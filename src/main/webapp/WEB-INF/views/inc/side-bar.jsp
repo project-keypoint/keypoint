@@ -67,7 +67,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="buttons.html">수주관리</a> 
 					<a class="collapse-item" href="cards.html">출하관리</a>
-					<a class="collapse-item" href="cards.html">거래처관리</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/customer/list">거래처관리</a>
 				</div>
 			</div></li>
 
