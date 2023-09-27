@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p style="font-size: 80px; color: black">빈공간</p>
+
 </body>
 </html>

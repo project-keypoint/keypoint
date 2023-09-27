@@ -54,7 +54,7 @@
 </div>
 </div>
 <div class="details-buttons">
-<input type="button" value="수정" class="">
+<input type="button" value="수정" class="" onclick="location.href='${pageContext.request.contextPath}/receive/receiveUpdate'">
 <input type="button" value="삭제" class="">
 </div>
 </div><!-- main-details -->

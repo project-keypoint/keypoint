@@ -99,7 +99,7 @@ background: #DDDDDD;
 }
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 상세내용 */
 .main-details {
-width: 400px;
+width: 450px;
 font-family: 'Noto', sans-serif !important;
 color: black;
 margin-right: 0;
@@ -118,6 +118,10 @@ text-align: right;
 margin-right: 10px;
 }
 .form-group-receive input {
+width: 150px;
+height: 30px;	
+}
+.form-group-receive select {
 width: 150px;
 height: 30px;	
 }

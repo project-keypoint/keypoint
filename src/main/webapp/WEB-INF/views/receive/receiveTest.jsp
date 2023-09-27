@@ -45,7 +45,7 @@
 <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
 </div>
 <div>
-<input type="button" value="등록" class="">
+<input type="button" value="등록" class="insert" onclick="openInsert()">
 <input type="button" value="삭제" class="">
 </div>
 </div>
@@ -155,7 +155,16 @@ checkboxes.forEach(function (checkbox) {
 // 수주상세내용 새창
 function openDetails() {
     var url = '${pageContext.request.contextPath}/receive/receiveDetails';
-    var windowWidth = 430;
+    var windowWidth = 480;
+    var windowHeight = 570;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+//수주등록 새창
+function openInsert() {
+    var url = '${pageContext.request.contextPath}/receive/receiveInsert';
+    var windowWidth = 480;
     var windowHeight = 570;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
