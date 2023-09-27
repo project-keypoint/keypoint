@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!--  JDBC 프로그램 설치, Spring JDBC 프로그램 설치 
+     => 자동으로 프로그램 설치 Maven환경	=> 코드 검색
+     => pom.xml 파일 넣기 => 자동으로 프로그램이 다운 받아짐
+     디비연결 객체생성	 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="itwillbs-rds-class1-team3.cwyqfeylunq5.ap-northeast-2.rds.amazonaws.com"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="class10420"></property>
+	</bean>
+	
+	<!-- https://mybatis.org/mybatis-3/ko/index.html 
+     https://mybatis.org/mybatis-3/ko/getting-started.html-->
+<!--  mybatis 설정 -->
+<!-- scr/main/resources/mybatis-config.xml 
+src/main/resources/mappers/memberMapper.xml
+https://mybatis.org/mybatis-3/ko/getting-started.html-->
+
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+	<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+	<property name="mapperLocations"  value="classpath:mappers/**/*Mapper.xml"></property>
+</bean>
+
+<!-- mybatis 연결(객체생성) 
+    MemberDAO 자동객체생성 @Inject 
+                       private SqlSession sqlSession;
+                       
+   destroy-method="clearCache" 자동으로 기억장소 삭제
+-->
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+</bean>
+		
+</beans>
