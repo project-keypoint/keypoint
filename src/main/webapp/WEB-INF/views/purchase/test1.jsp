@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <title>발주등록</title>
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
@@ -41,8 +41,8 @@
                             
                             <!-- ----------------------------------------------------- -->
                             
-                            <form class="user" action="${pageContext.request.contextPath}/purchase/test3" onsubmit="submitForm(event);" method="get">
-                            
+                            <form class="user" action="${pageContext.request.contextPath}/purchase/purchaseInsertPro" id="test1" onsubmit="submitForm(event);" method="post">
+
 								<div class="form-group row">
 								
 								    <div class="col-sm-6 mb-3 mb-sm-0">
@@ -97,6 +97,16 @@
 								        </div>
 								    </div>
 								</div>
+								
+								
+								<div class="form-group">
+								    <input type="text" class="form-control" id="poCode" name="poCode" placeholder="발주코드" readonly>
+								</div>
+							 <!-- ----------------------------------------------------- -->
+								<div class="form-group">
+								    <input type="text" class="form-control" id="poStatus" name="poStatus" value="발주대기" readonly>
+								</div>
+								
                                  <!-- ----------------------------------------------------- -->
                                 <button type="submit" class="btn btn-primary btn-user btn-block" >발주등록</button>
                                 <button type="reset" class="btn btn-secondary btn-user btn-block">초기화</button>
@@ -268,6 +278,61 @@
 	</script>			
 	<!-- // 폼 데이터 서브밋하고 팝업창 닫기	 -->
 	
+	<!-- 발주일자 클릭시 발주코드 자동생성 -->
+	<script>
+	    document.addEventListener('DOMContentLoaded', function () {
+	        var poDateInput = document.getElementById("poDate");
+	        var poCodeInput = document.getElementById("poCode");
+	
+	        poDateInput.addEventListener("click", function () {
+	            var today = new Date();
+	            var yyyy = today.getFullYear();
+	            var mm = String(today.getMonth() + 1).padStart(2, '0');
+	            var dd = String(today.getDate()).padStart(2, '0');
+	            var hh = String(today.getHours()).padStart(2, '0');
+	            var mi = String(today.getMinutes()).padStart(2, '0');
+	            var ss = String(today.getSeconds()).padStart(2, '0');
+	            var formattedDate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + mi + ":" + ss;
+	
+	            // 생성된 발주일자를 입력란에 설정
+	            poDateInput.value = formattedDate;
+	            poDateInput.readOnly = true;
+	            poDateInput.placeholder = "";
+	
+	            // 발주일자와 함께 poCode를 생성하여 입력란에 설정
+	            var poCode = "ORD" + yyyy + mm + dd + hh + mi + ss;
+	            poCodeInput.value = poCode;
+	        });
+	    });
+	</script>
+	<!-- // 발주일자 클릭시 발주코드 자동생성 -->
+	
+	<!-- 발주수량 * 자재단가의 곱 -->
+	<script>
+	    // poCount와 materialPrice 값을 곱하여 poPrice에 설정하는 함수
+	    function calculatePoPrice() {
+	        // poCount와 materialPrice 입력란의 값을 읽어옴
+	        var poCount = parseFloat(document.getElementsByName("poCount")[0].value);
+	        var materialPrice = parseFloat(document.getElementsByName("materialPrice")[0].value);
+	        
+	        // materialPrice 값이 NaN인지 확인
+	        if (isNaN(materialPrice)) {
+	            // materialPrice가 NaN이면 poPrice 입력란에 빈 문자열 설정
+	            document.getElementsByName("poPrice")[0].value = "";
+	        } else {
+	            // poCount와 materialPrice를 곱함
+	            var poPrice = poCount * materialPrice;
+	            
+	            // 곱한 결과를 poPrice 입력란에 설정
+	            document.getElementsByName("poPrice")[0].value = poPrice;
+	        }
+	    }
+	    
+	    // poCount와 materialPrice 입력란 값이 변경될 때마다 자동으로 발생하는 이벤트 리스너 등록
+	    document.getElementsByName("poCount")[0].addEventListener("input", calculatePoPrice);
+	    document.getElementsByName("materialPrice")[0].addEventListener("input", calculatePoPrice);
+	</script>
+	<!-- //  발주수량 * 자재단가의 곱 -->
 	
 	
 	

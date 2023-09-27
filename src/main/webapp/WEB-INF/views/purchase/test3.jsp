@@ -99,7 +99,7 @@
         var top = (screen.height - height) / 2;
 
         // 팝업 창 열기
-        var orderPageUrl = "${pageContext.request.contextPath}/purchase/test1"; // 발주 페이지의 URL을 입력하세요.
+        var orderPageUrl = "${pageContext.request.contextPath}/purchase/purchaseInsert"; // 발주 페이지의 URL을 입력하세요.
         var popupWindow = window.open(orderPageUrl, "발주 페이지", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top + ", location=no");
 
         // 팝업 창 포커스
