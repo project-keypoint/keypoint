@@ -120,6 +120,12 @@
 		</a></li>
 		
 		<li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/workOder/workOrder">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>작업지시</span></a>
+            </li> 
+		
+		<li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/receive/receiveList">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>수주목록(바로가기)</span></a>

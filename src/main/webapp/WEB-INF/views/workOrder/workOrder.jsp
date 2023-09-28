@@ -17,8 +17,8 @@
 
 </head>
 <body>
-<%@include file="../views/inc/top-bar.jsp" %>
-<%@include file="../views/inc/side-bar.jsp" %>
+<%@include file="../inc/top-bar.jsp" %>
+<%@include file="../inc/side-bar.jsp" %>
 
 
 <!--  contents start -->
