@@ -18,44 +18,49 @@
 </head>
 <body>
 <div class="main-details">
-<div class="page-title">수주상세</div>
+<!-- <div class="page-title">수주상세</div> -->
 <div class="forms-group-receive">
+<div class="page-title-popup">수주상세</div>
 <div class="form-group-receive">
-<p>업체코드</p>
-<input type="text" class="" name="cusCode" placeholder="업체코드" readonly>
+<p>수주번호</p>
+<input type="text" id="search-customer" class="form-control search-input" placeholder="수주번호" readonly>
 </div>
+<div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" class="" name="cusName" placeholder="업체명" readonly>
-</div>
-<div class="form-group-receive">
-<p>상품코드</p>
-<input type="text" class="" name="productCode" placeholder="상품코드" readonly>
+<input type="text" id="search-customer" class="form-control search-input inputcode" placeholder="업체코드" readonly>
+<input type="text" id="search-customer" class="form-control search-input inputname" placeholder="업체명" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" class="" name="productName" placeholder="상품명" readonly>
+<input type="text" id="search-customer" class="form-control search-input inputcode" placeholder="상품코드" readonly>
+<input type="text" id="search-customer" class="form-control search-input inputname" placeholder="상품명" readonly>
+</div>
 </div>
 <div class="form-group-receive">
 <p>수주수량</p>
-<input type="text" class="" name="roCount" placeholder="수주수량" readonly>
+<input type="text" id="search-customer" class="form-control search-input" placeholder="수주수량" readonly>
 </div>
 <div class="form-group-receive">
 <p>수주금액</p>
-<input type="text" class="" name="roPrice" placeholder="수주금액" readonly>
+<input type="text" id="search-customer" class="form-control search-input" placeholder="수주금액" readonly>
 </div>
 <div class="form-group-receive">
-<p>수주일자</p>
-<input type="text" class="" name="roDate" placeholder="수주일자" readonly>
+<p>수주등록일</p>
+<input type="text" id="search-customer" class="form-control search-input" placeholder="수주등록일" readonly>
+</div>
+<div class="form-group-receive">
+<p>납품예정일</p>
+<input type="text" id="search-customer" class="form-control search-input" placeholder="납품예정일" readonly>
 </div>
 <div class="form-group-receive">
 <p>상태</p>
-<input type="text" class="" name="roStatus" placeholder="상태" readonly>
+<input type="text" id="search-customer" class="form-control search-input" placeholder="상태" readonly>
 </div>
 </div>
 <div class="details-buttons">
-<input type="button" value="수정" class="" onclick="location.href='${pageContext.request.contextPath}/receive/receiveUpdate'">
-<input type="button" value="삭제" class="">
+<input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/receive/receiveUpdate'">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 </div><!-- main-details -->
 </body>

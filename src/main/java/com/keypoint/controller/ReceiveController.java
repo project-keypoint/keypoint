@@ -15,10 +15,10 @@ public class ReceiveController {
 //	@Inject
 //	private ReceiveService receiveService;
 	
-	@GetMapping("/receiveTest")
+	@GetMapping("/receiveList")
 	public String receiveTest() {
-		System.out.println("ReceiveController receive/receiveTest");
-		return "receive/receiveTest";
+		System.out.println("ReceiveController receive/receiveList");
+		return "receive/receiveList";
 	}// receiveTest [수주목록]
 	
 	@GetMapping("/receiveInsert")
@@ -44,4 +44,10 @@ public class ReceiveController {
 		System.out.println("ReceiveController receive/empty");
 		return "receive/empty";
 	}// empty [빈페이지]
+	
+	@GetMapping("/test") // 테스트페이지
+	public String test() {
+		System.out.println("ReceiveController receive/test");
+		return "receive/test";
+	}// test [테스트페이지]
 }

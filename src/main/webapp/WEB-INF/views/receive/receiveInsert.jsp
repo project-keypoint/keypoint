@@ -18,140 +18,147 @@
 </head>
 <body>
 <div class="main-details">
-<div class="page-title">수주등록</div>
 <form action="#">
 <div class="forms-group-receive">
+<div class="page-title-popup">수주등록</div>
 <div class="form-group-receive">
-<p>업체코드</p>
-<input type="text" id="search-customer" name="cusCode" class="" placeholder="업체코드">
+<p>수주번호</p>
+<input type="text" id="roCode" class="form-control search-input" placeholder="수주번호" readonly>
 </div>
+<div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" class="" name="cusName" placeholder="업체명" readonly>
-</div>
-<div class="form-group-receive">
-<p>상품코드</p>
-<input type="text" id="search-product" name="productCode" class="" placeholder="상품코드">
+<input type="text" id="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
+<input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" class="" name="productName" placeholder="상품명" readonly>
+<input type="text" id="productCode" class="form-control search-input inputcode" placeholder="상품검색">
+<input type="text" id="productName" class="form-control search-input inputname" placeholder="상품명" readonly>
+</div>
 </div>
 <div class="form-group-receive">
 <p>수주수량</p>
-<input type="text" class="" name="roCount" placeholder="수주수량">
+<input type="number" id="roCount" class="form-control search-input" placeholder="수주수량" min="0">
 </div>
 <div class="form-group-receive">
 <p>수주금액</p>
-<input type="text" class="" name="roPrice" placeholder="수주금액" readonly>
+<input type="text" id="roPrice" class="form-control search-input" placeholder="수주금액" readonly>
 </div>
 <div class="form-group-receive">
-<p>수주일자</p>
-<input type="text" id="datepicker" name="datepicker" placeholder="수주일자 선택" readonly>
-<!-- <input type="text" class="" name="roDate" placeholder="수주일자"> -->
+<p>수주등록일</p>
+<input type="text" id="roDate" class="form-control search-input" placeholder="수주등록일">
 </div>
 <div class="form-group-receive">
-<!-- <p>상태</p> -->
-<!-- <input type="text" class="" name="roStatus" placeholder="상태"> -->
-<!-- <label for="roStatus">상태</label> -->
+<p>납품예정일</p>
+<input type="text" id="shipSdate" class="form-control search-input" placeholder="납품예정일">
+</div>
+<div class="form-group-receive">
 <p>상태</p>
-	<select id="roStatus" name="roStatus">
-<!--         <option value="on">선택</option> -->
+<select id="roStatus" name="roStatus" class="form-control search-input status">
         <option value="pending">대기</option>
         <option value="ongoing">진행</option>
         <option value="completed">완료</option>
         <option value="canceled">취소</option>
-    </select>
+</select>
 </div>
 </div>
 <div class="details-buttons">
-<input type="submit" value="완료" class="">
-<input type="button" value="취소" class="" onClick="window.close()">
+<input type="submit" value="등록" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->
 </div><!-- main-details -->
-
-<script type="text/javascript">
-//업체명(거래처) 검색 새창
-var searchCustomer = document.getElementById("search-customer");
-searchCustomer.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 업체검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
-});
-
-//상품명 검색 새창
-var searchProduct = document.getElementById("search-product");
-searchProduct.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 상품검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
-});
-</script>
 
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<!--  데이트피커 커스텀 css-->
-<link rel="stylesheet" type="text/css" href="./css/datepicker_gr.css">
-<script>
-// 데이트피커에서 비활성화할 날짜
-var disabledDates = []; // 여기에 비활성화될 데이터들 JSON으로 가져와서 넣기
-// 수주코드 변수값
-var selectedStore = $('#roCode').val();
-// 날짜 구하는 함수
-var currentDate = new Date();
-var currentYear = currentDate.getFullYear();
-var currentMonth = currentDate.getMonth();
-var currentDateVal = currentDate.getDate();
-//서브밋 기능 제어 함수
-$('#roDate').submit(function() {
-	if($('#datepicker').val() == ""){
-		alert("날짜를 선택해 주십시오"); 
-		return false;
-	}
-});//submit기능 제어 끝
-
-// 데이트피커 초기화
-$("#datepicker").datepicker({
-  dateFormat: 'yy-mm-dd',
-  prevText: '이전 달',
-  nextText: '다음 달',
-  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-  dayNames: ['일','월','화','수','목','금','토'],
-  dayNamesShort: ['일','월','화','수','목','금','토'],
-  dayNamesMin: ['일','월','화','수','목','금','토'],
-  showMonthAfterYear: true,
-  yearSuffix: '년',
-  // 날짜 비활성화 관련 함수들
-  beforeShowDay: function(date) {
-    var day = date.getDay();
-    var dateString = $.datepicker.formatDate('yy-mm-dd', date); // 날짜를 형식에 맞게 문자열로 변환
-    var isDisabled = ($.inArray(dateString, disabledDates) !== -1);//비활성화될 데이터들 데이터 변환해서 최종적으로 일자 보여주기전에 비활성화해서 반환
-    return [(day !== 0 && day !== 6 && !isDisabled)]; // 일요일(0)과 토요일(6)을 제외한 날짜만 선택 가능
-  },
-  // 날짜 제한 관련
-  // 년도 범위 년도 : 년도 형식 2021 : 2023이라면 2021~2023까지 활성
-  yearRange: currentYear + ':' + (currentYear + 1),
-  // 최소 날짜 범위 년도, 달, 일로 되어있음. 지금은 23년 8월 17일로 되어있어서 8월 18일부터 선택 가능
-  minDate: new Date(currentYear, currentMonth, currentDateVal + 1),
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#cusCode").click(function() {
+        // 업체코드 입력란의 값을 가져옵니다.
+        var cusCode = $("input[name='cusCode']").val();
+        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
+        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
+        
+        $(document).ready(function() {
+	        $("#cusCode").click(function() {
+	            // 팝업 창 크기 및 위치 설정
+	            var width = 400;
+	            var height = 400;
+	            var left = (screen.width - width) / 2;
+	            var top = (screen.height - height) / 2;
+	            // 팝업 창 열기
+	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
+	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+	            // 팝업 창 포커스
+	            popupWindow.focus();
+	        });
+	    });
+    });
+});
+$(document).ready(function() {
+    $("#productCode").click(function() {
+        // 상품코드 입력란의 값을 가져옵니다.
+        var productCode = $("input[name='productCode']").val();
+        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
+        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
+        
+        $(document).ready(function() {
+	        $("#productCode").click(function() {
+	            // 팝업 창 크기 및 위치 설정
+	            var width = 400;
+	            var height = 400;
+	            var left = (screen.width - width) / 2;
+	            var top = (screen.height - height) / 2;
+	            // 팝업 창 열기
+	            var url = '${pageContext.request.contextPath}/receive/empty'; // 상품 검색 페이지의 URL.
+	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+	            // 팝업 창 포커스
+	            popupWindow.focus();
+	        });
+	    });
+    });
 });
 
-// 데이트피커 AJAX 처리
-$.ajax({
-type: "GET",
-url: '#',
-data: { "selectedStore": selectedStore }, // 선택된 값을 서버로 전송
-dataType: 'json',
-success: function (result) {
-disabledDates = result.map(function (item) {
-return item.date;
+// 수주일자 클릭시 현재날짜로 변경
+document.addEventListener('DOMContentLoaded', function () {
+    var roDateInput = document.getElementById("roDate");
+roDateInput.addEventListener("click", function () {
+	var today = new Date();
+	var yyyy = today.getFullYear();
+	var mm = String(today.getMonth() + 1).padStart(2, '0');
+	var dd = String(today.getDate()).padStart(2, '0');
+	var hh = String(today.getHours()).padStart(2, '0');
+	var mi = String(today.getMinutes()).padStart(2, '0');
+	var ss = String(today.getSeconds()).padStart(2, '0');
+	var formattedDate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + mi + ":" + ss;
+	roDateInput.value = formattedDate;
+	roDateInput.readOnly = true;
+	roDateInput.placeholder = "";
+    });
 });
-$("#datepicker").focus();
-}
+// 수주일자(현재날짜) 이후로 납품예정일 선택 설정
+// 수주일자 입력란의 값 가져오기
+var roDateInput = document.getElementById("roDate");
+var roDateValue = roDateInput.value;
+
+// 수주일자를 현재 년월일로 설정 (YYYY-MM-DD 형식)
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+var yyyy = today.getFullYear();
+var currentDateString = yyyy + '-' + mm + '-' + dd;
+// 납품예정일 입력란
+var shipSdateInput = document.getElementById("shipSdate");
+// 수주일자 이후의 날짜만 선택할 수 있도록 Datepicker 설정
+$(function() {
+    $("#shipSdate").datepicker({
+        minDate: currentDateString, // 현재 날짜 이후로 설정
+        dateFormat: "yy-mm-dd", // MySQL DATE 형식으로 출력
+    });
 });
 </script>
 </body>
