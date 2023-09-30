@@ -16,13 +16,29 @@ public class ProductController {
 	@Inject
 	private ProductService productService;
 
-//	가상주소 http://localhost:8080/keypoint/product/stock
-	@GetMapping("/stock")
-	public String stock() {
-
-		// WEB-INF/views/product/stock.jsp
-		return "product/stock";
-	}// stock
+//	가상주소 http://localhost:8080/keypoint/product/productList
+	@GetMapping("/productList")
+	public String productList() {
+		// WEB-INF/views/product/productList.jsp
+		return "product/productList";
+	}// productList [완제품등록]
+	
+	@GetMapping("/productInsert")
+	public String productInsert() {
+		return "product/productInsert";
+	}// productInsert [완제품등록]	
+	
+	@GetMapping("/productUpdate")
+	public String productUpdate() {
+		return "product/productUpdate";
+	}// productUpdate [완제품수정]
+	
+	@GetMapping("/addUnit")
+	public String addUnit() {
+		return "product/addUnit";
+	}// addUnit [단위추가]
+	
+	
 
 	@GetMapping("/addstock")
 	public String addstock() {
@@ -31,11 +47,11 @@ public class ProductController {
 		return "product/addstock";
 	}// add
 	
-	@GetMapping("/addunit")
-	public String addunit() {
+	@GetMapping("/addunitTEST")
+	public String addunitTEST() {
 		
-		// WEB-INF/views/product/addunit.jsp
-		return "product/addunit";
+		// WEB-INF/views/product/addunitTEST.jsp
+		return "product/addunitTEST";
 	}// addunit
 	
 //	가상주소 http://localhost:8080/keypoint/product/require
