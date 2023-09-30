@@ -30,13 +30,13 @@
 
 <div class="search-b">
 <div class="search-select">
-<p>코드</p> <input type="text" id="materialCode" class="form-control search-input" placeholder="자재코드">
+<p>코드</p> <input type="text" id="materialCode" name="materialCode" class="form-control search-input" placeholder="자재코드">
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-select">
-<p>자재명</p> <input type="text" id="materialName" class="form-control search-input" placeholder="자재명 ">
+<p>자재명</p> <input type="text" id="materialName" name="materialName" class="form-control search-input" placeholder="자재명 ">
 </div>
 </div>
 

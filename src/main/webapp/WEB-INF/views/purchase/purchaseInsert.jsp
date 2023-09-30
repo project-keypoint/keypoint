@@ -26,14 +26,14 @@
 
 <div class="form-group-receive">
 <p>발주코드</p>
-<input type="text" id="poCode" class="form-control search-input" placeholder="발주코드" readonly>
+<input type="text" id="poCode" name="poCode" class="form-control search-input" placeholder="발주코드" readonly>
 </div>
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>자재코드</p>
-<input type="text" id="materialCode" class="form-control search-input inputcode" placeholder="자재검색">
-<input type="text" id="materialName" class="form-control search-input inputname" placeholder="자재명">
+<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="자재검색">
+<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명">
 </div>
 
 <div class="form-group-receive">
@@ -54,28 +54,28 @@
 
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="poOwner" class="form-control search-input inputcode" placeholder="담당자검색">
+<input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색">
 </div>
 
 <div class="form-group-receive">
 <p>거래처</p>
-<input type="text" id="cusName" class="form-control search-input inputcode" placeholder="거래처검색">
+<input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" placeholder="거래처검색">
 </div>
 
 
 <div class="form-group-receive">
 <p>발주일자</p>
-<input type="text" id="poDate" class="form-control search-input" placeholder="발주일자">
+<input type="text" id="poDate" name="poDate" class="form-control search-input" placeholder="발주일자">
 </div>
 
 <div class="form-group-receive">
 <p>납기일자</p>
-<input type="text" id="payDate" class="form-control search-input" placeholder="납기일자">
+<input type="text" id="payDate" name="payDate" class="form-control search-input" placeholder="납기일자">
 </div>
 
 <div class="form-group-receive">
 <p>발주상태</p>
-<input type="text" id="poStatus" class="form-control search-input" value="발주대기" readonly>
+<input type="text" id="poStatus" name="poStatus" class="form-control search-input" value="발주대기" readonly>
 </div>
 
 </div>
