@@ -139,7 +139,7 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/product/stock">
+                <a class="nav-link" href="${pageContext.request.contextPath}/product/productList">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>상품재고</span></a>
             </li>
