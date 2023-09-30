@@ -3,13 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.itwillbs.mappers.purchaseMapper">
+<mapper namespace="com.itwillbs.mappers.workOrderMapper">
 	
 	<insert id="insertWorkOrder">
 		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode, productCode, materialCode, woCount, woStatus, woDate)
-		values(#{id},#{pass},#{name},#{date})
+		values(#{woCode},#{roCode},#{empId},#{lineCode}#{mfgCode},#{productCode},#{materialCode},#{woCount},#{woStatus},#{woDate})
 	</insert>
 
+  	<select id="workProdList" resultType="com.keypoint.dto.WorkOrderDTO">
+   select productCode, productName
+   from product
+   where 
+   productCode like CONCAT('%', #{productCode}, '%') and 
+   productName like CONCAT('%', #{productName}, '%')
+   order by productCode desc 
+   limit #{startRow}, #{pageSize}  
+   </select>
+  
+   <select id="countWorkList" resultType="java.lang.Integer">
+   select count(*)
+   from product
+   <if test="productCode!=null and productName!=null">
+   where 
+   productCode like CONCAT('%', #{productCode}, '%') and
+   productName like CONCAT('%', #{productName}, '%')
+   </if>   
+   </select>
   
 </mapper>
 

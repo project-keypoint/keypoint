@@ -120,7 +120,7 @@
 		</a></li>
 		
 		<li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/workOder/workOrder">
+                <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workOrderList">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>작업지시</span></a>
             </li> 

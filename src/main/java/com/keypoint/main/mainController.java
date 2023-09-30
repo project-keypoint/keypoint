@@ -30,7 +30,7 @@ public class mainController {
 
 		// /workOrder.jsp
 		// WEB-INF/views/workOrder.jsp
-		return "workOrder";
+		return "workOrder/workOrderList";
 	}//
 
 	// ------------------------------------------
