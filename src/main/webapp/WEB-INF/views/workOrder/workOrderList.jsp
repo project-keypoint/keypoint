@@ -306,5 +306,37 @@ function openInsert() {
 }
 </script>
 
+<br>
+<div class="center">
+<div id="pagination">
+
+    <!-- 1페이지 이전 -->
+	<c:if test="${pageDTO.currentPage > 1}">
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.currentPage-1}"><</a>
+	</c:if>
+
+<!-- 10페이지 이전 -->
+	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
+	</c:if>
+	
+	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
+	</c:forEach>
+
+<!-- 1페이지 다음 -->	
+	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.currentPage+1}">></a>
+	</c:if>
+
+<!-- 10페이지 다음 -->
+ 	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
+	</c:if>
+	
+</div>
+</div>
+
+
 </body>
 </html>

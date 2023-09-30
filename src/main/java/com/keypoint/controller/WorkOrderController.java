@@ -68,7 +68,7 @@ public class WorkOrderController {
 		search.put("startRow", pageDTO.getStartRow());
 		search.put("pageSize", pageDTO.getPageSize());
  
-		List<WorkOrderDTO> itemList = workOrderService.getWorkProdList(search);
+		List<WorkOrderDTO> workProdList = workOrderService.getWorkProdList(search);
 			
 		//페이징 처리
 		int count = workOrderService.countWorkList(search);
@@ -89,7 +89,7 @@ public class WorkOrderController {
 				
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("search", search);
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("workProdList", workProdList);
 		return "workOrder/workProdList";
 	}
 	

@@ -111,7 +111,7 @@ h2{
 <table>
 <tr><th>제품코드</th><th>제품명</th></tr>
 <c:forEach var="workProdList" items="${workProdList}">
-<tr onclick="selectItem('${workProdList.productCode }','${workProdList.productName }')"> <!-- ,'${itemList.itemId}' -->
+<tr onclick="selectWork('${workProdList.productCode }','${workProdList.productName }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${workProdList.productCode}</td>
 	<td id="con">${workProdList.productName}</td>
 	</tr>
@@ -120,8 +120,8 @@ h2{
 
         function selectWork(a,b){ // 부모창으로 값 넘기기
 		  
-          opener.document.getElementById("pcd").value = a 
-          opener.document.getElementById("pnm").value = b
+          opener.document.getElementById("productCode").value = a
+          opener.document.getElementById("productName").value = b
 //           opener.document.getElementById("pid").value = c
           window.close();
 
