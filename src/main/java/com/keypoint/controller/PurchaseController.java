@@ -27,7 +27,7 @@ public class PurchaseController {
 		
 		// member/join.jsp
 		// WEB-INF/views/member/join.jsp
-		return "purchase/test1";
+		return "purchase/purchaseInsert";
 	}//
 	
 	@PostMapping("/purchaseInsertPro")
@@ -39,13 +39,10 @@ public class PurchaseController {
 		purchaseService.insertPurchase(purchaseDTO);
 		
 		// 주소변경하면서 이동 /purchase/test3
-		return "redirect:/purchase/test3";
+		return "redirect:/purchase/purchaseList";
 	}//
 	
-	
-	
-	
-	
+	//----------------------------------------------------------------------------------------------
 	
 
 	@GetMapping("/test2")
@@ -56,16 +53,15 @@ public class PurchaseController {
 		return "purchase/test2";
 	}//
 	
-	@GetMapping("/test3")
-	public String test3() {
+	@GetMapping("/purchaseList")
+	public String purchaseList() {
 		
 		// /main.jsp
 		// WEB-INF/views/tables.jsp
-		return "purchase/test3";
+		return "purchase/purchaseList";
 	}//
 	
-	
-	
+
 	
 	
 	

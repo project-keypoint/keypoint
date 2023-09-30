@@ -7,7 +7,7 @@
 	
 	<insert id="insertPurchase">
 		insert into purchaseOrder(poCode, materialCode, materialName, materialPrice, poCount, poPrice, poDate, payDate, cusName, poOwner, poStatus)
-		values(#{id},#{pass},#{name},#{date})
+		values(#{poCode},#{materialCode},#{materialName},#{materialPrice},#{poCount},#{poPrice},#{poDate},#{payDate},#{cusName},#{poOwner},#{poStatus})
 	</insert>
 
   
