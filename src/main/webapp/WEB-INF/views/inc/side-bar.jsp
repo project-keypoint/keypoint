@@ -115,10 +115,7 @@
 		<li class="nav-item"><a class="nav-link"
 			href="${pageContext.request.contextPath}/product/productList"> <i
 				class="fas fa-fw fa-chart-area"></i> <span>상품재고</span></a></li>
-		<!-- Nav Item - Charts -->
-		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/charts.html">
-				<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
-		</a></li>
+		
 		
 		<li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workOrderList">
