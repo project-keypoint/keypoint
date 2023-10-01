@@ -1,5 +1,9 @@
 package com.keypoint.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,9 +19,32 @@ public class ReceiveDAO {
 	
 	private static final String namespace="com.itwillbs.mappers.receiveMapper";
 
-	public void insertTest(ReceiveDTO receiveDTO) {
-		System.out.println("ReceiveDAO insertTest()");
-		sqlSession.insert(namespace+".insertTest", receiveDTO);
-	}
+	public void insertReceive(ReceiveDTO receiveDTO) {
+		System.out.println("ReceiveDAO insertReceive()");
+		sqlSession.insert(namespace+".insertReceive",receiveDTO);
+	}// insertReceive() [수주등록]
 
+	public List<ReceiveDTO> getReceiveList() {
+		System.out.println("ReceiveDAO getReceiveList()");
+		return sqlSession.selectList(namespace+".getReceiveList");
+	}// getReceiveList() [수주목록]
+
+	public ReceiveDTO getReceiveDetails(String roCode) {
+		System.out.println("ReceiveDAO getReceiveDetails()");
+		return sqlSession.selectOne(namespace+".getReceiveDetails", roCode);
+	}// getReceiveDetails() [수주상세]
+
+	public void updateReceive(ReceiveDTO receiveDTO) {
+		System.out.println("ReceiveDAO updateReceive()");
+		System.out.println(receiveDTO);
+		sqlSession.update(namespace+".updateReceive",receiveDTO);
+	}// updateReceive() [수주수정]
+
+	public void deleteReceive(ReceiveDTO receiveDTO) {
+		System.out.println("ReceiveDAO deleteReceive()");
+		System.out.println(receiveDTO);
+		sqlSession.update(namespace+".deleteReceive",receiveDTO);
+	}// deleteReceive() [수주삭제]
+	
+	
 }
