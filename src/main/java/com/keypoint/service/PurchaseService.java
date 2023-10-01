@@ -20,7 +20,7 @@ public class PurchaseService {
 	public void insertPurchase(PurchaseDTO purchaseDTO) {
 		System.out.println("PurchaseService insertPurchase()");
 		
-		purchaseDTO.setPoDate(new Timestamp(System.currentTimeMillis()));
+		// purchaseDTO.setPoDate(new Timestamp(System.currentTimeMillis()));
 		
 		purchaseDAO.insertPurchase(purchaseDTO);
 		

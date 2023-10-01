@@ -10,8 +10,8 @@ public class PurchaseDTO {
     private int materialPrice;
     private int poCount;
     private int poPrice;
-    private Timestamp poDate;
-    private Timestamp payDate;
+    private String poDate;
+    private String payDate;
     private String cusName;
     private int poOwner;
     private String poStatus;
@@ -53,16 +53,16 @@ public class PurchaseDTO {
 	public void setPoPrice(int poPrice) {
 		this.poPrice = poPrice;
 	}
-	public Timestamp getPoDate() {
+	public String getPoDate() {
 		return poDate;
 	}
-	public void setPoDate(Timestamp poDate) {
+	public void setPoDate(String poDate) {
 		this.poDate = poDate;
 	}
-	public Timestamp getPayDate() {
+	public String getPayDate() {
 		return payDate;
 	}
-	public void setPayDate(Timestamp payDate) {
+	public void setPayDate(String payDate) {
 		this.payDate = payDate;
 	}
 	public String getCusName() {

@@ -19,7 +19,7 @@
 <body>
 
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/purchase/purchaseInsertPro" id="purchaseInsert" method="post">
+<form action="${pageContext.request.contextPath}/purchase/purchaseInsertPro" id="purchaseInsert" method="post" >
 
 <div class="forms-group-receive">
 <div class="page-title-popup">발주등록</div>
