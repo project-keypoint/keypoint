@@ -172,28 +172,29 @@ $(document).ready(function() {
 
 <!-- 발주수량 * 자재단가의 곱 -->
 <script>
-// poCount와 materialPrice 값을 곱하여 poPrice에 설정하는 함수
+//poCount와 materialPrice 값을 곱하여 poPrice에 설정하는 함수
 function calculatePoPrice() {
     // poCount와 materialPrice 입력란의 값을 읽어옴
     var poCount = parseFloat(document.getElementsByName("poCount")[0].value);
     var materialPrice = parseFloat(document.getElementsByName("materialPrice")[0].value);
     
-    // materialPrice 값이 NaN인지 확인
-    if (isNaN(materialPrice)) {
-        // materialPrice가 NaN이면 poPrice 입력란에 빈 문자열 설정
-        document.getElementsByName("poPrice")[0].value = "";
-    } else {
+    // 입력값이 유효한 숫자인지 확인
+    if (!isNaN(poCount) && !isNaN(materialPrice)) {
         // poCount와 materialPrice를 곱함
         var poPrice = poCount * materialPrice;
         
         // 곱한 결과를 poPrice 입력란에 설정
         document.getElementsByName("poPrice")[0].value = poPrice;
+    } else {
+        // 입력값이 숫자가 아닌 경우 또는 둘 중 하나라도 숫자가 아닌 경우
+        document.getElementsByName("poPrice")[0].value = "";
     }
 }
 
 // poCount와 materialPrice 입력란 값이 변경될 때마다 자동으로 발생하는 이벤트 리스너 등록
 document.getElementsByName("poCount")[0].addEventListener("input", calculatePoPrice);
 document.getElementsByName("materialPrice")[0].addEventListener("input", calculatePoPrice);
+
 </script>
 <!-- //  발주수량 * 자재단가의 곱 -->
 
