@@ -29,14 +29,26 @@ public class WorkOrderService {
 
 	
 	public List<WorkOrderDTO> getWorkProdList(Map<String, Object> search) {
-		System.out.println("WorkOrderService getWorkOrderList");
+		System.out.println("WorkOrderService getWorkProdList()");
 		return workOrderDAO.getWorkProdList(search);
 	}
 
 
 	public Integer countWorkList(Map<String, Object> search) { // 품목 개수
-		System.out.println("PerformServiceImpl countItemlist()");
+		System.out.println("PerformServiceImpl countWorklist()");
 		return workOrderDAO.countWorkList(search);
+	}
+
+
+	public List<WorkOrderDTO> getWorkCusList(Map<String, Object> search) {
+		System.out.println("WorkOrderService getWorkCusList()");
+		return workOrderDAO.getWorkCusList(search);
+	}
+
+
+	public int countCusList(Map<String, Object> search) {
+		System.out.println("WorkOrderService countCusList()");
+		return workOrderDAO.countCusList(search);
 	}
 
 	}

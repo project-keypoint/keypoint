@@ -30,6 +30,29 @@
    </if>   
    </select>
   
+  <select id="workCusList" resultType="com.keypoint.dto.WorkOrderDTO">
+   select cusCode, cusName
+   from customer
+   where 
+   cusCode like CONCAT('%', #{cusCode}, '%') and 
+   cusName like CONCAT('%', #{cusName}, '%')
+   order by cusCode desc 
+   limit #{startRow}, #{pageSize}  
+   </select>
+  
+  <select id="countCusList" resultType="java.lang.Integer">
+   select count(*)
+   from customer
+   <if test="cusCode!=null and cusName!=null">
+   where 
+   cusCode like CONCAT('%', #{cusCode}, '%') and
+   cusName like CONCAT('%', #{cusName}, '%')
+   </if>   
+   </select>
+  
+  
+  
+  
 </mapper>
 
 

@@ -15,17 +15,21 @@ public class WorkOrderDTO {
 	private String woStatus; // 지시상태
 	private Timestamp woDate; // 지시일자
 	private String productName; //상품이름
+	private String cusCode; //거래처 코드
+	private String cusName; // 거래처 명
 
 	
 	
 	
 	
+	
+
 	@Override
 	public String toString() {
 		return "WorkOrderDTO [woCode=" + woCode + ", roCode=" + roCode + ", empId=" + empId + ", lineCode=" + lineCode
 				+ ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode=" + materialCode
 				+ ", woCount=" + woCount + ", woStatus=" + woStatus + ", woDate=" + woDate + ", productName="
-				+ productName + "]";
+				+ productName + ", cusCode=" + cusCode + ", cusName=" + cusName + "]";
 	}
 
 	public String getWoCode() {
@@ -116,4 +120,26 @@ public class WorkOrderDTO {
 		this.productName = productName;
 	}
 
+	public String getCusCode() {
+		return cusCode;
+	}
+
+	public void setCusCode(String cusCode) {
+		this.cusCode = cusCode;
+	}
+
+	public String getCusName() {
+		return cusName;
+	}
+
+	public void setCusName(String cusName) {
+		this.cusName = cusName;
+	}
+
+	
+	
+	
+	
+	
+	
 }

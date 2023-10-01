@@ -49,6 +49,29 @@ public class WorkOrderDAO {
 		
 	
 	}
+
+
+	public List<WorkOrderDTO> getWorkCusList(Map<String, Object> search) { // 거래처 리스트 들고오기 (거래코드, 거래처명)
+		System.out.println("WorkOrderDAO getWorkCusList()");
+		System.out.println("cusCode"+search.get("cusCode"));
+		System.out.println("cusName"+search.get("cusName"));
+		System.out.println("startRow"+search.get("startRow"));
+		System.out.println("pageSize"+search.get("pageSize"));
+		if(search.get("cusName")==null) {
+			search.put("cusName", "");
+		}
+		if(search.get("cusCode")==null) {
+			search.put("cusCode", "");
+		}
+		return sqlSession.selectList(namespace+".workCusList", search);
+	
+	}
+
+
+	public Integer countCusList(Map<String, Object> search) { // 거래처 개수(for 페이징)
+		System.out.println("WorkOrderDAO countCusList()");
+		return sqlSession.selectOne(namespace+".countCusList", search);
+	}
 	
 	
 	

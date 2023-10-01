@@ -86,12 +86,12 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#cusCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
+	            var width = 500;
+	            var height = 500;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 업체 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
@@ -109,12 +109,12 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#productCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
+	            var width = 500;
+	            var height = 500;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 상품 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
