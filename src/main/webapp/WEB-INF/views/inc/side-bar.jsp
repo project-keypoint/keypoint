@@ -45,7 +45,7 @@
 		<hr class="sidebar-divider my-0">
 
 		<!-- Nav Item - Dashboard -->
-		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/">
+		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/main/notice">
 				<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항</span>
 		</a></li> 
 		

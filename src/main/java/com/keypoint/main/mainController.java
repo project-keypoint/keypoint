@@ -49,6 +49,14 @@ public class mainController {
 
 	// -------------------------------------------------
 	
+	@GetMapping("/notice")
+	public String notice() {
 
+		// /main.jsp
+		// WEB-INF/views/tables.jsp
+		return "notice";
+	}//
+
+	// -------------------------------------------------
 
 } // class
