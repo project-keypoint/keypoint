@@ -51,6 +51,24 @@
    </select>
   
   
+  <select id="workInstructList" resultType="com.keypoint.dto.WorkOrderDTO">
+   select woCode
+   from workOrder
+   where 
+   woCode like CONCAT('%', #{woCode}, '%') 
+   limit #{startRow}, #{pageSize}  
+   </select>
+  
+  <select id="countInstructList" resultType="java.lang.Integer">
+   select count(*)
+   from workOrder
+   <if test="woCode!=null">
+   where 
+   woCode like CONCAT('%', #{woCode}, '%')
+   </if>   
+   </select>
+  
+  
   
   
 </mapper>

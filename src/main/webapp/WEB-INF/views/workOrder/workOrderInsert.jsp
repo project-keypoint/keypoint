@@ -23,7 +23,7 @@
 <div class="page-title-popup">작업지시등록</div>
 <div class="form-group-receive">
 <p>지시번호</p>
-<input type="text" id="roCode" class="form-control search-input" placeholder="작업지시번호" readonly>
+<input type="text" id="woCode" class="form-control search-input" placeholder="작업지시번호" >
 </div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
@@ -36,6 +36,10 @@
 <input type="text" id="productCode" class="form-control search-input inputcode" placeholder="상품검색">
 <input type="text" id="productName" class="form-control search-input inputname" placeholder="상품코드" readonly>
 </div>
+</div>
+<div class="form-group-receive">
+<p>수주번호</p>
+<input type="text" id="roCode" class="form-control search-input" placeholder="수주번호">
 </div>
 <div class="form-group-receive">
 <p>지시수량</p>
@@ -76,6 +80,33 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+    $("#woCode").click(function() {
+        // 업체코드 입력란의 값을 가져옵니다.
+        var woCode = $("input[name='woCode']").val();
+        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
+        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
+        
+        $(document).ready(function() {
+	        $("#woCode").click(function() {
+	            // 팝업 창 크기 및 위치 설정
+	            var width = 500;
+	            var height = 500;
+	            var left = (screen.width - width) / 2;
+	            var top = (screen.height - height) / 2;
+	            // 팝업 창 열기
+	            var url = '${pageContext.request.contextPath}/workOrder/workInstructList'; // 업체 검색 페이지의 URL.
+	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+	            // 팝업 창 포커스
+	            popupWindow.focus();
+	        });
+	    });
+    });
+});
+
+
+
 $(document).ready(function() {
     $("#cusCode").click(function() {
         // 업체코드 입력란의 값을 가져옵니다.

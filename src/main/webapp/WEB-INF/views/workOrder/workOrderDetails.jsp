@@ -14,7 +14,7 @@
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/workOrder.css" rel="stylesheet">
 </head>
 <body>
 <div class="main-details">

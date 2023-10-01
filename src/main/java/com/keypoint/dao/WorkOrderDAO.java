@@ -72,6 +72,23 @@ public class WorkOrderDAO {
 		System.out.println("WorkOrderDAO countCusList()");
 		return sqlSession.selectOne(namespace+".countCusList", search);
 	}
+
+
+	public List<WorkOrderDTO> workInstructList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO workInstructList()");
+		
+		if(search.get("woCode")==null) {
+			search.put("woCode", "");
+		}
+		return sqlSession.selectList(namespace+".workInstructList", search);
+	
+	}
+
+
+	public int countInstructList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countInstructList()");
+		return sqlSession.selectOne(namespace+".countInstructList", search);
+	}
 	
 	
 	

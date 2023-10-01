@@ -11,14 +11,16 @@
 <!--     <link -->
 <!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
 <!--         rel="stylesheet"> -->
- <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+ <link href="${pageContext.request.contextPath}/resources/css/workOrder.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     
 <style type="text/css">
 	.lineName{
+	 
     width: 180px; 
   }
+  	
   .search-select{
     width: 480px; 
   }
@@ -299,7 +301,7 @@ function openDetails() {
 function openInsert() {
     var url = '${pageContext.request.contextPath}/workOrder/workOrderInsert';
     var windowWidth = 500;
-    var windowHeight = 600;
+    var windowHeight = 650;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

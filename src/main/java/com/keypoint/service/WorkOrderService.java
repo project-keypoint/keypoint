@@ -51,5 +51,17 @@ public class WorkOrderService {
 		return workOrderDAO.countCusList(search);
 	}
 
+
+	public List<WorkOrderDTO> workInstructList(Map<String, Object> search) {
+		System.out.println("WorkOrderService workInstructList()");
+		return workOrderDAO.workInstructList(search);
+	}
+
+
+	public int countInstructList(Map<String, Object> search) {		
+		System.out.println("WorkOrderService countInstructList()");
+		return workOrderDAO.countInstructList(search);
+	}
+
 	}
 
