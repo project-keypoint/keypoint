@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>완제품등록</title>
+<title>단위추가</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -18,44 +18,14 @@
 </head>
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/product/productInsertPro" name="productInsert" id="productInsert" method="post">
+<form action="#">
 <div class="forms-group-receive">
-<div class="page-title-popup">완제품등록</div>
-
-<div class="form-group-receive">
-<p>완제품코드</p>
-<input type="text" name="productCode" class="form-control search-input" placeholder="완제품명">
-</div>
-
-<div class="form-group-receive">
-<p>완제품명</p>
-<input type="text" name="productName" class="form-control search-input" placeholder="완제품명">
-</div>
-<div class="search-bar-popup">
-<div class="form-group-receive">
-<p>업체명</p>
-<input type="text" name="cusCode" id="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
-<input type="text" name="cusName" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
-</div>
-</div>
-<div class="form-group-receive">
-<p>매출단가</p>
-<input type="text" name="productPrice" class="form-control search-input" placeholder="매출단가">원
-</div>
-<div class="form-group-receive">
-<p>초기수량</p>
-<input type="number" name="productCount" class="form-control search-input" placeholder="초기수량" min="0">
-</div>
+<div class="page-title-popup">단위추가</div>
 <div class="form-group-receive">
 <p>단위</p>
-<select name="productUnit" class="form-control search-input status" required="required">
-<option value="EA" selected="selected">EA</option></select>
-<button class="btn btn-primary mybutton1" onclick="openAddUnit()">단위추가</button>
+<input type="text" id="addunit" class="form-control search-input" placeholder="단위">
 </div>
-<div class="form-group-receive">
-<p>비고</p>
-<textarea rows="5px" cols="25px" name="productMemo" class="form-control search-input textarea" placeholder="비고"></textarea>
-</div>
+
 
 </div>
 </div>
@@ -82,12 +52,12 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#cusCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
+	            var width = 400;
+	            var height = 400;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 업체 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
@@ -118,7 +88,6 @@ $(document).ready(function() {
 	    });
     });
 });
-
 // 수주일자 클릭시 현재날짜로 변경
 document.addEventListener('DOMContentLoaded', function () {
     var roDateInput = document.getElementById("roDate");
@@ -140,7 +109,6 @@ roDateInput.addEventListener("click", function () {
 // 수주일자 입력란의 값 가져오기
 var roDateInput = document.getElementById("roDate");
 var roDateValue = roDateInput.value;
-
 // 수주일자를 현재 년월일로 설정 (YYYY-MM-DD 형식)
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -156,19 +124,14 @@ $(function() {
         dateFormat: "yy-mm-dd", // MySQL DATE 형식으로 출력
     });
 });
-
-
-function openAddUnit() {
-    var url = '${pageContext.request.contextPath}/product/addUnit';
+function openUpdate() {
+    var url = '${pageContext.request.contextPath}/product/productUpdate';
     var windowWidth = 500;
-    var windowHeight = 300;
+    var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
-    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+    var newWindow = window.open(url, '_self', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-
-
-
 </script>
 </body>
 </html>

@@ -82,8 +82,9 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">발주목록</a> 
 					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">입고목록</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">소요량목록</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock">상품목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/product/requireList">소요량목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/product/productList">완제품목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/product/materialList">자재목록</a>
 				</div>
 			</div></li>
 

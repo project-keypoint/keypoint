@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>완제품목록</title>
+<title>소요량목록</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
@@ -21,7 +21,7 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">완제품목록(재고현황)</div>
+<div class="page-title">소요량목록</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
@@ -30,6 +30,14 @@
 </div>
 <div class="search-select">
 <p>완제품명</p> <input type="text" id="productName" class="form-control search-input" placeholder="완제품명 ">
+</div>
+</div>
+<div class="search-b">
+<div class="search-select">
+<p>자재코드</p> <input type="text" id="materialCode" class="form-control search-input" placeholder="자재코드 ">
+</div>
+<div class="search-select">
+<p>자재명</p> <input type="text" id="materialName" class="form-control search-input" placeholder="자재명 ">
 </div>
 </div>
 
@@ -48,28 +56,50 @@
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
     <th>완제품코드</th>
     <th>완제품명</th>
-    <th>거래처코드</th>
-    <th>매출단가</th>
-    <th>수량</th>
-    <th>단위</th>
-    <th>비고</th>
+    <th>자재코드</th>
+    <th>자재명</th>
+    <th>자재소요량</th>
+    <th>자재단위</th>
     <th>관리</th>
 </tr>
 
-<c:forEach var="productDTO" items="${productList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>${productDTO.productCode}</td>
-    <td>${productDTO.productName}</td>
-    <td>${productDTO.cusCode}</td>
-    <td>${productDTO.productPrice}원</td>
-    <td>${productDTO.productCount}</td>
-    <td>${productDTO.productUnit}</td>
-    <td>${productDTO.productMemo}</td>
+    <td>PRO0001</td>
+    <td>키포인트넘버원</td>
+    <td>MAT0001</td>
+    <td>투명키캡</td>
+    <td>176</td>
+    <td>EA</td>
     <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+	<!-- + openUpdate(가져갈값넣기) -->
 </tr>
-</c:forEach>      
-
+    
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
 </table>
 </div><!-- table -->
 <div class="content-bottom">
@@ -201,18 +231,18 @@ checkboxes.forEach(function (checkbox) {
     });
 });
 
-// 수주상세내용 새창
+// 자재수정 새창
 function openUpdate() {
-    var url = '${pageContext.request.contextPath}/product/productUpdate';
+    var url = '${pageContext.request.contextPath}/product/requireUpdate';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-//수주등록 새창
+//자재등록 새창
 function openInsert() {
-    var url = '${pageContext.request.contextPath}/product/productInsert';
+    var url = '${pageContext.request.contextPath}/product/requireInsert';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
