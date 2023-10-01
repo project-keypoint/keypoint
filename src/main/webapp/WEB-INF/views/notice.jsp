@@ -19,10 +19,10 @@
 <body>
 <%@include file="../views/inc/top-bar.jsp" %>
 <%@include file="../views/inc/side-bar.jsp" %>
-
+ㄴㄴ
 
 <!--  contents start -->
-<div class="contents" style="position: absolute;; left: 15rem;">여기 div 안에다가 내용 만들어 넣으면 됩니다!</div>
+<div class="contents" style="position: absolute;; left: 15rem;">공지사항</div>
 <!-- contents end -->
 
 
