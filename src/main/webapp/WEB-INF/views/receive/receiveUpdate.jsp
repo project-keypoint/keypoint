@@ -18,50 +18,60 @@
 </head>
 <body>
 <div class="main-details">
-<form action="#">
+<form action="${pageContext.request.contextPath}/receive/receiveUpdatePro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">수주수정</div>
 <div class="form-group-receive">
 <p>수주번호</p>
-<input type="text" id="roCode" class="form-control search-input" placeholder="수주번호" readonly>
+<input type="text" id="roCode" name="roCode" class="form-control search-input" value="${receiveDTO.roCode}" readonly>
 </div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
-<input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" value="${receiveDTO.cusCode}">
+<input type="text" id="cusName" class="form-control search-input inputname" value="${receiveDTO.cusCode}" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" class="form-control search-input inputcode" placeholder="상품검색">
-<input type="text" id="productName" class="form-control search-input inputname" placeholder="상품명" readonly>
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="${receiveDTO.productCode}">
+<input type="text" id="productName" class="form-control search-input inputname" value="${receiveDTO.productCode}" readonly>
 </div>
 </div>
 <div class="form-group-receive">
 <p>수주수량</p>
-<input type="number" id="roCount" class="form-control search-input" placeholder="수주수량" min="0">
+<input type="number" id="roCount" name="roCount" class="form-control search-input" value="${receiveDTO.roCount}" min="0">
 </div>
 <div class="form-group-receive">
 <p>수주금액</p>
-<input type="text" id="roPrice" class="form-control search-input" placeholder="수주금액" readonly>
+<input type="text" id="roPrice" class="form-control search-input" value="${receiveDTO.roPrice}" readonly>
 </div>
 <div class="form-group-receive">
 <p>수주등록일</p>
-<input type="text" id="roDate" class="form-control search-input" placeholder="수주등록일" readonly>
+<input type="text" id="roDate" class="form-control search-input" value="${receiveDTO.roDate}" readonly>
 </div>
 <div class="form-group-receive">
 <p>납품예정일</p>
-<input type="text" id="shipSdate" class="form-control search-input" placeholder="납품예정일">
+<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" value="${receiveDTO.shipSdate}">
 </div>
+
 <div class="form-group-receive">
 <p>상태</p>
 <select id="roStatus" name="roStatus" class="form-control search-input status">
-        <option value="pending">대기</option>
-        <option value="ongoing">진행</option>
-        <option value="completed">완료</option>
-        <option value="canceled">취소</option>
+    <option value="대기" ${receiveDTO.roStatus eq '대기' ? 'selected' : ''}>대기</option>
+    <option value="진행" ${receiveDTO.roStatus eq '진행' ? 'selected' : ''}>진행</option>
+    <option value="완료" ${receiveDTO.roStatus eq '완료' ? 'selected' : ''}>완료</option>
+    <option value="취소" ${receiveDTO.roStatus eq '취소' ? 'selected' : ''}>취소</option>
 </select>
 </div>
+
+<div class="search-bar-popup">
+<div class="form-group-receive">
+<p>당담자</p>
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="${receiveDTO.empId}">
+<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.empId}" readonly>
+</div>
+</div>
+
 </div>
 <div class="details-buttons">
 <input type="submit" value="완료" class="btn btn-primary mybutton1">
@@ -98,6 +108,34 @@ $(function() {
     	dateFormat: "yy-mm-dd"
     });
 });
+// 수주수정 페이지가 로드되면 수주예정일 값을 포맷팅해서 input에 넣음
+$(document).ready(function() {
+    var shipSdate = "${receiveDTO.shipSdate}"; // 서버에서 날짜를 받아옵니다.
+    var formattedDate = new Date(shipSdate).toISOString().slice(0, 10);
+    $("#shipSdate").val(formattedDate);
+});
+//유효성 검사
+function validateForm() {
+    // 각 입력 필드 값
+    var cusCode = document.getElementById("cusCode").value;
+    var productCode = document.getElementById("productCode").value;
+    var roCount = document.getElementById("roCount").value;
+    var roDate = document.getElementById("roDate").value;
+    var shipSdate = document.getElementById("shipSdate").value;
+    var empId = document.getElementById("empId").value;
+    // 빈 필드 검사
+    if (cusCode === "" || productCode === "" || roCount === "" ||
+    	roDate === "" || shipSdate === "" || empId === "") {
+        alert("모든 내용을 입력해주세요.");
+        return false; // 제출 방지
+    }
+    // 추가 유효성 검사
+    if (roCount == 0) {
+        alert("몇개부터 가능하도록 할까");
+        return false; // 제출 방지
+    }
+    return true;
+}
 </script>
 </body>
 </html>

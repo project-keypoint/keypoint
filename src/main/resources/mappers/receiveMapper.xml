@@ -4,9 +4,38 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mappers.receiveMapper">
 
-	<insert id="insertTest">
-		insert into test1 (testCode, testString, testInt)
-		values(#{testCode},#{testString},#{testInt})
+	<insert id="insertReceive">
+		insert into receivedOrder (roCode, empId, cusCode, productCode, roCount,
+		                          roPrice, roDate, shipSdate, shipDate, roStatus)
+		values(CONCAT('RO', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
+		       #{empId}, #{cusCode}, #{productCode}, #{roCount},
+		       #{roCount}*5000, <!-- #{roCount}*(SELECT productPrice FROM product WHERE productCode = #{productCode}) -->
+		       #{roDate}, #{shipSdate}, #{shipDate}, #{roStatus})
 	</insert>
-  
+	
+	<select id="getReceiveList" resultType="com.keypoint.dto.ReceiveDTO">
+		select * from receivedOrder
+		where roStatus != '삭제'
+		order by roCode desc;
+	</select>
+	
+	<select id="getReceiveDetails" resultType="com.keypoint.dto.ReceiveDTO">
+		select * from receivedOrder
+		where roCode = #{roCode};
+	</select>
+	
+	<update id="updateReceive">
+		UPDATE receivedOrder
+		SET cusCode = #{cusCode}, productCode = #{productCode}, 
+        	roCount = #{roCount},
+        	shipSdate = #{shipSdate}, roStatus = #{roStatus}
+		WHERE roCode = #{roCode}
+	</update>
+	
+	<update id="deleteReceive">
+		UPDATE receivedOrder
+		SET roStatus = '삭제'
+		WHERE roCode = #{roCode}
+	</update>
+	
 </mapper>

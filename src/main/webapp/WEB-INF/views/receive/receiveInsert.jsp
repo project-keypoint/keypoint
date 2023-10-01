@@ -18,28 +18,29 @@
 </head>
 <body>
 <div class="main-details">
-<form action="#">
+<form action="${pageContext.request.contextPath}/receive/receiveInsertPro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">수주등록</div>
 <div class="form-group-receive">
 <p>수주번호</p>
-<input type="text" id="roCode" class="form-control search-input" placeholder="수주번호" readonly>
+<input type="text" id="roCode" name="roCode" class="form-control search-input" placeholder="수주번호" readonly>
 </div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
 <input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" class="form-control search-input inputcode" placeholder="상품검색">
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="상품검색">
 <input type="text" id="productName" class="form-control search-input inputname" placeholder="상품명" readonly>
 </div>
 </div>
+
 <div class="form-group-receive">
 <p>수주수량</p>
-<input type="number" id="roCount" class="form-control search-input" placeholder="수주수량" min="0">
+<input type="number" id="roCount" name="roCount" class="form-control search-input" placeholder="수주수량" min="0">
 </div>
 <div class="form-group-receive">
 <p>수주금액</p>
@@ -47,24 +48,34 @@
 </div>
 <div class="form-group-receive">
 <p>수주등록일</p>
-<input type="text" id="roDate" class="form-control search-input" placeholder="수주등록일">
+<input type="text" id="roDate" name="roDate" class="form-control search-input" placeholder="수주등록일">
+
 </div>
 <div class="form-group-receive">
 <p>납품예정일</p>
-<input type="text" id="shipSdate" class="form-control search-input" placeholder="납품예정일">
+<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" placeholder="납품예정일">
 </div>
 <div class="form-group-receive">
 <p>상태</p>
 <select id="roStatus" name="roStatus" class="form-control search-input status">
-        <option value="pending">대기</option>
-        <option value="ongoing">진행</option>
-        <option value="completed">완료</option>
-        <option value="canceled">취소</option>
+        <option value="대기">대기</option>
+        <option value="진행">진행</option>
+        <option value="완료">완료</option>
+        <option value="취소">취소</option>
 </select>
 </div>
+
+<div class="search-bar-popup">
+<div class="form-group-receive">
+<p>당담자</p>
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="사원검색">
+<input type="text" id="empName" name="empName" class="form-control search-input inputcode" placeholder="사원명" readonly>
+</div>
+</div>
+
 </div>
 <div class="details-buttons">
-<input type="submit" value="등록" class="btn btn-primary mybutton1">
+<input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->
@@ -153,13 +164,36 @@ var yyyy = today.getFullYear();
 var currentDateString = yyyy + '-' + mm + '-' + dd;
 // 납품예정일 입력란
 var shipSdateInput = document.getElementById("shipSdate");
-// 수주일자 이후의 날짜만 선택할 수 있도록 Datepicker 설정
+// 수주일자(오늘) 이후의 날짜만 선택할 수 있도록 Datepicker 설정
 $(function() {
     $("#shipSdate").datepicker({
         minDate: currentDateString, // 현재 날짜 이후로 설정
         dateFormat: "yy-mm-dd", // MySQL DATE 형식으로 출력
     });
 });
+
+// 유효성 검사
+function validateForm() {
+    // 각 입력 필드 값
+    var cusCode = document.getElementById("cusCode").value;
+    var productCode = document.getElementById("productCode").value;
+    var roCount = document.getElementById("roCount").value;
+    var roDate = document.getElementById("roDate").value;
+    var shipSdate = document.getElementById("shipSdate").value;
+    var empId = document.getElementById("empId").value;
+    // 빈 필드 검사
+    if (cusCode === "" || productCode === "" || roCount === "" ||
+    	roDate === "" || shipSdate === "" || empId === "") {
+        alert("모든 내용을 입력해주세요.");
+        return false; // 제출 방지
+    }
+    // 추가 유효성 검사
+    if (roCount == 0) {
+        alert("몇개부터 가능하도록 할까");
+        return false; // 제출 방지
+    }
+    return true;
+}
 </script>
 </body>
 </html>

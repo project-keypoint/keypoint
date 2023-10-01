@@ -31,6 +31,7 @@ height: calc(100%-4.375rem);
 }
 .card {
 width: 1400px;
+margin-bottom: 24px;
 }
 .contents2 {
 width: 1300px;
@@ -198,7 +199,8 @@ margin-right: 10px;
 width: 175px;
 height: 30px;	
 }
-input[placeholder="업체코드"], input[placeholder="상품코드"], input[placeholder="업체검색"], input[placeholder="상품검색"] {
+input[placeholder="업체코드"], input[placeholder="상품코드"], input[placeholder="사원명"],
+input[placeholder="업체검색"], input[placeholder="상품검색"] {
 width: 105px;
 }
 input[placeholder="업체명"], input[placeholder="상품명"] {
@@ -206,6 +208,15 @@ width: 195px;
 }
 input[placeholder="수주번호"]{
 width: 310px;
+}
+#cusCode.search-input, #productCode.search-input, #empName.search-input {
+    width: 105px;
+}
+#cusName.search-input, #productName.search-input {
+    width: 195px;
+}
+#roCode.search-input {
+	width: 310px;
 }
 .form-group-receive select {
 width: 175px;
