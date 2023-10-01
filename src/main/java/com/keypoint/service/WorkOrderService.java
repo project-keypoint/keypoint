@@ -52,15 +52,39 @@ public class WorkOrderService {
 	}
 
 
-	public List<WorkOrderDTO> workInstructList(Map<String, Object> search) {
+	public List<WorkOrderDTO> getWorkInstructList(Map<String, Object> search) {
 		System.out.println("WorkOrderService workInstructList()");
-		return workOrderDAO.workInstructList(search);
+		return workOrderDAO.getWorkInstructList(search);
 	}
 
 
 	public int countInstructList(Map<String, Object> search) {		
 		System.out.println("WorkOrderService countInstructList()");
 		return workOrderDAO.countInstructList(search);
+	}
+
+
+	public List<WorkOrderDTO> getWorkLineList(Map<String, Object> search) {
+		System.out.println("WorkOrderService workLineList()");
+		return workOrderDAO.getWorkLineList(search);
+	}
+
+
+	public int countLineList(Map<String, Object> search) {
+		System.out.println("WorkOrderService countLineList()");
+		return workOrderDAO.countLineList(search);
+	}
+
+
+	public List<WorkOrderDTO> getWorkEmpList(Map<String, Object> search) {
+		System.out.println("WorkOrderService getWorkEmpList()");
+		return workOrderDAO.getWorkEmpList(search);
+	}
+
+
+	public int countEmpList(Map<String, Object> search) {
+		System.out.println("WorkOrderService countEmpList()");
+		return workOrderDAO.countEmpList(search);
 	}
 
 	}

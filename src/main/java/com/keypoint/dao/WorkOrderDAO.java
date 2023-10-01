@@ -74,7 +74,7 @@ public class WorkOrderDAO {
 	}
 
 
-	public List<WorkOrderDTO> workInstructList(Map<String, Object> search) {
+	public List<WorkOrderDTO> getWorkInstructList(Map<String, Object> search) {
 		System.out.println("WorkOrderDAO workInstructList()");
 		
 		if(search.get("woCode")==null) {
@@ -88,6 +88,41 @@ public class WorkOrderDAO {
 	public int countInstructList(Map<String, Object> search) {
 		System.out.println("WorkOrderDAO countInstructList()");
 		return sqlSession.selectOne(namespace+".countInstructList", search);
+	}
+
+
+	public List<WorkOrderDTO> getWorkLineList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO workLineList()");
+		
+		if(search.get("lineCode")==null) {
+			search.put("lineCode", "");
+		}
+		return sqlSession.selectList(namespace+".workLineList", search);
+	}
+
+
+	public int countLineList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countLineList()");
+		return sqlSession.selectOne(namespace+".countLineList", search);
+	}
+
+
+	public List<WorkOrderDTO> getWorkEmpList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO getWorkEmpList()");
+		
+		if(search.get("empId")==null) {
+			search.put("empId", "");
+		}
+		if(search.get("empName")==null) {
+			search.put("empName", "");
+		}
+		return sqlSession.selectList(namespace+".workEmpList", search);
+	}
+
+
+	public int countEmpList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countEmpList()");
+		return sqlSession.selectOne(namespace+".countEmpList", search);
 	}
 	
 	
