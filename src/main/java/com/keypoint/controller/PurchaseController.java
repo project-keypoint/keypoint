@@ -25,15 +25,15 @@ public class PurchaseController {
 	@GetMapping("/purchaseInsert")
 	public String purchaseInsert() {
 		
-		// member/join.jsp
-		// WEB-INF/views/member/join.jsp
+		
 		return "purchase/purchaseInsert";
 	}//
 	
 	@PostMapping("/purchaseInsertPro")
 	public String purchaseInsertPro(PurchaseDTO purchaseDTO) {
 		System.out.println("purchaseDTO purchaseInsertPro()");
-		//회원가입 처리
+		
+		//등록 처리
 		System.out.println(purchaseDTO);
 		
 		purchaseService.insertPurchase(purchaseDTO);

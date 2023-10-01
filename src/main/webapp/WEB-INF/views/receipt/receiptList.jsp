@@ -221,7 +221,7 @@ function openUpdate() {
 
 //입고처리 새창
 function openComplete() {
-    var url = '${pageContext.request.contextPath}/purchase/purchaseComplete';
+    var url = '${pageContext.request.contextPath}/receipt/receiptComplete';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
