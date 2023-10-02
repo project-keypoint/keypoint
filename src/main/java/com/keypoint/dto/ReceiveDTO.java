@@ -11,10 +11,11 @@ public class ReceiveDTO {
 	
 	private String roCode;
 	private String cusCode;
-	// private String cusName; //join
+	private String cusName; //join
 	private String productCode;
-	// private String productName; //join
+	private String productName; //join
 	private int roEmpId;
+	private String roEmpName; //join
 	private int roCount;
 	private int roPrice;
 	private String roDate; // string
@@ -30,11 +31,25 @@ public class ReceiveDTO {
 				",shipSdate"+shipSdate+",shipDate"+shipDate+",roStatus"+roStatus+"]";
 	}
 
-//	public String toString() {
-//		return "ReceiveDTO [testCode=" + testCode + ", testString=" + testString +
-//				", testInt=" + testInt + ", testDate=" + testDate + "]";
-//	}
 	
+	public String getCusName() {
+		return cusName;
+	}
+	public void setCusName(String cusName) {
+		this.cusName = cusName;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getRoEmpName() {
+		return roEmpName;
+	}
+	public void setRoEmpName(String roEmpName) {
+		this.roEmpName = roEmpName;
+	}
 	public String getTestCode() {
 		return testCode;
 	}

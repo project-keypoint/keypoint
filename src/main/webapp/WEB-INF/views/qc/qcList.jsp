@@ -74,27 +74,6 @@
     <th>버튼</th>
 </tr>
 
-
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-	<td>QC230927102344</td>
-	<td>2023-09-27</td>
-    <td>EEB003</td>
-    <td>키포인트넘버원</td>
-    <td>30</td>
-    <td>완료</td>
-    <td>완료</td>
-    <td>완료</td>
-    <td>30</td>
-    <td>0</td>
-    <td>0%</td>
-    <td>진행</td>
-    <td>홍길동</td>
-    <td>2023-09-25</td>
-    <td><input type="button" value="검사진행(상세)" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
-	<!-- + openDetails(가져갈값넣기) -->
-</tr>
-
 <c:forEach var="qualityDTO" items="${qcList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
@@ -104,7 +83,7 @@
         <c:otherwise>${qualityDTO.qcCode}</c:otherwise>
     </c:choose>
     </td>
-	<td>${qualityDTO.woCode}</td>
+	<td>${qualityDTO.shipSdate}</td>
     <td>${qualityDTO.productCode}</td>
     <td>${qualityDTO.productName}</td>
     <td>${qualityDTO.prodCount}</td>
@@ -152,8 +131,8 @@
 	</td>
     <td>
     <c:choose>
-        <c:when test="${qualityDTO.qcEmpId eq 0}">-</c:when>
-        <c:otherwise>${qualityDTO.qcEmpId}</c:otherwise>
+        <c:when test="${empty qualityDTO.qcEmpName}">-</c:when>
+        <c:otherwise>${qualityDTO.qcEmpName}</c:otherwise>
     </c:choose>
     </td>
     <td>
@@ -200,50 +179,20 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
 $(document).ready(function() {
-    $("#productCode").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var productCode = $("input[name='productCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#productCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
-    });
-});
-$(document).ready(function() {
-    $("#productName").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var productName = $("input[name='productName']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#productName").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+ 	// 사원 검색 팝업 열기
+    $("#productCode, #productName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        openPopup(url);
     });
 });
 $(function() {

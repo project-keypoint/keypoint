@@ -90,10 +90,6 @@
 	<th>불량</th>
 	<th>최종불량률</th></tr>
 <tr class="table-body">
-<%-- 	<td><input type="text" id="qcCount" class="form-control search-input input-center hide" placeholder="${qualityDTO.prodCount}" readonly></td> --%>
-<%-- 	<td><input type="number" id="qcPass" name="qcPass" class="form-control search-input input-center" value="${qualityDTO.qcPass}" min="0" oninput="calculateQCDefectRate()"></td> --%>
-<%-- 	<td><input type="number" id="qcDefect" name="qcDefect" class="form-control search-input input-center" value="${qualityDTO.qcDefect}" min="0" oninput="calculateQCDefectRate()"></td> --%>
-<%-- 	<td><input type="text" id="qcDefectRate" name="qcDefectRate" class="form-control search-input input-center" value="${qualityDTO.qcDefectRate}" min="0"></td> --%>
 	<td><input type="text" id="qcCount" class="form-control search-input input-center hide" placeholder="${qualityDTO.prodCount}" readonly></td>
 	<td><input type="number" id="qcPass" name="qcPass" class="form-control search-input input-center" value="${qualityDTO.qcPass}" min="0" oninput="calculateQCDefectRate(); checkTotal()"></td>
 	<td><input type="number" id="qcDefect" name="qcDefect" class="form-control search-input input-center" value="${qualityDTO.qcDefect}" min="0" oninput="calculateQCDefectRate(); checkTotal()"></td>
@@ -108,8 +104,8 @@
 </div>
 <div class="form-group-qc-receive">
 <p>품질검사원</p>
-<input type="text" id="qcEmpId" name="qcEmpId" class="form-control search-input inputcode" value="${qualityDTO.qcEmpId}" >
-<input type="text" id="qcEmpName" class="form-control search-input inputname" placeholder="사원명" readonly>
+<input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode" value="${qualityDTO.qcEmpId}" readonly>
+<input type="text" id="empName" class="form-control search-input inputname" placeholder="사원명" readonly>
 </div>
 
 <div class="form-group-qc-receive">
@@ -125,10 +121,13 @@
 </div>
 </div>
 <div class="details-buttons">
-
 <input type="submit" value="검사저장" class="btn btn-primary mybutton1">
+<select id="qcStatus" name="qcStatus" class="form-control search-input status qc-status">
+    <option value="대기" ${qualityDTO.qcStatus eq '대기' ? 'selected' : ''}>대기</option>
+    <option value="진행" ${qualityDTO.qcStatus eq '진행' ? 'selected' : ''}>진행</option>
+    <option value="완료" ${qualityDTO.qcStatus eq '완료' ? 'selected' : ''}>완료</option>
+</select>
 <!-- <input type="button" value="검사완료" class="btn btn-primary mybutton1"> -->
-
 </div>
 <!-- </form>form 끝 -->
 </div><!-- main-details -->
@@ -152,7 +151,24 @@ setPlaceholder('prodCode', "${qualityDTO.prodCode}");
 
 setPlaceholder('qcStartDate', "${qualityDTO.qcStartDate}");
 setPlaceholder('qcEndDate', "${qualityDTO.qcEndDate}"); //시작일or완료일 컬럼추가하기
-setPlaceholder('qcEmpName', "${qualityDTO.qcEmpName}");
+setPlaceholder('empName', "${qualityDTO.qcEmpName}");
+
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
+$(document).ready(function() {
+ 	// 사원 검색 팝업 열기
+    $("#empId, #empName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        openPopup(url);
+    });
+});
 
 function setPlaceholderQcEmp(id, value) {
     var inputElement = document.getElementById(id);
@@ -184,21 +200,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	qcEndDateInput.readOnly = true;
 	qcEndDateInput.placeholder = "";
     });
-});
-//업체명(거래처) 검색 새창
-var searchCustomer = document.getElementById("cusCode");
-searchCustomer.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 업체검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
-});
-
-//상품명 검색 새창
-var searchProduct = document.getElementById("productCode");
-searchProduct.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 상품검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
 });
 
 //유효성 검사

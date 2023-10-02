@@ -8,12 +8,14 @@
 		select a.qcCode,
 			   b.prodCode, d.shipSdate, b.woCode, b.productCode, e.productName, b.prodCount, 
        	       a.qcTest1, a.qcTest2, a.qcTest3, a.qcPass, a.qcDefect, a.qcDefectRate,
-       	       a.qcStatus, a.qcEmpId, a.qcStartDate, a.qcEndDate
+       	       a.qcStatus, a.qcEmpId, f.empName as qcEmpName, a.qcStartDate, a.qcEndDate
 		from production b
 		left join qualityControl a on b.prodCode = a.prodCode
 		left join workOrder c on b.woCode = c.woCode
 		left join receivedOrder d on d.roCode = c.roCode
 		left join product e on b.productCode = e.productCode
+		left join employees f on a.qcEmpId = f.empId
+		order by qcCode desc
 	</select>
 	
 	<select id="getQcDetails" resultType="com.keypoint.dto.QualityDTO">
@@ -43,7 +45,7 @@
 		UPDATE qualityControl
 		SET qcTest1 = #{qcTest1}, qcTest2 = #{qcTest2}, qcTest3 = #{qcTest3},
 		    qcPass = #{qcPass}, qcDefect = #{qcDefect}, qcDefectRate = #{qcDefectRate},
-		    qcEmpId = #{qcEmpId}, qcEndDate = #{qcEndDate}
+		    qcEmpId = #{qcEmpId}, qcEndDate = #{qcEndDate}, qcStatus = #{qcStatus}
 		WHERE prodCode = #{prodCode}                        
 	</update>
 	

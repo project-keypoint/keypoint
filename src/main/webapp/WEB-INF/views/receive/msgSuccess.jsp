@@ -9,6 +9,7 @@
 <body>
 	<script type="text/javascript">
 		alert("처리가 완료되었습니다.");
+		window.opener.location.reload();
 		window.close();
 	</script>
 </body>

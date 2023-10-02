@@ -29,12 +29,12 @@
 <div class="form-group-receive">
 <p>업체명</p>
 <input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" value="${receiveDTO.cusCode}" readonly>
-<input type="text" id="cusName" class="form-control search-input inputname" value="${receiveDTO.cusCode}" readonly>
+<input type="text" id="cusName" class="form-control search-input inputname" value="${receiveDTO.cusName}" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
 <input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="${receiveDTO.productCode}" readonly>
-<input type="text" id="productName" class="form-control search-input inputname" value="${receiveDTO.productCode}" readonly>
+<input type="text" id="productName" class="form-control search-input inputname" value="${receiveDTO.productName}" readonly>
 </div>
 </div>
 <div class="form-group-receive">
@@ -67,8 +67,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="roEmpId" name="roEmpId" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
-<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
+<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
+<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" value="${receiveDTO.roEmpName}" readonly>
 </div>
 </div>
 
@@ -86,22 +86,32 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-//업체명(거래처) 검색 새창
-var searchCustomer = document.getElementById("cusCode");
-searchCustomer.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 업체검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
+$(document).ready(function() {
+    // 업체명 검색 팝업 열기
+    $("#cusCode, #cusName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+        openPopup(url);
+    });
+    // 상품명 검색 팝업 열기
+    $("#productCode, #productName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        openPopup(url);
+    });
+ 	// 사원 검색 팝업 열기
+    $("#empId, #empName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        openPopup(url);
+    });
 });
-
-//상품명 검색 새창
-var searchProduct = document.getElementById("productCode");
-searchProduct.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 상품검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
-});
-
 //수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
 $(function() {
     $("#shipSdate").datepicker({

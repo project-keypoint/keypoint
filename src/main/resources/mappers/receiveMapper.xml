@@ -5,22 +5,34 @@
 <mapper namespace="com.itwillbs.mappers.receiveMapper">
 
 	<insert id="insertReceive">
-		insert into receivedOrder (roCode, empId, cusCode, productCode, roCount,
+		insert into receivedOrder (roCode, roEmpId, cusCode, productCode, roCount,
 		                          roPrice, roDate, shipSdate, shipDate, roStatus)
 		values(CONCAT('RO', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
-		       #{empId}, #{cusCode}, #{productCode}, #{roCount},
-		       #{roCount}*5000, <!-- #{roCount}*(SELECT productPrice FROM product WHERE productCode = #{productCode}) -->
+		       #{roEmpId}, #{cusCode}, #{productCode}, #{roCount},
+		       #{roCount}*(SELECT productPrice FROM product WHERE productCode = #{productCode}),
 		       #{roDate}, #{shipSdate}, #{shipDate}, #{roStatus})
 	</insert>
 	
 	<select id="getReceiveList" resultType="com.keypoint.dto.ReceiveDTO">
-		select * from receivedOrder
-		where roStatus != '삭제'
-		order by roCode desc
+		select a.roCode, a.cusCode, b.cusName, a.productCode, c.productName,
+	   		   a.roCount, a.roPrice, a.roDate, a.shipSdate, a.shipDate, a.roStatus,
+	   		   a.roEmpId, d.EmpName as roEmpName
+		from receivedOrder a
+		left join customer b on a.cusCode = b.cusCode
+		left join product c on a.productCode = c.productCode
+		left join employees d on a.roEmpId = d.empId
+		where a.roStatus != '삭제'
+		order by a.roCode desc
 	</select>
 	
 	<select id="getReceiveDetails" resultType="com.keypoint.dto.ReceiveDTO">
-		select * from receivedOrder
+		select a.roCode, a.cusCode, b.cusName, a.productCode, c.productName,
+	   		   a.roCount, a.roPrice, a.roDate, a.shipSdate, a.shipDate, a.roStatus,
+	   		   a.roEmpId, d.EmpName as roEmpName
+		from receivedOrder a
+		left join customer b on a.cusCode = b.cusCode
+		left join product c on a.productCode = c.productCode
+		left join employees d on a.roEmpId = d.empId
 		where roCode = #{roCode}
 	</select>
 	
@@ -28,7 +40,9 @@
 		UPDATE receivedOrder
 		SET cusCode = #{cusCode}, productCode = #{productCode}, 
         	roCount = #{roCount},
-        	shipSdate = #{shipSdate}, roStatus = #{roStatus}
+        	roPrice = #{roCount}*(SELECT productPrice FROM product WHERE productCode = #{productCode}),
+        	shipSdate = #{shipSdate}, roStatus = #{roStatus},
+        	roEmpId = #{roEmpId}
 		WHERE roCode = #{roCode}
 	</update>
 	

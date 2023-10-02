@@ -81,8 +81,17 @@
 </div>
 <div class="form-group-qc-receive">
 <p>품질검사원</p>
-<input type="text" id="qcEmpId" name="qcEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.qcEmpId}" >
-<input type="text" id="qcEmpName" class="form-control search-input inputname" placeholder="사원명" readonly>
+<c:choose>
+  <c:when test="${not empty qualityDTO.qcCode}">
+    <input type="text" id="qcEmpId" name="qcEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.qcEmpId}" readonly>
+	<input type="text" id="qcEmpName" class="form-control search-input inputname" placeholder="사원명" readonly>
+  </c:when>
+  <c:otherwise>
+    <input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.qcEmpId}" readonly>
+	<input type="text" id="empName" class="form-control search-input inputname" placeholder="사원명" readonly>
+  </c:otherwise>
+</c:choose>
+
 </div>
 
 <div class="form-group-qc-receive">
@@ -113,6 +122,7 @@
     <input type="button" value="검사시작" class="btn btn-secondary mybutton1">
   </c:otherwise>
 </c:choose>
+<input type="text" id="qcStatus" class="form-control search-input input-center" readonly>
 
 </div>
 <!-- </form>form 끝 -->
@@ -133,18 +143,19 @@ function setPlaceholder(id, value) {
 setPlaceholder('qcTest1', "${qualityDTO.qcTest1}");
 setPlaceholder('qcTest2', "${qualityDTO.qcTest2}");
 setPlaceholder('qcTest3', "${qualityDTO.qcTest3}");
+setPlaceholder('qcStatus', "${qualityDTO.qcStatus}");
 setPlaceholder('qcDefectRate', "${qualityDTO.qcDefectRate}");
 setPlaceholder('prodCode', "${qualityDTO.prodCode}");
 
 setPlaceholder('qcStartDate', "${qualityDTO.qcStartDate}");
 setPlaceholder('qcEndDate', "${qualityDTO.qcEndDate}"); //시작일or완료일 컬럼추가하기
-setPlaceholder('qcEmpName', "${qualityDTO.qcEmpName}");
+setPlaceholder('empName', "${qualityDTO.qcEmpName}");
 
 function setPlaceholderQcEmp(id, value) {
     var inputElement = document.getElementById(id);
     inputElement.placeholder = (value !== null && value !== "" && value !== "0") ? value : '사원검색(클릭)';
 }
-setPlaceholderQcEmp('qcEmpId', "${qualityDTO.qcEmpId}");
+setPlaceholderQcEmp('empId', "${qualityDTO.qcEmpId}");
 
 function setPlaceholderStart(id, value) {
     var inputElement = document.getElementById(id);
@@ -154,33 +165,21 @@ setPlaceholderStart('qcCode', "${qualityDTO.qcCode}");
 </script>
 
 <script type="text/javascript">
-//업체명(거래처) 검색 새창
-var searchCustomer = document.getElementById("cusCode");
-searchCustomer.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 업체검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
-});
-
-//상품명 검색 새창
-var searchProduct = document.getElementById("productCode");
-searchProduct.addEventListener("click", function () {
-	var url = '${pageContext.request.contextPath}/receive/empty';
-	// ↑ 상품검색페이지 새로 입력하기
-    window.open(url, '_blank', 'width=400, height=400');
-});
-
-//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
-$(function() {
-    $("#shipSdate").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-});
-// 수주수정 페이지가 로드되면 수주예정일 값을 포맷팅해서 input에 넣음
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
 $(document).ready(function() {
-    var shipSdate = "${receiveDTO.shipSdate}"; // 서버에서 날짜를 받아옵니다.
-    var formattedDate = new Date(shipSdate).toISOString().slice(0, 10);
-    $("#shipSdate").val(formattedDate);
+ 	// 사원 검색 팝업 열기
+    $("#empId, #empName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        openPopup(url);
+    });
 });
 //유효성 검사
 function validateForm() {

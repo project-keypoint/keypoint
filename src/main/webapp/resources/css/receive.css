@@ -201,20 +201,27 @@ height: 30px;
 }
 input[placeholder="업체코드"], input[placeholder="상품코드"], input[placeholder="사원명"],
 input[placeholder="업체검색"], input[placeholder="상품검색"] {
-width: 105px;
+width: 110px;
 }
 input[placeholder="업체명"], input[placeholder="상품명"] {
-width: 195px;
+width: 190px;
 }
 input[placeholder="수주번호"]{
 width: 310px;
 }
-#cusCode.search-input, #productCode.search-input,
-#empName.search-input, #qcEmpName.search-input, #prodEmpName.search-input {
-    width: 105px;
+#cusCode.search-input, #productCode.search-input {
+    width: 110px;
+}
+#empId.search-input, #qcEmpId.search-input,
+#prodEmpId.search-input, #roEmpId.search-input {
+    width: 150px;
+}
+#empName.search-input, #qcEmpName.search-input,
+#prodEmpName.search-input, #roEmpName.search-input {
+    width: 150px;
 }
 #cusName.search-input, #productName.search-input {
-    width: 195px;
+    width: 190px;
 }
 #roCode.search-input {
 	width: 310px;
@@ -292,8 +299,8 @@ display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭�
 width: 80px;
 height: 28px;
 }
-#qcDefectRate.search-input, #qcTest1.search-input,
-#qcTest2.search-input, #qcTest3.search-input   {
+#qcDefectRate.search-input, #qcStatus.search-input,
+#qcTest1.search-input, #qcTest2.search-input, #qcTest3.search-input   {
 width: 85px;
 height: 28px;
 }

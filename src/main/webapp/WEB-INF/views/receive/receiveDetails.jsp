@@ -31,12 +31,12 @@
 <div class="form-group-receive">
 <p>업체명</p>
 <input type="text" id="cusCode" class="form-control search-input inputcode input-short" placeholder="${receiveDTO.cusCode}" readonly>
-<input type="text" id="cusName" class="form-control search-input inputname input-middle" placeholder="${receiveDTO.cusCode}" readonly>
+<input type="text" id="cusName" class="form-control search-input inputname input-middle" placeholder="${receiveDTO.cusName}" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
 <input type="text" id="productCode" class="form-control search-input inputcode" placeholder="${receiveDTO.productCode}" readonly>
-<input type="text" id="productName" class="form-control search-input inputname" placeholder="${receiveDTO.productCode}" readonly>
+<input type="text" id="productName" class="form-control search-input inputname" placeholder="${receiveDTO.productName}" readonly>
 </div>
 </div>
 
@@ -66,7 +66,7 @@
 <div class="form-group-receive">
 <p>당담자</p>
 <input type="text" id="roEmpId" name="roEmpId" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
-<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
+<input type="text" id="roEmpName" name="roEmpName" class="form-control search-input inputcode" value="${receiveDTO.roEmpName}" readonly>
 </div>
 </div>
 
