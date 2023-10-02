@@ -14,7 +14,7 @@ public class ReceiveDTO {
 	// private String cusName; //join
 	private String productCode;
 	// private String productName; //join
-	private int empId;
+	private int roEmpId;
 	private int roCount;
 	private int roPrice;
 	private String roDate; // string
@@ -26,7 +26,7 @@ public class ReceiveDTO {
 	@Override
 	public String toString() {
 		return "ReceiveDTO [roCode="+roCode+",cusCode="+cusCode+",productCode="+productCode+
-				", empId="+empId+",roCount"+roCount+",roPrice"+roPrice+",roDate"+roDate+
+				", roEmpId="+roEmpId+",roCount"+roCount+",roPrice"+roPrice+",roDate"+roDate+
 				",shipSdate"+shipSdate+",shipDate"+shipDate+",roStatus"+roStatus+"]";
 	}
 
@@ -84,12 +84,12 @@ public class ReceiveDTO {
 		this.productCode = productCode;
 	}
 
-	public int getEmpId() {
-		return empId;
+	public int getRoEmpId() {
+		return roEmpId;
 	}
 
-	public void setEmpId(int empId) {
-		this.empId = empId;
+	public void setRoEmpId(int roEmpId) {
+		this.roEmpId = roEmpId;
 	}
 
 	public int getRoCount() {

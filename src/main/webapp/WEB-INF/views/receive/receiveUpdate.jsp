@@ -67,8 +67,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="${receiveDTO.empId}" readonly>
-<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.empId}" readonly>
+<input type="text" id="roEmpId" name="roEmpId" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
+<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
 </div>
 </div>
 
@@ -122,10 +122,10 @@ function validateForm() {
     var roCount = document.getElementById("roCount").value;
     var roDate = document.getElementById("roDate").value;
     var shipSdate = document.getElementById("shipSdate").value;
-    var empId = document.getElementById("empId").value;
+    var roEmpId = document.getElementById("roEmpId").value;
     // 빈 필드 검사
     if (cusCode === "" || productCode === "" || roCount === "" ||
-    	roDate === "" || shipSdate === "" || empId === "") {
+    	roDate === "" || shipSdate === "" || roEmpId === "") {
         alert("모든 내용을 입력해주세요.");
         return false; // 제출 방지
     }

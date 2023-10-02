@@ -209,7 +209,8 @@ width: 195px;
 input[placeholder="수주번호"]{
 width: 310px;
 }
-#cusCode.search-input, #productCode.search-input, #empName.search-input {
+#cusCode.search-input, #productCode.search-input,
+#empName.search-input, #qcEmpName.search-input, #prodEmpName.search-input {
     width: 105px;
 }
 #cusName.search-input, #productName.search-input {
@@ -275,7 +276,7 @@ margin-right: 10px;
 width: 200px;
 height: 30px;	
 }
-#qcCode.search-input,#workNum.search-input, #prodCode.search-input  {
+#qcCode.search-input,#woCode.search-input, #prodCode.search-input  {
 	width: 315px;
 }
 .form-group-qc-receive select {
