@@ -53,15 +53,35 @@
 <input type="text" class="form-control search-input" id="poPrice" name="poPrice" placeholder="${purchaseDTO.poPrice}" readonly>
 </div>
 
+<div class="search-bar-popup">
 <div class="form-group-receive">
-<p>담당자</p>
-<input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="${purchaseDTO.poOwner}" readonly>
+<p>당담자</p>
+<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="${purchaseDTO.poOwner}" readonly>
 </div>
+
+<!-- <div class="form-group-receive"> -->
+<!-- <p>담당자</p> -->
+<!-- <input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색"> -->
+<!-- </div> -->
+
 
 <div class="form-group-receive">
 <p>거래처</p>
 <input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" placeholder="${purchaseDTO.cusName}" readonly>
 </div>
+</div>
+
+
+
+<!-- <div class="form-group-receive"> -->
+<!-- <p>담당자</p> -->
+<%-- <input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="${purchaseDTO.poOwner}" readonly> --%>
+<!-- </div> -->
+
+<!-- <div class="form-group-receive"> -->
+<!-- <p>거래처</p> -->
+<%-- <input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" placeholder="${purchaseDTO.cusName}" readonly> --%>
+<!-- </div> -->
 
 
 <div class="form-group-receive">

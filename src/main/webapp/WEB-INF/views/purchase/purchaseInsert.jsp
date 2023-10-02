@@ -32,13 +32,13 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>자재코드</p>
-<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="자재검색">
-<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명">
+<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="자재검색" >
+<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명" >
 </div>
 
 <div class="form-group-receive">
 <p>자재단가</p>
-<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가">
+<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가" >
 </div>
 </div>
 
@@ -52,15 +52,31 @@
 <input type="text" class="form-control search-input" id="poPrice" name="poPrice" placeholder="발주금액">
 </div>
 
+
+<div class="search-bar-popup">
 <div class="form-group-receive">
-<p>담당자</p>
-<input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색">
+<p>당담자</p>
+<input type="text" id="empId" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색" readonly>
+<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="담당자명" readonly>
 </div>
+
+<!-- <div class="form-group-receive"> -->
+<!-- <p>담당자</p> -->
+<!-- <input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색"> -->
+<!-- </div> -->
+
 
 <div class="form-group-receive">
 <p>거래처</p>
-<input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" placeholder="거래처검색">
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="거래처검색" readonly>
+<input type="text" id="cusName" name="cusName" class="form-control search-input inputname" placeholder="거래처명" readonly>
 </div>
+</div>
+
+<!-- <div class="form-group-receive"> -->
+<!-- <p>거래처</p> -->
+<!-- <input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" placeholder="거래처검색"> -->
+<!-- </div> -->
 
 
 <div class="form-group-receive">
@@ -96,75 +112,30 @@
 
 <!-- 자재코드, 거래처, 담당자 검색기능 -->
 <script type="text/javascript">
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
 $(document).ready(function() {
-    $("#materialCode").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var materialCode = $("input[name='materialCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#materialCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/purchase/test2'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+    // 업체명 검색 팝업 열기
+    $("#cusCode, #cusName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+        openPopup(url);
     });
-});
-
-$(document).ready(function() {
-    $("#poOwner").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var poOwner = $("input[name='poOwner']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#poOwner").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+    // 상품명 검색 팝업 열기
+    $("#materialCode, #materialName, #materialPrice").click(function() {
+        var url = '${pageContext.request.contextPath}/material/materialList';
+        openPopup(url);
     });
-});
-
-$(document).ready(function() {
-    $("#cusName").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var cusName = $("input[name='cusName']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusName").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+ 	// 사원 검색 팝업 열기
+    $("#empId, #empName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        openPopup(url);
     });
 });
 </script>
