@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,25 +77,27 @@
     <th>담당자</th>
     <th>거래처</th>
     <th>발주상태</th>
-    <th>관리</th>
+    <th>상세내역</th>
 </tr>
 
+<c:forEach var="purchaseDTO" items="${purchaseList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>ORD20231019121539</td>
-    <td>M001</td>
-    <td>키캡</td>
-    <td>100</td>
-    <td>2023/09/20</td>
-    <td>2023/09/30</td>
-    <td>10</td>
-    <td>1000</td>
-    <td>이홍렬</td>
-    <td>키보드나라</td>
-    <td>발주대기</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+    <td>${purchaseDTO.poCode}</td>
+    <td>${purchaseDTO.materialCode}</td>
+    <td>${purchaseDTO.materialName}</td>
+    <td>${purchaseDTO.poCount}EA</td>
+    <td>${purchaseDTO.poDate}</td>
+    <td>${purchaseDTO.payDate}</td>
+    <td>${purchaseDTO.materialPrice}원</td>
+    <td>${purchaseDTO.poPrice}원</td>
+    <td>${purchaseDTO.poOwner}</td>
+    <td>${purchaseDTO.cusName}</td>
+    <td>${purchaseDTO.poStatus}</td>
+    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${purchaseDTO.poCode}')"></td>
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
+</c:forEach>
 </table>
 </div><!-- table -->
 
@@ -209,8 +215,8 @@ function openInsert() {
 }
 
 //발수정주등록 새창
-function openUpdate() {
-    var url = '${pageContext.request.contextPath}/purchase/purchaseUpdate';
+function openDetails(poCode) {
+    var url = '${pageContext.request.contextPath}/purchase/purchaseDetails?poCode='+poCode;
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;

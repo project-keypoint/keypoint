@@ -10,6 +10,30 @@
 		values(#{poCode},#{materialCode},#{materialName},#{materialPrice},#{poCount},#{poPrice},#{poDate},#{payDate},#{cusName},#{poOwner},#{poStatus})
 	</insert>
 
+  	<select id="getPurchaseList" resultType="com.keypoint.dto.PurchaseDTO">
+		select * from purchaseOrder
+		where poStatus != '삭제됨'
+		order by poCode desc;
+	</select>
+  	
+  	<select id="getPurchaseDetails" resultType="com.keypoint.dto.PurchaseDTO">
+		select * from purchaseOrder
+		where poCode = #{poCode};
+	</select>
+	
+	<update id="updatePurchase">
+		UPDATE purchaseOrder
+		SET poCount = #{poCount}, poPrice = #{poPrice}, 
+        	poOwner = #{poOwner},
+        	cusName = #{cusName}, payDate = #{payDate}
+		WHERE poCode = #{poCode}
+	</update>
+	
+	<update id="deletePurchase">
+		UPDATE purchaseOrder
+		SET poStatus = '삭제됨'
+		WHERE poCode = #{poCode}
+	</update>
   
 </mapper>
 

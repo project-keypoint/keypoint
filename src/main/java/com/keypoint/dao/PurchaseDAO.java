@@ -1,11 +1,14 @@
 package com.keypoint.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.PurchaseDTO;
+import com.keypoint.dto.ReceiveDTO;
 
 @Repository
 public class PurchaseDAO {
@@ -22,8 +25,32 @@ public class PurchaseDAO {
 		
 			sqlSession.insert(namespace+".insertPurchase", purchaseDTO);
 	} // insertPurchase
+
+	public List<PurchaseDTO> getPurchaseList() {
+		System.out.println("PurchaseDAO getPurchaseList()");
+		
+		return sqlSession.selectList(namespace+".getPurchaseList");
+	} // getPurchaseList
 	
-	
+	public PurchaseDTO getPurchaseDetails(String poCode) {
+		System.out.println("PurchaseDAO getPurchaseDetails()");
+		
+		return sqlSession.selectOne(namespace+".getPurchaseDetails", poCode);
+	}// getPurchaseDetails() [발주상세]
+
+	public void updatePurchase(PurchaseDTO purchaseDTO) {
+		System.out.println("PurchaseDAO updatePurchase()");
+		System.out.println(purchaseDTO);
+		
+		sqlSession.update(namespace+".updatePurchase",purchaseDTO);
+	}// updatePurchase() [발주수정]
+
+	public void deletePurchase(PurchaseDTO purchaseDTO) {
+		System.out.println("PurchaseDAO deletePurchase()");
+		System.out.println(purchaseDTO);
+		
+		sqlSession.update(namespace+".deletePurchase",purchaseDTO);
+	}// deletePurchase() [발주삭제]
 	
 	
 	

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>발주등록</title>
+<title>발주수정</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -19,58 +19,58 @@
 <body>
 
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/purchase/purchaseInsertPro" id="purchaseInsert" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/purchase/purchaseUpdatePro" id="purchaseInsert" method="post" onsubmit="return validateForm()">
 
 <div class="forms-group-receive">
-<div class="page-title-popup">발주등록</div>
+<div class="page-title-popup">발주수정</div>
 
 <div class="form-group-receive">
 <p>발주코드</p>
-<input type="text" id="poCode" name="poCode" class="form-control search-input" placeholder="발주코드" readonly>
+<input type="text" id="poCode" name="poCode" class="form-control search-input" value="${purchaseDTO.poCode}" readonly>
 </div>
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>자재코드</p>
-<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="자재검색">
-<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명">
+<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" value="${purchaseDTO.materialCode}" readonly>
+<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" value="${purchaseDTO.materialName}" readonly>
 </div>
 
 <div class="form-group-receive">
 <p>자재단가</p>
-<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가">
+<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" value="${purchaseDTO.materialPrice}" readonly>
 </div>
 </div>
 
 <div class="form-group-receive">
 <p>발주수량</p>
-<input type="number" id="poCount" name="poCount" class="form-control search-input" placeholder="발주수량" min="0">
+<input type="number" id="poCount" name="poCount" class="form-control search-input" value="${purchaseDTO.poCount}" min="0">
 </div>
 
 <div class="form-group-receive">
 <p>발주금액</p>
-<input type="text" class="form-control search-input" id="poPrice" name="poPrice" placeholder="발주금액">
+<input type="text" class="form-control search-input" id="poPrice" name="poPrice" value="${purchaseDTO.poPrice}">
 </div>
 
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색">
+<input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" value="${purchaseDTO.poOwner}">
 </div>
 
 <div class="form-group-receive">
 <p>거래처</p>
-<input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" placeholder="거래처검색">
+<input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" value="${purchaseDTO.cusName}">
 </div>
 
 
 <div class="form-group-receive">
 <p>발주일자</p>
-<input type="text" id="poDate" name="poDate" class="form-control search-input" placeholder="발주일자">
+<input type="text" id="poDate" name="poDate" class="form-control search-input" value="${purchaseDTO.poDate}" readonly>
 </div>
 
 <div class="form-group-receive">
 <p>납기일자</p>
-<input type="text" id="payDate" name="payDate" class="form-control search-input" placeholder="납기일자">
+<input type="text" id="payDate" name="payDate" class="form-control search-input" value="${purchaseDTO.payDate}">
 </div>
 
 <div class="form-group-receive">
@@ -80,8 +80,7 @@
 
 </div>
 <div class="details-buttons">
-<input type="submit" value="등록" class="btn btn-primary mybutton1">
-<input type="reset" value="초기화" class="btn btn-primary mybutton1">
+<input type="submit" value="완료" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 
@@ -198,58 +197,6 @@ document.getElementsByName("materialPrice")[0].addEventListener("input", calcula
 </script>
 <!-- //  발주수량 * 자재단가의 곱 -->
 
-<!-- 발주일자 클릭시 발주코드 자동생성 -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var poDateInput = document.getElementById("poDate");
-    var poCodeInput = document.getElementById("poCode");
-
-    poDateInput.addEventListener("click", function () {
-        var today = new Date();
-        var yyyy = today.getFullYear();
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var dd = String(today.getDate()).padStart(2, '0');
-        var hh = String(today.getHours()).padStart(2, '0');
-        var mi = String(today.getMinutes()).padStart(2, '0');
-        var ss = String(today.getSeconds()).padStart(2, '0');
-        var formattedDate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + mi + ":" + ss;
-
-        // 생성된 발주일자를 입력란에 설정
-        poDateInput.value = formattedDate;
-        poDateInput.readOnly = true;
-        poDateInput.placeholder = "";
-
-        // 발주일자와 함께 poCode를 생성하여 입력란에 설정
-        var poCode = "ORD" + yyyy + mm + dd + hh + mi + ss;
-        poCodeInput.value = poCode;
-    });
-});
-</script>
-<!-- // 발주일자 클릭시 발주코드 자동생성 -->
-
-
-<!-- 발주일자 클릭시 현재날짜로 변경 -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var poDateInput = document.getElementById("poDate");
-
-    poDateInput.addEventListener("click", function () {
-        var today = new Date();
-        var yyyy = today.getFullYear();
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var dd = String(today.getDate()).padStart(2, '0');
-        var hh = String(today.getHours()).padStart(2, '0');
-        var mi = String(today.getMinutes()).padStart(2, '0');
-        var ss = String(today.getSeconds()).padStart(2, '0');
-        var formattedDate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + mi + ":" + ss;
-        
-        poDateInput.value = formattedDate;
-        poDateInput.readOnly = true;
-        poDateInput.placeholder = "";
-    });
-});
-</script>
-<!-- // 발주일자 클릭시 현재날짜로 변경 -->
 
 <!-- 발주날짜(현재날짜) 이후로 납기일자 선택하게끔 설정 -->
 <script>
@@ -301,6 +248,7 @@ function validateForm() {
 }
 </script>
 <!-- // 필수입력항목 메시지 -->
+
 
 
 </body>
