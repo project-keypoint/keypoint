@@ -1149,7 +1149,12 @@ pre code {
     margin-left: 91.66667%;
   }
 }
-
+.card o-hidden border-0 shadow-lg my-5 {
+	position:absolute; 
+	width:30rem; 
+	height:50rem; 
+	left:45rem;
+}
 @media (min-width: 992px) {
   .col-lg {
     flex-basis: 0;
@@ -1206,6 +1211,8 @@ pre code {
     max-width: 41.66667%;
   }
   .col-lg-6 {
+  	margin-left: 3rem;
+  	margin-top: 15rem;
     flex: 0 0 50%;
     max-width: 50%;
   }
@@ -7910,7 +7917,7 @@ button.bg-dark:focus {
 }
 
 .p-5 {
-  padding: 3rem !important;
+  width: 20rem;
 }
 
 .pt-5,
