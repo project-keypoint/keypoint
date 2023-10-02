@@ -16,12 +16,12 @@
 	<select id="getReceiveList" resultType="com.keypoint.dto.ReceiveDTO">
 		select * from receivedOrder
 		where roStatus != '삭제'
-		order by roCode desc;
+		order by roCode desc
 	</select>
 	
 	<select id="getReceiveDetails" resultType="com.keypoint.dto.ReceiveDTO">
 		select * from receivedOrder
-		where roCode = #{roCode};
+		where roCode = #{roCode}
 	</select>
 	
 	<update id="updateReceive">

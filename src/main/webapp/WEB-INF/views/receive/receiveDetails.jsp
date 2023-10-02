@@ -65,8 +65,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>당담자</p>
-<input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="${receiveDTO.empId}" readonly>
-<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.empId}" readonly>
+<input type="text" id="roEmpId" name="roEmpId" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
+<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
 </div>
 </div>
 

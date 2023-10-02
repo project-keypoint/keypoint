@@ -22,7 +22,7 @@ public class ReceiveController {
 	private ReceiveService receiveService;
 	
 	@GetMapping("/receiveList")
-	public String receiveTest(Model model) {
+	public String receiveList(Model model) {
 		System.out.println("ReceiveController receive/receiveList");
 		List<ReceiveDTO> receiveList = receiveService.getReceiveList();
 		model.addAttribute("receiveList", receiveList);

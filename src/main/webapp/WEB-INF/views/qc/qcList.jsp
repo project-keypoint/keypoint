@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +74,7 @@
     <th>버튼</th>
 </tr>
 
+
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
 	<td>QC230927102344</td>
@@ -91,25 +95,78 @@
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
 
+<c:forEach var="qualityDTO" items="${qcList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-	<td>-</td>
-	<td>2023-09-27</td>
-    <td>EEB003</td>
-    <td>키포인트넘버원</td>
-    <td>30</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>대기</td>
-    <td>-</td>
-    <td>-</td>
-    <td><input type="button" value="검사진행(상세)" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
+	<td>
+	<c:choose>
+        <c:when test="${empty qualityDTO.qcCode}">-</c:when>
+        <c:otherwise>${qualityDTO.qcCode}</c:otherwise>
+    </c:choose>
+    </td>
+	<td>${qualityDTO.woCode}</td>
+    <td>${qualityDTO.productCode}</td>
+    <td>${qualityDTO.productName}</td>
+    <td>${qualityDTO.prodCount}</td>
+    <td>
+    <c:choose>
+        <c:when test="${empty qualityDTO.qcTest1}">-</c:when>
+        <c:otherwise>${qualityDTO.qcTest1}</c:otherwise>
+    </c:choose>
+    </td>
+    <td>
+    <c:choose>
+        <c:when test="${empty qualityDTO.qcTest2}">-</c:when>
+        <c:otherwise>${qualityDTO.qcTest2}</c:otherwise>
+    </c:choose>
+    </td>
+    <td>
+    <c:choose>
+        <c:when test="${empty qualityDTO.qcTest3}">-</c:when>
+        <c:otherwise>${qualityDTO.qcTest3}</c:otherwise>
+    </c:choose>
+    </td>
+    <td>
+    <c:choose>
+        <c:when test="${qualityDTO.qcPass eq 0}">-</c:when>
+        <c:otherwise>${qualityDTO.qcPass}</c:otherwise>
+    </c:choose>
+    </td>
+    <td>
+    <c:choose>
+        <c:when test="${qualityDTO.qcDefect eq 0}">-</c:when>
+        <c:otherwise>${qualityDTO.qcDefect}</c:otherwise>
+    </c:choose>
+    </td>
+    <td>
+    <c:choose>
+        <c:when test="${empty qualityDTO.qcDefectRate}">-</c:when>
+        <c:otherwise>${qualityDTO.qcDefectRate}</c:otherwise>
+    </c:choose>
+    </td>
+    <td>
+	<c:choose>
+        <c:when test="${empty qualityDTO.qcStatus}">대기</c:when>
+        <c:otherwise>${qualityDTO.qcStatus}</c:otherwise>
+    </c:choose>
+	</td>
+    <td>
+    <c:choose>
+        <c:when test="${qualityDTO.qcEmpId eq 0}">-</c:when>
+        <c:otherwise>${qualityDTO.qcEmpId}</c:otherwise>
+    </c:choose>
+    </td>
+    <td>
+    <c:choose>
+        <c:when test="${empty qualityDTO.qcEndDate}">-</c:when>
+        <c:otherwise><c:out value="${fn:substring(qualityDTO.qcEndDate, 0, 10)}" /></c:otherwise>
+    </c:choose>
+    </td>
+    <td><input type="button" value="검사진행(상세)" class="btn btn-secondary mybutton1" onclick="openDetails('${qualityDTO.prodCode}')"></td>
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
+</c:forEach>
+
 
 </table>
 </div><!-- table -->
@@ -224,8 +281,8 @@ checkboxes.forEach(function (checkbox) {
 });
 
 // 품질상세내용 새창
-function openDetails() {
-    var url = '${pageContext.request.contextPath}/qc/qcDetails';
+function openDetails(prodCode) {
+    var url = '${pageContext.request.contextPath}/qc/qcDetails?prodCode='+prodCode;
     var windowWidth = 600;
     var windowHeight = 890;
     var windowLeft = (screen.width - windowWidth) / 2;

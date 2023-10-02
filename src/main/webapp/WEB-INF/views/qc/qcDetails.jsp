@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,31 +19,34 @@
     <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
 </head>
 <body>
+<form action="${pageContext.request.contextPath}/qc/qcStart" method="post" onsubmit="return validateForm()">
 <div class="main-details">
 <!-- <form action="#" method="post" onsubmit="return validateForm()"> -->
 <div class="forms-group-qc-receive">
 <div class="page-title-popup">품질검사(상세)</div>
 <div class="search-bar-popup-qc">
 <div class="form-group-qc-receive">
+
 <p>작업지시코드</p>
-<input type="text" id="workNum" name="workNum" class="form-control search-input inputcode" placeholder="작업지시코드" readonly>
+<input type="text" id="woCode" class="form-control search-input inputcode" placeholder="${qualityDTO.woCode}" readonly>
 </div>
 <div class="form-group-qc-receive">
 <p>생산코드</p>
-<input type="text" id="prodCode" name="prodCode" class="form-control search-input inputcode" placeholder="생산코드" readonly>
+<input type="text" id="prodCode" name="prodCode" class="form-control search-input inputcode" value="${qualityDTO.prodCode}" readonly>
 </div>
 <div class="form-group-qc-receive">
 <p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
+<input type="text" id="productCode" class="form-control search-input" placeholder="${qualityDTO.productCode}" style="width:110px;" readonly>
+<input type="text" id="productName" class="form-control search-input" placeholder="${qualityDTO.productName}" readonly>
 </div>
 <div class="form-group-qc-receive">
 <p>상품생산자</p>
-<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="사원검색" readonly>
-<input type="text" id="empName" class="form-control search-input inputname" placeholder="사원명" readonly>
+<input type="text" id="prodEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.prodEmpId}" readonly>
+<input type="text" id="prodEmpName" class="form-control search-input inputname" placeholder="${qualityDTO.prodEmpName}" readonly>
 </div>
 <div class="form-group-qc-receive">
-<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly>
+<p>납품예정일</p>
+<input type="text" id="shipSdate" class="form-control search-input" placeholder="${qualityDTO.shipSdate}" readonly>
 </div>
 </div>
 <table class="table-list">
@@ -50,9 +55,9 @@
 	<th>검사2</th>
 	<th>검사3</th></tr>
 <tr class="table-body">
-	<td><input type="text" id="qcTest1" name="qcTest1" class="form-control search-input input-center" placeholder="완료" readonly></td>
-	<td><input type="text" id="qcTest2" name="qcTest2" class="form-control search-input input-center" placeholder="진행" readonly></td>
-	<td><input type="text" id="qcTest3" name="qcTest3" class="form-control search-input input-center" placeholder="대기" readonly></td>
+	<td><input type="text" id="qcTest1" class="form-control search-input input-center" readonly></td>
+	<td><input type="text" id="qcTest2" class="form-control search-input input-center" readonly></td>
+	<td><input type="text" id="qcTest3" class="form-control search-input input-center" readonly></td>
 </tr>
 </table>
 <br>
@@ -62,45 +67,91 @@
 	<th>불량</th>
 	<th>최종불량률</th></tr>
 <tr class="table-body">
-	<td><input type="text" id="qcCount" name="qcCount" class="form-control search-input input-center hide" placeholder="30" readonly></td>
-	<td><input type="text" id="qcPass" name="qcPass" class="form-control search-input input-center hide" placeholder="27" readonly></td>
-	<td><input type="text" id="qcDefect" name="qcDefect" class="form-control search-input input-center hide" placeholder="3" readonly></td>
-	<td><input type="text" id="qcDefectRate" name="qcDefectRate" class="form-control search-input input-center" placeholder="10.0%" min="0" readonly></td>
+	<td><input type="text" id="qcCount" class="form-control search-input input-center hide" placeholder="${qualityDTO.prodCount}" readonly></td>
+	<td><input type="text" id="qcPass" class="form-control search-input input-center hide" placeholder="${qualityDTO.qcPass}" readonly></td>
+	<td><input type="text" id="qcDefect" class="form-control search-input input-center hide" placeholder="${qualityDTO.qcDefect}" readonly></td>
+	<td><input type="text" id="qcDefectRate" class="form-control search-input input-center" placeholder="${qualityDTO.qcDefectRate}" min="0" readonly></td>
 </tr>
 </table>
 <br>
 <div class="search-bar-popup-qc">
 <div class="form-group-qc-receive">
 <p>품질검사코드</p>
-<input type="text" id="qcCode" name="cusCode" class="form-control search-input inputcode" placeholder="품질검사코드" readonly>
+<input type="text" id="qcCode" class="form-control search-input inputcode" placeholder="${qualityDTO.qcCode}" readonly>
 </div>
 <div class="form-group-qc-receive">
 <p>품질검사원</p>
-<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="사원검색" readonly>
-<input type="text" id="empName" class="form-control search-input inputname" placeholder="사원명" readonly>
+<input type="text" id="qcEmpId" name="qcEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.qcEmpId}" >
+<input type="text" id="qcEmpName" class="form-control search-input inputname" placeholder="사원명" readonly>
 </div>
 
 <div class="form-group-qc-receive">
-<p>검사시작일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="검사시작일" readonly>
+<p>검사시작일</p> <input type="text" id="qcStartDate" class="form-control search-input" placeholder="${qualityDTO.qcStartDate}" readonly>
 </div>
 
 <div class="form-group-qc-receive">
-<p>검사완료일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="검사완료일" readonly>
+<p>검사완료일</p> <input type="text" id="qcEndDate" class="form-control search-input" placeholder="${qualityDTO.qcEndDate}" readonly>
 </div>
 
 </div>
 </div>
 <div class="details-buttons">
-<input type="button" value="검사등록" class="btn btn-primary mybutton1">
-<input type="button" value="검사시작" class="btn btn-secondary mybutton1" onclick="location.href='${pageContext.request.contextPath}/qc/qcUpdate'">
+<c:choose>
+  <c:when test="${not empty qualityDTO.qcCode}">
+    <input type="button" value="검사등록" class="btn btn-secondary mybutton1">
+  </c:when>
+  <c:otherwise>
+    <input type="submit" value="검사등록" class="btn btn-primary mybutton1">
+  </c:otherwise>
+</c:choose>
+
+<c:choose>
+  <c:when test="${not empty qualityDTO.qcCode}">
+    <input type="button" value="검사시작" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/qc/qcUpdate?prodCode=${qualityDTO.prodCode}'">
+  </c:when>
+  <c:otherwise>
+    <input type="button" value="검사시작" class="btn btn-secondary mybutton1">
+  </c:otherwise>
+</c:choose>
+
 </div>
 <!-- </form>form 끝 -->
 </div><!-- main-details -->
-
+</form>
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script>
+// 받아온 값이 0 또는 null일 경우 '-'
+function setPlaceholder(id, value) {
+    var inputElement = document.getElementById(id);
+    inputElement.placeholder = (value !== null && value !== "" && value !== "0") ? value : '-';
+}
+setPlaceholder('qcTest1', "${qualityDTO.qcTest1}");
+setPlaceholder('qcTest2', "${qualityDTO.qcTest2}");
+setPlaceholder('qcTest3', "${qualityDTO.qcTest3}");
+setPlaceholder('qcDefectRate', "${qualityDTO.qcDefectRate}");
+setPlaceholder('prodCode', "${qualityDTO.prodCode}");
+
+setPlaceholder('qcStartDate', "${qualityDTO.qcStartDate}");
+setPlaceholder('qcEndDate', "${qualityDTO.qcEndDate}"); //시작일or완료일 컬럼추가하기
+setPlaceholder('qcEmpName', "${qualityDTO.qcEmpName}");
+
+function setPlaceholderQcEmp(id, value) {
+    var inputElement = document.getElementById(id);
+    inputElement.placeholder = (value !== null && value !== "" && value !== "0") ? value : '사원검색(클릭)';
+}
+setPlaceholderQcEmp('qcEmpId', "${qualityDTO.qcEmpId}");
+
+function setPlaceholderStart(id, value) {
+    var inputElement = document.getElementById(id);
+    inputElement.placeholder = (value !== null && value !== "" && value !== "0") ? value : '(검사등록시 자동생성)';
+}
+setPlaceholderStart('qcCode', "${qualityDTO.qcCode}");
+</script>
 
 <script type="text/javascript">
 //업체명(거래처) 검색 새창
@@ -134,21 +185,10 @@ $(document).ready(function() {
 //유효성 검사
 function validateForm() {
     // 각 입력 필드 값
-    var cusCode = document.getElementById("cusCode").value;
-    var productCode = document.getElementById("productCode").value;
-    var roCount = document.getElementById("roCount").value;
-    var roDate = document.getElementById("roDate").value;
-    var shipSdate = document.getElementById("shipSdate").value;
-    var empId = document.getElementById("empId").value;
+    var qcEmpId = document.getElementById("qcEmpId").value;
     // 빈 필드 검사
-    if (cusCode === "" || productCode === "" || roCount === "" ||
-    	roDate === "" || shipSdate === "" || empId === "") {
-        alert("모든 내용을 입력해주세요.");
-        return false; // 제출 방지
-    }
-    // 추가 유효성 검사
-    if (roCount == 0) {
-        alert("몇개부터 가능하도록 할까");
+    if (qcEmpId === "") {
+        alert("[품질검사원]을 입력해주세요.");
         return false; // 제출 방지
     }
     return true;
