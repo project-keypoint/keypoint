@@ -37,8 +37,6 @@ public class mainController {
 
 
 
-	// -------------------------------------------------
-
 	@GetMapping("/testpage")
 	public String testpage() {
 
@@ -55,6 +53,15 @@ public class mainController {
 		// /main.jsp
 		// WEB-INF/views/tables.jsp
 		return "notice";
+	}//
+
+	// -------------------------------------------------
+	@GetMapping("/login")
+	public String login() {
+
+		// /main.jsp
+		// WEB-INF/views/tables.jsp
+		return "member/login";
 	}//
 
 	// -------------------------------------------------
