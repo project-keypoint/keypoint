@@ -13,8 +13,14 @@
   	<select id="getPurchaseList" resultType="com.keypoint.dto.PurchaseDTO">
 		select * from purchaseOrder
 		where poStatus != '삭제됨'
-		order by poCode desc;
+		order by poCode desc
+		limit #{startRow}, #{pageSize}
 	</select>
+  	
+  	<select id="getPurchaseCount" resultType="java.lang.Integer">
+		select count(*) from purchaseOrder 
+	</select>
+  	
   	
   	<select id="getPurchaseDetails" resultType="com.keypoint.dto.PurchaseDTO">
 		select * from purchaseOrder

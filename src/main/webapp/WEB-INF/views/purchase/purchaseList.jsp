@@ -106,15 +106,27 @@
 <input type="button" value="발주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
+
+
 <div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
-<a href="#" class="page-button">&gt;</a>
+
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/purchase/purchaseList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage}" 
+                   end="${pageDTO.endPage}" step="1">
+	<a href="${pageContext.request.contextPath}/purchase/purchaseList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/purchase/purchaseList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+</c:if>
+
 </div><!-- page-button -->
+
+
+
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->

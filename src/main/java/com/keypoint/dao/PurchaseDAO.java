@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
 import com.keypoint.dto.ReceiveDTO;
 
@@ -26,11 +27,17 @@ public class PurchaseDAO {
 			sqlSession.insert(namespace+".insertPurchase", purchaseDTO);
 	} // insertPurchase
 
-	public List<PurchaseDTO> getPurchaseList() {
+	public List<PurchaseDTO> getPurchaseList(PageDTO pageDTO) {
 		System.out.println("PurchaseDAO getPurchaseList()");
 		
-		return sqlSession.selectList(namespace+".getPurchaseList");
+		return sqlSession.selectList(namespace+".getPurchaseList", pageDTO);
 	} // getPurchaseList
+	
+	public int getPurchaseCount() {
+		System.out.println("PurchaseDAO getPurchaseCount()");
+		
+		return sqlSession.selectOne(namespace+".getPurchaseCount");
+	} // getPurchaseCount
 	
 	public PurchaseDTO getPurchaseDetails(String poCode) {
 		System.out.println("PurchaseDAO getPurchaseDetails()");
