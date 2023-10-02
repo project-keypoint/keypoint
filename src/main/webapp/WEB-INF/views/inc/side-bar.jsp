@@ -29,7 +29,7 @@
 	<!-- Sidebar -->
 	<ul
 		class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-		id="accordionSidebar" style="position: fixed; top: 0rem;">
+		id="accordionSidebar" style="position: fixed; top: 0rem; height: 100vh;">
 
 		<!-- Sidebar - Brand -->
 		<a

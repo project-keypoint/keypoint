@@ -24,7 +24,8 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" style=" background: url(${pageContext.request.contextPath}/resources/img/pxfuel.jpg); 
+										background-repeat: no-repeat; background-size: 100%">
 
     <div class="container">
 
@@ -58,7 +59,7 @@
                                                 <label class="custom-control-label" for="customCheck">아이디 기억하기</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <a href="${pageContext.request.contextPath}/main/main" class="btn btn-primary btn-user btn-block">
                                             로그인
                                         </a>
                                         <hr>
@@ -82,14 +83,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
 
 </body>
 
