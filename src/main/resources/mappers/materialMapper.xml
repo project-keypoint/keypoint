@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mappers.materialMapper">
+
+	<insert id="insertMaterial">
+		insert into material(materialName,cusCode,materialPrice,materialCount,materialUnit,materialMemo)
+		values(#{materialName},#{cusCode},#{materialPrice},#{materialCount},#{materialUnit},#{materialMemo})
+	</insert>
+
+	<select id="getMaterialList" resultType="com.keypoint.dto.MaterialDTO">
+		select * from material
+		where materialDel = 0
+		order by materialCode desc
+	</select>
+	
+	<select id="getMaterial" resultType="com.keypoint.dto.MaterialDTO">
+		select * from material
+		where materialCode = #{materialCode}
+	</select>	
+
+	<update id="deleteMaterial">
+		UPDATE material
+		SET materialDel = 1
+		WHERE materialCode = #{materialCode}
+	</update>
+
+
+</mapper>
+
+
+
+

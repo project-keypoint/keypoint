@@ -66,7 +66,8 @@
     <td>${productDTO.productCount}</td>
     <td>${productDTO.productUnit}</td>
     <td>${productDTO.productMemo}</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate()">
+    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="openDelete()"></td>
 </tr>
 </c:forEach>      
 
@@ -201,6 +202,15 @@ checkboxes.forEach(function (checkbox) {
     });
 });
 
+//수주등록 새창
+function openInsert() {
+    var url = '${pageContext.request.contextPath}/product/productInsert';
+    var windowWidth = 500;
+    var windowHeight = 600;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
 // 수주상세내용 새창
 function openUpdate() {
     var url = '${pageContext.request.contextPath}/product/productUpdate';
@@ -211,8 +221,8 @@ function openUpdate() {
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
 //수주등록 새창
-function openInsert() {
-    var url = '${pageContext.request.contextPath}/product/productInsert';
+function openDelete() {
+    var url = '${pageContext.request.contextPath}/product/productDelete';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;

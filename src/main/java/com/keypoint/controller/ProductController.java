@@ -3,6 +3,7 @@ package com.keypoint.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.keypoint.dto.ProductDTO;
-import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.ProductService;
 
 @Controller
@@ -21,6 +21,11 @@ public class ProductController {
 	//productService 객체생성
 	@Inject
 	private ProductService productService;
+	
+	@GetMapping("/addUnit")
+	public String addUnit() {
+		return "product/addUnit";
+	}// addUnit [단위추가]
 
 //	가상주소 http://localhost:8080/keypoint/product/productList
 	@GetMapping("/productList")
@@ -44,35 +49,45 @@ public class ProductController {
 		
 		productService.insertProduct(productDTO);
 		
-		return "redirect:/product/productList";
-	}// productInsertPro
+		return "product/close";
+	}// productInsertPro [완제품등록]
 	
 	@GetMapping("/productUpdate")
 	public String productUpdate() {
 		return "product/productUpdate";
 	}// productUpdate [완제품수정]
 	
-	@GetMapping("/addUnit")
-	public String addUnit() {
-		return "product/addUnit";
-	}// addUnit [단위추가]
+	@GetMapping("/productDelete")
+	public String productDelete(HttpServletRequest request,Model model) {
+		System.out.println("ProductController productDelete()");
+		
+		String productCode = request.getParameter("productCode");
+		System.out.println(productCode);
+		ProductDTO productDTO = productService.getProduct(productCode);
+		System.out.println(productDTO);
+		model.addAttribute("productDTO", productDTO);
+		
+		return "product/productDelete";
+	}// productDelete [완제품삭제]
 	
-//	가상주소 http://localhost:8080/keypoint/product/materialList
-	@GetMapping("/materialList")
-	public String materialList() {
-		// WEB-INF/views/product/materialList.jsp
-		return "product/materialList";
-	}// materialList [자재목록]
+	@PostMapping("/productDeletePro")
+	public String productDeletePro(ProductDTO productDTO) {
+		System.out.println("ProductController productDeletePro()");
+		//회원가입 처리
+		System.out.println(productDTO);
+		
+		productService.deleteProduct(productDTO);
+		
+		return "product/close";
+	}// productDeletePro [완제품삭제]
 	
-	@GetMapping("/materialInsert")
-	public String materialInsert() {
-		return "product/materialInsert";
-	}// materialInsert [자재등록]	
+
 	
-	@GetMapping("/materialUpdate")
-	public String materialUpdate() {
-		return "product/materialUpdate";
-	}// materialUpdate [자재수정]
+	
+	
+	
+	
+	
 	
 //	가상주소 http://localhost:8080/keypoint/product/requireList
 	@GetMapping("/requireList")
@@ -92,8 +107,6 @@ public class ProductController {
 	}// requireUpdate [소요량수정]
 	
 
-	
-	
 	
 	
 	

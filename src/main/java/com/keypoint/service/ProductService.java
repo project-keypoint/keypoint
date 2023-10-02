@@ -25,5 +25,17 @@ public class ProductService {
 		return productDAO.getProductList();
 	}// getProductList
 
+	public void deleteProduct(ProductDTO productDTO) {
+		System.out.println("ProductService deleteProduct()");
+		productDAO.deleteProduct(productDTO);
+	}// deleteProduct
+
+	public ProductDTO getProduct(String productCode) {
+		System.out.println("ProductService getProduct()");
+		return productDAO.getProduct(productCode);
+	}
+
+
+
 	
 }

@@ -5,13 +5,26 @@
 <mapper namespace="com.itwillbs.mappers.productMapper">
 
 	<insert id="insertProduct">
-		insert into product(productCode,productName,cusCode,productPrice,productCount,productUnit,productMemo)
-		values(#{productCode},#{productName},#{cusCode},#{productPrice},#{productCount},#{productUnit},#{productMemo})
+		insert into product(productName,cusCode,productPrice,productCount,productUnit,productMemo)
+		values(#{productName},#{cusCode},#{productPrice},#{productCount},#{productUnit},#{productMemo})
 	</insert>
 
 	<select id="getProductList" resultType="com.keypoint.dto.ProductDTO">
 		select * from product
+		where productDel = 0
+		order by productCode desc
 	</select>
+	
+	<select id="getProduct" resultType="com.keypoint.dto.ProductDTO">
+		select * from product
+		where productCode = #{productCode}
+	</select>	
+
+	<update id="deleteProduct">
+		UPDATE product
+		SET productDel = 1
+		WHERE productCode = #{productCode}
+	</update>
 
 
 </mapper>

@@ -84,7 +84,7 @@
 					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">입고목록</a> 
 					<a class="collapse-item" href="${pageContext.request.contextPath}/product/requireList">소요량목록</a>
 					<a class="collapse-item" href="${pageContext.request.contextPath}/product/productList">완제품목록</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/materialList">자재목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/material/materialList">자재목록</a>
 				</div>
 			</div></li>
 
@@ -122,11 +122,6 @@
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
-
-		<li class="nav-item"><a class="nav-link"
-			href="${pageContext.request.contextPath}/product/productList"> <i
-				class="fas fa-fw fa-chart-area"></i> <span>상품재고</span></a></li>
-		
 		
 		<li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workOrderList">

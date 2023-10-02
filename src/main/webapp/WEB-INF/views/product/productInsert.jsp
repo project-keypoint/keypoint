@@ -23,11 +23,6 @@
 <div class="page-title-popup">완제품등록</div>
 
 <div class="form-group-receive">
-<p>완제품코드</p>
-<input type="text" name="productCode" class="form-control search-input" placeholder="완제품명">
-</div>
-
-<div class="form-group-receive">
 <p>완제품명</p>
 <input type="text" name="productName" class="form-control search-input" placeholder="완제품명">
 </div>

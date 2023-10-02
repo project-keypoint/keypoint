@@ -18,37 +18,37 @@
 </head>
 <body>
 <div class="main-details">
-<form action="#">
+<form action="${pageContext.request.contextPath}/material/materialInsertPro" name="materialInsert" id="materialInsert" method="post">
 <div class="forms-group-receive">
 <div class="page-title-popup">자재등록</div>
 <div class="form-group-receive">
 <p>자재명</p>
-<input type="text" id="materialName" class="form-control search-input" placeholder="자재명">
+<input type="text" name="materialName" id="materialName" class="form-control search-input" placeholder="자재명">
 </div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
-<input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
+<input type="text" name="cusCode" id="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
+<input type="text" name="cusName" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
 </div>
 </div>
 <div class="form-group-receive">
 <p>매입단가</p>
-<input type="text" id="roPrice" class="form-control search-input" placeholder="매입단가">원
+<input type="text" name="materialPrice" id="materialPrice" class="form-control search-input" placeholder="매입단가">원
 </div>
 <div class="form-group-receive">
 <p>초기수량</p>
-<input type="number" id="roCount" class="form-control search-input" placeholder="초기수량" min="0">
+<input type="number" name="materialCount" id="materialCount" class="form-control search-input" placeholder="초기수량" min="0">
 </div>
 <div class="form-group-receive">
 <p>단위</p>
-<select name="punit" class="form-control search-input status" required="required">
+<select name="materialUnit" class="form-control search-input status" required="required">
 <option value="EA" selected="selected">EA</option></select>
 <button class="btn btn-primary mybutton1" onclick="openAddUnit()">단위추가</button>
 </div>
 <div class="form-group-receive">
 <p>비고</p>
-<textarea rows="5px" cols="25px" id="roDate" class="form-control search-input textarea" placeholder="비고"></textarea>
+<textarea rows="5px" cols="25px" name="materialMemo" class="form-control search-input textarea" placeholder="비고"></textarea>
 </div>
 
 </div>
@@ -76,12 +76,12 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#cusCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
+	            var width = 500;
+	            var height = 500;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 업체 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();

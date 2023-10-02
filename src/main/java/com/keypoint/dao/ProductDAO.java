@@ -27,6 +27,17 @@ public class ProductDAO {
 		return sqlSession.selectList(namespace+".getProductList");
 	}// getProductList
 
+	public void deleteProduct(ProductDTO productDTO) {
+		System.out.println("ProductDAO deleteProduct()");
+		sqlSession.update(namespace+".deleteProduct", productDTO);
+	}// deleteProduct
+
+	public ProductDTO getProduct(String productCode) {
+		System.out.println("ProductDAO getProduct()");
+		return sqlSession.selectOne(namespace+".getProduct", productCode);
+	}
+
+	
 	
 	
 	

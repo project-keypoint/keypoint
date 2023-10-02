@@ -56,44 +56,21 @@
     <th>관리</th>
 </tr>
 
+<c:forEach var="materialDTO" items="${materialList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>MAT0001</td>
-    <td>투명키캡</td>
-    <td>C012003</td>
-    <td>1,000원</td>
-    <td>3000</td>
-    <td>EA</td>
-    <td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-	<!-- + openUpdate(가져갈값넣기) -->
+    <td>${materialDTO.materialCode}</td>
+    <td>${materialDTO.materialName}</td>
+    <td>${materialDTO.cusCode}</td>
+    <td>${materialDTO.materialPrice}원</td>
+    <td>${materialDTO.materialCount}</td>
+    <td>${materialDTO.materialUnit}</td>
+    <td>${materialDTO.materialMemo}</td>
+    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate()">
+    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="openDelete()"></td>
 </tr>
-    
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
+</c:forEach>      
+
 </table>
 </div><!-- table -->
 <div class="content-bottom">
@@ -227,7 +204,7 @@ checkboxes.forEach(function (checkbox) {
 
 // 자재수정 새창
 function openUpdate() {
-    var url = '${pageContext.request.contextPath}/product/materialUpdate';
+    var url = '${pageContext.request.contextPath}/material/materialUpdate';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
@@ -236,7 +213,7 @@ function openUpdate() {
 }
 //자재등록 새창
 function openInsert() {
-    var url = '${pageContext.request.contextPath}/product/materialInsert';
+    var url = '${pageContext.request.contextPath}/material/materialInsert';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
