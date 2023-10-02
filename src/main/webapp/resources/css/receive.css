@@ -236,3 +236,74 @@ margin-right: 5px;
 .status{
 padding: 0 0 0 10px;
 }
+/* 품질검사 새창 */
+.main-details-qc {
+display: flex;
+justify-content: center;
+}
+.qcdetail-left {
+	margin-right: 30px;
+}
+.search-bar-popup-qc {
+width: 100%;
+padding: 15px 20px 0 0;
+border-radius: 3px;
+/* display: flex; */
+/* justify-content: flex-start; */
+/* align-items: center; */
+background: #E5E5E5;
+/* align-items: baseline; */
+/* justify-content: space-between; */
+margin-bottom: 20px;
+margin-top: 5px;
+}
+.forms-group-qc-receive {
+text-align: center;
+}
+.form-group-qc-receive {
+display: flex;
+justify-content: flex-start;
+}
+.form-group-qc-receive p {
+width: 105px;
+height: 30px;
+text-align: right;
+margin-right: 10px;
+}
+.form-group-qc-receive input {
+/* width: 175px; */
+width: 200px;
+height: 30px;	
+}
+#qcCode.search-input,#workNum.search-input, #prodCode.search-input  {
+	width: 315px;
+}
+.form-group-qc-receive select {
+width: 85px;
+height: 28px;	
+}
+.qc-status.status {
+margin: 0 auto; /* select 요소를 수평 가운데 정렬합니다. */
+display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭니다. */
+}
+#qcPass.search-input, #qcDefect.search-input,
+#qcCount.search-input {
+width: 80px;
+height: 28px;
+}
+#qcDefectRate.search-input, #qcTest1.search-input,
+#qcTest2.search-input, #qcTest3.search-input   {
+width: 85px;
+height: 28px;
+}
+.input-center {
+margin: 0 auto; /* 입력 칸을 수평으로 가운데 정렬합니다. */
+display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭니다. */
+text-align: center;
+}
+.hide {
+background: transparent; /* 배경을 투명으로 설정 */
+border: none; /* 테두리를 없애기 */
+text-align: center;
+color: black;
+}

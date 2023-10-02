@@ -28,12 +28,12 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" value="${receiveDTO.cusCode}">
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" value="${receiveDTO.cusCode}" readonly>
 <input type="text" id="cusName" class="form-control search-input inputname" value="${receiveDTO.cusCode}" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="${receiveDTO.productCode}">
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="${receiveDTO.productCode}" readonly>
 <input type="text" id="productName" class="form-control search-input inputname" value="${receiveDTO.productCode}" readonly>
 </div>
 </div>
@@ -51,7 +51,7 @@
 </div>
 <div class="form-group-receive">
 <p>납품예정일</p>
-<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" value="${receiveDTO.shipSdate}">
+<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" value="${receiveDTO.shipSdate}" readonly>
 </div>
 
 <div class="form-group-receive">
@@ -66,8 +66,8 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자</p>
-<input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="${receiveDTO.empId}">
+<p>담당자</p>
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="${receiveDTO.empId}" readonly>
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${receiveDTO.empId}" readonly>
 </div>
 </div>

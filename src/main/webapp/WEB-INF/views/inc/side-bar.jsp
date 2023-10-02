@@ -65,8 +65,8 @@
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="buttons.html">수주관리</a> 
-					<a class="collapse-item" href="cards.html">출하관리</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/receive/receiveList">수주목록(작업중)</a>
+					<a class="collapse-item" href="#">출하관리(없음)</a>
 					<a class="collapse-item" href="${pageContext.request.contextPath}/customer/list">거래처관리</a>
 				</div>
 			</div></li>
@@ -107,10 +107,21 @@
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
+			
 		<!-- Nav Item - Charts -->
-		<li class="nav-item"><a class="nav-link" href="#">
-				<i class="fas fa-fw fa-chart-area"></i> <span>품질관리</span>
-		</a></li>
+		<li class="nav-item"><a class="nav-link collapsed" href="#"
+			data-toggle="collapse" data-target="#qcPages"
+			aria-expanded="true" aria-controls="qcPages"> <i
+				class="fas fa-fw fa-folder"></i> <span>품질관리</span>
+		</a>
+			<div id="qcPages" class="collapse"
+				aria-labelledby="headingPages" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<a class="collapse-item" href="${pageContext.request.contextPath}/qc/qcList">품질검사목록(작업중)</a> 
+					<a class="collapse-item" href="#">폐기관리(없음)</a> 
+					<div class="collapse-divider"></div>
+				</div>
+			</div></li>
 
 		<li class="nav-item"><a class="nav-link"
 			href="${pageContext.request.contextPath}/product/productList"> <i
@@ -123,13 +134,6 @@
                     <span>작업지시</span></a>
             </li> 
 		
-		<li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/receive/receiveList">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>수주목록(바로가기)</span></a>
-            </li> 
-
-
 		<!-- Nav Item - Tables -->
 		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/tables">
 				<i class="fas fa-fw fa-table"></i> <span>Tables</span>

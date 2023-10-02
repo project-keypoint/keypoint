@@ -28,12 +28,12 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="업체검색" readonly>
 <input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="상품검색">
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="상품검색" readonly>
 <input type="text" id="productName" class="form-control search-input inputname" placeholder="상품명" readonly>
 </div>
 </div>
@@ -48,12 +48,12 @@
 </div>
 <div class="form-group-receive">
 <p>수주등록일</p>
-<input type="text" id="roDate" name="roDate" class="form-control search-input" placeholder="수주등록일">
+<input type="text" id="roDate" name="roDate" class="form-control search-input" placeholder="수주등록일" readonly>
 
 </div>
 <div class="form-group-receive">
 <p>납품예정일</p>
-<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" placeholder="납품예정일">
+<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" placeholder="납품예정일" readonly>
 </div>
 <div class="form-group-receive">
 <p>상태</p>
@@ -68,7 +68,7 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>당담자</p>
-<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="사원검색">
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="사원검색" readonly>
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" placeholder="사원명" readonly>
 </div>
 </div>
