@@ -91,7 +91,7 @@
 // 삭제 확인메세지
 function confirmDelete() {
     if (confirm("정말로 삭제하시겠습니까?")) {
-        location.href = '${pageContext.request.contextPath}/purcahse/purchaseDelete?poCode=${purchaseDTO.poCode}';
+        location.href = '${pageContext.request.contextPath}/purchase/purchaseDelete?poCode=${purchaseDTO.poCode}';
     } else {
     	
     }

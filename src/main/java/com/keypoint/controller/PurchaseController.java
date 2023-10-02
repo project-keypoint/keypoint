@@ -42,8 +42,12 @@ public class PurchaseController {
 		
 		purchaseService.insertPurchase(purchaseDTO);
 		
-		// 주소변경하면서 이동 /purchase/test3
-		return "redirect:/purchase/purchaseList";
+		if(purchaseDTO != null) {
+			return "purchase/msgSuccess"; // 등록완료
+		}else {
+			return "purchase/msgFailed"; // 등록실패
+		}
+		
 	}//
 	
 	//----------------------------------------------------------------------------------------------
@@ -95,18 +99,27 @@ public class PurchaseController {
 		System.out.println(purchaseDTO);
 		purchaseService.purchaseUpdatePro(purchaseDTO);
 		
-		return "redirect:/purchase/purchaseList";
+		if(purchaseDTO != null) {
+			return "purchase/msgSuccess"; // 등록완료
+		}else {
+			return "purchase/msgFailed"; // 등록실패
+		}
+		
 	}// purchaseUpdatePro [발주수정Pro]
 	
 	//------------------------------------------------------------------------------------------
 	
 	@GetMapping("/purchaseDelete")
-	public String purchaseDelete(PurchaseDTO purchaseDTO) {
+	public String purchaseDeletePro(PurchaseDTO purchaseDTO) {
 		System.out.println("purchaseController purchase/purchaseDelete");
 		System.out.println(purchaseDTO);
 		purchaseService.purchaseDelete(purchaseDTO);
 		
-		return "redirect:/purchase/purchaseList";
+		if(purchaseDTO != null) {
+			return "purchase/msgSuccess"; // 등록완료
+		}else {
+			return "purchase/msgFailed"; // 등록실패
+		}
 	}// purchaseDelete [발주삭제]
 	
 	//------------------------------------------------------------------------------------------
