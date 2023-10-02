@@ -17,29 +17,12 @@
 
 </head>
 <body>
-<%@include file="../inc/top-bar.jsp" %>
-<%@include file="../inc/side-bar.jsp" %>
-
+<%@include file="../views/inc/top-bar.jsp" %>
+<%@include file="../views/inc/side-bar.jsp" %>
+ㄴㄴ
 
 <!--  contents start -->
-<div class="contents" style="position:fixed; left: 15rem;">
-
-
-
-<form action="${pageContext.request.contextPath}/product/addunitPro" method="post">
-<table id="notice">
-<tr><td>단위</td>
-	<td><input type="text" name="paddunit"></td></tr>
-	
-</table>
-
-<div id="table_search">
-<input type="submit" value="추가" class="btn">
-</div>
-</form>
-
-
-</div>
+<div class="contents" style="position: absolute;; left: 15rem;">공지사항</div>
 <!-- contents end -->
 
 

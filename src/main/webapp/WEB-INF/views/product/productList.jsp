@@ -33,16 +33,6 @@
 </div>
 </div>
 
-<!-- <div class="search-b"> -->
-<!-- <div class="search-date"> -->
-<!-- <p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input" placeholder="수주일자"> -->
-<!-- ~<input type="text" id="roDate2" class="form-control search-input" placeholder="수주일자"> -->
-<!-- </div> -->
-<!-- <div class="search-date"> -->
-<!-- <p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일"> -->
-<!-- ~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일"> -->
-<!-- </div> -->
-<!-- </div> -->
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
@@ -66,44 +56,20 @@
     <th>관리</th>
 </tr>
 
+<c:forEach var="productDTO" items="${productList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td>
-    <td>키포인트넘버원</td>
-    <td>C012003</td>
-    <td>500,000원</td>
-    <td>30</td>
-    <td>EA</td>
-    <td></td>
+    <td>${productDTO.productCode}</td>
+    <td>${productDTO.productName}</td>
+    <td>${productDTO.cusCode}</td>
+    <td>${productDTO.productPrice}원</td>
+    <td>${productDTO.productCount}</td>
+    <td>${productDTO.productUnit}</td>
+    <td>${productDTO.productMemo}</td>
     <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-	<!-- + openUpdate(가져갈값넣기) -->
 </tr>
-    
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>C012003</td><td>500,000원</td><td>30</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>C012003</td><td>500,000원</td><td>30</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>C012003</td><td>500,000원</td><td>30</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>C012003</td><td>500,000원</td><td>30</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>C012003</td><td>500,000원</td><td>30</td><td>EA</td><td></td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
+</c:forEach>      
+
 </table>
 </div><!-- table -->
 <div class="content-bottom">

@@ -17,11 +17,13 @@ public class WorkOrderDTO {
 	private String productName; //상품이름
 	private String cusCode; //거래처 코드
 	private String cusName; // 거래처 명
+	private String empName;
+	
+	
+	
+	
+	
 
-	
-	
-	
-	
 	
 
 	@Override
@@ -29,7 +31,7 @@ public class WorkOrderDTO {
 		return "WorkOrderDTO [woCode=" + woCode + ", roCode=" + roCode + ", empId=" + empId + ", lineCode=" + lineCode
 				+ ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode=" + materialCode
 				+ ", woCount=" + woCount + ", woStatus=" + woStatus + ", woDate=" + woDate + ", productName="
-				+ productName + ", cusCode=" + cusCode + ", cusName=" + cusName + "]";
+				+ productName + ", cusCode=" + cusCode + ", cusName=" + cusName + ", empName=" + empName + "]";
 	}
 
 	public String getWoCode() {
@@ -134,6 +136,14 @@ public class WorkOrderDTO {
 
 	public void setCusName(String cusName) {
 		this.cusName = cusName;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
 
 	

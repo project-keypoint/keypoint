@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수주목록</title>
+<title>품질검사대상</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
@@ -24,15 +20,11 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">수주현황(전체수주목록)</div>
+<div class="page-title">품질검사(전)</div>
 <div class="contents2">
+
 <div class="search-bar">
 <div class="search-b">
-<div class="search-select">
-<p>업체명</p> 
-<input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
-<input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
-</div>
 <div class="search-select">
 <p>상품명</p> 
 <input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
@@ -41,10 +33,6 @@
 </div>
 
 <div class="search-b">
-<div class="search-date">
-<p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input" placeholder="수주일자" readonly>
-~<input type="text" id="roDate2" class="form-control search-input" placeholder="수주일자" readonly>
-</div>
 <div class="search-date">
 <p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly>
 ~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일" readonly>
@@ -59,59 +47,75 @@
 <div class="select-status">
 <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
 <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
-<a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a>
-<a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
+<a>완료<input type="checkbox" id="select3" name="select3" class="list-select"></a>
 <a>( 체크박스 사용여부 보류중 )</a>
 <div>
-</div>
-</div>
-
 <div>
 <table class="table-list">
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>수주번호</th>
-    <th>업체코드</th>
-    <th>업체명</th>
+	<th>품질검사코드</th>
+	<th>납품예정일</th>
     <th>상품코드</th>
     <th>상품명</th>
-    <th>수량</th>
-    <th>수주금액</th>
-    <th>수주일자</th>
-    <th>납품예정일</th>
-    <th>납품일</th>
+    <th>전체수량</th>
+    <th>1차</th>
+    <th>2차</th>
+    <th>3차</th>
+    <th>합격</th>
+    <th>불량</th>
+    <th>최종불량률</th>
     <th>상태</th>
-    <th>상세내역</th>
+    <th>품질검사원</th>
+    <th>검사완료일</th>
+    <th>버튼</th>
 </tr>
-<c:forEach var="receiveDTO" items="${receiveList}">
+
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>${receiveDTO.roCode}</td>
-    <td>${receiveDTO.cusCode}</td>
-    <td>${receiveDTO.cusCode}</td>
-    <td>${receiveDTO.productCode}</td>
-    <td>${receiveDTO.productCode}</td>
-    <td>${receiveDTO.roCount}EA</td>
-    <td>${receiveDTO.roPrice}원</td>
-    <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td>
-    <td>${receiveDTO.shipSdate}</td>
-    <td><c:choose>
-            <c:when test="${not empty receiveDTO.shipDate}">
-                ${receiveDTO.shipDate}
-            </c:when>
-            <c:otherwise>
-                -
-            </c:otherwise>
-        </c:choose></td><!-- 납품일 null 대신 '-' -->
-    <td>${receiveDTO.roStatus}</td>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td>
+	<td>QC230927102344</td>
+	<td>2023-09-27</td>
+    <td>EEB003</td>
+    <td>키포인트넘버원</td>
+    <td>30</td>
+    <td>완료</td>
+    <td>완료</td>
+    <td>완료</td>
+    <td>30</td>
+    <td>0</td>
+    <td>0%</td>
+    <td>진행</td>
+    <td>홍길동</td>
+    <td>2023-09-25</td>
+    <td><input type="button" value="검사진행(상세)" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
+	<!-- + openDetails(가져갈값넣기) -->
 </tr>
-</c:forEach>    
+
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+	<td>-</td>
+	<td>2023-09-27</td>
+    <td>EEB003</td>
+    <td>키포인트넘버원</td>
+    <td>30</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>대기</td>
+    <td>-</td>
+    <td>-</td>
+    <td><input type="button" value="검사진행(상세)" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
+	<!-- + openDetails(가져갈값넣기) -->
+</tr>
+
 </table>
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="수주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="등록" class="btn btn-primary mybutton1">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
@@ -126,6 +130,9 @@
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
+
+<!-- 리스트 -->
+
 </div><!-- main -->
 
 <!-- contents end -->
@@ -136,52 +143,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-    $("#cusCode").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var cusCode = $("input[name='cusCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
-    });
-});
-$(document).ready(function() {
-    $("#cusName").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var cusName = $("input[name='cusName']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusName").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
-    });
-});
 $(document).ready(function() {
     $("#productCode").click(function() {
         // 상품코드 입력란의 값을 가져옵니다.
@@ -228,14 +189,7 @@ $(document).ready(function() {
 	    });
     });
 });
-//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
 $(function() {
-    $("#roDate1").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#roDate2").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
     $("#shipSdate1").datepicker({
     	dateFormat: "yy-mm-dd"
     });
@@ -269,11 +223,11 @@ checkboxes.forEach(function (checkbox) {
     });
 });
 
-// 수주상세내용 새창
-function openDetails(roCode) {
-    var url = '${pageContext.request.contextPath}/receive/receiveDetails?roCode='+roCode;
-    var windowWidth = 500;
-    var windowHeight = 675;
+// 품질상세내용 새창
+function openDetails() {
+    var url = '${pageContext.request.contextPath}/qc/qcDetails';
+    var windowWidth = 600;
+    var windowHeight = 840;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
@@ -282,7 +236,7 @@ function openDetails(roCode) {
 function openInsert() {
     var url = '${pageContext.request.contextPath}/receive/receiveInsert';
     var windowWidth = 500;
-    var windowHeight = 675;
+    var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

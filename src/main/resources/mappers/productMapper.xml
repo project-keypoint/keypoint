@@ -3,9 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.mappers.productMapper">
-	
 
-  
+	<insert id="insertProduct">
+		insert into product(productCode,productName,cusCode,productPrice,productCount,productUnit,productMemo)
+		values(#{productCode},#{productName},#{cusCode},#{productPrice},#{productCount},#{productUnit},#{productMemo})
+	</insert>
+
+	<select id="getProductList" resultType="com.keypoint.dto.ProductDTO">
+		select * from product
+	</select>
+
+
 </mapper>
 
 

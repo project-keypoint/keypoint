@@ -29,7 +29,7 @@
 	<!-- Sidebar -->
 	<ul
 		class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-		id="accordionSidebar" style="position: fixed; top: 0rem;">
+		id="accordionSidebar" style="position: fixed; top: 0rem; height: 100vh;">
 
 		<!-- Sidebar - Brand -->
 		<a
@@ -38,14 +38,14 @@
 			<div class="sidebar-brand-icon rotate-n-15">
 				<i class="fas fa-laugh-wink"></i>
 			</div>
-			<div class="sidebar-brand-text mx-3">키포인트</div>
+			<div class="sidebar-brand-text mx-3">KEYPOINT</div>
 		</a>
 
 		<!-- Divider -->
 		<hr class="sidebar-divider my-0">
 
 		<!-- Nav Item - Dashboard -->
-		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/">
+		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/main/notice">
 				<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항</span>
 		</a></li> 
 		
@@ -65,8 +65,8 @@
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="buttons.html">수주관리</a> 
-					<a class="collapse-item" href="cards.html">출하관리</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/receive/receiveList">수주목록(작업중)</a>
+					<a class="collapse-item" href="#">출하관리(없음)</a>
 					<a class="collapse-item" href="${pageContext.request.contextPath}/customer/list">거래처관리</a>
 				</div>
 			</div></li>
@@ -82,8 +82,9 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">발주목록</a> 
 					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">입고목록</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">소요량목록</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock">상품목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/product/requireList">소요량목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/product/productList">완제품목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/product/materialList">자재목록</a>
 				</div>
 			</div></li>
 
@@ -106,18 +107,26 @@
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
+			
 		<!-- Nav Item - Charts -->
-		<li class="nav-item"><a class="nav-link" href="#">
-				<i class="fas fa-fw fa-chart-area"></i> <span>품질관리</span>
-		</a></li>
+		<li class="nav-item"><a class="nav-link collapsed" href="#"
+			data-toggle="collapse" data-target="#qcPages"
+			aria-expanded="true" aria-controls="qcPages"> <i
+				class="fas fa-fw fa-folder"></i> <span>품질관리</span>
+		</a>
+			<div id="qcPages" class="collapse"
+				aria-labelledby="headingPages" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<a class="collapse-item" href="${pageContext.request.contextPath}/qc/qcList">품질검사목록(작업중)</a> 
+					<a class="collapse-item" href="#">폐기관리(없음)</a> 
+					<div class="collapse-divider"></div>
+				</div>
+			</div></li>
 
 		<li class="nav-item"><a class="nav-link"
 			href="${pageContext.request.contextPath}/product/productList"> <i
 				class="fas fa-fw fa-chart-area"></i> <span>상품재고</span></a></li>
-		<!-- Nav Item - Charts -->
-		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/charts.html">
-				<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
-		</a></li>
+		
 		
 		<li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workOrderList">
@@ -125,16 +134,14 @@
                     <span>작업지시</span></a>
             </li> 
 		
-		<li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/receive/receiveList">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>수주목록(바로가기)</span></a>
-            </li> 
-
-
 		<!-- Nav Item - Tables -->
 		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/tables">
 				<i class="fas fa-fw fa-table"></i> <span>Tables</span>
+		</a></li>
+		
+			<!-- Nav Item - Tables -->
+		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/login">
+				<i class="fas fa-fw fa-table"></i> <span>로그인 수정중</span>
 		</a></li>
 
 		<!-- Divider -->

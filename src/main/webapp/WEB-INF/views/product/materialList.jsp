@@ -1,21 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수주목록</title>
+<title>자재목록</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
+
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="../inc/top-bar.jsp" %>
@@ -24,94 +21,84 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">수주현황(전체수주목록)</div>
+<div class="page-title">자재목록(재고현황)</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>업체명</p> 
-<input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
-<input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
+<p>자재코드</p> <input type="text" id="materialCode" class="form-control search-input" placeholder="자재코드 ">
 </div>
 <div class="search-select">
-<p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
+<p>자재명</p> <input type="text" id="materialName" class="form-control search-input" placeholder="자재명 ">
 </div>
 </div>
 
-<div class="search-b">
-<div class="search-date">
-<p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input" placeholder="수주일자" readonly>
-~<input type="text" id="roDate2" class="form-control search-input" placeholder="수주일자" readonly>
-</div>
-<div class="search-date">
-<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly>
-~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일" readonly>
-</div>
-</div>
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
 </div><!-- search-bar -->
 <br>
-<div class="select-status">
-<a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
-<a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
-<a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a>
-<a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
-<a>( 체크박스 사용여부 보류중 )</a>
-<div>
-</div>
-</div>
+
+
 
 <div>
 <table class="table-list">
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>수주번호</th>
-    <th>업체코드</th>
-    <th>업체명</th>
-    <th>상품코드</th>
-    <th>상품명</th>
+    <th>자재코드</th>
+    <th>자재명</th>
+    <th>거래처코드</th>
+    <th>매입단가</th>
     <th>수량</th>
-    <th>수주금액</th>
-    <th>수주일자</th>
-    <th>납품예정일</th>
-    <th>납품일</th>
-    <th>상태</th>
-    <th>상세내역</th>
+    <th>단위</th>
+    <th>비고</th>
+    <th>관리</th>
 </tr>
-<c:forEach var="receiveDTO" items="${receiveList}">
+
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>${receiveDTO.roCode}</td>
-    <td>${receiveDTO.cusCode}</td>
-    <td>${receiveDTO.cusCode}</td>
-    <td>${receiveDTO.productCode}</td>
-    <td>${receiveDTO.productCode}</td>
-    <td>${receiveDTO.roCount}EA</td>
-    <td>${receiveDTO.roPrice}원</td>
-    <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td>
-    <td>${receiveDTO.shipSdate}</td>
-    <td><c:choose>
-            <c:when test="${not empty receiveDTO.shipDate}">
-                ${receiveDTO.shipDate}
-            </c:when>
-            <c:otherwise>
-                -
-            </c:otherwise>
-        </c:choose></td><!-- 납품일 null 대신 '-' -->
-    <td>${receiveDTO.roStatus}</td>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td>
+    <td>MAT0001</td>
+    <td>투명키캡</td>
+    <td>C012003</td>
+    <td>1,000원</td>
+    <td>3000</td>
+    <td>EA</td>
+    <td></td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+	<!-- + openUpdate(가져갈값넣기) -->
 </tr>
-</c:forEach>    
+    
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
+<tr class="table-body">
+	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
+    <td>MAT0001</td><td>투명키캡</td><td>C012003</td><td>1,000원</td><td>3000</td><td>EA</td><td></td>
+    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
+</tr> <!-- DB연결 시 삭제될 tr -->
 </table>
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="수주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
@@ -146,35 +133,12 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#cusCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
+	            var width = 400;
+	            var height = 400;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
-    });
-});
-$(document).ready(function() {
-    $("#cusName").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var cusName = $("input[name='cusName']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusName").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workCusList'; // 업체 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
@@ -192,12 +156,12 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#productCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
+	            var width = 400;
+	            var height = 400;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/receive/empty'; // 상품 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
@@ -205,29 +169,21 @@ $(document).ready(function() {
 	    });
     });
 });
-$(document).ready(function() {
-    $("#productName").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var productName = $("input[name='productName']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#productName").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
-    });
-});
+// //업체명(거래처) 검색 새창
+// var searchCustomer = document.getElementById("search-customer");
+// searchCustomer.addEventListener("click", function () {
+// 	var url = '${pageContext.request.contextPath}/receive/empty';
+// 	// ↑ 업체검색페이지 새로 입력하기
+//     window.open(url, '_blank', 'width=400, height=400');
+// });
+
+// //상품명 검색 새창
+// var searchProduct = document.getElementById("search-product");
+// searchProduct.addEventListener("click", function () {
+// 	var url = '${pageContext.request.contextPath}/receive/empty';
+// 	// ↑ 상품검색페이지 새로 입력하기
+//     window.open(url, '_blank', 'width=400, height=400');
+// });
 //수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
 $(function() {
     $("#roDate1").datepicker({
@@ -269,20 +225,20 @@ checkboxes.forEach(function (checkbox) {
     });
 });
 
-// 수주상세내용 새창
-function openDetails(roCode) {
-    var url = '${pageContext.request.contextPath}/receive/receiveDetails?roCode='+roCode;
+// 자재수정 새창
+function openUpdate() {
+    var url = '${pageContext.request.contextPath}/product/materialUpdate';
     var windowWidth = 500;
-    var windowHeight = 675;
+    var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-//수주등록 새창
+//자재등록 새창
 function openInsert() {
-    var url = '${pageContext.request.contextPath}/receive/receiveInsert';
+    var url = '${pageContext.request.contextPath}/product/materialInsert';
     var windowWidth = 500;
-    var windowHeight = 675;
+    var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

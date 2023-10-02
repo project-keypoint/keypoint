@@ -22,7 +22,7 @@
 
 
 <!--  contents start -->
-<div class="contents" style="position:fixed; left: 15rem;">여기 div 안에다가 내용 만들어 넣으면 됩니다</div>
+<div class="contents" style="position: absolute;; left: 15rem;">여기 div 안에다가 내용 만들어 넣으면 됩니다!</div>
 <!-- contents end -->
 
 
