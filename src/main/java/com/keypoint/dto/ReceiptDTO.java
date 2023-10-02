@@ -6,11 +6,11 @@ public class ReceiptDTO {
 
 	private String grCode; // 입고코드
     private String poCode; // 발주코드
-    private Timestamp grSdate; // 입고등록날짜
+    private String grSdate; // 입고등록날짜
     private int grCount; // 입고예정수량
-    private Timestamp grDate; // 입고예정날짜
+    private String grDate; // 입고예정날짜
     private int grEcount; // 입고완료수량
-    private Timestamp grEdate; // 입고완료날짜
+    private String grEdate; // 입고완료날짜
     private int grOwner; // 입고담당자
     private String grStatus; // 입고현황 (enum)
     
@@ -27,10 +27,10 @@ public class ReceiptDTO {
 	public void setPoCode(String poCode) {
 		this.poCode = poCode;
 	}
-	public Timestamp getGrSdate() {
+	public String getGrSdate() {
 		return grSdate;
 	}
-	public void setGrSdate(Timestamp grSdate) {
+	public void setGrSdate(String grSdate) {
 		this.grSdate = grSdate;
 	}
 	public int getGrCount() {
@@ -39,10 +39,10 @@ public class ReceiptDTO {
 	public void setGrCount(int grCount) {
 		this.grCount = grCount;
 	}
-	public Timestamp getGrDate() {
+	public String getGrDate() {
 		return grDate;
 	}
-	public void setGrDate(Timestamp grDate) {
+	public void setGrDate(String grDate) {
 		this.grDate = grDate;
 	}
 	public int getGrEcount() {
@@ -51,10 +51,10 @@ public class ReceiptDTO {
 	public void setGrEcount(int grEcount) {
 		this.grEcount = grEcount;
 	}
-	public Timestamp getGrEdate() {
+	public String getGrEdate() {
 		return grEdate;
 	}
-	public void setGrEdate(Timestamp grEdate) {
+	public void setGrEdate(String grEdate) {
 		this.grEdate = grEdate;
 	}
 	public int getGrOwner() {

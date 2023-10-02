@@ -5,6 +5,19 @@
   
 <mapper namespace="com.itwillbs.mappers.receiptMapper">
 
+	<insert id="insertReceipt">
+		insert into goodsReceipt (grCode, poCode, grSdate, grCount, grDate, grEcount, grEdate, grOwner, grStatus)
+		values(#{grCode},#{poCode},#{grSdate},#{grCount},#{grDate},#{grEcount},#{grEdate},#{grOwner},#{grStatus})
+	</insert>
+
+
+
+
+
+
+
+
+
 
   
 </mapper>

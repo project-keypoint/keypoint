@@ -19,7 +19,7 @@
 <body>
 
 <div class="main-details">
-<form action="" id="" method="post">
+<form action="${pageContext.request.contextPath}/receipt/receiptInsertPro" id="receiptInsert" method="post" onsubmit="return validateForm()">
 
 <div class="forms-group-receive">
 <div class="page-title-popup">입고예정등록</div>
@@ -44,7 +44,7 @@
 
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색">
+<input type="text" id="grOwner" name="grOwner" class="form-control search-input inputcode" placeholder="담당자검색">
 </div>
 
 <div class="form-group-receive">
@@ -59,7 +59,7 @@
 
 <div class="form-group-receive">
 <p>입고상태</p>
-<input type="text" id="grStatus" name="poStatus" class="form-control search-input" value="입고대기" readonly>
+<input type="text" id="grStatus" name="grStatus" class="form-control search-input" value="입고대기" readonly>
 </div>
 
 </div>
@@ -105,14 +105,14 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $("#poOwner").click(function() {
+    $("#grOwner").click(function() {
         // 상품코드 입력란의 값을 가져옵니다.
-        var poOwner = $("input[name='poOwner']").val();
+        var poOwner = $("input[name='grOwner']").val();
         // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
         // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
         
         $(document).ready(function() {
-	        $("#poOwner").click(function() {
+	        $("#grOwner").click(function() {
 	            // 팝업 창 크기 및 위치 설정
 	            var width = 400;
 	            var height = 400;
@@ -261,6 +261,28 @@ $(function() {
 </script>
 <!-- // 발주날짜(현재날짜) 이후로 납기일자 선택하게끔 설정 -->
 
+<!-- 필수입력항목 메시지 -->
+<script>
+function validateForm() {
+    // 각 입력 필드 값
+    var grCode = document.getElementById("grCode").value;
+    var poCode = document.getElementById("poCode").value;
+    var materialName = document.getElementById("materialName").value;
+    var grCount = document.getElementById("grCount").value;
+    var grOwner = document.getElementById("grOwner").value;
+    var grSdate = document.getElementById("grSdate").value;
+    var grDate = document.getElementById("grDate").value;
+    var grStatus = document.getElementById("grStatus").value;
+    // 빈 필드 검사
+    if (grCode === "" || poCode === "" || materialName === "" ||
+   		grCount === "" || grOwner === "" || grSdate === "" || grDate === "" || grStatus === "") {
+        alert("모든 내용을 입력해주세요.");
+        return false; // 제출 방지
+    }
+    return true;
+}
+</script>
+<!-- // 필수입력항목 메시지 -->
 
 
 </body>
