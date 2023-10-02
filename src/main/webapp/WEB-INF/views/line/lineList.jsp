@@ -40,13 +40,13 @@
 <div class="search-b">
 <div class="search-select">
 <p>라인명</p> 
-<input type="text" id="cusCode" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
-<input type="text" id="cusName" class="form-control search-input" placeholder="라인명(클릭)" readonly>
+<input type="text" id="lineCode" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
+<input type="text" id="lineName" class="form-control search-input" placeholder="라인명(클릭)" readonly>
 </div>
 <div class="search-select">
 <p>작업명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="작업코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="작업명(클릭)" readonly>
+<input type="text" id="woCode" class="form-control search-input" placeholder="작업코드" style="width:110px;" readonly>
+<input type="text" id="woName" class="form-control search-input" placeholder="작업명(클릭)" readonly>
 </div>
 </div>
 
@@ -78,7 +78,7 @@
     <th>작업상태</th>
     <th>상세보기</th>
 </tr>
-<c:forEach var="LineDTO" items="${LineList}">
+<c:forEach var="LineDTO" items="${lineList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${LineDTO.lineCode}</td>

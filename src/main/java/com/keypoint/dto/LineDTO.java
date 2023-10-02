@@ -8,11 +8,14 @@ public class LineDTO {
 	private String lineMemo;
 	private String lineEmp;
 	
+	private WorkOrderDTO workOrderDTO ;
 	
+
+
 	@Override
 	public String toString() {
 		return "LineDTO [lineCode=" + lineCode + ", lineName=" + lineName + ", lineMemo=" + lineMemo + ", lineEmp="
-				+ lineEmp + "]";
+				+ lineEmp + ", workOrderDTO=" + workOrderDTO + "]";
 	}
 
 
@@ -55,7 +58,13 @@ public class LineDTO {
 		this.lineEmp = lineEmp;
 	}
 	
-	
+	public WorkOrderDTO getWorkOrderDTO() {
+        return workOrderDTO;
+    }
+
+    public void setWorkOrderDTO(WorkOrderDTO workOrderDTO) {
+        this.workOrderDTO = workOrderDTO;
+    }
 	
 	
 	
