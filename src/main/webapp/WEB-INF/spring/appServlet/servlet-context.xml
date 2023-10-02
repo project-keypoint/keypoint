@@ -27,9 +27,6 @@
 	<context:component-scan base-package="com.keypoint.controller" />
 	<context:component-scan base-package="com.keypoint.service" />
 	<context:component-scan base-package="com.keypoint.dao" />	
-<!-- 	<context:component-scan base-package="com.itwillbs.controller" /> -->
-<!-- 	<context:component-scan base-package="com.itwillbs.service" /> -->
-<!-- 	<context:component-scan base-package="com.itwillbs.dao" /> -->
 	
 	
 	

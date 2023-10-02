@@ -102,7 +102,7 @@
 				aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="${pageContext.request.contextPath}/main/workOrder">작업지시관리</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/register.html">라인관리</a> 
+					<a class="collapse-item" href="${pageContext.request.contextPath}/line/lineList">라인관리</a> 
 					<a class="collapse-item" href="${pageContext.request.contextPath}/forgot-password.html">실적관리</a>
 					<div class="collapse-divider"></div>
 				</div>
