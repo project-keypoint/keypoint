@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>테스트페이지입니다</title>
+<title>키포인트</title>
 
 <!-- Custom fonts for this template-->
 <link
