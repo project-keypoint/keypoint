@@ -18,10 +18,17 @@ public class WorkOrderService {
 	@Inject
 	private WorkOrderDAO workOrderDAO;
 	
-	public void insertWorkOrder(WorkOrderDTO workOrderDTO) {
-		System.out.println("workOrderService insertWorkOrder()");
+	
+	public List<WorkOrderDTO> getWorkOrderList() {
+		System.out.println("WorkOrderService getWorkOrderList()");
+		return workOrderDAO.getWorkOrderList();
+	}
 		
-		workOrderDTO.setWoDate(new Timestamp(System.currentTimeMillis()));
+	
+	public void workOrderInsertPro(WorkOrderDTO workOrderDTO) {
+		System.out.println("workOrderService workOrderInsertPro()");
+		
+//		workOrderDTO.setWoDate(new Timestamp(System.currentTimeMillis()));
 		
 		workOrderDAO.insertWorkOrder(workOrderDTO);
 		
@@ -86,6 +93,9 @@ public class WorkOrderService {
 		System.out.println("WorkOrderService countEmpList()");
 		return workOrderDAO.countEmpList(search);
 	}
+
+
+	
 
 	}
 

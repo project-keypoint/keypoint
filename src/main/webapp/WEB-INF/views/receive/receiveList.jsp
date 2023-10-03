@@ -70,13 +70,13 @@
 <table class="table-list">
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>수주번호</th>
-    <th>업체코드</th>
-    <th>업체명</th>
-    <th>상품코드</th>
-    <th>상품명</th>
-    <th>수량</th>
-    <th>수주금액</th>
+	<th>수주번호</th> 
+    <th>업체코드</th> 
+    <th>업체명</th> 
+    <th>상품코드</th> 
+    <th>상품명</th> 
+    <th>수량</th> 
+    <th>수주금액</th> 
     <th>수주일자</th>
     <th>납품예정일</th>
     <th>납품일</th>

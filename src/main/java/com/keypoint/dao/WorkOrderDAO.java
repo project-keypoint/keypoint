@@ -19,8 +19,17 @@ public class WorkOrderDAO {
 	private static final String namespace="com.itwillbs.mappers.workOrderMapper";
 	
 	
+	public List<WorkOrderDTO> getWorkOrderList() {
+		System.out.println("WorkOrderDAO getWorkOrderList()");
+		return sqlSession.selectList(namespace+".getWorkOrderList");
+	}
+	
+	
+	
 	public void insertWorkOrder(WorkOrderDTO workOrderDTO) {
-		System.out.println("WorkOrderDAO insertWorkOrder");
+		System.out.println("WorkOrderDAO insertWorkOrder()");
+		System.out.println("woDate:" + workOrderDTO.getWoDate());
+		System.out.println("empName:" + workOrderDTO.getEmpName());
 		
 		sqlSession.insert(namespace+".insertWorkOrder", workOrderDTO);
 		
@@ -124,6 +133,9 @@ public class WorkOrderDAO {
 		System.out.println("WorkOrderDAO countEmpList()");
 		return sqlSession.selectOne(namespace+".countEmpList", search);
 	}
+
+
+	
 	
 	
 	
