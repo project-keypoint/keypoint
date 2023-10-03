@@ -12,7 +12,11 @@
     ORDER BY l.lineCode DESC;
 	</select>
 
-
+	<insert id="lineInsert" >
+		insert into line (lineCode, lineName, lineMemo, lineEmp)
+		values(#(lineCode),#(lineName),#(lineMemo),#(lineEmp))
+	
+	</insert>
 
 
 

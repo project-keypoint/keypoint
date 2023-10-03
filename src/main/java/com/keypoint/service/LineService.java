@@ -21,4 +21,11 @@ public class LineService {
 		return lineDAO.getLineList();
 	}// getLineList
 
+
+	public void lineInsert(LineDTO lineDTO) {
+		System.out.println("LineService lineInsert()");
+		
+		lineDAO.lineInsert(lineDTO);
+	}// 라인등록Pro
+
 }
