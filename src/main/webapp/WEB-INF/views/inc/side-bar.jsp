@@ -49,7 +49,7 @@
 				<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항</span>
 		</a></li> 
 		
-		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/">
+		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/employee/employeeList">
 				<i class="fas fa-fw fa-tachometer-alt"></i> <span>사원관리</span>
 		</a></li> 
 

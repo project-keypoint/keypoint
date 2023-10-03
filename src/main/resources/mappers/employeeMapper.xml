@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mappers.employeeMapper">
+
+
+	<select id="getEmployeeList" resultType="com.keypoint.dto.EmployeeDTO">
+		select * 
+		from employees
+	</select>
+
+
+
+
+
+<!-- <insert parameterType="com.keypoint.dto.EmployeeDTO" id="insertMember"> -->
+<!-- insert into employees(empId, empPass, empSalt, empName, empPhoto, empBirth,  -->
+<!-- empPhone, empTel, empEmail, empAddress, empStatus, departmentId, departmentName,  -->
+<!-- empPosition, empHiredate, empRole, empLeavedate, empRetiredate) -->
+<!-- values(#{empId}, #{empPass}, #{empSalt}, #{empName}, #{empPhoto}, #{empBirth},  -->
+<!-- #{empPhone}, #{empTel}, #{empEmail}, #{empAddress}, #{empStatus}, #{departmentId},  -->
+<!-- #{departmentName}, #{empPosition}, #{empHiredate}, #{empRole}, #{empLeavedate}, #{empRetiredate})  -->
+<!-- </insert> -->
+
+<!-- <update parameterType="String" id="deleteMember"> -->
+<!-- DELETE FROM employees -->
+<!-- WHERE empId = #{empId}  -->
+<!-- </update> -->
+
+<!-- <update parameterType="com.keypoint.dto.EmployeeDTO" id="updateMember"> -->
+<!-- UPDATE employeesSET empStatus = #{empStatus}AND empPhone = #{empPhone}WHERE empId = #{empId}  -->
+<!-- </update> -->
+
+
+
+</mapper>
+
