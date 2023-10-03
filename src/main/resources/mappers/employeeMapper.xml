@@ -23,10 +23,10 @@
 <!-- #{departmentName}, #{empPosition}, #{empHiredate}, #{empRole}, #{empLeavedate}, #{empRetiredate})  -->
 <!-- </insert> -->
 
-<!-- <update parameterType="String" id="deleteMember"> -->
+<!-- <delete parameterType="String" id="deleteMember"> -->
 <!-- DELETE FROM employees -->
 <!-- WHERE empId = #{empId}  -->
-<!-- </update> -->
+<!-- </delete> -->
 
 <!-- <update parameterType="com.keypoint.dto.EmployeeDTO" id="updateMember"> -->
 <!-- UPDATE employeesSET empStatus = #{empStatus}AND empPhone = #{empPhone}WHERE empId = #{empId}  -->

@@ -8,7 +8,7 @@
 
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/member/add" name="materialInsert" id="memberInsert" method="post">
+<form action="${pageContext.request.contextPath}/employee/add" name="employeeInsert" id="employeeInsert" method="post">
 <input type="text" name = "empId" id="empId">
 <input type="text" id="empPass">
 <input type="text" id="empSalt">
