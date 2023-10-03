@@ -111,7 +111,7 @@ h2{
 <table>
 <tr><th>사원아이디</th><th>사원이름</th></tr>
 <c:forEach var="workEmpList" items="${workEmpList}">
-<tr onclick="selectWork('${workEmpList.empId }','${workEmpList.empName }')"> <!-- ,'${itemList.itemId}' -->
+<tr onclick="selectWork('${workEmpList.empId}','${workEmpList.empName }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${workEmpList.empId}</td>
 	<td id="con">${workEmpList.empName}</td>
 	</tr>

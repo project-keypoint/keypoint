@@ -67,7 +67,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="${pageContext.request.contextPath}/receive/receiveList">수주목록(작업중)</a>
 					<a class="collapse-item" href="#">출하관리(없음)</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/customer/list">거래처관리</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/customer/cusList">거래처관리(작업중)</a>
 				</div>
 			</div></li>
 

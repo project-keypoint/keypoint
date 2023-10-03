@@ -13,15 +13,18 @@ public class WorkOrderDTO {
 	private String materialCode; // 자재코드
 	private int woCount; // 지시수량
 	private String woStatus; // 지시상태
-	private Timestamp woDate; // 지시일자
+	private String woDate; // 지시일자
 	private String productName; //상품이름
 	private String cusCode; //거래처 코드
 	private String cusName; // 거래처 명
-	private String empName;
+	private String empName; // 사원 명
+	private String shipSdate; // 납품예정일
 	
 	
 	
 	
+	
+		
 	
 
 	
@@ -31,7 +34,8 @@ public class WorkOrderDTO {
 		return "WorkOrderDTO [woCode=" + woCode + ", roCode=" + roCode + ", empId=" + empId + ", lineCode=" + lineCode
 				+ ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode=" + materialCode
 				+ ", woCount=" + woCount + ", woStatus=" + woStatus + ", woDate=" + woDate + ", productName="
-				+ productName + ", cusCode=" + cusCode + ", cusName=" + cusName + ", empName=" + empName + "]";
+				+ productName + ", cusCode=" + cusCode + ", cusName=" + cusName + ", empName=" + empName
+				+ ", shipSdate=" + shipSdate + "]";
 	}
 
 	public String getWoCode() {
@@ -106,11 +110,11 @@ public class WorkOrderDTO {
 		this.woStatus = woStatus;
 	}
 
-	public Timestamp getWoDate() {
+	public String getWoDate() {
 		return woDate;
 	}
 
-	public void setWoDate(Timestamp woDate) {
+	public void setWoDate(String woDate) {
 		this.woDate = woDate;
 	}
 
@@ -144,6 +148,14 @@ public class WorkOrderDTO {
 
 	public void setEmpName(String empName) {
 		this.empName = empName;
+	}
+
+	public String getShipSdate() {
+		return shipSdate;
+	}
+
+	public void setShipSdate(String shipSdate) {
+		this.shipSdate = shipSdate;
 	}
 
 	

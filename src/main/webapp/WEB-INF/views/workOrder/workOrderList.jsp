@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     
 <style type="text/css">
-	.lineName{
+	.lineCode{
 	 
     width: 180px; 
   }
@@ -43,16 +44,16 @@
 <div class="search-b">
 
 <div class="form-group-workOrder">
-<p>라인			<select id="lineName" name="lineName" class="custom-select form-control lineName">
-						<option value="" selected>전체</option>
-						<option value="라인1">라인1</option>
-  						<option value="라인2">라인2</option>
- 						<option value="라인3">라인3</option>
-  						<option value="라인4">라인4</option>
- 						<option value="라인5">라인5</option>
- 						<option value="라인6">라인6</option>
-						<c:forEach var="line" items="${lineList}">
-							<option value="${line.lineName}">${line.lineName}</option>
+<p>라인			<select id="LineCode" name="LineCode" class="custom-select form-control lineCode">
+<!-- 						<option value="" selected>전체</option> -->
+<!-- 						<option value="라인1">라인1</option> -->
+<!--   						<option value="라인2">라인2</option> -->
+<!--  						<option value="라인3">라인3</option> -->
+<!--   						<option value="라인4">라인4</option> -->
+<!--  						<option value="라인5">라인5</option> -->
+<!--  						<option value="라인6">라인6</option> -->
+						<c:forEach var="LineDTO" items="${lineList}">
+							<option value="${LineDTO.lineCode}">${LineDTO.lineCode}</option>
 						</c:forEach>
 					</select>
 					</p>
@@ -102,61 +103,38 @@
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
 	<th>작업지시번호</th>
-    <th>업체명</th>
-    <th>수주번호</th>
-    <th>지시일자</th>
-    <th>납품예정일</th>
-    <th>지시상태</th>
-    <th>상품코드</th>
-    <th>상품명</th>
-    <th>라인코드</th>
-    <th>지시수량</th>
-    <th>작업지시자</th>
+    <th>업체명</th> 
+    <th>업체코드</th> 
+    <th>수주번호</th> 
+    <th>지시일자</th> 
+    <th>지시상태</th> 
+    <th>상품코드</th> 
+    <th>상품명</th> 
+    <th>라인코드</th> 
+    <th>지시수량</th> 
+    <th>작업지시자</th> 
     <th>상세내역</th>
 </tr>
 
+<c:forEach var="workOrderDTO" items="${workOrderList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>ORD23092400014</td>
-    <td>로지텍</td>
-    <td>RO2309272201</td>
-    <td>23.09.30</td>
-    <td>23.10.05</td>
-    <td>대기</td>
-    <td>EEB003</td>
-    <td>키포인트키보드</td>
-    <td>LINE01</td>
-    <td>10</td>
-<!--     <td>-</td> -->
-    <td>이정윤</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
-	<!-- + openDetails(가져갈값넣기) -->
+    <td>${workOrderDTO.woCode}</td>
+    <td>${workOrderDTO.cusName}</td>
+    <td>${workOrderDTO.cusCode}</td>
+    <td>${workOrderDTO.roCode}</td>
+    <td>${workOrderDTO.woDate}</td>
+<%--     <td><c:out value="${fn:substring(workOrderDTO.woDate, 0, 10)}" /></td> --%>
+    <td>${workOrderDTO.woStatus}</td>
+    <td>${workOrderDTO.productCode}</td>
+    <td>${workOrderDTO.productName}</td>
+    <td>${workOrderDTO.lineCode}</td>
+    <td>${workOrderDTO.woCount}</td>
+    <td>${workOrderDTO.empName}</td>
+
+    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${workOrderDTO.woCode}')"></td>
 </tr>
-    
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>ORD23092400014</td><td>로지텍</td><td>RO2309272201</td><td>23.09.30</td><td>23.10.05</td><td>대기</td>
-    <td>EEB003</td><td>키포인트키보드</td><td>LINE01</td><td>10</td><td>이정윤</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>ORD23092400014</td><td>로지텍</td><td>RO2309272201</td><td>23.09.30</td><td>23.10.05</td><td>대기</td>
-    <td>EEB003</td><td>키포인트키보드</td><td>LINE01</td><td>10</td><td>이정윤</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>ORD23092400014</td><td>로지텍</td><td>RO2309272201</td><td>23.09.30</td><td>23.10.05</td><td>대기</td>
-    <td>EEB003</td><td>키포인트키보드</td><td>LINE01</td><td>10</td><td>이정윤</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>ORD23092400014</td><td>로지텍</td><td>RO2309272201</td><td>23.09.30</td><td>23.10.05</td><td>대기</td>
-    <td>EEB003</td><td>키포인트키보드</td><td>LINE01</td><td>10</td><td>이정윤</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openDetails()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
+</c:forEach>    
 </table>
 </div><!-- table -->
 <div class="content-bottom">

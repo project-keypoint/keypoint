@@ -6,11 +6,32 @@
 <mapper namespace="com.itwillbs.mappers.workOrderMapper">
 	
 	<insert id="insertWorkOrder">
-		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode, productCode, materialCode, woCount, woStatus, woDate)
-		values(#{woCode},#{roCode},#{empId},#{lineCode}#{mfgCode},#{productCode},#{materialCode},#{woCount},#{woStatus},#{woDate})
+		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode, productCode, materialCode, woCount, woStatus, woDate, productName, cusCode, empName)
+		values(CONCAT('WO', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
+		#{roCode},#{empId},#{lineCode},
+		 <if test="mfgCode == null">NULL</if>
+         <if test="mfgCode != null">#{mfgCode}</if>,
+		#{productCode},
+		 <if test="materialCode == null">NULL</if>
+         <if test="materialCode != null">#{materialCode}</if>,
+		#{woCount},#{woStatus},#{woDate},#{productName},#{cusCode},#{empName})
 	</insert>
-
-  	<select id="workProdList" resultType="com.keypoint.dto.WorkOrderDTO">
+	
+	<select id="getWorkOrderList" resultType="com.keypoint.dto.WorkOrderDTO">
+		select a.woCode, a.cusCode, b.cusName, a.productCode, c.productName,
+	   		   a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
+	   		   a.empId, e.empName  as woEmpName
+		from workOrder a
+		left join customer b on a.cusCode = b.cusCode
+		left join product c on a.productCode = c.productCode
+		left join receivedOrder d on a.roCode = d.roCode
+		left join employees e on a.empId = e.empId
+		where a.woStatus != '삭제'
+		order by a.woCode desc
+	</select>
+	
+	
+   <select id="workProdList" resultType="com.keypoint.dto.WorkOrderDTO">
    select productCode, productName
    from product
    where 

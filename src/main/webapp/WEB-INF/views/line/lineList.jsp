@@ -83,7 +83,7 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${LineDTO.lineCode}</td>
     <td>${LineDTO.lineName}</td>
-    <td>${LineDTO.workOrderDTO.woCode}</td>
+    <td>${LineDTO.woCode}</td>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
     <td><button class = "status">대기중</button></td>
@@ -136,6 +136,18 @@ $(document).ready(function() {
         }
     });
 });
+// 작업상태 변환 버튼
+
+//수주등록 새창
+function openInsert() {
+    var url = '${pageContext.request.contextPath}/line/lineInsert';
+    var windowWidth = 500;
+    var windowHeight = 675;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+
 </script>
 </body>
 

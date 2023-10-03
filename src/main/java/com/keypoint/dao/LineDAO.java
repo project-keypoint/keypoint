@@ -23,7 +23,15 @@ public class LineDAO {
 	public List<LineDTO> getLineList() {
 		System.out.println("LineDAO getLineList()");
 		return sqlSession.selectList(namespace+".getLineList");
-	}// getLineList
+	}// 라인목록조회
+
+
+	public void lineInsert(LineDTO lineDTO) {
+		System.out.println("LineDAO lineInsert()");
+		sqlSession.insert(namespace+".lineInsert",lineDTO);
+	}// 라인등록
+
+
 
 	
 	

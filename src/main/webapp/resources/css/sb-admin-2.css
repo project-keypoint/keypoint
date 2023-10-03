@@ -554,6 +554,7 @@ pre code {
   width: 100%;
   padding-right: 0.75rem;
   padding-left: 0.75rem;
+  padding-top: 10.5vh;
   margin-right: auto;
   margin-left: auto;
 }
@@ -587,6 +588,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -0.75rem;
   margin-left: -0.75rem;
+  justify-content: space-around;
 }
 
 .no-gutters {
@@ -1212,7 +1214,6 @@ pre code {
   }
   .col-lg-6 {
   	margin-left: 3rem;
-  	margin-top: 15rem;
     flex: 0 0 50%;
     max-width: 50%;
   }

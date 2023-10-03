@@ -9,12 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
 
+import com.keypoint.dto.LineDTO;
 import com.keypoint.dto.PageDTO;
+import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
+import com.keypoint.service.LineService;
 import com.keypoint.service.WorkOrderService;
 
 @Controller
@@ -24,18 +28,41 @@ public class WorkOrderController {
 	@Inject
 	private WorkOrderService workOrderService;
 	
+	@Inject
+	private LineService lineService;
 	
 	@GetMapping("/workOrderList")
-	public String workOrder() {
+	public String workOrderList(Model model) {
 		System.out.println("WorkOrderController workOrder/workOrderList");
+		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList();
+		List<LineDTO> lineList = lineService.getLineList();
+		model.addAttribute("lineList", lineList);
+		model.addAttribute("workOrderList", workOrderList);
 		return "workOrder/workOrderList";
 	}// workOrder [작업지시]
 	
+	
 	@GetMapping("/workOrderInsert")
 	public String workOrderInsert() {
-		System.out.println("WorkOrderController workOrder/workOrderUpdate");
+		System.out.println("WorkOrderController workOrder/workOrderInsert");
 		return "workOrder/workOrderInsert";
 	}// receiveUpdate [작업지시등록]
+	
+	@PostMapping("/workOrderInsertPro")
+	public String workOrderInsertPro(WorkOrderDTO workOrderDTO) {
+		System.out.println("ReceiveController workOrder/workOrderInsertPro");
+		System.out.println(workOrderDTO);
+		workOrderService.workOrderInsertPro(workOrderDTO);
+		
+		if(workOrderDTO != null) {
+			return "workOrder/msgSuccess"; // 등록완료
+		}else {
+			return "workOrder/msgFailed"; // 등록실패
+		}
+	}// workOrderInsertPro [작업지시등록Pro]
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/workProdList", method = RequestMethod.GET)

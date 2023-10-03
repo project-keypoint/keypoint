@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수주목록</title>
+<title>거래처 목록</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
@@ -24,7 +24,7 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">수주현황(전체수주목록)</div>
+<div class="page-title">거래처 목록</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
@@ -33,66 +33,75 @@
 <input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
 <input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
 </div>
+</div>
+
+<div class="search-b">
 <div class="search-select">
 <p>상품명</p> 
 <input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
 <input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
 </div>
+
 </div>
 
-<div class="search-b">
-<div class="search-date">
-<p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input" placeholder="수주일자" readonly>
-~<input type="text" id="roDate2" class="form-control search-input" placeholder="수주일자" readonly>
-</div>
-<div class="search-date">
-<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly>
-~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일" readonly>
-</div>
-</div>
+
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
 </div><!-- search-bar -->
 <br>
+
+
+
+
 <div class="select-status">
 <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
 <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
 <a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a>
 <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
 <a>( 체크박스 사용여부 보류중 )</a>
+
+
+<div style="text-align: right;">
+<input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+</div>
 <div>
 </div>
 </div>
+
+
+
 
 <div>
 <table class="table-list">
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>수주번호</th> 
-    <th>업체코드</th> 
-    <th>업체명</th> 
-    <th>상품코드</th> 
-    <th>상품명</th> 
-    <th>수량</th> 
-    <th>수주금액</th> 
-    <th>수주일자</th>
-    <th>납품예정일</th>
-    <th>납품일</th>
+	<th>거래처코드</th>
+    <th>구분</th>
+    <th>거래처명</th>
+    <th>대표자명</th>
+    <th>대표전화</th>
+    <th>주소</th>	
+    <th>업태</th>
+    <th>종목</th>
+    <th>담당자명</th>
+    <th>담당자이메일</th>
     <th>상태</th>
-    <th>상세내역</th>
 </tr>
-<c:forEach var="receiveDTO" items="${receiveList}">
+
+
+<c:forEach var="customerDTO" items="${cusList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>${receiveDTO.roCode}</td>
-    <td>${receiveDTO.cusCode}</td>
-    <td>${receiveDTO.cusName}</td>
-    <td>${receiveDTO.productCode}</td>
-    <td>${receiveDTO.productName}</td>
-    <td>${receiveDTO.roCount}EA</td>
-    <td>${receiveDTO.roPrice}원</td>
+    <td onclick="openDetails('$customerDTO.cusCode')">${customerDTO.cusCode}</td>
+    <td>${customerDTO.cusCategory}</td>
+    <td>${customerDTO.cusName}</td>
+    <td>${customerDTO.cusTel}</td>
+    <td>${customerDTO.cusAddress}</td>
+    <td>${customerDTO.cusResp}</td>
+    <td>${customerDTO.cusEmail}</td>
     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td>
     <td>${receiveDTO.shipSdate}</td>
     <td><c:choose>
@@ -104,14 +113,14 @@
             </c:otherwise>
         </c:choose></td><!-- 납품일 null 대신 '-' -->
     <td>${receiveDTO.roStatus}</td>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td>
+<%--     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td> --%>
 </tr>
 </c:forEach>    
 </table>
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="수주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
@@ -129,6 +138,13 @@
 </div><!-- main -->
 
 <!-- contents end -->
+
+
+
+
+
+
+
 
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -157,21 +173,9 @@ $(document).ready(function() {
         openPopup(url);
     });
 });
-//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
-$(function() {
-    $("#roDate1").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#roDate2").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#shipSdate1").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#shipSdate2").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-});
+
+
+
 
 // 체크박스(삭제용) 전체선택
 var selectAllCheckbox = document.getElementById("delete-list-all");
@@ -209,9 +213,9 @@ function openDetails(roCode) {
 }
 //수주등록 새창
 function openInsert() {
-    var url = '${pageContext.request.contextPath}/receive/receiveInsert';
-    var windowWidth = 500;
-    var windowHeight = 675;
+    var url = '${pageContext.request.contextPath}/customer/cusInsert';
+    var windowWidth = 650;
+    var windowHeight = 900;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
