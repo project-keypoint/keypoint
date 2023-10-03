@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.itwillbs.mappers.customerMapper">
+
+
+
+	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
+		SELECT *
+		FROM customer
+		ORDER BY cusCode desc
+	</select>
+
+
+	<insert id="insertCustomer">
+		INSERT INTO customer (cusCode, cusName, cusCategory, cusType, cusNumber, cusRep,
+								cusTel, cusHome, cusAddress, cusResp, cusPhone, cusEmail,
+								cusFax, cusMemo, cusStatus, cusDate)
+		VALUES(CONCAT('CUS', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
+				#{cusName},#{cusCategory},#{cusType},#{cusNumber},#{cusRep},
+				#{cusTel}, #{cusHome}, #{cusAddress}, #{cusResp}, #{cusPhone}, #{cusEmail},
+				#{cusFax}, #{cusMemo}, #{cusStatus}, #{cusDate}
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
