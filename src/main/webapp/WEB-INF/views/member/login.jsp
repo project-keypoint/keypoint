@@ -25,21 +25,21 @@
 </head>
 
 <body class="bg-gradient-primary" style=" background: url(${pageContext.request.contextPath}/resources/img/pxfuel.jpg); 
-										background-repeat: no-repeat; background-size: 100%">
+										background-repeat: no-repeat; background-size: 100vw 100vh;">
 
-    <div class="container">
+    <div class="container" style="padding-top: 10.5vh;">
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5" style="position:absolute; width:30rem; height:51.5rem; left:45rem; ">
+                <div class="card o-hidden border-0 shadow-lg my-5" >
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6" style="margin-left: 3rem; margin-top: 13rem;">
-                                <div class="p-5" style="width: 24.5rem;">
+                        <div class="row" style="  justify-content: space-around;">
+                            <div class="col-lg-6" >
+                                <div class="p-5" >
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">KEYPOINT</h1>
                                     </div>

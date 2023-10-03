@@ -25,8 +25,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="업체검색" readonly>
-<input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" placeholder="라인검색" readonly>
+<input type="text" id="lineName" class="form-control search-input inputname" placeholder="라인명" readonly>
 </div>
 <div class="form-group-receive">
 <p>라인명</p>
@@ -71,8 +71,8 @@ function openPopup(url) {
 }
 $(document).ready(function() {
     // 업체명 검색 팝업 열기
-    $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+    $("#lineCode, #lineName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
         openPopup(url);
     });
     // 상품명 검색 팝업 열기
