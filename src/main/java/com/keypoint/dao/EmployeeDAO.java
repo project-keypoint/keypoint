@@ -17,6 +17,7 @@ public class EmployeeDAO {
 	
 	private static final String namespace="com.itwillbs.mappers.employeeMapper";
 	
+	
 	// 사원목록
 	public List<EmployeeDTO> getEmployeeList() {
 		System.out.println("EmployeeDAO getEmployeeList()");
@@ -25,23 +26,32 @@ public class EmployeeDAO {
 	
 	
 	
-	
-	public void insertMember(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeDAO insertMember()");
-		sqlSession.insert(namespace+".insertMember", employeeDTO);
-	}// insertMember
+	// 사원등록
+	public void insertEmployee(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO insertEmployee()");
+		
+		sqlSession.insert(namespace+".insertEmployee", employeeDTO);
+	}// insertEmployee
 
-	public void deleteMember(String empId) {
-		System.out.println("EmployeeDAO deleteMember()");
-		sqlSession.update(namespace+".deleteMember", empId);
-	}//deleteMember
+
 	
-	public void updateMember(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeDAO updateMember()");
-		sqlSession.update(namespace+".updateMember", employeeDTO);
-	}//updateMember
+//	// 사원수정
+//	public void updateEmployee(EmployeeDTO employeeDTO) {
+//		System.out.println("EmployeeDAO updateEmployee()");
+//		
+//		sqlSession.update(namespace+".updateEmployee", employeeDTO);
+//	}// updateEmployee
 	
 
+	
+//	public void deleteMember(String empId) {
+//	System.out.println("EmployeeDAO deleteMember()");
+//	sqlSession.update(namespace+".deleteMember", empId);
+//}//deleteMember
+	
+	
+	
+	
 	
 } // 클래스
 

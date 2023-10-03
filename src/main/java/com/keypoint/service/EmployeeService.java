@@ -15,6 +15,7 @@ public class EmployeeService {
 	@Inject
 	private EmployeeDAO employeeDAO;
 	
+	
 	// 사원목록
 	public List<EmployeeDTO> getEmployeeList() {
 		System.out.println("EmployeeService getEmployeeList");
@@ -23,24 +24,29 @@ public class EmployeeService {
 	} // getEmployeeList
 	
 	
-	
-	public void insertMember(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeService insertMember()");
-		employeeDAO.insertMember(employeeDTO);
-	}// insert
-	
-	public void deleteMember(String empId) {
-		System.out.println("EmployeeService deleteMember()");
-		employeeDAO.deleteMember(empId);
-	}// delete
-
-	public void updateMember(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeService updateMember()");
-		employeeDAO.updateMember(employeeDTO);
-	}//update
+	// 사원등록
+	public void insertEmployee(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService insertEmployee()");
+		
+		employeeDAO.insertEmployee(employeeDTO);
+	}// insertEmployee
 	
 
+//	// 사원수정
+//	public void updateEmployee(EmployeeDTO employeeDTO) {
+//		System.out.println("EmployeeService updateEmployee()");
+//		
+//		employeeDAO.updateEmployee(employeeDTO);
+//	}// updateEmployee
 	
+	
+	
+	
+// 사원삭제(보류)
+//	public void deleteMember(String empId) {
+//	System.out.println("EmployeeService deleteMember()");
+//	employeeDAO.deleteMember(empId);
+//}// delete	
 	
 	
 } // 클래스
