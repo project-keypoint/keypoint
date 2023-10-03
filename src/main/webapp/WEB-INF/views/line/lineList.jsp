@@ -86,7 +86,7 @@
     <td>${WorkOrderDTO.woCode}</td>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
-    <td><button>대기중</button></td>
+    <td><button id = "status">대기중</button></td>
    
 <%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
 <%--     <td>${receiveDTO.shipSdate}</td> --%>
@@ -124,5 +124,20 @@
 </div><!-- main -->
 
 		<!-- contents end -->
+
+<script type="text/javascript">
+
+$(function() {
+	  $('#status').click( function() {
+	    if( $(this).html() == '대기중' ) {
+	      $(this).html('작업중');
+	    }
+	    else {
+	      $(this).html('대기중');
+	    }
+	  });
+	});
+</script>
 </body>
+
 </html>
