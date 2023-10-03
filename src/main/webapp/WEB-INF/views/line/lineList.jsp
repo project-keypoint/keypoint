@@ -83,7 +83,7 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${LineDTO.lineCode}</td>
     <td>${LineDTO.lineName}</td>
-    <td>${LineDTO.workOrderDTO.woCode}</td>
+    <td>${LineDTO.woCode}</td>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
     <td><button class = "status">대기중</button></td>

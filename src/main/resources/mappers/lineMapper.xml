@@ -6,10 +6,10 @@
 
 
 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO">
-		SELECT line.*, workOrder.woCode
-		FROM line
-		LEFT JOIN workOrder ON line.lineCode = workOrder.lineCode
-		ORDER BY line.lineCode DESC;
+	SELECT l.*, w.woCode 
+	from line l
+    join workOrder w ON l.lineCode = w.lineCode
+    ORDER BY l.lineCode DESC;
 	</select>
 
 

@@ -22,8 +22,7 @@ public class LineController {
 	@GetMapping("/lineList")
 	public String linelist(Model model) {
 		System.out.println("LineController line/lineList");
-		List<LineDTO> lineList = lineService.getLineList();
-		
+		List<LineDTO> lineList = lineService.getLineList();	
 		model.addAttribute("lineList", lineList);
 		System.out.println("lineList");
 		return "line/lineList";
