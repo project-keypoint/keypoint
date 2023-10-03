@@ -129,10 +129,6 @@
                     <span>작업지시</span></a>
             </li> 
 		
-		<!-- Nav Item - Tables -->
-		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/tables">
-				<i class="fas fa-fw fa-table"></i> <span>Tables</span>
-		</a></li>
 		
 			<!-- Nav Item - Tables -->
 		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/login">
