@@ -1,0 +1,317 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'Noto';
+/*     src: url('${pageContext.request.contextPath}/resources/fonts/NotoSansKR-Regular.otf') format('opentype'); */
+    src: url('../fonts/NotoSansKR-Regular.otf') format('opentype');
+}
+@media screen and (max-width: 768px) { /* 화면너비 768px 이하일 때 */
+  .main {
+  position:relative;
+  margin-left: 6.5rem;
+  width: calc(100%-6.5rem);
+  height: 100%;
+  overflow: scroll; 
+  }
+}
+@media (min-width: 768px) { /* 화면너비 768px 이상일 때 */
+ .main {
+  position:relative;
+  margin-left: 14rem;
+  width: calc(100%-14rem);
+  overflow: scroll; 
+  }
+}
+.main {
+font-family: 'Noto', sans-serif !important;
+color: black;
+padding-left: 30px;
+overflow-y: hidden;
+/* height: 860px; */
+height: calc(100%-4.375rem);
+}
+.card {
+width: 1400px;
+margin-bottom: 24px;
+}
+.contents2 {
+width: 1300px;
+margin-left: 50px;
+margin-right: 50px;
+}
+.page-title {
+width: 100%;
+font-size: 26px;
+font-weight: bold;
+margin-left: 30px;
+margin-top: 30px;
+margin-bottom: 30px;
+}
+.search-bar {
+width: 100%;
+padding: 15px 25px 15px 25px;
+border-radius: 3px;
+display: flex;
+/* justify-content: flex-start; */
+/* align-items: center; */
+background: #E5E5E5;
+align-items: baseline;
+justify-content: space-between;
+}
+.search-date, .search-select {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-right: 100px;
+margin: 5px 20px 5px 0;
+}
+.search-select p{
+width: 50px;
+justify-content: center;
+align-items: center;
+margin-bottom: 0;
+}
+.search-date p{
+width: 90px;
+justify-content: center;
+align-items: center;
+margin-bottom: 0;
+/* margin-left: 30px; */
+}
+.search-b {
+display: flex;
+flex-direction: row;
+}
+.search-input {
+margin-left: 5px;
+margin-right: 5px;
+width: 200px;
+}
+.table-list {
+width: 100%;
+text-align: center;
+}
+.table-list th {
+padding: 7px;
+border: 1px solid #ddd;
+background: #E5E5E5;
+}
+.table-list td {
+padding: 7px;
+border: 1px solid #ddd;
+background: #FFF;
+}
+.table-head {
+font-weight: bold;
+}
+.list-select {
+margin-left: 5px;
+margin-right: 10px;
+}
+input[type="checkbox"] {
+width: 16px;
+height: 16px;
+}
+.select-status {
+margin: 0 0 5px 10px;
+}
+.content-bottom {
+display: flex;
+justify-content: space-between;
+margin-top: 15px;
+}
+.page-buttons {
+/* margin-top: 15px; */
+margin-bottom: 50px;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+}
+.page-button {
+cursor: pointer;
+width: 28px;
+height: 28px;
+display: flex;
+justify-content: center;
+align-items: center;
+background: silver;
+color: black;
+background: white;
+border: 1px solid #D3D3D3;
+border-radius: 0;
+margin: 0 -1px;
+}
+.page-button:hover {
+color: black;
+background: #D3D3D3;
+text-decoration: none;
+}
+.page-button-active {
+background: #D3D3D3;
+}
+.mybutton1 {
+    line-height: 0;
+    height: 32px;
+}
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 상세내용 */
+.page-title-popup {
+width: 100%;
+font-size: 26px;
+font-weight: bold;
+margin-top: 30px;
+margin-bottom: 30px;
+}
+.main-details {
+width: 100%;
+font-family: 'Noto', sans-serif !important;
+color: black;
+display: flex;
+flex-direction: column;
+align-items: center;
+/* margin: 0 0 0 10px; */
+}
+.search-bar-popup {
+width: 100%;
+padding: 15px 20px 0 0;
+border-radius: 3px;
+/* display: flex; */
+/* justify-content: flex-start; */
+/* align-items: center; */
+background: #E5E5E5;
+/* align-items: baseline; */
+/* justify-content: space-between; */
+margin-bottom: 20px;
+margin-top: 5px;
+}
+.forms-group-receive {
+text-align: center;
+}
+.form-group-receive {
+display: flex;
+justify-content: flex-start;
+}
+.form-group-receive p {
+width: 75px;
+height: 30px;
+text-align: right;
+margin-right: 10px;
+}
+.form-group-receive input {
+width: 175px;
+height: 30px;	
+}
+input[placeholder="업체코드"], input[placeholder="상품코드"], input[placeholder="사원명"],
+input[placeholder="업체검색"], input[placeholder="상품검색"] {
+width: 110px;
+}
+input[placeholder="업체명"], input[placeholder="상품명"] {
+width: 190px;
+}
+input[placeholder="수주번호"]{
+width: 310px;
+}
+#cusCode.search-input, #productCode.search-input {
+    width: 110px;
+}
+#empId.search-input, #qcEmpId.search-input,
+#prodEmpId.search-input, #roEmpId.search-input {
+    width: 150px;
+}
+#empName.search-input, #qcEmpName.search-input,
+#prodEmpName.search-input, #roEmpName.search-input {
+    width: 150px;
+}
+#cusName.search-input, #productName.search-input {
+    width: 190px;
+}
+#roCode.search-input {
+	width: 310px;
+}
+.form-group-receive select {
+width: 175px;
+height: 30px;	
+}
+.details-buttons {
+display: flex;
+justify-content: center;
+margin-top: 15px;
+margin-bottom: 30px;
+}
+.details-buttons input{
+margin-left: 5px;
+margin-right: 5px;
+}
+/**/
+.status{
+
+}
+/* 품질검사 새창 */
+.main-details-qc {
+display: flex;
+justify-content: center;
+}
+.qcdetail-left {
+	margin-right: 30px;
+}
+.search-bar-popup-qc {
+width: 100%;
+padding: 15px 20px 0 0;
+border-radius: 3px;
+/* display: flex; */
+/* justify-content: flex-start; */
+/* align-items: center; */
+background: #E5E5E5;
+/* align-items: baseline; */
+/* justify-content: space-between; */
+margin-bottom: 20px;
+margin-top: 5px;
+}
+.forms-group-qc-receive {
+text-align: center;
+}
+.form-group-qc-receive {
+display: flex;
+justify-content: flex-start;
+}
+.form-group-qc-receive p {
+width: 105px;
+height: 30px;
+text-align: right;
+margin-right: 10px;
+}
+.form-group-qc-receive input {
+/* width: 175px; */
+width: 200px;
+height: 30px;	
+}
+#qcCode.search-input,#woCode.search-input, #prodCode.search-input  {
+	width: 315px;
+}
+.form-group-qc-receive select {
+width: 85px;
+height: 28px;	
+}
+.qc-status.status {
+margin: 0 auto; /* select 요소를 수평 가운데 정렬합니다. */
+display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭니다. */
+}
+#qcPass.search-input, #qcDefect.search-input,
+#qcCount.search-input {
+width: 80px;
+height: 28px;
+}
+#qcDefectRate.search-input, #qcStatus.search-input,
+#qcTest1.search-input, #qcTest2.search-input, #qcTest3.search-input   {
+width: 85px;
+height: 28px;
+}
+.input-center {
+margin: 0 auto; /* 입력 칸을 수평으로 가운데 정렬합니다. */
+display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭니다. */
+text-align: center;
+}
+.hide {
+background: transparent; /* 배경을 투명으로 설정 */
+border: none; /* 테두리를 없애기 */
+text-align: center;
+color: black;
+}

@@ -22,7 +22,7 @@
 	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
 	rel="stylesheet">
 <link
-	href="${pageContext.request.contextPath}/resources/css/receive.css"
+	href="${pageContext.request.contextPath}/resources/css/line.css"
 	rel="stylesheet">
 </head>
 </head>
@@ -83,10 +83,10 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${LineDTO.lineCode}</td>
     <td>${LineDTO.lineName}</td>
-    <td>${WorkOrderDTO.woCode}</td>
+    <td>${LineDTO.workOrderDTO.woCode}</td>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
-    <td><button id = "status">대기중</button></td>
+    <td><button class = "status">대기중</button></td>
    
 <%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
 <%--     <td>${receiveDTO.shipSdate}</td> --%>
@@ -127,16 +127,15 @@
 
 <script type="text/javascript">
 
-$(function() {
-	  $('#status').click( function() {
-	    if( $(this).html() == '대기중' ) {
-	      $(this).html('작업중');
-	    }
-	    else {
-	      $(this).html('대기중');
-	    }
-	  });
-	});
+$(document).ready(function() {
+    $('.status').click(function() {
+        if ($(this).text() === '대기중') {
+            $(this).text('작업중');
+        } else {
+            $(this).text('대기중');
+        }
+    });
+});
 </script>
 </body>
 

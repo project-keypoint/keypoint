@@ -14,6 +14,7 @@ import com.keypoint.dto.LineDTO;
 public class LineService {
 	
 	@Inject LineDAO lineDAO;
+	
 
 	public List<LineDTO> getLineList() {
 		System.out.println("LineService getLineList()");

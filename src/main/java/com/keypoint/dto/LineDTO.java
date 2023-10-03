@@ -7,6 +7,8 @@ public class LineDTO {
 	private String lineName;
 	private String lineMemo;
 	private String lineEmp;
+	private String woCode;
+	
 	
 	private WorkOrderDTO workOrderDTO ;
 	

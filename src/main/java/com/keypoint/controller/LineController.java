@@ -23,6 +23,7 @@ public class LineController {
 	public String linelist(Model model) {
 		System.out.println("LineController line/lineList");
 		List<LineDTO> lineList = lineService.getLineList();
+		
 		model.addAttribute("lineList", lineList);
 		System.out.println("lineList");
 		return "line/lineList";
