@@ -19,7 +19,7 @@
 <body>
 
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/purchase/purchaseUpdatePro" id="purchaseInsert" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/purchase/purchaseUpdatePro" id="purchaseInsert" method="post" >
 
 <div class="forms-group-receive">
 <div class="page-title-popup">발주수정</div>
@@ -57,7 +57,7 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>당담자</p>
-<input type="text" id="empId" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색" value="${purchaseDTO.poOwner}(변경가능)" readonly>
+<input type="text" id="empId" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색" value="${purchaseDTO.poOwner}" readonly>
 <input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="담당자명" readonly hidden >
 </div>
 
@@ -70,7 +70,7 @@
 <div class="form-group-receive">
 <p>거래처</p>
 <input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="거래처검색" hidden readonly>
-<input type="text" id="cusName" name="cusName" class="form-control search-input inputname" placeholder="거래처명" value="${purchaseDTO.cusName}(변경가능)" readonly >
+<input type="text" id="cusName" name="cusName" class="form-control search-input inputname" placeholder="거래처명" value="${purchaseDTO.cusName}" readonly >
 </div>
 </div>
 <!-- <div class="form-group-receive"> -->
@@ -133,7 +133,7 @@ $(document).ready(function() {
     });
     // 상품명 검색 팝업 열기
     $("#materialCode, #materialName, #materialPrice").click(function() {
-        var url = '${pageContext.request.contextPath}/material/materialList';
+        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList';
         openPopup(url);
     });
  	// 사원 검색 팝업 열기
@@ -200,31 +200,6 @@ $(function() {
 });
 </script>
 <!-- // 발주날짜(현재날짜) 이후로 납기일자 선택하게끔 설정 -->
-
-<!-- 필수입력항목 메시지 -->
-<script>
-function validateForm() {
-    // 각 입력 필드 값
-    var poCode = document.getElementById("poCode").value;
-    var materialCode = document.getElementById("materialCode").value;
-    var materialName = document.getElementById("materialName").value;
-    var poCount = document.getElementById("poCount").value;
-    var poPrice = document.getElementById("poPrice").value;
-    var poOwner = document.getElementById("poOwner").value;
-    var cusName = document.getElementById("cusName").value;
-    var poDate = document.getElementById("poDate").value;
-    var payDate = document.getElementById("payDate").value;
-    var poStatus = document.getElementById("poStatus").value;
-    // 빈 필드 검사
-    if (poCode === "" || materialCode === "" || materialName === "" ||
-   		poCount === "" || poPrice === "" || poOwner === "" || cusName === "" || poDate === "" || payDate === "" || poStatus === "") {
-        alert("모든 내용을 입력해주세요.");
-        return false; // 제출 방지
-    }
-    return true;
-}
-</script>
-<!-- // 필수입력항목 메시지 -->
 
 
 

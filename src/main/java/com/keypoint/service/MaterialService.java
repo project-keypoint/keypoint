@@ -1,6 +1,7 @@
 package com.keypoint.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -36,6 +37,39 @@ public class MaterialService {
 	}
 
 
+	//-----------------------------------------홍렬 자재리스트팝업--------------------------------------------
+	
+	public List<MaterialDTO> getPurchaseMaterialList(Map<String, Object> search) {
+		System.out.println("materialService getPurchaseMaterialList()");
+		
+		
+		return materialDAO.getPurchaseMaterialList(search);
+	} // getPurchaseMaterialList
+
+
+	public Integer countPurchaseList(Map<String, Object> search) { // 품목 개수
+		System.out.println("materialService countPurchaseList()");
+		
+		
+		return materialDAO.countPurchaseList(search);
+	} // countPurchaseList
+	
+	// --------------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 }

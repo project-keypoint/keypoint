@@ -32,13 +32,13 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>자재코드</p>
-<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="자재검색" >
-<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명" >
+<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="자재검색" readonly>
+<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명" readonly>
 </div>
 
 <div class="form-group-receive">
 <p>자재단가</p>
-<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가" >
+<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가" readonly>
 </div>
 </div>
 
@@ -129,7 +129,7 @@ $(document).ready(function() {
     });
     // 상품명 검색 팝업 열기
     $("#materialCode, #materialName, #materialPrice").click(function() {
-        var url = '${pageContext.request.contextPath}/material/materialList';
+        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList';
         openPopup(url);
     });
  	// 사원 검색 팝업 열기

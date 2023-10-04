@@ -27,6 +27,46 @@
 	</update>
 
 
+
+	<select id="getPurchaseMaterialList" resultType="com.keypoint.dto.MaterialDTO">
+	   select materialCode, materialName, materialPrice
+	   from material
+	   where 
+	   materialCode like CONCAT('%', #{materialCode}, '%') and 
+	   materialName like CONCAT('%', #{materialName}, '%') and
+	   materialPrice like CONCAT('%', #{materialPrice}, '%') 
+	   order by materialCode desc 
+	   limit #{startRow}, #{pageSize}  
+	</select>
+	  
+	<select id="countPurchaseList" resultType="java.lang.Integer">
+	   select count(*)
+	   from material
+	   <if test="materialCode!=null and materialName!=null and materialPrice!=null">
+	   where 
+	   materialCode like CONCAT('%', #{materialCode}, '%') and
+	   materialName like CONCAT('%', #{materialName}, '%') and
+	   materialPrice like CONCAT('%', #{materialPrice}, '%') 
+	   </if>   
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
 
 

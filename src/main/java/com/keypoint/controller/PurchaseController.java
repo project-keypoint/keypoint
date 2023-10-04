@@ -1,7 +1,9 @@
 package com.keypoint.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
+import com.keypoint.dto.WorkOrderDTO;
+import com.keypoint.service.MaterialService;
 import com.keypoint.service.PurchaseService;
 
 
@@ -158,6 +164,7 @@ public class PurchaseController {
 	}// purchaseDelete [발주삭제]
 	
 	//------------------------------------------------------------------------------------------
+	
 	
 	@GetMapping("/test2")
 	public String test2() {
