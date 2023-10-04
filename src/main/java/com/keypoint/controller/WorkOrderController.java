@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import com.keypoint.dto.LineDTO;
@@ -62,8 +63,13 @@ public class WorkOrderController {
 		}
 	}// workOrderInsertPro [작업지시등록Pro]
 	
-	
-	
+	@GetMapping("/workOrderDetails")
+	public String workOrderDetails(Model model, @RequestParam("woCode") String woCode) {
+		System.out.println("WorkOrderController workOrder/workOrderDetails");
+		WorkOrderDTO workOrderDTO = workOrderService.getWorkOrderDetails(woCode);
+		model.addAttribute("workOrderDTO", workOrderDTO);
+		return "workOrder/workOrderDetails";
+	}// workOrderDetails [작업지시상세]
 	
 	
 	@RequestMapping(value = "/workProdList", method = RequestMethod.GET)

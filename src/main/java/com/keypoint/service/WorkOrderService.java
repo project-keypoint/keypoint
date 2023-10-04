@@ -24,6 +24,11 @@ public class WorkOrderService {
 		return workOrderDAO.getWorkOrderList();
 	}
 		
+	public WorkOrderDTO getWorkOrderDetails(String woCode) {
+		System.out.println("ReceiveService getReceiveDetails()");
+		return workOrderDAO.getWorkOrderDetails(woCode);
+	}// getReceiveDetails [작업지시상세]
+	
 	
 	public void workOrderInsertPro(WorkOrderDTO workOrderDTO) {
 		System.out.println("workOrderService workOrderInsertPro()");
