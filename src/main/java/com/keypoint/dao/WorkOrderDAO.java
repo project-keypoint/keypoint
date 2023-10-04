@@ -89,7 +89,7 @@ public class WorkOrderDAO {
 		if(search.get("roCode")==null) {
 			search.put("roCode", "");
 		}
-		return sqlSession.selectList(namespace+".getWorkRoCodeList", search);
+		return sqlSession.selectList(namespace+".workRoCodeList", search);
 	
 	}
 

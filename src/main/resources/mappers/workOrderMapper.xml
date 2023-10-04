@@ -20,7 +20,7 @@
 	<select id="getWorkOrderList" resultType="com.keypoint.dto.WorkOrderDTO">
 		select a.woCode, a.cusCode, b.cusName, a.productCode, c.productName,
 	   		   a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
-	   		   a.empId, e.empName  as woEmpName
+	   		   a.empId, e.empName
 		from workOrder a
 		left join customer b on a.cusCode = b.cusCode
 		left join product c on a.productCode = c.productCode
@@ -80,7 +80,7 @@
    limit #{startRow}, #{pageSize}  
    </select>
   
-  <select id="countInstructList" resultType="java.lang.Integer">
+  <select id="countWorkRoCodeList" resultType="java.lang.Integer">
    select count(*)
    from receivedOrder
    <if test="roCode!=null">
