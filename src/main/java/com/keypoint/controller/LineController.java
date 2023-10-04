@@ -22,7 +22,7 @@ public class LineController {
 	private LineService lineService;
 
 	@GetMapping("/lineList")
-	public String linelist(Model model) {
+	public String lineList(Model model) {
 		System.out.println("LineController line/lineList");
 		List<LineDTO> lineList = lineService.getLineList();
 		model.addAttribute("lineList", lineList);

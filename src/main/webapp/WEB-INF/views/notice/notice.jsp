@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라인관리</title>
+<title>공지사항</title>
 
 <!-- Custom fonts for this template-->
 <link
@@ -34,19 +34,14 @@
 	<!--  contents start -->
 	<div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">라인현황</div>
+<div class="page-title">공지사항</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>라인명</p> 
-<input type="text" id="lineCode" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
+<p>제목</p> 
+<input type="text" id="noticeSubject" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
 <input type="text" id="lineName" class="form-control search-input" placeholder="라인명(클릭)" readonly>
-</div>
-<div class="search-select">
-<p>작업명</p> 
-<input type="text" id="woCode" class="form-control search-input" placeholder="작업코드" style="width:110px;" readonly>
-<input type="text" id="woName" class="form-control search-input" placeholder="작업명(클릭)" readonly>
 </div>
 </div>
 
@@ -70,13 +65,11 @@
 <table class="table-list">
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>라인코드</th>
-    <th>라인명</th>
-    <th>작업코드</th>
-    <th>작업명</th>
+	<th>번호</th>
+    <th>제목</th>
+    <th>작성날짜</th>
+    <th>조회수</th>
     <th>담당자</th>
-    <th>작업상태</th>
-    <th>상세내역</th>
 </tr>
 <c:forEach var="LineDTO" items="${lineList}">
 <tr class="table-body">
@@ -86,7 +79,7 @@
     <td>${LineDTO.woCode}</td>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
-    <td><button class = "status">대기중</button></td>
+   
    
 <%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
 <%--     <td>${receiveDTO.shipSdate}</td> --%>
@@ -106,7 +99,7 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="라인등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="글쓰기" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
@@ -127,21 +120,10 @@
 
 <script type="text/javascript">
 
-//작업상태 변환 버튼
-$(document).ready(function() {
-    $('.status').click(function() {
-        if ($(this).text() === '대기중') {
-            $(this).text('작업중');
-        } else {
-            $(this).text('대기중');
-        }
-    });
-});
-
 
 //수주등록 새창
 function openInsert() {
-    var url = '${pageContext.request.contextPath}/line/lineInsert';
+    var url = '${pageContext.request.contextPath}/notice/noticeInsert';
     var windowWidth = 500;
     var windowHeight = 675;
     var windowLeft = (screen.width - windowWidth) / 2;

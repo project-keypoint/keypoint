@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라인관리</title>
+<title>공지사항 등록</title>
 
 <!-- Custom fonts for this template-->
 <link
@@ -34,7 +34,7 @@
 	<!--  contents start -->
 	<div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">라인현황</div>
+<div class="page-title">공지사항</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
@@ -106,7 +106,7 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="라인등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="글쓰기" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">

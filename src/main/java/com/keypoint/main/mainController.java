@@ -24,17 +24,6 @@ public class mainController {
 
 	// ------------------------------------------
 	
-	@GetMapping("/workOrder")
-	public String workOrder() {
-
-		// /workOrder.jsp
-		// WEB-INF/views/workOrder.jsp
-		return "workOrder/workOrderList";
-	}//
-
-	// ------------------------------------------
-
-
 
 	@GetMapping("/testpage")
 	public String testpage() {
@@ -51,7 +40,7 @@ public class mainController {
 
 		// /main.jsp
 		// WEB-INF/views/tables.jsp
-		return "notice";
+		return "/notice/notice";
 	}//
 
 	// -------------------------------------------------
