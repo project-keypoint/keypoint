@@ -28,4 +28,10 @@ public class LineService {
 		lineDAO.lineInsert(lineDTO);
 	}// 라인등록Pro
 
+
+	public LineDTO getlineDetails(String lineCode) {
+		System.out.println("LineService getLineDetails()");	
+		return lineDAO.getLineDetails(lineCode);
+	}
+
 }

@@ -24,7 +24,11 @@
 	
 	</insert>
 
-
+	<select id="getLineDetails" resultType="com.keypoint.dto.LineDTO">
+		select lineCode, lineName, lineMemo, lineEmp
+		from line 
+		where lineCode = #{lineCode}
+	</select>
 
 </mapper>
 

@@ -99,8 +99,8 @@
 <%--             </c:otherwise> --%>
 <%--         </c:choose></td><!-- 납품일 null 대신 '-' --> --%>
 <%--     <td>${receiveDTO.roStatus}</td> --%>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${lineDTO.lineCode}')"></td>
-</tr>
+    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${LineDTO.lineCode}')"></td>
+</tr> 
 </c:forEach>    
 </table>
 </div><!-- table -->
@@ -173,9 +173,9 @@ function openInsert() {
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
 
-//수주상세내용 새창
-function openDetails(roCode) {
-    var url = '${pageContext.request.contextPath}/receive/receiveDetails?roCode='+roCode;
+//라인상세내용 새창
+function openDetails(lineCode) {
+    var url = '${pageContext.request.contextPath}/line/lineDetails?lineCode='+lineCode;
     var windowWidth = 500;
     var windowHeight = 675;
     var windowLeft = (screen.width - windowWidth) / 2;
