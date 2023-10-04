@@ -127,6 +127,7 @@
 
 <script type="text/javascript">
 
+//작업상태 변환 버튼
 $(document).ready(function() {
     $('.status').click(function() {
         if ($(this).text() === '대기중') {
@@ -136,7 +137,7 @@ $(document).ready(function() {
         }
     });
 });
-// 작업상태 변환 버튼
+
 
 //수주등록 새창
 function openInsert() {
@@ -147,6 +148,41 @@ function openInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+
+//수주상세내용 새창
+function openDetails(roCode) {
+    var url = '${pageContext.request.contextPath}/receive/receiveDetails?roCode='+roCode;
+    var windowWidth = 500;
+    var windowHeight = 675;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+
+//체크박스(삭제용) 전체선택
+var selectAllCheckbox = document.getElementById("delete-list-all");
+var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
+selectAllCheckbox.addEventListener("change", function () {
+    checkboxes.forEach(function (checkbox) {
+        checkbox.checked = selectAllCheckbox.checked;
+    });
+});
+checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        if (!this.checked) {
+            selectAllCheckbox.checked = false;
+        } else {
+            // 모든 체크박스가 선택되었는지 확인
+            var allChecked = true;
+            checkboxes.forEach(function (c) {
+                if (!c.checked) {
+                    allChecked = false;
+                }
+            });
+            selectAllCheckbox.checked = allChecked;
+        }
+    });
+});
 
 </script>
 </body>
