@@ -205,7 +205,7 @@ height: 30px;
 #cusCode.search-input, #cusNumber.search-input, #cusName.search-input, #cusResp.search-input,
 #cusPhone.search-input, #cusEmail.search-input, #cusMemo.search-input, #cusHome.search-input,
 #cusRep.search-input,#cusTel.search-input, #cusType.search-input, #cusAddress.search-input,
-#cusStatus.search-input {
+#cusStatus.search-input, #cusFax.search-input {
 width: 280px;
 }
 

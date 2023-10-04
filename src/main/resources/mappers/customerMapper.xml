@@ -22,12 +22,16 @@
 		VALUES(CONCAT('CUS', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
 				#{cusName},#{cusCategory},#{cusType},#{cusNumber},#{cusRep},
 				#{cusTel}, #{cusHome}, #{cusAddress}, #{cusResp}, #{cusPhone}, #{cusEmail},
-				#{cusFax}, #{cusMemo}, #{cusStatus}, #{cusDate}
+				#{cusFax}, #{cusMemo}, #{cusStatus}, #{cusDate})
 	</insert>
 
 
 
-
+	<select id="getCustomerDetails" resultType="com.keypoint.dto.CustomerDTO">
+		select *
+		from customer
+		where cusCode = #{cusCode}
+	</select>
 
 
 
