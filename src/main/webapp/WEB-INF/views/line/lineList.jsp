@@ -72,7 +72,7 @@
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
 	<th>라인코드</th>
     <th>라인명</th>
-    <th>작업코드</th>
+<!--     <th>작업코드</th> -->
     <th>작업명</th>
     <th>담당자</th>
     <th>작업상태</th>
@@ -83,7 +83,7 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${LineDTO.lineCode}</td>
     <td>${LineDTO.lineName}</td>
-    <td>${LineDTO.woCode}</td>
+<%--     <td>${LineDTO.woCode}</td> --%>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
     <td><button class = "status">대기중</button></td>
@@ -130,8 +130,11 @@
 //작업상태 변환 버튼
 $(document).ready(function() {
     $('.status').click(function() {
-        if ($(this).text() === '대기중') {
+        var currentStatus = $(this).text();
+        if (currentStatus === '대기중') {
             $(this).text('작업중');
+        } else if (currentStatus === '작업중') {
+            $(this).text('완료');
         } else {
             $(this).text('대기중');
         }
@@ -160,7 +163,7 @@ $(document).ready(function() {
     });
 });
 
-//수주등록 새창
+//라인등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/line/lineInsert';
     var windowWidth = 500;
