@@ -40,7 +40,7 @@
 <div class="search-b">
 <div class="search-select">
 <p>제목</p> 
-<input type="text" id="noticeSubject" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
+<input type="text" id="noticeSubject" class="form-control search-input" placeholder="제목" style="width:110px;" readonly>
 <input type="text" id="lineName" class="form-control search-input" placeholder="라인명(클릭)" readonly>
 </div>
 </div>
