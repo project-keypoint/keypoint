@@ -21,10 +21,6 @@
 <form action="${pageContext.request.contextPath}/workOrder/workOrderInsertPro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">작업지시등록</div>
-<div class="form-group-receive">
-<p>지시번호</p>
-<input type="text" id="woCode" name="woCode" class="form-control search-input" placeholder="작업지시번호" >
-</div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
@@ -100,12 +96,12 @@ function openPopup(url) {
     popupWindow.focus();
 }
 $(document).ready(function() {
-    // 업체명 검색 팝업 열기
-    $("#woCode, #woCode").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workInstructList';
+    // 수주코드 검색 팝업 열기
+    $("#roCode, #roCode").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
         openPopup(url);
     });
-    // 상품명 검색 팝업 열기
+    // 업체명 검색 팝업 열기
     $("#cusCode, #cusCode").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
         openPopup(url);
@@ -115,7 +111,7 @@ $(document).ready(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
         openPopup(url);
     });
- // 상품명 검색 팝업 열기
+ // 라인명 검색 팝업 열기
     $("#lineCode, #lineCode").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workLineList';
         openPopup(url);
