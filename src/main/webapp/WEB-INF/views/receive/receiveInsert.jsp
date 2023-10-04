@@ -159,7 +159,7 @@ function validateForm() {
     var roCount = document.getElementById("roCount").value;
     var roDate = document.getElementById("roDate").value;
     var shipSdate = document.getElementById("shipSdate").value;
-    var roEmpId = document.getElementById("roEmpId").value;
+    var roEmpId = document.getElementById("empId").value;
     // 빈 필드 검사
     if (cusCode === "" || productCode === "" || roCount === "" ||
     	roDate === "" || shipSdate === "" || roEmpId === "") {
