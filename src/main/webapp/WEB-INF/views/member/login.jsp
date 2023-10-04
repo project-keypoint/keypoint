@@ -39,7 +39,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row" style="justify-content: space-around;">
                             <div class="col-lg-6" >
-                                <div class="p-5" style="background-color: white;">
+                                <div class="p-5" style="background-color: white; border-radius: 0.35rem;">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">KEYPOINT</h1>
                                     </div>
