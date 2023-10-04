@@ -18,30 +18,26 @@
 </head>
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/receive/receiveInsertPro" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/line/lineUpdatePro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
-<div class="page-title-popup">라인등록</div>
+<div class="page-title-popup">라인수정</div>
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" placeholder="라인검색" readonly>
-<input type="text" id="lineName" class="form-control search-input inputname" placeholder="라인명" readonly>
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" value="${lineDTO.lineCode }"  >
 </div>
 <div class="form-group-receive">
 <p>라인명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="상품검색" readonly>
-<input type="text" id="productName" class="form-control search-input inputname" placeholder="상품명" readonly>
+<input type="text" id="lineName" name="lineName" class="form-control search-input inputcode" value="${lineDTO.lineName }"  >
 </div>
 <div class="form-group-receive">
 <p>작업명</p>
-<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" placeholder="작업검색" readonly>
-<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="작업명" readonly>
+<input type="text" id="lineMemo" name="lineMemo" class="form-control search-input inputcode" value="${lineDTO.lineMemo }"  >
 </div>
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" placeholder="사원검색" readonly>
-<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="사원명" readonly>
+<input type="text" id="lineEmp" name="lineEmp" class="form-control search-input inputcode" value="${lineDTO.lineEmp }"  >
 </div>
 </div> 
 <!-- search-bar-popup end -->
@@ -69,23 +65,23 @@ function openPopup(url) {
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
-$(document).ready(function() {
-    // 라인명 검색 팝업 열기
-    $("#lineCode, #lineName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
-        openPopup(url);
-    });
-    // 상품명 검색 팝업 열기
-    $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-        openPopup(url);
-    });
- 	// 사원 검색 팝업 열기
-    $("#empId, #empName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-        openPopup(url);
-    });
-});
+// $(document).ready(function() {
+//     // 라인명 검색 팝업 열기
+//     $("#lineCode, #lineName").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workLineList';
+//         openPopup(url);
+//     });
+//     // 상품명 검색 팝업 열기
+//     $("#productCode, #productName").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+//         openPopup(url);
+//     });
+//  	// 사원 검색 팝업 열기
+//     $("#empId, #empName").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+//         openPopup(url);
+//     });
+// });
 // // 수주일자 클릭시 현재날짜로 변경
 // document.addEventListener('DOMContentLoaded', function () {
 //     var roDateInput = document.getElementById("roDate");
@@ -124,28 +120,26 @@ $(document).ready(function() {
 //     });
 // });
 
-// // 유효성 검사
-// function validateForm() {
-//     // 각 입력 필드 값
-//     var cusCode = document.getElementById("cusCode").value;
-//     var productCode = document.getElementById("productCode").value;
-//     var roCount = document.getElementById("roCount").value;
-//     var roDate = document.getElementById("roDate").value;
-//     var shipSdate = document.getElementById("shipSdate").value;
-//     var roEmpId = document.getElementById("roEmpId").value;
-//     // 빈 필드 검사
-//     if (cusCode === "" || productCode === "" || roCount === "" ||
-//     	roDate === "" || shipSdate === "" || roEmpId === "") {
-//         alert("모든 내용을 입력해주세요.");
-//         return false; // 제출 방지
-//     }
+// 유효성 검사
+function validateForm() {
+    // 각 입력 필드 값
+    var lineCode = document.getElementById("lineCode").value;
+    var lineName = document.getElementById("lineName").value;
+    var lineMemo = document.getElementById("lineMemo").value;
+    var lineEmp = document.getElementById("lineEmp").value;
+    // 빈 필드 검사
+    if (lineCode === "" || lineName === "" || lineMemo === "" ||
+    		lineEmp === "") {
+        alert("모든 내용을 입력해주세요.");
+        return false; // 제출 방지
+    }
 //     // 추가 유효성 검사
 //     if (roCount == 0) {
 //         alert("몇개부터 가능하도록 할까");
 //         return false; // 제출 방지
 //     }
 //     return true;
-// }
+}
 </script>
 </body>
 </html>

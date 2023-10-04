@@ -36,7 +36,14 @@ public class LineDAO {
 	public LineDTO getLineDetails(String lineCode) {
 		System.out.println("LineDAO getLineDetails()");
 		return sqlSession.selectOne(namespace+".getLineDetails", lineCode);
-	}// getLineDetails() [수주상세]
+	}// 라인상세
+
+
+	public void lineUpdate(LineDTO lineDTO) {
+		System.out.println("LineDAO lineUpdate()");
+		System.out.println(lineDTO);
+		sqlSession.update(namespace+".lineUpdate",lineDTO);
+	}// 라인수정
 
 
 

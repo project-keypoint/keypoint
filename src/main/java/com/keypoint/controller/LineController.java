@@ -60,10 +60,27 @@ public class LineController {
 		return "line/lineDetails";
 	}// receiveDetails [수주상세]
 	
+	@GetMapping("/lineUpdate")
+	public String lineUpdate(Model model, @RequestParam("lineCode") String lineCode) {
+		System.out.println("LineController line/lineUpdate");
+		LineDTO lineDTO = lineService.getlineDetails(lineCode);
+		model.addAttribute("lineDTO", lineDTO);
+		return "line/lineUpdate";
+	}// receiveUpdate [수주수정]
 	
 	
-	
-	
+	@PostMapping("/lineUpdatePro")
+	public String lineUpdatePro(LineDTO lineDTO) {
+		System.out.println("LIneController line/lineUpdatePro");
+		System.out.println(lineDTO);
+		lineService.lineUpdatePro(lineDTO);
+		
+		if(lineDTO != null) {
+			return "line/msgSuccess"; // 등록완료
+		}else {
+			return "line/msgFailed"; // 등록실패
+		}
+	}// receiveUpdatePro [수주수정Pro]
 	
 	
 	

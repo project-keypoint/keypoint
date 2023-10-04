@@ -29,6 +29,15 @@
 		from line 
 		where lineCode = #{lineCode}
 	</select>
+	
+	<update id="lineUpdate">
+		UPDATE line
+		SET lineCode = #{lineCode},  
+        	lineName = #{lineName},
+        	lineMemo = #{lineMemo},
+        	lineEmp = #{lineEmp} 	
+		WHERE lineCode = #{lineCode}
+	</update>
 
 </mapper>
 
