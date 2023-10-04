@@ -15,7 +15,7 @@
 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO">
 	SELECT *  
 	from line 
-    ORDER BY lineName DESC;
+    ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED);
 	</select>
 
 	<insert id="lineInsert" >
