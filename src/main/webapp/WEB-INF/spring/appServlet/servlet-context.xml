@@ -34,8 +34,9 @@
 	</beans:bean>
 	
 	<!-- 	파일 업로드 폴더 지정 -->
+	<!-- 	경로 바뀔때마다 value값 수정..?? -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value=""></beans:constructor-arg>
+		<beans:constructor-arg value="D:\\WEB\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
 	</beans:bean>
 	
 	
