@@ -28,6 +28,16 @@
 	<context:component-scan base-package="com.keypoint.service" />
 	<context:component-scan base-package="com.keypoint.dao" />	
 	
+	<!--  	파일업로드 객체생성, 업로드 파일 크기 지정 10M  -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	</beans:bean>
+	
+	<!-- 	파일 업로드 폴더 지정 -->
+	<!-- 	경로 바뀔때마다 value값 수정..?? -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="D:\\WEB\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
+	</beans:bean>
 	
 	
 </beans:beans>

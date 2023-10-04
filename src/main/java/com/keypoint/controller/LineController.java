@@ -22,7 +22,7 @@ public class LineController {
 	private LineService lineService;
 
 	@GetMapping("/lineList")
-	public String linelist(Model model) {
+	public String lineList(Model model) {
 		System.out.println("LineController line/lineList");
 		List<LineDTO> lineList = lineService.getLineList();
 		model.addAttribute("lineList", lineList);
@@ -40,12 +40,12 @@ public class LineController {
 	public String lineInsertPro(LineDTO lineDTO) {
 		System.out.println("LineController line/lineInsertPro");
 		System.out.println(lineDTO);
-		lineService.lineInsert(lineDTO);
+		lineService.lineInsertPro(lineDTO);
 
 		if (lineDTO != null) {
-			return "receive/msgSuccess"; // 등록완료
+			return "line/msgSuccess"; // 등록완료
 		} else {
-			return "receive/msgFailed"; // 등록실패
+			return "line/msgFailed"; // 등록실패
 		}
 	}// 라인등록Pro
 

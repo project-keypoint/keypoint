@@ -25,11 +25,11 @@ public class EmployeeController {
 	
 	// 사원목록
 	@GetMapping("/employeeList")
-	public String memberList(Model model) {
+	public String employeeList(Model model) {
 		System.out.println("EmployeeController employeelist()");
 		
-		List<EmployeeDTO> memberList = employeeService.getEmployeeList();
-		model.addAttribute("memberList", memberList);
+		List<EmployeeDTO> employeeList = employeeService.getEmployeeList();
+		model.addAttribute("employeeList", employeeList);
 		
 		return "employee/employeeList";		
 	} // employeeList

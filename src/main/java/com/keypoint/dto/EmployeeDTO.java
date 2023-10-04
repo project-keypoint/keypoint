@@ -9,7 +9,7 @@ public class EmployeeDTO {
 	private String empSalt;
 	private String empName;
 	private String empPhoto;
-	private String empBirth; // String ? Timestamp
+	private String empBirth; // String ? Timestamp (date)
 	private String empPhone; // 연락처
 	private String empTel; // 내선번호
 	private String empEmail;
@@ -18,10 +18,10 @@ public class EmployeeDTO {
 	private String departmentId;
 	private String departmentName; // ('영업','자재','생산','인사')
 	private String empPosition; // ('사원','대리','부장','이사','대표')
-	private String empHiredate; // 입사일
+	private String empHiredate; // 입사일 (date)
 	private int empRole; // 권한(1=관리자 / 2=사원 / 3=퇴사자(로그인x))
-	private String empLeavedate; // 휴직일
-	private String empRetiredate; // 퇴사일
+	private String empLeavedate; // 휴직일 (date)
+	private String empRetiredate; // 퇴사일 (date)
 	
 	@Override
 	public String toString() {

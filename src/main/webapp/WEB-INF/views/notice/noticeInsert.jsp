@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라인관리</title>
+<title>공지사항 등록</title>
 
 <!-- Custom fonts for this template-->
 <link
@@ -34,19 +34,19 @@
 	<!--  contents start -->
 	<div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">라인현황</div>
+<div class="page-title">공지사항</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>라인</p> 
+<p>라인명</p> 
 <input type="text" id="lineCode" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
-<input type="text" id="lineName" class="form-control search-input" placeholder="라인이름" readonly>
+<input type="text" id="lineName" class="form-control search-input" placeholder="라인명(클릭)" readonly>
 </div>
 <div class="search-select">
-<p>담당자</p> 
-<input type="text" id="empId" class="form-control search-input" placeholder="담당자코드" style="width:110px;" readonly>
-<input type="text" id="empName" class="form-control search-input" placeholder="담당자이름" readonly>
+<p>작업명</p> 
+<input type="text" id="woCode" class="form-control search-input" placeholder="작업코드" style="width:110px;" readonly>
+<input type="text" id="woName" class="form-control search-input" placeholder="작업명(클릭)" readonly>
 </div>
 </div>
 
@@ -72,7 +72,7 @@
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
 	<th>라인코드</th>
     <th>라인명</th>
-<!--     <th>작업코드</th> -->
+    <th>작업코드</th>
     <th>작업명</th>
     <th>담당자</th>
     <th>작업상태</th>
@@ -83,7 +83,7 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${LineDTO.lineCode}</td>
     <td>${LineDTO.lineName}</td>
-<%--     <td>${LineDTO.woCode}</td> --%>
+    <td>${LineDTO.woCode}</td>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
     <td><button class = "status">대기중</button></td>
@@ -106,7 +106,7 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="라인등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="글쓰기" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
@@ -130,40 +130,16 @@
 //작업상태 변환 버튼
 $(document).ready(function() {
     $('.status').click(function() {
-        var currentStatus = $(this).text();
-        if (currentStatus === '대기중') {
+        if ($(this).text() === '대기중') {
             $(this).text('작업중');
-        } else if (currentStatus === '작업중') {
-            $(this).text('완료');
         } else {
             $(this).text('대기중');
         }
     });
 });
 
-function openPopup(url) {
-    var width = 500;
-    var height = 500;
-    var left = (screen.width - width) / 2;
-    var top = (screen.height - height) / 2;
-    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-    popupWindow.focus();
-}
 
-$(document).ready(function() {
-    // 업체명 검색 팝업 열기
-    $("#lineCode, #lineName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
-        openPopup(url);
-    });
-    // 담당자 검색 팝업 열기
-    $("#empId, #empName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-        openPopup(url);
-    });
-});
-
-//라인등록 새창
+//수주등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/line/lineInsert';
     var windowWidth = 500;
