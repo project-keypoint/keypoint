@@ -45,6 +45,13 @@ public class ReceiveDAO {
 		System.out.println(receiveDTO);
 		sqlSession.update(namespace+".deleteReceive",receiveDTO);
 	}// deleteReceive() [수주삭제]
+
+// 테스트
+	
+	public List<ReceiveDTO> getReceiveListTest() {
+		System.out.println("ReceiveDAO getReceiveListTest()");
+		return sqlSession.selectList(namespace+".getReceiveListTest");
+	}// getReceiveListTest() [수주+출하목록(테스트)]
 	
 	
-}
+}// class

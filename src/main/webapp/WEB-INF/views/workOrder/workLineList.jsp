@@ -116,7 +116,7 @@ h2{
 
     <script type="text/javascript">
 
-        function selectWork(a,b){ // 부모창으로 값 넘기기
+        function selectWork(a){ // 부모창으로 값 넘기기
 		  
           opener.document.getElementById("lineCode").value = a
 //           opener.document.getElementById("lineCode").value = b

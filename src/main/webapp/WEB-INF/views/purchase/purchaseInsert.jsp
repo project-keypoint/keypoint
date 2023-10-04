@@ -257,14 +257,14 @@ function validateForm() {
     var materialName = document.getElementById("materialName").value;
     var poCount = document.getElementById("poCount").value;
     var poPrice = document.getElementById("poPrice").value;
-    var poOwner = document.getElementById("poOwner").value;
+    var empId = document.getElementById("empId").value;
     var cusName = document.getElementById("cusName").value;
     var poDate = document.getElementById("poDate").value;
     var payDate = document.getElementById("payDate").value;
     var poStatus = document.getElementById("poStatus").value;
     // 빈 필드 검사
     if (poCode === "" || materialCode === "" || materialName === "" ||
-   		poCount === "" || poPrice === "" || poOwner === "" || cusName === "" || poDate === "" || payDate === "" || poStatus === "") {
+   		poCount === "" || poPrice === "" || empId === "" || cusName === "" || poDate === "" || payDate === "" || poStatus === "") {
         alert("모든 내용을 입력해주세요.");
         return false; // 제출 방지
     }

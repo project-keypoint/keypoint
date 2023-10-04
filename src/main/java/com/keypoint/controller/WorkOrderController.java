@@ -36,6 +36,7 @@ public class WorkOrderController {
 		System.out.println("WorkOrderController workOrder/workOrderList");
 		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList();
 		List<LineDTO> lineList = lineService.getLineList();
+		System.out.println(workOrderList.get(0).getEmpName());
 		model.addAttribute("lineList", lineList);
 		model.addAttribute("workOrderList", workOrderList);
 		return "workOrder/workOrderList";
