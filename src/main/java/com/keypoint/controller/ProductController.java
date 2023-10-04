@@ -10,8 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.keypoint.dto.ProductDTO;
+import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.ProductService;
 
 @Controller
@@ -49,7 +52,11 @@ public class ProductController {
 		
 		productService.insertProduct(productDTO);
 		
-		return "product/close";
+		if(productDTO != null) {
+			return "require/msgSuccess"; // 등록완료
+		}else {
+			return "require/msgFailed"; // 등록실패
+		}
 	}// productInsertPro [완제품등록]
 	
 	@GetMapping("/productUpdate")
@@ -58,28 +65,15 @@ public class ProductController {
 	}// productUpdate [완제품수정]
 	
 	@GetMapping("/productDelete")
-	public String productDelete(HttpServletRequest request,Model model) {
+	public String productDelete(ProductDTO productDTO) {
 		System.out.println("ProductController productDelete()");
-		
-		String productCode = request.getParameter("productCode");
-		System.out.println(productCode);
-		ProductDTO productDTO = productService.getProduct(productCode);
 		System.out.println(productDTO);
-		model.addAttribute("productDTO", productDTO);
-		
-		return "product/productDelete";
-	}// productDelete [완제품삭제]
-	
-	@PostMapping("/productDeletePro")
-	public String productDeletePro(ProductDTO productDTO) {
-		System.out.println("ProductController productDeletePro()");
-		//회원가입 처리
-		System.out.println(productDTO);
-		
 		productService.deleteProduct(productDTO);
 		
-		return "product/close";
-	}// productDeletePro [완제품삭제]
+		return "product/productList";
+	}// productDelete [완제품삭제]
+	
+
 	
 
 	
@@ -88,26 +82,7 @@ public class ProductController {
 	
 	
 	
-	
-//	가상주소 http://localhost:8080/keypoint/product/requireList
-	@GetMapping("/requireList")
-	public String requireList() {
-		// WEB-INF/views/product/requireList.jsp
-		return "product/requireList";
-	}// requireList [소요량목록]
-	
-	@GetMapping("/requireInsert")
-	public String requireInsert() {
-		return "product/requireInsert";
-	}// requireInsert [소요량등록]	
-	
-	@GetMapping("/requireUpdate")
-	public String requireUpdate() {
-		return "product/requireUpdate";
-	}// requireUpdate [소요량수정]
-	
 
-	
 	
 	
 	

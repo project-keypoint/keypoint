@@ -18,21 +18,21 @@
 </head>
 <body>
 <div class="main-details">
-<form action="#">
+<form action="${pageContext.request.contextPath}/require/requireInsertPro" name="requireInsert" id="requireInsert" method="post">
 <div class="forms-group-receive">
 <div class="page-title-popup">소요량등록</div>
 <div class="form-group-receive">
-<p>완제품명</p>
-<input type="text" id="productName" class="form-control search-input" placeholder="완제품명">
+<p>완제품코드</p>
+<input type="text" name="productCode" id="productCode" class="form-control search-input" placeholder="완제품명">
 </div>
 <div class="form-group-receive">
-<p>자재명</p>
-<input type="text" id="materialName" class="form-control search-input" placeholder="자재명">
+<p>자재코드</p>
+<input type="text" name="materialCode" id="materialCode" class="form-control search-input" placeholder="자재명">
 </div>
 
 <div class="form-group-receive">
 <p>자재소요량</p>
-<input type="number" id="roCount" class="form-control search-input" placeholder="자재소요량" min="0">
+<input type="number" name="reqCount" id="reqCount" class="form-control search-input" placeholder="자재소요량" min="0">
 </div>
 <div class="form-group-receive">
 <p>단위</p>

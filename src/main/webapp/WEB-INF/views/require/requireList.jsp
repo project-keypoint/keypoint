@@ -63,43 +63,20 @@
     <th>관리</th>
 </tr>
 
+<c:forEach var="requireDTO" items="${requireList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td>
-    <td>키포인트넘버원</td>
-    <td>MAT0001</td>
-    <td>투명키캡</td>
-    <td>176</td>
-    <td>EA</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-	<!-- + openUpdate(가져갈값넣기) -->
+    <td>${requireDTO.productCode}</td>
+    <td>${requireDTO.productName}</td>
+    <td>${requireDTO.materialCode}</td>
+    <td>${requireDTO.materialName}원</td>
+    <td>${requireDTO.reqCount}</td>
+    <td>${requireDTO.materialUnit}</td>
+    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate()">
+    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
 </tr>
-    
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list2" name="delete-list" data-group="delete-list"></td>
-    <td>PRO0001</td><td>키포인트넘버원</td><td>MAT0001</td><td>투명키캡</td><td>176</td><td>EA</td>
-    <td><input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()"></td>
-</tr> <!-- DB연결 시 삭제될 tr -->
+</c:forEach> 
+
 </table>
 </div><!-- table -->
 <div class="content-bottom">
@@ -233,7 +210,7 @@ checkboxes.forEach(function (checkbox) {
 
 // 자재수정 새창
 function openUpdate() {
-    var url = '${pageContext.request.contextPath}/product/requireUpdate';
+    var url = '${pageContext.request.contextPath}/require/requireUpdate';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
@@ -242,12 +219,27 @@ function openUpdate() {
 }
 //자재등록 새창
 function openInsert() {
-    var url = '${pageContext.request.contextPath}/product/requireInsert';
+    var url = '${pageContext.request.contextPath}/require/requireInsert';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+//삭제 확인메세지
+function confirmDelete(productCode,materialCode) {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+    	var query = {"productCode" : productCode, "materialCode" : materialCode};
+    	$.ajax({
+        	url : "${pageContext.request.contextPath}/require/requireDelete",
+    		type : "get",
+    		data : query,
+    		dataType : "text",
+    		success : function(data){
+    			location.reload();
+    		}
+    	});
+    } 
 }
 </script>
 
