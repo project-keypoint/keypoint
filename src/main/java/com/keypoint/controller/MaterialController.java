@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.keypoint.dto.MaterialDTO;
+import com.keypoint.dto.MaterialDTO;
 import com.keypoint.service.MaterialService;
 
 @Controller
@@ -55,7 +56,14 @@ public class MaterialController {
 		return "material/materialUpdate";
 	}// materialUpdate [자재수정]
 	
-	
+	@GetMapping("/materialDelete")
+	public String materialDelete(MaterialDTO materialDTO) {
+		System.out.println("MaterialController materialDelete()");
+		System.out.println(materialDTO);
+		materialService.deleteMaterial(materialDTO);
+		
+		return "material/materialList";
+	}// materialDelete [자재삭제]
 	
 	
 	
