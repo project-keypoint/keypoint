@@ -81,9 +81,9 @@
 
 
 <c:forEach var="customerDTO" items="${cusList}">
-<tr class="table-body" onclick="openDetails('$customerDTO.cusCode')">
+<tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>${customerDTO.cusCode}</td>
+    <td onclick="openDetails('$customerDTO.cusCode')">${customerDTO.cusCode}</td>
     <td>${customerDTO.cusCategory}</td>
     <td>${customerDTO.cusName}</td>
     <td>${customerDTO.cusRep}</td>

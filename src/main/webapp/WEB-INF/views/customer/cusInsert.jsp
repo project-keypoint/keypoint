@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수주등록</title>
+<title>거래처등록</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -22,12 +22,12 @@
 <form action="${pageContext.request.contextPath}/customer/cusInsertPro" method="post" onsubmit="return validateForm()">
 
 <div class="forms-group-customer">
-<div class="page-title-popup">거래처 등록</div>
+<div class="page-title-popup">거래처등록</div>
 
 
 <div class="form-group-customer">
 <p>거래처코드</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input" placeholder="거래처코드" readonly>
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input" placeholder="거래처코드" readonly="readonly">
 </div>
 
 
@@ -41,7 +41,7 @@
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>사업자번호</p>
 <input type="text" id="cusNumber" class="form-control search-input" placeholder="-없이 10자리 입력하세요" >
-<input type="submit" id="dubSubmit" value="중복확인" class="btn btn-primary mybutton2">
+<input type="button" id="dubSubmit" value="중복확인" class="btn btn-primary mybutton2">
 </div>
 
 
@@ -65,7 +65,7 @@
 
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>업태</p>
-<select id="cusType1" name="cusType1" class="form-control search-input">
+<select id="cusBusiness" name="cusBusiness" class="form-control search-input">
         <option value="도매 및 소매업">도매 및 소매업</option>
         <option value="제조업">제조업</option>
 </select>
@@ -93,7 +93,18 @@
 
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>주소</p>
-<input type="text" id="cusAddress" name="cusAddress" class="form-control search-input">
+<input type="text" id="zonecode" name="zonecode" class="form-control search-input" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()"id="dubSubmit" value="우편번호" class="btn btn-primary mybutton2">
+</div>
+
+<div class="form-group-customer">
+<p></p>
+<input type="text" id="cusAddress" name="cusAddress" class="form-control search-input" placeholder="기본주소">
+</div>
+
+<div class="form-group-customer">
+<p></p>
+<input type="text" id="cusAddress_dtail" name="cusAddress_dtail" class="form-control search-input" placeholder="상세주소">
 </div>
 
 <div class="form-group-customer">
@@ -130,10 +141,10 @@
 
 
 
-<div class="form-group-customer">
+<div class="form-group-customer"  style="display: none;">
 <p><a style="color: red;">*</a>상태</p>
 <select id="cusStatus" name="cusStatus" class="form-control search-input">
-        <option value="거래중">거래중</option>
+        <option value="거래중" selected>거래중</option>
         <option value="거래중지">거래중지</option>
 </select>
 </div>
@@ -155,9 +166,42 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-/* //팝업 창을 열어주는 함수
+
+
+// 주소 넣기
+function sample6_execDaumPostcode() {
+	  new daum.Postcode({
+	    oncomplete: function(data) {
+	      var fullAddress = data.address; // 선택한 주소 변수에 저장
+	      var extraAddress = ''; // 조합형 주소 변수 초기화
+
+	      if (data.addressType === 'R') {
+	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+	          extraAddress += data.bname;
+	        }
+	        if (data.buildingName !== '' && data.apartment === 'Y') {
+	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
+	        }
+	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
+	      }
+
+	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
+	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
+	      document.getElementById('cusAddress').value = fullAddress; // 기본주소
+
+	      // 상세주소 입력란으로 포커스 이동
+	      document.getElementById('cusAddress_dtail').focus();
+	    }
+	  }).open();
+	}
+
+
+
+
+ //팝업 창을 열어주는 함수
 function openPopup(url) {
     var width = 500;
     var height = 500;
@@ -167,11 +211,11 @@ function openPopup(url) {
     popupWindow.focus();
 }
 $(document).ready(function() {
-    // 업체명 검색 팝업 열기
-    $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-        openPopup(url);
-    });
+//     // 업체명 검색 팝업 열기
+//     $("#cusCode, #cusName").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+//         openPopup(url);
+//     });
     // 상품명 검색 팝업 열기
     $("#productCode, #productName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
@@ -182,7 +226,7 @@ $(document).ready(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
         openPopup(url);
     });
-}); */
+}); 
 
 
 

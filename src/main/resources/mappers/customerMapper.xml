@@ -16,11 +16,11 @@
 
 
 	<insert id="insertCustomer">
-		INSERT INTO customer (cusCode, cusName, cusCategory, cusType, cusNumber, cusRep,
+		INSERT INTO customer (cusCode, cusName, cusCategory, cusBusiness, cusType, cusNumber, cusRep,
 								cusTel, cusHome, cusAddress, cusResp, cusPhone, cusEmail,
 								cusFax, cusMemo, cusStatus, cusDate)
 		VALUES(CONCAT('CUS', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
-				#{cusName},#{cusCategory},#{cusType},#{cusNumber},#{cusRep},
+				#{cusName},#{cusCategory},#{cusBusiness}, #{cusType},#{cusNumber},#{cusRep},
 				#{cusTel}, #{cusHome}, #{cusAddress}, #{cusResp}, #{cusPhone}, #{cusEmail},
 				#{cusFax}, #{cusMemo}, #{cusStatus}, #{cusDate})
 	</insert>

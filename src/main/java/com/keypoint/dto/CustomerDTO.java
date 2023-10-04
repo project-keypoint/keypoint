@@ -10,6 +10,7 @@ public class CustomerDTO {
 	private String cusCode;
 	private String cusName;
 	private String cusCategory;
+	private String cusBusiness;
 	private String cusType;
 	private String cusNumber;
 	private String cusRep;
@@ -27,14 +28,13 @@ public class CustomerDTO {
 	
 	
 	
-	
 	@Override
 	public String toString() {
 		return "CustomerDTO [cusCode=" + cusCode + ", cusName=" + cusName + ", cusCategory=" + cusCategory
-				+ ", cusType=" + cusType + ", cusNumber=" + cusNumber + ", cusRep=" + cusRep + ", cusTel=" + cusTel
-				+ ", cusHome=" + cusHome + ", cusAddress=" + cusAddress + ", cusResp=" + cusResp + ", cusPhone="
-				+ cusPhone + ", cusEmail=" + cusEmail + ", cusFax=" + cusFax + ", cusMemo=" + cusMemo + ", cusStatus="
-				+ cusStatus + ", cusDate=" + cusDate + "]";
+				+ ", cusBusiness=" + cusBusiness + ", cusType=" + cusType + ", cusNumber=" + cusNumber + ", cusRep="
+				+ cusRep + ", cusTel=" + cusTel + ", cusHome=" + cusHome + ", cusAddress=" + cusAddress + ", cusResp="
+				+ cusResp + ", cusPhone=" + cusPhone + ", cusEmail=" + cusEmail + ", cusFax=" + cusFax + ", cusMemo="
+				+ cusMemo + ", cusStatus=" + cusStatus + ", cusDate=" + cusDate + "]";
 	}
 	
 	
@@ -57,6 +57,12 @@ public class CustomerDTO {
 	}
 	public void setCusCategory(String cusCategory) {
 		this.cusCategory = cusCategory;
+	}
+	public String getCusBusiness() {
+		return cusBusiness;
+	}
+	public void setCusBusiness(String cusBusiness) {
+		this.cusBusiness = cusBusiness;
 	}
 	public String getCusType() {
 		return cusType;
@@ -139,7 +145,6 @@ public class CustomerDTO {
 	
 	
 	
-
 	
 	
 	
