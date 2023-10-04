@@ -19,7 +19,7 @@
 <body>
 
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/receipt/receiptUpdatePro" id="receiptInsert" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/receipt/receiptUpdatePro" id="receiptInsert" method="post" >
 
 <div class="forms-group-receive">
 <div class="page-title-popup">입고수정</div>
@@ -44,7 +44,7 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>당담자</p>
-<input type="text" id="empId" name="grOwner" class="form-control search-input inputcode" value="${receiptDTO.grOwner}(변경가능)" readonly>
+<input type="text" id="empId" name="grOwner" class="form-control search-input inputcode" value="${receiptDTO.grOwner}" readonly>
 <input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="담당자명" readonly hidden>
 </div>
 </div>

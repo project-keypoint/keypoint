@@ -2,15 +2,19 @@ package com.keypoint.service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.keypoint.dao.MaterialDAO;
 import com.keypoint.dao.PurchaseDAO;
+import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
 import com.keypoint.dto.ReceiveDTO;
+import com.keypoint.dto.WorkOrderDTO;
 
 @Service
 public class PurchaseService {
@@ -74,6 +78,23 @@ public class PurchaseService {
 		purchaseDAO.deletePurchase(purchaseDTO);
 	}// purchaseDelete() [발주삭제]
 
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

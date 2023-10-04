@@ -34,6 +34,11 @@ public class WorkOrderDAO {
 		sqlSession.insert(namespace+".insertWorkOrder", workOrderDTO);
 		
 	}
+	
+	public WorkOrderDTO getWorkOrderDetails(String woCode) {
+		System.out.println("WorkOrderDAO getWorkOrderDetails()");
+		return sqlSession.selectOne(namespace+".getWorkOrderDetails", woCode);
+	}
 
 
 	public List<WorkOrderDTO> getWorkProdList(Map<String,Object> search) { // 품목리스트 들고오기 (품번, 품명만..)

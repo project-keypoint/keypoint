@@ -267,8 +267,8 @@ checkboxes.forEach(function (checkbox) {
 });
 
 // 작업지시상세내용 새창
-function openDetails() {
-    var url = '${pageContext.request.contextPath}/receive/receiveDetails';
+function openDetails(woCode) {
+    var url = '${pageContext.request.contextPath}/workOrder/workOrderDetails?woCode=' + woCode;
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;

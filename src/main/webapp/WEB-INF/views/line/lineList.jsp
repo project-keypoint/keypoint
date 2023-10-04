@@ -167,7 +167,7 @@ $(document).ready(function() {
 function openInsert() {
     var url = '${pageContext.request.contextPath}/line/lineInsert';
     var windowWidth = 500;
-    var windowHeight = 675;
+    var windowHeight = 500;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
@@ -177,7 +177,7 @@ function openInsert() {
 function openDetails(lineCode) {
     var url = '${pageContext.request.contextPath}/line/lineDetails?lineCode='+lineCode;
     var windowWidth = 500;
-    var windowHeight = 675;
+    var windowHeight = 500;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

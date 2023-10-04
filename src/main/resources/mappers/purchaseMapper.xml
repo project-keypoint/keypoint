@@ -31,7 +31,7 @@
 		UPDATE purchaseOrder
 		SET poCount = #{poCount}, poPrice = #{poPrice}, 
         	poOwner = #{poOwner},
-        	cusName = #{cusName}, payDate = #{payDate}
+        	cusName = #{cusName}, payDate = #{payDate} , materialCode = #{materialCode}, materialName = #{materialName}, materialPrice = #{materialPrice}
 		WHERE poCode = #{poCode}
 	</update>
 	
