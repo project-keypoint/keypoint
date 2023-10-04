@@ -16,6 +16,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/employee.css" rel="stylesheet">
 
 </head>
+
 <body>
 <%@include file="../inc/top-bar.jsp" %>
 <%@include file="../inc/side-bar.jsp" %>
@@ -27,46 +28,32 @@
 <div class="page-title">사원목록(사원기본정보)</div>
 <div class="contents2">
 
-<!-- <div class="search-bar"> -->
-<!-- <div class="search-b"> -->
-<!-- <div class="search-select"> -->
-<!-- <p>업체명</p>  -->
-<!-- <input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly> -->
-<!-- <input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly> -->
-<!-- </div> -->
-<!-- <div class="search-select"> -->
-<!-- <p>상품명</p>  -->
-<!-- <input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly> -->
-<!-- <input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly> -->
-<!-- </div> -->
-<!-- </div> -->
+<div class="search-bar">
+<div class="search-b">
+<div class="search-select">
 
-<!-- <div class="search-b"> -->
-<!-- <div class="search-date"> -->
-<!-- <p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input" placeholder="수주일자" readonly> -->
-<!-- ~<input type="text" id="roDate2" class="form-control search-input" placeholder="수주일자" readonly> -->
-<!-- </div> -->
-<!-- <div class="search-date"> -->
-<!-- <p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly> -->
-<!-- ~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일" readonly> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="search-button"> -->
-<!-- <input type="button" value="검색" class="btn btn-primary mybutton1"> -->
-<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1"> -->
-<!-- </div> -->
-<!-- </div>search-bar -->
+
+<p>사원명</p> 
+<input type="text" id="empId" class="form-control search-input" placeholder="사원ID" style="width:110px;" readonly>
+<input type="text" id="empName" class="form-control search-input" placeholder="사원명(클릭)" readonly>
+</div><!-- search-select -->
+</div><!-- search-b -->
+
+<div class="search-b">
+<div class="search-select">
+<p>부서명</p> 
+<input type="text" id="departmentId" class="form-control search-input" placeholder="부서코드" style="width:110px;" readonly>
+<input type="text" id="departmentName" class="form-control search-input" placeholder="부서명(클릭)" readonly>
+</div>
+</div>
+
+<div class="search-button">
+<input type="button" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1">
+</div>
+</div><!-- search-bar -->
 
 <br>
-<!-- <div class="select-status"> -->
-<!-- <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a> -->
-<!-- <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a> -->
-<!-- <a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a> -->
-<!-- <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a> -->
-<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
-<!-- <div> -->
-<!-- </div> -->
-<!-- </div> -->
 
 <div>
 <table class="table-list">
@@ -83,7 +70,7 @@
 </tr>
 <c:forEach var="employeeDTO" items="${employeeList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+<!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${employeeDTO.empId}</td>
     <td>${employeeDTO.empName}</td>
     <td>${employeeDTO.departmentName}</td>
@@ -116,11 +103,56 @@
 </div><!-- main -->
 <!-- contents end -->
 
+
 <!-- 데이트피커 : 날짜선택요소(달력형식, 직접입력) -->
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script type="text/javascript">
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
+$(document).ready(function() {
+    // 사원명 검색 팝업 열기
+    $("#empId, #empName").click(function() {
+        var url = '${pageContext.request.contextPath}/employee/employeeList';
+        openPopup(url);
+    });
+    // 부서명 검색 팝업 열기
+    $("#departmentId, #departmentName").click(function() {
+        var url = '${pageContext.request.contextPath}/employee/employeeList';
+        openPopup(url);
+    });
+});
+
+// 사원상세내용 새창
+function openDetails(roCode) {
+    var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='+empId;
+    var windowWidth = 500;
+    var windowHeight = 675;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+// 사원등록 새창
+function openInsert() {
+    var url = '${pageContext.request.contextPath}/employee/employeeInsert';
+    var windowWidth = 650;
+    var windowHeight = 900;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+</script>
 
 
 </body>

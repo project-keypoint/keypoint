@@ -9,7 +9,7 @@ public class EmployeeDTO {
 	private String empSalt;
 	private String empName;
 	private String empPhoto;
-	private String empBirth; // String ? Timestamp
+	private String empBirth;
 	private String empPhone; // 연락처
 	private String empTel; // 내선번호
 	private String empEmail;
