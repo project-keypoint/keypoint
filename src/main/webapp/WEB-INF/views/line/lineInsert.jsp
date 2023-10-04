@@ -29,19 +29,9 @@
 <input type="text" id="lineName" class="form-control search-input inputname" placeholder="라인명" readonly>
 </div>
 <div class="form-group-receive">
-<p>라인명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="상품검색" readonly>
-<input type="text" id="productName" class="form-control search-input inputname" placeholder="상품명" readonly>
-</div>
-<div class="form-group-receive">
-<p>작업명</p>
-<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" placeholder="작업검색" readonly>
-<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="작업명" readonly>
-</div>
-<div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" placeholder="사원검색" readonly>
-<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="사원명" readonly>
+<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" placeholder="담당자검색" readonly>
+<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="이름" readonly>
 </div>
 </div> 
 <!-- search-bar-popup end -->
