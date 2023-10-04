@@ -27,17 +27,37 @@
 
 <div class="form-group-customer">
 <p>사원ID</p>
-<input type="text" id="empId" name="empId" class="form-control search-input" placeholder="사원ID">
+<input type="text" id="empId" name="empId" class="form-control search-input">
 </div>
 
 <div class="form-group-customer">
 <p>비밀번호</p>
-<input type="text" id="empPass" name="empPass" class="form-control search-input" placeholder="비밀번호">
+<input type="text" id="empPass" name="empPass" class="form-control search-input" >
 </div>
 
 <div class="form-group-customer">
 <p>이름</p>
-<input type="text" id="empName" name="empName" class="form-control search-input" placeholder="이름">
+<input type="text" id="empName" name="empName" class="form-control search-input">
+</div>
+
+<div class="form-group-customer">
+<p>주소</p>
+<input type="text" id="empAddress" name="empAddress" class="form-control search-input">
+</div>
+
+<div class="form-group-customer">
+<p>연락처</p>
+<input type="tel" id="empPhone" name="empPhone" class="form-control search-input">
+</div>
+
+<div class="form-group-customer">
+<p>내선번호</p>
+<input type="tel" id="empTel" name="empTel" class="form-control search-input">
+</div>
+
+<div class="form-group-customer">
+<p>이메일</p>
+<input type="text" id="empEmail" name="empEmail" class="form-control search-input">
 </div>
 
 <div class="form-group-customer">
@@ -59,26 +79,6 @@
         <option value="이사">이사</option>
         <option value="대표">대표</option>
 </select>
-</div>
-
-<div class="form-group-customer">
-<p>주소</p>
-<input type="text" id="empAddress" name="empAddress" class="form-control search-input">
-</div>
-
-<div class="form-group-customer">
-<p>연락처</p>
-<input type="tel" id="empPhone" name="empPhone" class="form-control search-input">
-</div>
-
-<div class="form-group-customer">
-<p>내선번호</p>
-<input type="tel" id="empTel" name="empTel" class="form-control search-input">
-</div>
-
-<div class="form-group-customer">
-<p>이메일</p>
-<input type="text" id="empEmail" name="empEmail" class="form-control search-input">
 </div>
 
 <div class="form-group-customer">

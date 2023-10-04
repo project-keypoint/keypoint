@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class EmployeeDTO {
 	
-	private int empId;
+	private int empId; // 사원ID
 	private String empPass;
 	private String empSalt;
 	private String empName;
@@ -14,10 +14,10 @@ public class EmployeeDTO {
 	private String empTel; // 내선번호
 	private String empEmail;
 	private String empAddress;
-	private String empStatus; // ('재직','휴직','퇴직')
-	private String departmentId;
-	private String departmentName; // ('영업','자재','생산','인사')
-	private String empPosition; // ('사원','대리','부장','이사','대표')
+	private String empStatus; // 재직여부('재직','휴직','퇴직')
+	private String departmentId; // 부서ID
+	private String departmentName; // 부서('영업','자재','생산','인사')
+	private String empPosition; // 직급('사원','대리','부장','이사','대표')
 	private String empHiredate; // 입사일
 	private int empRole; // 권한(1=관리자 / 2=사원 / 3=퇴사자(로그인x))
 	private String empLeavedate; // 휴직일

@@ -59,8 +59,27 @@ public class EmployeeController {
 		}
 	} // employeeInsertPro	
 	
-
-
+	
+	// 사원 상세정보 화면(연결되는지 테스트용)
+//	@GetMapping("/employeeDetails")
+//	public String employeeDetails() {
+//		System.out.println("EmployeeController employeeDetails()");
+//		
+//		return "employee/employeeDetails";  
+//	} 
+	
+	
+	// 사원-상세정보
+	@GetMapping("/employeeDetails")
+	public String employeeDetails(Model model, @RequestParam("empId") int empId) {
+		System.out.println("EmployeeController employeeDetails()");
+		
+		EmployeeDTO employeeDTO= employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		
+		return "employee/employeeDetails";
+	}// employeeDetails
+	
 	
 	// 내정보수정 , 모든 사원정보수정
 	// 사원정보수정화면
