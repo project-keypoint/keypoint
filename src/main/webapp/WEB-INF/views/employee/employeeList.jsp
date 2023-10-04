@@ -70,6 +70,7 @@
 </tr>
 <c:forEach var="employeeDTO" items="${employeeList}">
 <tr class="table-body">
+<!-- // 왜 푸시가 안되지? -->
 <!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${employeeDTO.empId}</td>
     <td>${employeeDTO.empName}</td>

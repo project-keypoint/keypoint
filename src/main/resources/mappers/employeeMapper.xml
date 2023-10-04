@@ -10,7 +10,7 @@
 		from employees
 	</select>
 
-
+<!-- // 왜 푸시가 안되지? -->
 <!-- 사원-상세정보 -->
 	<select id="getEmployeeDetails" resultType="com.keypoint.dto.EmployeeDTO">
 		select empId, empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail

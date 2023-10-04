@@ -32,7 +32,7 @@ public class EmployeeService {
 		employeeDAO.insertEmployee(employeeDTO);
 	}// insertEmployee
 
-	
+	// 왜 푸시가 안되지?
 	// 사원-상세정보
 	public EmployeeDTO getEmployeeDetails(int empId) {
 		System.out.println("EmployeeService getEmployeeDetails()");
