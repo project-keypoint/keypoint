@@ -105,13 +105,16 @@ h2{
 <tr>
 	<td>라인코드</td><td><input type="text" name="lineCode" style="width:100px;"></td>
 	<td><input type="submit" value="조회"></td></tr>
+	<td>라인이름</td><td><input type="text" name="lineName" style="width:100px;"></td>
+	<td><input type="submit" value="조회"></td></tr>
 </table>
 </form>
 <table>
-<tr><th>라인코드</th></tr>
+<tr><th>라인코드</th><th>라인이름</th></tr>
 <c:forEach var="workLineList" items="${workLineList}">
-<tr onclick="selectWork('${workLineList.lineCode }')"> <!-- ,'${itemList.itemId}' -->
+<tr onclick="selectWork('${workLineList.lineCode }','${workLineList.lineName }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${workLineList.lineCode}</td>
+	<td id="con">${workLineList.lineName}</td>
 	</tr>
 
     <script type="text/javascript">
@@ -119,8 +122,8 @@ h2{
         function selectWork(a,b){ // 부모창으로 값 넘기기
 		  
           opener.document.getElementById("lineCode").value = a
+          opener.document.getElementById("lineName").value = b
           window.close();
-
         }
 
    </script>

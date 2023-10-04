@@ -39,14 +39,14 @@
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>라인명</p> 
+<p>라인</p> 
 <input type="text" id="lineCode" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
-<input type="text" id="lineName" class="form-control search-input" placeholder="라인명(클릭)" readonly>
+<input type="text" id="lineName" class="form-control search-input" placeholder="라인이름" readonly>
 </div>
 <div class="search-select">
-<p>작업명</p> 
-<input type="text" id="woCode" class="form-control search-input" placeholder="작업코드" style="width:110px;" readonly>
-<input type="text" id="woName" class="form-control search-input" placeholder="작업명(클릭)" readonly>
+<p>담당자</p> 
+<input type="text" id="empId" class="form-control search-input" placeholder="담당자코드" style="width:110px;" readonly>
+<input type="text" id="empName" class="form-control search-input" placeholder="담당자이름" readonly>
 </div>
 </div>
 
@@ -138,6 +138,27 @@ $(document).ready(function() {
     });
 });
 
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
+
+$(document).ready(function() {
+    // 업체명 검색 팝업 열기
+    $("#lineCode, #lineName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
+        openPopup(url);
+    });
+    // 담당자 검색 팝업 열기
+    $("#empId, #empName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        openPopup(url);
+    });
+});
 
 //수주등록 새창
 function openInsert() {

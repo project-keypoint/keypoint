@@ -91,10 +91,11 @@
   
   
   <select id="workLineList" resultType="com.keypoint.dto.WorkOrderDTO">
-   select lineCode
-   from line
+   select lineCode, lineName
+   from line 
    where 
-   lineCode like CONCAT('%', #{lineCode}, '%') 
+   lineCode like CONCAT('%', #{lineCode}, '%') and
+   lineCode like CONCAT('%', #{lineName}, '%')
    limit #{startRow}, #{pageSize}  
    </select>
   
@@ -104,6 +105,7 @@
    <if test="lineCode!=null">
    where 
    lineCode like CONCAT('%', #{lineCode}, '%')
+   
    </if>   
    </select>
   

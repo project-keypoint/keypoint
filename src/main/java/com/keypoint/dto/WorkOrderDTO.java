@@ -8,6 +8,7 @@ public class WorkOrderDTO {
 	private String roCode; // 수주코드
 	private int empId; // 작업지시자
 	private String lineCode; // 라인코드
+	private String lineName; // 라인명
 	private String mfgCode; // 공정코드
 	private String productCode; // 상품코드
 	private String materialCode; // 자재코드
@@ -20,19 +21,11 @@ public class WorkOrderDTO {
 	private String empName; // 사원 명
 	private String shipSdate; // 납품예정일
 	
-	
-	
-	
-	
-		
-	
-
-	
 
 	@Override
 	public String toString() {
 		return "WorkOrderDTO [woCode=" + woCode + ", roCode=" + roCode + ", empId=" + empId + ", lineCode=" + lineCode
-				+ ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode=" + materialCode
+				+ ", lineName=" + lineName +  ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode=" + materialCode
 				+ ", woCount=" + woCount + ", woStatus=" + woStatus + ", woDate=" + woDate + ", productName="
 				+ productName + ", cusCode=" + cusCode + ", cusName=" + cusName + ", empName=" + empName
 				+ ", shipSdate=" + shipSdate + "]";
@@ -158,7 +151,14 @@ public class WorkOrderDTO {
 		this.shipSdate = shipSdate;
 	}
 
-	
+
+	public String getLineName() {
+		return lineName;
+	}
+
+	public void setLineName(String lineName) {
+		this.lineName = lineName;
+	}
 	
 	
 	

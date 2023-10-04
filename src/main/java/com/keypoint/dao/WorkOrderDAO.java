@@ -106,6 +106,9 @@ public class WorkOrderDAO {
 		if(search.get("lineCode")==null) {
 			search.put("lineCode", "");
 		}
+		if(search.get("lineName")==null) {
+			search.put("lineName", "");
+		}
 		return sqlSession.selectList(namespace+".workLineList", search);
 	}
 
