@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.LineDAO;
 import com.keypoint.dto.LineDTO;
+import com.keypoint.dto.ReceiveDTO;
 
 
 @Service
@@ -27,5 +28,19 @@ public class LineService {
 		
 		lineDAO.lineInsert(lineDTO);
 	}// 라인등록Pro
+
+
+	public LineDTO getlineDetails(String lineCode) {
+		System.out.println("LineService getLineDetails()");	
+		return lineDAO.getLineDetails(lineCode);
+	}// 라인상세
+
+
+	public void lineUpdatePro(LineDTO lineDTO) {
+		System.out.println("LineService lineUpdatePro()");
+		System.out.println(lineDTO);
+//		receiveDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
+		lineDAO.lineUpdate(lineDTO);
+	}// receiveUpdatePro() [수주수정Pro]
 
 }

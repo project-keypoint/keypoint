@@ -66,7 +66,7 @@
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
 	<th>입고코드</th>
-    <th>자재코드</th>
+    <th>발주코드</th>
     <th>자재명</th>
     <th>발주수량</th>
     <th>입고예정수량</th>

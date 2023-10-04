@@ -67,7 +67,7 @@
     <td>${productDTO.productUnit}</td>
     <td>${productDTO.productMemo}</td>
     <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate()">
-    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="openDelete()"></td>
+    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${productDTO.productCode}')"></td>
 </tr>
 </c:forEach>      
 
@@ -101,29 +101,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#cusCode").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var cusCode = $("input[name='cusCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
-    });
-});
-$(document).ready(function() {
     $("#productCode").click(function() {
         // 상품코드 입력란의 값을 가져옵니다.
         var productCode = $("input[name='productCode']").val();
@@ -133,12 +110,12 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#productCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
+	            var width = 500;
+	            var height = 500;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 상품 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
@@ -220,14 +197,20 @@ function openUpdate() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-//수주등록 새창
-function openDelete() {
-    var url = '${pageContext.request.contextPath}/product/productDelete';
-    var windowWidth = 500;
-    var windowHeight = 600;
-    var windowLeft = (screen.width - windowWidth) / 2;
-    var windowTop = (screen.height - windowHeight) / 2;
-    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+//삭제 확인메세지
+function confirmDelete(productCode) {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+    	var query = {"productCode" : productCode};
+    	$.ajax({
+        	url : "${pageContext.request.contextPath}/product/productDelete",
+    		type : "get",
+    		data : query,
+    		dataType : "text",
+    		success : function(data){
+    			location.reload();
+    		}
+    	});
+    } 
 }
 </script>
 

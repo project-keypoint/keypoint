@@ -67,7 +67,7 @@
     <td>${materialDTO.materialUnit}</td>
     <td>${materialDTO.materialMemo}</td>
     <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate()">
-    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="openDelete()"></td>
+    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${materialDTO.materialCode}')"></td>
 </tr>
 </c:forEach>      
 
@@ -219,6 +219,21 @@ function openInsert() {
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+//삭제 확인메세지
+function confirmDelete(materialCode) {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+    	var query = {"materialCode" : materialCode};
+    	$.ajax({
+        	url : "${pageContext.request.contextPath}/material/materialDelete",
+    		type : "get",
+    		data : query,
+    		dataType : "text",
+    		success : function(data){
+    			location.reload();
+    		}
+    	});
+    } 
 }
 </script>
 

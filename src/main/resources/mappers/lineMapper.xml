@@ -15,7 +15,7 @@
 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO">
 	SELECT *  
 	from line 
-    ORDER BY lineCode DESC;
+    ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED);
 	</select>
 
 	<insert id="lineInsert" >
@@ -24,7 +24,20 @@
 	
 	</insert>
 
-
+	<select id="getLineDetails" resultType="com.keypoint.dto.LineDTO">
+		select lineCode, lineName, lineMemo, lineEmp
+		from line 
+		where lineCode = #{lineCode}
+	</select>
+	
+	<update id="lineUpdate">
+		UPDATE line
+		SET lineCode = #{lineCode},  
+        	lineName = #{lineName},
+        	lineMemo = #{lineMemo},
+        	lineEmp = #{lineEmp} 	
+		WHERE lineCode = #{lineCode}
+	</update>
 
 </mapper>
 

@@ -6,13 +6,15 @@ public class LineDTO {
 	private String lineName;
 	private String lineMemo;
 	private String lineEmp;
-	private String woCode;
+//	private String woCode;
 
+	
 	@Override
 	public String toString() {
 		return "LineDTO [lineCode=" + lineCode + ", lineName=" + lineName + ", lineMemo=" + lineMemo + ", lineEmp="
-				+ lineEmp + ", woCode=" + woCode + "]";
+				+ lineEmp + "]";
 	}
+	
 
 	public String getLineCode() {
 		return lineCode;
@@ -46,11 +48,11 @@ public class LineDTO {
 		this.lineEmp = lineEmp;
 	}
 
-	public String getWoCode() {
-		return woCode;
-	}
-
-	public void setWoCode(String woCode) {
-		this.woCode = woCode;
-	}
+//	public String getWoCode() {
+//		return woCode;
+//	}
+//
+//	public void setWoCode(String woCode) {
+//		this.woCode = woCode;
+//	}
 }

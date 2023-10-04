@@ -133,6 +133,14 @@ public class MaterialController {
 	
 	
 	// --------------------------------------------------------------------------------------------------
+	@GetMapping("/materialDelete")
+	public String materialDelete(MaterialDTO materialDTO) {
+		System.out.println("MaterialController materialDelete()");
+		System.out.println(materialDTO);
+		materialService.deleteMaterial(materialDTO);
+		
+		return "material/materialList";
+	}// materialDelete [자재삭제]
 	
 	
 	

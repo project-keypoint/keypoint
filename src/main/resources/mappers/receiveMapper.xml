@@ -52,4 +52,19 @@
 		WHERE roCode = #{roCode}
 	</update>
 	
+	
+	
+	<select id="getReceiveListTest" resultType="com.keypoint.dto.ReceiveDTO">
+		select a.roCode, a.cusCode, b.cusName, a.productCode, c.productName, c.productCount,
+	   		   a.roCount, a.roPrice, a.roDate, a.shipSdate, a.shipDate, a.roStatus,
+	   		   a.roEmpId, d.EmpName as roEmpName
+		from receivedOrder a
+		left join customer b on a.cusCode = b.cusCode
+		left join product c on a.productCode = c.productCode
+		left join employees d on a.roEmpId = d.empId
+		where a.roStatus != '삭제'
+		order by a.roCode desc
+	</select>
+	
+	
 </mapper>
