@@ -40,14 +40,13 @@
 					<div class="search-b">
 						<div class="search-select">
 							<div class="dropdown">
-								<select name="language" id="language">
+								<select name="language" id="language" style="padding-top:5px; padding-bottom:5px; border-radius: 0.35rem;">
 									<option value="javascript">제목</option>
 									<option value="python">제목+내용</option>
 								</select>
 							</div>
 							<input type="text" id="noticeSubject"
-								class="form-control search-input" placeholder="제목"
-								style="width: 110px;">
+								class="form-control search-input">
 
 						</div>
 					</div>
