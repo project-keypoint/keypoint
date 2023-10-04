@@ -10,13 +10,29 @@
 		values(#{grCode},#{poCode},#{grSdate},#{grCount},#{grDate},#{grEcount},#{grEdate},#{grOwner},#{grStatus})
 	</insert>
 
+	<select id="getReceiptList" resultType="com.keypoint.dto.ReceiptDTO">
+		select * from goodsReceipt
+		where grStatus != '삭제됨'
+		order by grCode desc
+		limit #{startRow}, #{pageSize}
+	</select>
 
+	<select id="getReceiptCount" resultType="java.lang.Integer">
+		select count(*) from goodsReceipt 
+	</select>
 
+	<select id="getReceiptDetails" resultType="com.keypoint.dto.ReceiptDTO">
+		select grCode, poCode, grCount, grOwner, grSdate, grDate, grStatus
+		from goodsReceipt
+		where grCode = #{grCode}
+	</select>
 
-
-
-
-
+	<update id="updateReceipt">
+		UPDATE goodsReceipt
+		SET grCount = #{grCount}, grOwner = #{grOwner}, 
+        	grDate = #{grDate}
+		WHERE grCode = #{grCode}
+	</update>
 
 
   
