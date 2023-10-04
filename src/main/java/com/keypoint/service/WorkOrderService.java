@@ -59,15 +59,15 @@ public class WorkOrderService {
 	}
 
 
-	public List<WorkOrderDTO> getWorkInstructList(Map<String, Object> search) {
-		System.out.println("WorkOrderService workInstructList()");
-		return workOrderDAO.getWorkInstructList(search);
+	public List<WorkOrderDTO> getWorkRoCodeList(Map<String, Object> search) {
+		System.out.println("WorkOrderService getWorkRoCodeList()");
+		return workOrderDAO.getWorkRoCodeList(search);
 	}
 
 
-	public int countInstructList(Map<String, Object> search) {		
-		System.out.println("WorkOrderService countInstructList()");
-		return workOrderDAO.countInstructList(search);
+	public int countWorkRoCodeList(Map<String, Object> search) {		
+		System.out.println("WorkOrderService countRoCodeList()");
+		return workOrderDAO.countWorkRoCodeList(search);
 	}
 
 

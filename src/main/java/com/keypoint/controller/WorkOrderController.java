@@ -36,6 +36,7 @@ public class WorkOrderController {
 		System.out.println("WorkOrderController workOrder/workOrderList");
 		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList();
 		List<LineDTO> lineList = lineService.getLineList();
+		System.out.println(workOrderList.get(0).getEmpName());
 		model.addAttribute("lineList", lineList);
 		model.addAttribute("workOrderList", workOrderList);
 		return "workOrder/workOrderList";
@@ -180,9 +181,9 @@ public String workCusList(Model model, HttpServletRequest request, PageDTO pageD
 	
 
 
-@RequestMapping(value = "/workInstructList", method = RequestMethod.GET)
-public String workInstructList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
-	String woCode = request.getParameter("woCode");
+@RequestMapping(value = "/workRoCodeList", method = RequestMethod.GET)
+public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
+	String roCode = request.getParameter("roCode");
 	
 	// 한 화면에 보여줄 글 개수 설정
 	int pageSize = 5; // sql문에 들어가는 항목
@@ -204,14 +205,14 @@ public String workInstructList(Model model, HttpServletRequest request, PageDTO 
 	pageDTO.setEndRow(endRow);
 
 	Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
-	search.put("woCode", woCode);
+	search.put("roCode", roCode);
 	search.put("startRow", pageDTO.getStartRow());
 	search.put("pageSize", pageDTO.getPageSize());
 
-	List<WorkOrderDTO> workInstructList = workOrderService.getWorkInstructList(search);
+	List<WorkOrderDTO> workRoCodeList = workOrderService.getWorkRoCodeList(search);
 		
 	//페이징 처리
-	int count = workOrderService.countInstructList(search);
+	int count = workOrderService.countWorkRoCodeList(search);
 
 	int pageBlock = 10;
 	int startPage=(currentPage-1)/pageBlock*pageBlock+1;
@@ -229,8 +230,8 @@ public String workInstructList(Model model, HttpServletRequest request, PageDTO 
 			
 	model.addAttribute("pageDTO", pageDTO);
 	model.addAttribute("search", search);
-	model.addAttribute("workInstructList", workInstructList);
-	return "workOrder/workInstructList";
+	model.addAttribute("workRoCodeList", workRoCodeList);
+	return "workOrder/workRoCodeList";
 }
 
 	
@@ -258,7 +259,6 @@ public String workInstructList(Model model, HttpServletRequest request, PageDTO 
 
 	Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
 	search.put("lineCode", lineCode);
-	search.put("lineName", lineDTO.getLineName());
 	search.put("startRow", pageDTO.getStartRow());
 	search.put("pageSize", pageDTO.getPageSize());
 

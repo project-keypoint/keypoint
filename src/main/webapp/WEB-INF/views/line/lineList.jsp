@@ -72,7 +72,7 @@
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
 	<th>라인코드</th>
     <th>라인명</th>
-    <th>작업코드</th>
+<!--     <th>작업코드</th> -->
     <th>작업명</th>
     <th>담당자</th>
     <th>작업상태</th>
@@ -83,7 +83,7 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${LineDTO.lineCode}</td>
     <td>${LineDTO.lineName}</td>
-    <td>${LineDTO.woCode}</td>
+<%--     <td>${LineDTO.woCode}</td> --%>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.lineEmp}</td>
     <td><button class = "status">대기중</button></td>
@@ -99,8 +99,8 @@
 <%--             </c:otherwise> --%>
 <%--         </c:choose></td><!-- 납품일 null 대신 '-' --> --%>
 <%--     <td>${receiveDTO.roStatus}</td> --%>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${lineDTO.lineCode}')"></td>
-</tr>
+    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${LineDTO.lineCode}')"></td>
+</tr> 
 </c:forEach>    
 </table>
 </div><!-- table -->
@@ -130,8 +130,11 @@
 //작업상태 변환 버튼
 $(document).ready(function() {
     $('.status').click(function() {
-        if ($(this).text() === '대기중') {
+        var currentStatus = $(this).text();
+        if (currentStatus === '대기중') {
             $(this).text('작업중');
+        } else if (currentStatus === '작업중') {
+            $(this).text('완료');
         } else {
             $(this).text('대기중');
         }
@@ -160,7 +163,7 @@ $(document).ready(function() {
     });
 });
 
-//수주등록 새창
+//라인등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/line/lineInsert';
     var windowWidth = 500;
@@ -170,9 +173,9 @@ function openInsert() {
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
 
-//수주상세내용 새창
-function openDetails(roCode) {
-    var url = '${pageContext.request.contextPath}/receive/receiveDetails?roCode='+roCode;
+//라인상세내용 새창
+function openDetails(lineCode) {
+    var url = '${pageContext.request.contextPath}/line/lineDetails?lineCode='+lineCode;
     var windowWidth = 500;
     var windowHeight = 675;
     var windowLeft = (screen.width - windowWidth) / 2;

@@ -97,30 +97,34 @@ h2{
 </head>
 <body>
 <h2>
-라인코드 조회
+수주코드 조회
 </h2>
 <br>
 <form>
 <table>
 <tr>
-	<td>라인코드</td><td><input type="text" name="lineCode" style="width:100px;"></td>
+	<td>수주코드</td><td><input type="text" name="roCode" style="width:100px;"></td>
+<!-- 	<td>업체명</td><td><input type="text" name="woName" style="width:100px;"></td> -->
 	<td><input type="submit" value="조회"></td></tr>
 </table>
 </form>
 <table>
-<tr><th>라인코드</th></tr>
-<c:forEach var="workLineList" items="${workLineList}">
-<tr onclick="selectWork('${workLineList.lineCode }')"> <!-- ,'${itemList.itemId}' -->
-	<td id="con">${workLineList.lineCode}</td>
+<tr><th>수주코드</th></tr>
+<c:forEach var="workRoCodeList" items="${workRoCodeList}">
+<tr onclick="selectWork('${workRoCodeList.roCode}')"> <!-- ,'${itemList.itemId}' -->
+	<td id="con">${workRoCodeList.roCode}</td>
+<%-- 	<td id="con">${workInstructList.woName}</td> --%>
 	</tr>
 
     <script type="text/javascript">
 
         function selectWork(a){ // 부모창으로 값 넘기기
 		  
-          opener.document.getElementById("lineCode").value = a
-//           opener.document.getElementById("lineCode").value = b
+          opener.document.getElementById("roCode").value = a
+//           opener.document.getElementById("woName").value = b
+//           opener.document.getElementById("pid").value = c
           window.close();
+
         }
 
    </script>
@@ -133,26 +137,26 @@ h2{
 
     <!-- 1페이지 이전 -->
 	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/workOrder/workLineList?lineCode=${search.lineCode}&pageNum=${pageDTO.currentPage-1}"><</a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
 <!-- 10페이지 이전 -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/workOrder/workLineList?lineCode=${search.lineCode}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath }/workOrder/workLineList?lineCode=${search.lineCode}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
 	</c:forEach>
 
 <!-- 1페이지 다음 -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workLineList?lineCode=${search.lineCode}&pageNum=${pageDTO.currentPage+1}">></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
 <!-- 10페이지 다음 -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workLineList?lineCode=${search.lineCode}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>
 	
 </div>

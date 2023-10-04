@@ -54,13 +54,6 @@ public class PurchaseService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	public PurchaseDTO getPurchaseDetails(String poCode) {
 		System.out.println("PurchaseService getPurchaseDetails()");
 		

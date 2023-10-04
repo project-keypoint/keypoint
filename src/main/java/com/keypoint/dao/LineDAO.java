@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.LineDTO;
+import com.keypoint.dto.ReceiveDTO;
 
 
 @Repository
@@ -30,6 +31,12 @@ public class LineDAO {
 		System.out.println("LineDAO lineInsert()");
 		sqlSession.insert(namespace+".lineInsert",lineDTO);
 	}// 라인등록
+
+
+	public LineDTO getLineDetails(String lineCode) {
+		System.out.println("LineDAO getLineDetails()");
+		return sqlSession.selectOne(namespace+".getLineDetails", lineCode);
+	}// getLineDetails() [수주상세]
 
 
 

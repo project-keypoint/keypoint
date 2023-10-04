@@ -232,13 +232,13 @@ function validateForm() {
     var poCode = document.getElementById("poCode").value;
     var materialName = document.getElementById("materialName").value;
     var grCount = document.getElementById("grCount").value;
-    var grOwner = document.getElementById("grOwner").value;
+    var empId = document.getElementById("empId").value;
     var grSdate = document.getElementById("grSdate").value;
     var grDate = document.getElementById("grDate").value;
     var grStatus = document.getElementById("grStatus").value;
     // 빈 필드 검사
     if (grCode === "" || poCode === "" || materialName === "" ||
-   		grCount === "" || grOwner === "" || grSdate === "" || grDate === "" || grStatus === "") {
+   		grCount === "" || empId === "" || grSdate === "" || grDate === "" || grStatus === "") {
         alert("모든 내용을 입력해주세요.");
         return false; // 제출 방지
     }

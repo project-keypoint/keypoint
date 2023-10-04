@@ -22,10 +22,16 @@ public class LineService {
 	}// getLineList
 
 
-	public void lineInsert(LineDTO lineDTO) {
-		System.out.println("LineService lineInsert()");
+	public void lineInsertPro(LineDTO lineDTO) {
+		System.out.println("LineService lineInsertPro()");
 		
 		lineDAO.lineInsert(lineDTO);
 	}// 라인등록Pro
+
+
+	public LineDTO getlineDetails(String lineCode) {
+		System.out.println("LineService getLineDetails()");	
+		return lineDAO.getLineDetails(lineCode);
+	}
 
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mappers.requireMapper">
+
+	<insert id="insertRequire">
+		insert into requirement(productCode,materialCode,reqCount)
+		values(#{productCode},#{materialCode},#{reqCount})
+	</insert>
+
+	<select id="getRequireList" resultType="com.keypoint.dto.RequireDTO">
+		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit
+		from requirement r join product p
+		on r.productCode = p.productCode
+		join material m
+		on r.materialCode = m.materialCode
+		order by productCode desc
+	</select>
+	
+<!-- 	<select id="getRequire" resultType="com.keypoint.dto.RequireDTO">
+		select * from requirement
+		where requireCode = #{requireCode}
+	</select>	 -->
+
+	<delete id="deleteRequire">
+		delete from requirement
+		where productCode = #{productCode}
+		and materialCode = #{materialCode}
+	</delete>
+
+
+</mapper>
+
+
+
+

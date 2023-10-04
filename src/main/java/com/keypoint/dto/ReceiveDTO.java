@@ -14,6 +14,7 @@ public class ReceiveDTO {
 	private String cusName; //join
 	private String productCode;
 	private String productName; //join
+	private int productCount;
 	private int roEmpId;
 	private String roEmpName; //join
 	private int roCount;
@@ -32,6 +33,12 @@ public class ReceiveDTO {
 	}
 
 	
+	public int getProductCount() {
+		return productCount;
+	}
+	public void setProductCount(int productCount) {
+		this.productCount = productCount;
+	}
 	public String getCusName() {
 		return cusName;
 	}

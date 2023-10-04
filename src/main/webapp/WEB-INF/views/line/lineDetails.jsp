@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라인등록</title>
+<title>라인상세내역</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -20,31 +22,31 @@
 <div class="main-details">
 <form action="${pageContext.request.contextPath}/line/lineInsertPro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
-<div class="page-title-popup">라인등록</div>
+<div class="page-title-popup">라인상세내역</div>
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" placeholder="LINE1">
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" placeholder="${lineDTO.lineCode }" readonly >
 </div>
 <div class="form-group-receive">
 <p>라인명</p>
-<input type="text" id="lineName" name="lineName" class="form-control search-input inputcode" placeholder="라인A" >
+<input type="text" id="lineName" name="lineName" class="form-control search-input inputcode" placeholder="${lineDTO.lineName }" readonly>
 </div>
 <div class="form-group-receive">
 <p>작업명</p>
-<input type="text" id="lineMemo" name="lineMemo" class="form-control search-input inputcode" placeholder="작업명" >
+<input type="text" id="lineMemo" name="lineMemo" class="form-control search-input inputcode" placeholder="${lineDTO.lineMemo }" >
 </div>
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="lineEmp" name="lineEmp" class="form-control search-input inputcode" placeholder="담당자" >
+<input type="text" id="lineEmp" name="lineEmp" class="form-control search-input inputcode" placeholder="${lineDTO.lineEmp }" >
 </div>
 </div> 
 <!-- search-bar-popup end -->
 
 </div>
 <div class="details-buttons">
-<input type="submit" id="lineSubmit" value="등록" class="btn btn-primary mybutton1">
+<input type="submit" id="lineSubmit" value="수정" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->

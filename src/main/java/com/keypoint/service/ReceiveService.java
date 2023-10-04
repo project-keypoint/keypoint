@@ -48,4 +48,12 @@ public class ReceiveService {
 		receiveDAO.deleteReceive(receiveDTO);
 	}// receiveDelete() [수주삭제]
 
+	
+// 테스트
+	
+	public List<ReceiveDTO> getReceiveListTest() {
+		System.out.println("ReceiveService getReceiveListTest()");
+		return receiveDAO.getReceiveListTest();
+	}// getReceiveListTest [수주+출하목록(테스트)]
+
 }

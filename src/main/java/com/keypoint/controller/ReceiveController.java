@@ -92,6 +92,19 @@ public class ReceiveController {
 	
 	
 	
+//	@GetMapping("/shipmentTest") // 수주+출하 테스트
+//	public String shipment() {
+//		System.out.println("ReceiveController receive/shipmentTest");
+//		return "receive/shipmentTest";
+//	}// shipmentTest [수주+출하 테스트]
+	
+	@GetMapping("/shipmentTest")
+	public String shipmentTest(Model model) {
+		System.out.println("ReceiveController receive/shipmentTest");
+		List<ReceiveDTO> receiveList = receiveService.getReceiveListTest();
+		model.addAttribute("receiveList", receiveList);
+		return "receive/shipmentTest";
+	}// receiveTest [수주목록] // 페이징은 나중에
 	
 	/////////////////////////////////////////////////////////////////////
 	

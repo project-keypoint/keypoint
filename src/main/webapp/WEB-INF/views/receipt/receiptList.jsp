@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,24 +78,26 @@
     <th>관리</th>
 </tr>
 
+<c:forEach var="receiptDTO" items="${receiptList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>IN20231019121539</td>
-    <td>M001</td>
+    <td>${receiptDTO.grCode}</td>
+    <td>${receiptDTO.poCode}</td>
     <td>키캡</td>
     <td>100</td>
-    <td>90</td>
+    <td>${receiptDTO.grCount}</td>
     <td>-</td>
-    <td>-</td>
-    <td>2023/09/10</td>
-    <td>이홍렬</td>
-    <td>입고대기</td>
+    <td>${receiptDTO.grEcount}</td>
+    <td>${receiptDTO.grDate}</td>
+    <td>${receiptDTO.grOwner}</td>
+    <td>${receiptDTO.grStatus}</td>
     <td>
-    <input type="button" value="수정" class="btn btn-secondary mybutton1" onclick="openUpdate()">
+    <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
     <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete()">
     </td>
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
+</c:forEach>
 </table>
 </div><!-- table -->
 
@@ -102,13 +107,18 @@
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
-<a href="#" class="page-button">&gt;</a>
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage}" 
+                   end="${pageDTO.endPage}" step="1">
+	<a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+</c:if>
 </div><!-- page-button -->
 </div>
 </div><!-- contents -->
@@ -222,6 +232,16 @@ function openUpdate() {
 //입고처리 새창
 function openComplete() {
     var url = '${pageContext.request.contextPath}/receipt/receiptComplete';
+    var windowWidth = 500;
+    var windowHeight = 600;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+
+//발수정주등록 새창
+function openDetails(grCode) {
+	var url = '${pageContext.request.contextPath}/receipt/receiptDetails?grCode='+grCode;
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;

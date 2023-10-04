@@ -20,7 +20,6 @@ public class WorkOrderDTO {
 	private String cusName; // 거래처 명
 	private String empName; // 사원 명
 	private String shipSdate; // 납품예정일
-	
 
 	@Override
 	public String toString() {

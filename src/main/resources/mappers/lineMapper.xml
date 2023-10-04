@@ -5,20 +5,30 @@
 <mapper namespace="com.itwillbs.mappers.lineMapper">
 
 
+<!-- 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO"> -->
+<!-- 	SELECT distinct l.*,  w.woCode  -->
+<!-- 	from line l -->
+<!--     join workOrder w ON l.lineCode = w.lineCode -->
+<!--     ORDER BY l.lineCode DESC; -->
+<!-- 	</select> -->
+	
 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO">
-	SELECT l.*, w.woCode 
-	from line l
-    join workOrder w ON l.lineCode = w.lineCode
-    ORDER BY l.lineCode DESC;
+	SELECT *  
+	from line 
+    ORDER BY lineCode DESC;
 	</select>
 
 	<insert id="lineInsert" >
 		insert into line (lineCode, lineName, lineMemo, lineEmp)
-		values(#(lineCode),#(lineName),#(lineMemo),#(lineEmp))
+		values( #{lineCode}, #{lineName}, #{lineMemo}, #{lineEmp})
 	
 	</insert>
 
-
+	<select id="getLineDetails" resultType="com.keypoint.dto.LineDTO">
+		select lineCode, lineName, lineMemo, lineEmp
+		from line 
+		where lineCode = #{lineCode}
+	</select>
 
 </mapper>
 
