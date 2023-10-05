@@ -40,10 +40,24 @@
 <input type="text" id="empName" name="empName" class="form-control search-input">
 </div>
 
+<!-- 주소 -->
 <div class="form-group-customer">
 <p>주소</p>
-<input type="text" id="empAddress" name="empAddress" class="form-control search-input">
+<input type="text" id="zonecode" name="zonecode" class="form-control search-input" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()"id="dubSubmit" value="우편번호" class="btn btn-primary mybutton2">
 </div>
+
+<div class="form-group-customer">
+<p></p>
+<input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="기본주소">
+</div>
+
+<div class="form-group-customer">
+<p></p>
+<input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소">
+</div>
+<!-- // 주소 -->
+
 
 <div class="form-group-customer">
 <p>연락처</p>
@@ -108,14 +122,16 @@
 
 
 
-
+<!-- 데이트피커 : 날짜선택요소(달력형식, 직접입력) -->
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 주소API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-//팝업 창을 열어주는 함수
+// 팝업 창을 열어주는 함수
 function openPopup(url) {
     var width = 500;
     var height = 500;
@@ -124,6 +140,46 @@ function openPopup(url) {
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
+
+
+// 생년월일, 일사일 검색 데이트피커
+$(function() {
+    $("#empBirth").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#empHiredate").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+});
+
+
+// 주소
+function sample6_execDaumPostcode() {
+	  new daum.Postcode({
+	    oncomplete: function(data) {
+	      var fullAddress = data.address; // 선택한 주소 변수에 저장
+	      var extraAddress = ''; // 조합형 주소 변수 초기화
+
+	      if (data.addressType === 'R') {
+	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+	          extraAddress += data.bname;
+	        }
+	        if (data.buildingName !== '' && data.apartment === 'Y') {
+	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
+	        }
+	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
+	      }
+
+	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
+	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
+	      document.getElementById('empAddress').value = fullAddress; // 기본주소
+
+	      // 상세주소 입력란으로 포커스 이동
+	      document.getElementById('cusAddress_dtail').focus();
+	    }
+	  }).open();
+	}
+	
 // $(document).ready(function() {
 //     // 업체명 검색 팝업 열기
 //     $("#cusCode, #cusName").click(function() {
@@ -143,27 +199,27 @@ function openPopup(url) {
 // });
 
 // 유효성 검사
-function validateForm() {
-    // 각 입력 필드 값
-    var cusCode = document.getElementById("cusCode").value;
-    var productCode = document.getElementById("productCode").value;
-    var roCount = document.getElementById("roCount").value;
-    var roDate = document.getElementById("roDate").value;
-    var shipSdate = document.getElementById("shipSdate").value;
-    var roEmpId = document.getElementById("roEmpId").value;
-    // 빈 필드 검사
-    if (cusCode === "" || productCode === "" || roCount === "" ||
-    	roDate === "" || shipSdate === "" || roEmpId === "") {
-        alert("모든 내용을 입력해주세요.");
-        return false; // 제출 방지
-    }
-    // 추가 유효성 검사
-    if (roCount == 0) {
-        alert("몇개부터 가능하도록 할까");
-        return false; // 제출 방지
-    }
-    return true;
-}
+// function validateForm() {
+//     // 각 입력 필드 값
+//     var cusCode = document.getElementById("cusCode").value;
+//     var productCode = document.getElementById("productCode").value;
+//     var roCount = document.getElementById("roCount").value;
+//     var roDate = document.getElementById("roDate").value;
+//     var shipSdate = document.getElementById("shipSdate").value;
+//     var roEmpId = document.getElementById("roEmpId").value;
+//     // 빈 필드 검사
+//     if (cusCode === "" || productCode === "" || roCount === "" ||
+//     	roDate === "" || shipSdate === "" || roEmpId === "") {
+//         alert("모든 내용을 입력해주세요.");
+//         return false; // 제출 방지
+//     }
+//     // 추가 유효성 검사
+//     if (roCount == 0) {
+//         alert("몇개부터 가능하도록 할까");
+//         return false; // 제출 방지
+//     }
+//     return true;
+// }
 </script>
 </body>
 </html>

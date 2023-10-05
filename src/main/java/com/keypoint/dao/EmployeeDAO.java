@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.EmployeeDTO;
-import com.keypoint.dto.ReceiveDTO;
 
 @Repository
 public class EmployeeDAO {
@@ -34,7 +33,7 @@ public class EmployeeDAO {
 		sqlSession.insert(namespace+".insertEmployee", employeeDTO);
 	}// insertEmployee
 
-	// 왜 푸시가 안되지?
+
 	// 사원-상세정보
 	public EmployeeDTO getEmployeeDetails(int empId) {
 		System.out.println("EmployeeDAO getEmployeeDetails()");

@@ -99,7 +99,7 @@
 <!-- </div> -->
 <!-- <div class="form-group-receive"> -->
 <!-- <p>납품예정일</p> -->
-<%-- <%-- <input type="text" id="shipSdate" class="form-control search-input" placeholder="<fmt:formatDate value="${receiveDTO.shipSdate}" pattern="yyyy.MM.dd"/>" readonly> --%> --%>
+<%-- <%-- <input type="text" id="shipSdate" class="form-control search-input" placeholder="<fmt:formatDate value="${receiveDTO.shipSdate}" pattern="yyyy.MM.dd"/>" readonly> --%>
 <%-- <input type="text" id="shipSdate" class="form-control search-input" placeholder="${employeeDTO.shipSdate}" readonly> --%>
 <!-- </div> -->
 <!-- <div class="form-group-receive"> -->

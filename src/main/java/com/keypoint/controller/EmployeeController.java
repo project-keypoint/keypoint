@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keypoint.dto.EmployeeDTO;
-import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.EmployeeService;
 
 @Controller
@@ -68,7 +67,7 @@ public class EmployeeController {
 //		return "employee/employeeDetails";  
 //	} 
 	
-	// 왜 푸시가 안되지?
+	
 	// 사원-상세정보
 	@GetMapping("/employeeDetails")
 	public String employeeDetails(Model model, @RequestParam("empId") int empId) {
