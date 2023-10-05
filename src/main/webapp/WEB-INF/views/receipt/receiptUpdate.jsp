@@ -96,16 +96,7 @@ function openPopup(url) {
     popupWindow.focus();
 }
 $(document).ready(function() {
-    // 업체명 검색 팝업 열기
-    $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-        openPopup(url);
-    });
-    // 상품명 검색 팝업 열기
-    $("#materialCode, #materialName, #materialPrice").click(function() {
-        var url = '${pageContext.request.contextPath}/material/materialList';
-        openPopup(url);
-    });
+  
  	// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';

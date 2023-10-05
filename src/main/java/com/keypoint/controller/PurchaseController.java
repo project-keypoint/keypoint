@@ -165,24 +165,66 @@ public class PurchaseController {
 	
 	//------------------------------------------------------------------------------------------
 	
-	
-	@GetMapping("/test2")
-	public String test2() {
+
+	@RequestMapping(value = "/purchaseOrderList", method = RequestMethod.GET)
+	public String purchaseOrderList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
+		String poCode = request.getParameter("poCode");
+		String materialName = request.getParameter("materialName");
 		
-		// /main.jsp
-		// WEB-INF/views/tables.jsp
-		return "purchase/test2";
-	}//
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize = 5; // sql문에 들어가는 항목
+		
+		// 현페이지 번호 가져오기
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		// 페이지번호를 정수형 변경
+		int currentPage=Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1; // sql문에 들어가는 항목
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setStartRow(startRow-1); // limit startRow (0이 1열이기 때문 1을 뺌)
+		pageDTO.setEndRow(endRow);
+	
+		Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
+		search.put("poCode", poCode);
+		search.put("materialName", materialName);
+		search.put("startRow", pageDTO.getStartRow());
+		search.put("pageSize", pageDTO.getPageSize());
+	 
+		List<PurchaseDTO> purchaseOrderList = purchaseService.getPurchaseOrderList(search);
+				
+			//페이징 처리
+		int count = purchaseService.countPurchaseOrderList(search);
+	
+		int pageBlock = 10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+		 	endPage = pageCount;
+		 }
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+				
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("search", search);
+		model.addAttribute("purchaseOrderList", purchaseOrderList);
+		
+		return "purchase/purchaseOrderList";
+	} // purchaseOrderList
 	
 	//------------------------------------------------------------------------------------------
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

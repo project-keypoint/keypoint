@@ -79,7 +79,24 @@ public class PurchaseService {
 	}// purchaseDelete() [발주삭제]
 
 	
+	//-----------------------------------------------------------------------------
+	
+	public List<PurchaseDTO> getPurchaseOrderList(Map<String, Object> search) {
+		System.out.println("purchaseService getPurchaseOrderList()");
+		
+		
+		return purchaseDAO.getPurchaseOrderList(search);
+	} // getPurchaseOrderList
 
+
+	public Integer countPurchaseOrderList(Map<String, Object> search) { // 품목 개수
+		System.out.println("purchaseService countPurchaseOrderList()");
+		
+		
+		return purchaseDAO.countPurchaseOrderList(search);
+	} // countPurchaseList
+	
+	// --------------------------------------------------------------------------------------------------
 	
 	
 	

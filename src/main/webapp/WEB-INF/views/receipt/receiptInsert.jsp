@@ -32,8 +32,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>발주서</p>
-<input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" placeholder="발주코드">
-<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명">
+<input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" placeholder="발주코드" readonly>
+<input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명" readonly>
 </div>
 </div>
 
@@ -99,15 +99,11 @@ function openPopup(url) {
 }
 $(document).ready(function() {
     // 업체명 검색 팝업 열기
-    $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+    $("#poCode, #materialName").click(function() {
+        var url = '${pageContext.request.contextPath}/purchase/purchaseOrderList';
         openPopup(url);
     });
-    // 상품명 검색 팝업 열기
-    $("#materialCode, #materialName, #materialPrice").click(function() {
-        var url = '${pageContext.request.contextPath}/material/materialList';
-        openPopup(url);
-    });
+ 
  	// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
