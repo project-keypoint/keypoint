@@ -267,10 +267,10 @@ checkboxes.forEach(function (checkbox) {
 });
 
 // 작업지시상세내용 새창
-function openDetails() {
-    var url = '${pageContext.request.contextPath}/receive/receiveDetails';
-    var windowWidth = 500;
-    var windowHeight = 600;
+function openDetails(woCode) {
+    var url = '${pageContext.request.contextPath}/workOrder/workOrderDetails?woCode=' + woCode;
+    var windowWidth = 560;
+    var windowHeight = 720;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

@@ -205,7 +205,7 @@ height: 30px;
 #cusCode.search-input, #cusNumber.search-input, #cusName.search-input, #cusResp.search-input,
 #cusPhone.search-input, #cusEmail.search-input, #cusMemo.search-input, #cusHome.search-input,
 #cusRep.search-input,#cusTel.search-input, #cusType.search-input, #cusAddress.search-input,
-#cusStatus.search-input {
+#cusStatus.search-input, #cusFax.search-input, #cusBusiness.search-input, #zonecode.search-input, #cusAddress_dtail.search-input {
 width: 280px;
 }
 
@@ -280,3 +280,30 @@ border: none; /* 테두리를 없애기 */
 text-align: center;
 color: black;
 }
+
+
+/* 라디오 버튼 스타일을 설정합니다. */
+.form-group-customer input[type="radio"] {
+  width: 19px; /* 네모 크기를 조절합니다. */
+  height: 19px; /* 네모 크기를 조절합니다. */
+  border: 1px solid #D3D3D3; /* 네모 테두리 스타일과 색상 설정 */
+  border-radius: 70; /* 네모 모양으로 만듭니다. */
+  appearance: none; /* 기본 스타일 제거 */
+  margin-left: 30px;
+}
+
+/* 라디오 버튼가 선택되었을 때의 스타일을 설정합니다. */
+.form-group-customer input[type="radio"]:checked {
+  background-color: #4E73DF; /* 선택되었을 때의 배경색을 설정합니다. */
+}
+
+
+
+
+
+
+
+
+
+
+

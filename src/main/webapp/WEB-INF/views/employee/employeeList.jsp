@@ -70,6 +70,7 @@
 </tr>
 <c:forEach var="employeeDTO" items="${employeeList}">
 <tr class="table-body">
+<!-- // 왜 푸시가 안되지? -->
 <!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${employeeDTO.empId}</td>
     <td>${employeeDTO.empName}</td>
@@ -79,6 +80,8 @@
     <td>${employeeDTO.empEmail}</td>
     <td>${employeeDTO.empStatus}</td>
     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${employeeDTO.empId}')"></td>
+<!-- 사원상세내역 연결되는지 테스트 -->
+<!--     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails()"></td> -->
 </tr>
 </c:forEach>    
 </table>
@@ -86,7 +89,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="사원등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
 <div class="page-buttons">
 <a href="#" class="page-button">&lt;</a>
@@ -134,15 +137,18 @@ $(document).ready(function() {
     });
 });
 
-// 사원상세내용 새창
-function openDetails(roCode) {
-    var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='+empId;
+// 사원 상세내용 새창
+function openDetails(empId) {
+	// 연결되는지 보기위해
+//     var url = '${pageContext.request.contextPath}/employee/employeeDetails';
+ 	var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='+empId;
     var windowWidth = 500;
-    var windowHeight = 675;
+    var windowHeight = 850;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+
 // 사원등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/employee/employeeInsert';

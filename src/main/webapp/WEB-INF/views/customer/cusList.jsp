@@ -55,21 +55,10 @@
 
 
 
-<div class="select-status">
-<a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
-<a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
-<a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a>
-<a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
-<a>( 체크박스 사용여부 보류중 )</a>
-
-
 <div style="text-align: right;">
 <input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
-</div>
-<div>
-</div>
-</div>
+</div><br>
 
 
 
@@ -83,7 +72,6 @@
     <th>거래처명</th>
     <th>대표자명</th>
     <th>대표전화</th>
-    <th>주소</th>	
     <th>업태</th>
     <th>종목</th>
     <th>담당자명</th>
@@ -98,31 +86,26 @@
     <td onclick="openDetails('$customerDTO.cusCode')">${customerDTO.cusCode}</td>
     <td>${customerDTO.cusCategory}</td>
     <td>${customerDTO.cusName}</td>
+    <td>${customerDTO.cusRep}</td>
     <td>${customerDTO.cusTel}</td>
-    <td>${customerDTO.cusAddress}</td>
+    <td>${customerDTO.cusType}</td>
+    <td>${customerDTO.cusType}</td>
     <td>${customerDTO.cusResp}</td>
     <td>${customerDTO.cusEmail}</td>
-    <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td>
-    <td>${receiveDTO.shipSdate}</td>
-    <td><c:choose>
-            <c:when test="${not empty receiveDTO.shipDate}">
-                ${receiveDTO.shipDate}
-            </c:when>
-            <c:otherwise>
-                -
-            </c:otherwise>
-        </c:choose></td><!-- 납품일 null 대신 '-' -->
-    <td>${receiveDTO.roStatus}</td>
-<%--     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td> --%>
+    <td>${customerDTO.cusStatus}</td>
 </tr>
 </c:forEach>    
 </table>
 </div><!-- table -->
+
+
 <div class="content-bottom">
 <div>
 <input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
+
+
 <div class="page-buttons">
 <a href="#" class="page-button">&lt;</a>
 <a href="#" class="page-button page-button-active">1</a>
@@ -202,16 +185,17 @@ checkboxes.forEach(function (checkbox) {
     });
 });
 
-// 수주상세내용 새창
-function openDetails(roCode) {
-    var url = '${pageContext.request.contextPath}/receive/receiveDetails?roCode='+roCode;
+
+// 거래처 상세내용 새창
+function openDetails(cusCode) {
+    var url = '${pageContext.request.contextPath}/customer/cusDetails?cusCode='+cusCode;
     var windowWidth = 500;
     var windowHeight = 675;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-//수주등록 새창
+//	거래처등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/customer/cusInsert';
     var windowWidth = 650;

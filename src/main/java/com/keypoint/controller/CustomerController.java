@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keypoint.dto.CustomerDTO;
 import com.keypoint.dto.QualityDTO;
@@ -58,12 +59,43 @@ public class CustomerController {
 		
 		customerService.insertCustomer(customerDTO);
 		
+		
+		
 		if(customerDTO != null) {
-			return "receive/msgSuccess"; // 등록완료
+			return "receive/msgSuccess"; // 등록완료->수정해야함
 		}else {
-			return "receive/msgFailed"; // 등록실패
+			return "receive/msgFailed"; // 등록실패->수정해야함
 		}
 	}
+	
+	
+	
+//	거래처상세보기
+	@GetMapping("/cusDetails")
+	public String cusDetails(Model model, @RequestParam("cusCode") String cusCode) {
+		System.out.println("CustomerController cusInsertPro()");
+		
+		CustomerDTO customerDTO = customerService.getCustomerDetails(cusCode);
+		
+		model.addAttribute("customerDTO", customerDTO);
+		
+		return "customer/cusDetails";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

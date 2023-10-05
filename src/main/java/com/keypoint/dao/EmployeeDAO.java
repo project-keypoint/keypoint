@@ -34,6 +34,13 @@ public class EmployeeDAO {
 	}// insertEmployee
 
 
+	// 사원-상세정보
+	public EmployeeDTO getEmployeeDetails(int empId) {
+		System.out.println("EmployeeDAO getEmployeeDetails()");
+		
+		return sqlSession.selectOne(namespace+".getEmployeeDetails", empId);
+	} // getEmployeeDetails
+
 	
 //	// 사원수정
 //	public void updateEmployee(EmployeeDTO employeeDTO) {

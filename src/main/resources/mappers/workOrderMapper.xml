@@ -2,133 +2,165 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.itwillbs.mappers.workOrderMapper">
-	
+
 	<insert id="insertWorkOrder">
-		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode, productCode, materialCode, woCount, woStatus, woDate, productName, cusCode, empName)
-		values(CONCAT('WO', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
+		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode,
+		productCode, materialCode, woCount, woStatus, woDate, productName,
+		cusCode, empName)
+		values(CONCAT('WO', DATE_FORMAT(NOW(),
+		'%y%m%d%H%i%s')),
 		#{roCode},#{empId},#{lineCode},
-		 <if test="mfgCode == null">NULL</if>
-         <if test="mfgCode != null">#{mfgCode}</if>,
+		<if test="mfgCode == null">NULL</if>
+		<if test="mfgCode != null">#{mfgCode}</if>
+		,
 		#{productCode},
-		 <if test="materialCode == null">NULL</if>
-         <if test="materialCode != null">#{materialCode}</if>,
+		<if test="materialCode == null">NULL</if>
+		<if test="materialCode != null">#{materialCode}</if>
+		,
 		#{woCount},#{woStatus},#{woDate},#{productName},#{cusCode},#{empName})
 	</insert>
-	
-	<select id="getWorkOrderList" resultType="com.keypoint.dto.WorkOrderDTO">
-		select a.woCode, a.cusCode, b.cusName, a.productCode, c.productName,
-	   		   a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
-	   		   a.empId, e.empName
+
+	<select id="getWorkOrderList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select a.woCode, a.cusCode, b.cusName, a.productCode,
+		c.productName,
+		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
+		a.empId, e.empName
 		from workOrder a
-		left join customer b on a.cusCode = b.cusCode
+		left join customer b on a.cusCode =
+		b.cusCode
 		left join product c on a.productCode = c.productCode
-		left join receivedOrder d on a.roCode = d.roCode
-		left join employees e on a.empId = e.empId
+		left join
+		receivedOrder d on a.roCode = d.roCode
+		left join employees e on a.empId
+		= e.empId
 		where a.woStatus != '삭제'
 		order by a.woCode desc
 	</select>
-	
-	
-   <select id="workProdList" resultType="com.keypoint.dto.WorkOrderDTO">
-   select productCode, productName
-   from product
-   where 
-   productCode like CONCAT('%', #{productCode}, '%') and 
-   productName like CONCAT('%', #{productName}, '%')
-   order by productCode desc 
-   limit #{startRow}, #{pageSize}  
-   </select>
-  
-   <select id="countWorkList" resultType="java.lang.Integer">
-   select count(*)
-   from product
-   <if test="productCode!=null and productName!=null">
-   where 
-   productCode like CONCAT('%', #{productCode}, '%') and
-   productName like CONCAT('%', #{productName}, '%')
-   </if>   
-   </select>
-  
-  <select id="workCusList" resultType="com.keypoint.dto.WorkOrderDTO">
-   select cusCode, cusName
-   from customer
-   where 
-   cusCode like CONCAT('%', #{cusCode}, '%') and 
-   cusName like CONCAT('%', #{cusName}, '%')
-   order by cusCode desc 
-   limit #{startRow}, #{pageSize}  
-   </select>
-  
-  <select id="countCusList" resultType="java.lang.Integer">
-   select count(*)
-   from customer
-   <if test="cusCode!=null and cusName!=null">
-   where 
-   cusCode like CONCAT('%', #{cusCode}, '%') and
-   cusName like CONCAT('%', #{cusName}, '%')
-   </if>   
-   </select>
-  
-  
-  <select id="workRoCodeList" resultType="com.keypoint.dto.WorkOrderDTO">
-   select roCode
-   from receivedOrder
-   where 
-   roCode like CONCAT('%', #{roCode}, '%') 
-   limit #{startRow}, #{pageSize}  
-   </select>
-  
-  <select id="countWorkRoCodeList" resultType="java.lang.Integer">
-   select count(*)
-   from receivedOrder
-   <if test="roCode!=null">
-   where 
-   roCode like CONCAT('%', #{roCode}, '%')
-   </if>   
-   </select>
-  
-  
-  <select id="workLineList" resultType="com.keypoint.dto.WorkOrderDTO">
-   select lineCode
-   from line 
-   where 
-   lineCode like CONCAT('%', #{lineCode}, '%')
-   limit #{startRow}, #{pageSize}  
-   </select>
-  
-  <select id="countLineList" resultType="java.lang.Integer">
-   select count(*)
-   from line
-   <if test="lineCode!=null">
-   where 
-   lineCode like CONCAT('%', #{lineCode}, '%')
-   
-   </if>   
-   </select>
-  
-  <select id="workEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
-   select empId, empName
-   from employees
-   where 
-   empId like CONCAT('%', #{empId}, '%') and 
-   empName like CONCAT('%', #{empName}, '%')
-   order by empId desc 
-   limit #{startRow}, #{pageSize}  
-   </select>
-  
-  <select id="countEmpList" resultType="java.lang.Integer">
-   select count(*)
-   from employees
-   <if test="lineCode!=null">
-   where 
-   empId like CONCAT('%', #{empId}, '%')
-   </if>   
-   </select>
-  
-  
-  
+
+	<select id="getWorkOrderDetails"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select a.woCode, a.cusCode, b.cusName, a.productCode,
+		c.productName,
+		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
+		a.empId, e.empName
+		from workOrder a
+		left join customer b on a.cusCode =
+		b.cusCode
+		left join product c on a.productCode = c.productCode
+		left join
+		receivedOrder d on a.roCode = d.roCode
+		left join employees e on a.empId
+		= e.empId
+		where woCode = #{woCode}
+	</select>
+
+
+	<select id="workProdList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select productCode, productName
+		from product
+		where
+		productCode like CONCAT('%', #{productCode}, '%') and
+		productName like CONCAT('%', #{productName}, '%')
+		order by productCode desc
+		limit #{startRow}, #{pageSize}
+	</select>
+
+	<select id="countWorkList" resultType="java.lang.Integer">
+		select count(*)
+		from product
+		<if test="productCode!=null and productName!=null">
+			where
+			productCode like CONCAT('%', #{productCode}, '%') and
+			productName like CONCAT('%', #{productName}, '%')
+		</if>
+	</select>
+
+	<select id="workCusList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select cusCode, cusName
+		from customer
+		where
+		cusCode like CONCAT('%', #{cusCode}, '%') and
+		cusName like CONCAT('%', #{cusName}, '%')
+		order by cusCode desc
+		limit #{startRow}, #{pageSize}
+	</select>
+
+	<select id="countCusList" resultType="java.lang.Integer">
+		select count(*)
+		from customer
+		<if test="cusCode!=null and cusName!=null">
+			where
+			cusCode like CONCAT('%', #{cusCode}, '%') and
+			cusName like CONCAT('%', #{cusName}, '%')
+		</if>
+	</select>
+
+
+	<select id="workRoCodeList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select roCode
+		from receivedOrder
+		where
+		roCode like CONCAT('%', #{roCode}, '%')
+		limit #{startRow}, #{pageSize}
+	</select>
+
+	<select id="countWorkRoCodeList" resultType="java.lang.Integer">
+		select count(*)
+		from receivedOrder
+		<if test="roCode!=null">
+			where
+			roCode like CONCAT('%', #{roCode}, '%')
+		</if>
+	</select>
+
+
+	<select id="workLineList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select lineCode
+		from line
+		where
+		lineCode like CONCAT('%', #{lineCode}, '%')
+		limit #{startRow}, #{pageSize}
+	</select>
+
+	<select id="countLineList" resultType="java.lang.Integer">
+		select count(*)
+		from line
+		<if test="lineCode!=null">
+			where
+			lineCode like CONCAT('%', #{lineCode}, '%')
+
+		</if>
+	</select>
+
+	<select id="workEmpList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select empId, empName
+		from employees
+		where
+		empId like CONCAT('%', #{empId}, '%') and
+		empName like CONCAT('%', #{empName}, '%')
+		order by empId desc
+		limit #{startRow}, #{pageSize}
+	</select>
+
+	<select id="countEmpList" resultType="java.lang.Integer">
+		select count(*)
+		from employees
+		<if test="lineCode!=null">
+			where
+			empId like CONCAT('%', #{empId}, '%')
+		</if>
+	</select>
+
+
+
 </mapper>
 
 
