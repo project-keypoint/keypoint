@@ -11,10 +11,12 @@
 	</insert>
 
 	<select id="getReceiptList" resultType="com.keypoint.dto.ReceiptDTO">
-		select * from goodsReceipt
-		where grStatus != '삭제됨'
-		order by grCode desc
-		limit #{startRow}, #{pageSize}
+		 SELECT gr.grCode,gr.poCode,gr.grCount,gr.grEcount,gr.grDate,gr.grStatus, e.empName AS grOwner
+	    FROM goodsReceipt gr
+	    JOIN employees e ON gr.grOwner = e.empid
+	    WHERE gr.grStatus != '삭제됨'
+	    ORDER BY gr.grCode DESC
+	    LIMIT #{startRow}, #{pageSize}
 	</select>
 
 	<select id="getReceiptCount" resultType="java.lang.Integer">
@@ -22,17 +24,20 @@
 	</select>
 
 	<select id="getReceiptDetails" resultType="com.keypoint.dto.ReceiptDTO">
-		select grCode, poCode, grCount, grOwner, grSdate, grDate, grStatus
-		from goodsReceipt
-		where grCode = #{grCode}
+		SELECT gr.grCode, gr.poCode, gr.grCount, e.empName AS grOwner, gr.grSdate, gr.grDate, gr.grStatus
+    FROM goodsReceipt gr
+    JOIN employees e ON gr.grOwner = e.empid
+    WHERE gr.grCode = #{grCode}
 	</select>
 
 	<update id="updateReceipt">
-		UPDATE goodsReceipt
-		SET grCount = #{grCount}, grOwner = #{grOwner}, 
-        	grDate = #{grDate}
-		WHERE grCode = #{grCode}
+    UPDATE goodsReceipt
+    SET grCount = #{grCount},
+        grOwner = (SELECT empid FROM employees WHERE empName = #{grOwner}),
+        grDate = #{grDate}
+    WHERE grCode = #{grCode}
 	</update>
+
 
 
   

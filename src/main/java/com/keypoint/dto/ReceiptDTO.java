@@ -11,7 +11,7 @@ public class ReceiptDTO {
     private String grDate; // 입고예정날짜
     private int grEcount; // 입고완료수량
     private String grEdate; // 입고완료날짜
-    private int grOwner; // 입고담당자
+    private String grOwner; // 입고담당자
     private String grStatus; // 입고현황 (enum)
     
     
@@ -57,10 +57,10 @@ public class ReceiptDTO {
 	public void setGrEdate(String grEdate) {
 		this.grEdate = grEdate;
 	}
-	public int getGrOwner() {
+	public String getGrOwner() {
 		return grOwner;
 	}
-	public void setGrOwner(int grOwner) {
+	public void setGrOwner(String grOwner) {
 		this.grOwner = grOwner;
 	}
 	public String getGrStatus() {
