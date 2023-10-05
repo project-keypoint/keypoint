@@ -19,15 +19,15 @@
 
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/customer/cusInsertPro" method="post" onsubmit="return validateForm()">
-
+<form action="${pageContext.request.contextPath}/employee/employeeInsertPro2" method="post">
+<!-- onsubmit="return validateForm()" -->
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
 
 
 <div class="form-group-customer">
 <p>사원ID</p>
-<input type="text" id="empId" name="empId" class="form-control search-input">
+<input type="text" id="empId" name="empId" class="form-control search-input" readonly>
 </div>
 
 <div class="form-group-customer">

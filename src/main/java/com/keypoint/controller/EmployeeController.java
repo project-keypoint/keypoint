@@ -44,7 +44,7 @@ public class EmployeeController {
 	
 	
 	// 사원등록하기
-	@PostMapping("/employeeInsertPro")
+	@PostMapping("/employeeInsertPro2")
 	public String employeeInsertPro(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeController employeeInsertPro()");
 		System.out.println(employeeDTO);
@@ -53,9 +53,10 @@ public class EmployeeController {
 		
 		if(employeeDTO != null) {
 			return "employee/msgSuccess"; // 등록완료
-		}else {
+		} else {
 			return "employee/msgFailed"; // 등록실패
 		}
+	
 	} // employeeInsertPro	
 	
 	

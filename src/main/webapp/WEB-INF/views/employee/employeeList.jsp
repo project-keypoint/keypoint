@@ -65,12 +65,13 @@
     <th>직급</th> 
     <th>내선번호</th> 
     <th>이메일</th> 
+    <th>입사일</th>
     <th>재직여부</th>
     <th>상세내역</th>
 </tr>
 <c:forEach var="employeeDTO" items="${employeeList}">
 <tr class="table-body">
-<!-- // 왜 푸시가 안되지? -->
+
 <!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${employeeDTO.empId}</td>
     <td>${employeeDTO.empName}</td>
@@ -78,6 +79,7 @@
     <td>${employeeDTO.empPosition}</td>
     <td>${employeeDTO.empTel}</td>
     <td>${employeeDTO.empEmail}</td>
+    <td>${employeeDTO.empHiredate}</td>
     <td>${employeeDTO.empStatus}</td>
     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${employeeDTO.empId}')"></td>
 <!-- 사원상세내역 연결되는지 테스트 -->

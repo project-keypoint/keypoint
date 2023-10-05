@@ -5,12 +5,12 @@
 <mapper namespace="com.itwillbs.mappers.employeeMapper">
 
 
+<!-- 사원목록 --> 
 	<select id="getEmployeeList" resultType="com.keypoint.dto.EmployeeDTO">
-		select * 
+		select *
 		from employees
 	</select>
 
-<!-- // 왜 푸시가 안되지? -->
 <!-- 사원-상세정보 -->
 	<select id="getEmployeeDetails" resultType="com.keypoint.dto.EmployeeDTO">
 		select empId, empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail
@@ -20,24 +20,11 @@
 	</select>
 
 
-<!-- <insert parameterType="com.keypoint.dto.EmployeeDTO" id="insertMember"> -->
-<!-- insert into employees(empId, empPass, empSalt, empName, empPhoto, empBirth,  -->
-<!-- empPhone, empTel, empEmail, empAddress, empStatus, departmentId, departmentName,  -->
-<!-- empPosition, empHiredate, empRole, empLeavedate, empRetiredate) -->
-<!-- values(#{empId}, #{empPass}, #{empSalt}, #{empName}, #{empPhoto}, #{empBirth},  -->
-<!-- #{empPhone}, #{empTel}, #{empEmail}, #{empAddress}, #{empStatus}, #{departmentId},  -->
-<!-- #{departmentName}, #{empPosition}, #{empHiredate}, #{empRole}, #{empLeavedate}, #{empRetiredate})  -->
-<!-- </insert> -->
-
-<!-- <delete parameterType="String" id="deleteMember"> -->
-<!-- DELETE FROM employees -->
-<!-- WHERE empId = #{empId}  -->
-<!-- </delete> -->
-
-<!-- <update parameterType="com.keypoint.dto.EmployeeDTO" id="updateMember"> -->
-<!-- UPDATE employeesSET empStatus = #{empStatus}AND empPhone = #{empPhone}WHERE empId = #{empId}  -->
-<!-- </update> -->
-
+<!-- 사원등록 -->
+	<insert id="insertEmployee">
+		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, empAddress, departmentName, empPosition, empHiredate, empRole)
+		values (#{empPass}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail}, #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empRole})
+	</insert>
 
 
 </mapper>
