@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.WorkOrderDAO;
+import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
 
 
@@ -38,7 +39,21 @@ public class WorkOrderService {
 		workOrderDAO.insertWorkOrder(workOrderDTO);
 		
 	} // insertWorkOrder
-
+	
+	
+	public void workOrderUpdatePro(WorkOrderDTO workOrderDTO) {
+		System.out.println("WorkOrderService workOrderUpdatePro()");
+//		workOrderDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
+		workOrderDAO.updateWorkOrder(workOrderDTO);
+	}// workOrderUpdatePro() [작업지시수정Pro]
+	
+	public void workOrderDelete(WorkOrderDTO workOrderDTO) {
+		System.out.println("WorkOrderService receiveUpdatePro()");
+		System.out.println(workOrderDTO);
+		workOrderDAO.deleteWorkOrder(workOrderDTO);
+	}// receiveDelete() [작업지시삭제]
+	
+	
 	
 	public List<WorkOrderDTO> getWorkProdList(Map<String, Object> search) {
 		System.out.println("WorkOrderService getWorkProdList()");
@@ -98,6 +113,8 @@ public class WorkOrderService {
 		System.out.println("WorkOrderService countEmpList()");
 		return workOrderDAO.countEmpList(search);
 	}
+
+	
 
 
 	

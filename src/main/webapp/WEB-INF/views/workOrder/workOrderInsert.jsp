@@ -24,34 +24,34 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
-<input type="text" id="cusName" name="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" value="업체검색">
+<input type="text" id="cusName" name="cusName" class="form-control search-input inputname" value="업체명" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="상품검색">
-<input type="text" id="productName" name="productName" class="form-control search-input inputname" placeholder="상품코드" readonly>
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="상품검색">
+<input type="text" id="productName" name="productName" class="form-control search-input inputname" value="상품코드" readonly>
 </div>
 </div>
 <div class="form-group-receive">
 <p>수주번호</p>
-<input type="text" id="roCode" name="roCode" class="form-control search-input" placeholder="수주번호">
+<input type="text" id="roCode" name="roCode" class="form-control search-input" value="수주번호">
 </div>
 <div class="form-group-receive">
 <p>지시수량</p>
-<input type="number" id="woCount" name="woCount" class="form-control search-input" placeholder="지시수량" min="0">
+<input type="number" id="woCount" name="woCount" class="form-control search-input" placeholder="지시수량" min="0" >
 </div>
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="lineCode" name="lineCode" class="form-control search-input" placeholder="라인코드">
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input" value="라인코드">
 </div>
 <div class="form-group-receive">
 <p>지시일자</p>
-<input type="text" id="woDate" name="woDate" class="form-control search-input" placeholder="지시일자">
+<input type="text" id="woDate" name="woDate" class="form-control search-input" value="지시일자">
 </div>
 <div class="form-group-receive">
 <p>납품예정일</p>
-<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" placeholder="납품예정일">
+<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" value="납품예정일">
 </div>
 <div class="form-group-receive">
 <p>상태</p>
@@ -66,8 +66,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>당담자</p>
-<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="사원검색">
-<input type="text" id="empName" name="empName" class="form-control search-input inputcode" placeholder="사원명" readonly>
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="사원검색">
+<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="사원명" readonly>
 </div>
 </div>
 

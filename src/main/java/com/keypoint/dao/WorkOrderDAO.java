@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
 
 @Repository
@@ -39,6 +40,19 @@ public class WorkOrderDAO {
 		System.out.println("WorkOrderDAO getWorkOrderDetails()");
 		return sqlSession.selectOne(namespace+".getWorkOrderDetails", woCode);
 	}
+	
+	
+	public void updateWorkOrder(WorkOrderDTO workOrderDTO) {
+		System.out.println("WorkOrderDAO updateWorkOrder()");
+		sqlSession.update(namespace+".updateWorkOrder",workOrderDTO);
+	}// updateReceive() [작업지시수정]
+	
+	public void deleteWorkOrder(WorkOrderDTO workOrderDTO) {
+		System.out.println("WorkOrderDAO deleteWorkOrder()");
+		System.out.println(workOrderDTO);
+		sqlSession.update(namespace+".deleteWorkOrder",workOrderDTO);
+	}// deleteReceive() [수주삭제]
+	
 
 
 	public List<WorkOrderDTO> getWorkProdList(Map<String,Object> search) { // 품목리스트 들고오기 (품번, 품명만..)

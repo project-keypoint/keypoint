@@ -30,62 +30,62 @@
 			<div class="form-group-receive">
 				<p>작업지시번호</p>
 				<input type="text" id="woCode" class="form-control search-input"
-					placeholder="${workOrderDTO.woCode}" readonly>
+					value="${workOrderDTO.woCode}" readonly>
 			</div>
 			<div class="search-bar-popup">
 				<div class="form-group-receive">
 					<p>업체명</p>
 					<input type="text" id="cusCode" name="cusCode"
 						class="form-control search-input inputcode"
-						placeholder="${workOrderDTO.cusCode}" readonly> <input
+						value="${workOrderDTO.cusCode}" readonly> <input
 						type="text" id="cusName" name="cusName"
 						class="form-control search-input inputname"
-						placeholder="${workOrderDTO.cusName}" readonly>
+						value="${workOrderDTO.cusName}" readonly>
 				</div>
 				<div class="form-group-receive">
 					<p>상품명</p>
 					<input type="text" id="productCode" name="productCode"
 						class="form-control search-input inputcode"
-						placeholder="${workOrderDTO.productCode}" readonly> <input
+						value="${workOrderDTO.productCode}" readonly> <input
 						type="text" id="productName" name="productName"
 						class="form-control search-input inputname"
-						placeholder="${workOrderDTO.productName}" readonly>
+						value="${workOrderDTO.productName}" readonly>
 				</div>
 			</div>
 			<div class="form-group-receive">
 				<p>수주번호</p>
 				<input type="text" id="roCode" name="roCode"
 					class="form-control search-input"
-					placeholder="${workOrderDTO.roCode}" readonly>
+					value="${workOrderDTO.roCode}" readonly>
 			</div>
 			<div class="form-group-receive">
 				<p>지시수량</p>
 				<input type="number" id="woCount" name="woCount"
 					class="form-control search-input"
-					placeholder="${workOrderDTO.woCount}" min="0" readonly>
+					value="${workOrderDTO.woCount}" min="0" readonly>
 			</div>
 			<div class="form-group-receive">
 				<p>라인코드</p>
 				<input type="text" id="lineCode" name="lineCode"
 					class="form-control search-input"
-					placeholder="${workOrderDTO.lineCode}" readonly>
+					value="${workOrderDTO.lineCode}" readonly>
 			</div>
 			<div class="form-group-receive">
 				<p>지시일자</p>
 				<input type="text" id="woDate" name="woDate"
 					class="form-control search-input"
-					placeholder="${workOrderDTO.woDate}" readonly>
+					value="${workOrderDTO.woDate}" readonly>
 			</div>
 			<div class="form-group-receive">
 				<p>납품예정일</p>
 				<input type="text" id="shipSdate" name="shipSdate"
 					class="form-control search-input"
-					placeholder="${workOrderDTO.shipSdate}" readonly>
+					value="${workOrderDTO.shipSdate}" readonly>
 			</div>
 			<div class="form-group-receive">
 				<p>상태</p>
 				<input type="text" id="woStatus" class="form-control search-input"
-					placeholder="${workOrderDTO.woStatus}" readonly>
+					value="${workOrderDTO.woStatus}" readonly>
 			</div>
 
 			<div class="search-bar-popup">
@@ -93,10 +93,10 @@
 					<p>담당자</p>
 					<input type="text" id="empId" name="empId"
 						class="form-control search-input inputcode"
-						placeholder="${workOrderDTO.empId}" readonly> <input
+						value="${workOrderDTO.empId}" readonly> <input
 						type="text" id="empName" name="empName"
 						class="form-control search-input inputcode"
-						placeholder="${workOrderDTO.empName}" readonly>
+						value="${workOrderDTO.empName}" readonly>
 				</div>
 			</div>
 
@@ -104,9 +104,20 @@
 		<div class="details-buttons">
 			<input type="button" value="수정" class="btn btn-primary mybutton1"
 				onclick="location.href='${pageContext.request.contextPath}/workOrder/workOrderUpdate?woCode=${workOrderDTO.woCode}'">
-			<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+			<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
 		</div>
 	</div>
 	<!-- main-details -->
+	
+	<script>
+// 삭제 확인메세지
+function confirmDelete() {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+        location.href = '${pageContext.request.contextPath}/receive/receiveDelete?roCode=${receiveDTO.roCode}';
+    } else {
+    	
+    }
+}
+</script>
 </body>
 </html>
