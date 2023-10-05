@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -137,12 +137,12 @@ h2{
 
     <!-- 1페이지 이전 -->
 	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.currentPage-1}"></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
 <!-- 10페이지 이전 -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
@@ -151,12 +151,12 @@ h2{
 
 <!-- 1페이지 다음 -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.currentPage+1}"></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
 <!-- 10페이지 다음 -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}"></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&productName=${search.productName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>
 	
 </div>
