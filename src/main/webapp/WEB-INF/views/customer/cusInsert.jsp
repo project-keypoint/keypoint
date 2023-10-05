@@ -25,8 +25,12 @@
 <div class="page-title-popup">거래처등록</div>
 
 
+
+<p><a style="color: red; font-size: 12px;">*필수입력사항입니다(수정해야)</a></p>
+
+
 <div class="form-group-customer">
-<p>거래처코드</p>
+<p><a style="color: red;">*</a>거래처코드</p>
 <input type="text" id="cusCode" name="cusCode" class="form-control search-input" placeholder="거래처코드" readonly="readonly">
 </div>
 
@@ -45,6 +49,7 @@
 </div>
 
 
+
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>거래처명</p>
 <input type="text" id="cusName" name="cusName" class="form-control search-input">
@@ -59,7 +64,7 @@
 
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>대표전화</p>
-<input type="text" id="cusTel" name="cusTel" class="form-control search-input">
+<input type="text" id="cusTel" name="cusTel" class="form-control search-input" placeholder="-없이 10자리 입력하세요">
 </div>
 
 
@@ -116,6 +121,7 @@
 <p><a style="color: red;">*</a>담당자 전화번호</p>
 <input type="text" id="cusPhone" name="cusPhone" class="form-control search-input">
 </div>
+
 
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>담당자 이메일</p>
@@ -200,57 +206,113 @@ function sample6_execDaumPostcode() {
 
 
 
+//	사업자번호, 대표전화, 담당자전화 자동으로 하이픈 + 글자 수 고정
+document.addEventListener("DOMContentLoaded", function() {
+  var cusNumberInput = document.getElementById("cusNumber");
+  var cusTelInput = document.getElementById("cusTel");
+  var cusPhoneInput = document.getElementById("cusPhone");
+  
 
- //팝업 창을 열어주는 함수
-function openPopup(url) {
-    var width = 500;
-    var height = 500;
-    var left = (screen.width - width) / 2;
-    var top = (screen.height - height) / 2;
-    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-    popupWindow.focus();
-}
-$(document).ready(function() {
-//     // 업체명 검색 팝업 열기
-//     $("#cusCode, #cusName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-//         openPopup(url);
-//     });
-    // 상품명 검색 팝업 열기
-    $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-        openPopup(url);
+// 사업자번호 하이픈 추가
+  function formatCusNumber(inputField, maxLength) {
+    inputField.addEventListener("input", function() {
+      var inputValue = inputField.value;
+
+//		하이픈(-)을 제외한 숫자만 추출
+      var numericValue = inputValue.replace(/[^0-9]/g, "");
+
+//		0000-00-0000 형식
+      var formattedValue = numericValue.slice(0, 4) + "-" + numericValue.slice(4, 6) + "-" + numericValue.slice(6);
+
+//		maxLength 길이로 고정합니다.
+      if (formattedValue.length > maxLength) {
+        formattedValue = formattedValue.slice(0, maxLength);
+      }
+
+//		포맷된 값을 입력 필드에 설정
+      inputField.value = formattedValue;
     });
- 	// 사원 검색 팝업 열기
-    $("#empId, #empName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-        openPopup(url);
+  }
+
+// 대표전화번호 하이픈 추가
+  function formatCusTel(inputField, maxLength) {
+    inputField.addEventListener("input", function() {
+      var inputValue = inputField.value;
+
+      // 하이픈(-)을 제외한 숫자만 추출
+      var numericValue = inputValue.replace(/[^0-9]/g, "");
+
+      // 000-000-000 형식
+      var formattedValue = numericValue.slice(0, 3) + "-" + numericValue.slice(3, 6) + "-" + numericValue.slice(6);
+
+      // maxLength 길이로 고정
+      if (formattedValue.length > maxLength) {
+        formattedValue = formattedValue.slice(0, maxLength);
+      }
+
+      // 포맷된 값을 입력 필드에 설정
+      inputField.value = formattedValue;
     });
-}); 
+  }
+
+//	담당자 전화번호 하이픈 추가
+  function formatCusPhone(inputField, maxLength) {
+	    inputField.addEventListener("input", function() {
+	      var inputValue = inputField.value;
+
+	      // 하이픈(-)을 제외한 숫자만 추출
+	      var numericValue = inputValue.replace(/[^0-9]/g, "");
+
+	      // 000-0000-0000 형식
+	      var formattedValue = numericValue.slice(0, 3) + "-" + numericValue.slice(3, 7) + "-" + numericValue.slice(7);
+
+	      // maxLength 길이로 고정
+	      if (formattedValue.length > maxLength) {
+	        formattedValue = formattedValue.slice(0, maxLength);
+	      }
+
+	      // 포맷된 값을 입력 필드에 설정
+	      inputField.value = formattedValue;
+	    });
+	  }
+
+//	fax번호도 시간나면 해봅쉬다
+	  
+//	길이고정(12, 12, 13)
+  formatCusNumber(cusNumberInput, 12);
+  formatCusTel(cusTelInput, 12);
+  formatCusPhone(cusPhoneInput, 13);
+});
+
+
+
 
 
 
 
 // 유효성 검사
 function validateForm() {
-    // 각 입력 필드 값
-    var cusCode2 = document.getElementById("cusCode").value;
-    var productCode = document.getElementById("productCode").value;
-    var roCount = document.getElementById("roCount").value;
-    var roDate = document.getElementById("roDate").value;
-    var shipSdate = document.getElementById("shipSdate").value;
-    var roEmpId = document.getElementById("roEmpId").value;
-    // 빈 필드 검사
-    if (cusCode === "" || productCode === "" || roCount === "" ||
-    	roDate === "" || shipSdate === "" || roEmpId === "") {
-        alert("모든 내용을 입력해주세요.");
+//	각 필수 입력 필드 값
+    var cusCategory = document.getElementById("cusCategory").value;
+    var cusNumber = document.getElementById("cusNumber").value;
+    var cusName = document.getElementById("cusName").value;
+    var cusRep = document.getElementById("cusRep").value;
+    var cusTel = document.getElementById("cusTel").value;
+    var cusBusiness = document.getElementById("cusBusiness").value;
+    var cusType = document.getElementById("cusType").value;
+    var cusAddress = document.getElementById("cusAddress").value;
+    var cusResp = document.getElementById("cusResp").value;
+    var cusPhone = document.getElementById("cusPhone").value;
+    var cusEmail = document.getElementById("cusEmail").value;
+    
+// 	빈 필드 검사
+    if (cusCategory === "" || cusNumber === "" || cusName === "" ||
+    	cusRep === "" || cusTel === "" || cusBusiness === "" || cusType === "" ||
+    	cusAddress === "" || cusResp === "" || cusPhone === "" || cusEmail === "") {
+        alert("필수항목을 모두 입력해주세요.");
         return false; // 제출 방지
     }
-    // 추가 유효성 검사
-    if (roCount == 0) {
-        alert("몇개부터 가능하도록 할까");
-        return false; // 제출 방지
-    }
+
     return true;
 }
 </script>

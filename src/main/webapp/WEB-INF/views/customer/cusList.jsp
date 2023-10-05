@@ -57,7 +57,6 @@
 
 <div style="text-align: right;">
 <input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div><br>
 
 
@@ -88,7 +87,7 @@
     <td>${customerDTO.cusName}</td>
     <td>${customerDTO.cusRep}</td>
     <td>${customerDTO.cusTel}</td>
-    <td>${customerDTO.cusType}</td>
+    <td>${customerDTO.cusBusiness}</td>
     <td>${customerDTO.cusType}</td>
     <td>${customerDTO.cusResp}</td>
     <td>${customerDTO.cusEmail}</td>
@@ -102,7 +101,6 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 
 

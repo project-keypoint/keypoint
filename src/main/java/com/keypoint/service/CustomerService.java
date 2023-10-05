@@ -40,16 +40,7 @@ public class CustomerService {
 	}
 
 
-//	거래처상세보기
-	public CustomerDTO getCustomerDetails(String cusCode) {
-		System.out.println("CustomerService getCustomerDetails()");
 
-		return customerDAO.getCustomerDetails(cusCode);
-	}
-
-	
-	
-	
 	
 	
 	
