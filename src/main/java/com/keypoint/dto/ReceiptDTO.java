@@ -14,7 +14,22 @@ public class ReceiptDTO {
     private String grOwner; // 입고담당자
     private String grStatus; // 입고현황 (enum)
     
+    private String materialName; // 자재명 추가
+    private int poCount;         // 발주수량 추가
     
+    
+	public String getMaterialName() {
+		return materialName;
+	}
+	public void setMaterialName(String materialName) {
+		this.materialName = materialName;
+	}
+	public int getPoCount() {
+		return poCount;
+	}
+	public void setPoCount(int poCount) {
+		this.poCount = poCount;
+	}
 	public String getGrCode() {
 		return grCode;
 	}

@@ -83,10 +83,10 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${receiptDTO.grCode}</td>
     <td>${receiptDTO.poCode}</td>
-    <td>키캡</td>
-    <td>100</td>
+    <td>${receiptDTO.materialName}</td>
+    <td>${receiptDTO.poCount}</td>
     <td>${receiptDTO.grCount}</td>
-    <td>-</td>
+    <td>-</td> 
     <td>${receiptDTO.grEcount}</td>
     <td>${receiptDTO.grDate}</td>
     <td>${receiptDTO.grOwner}</td>

@@ -11,13 +11,16 @@
 	</insert>
 
 	<select id="getReceiptList" resultType="com.keypoint.dto.ReceiptDTO">
-		 SELECT gr.grCode,gr.poCode,gr.grCount,gr.grEcount,gr.grDate,gr.grStatus, e.empName AS grOwner
+	    SELECT gr.grCode, gr.poCode, gr.grCount, gr.grEcount, gr.grDate, gr.grStatus, e.empName AS grOwner,
+	           po.poCode AS purchaseOrderCode, po.materialName, po.poCount
 	    FROM goodsReceipt gr
 	    JOIN employees e ON gr.grOwner = e.empid
+	    JOIN purchaseOrder po ON gr.poCode = po.poCode
 	    WHERE gr.grStatus != '삭제됨'
 	    ORDER BY gr.grCode DESC
 	    LIMIT #{startRow}, #{pageSize}
 	</select>
+	
 
 	<select id="getReceiptCount" resultType="java.lang.Integer">
 		select count(*) from goodsReceipt 
