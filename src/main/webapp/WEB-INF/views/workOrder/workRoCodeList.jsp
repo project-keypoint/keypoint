@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@ body{
 
 
 
-/* ÆäÀÌÂ¡ */
+/* í˜ì´ì§• */
 
 
 #pagination {
@@ -97,19 +97,19 @@ h2{
 </head>
 <body>
 <h2>
-¼öÁÖÄÚµå Á¶È¸
+ìˆ˜ì£¼ì½”ë“œ ì¡°íšŒ
 </h2>
 <br>
 <form>
 <table>
 <tr>
-	<td>¼öÁÖÄÚµå</td><td><input type="text" name="roCode" style="width:100px;"></td>
-<!-- 	<td>¾÷Ã¼¸í</td><td><input type="text" name="woName" style="width:100px;"></td> -->
-	<td><input type="submit" value="Á¶È¸"></td></tr>
+	<td>ìˆ˜ì£¼ì½”ë“œ</td><td><input type="text" name="roCode" style="width:100px;"></td>
+<!-- 	<td>ì—…ì²´ëª…</td><td><input type="text" name="woName" style="width:100px;"></td> -->
+	<td><input type="submit" value="ì¡°íšŒ"></td></tr>
 </table>
 </form>
 <table>
-<tr><th>¼öÁÖÄÚµå</th></tr>
+<tr><th>ìˆ˜ì£¼ì½”ë“œ</th></tr>
 <c:forEach var="workRoCodeList" items="${workRoCodeList}">
 <tr onclick="selectWork('${workRoCodeList.roCode}')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${workRoCodeList.roCode}</td>
@@ -118,7 +118,7 @@ h2{
 
     <script type="text/javascript">
 
-        function selectWork(a){ // ºÎ¸ğÃ¢À¸·Î °ª ³Ñ±â±â
+        function selectWork(a){ // ë¶€ëª¨ì°½ìœ¼ë¡œ ê°’ ë„˜ê¸°ê¸°
 		  
           opener.document.getElementById("roCode").value = a
 //           opener.document.getElementById("woName").value = b
@@ -135,12 +135,12 @@ h2{
 <div class="center">
 <div id="pagination">
 
-    <!-- 1ÆäÀÌÁö ÀÌÀü -->
+    <!-- 1í˜ì´ì§€ ì´ì „ -->
 	<c:if test="${pageDTO.currentPage > 1}">
 	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
-<!-- 10ÆäÀÌÁö ÀÌÀü -->
+<!-- 10í˜ì´ì§€ ì´ì „ -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
 	</c:if>
@@ -149,12 +149,12 @@ h2{
 	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
 	</c:forEach>
 
-<!-- 1ÆäÀÌÁö ´ÙÀ½ -->	
+<!-- 1í˜ì´ì§€ ë‹¤ìŒ -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
 	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
-<!-- 10ÆäÀÌÁö ´ÙÀ½ -->
+<!-- 10í˜ì´ì§€ ë‹¤ìŒ -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>

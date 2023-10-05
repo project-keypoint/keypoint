@@ -57,7 +57,30 @@
 		where woCode = #{woCode}
 	</select>
 
-
+	
+	<update id="updateWorkOrder">
+		UPDATE workOrder
+		SET cusCode = #{cusCode}, 
+			productCode = #{productCode}, 
+        	roCode = #{roCode},
+        	woCount = #{woCount},
+        	lineCode = #{lineCode},
+        	woDate = #{woDate},
+<!--         	shipSdate = #{shipSdate}, -->
+        	woStatus = #{woStatus},
+        	empId = #{empId},
+        	empName = #{empName}
+		WHERE woCode = #{woCode}
+	</update>
+	
+	<update id="deleteWorkOrder">
+		UPDATE workOrder
+		SET woStatus = '삭제'
+		WHERE woCode = #{woCode}
+	</update>
+	
+	
+	
 	<select id="workProdList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
 		select productCode, productName

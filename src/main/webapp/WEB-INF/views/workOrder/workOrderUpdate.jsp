@@ -23,39 +23,39 @@
 <div class="page-title-popup">작업지시수정</div>
 <div class="form-group-receive">
 <p>작업지시번호</p>
-<input type="text" id="woCode" class="form-control search-input" placeholder="${workOrderDTO.woCode}" readonly>
+<input type="text" id="woCode" name="woCode" class="form-control search-input" value="${workOrderDTO.woCode}" readonly>
 </div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="${workOrderDTO.cusCode}" readonly>
-<input type="text" id="cusName" name="cusName" class="form-control search-input inputname" placeholder="${workOrderDTO.cusName}" readonly>
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" value="${workOrderDTO.cusCode}" readonly>
+<input type="text" id="cusName" name="cusName" class="form-control search-input inputname" value="${workOrderDTO.cusName}" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="${workOrderDTO.productCode}" readonly>
-<input type="text" id="productName" name="productName" class="form-control search-input inputname" placeholder="${workOrderDTO.productName}" readonly>
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="${workOrderDTO.productCode}" readonly>
+<input type="text" id="productName" name="productName" class="form-control search-input inputname" value="${workOrderDTO.productName}" readonly>
 </div>
 </div>
 <div class="form-group-receive">
 <p>수주번호</p>
-<input type="text" id="roCode" name="roCode" class="form-control search-input" placeholder="${workOrderDTO.roCode}" readonly>
+<input type="text" id="roCode" name="roCode" class="form-control search-input" value="${workOrderDTO.roCode}" readonly>
 </div>
 <div class="form-group-receive">
 <p>지시수량</p>
-<input type="number" id="woCount" name="woCount" class="form-control search-input" placeholder="${workOrderDTO.woCount}" readonly>
+<input type="number" id="woCount" name="woCount" class="form-control search-input" value="${workOrderDTO.woCount}">
 </div>
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="lineCode" name="lineCode" class="form-control search-input" placeholder="${workOrderDTO.lineCode}" readonly>
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input" value="${workOrderDTO.lineCode}" readonly>
 </div>
 <div class="form-group-receive">
 <p>지시일자</p>
-<input type="text" id="woDate" name="woDate" class="form-control search-input" placeholder="${workOrderDTO.woDate}" readonly>
+<input type="text" id="woDate" name="woDate" class="form-control search-input" value="${workOrderDTO.woDate}">
 </div>
 <div class="form-group-receive">
 <p>납품예정일</p>
-<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" placeholder="${workOrderDTO.shipSdate}" readonly>
+<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" value="${workOrderDTO.shipSdate}" readonly>
 </div>
 <div class="form-group-receive">
 <p>상태</p>
@@ -70,8 +70,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" value="${workOrderDTO.empId}" readonly>
-<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" value="${workOrderDTO.empName}" readonly>
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="${workOrderDTO.empId}" readonly>
+<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${workOrderDTO.empName}" readonly>
 </div>
 </div>
 
@@ -158,11 +158,11 @@ function validateForm() {
         alert("모든 내용을 입력해주세요.");
         return false; // 제출 방지
     }
-//     // 추가 유효성 검사
-//     if (woCount == 0) {
-//         alert("몇개부터 가능하도록 할까");
-//         return false; // 제출 방지
-//     }
+    // 추가 유효성 검사
+    if (woCount == 0) {
+        alert("몇개부터 가능하도록 할까");
+        return false; // 제출 방지
+    }
     return true;
 }
 </script>

@@ -71,6 +71,44 @@ public class WorkOrderController {
 		return "workOrder/workOrderDetails";
 	}// workOrderDetails [작업지시상세]
 	
+	@GetMapping("/workOrderUpdate")
+	public String workOrderUpdate(Model model, @RequestParam("woCode") String woCode) {
+		System.out.println("WorkOrderController workOrder/workOrderUpdate");
+		WorkOrderDTO workOrderDTO = workOrderService.getWorkOrderDetails(woCode);
+		model.addAttribute("workOrderDTO", workOrderDTO);
+		return "workOrder/workOrderUpdate";
+	}// workOrderUpdate [작업지시수정]
+	
+	
+	
+	@PostMapping("/workOrderUpdatePro")
+	public String workOrderUpdatePro(WorkOrderDTO workOrderDTO) {
+		System.out.println("ReceiveController workOrder/workOrderUpdatePro");
+		System.out.println(workOrderDTO);
+		workOrderService.workOrderUpdatePro(workOrderDTO);
+		
+		if(workOrderDTO != null) {
+			return "workOrder/msgSuccess"; // 등록완료
+		}else {
+			return "workOrder/msgFailed"; // 등록실패
+		}
+	}// workOrderUpdatePro [작업지시수정Pro]
+	
+	
+	@GetMapping("/workOrderDelete")
+	public String workOrderDelete(WorkOrderDTO workOrderDTO) {
+		System.out.println("ReceiveController receive/receiveDelete");
+		System.out.println(workOrderDTO);
+		workOrderService.workOrderUpdatePro(workOrderDTO);
+		
+		if(workOrderDTO != null) {
+			return "workOrder/msgSuccess"; // 등록완료
+		}else {
+			return "workOrder/msgFailed"; // 등록실패
+		}
+	}// receiveDelete [수주삭제]
+	
+	
 	
 	@RequestMapping(value = "/workProdList", method = RequestMethod.GET)
 	public String workProdList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
