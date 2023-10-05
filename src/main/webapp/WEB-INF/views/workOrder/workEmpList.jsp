@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@ body{
 
 
 
-/* ÆäÀÌÂ¡ */
+/* í˜ì´ì§• */
 
 
 #pagination {
@@ -97,19 +97,19 @@ h2{
 </head>
 <body>
 <h2>
-´ã´çÀÚ Á¶È¸
+ë‹´ë‹¹ì ì¡°íšŒ
 </h2>
 <br>
 <form>
 <table>
 <tr>
-	<td>»ç¿ø¾ÆÀÌµğ</td><td><input type="text" name="empId" style="width:100px;"></td>
-	<td>»ç¿øÀÌ¸§</td><td><input type="text" name="empName" style="width:100px;"></td>
-	<td><input type="submit" value="Á¶È¸"></td></tr>
+	<td>ì‚¬ì›ì•„ì´ë””</td><td><input type="text" name="empId" style="width:100px;"></td>
+	<td>ì‚¬ì›ì´ë¦„</td><td><input type="text" name="empName" style="width:100px;"></td>
+	<td><input type="submit" value="ì¡°íšŒ"></td></tr>
 </table>
 </form>
 <table>
-<tr><th>»ç¿ø¾ÆÀÌµğ</th><th>»ç¿øÀÌ¸§</th></tr>
+<tr><th>ì‚¬ì›ì•„ì´ë””</th><th>ì‚¬ì›ì´ë¦„</th></tr>
 <c:forEach var="workEmpList" items="${workEmpList}">
 <tr onclick="selectWork('${workEmpList.empId}','${workEmpList.empName }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${workEmpList.empId}</td>
@@ -118,7 +118,7 @@ h2{
 
     <script type="text/javascript">
 
-        function selectWork(a,b){ // ºÎ¸ğÃ¢À¸·Î °ª ³Ñ±â±â
+        function selectWork(a,b){ // ë¶€ëª¨ì°½ìœ¼ë¡œ ê°’ ë„˜ê¸°ê¸°
 		  
           opener.document.getElementById("empId").value = a
           opener.document.getElementById("empName").value = b
@@ -135,12 +135,12 @@ h2{
 <div class="center">
 <div id="pagination">
 
-    <!-- 1ÆäÀÌÁö ÀÌÀü -->
+    <!-- 1í˜ì´ì§€ ì´ì „ -->
 	<c:if test="${pageDTO.currentPage > 1}">
 	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
-<!-- 10ÆäÀÌÁö ÀÌÀü -->
+<!-- 10í˜ì´ì§€ ì´ì „ -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
 	</c:if>
@@ -149,12 +149,12 @@ h2{
 	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
 	</c:forEach>
 
-<!-- 1ÆäÀÌÁö ´ÙÀ½ -->	
+<!-- 1í˜ì´ì§€ ë‹¤ìŒ -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
 	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
-<!-- 10ÆäÀÌÁö ´ÙÀ½ -->
+<!-- 10í˜ì´ì§€ ë‹¤ìŒ -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>
