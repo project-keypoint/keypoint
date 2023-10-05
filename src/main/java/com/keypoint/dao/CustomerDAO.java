@@ -38,15 +38,6 @@ public class CustomerDAO {
 	}
 
 
-//	거래처상세보기
-	public CustomerDTO getCustomerDetails(String cusCode) {
-		System.out.println("CustomerDAO getCustomerDetails()");
-
-		return sqlSession.selectOne(namespace+".getCustomerDetails", cusCode);
-	}
-
-	
-	
 	
 	
 	

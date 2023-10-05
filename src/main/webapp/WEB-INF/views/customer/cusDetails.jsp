@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수주상세</title>
+<title>거래처상세</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -28,7 +28,7 @@
 
 <div class="form-group-customer">
 <p>거래처코드</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input" value="${custoemrDTO.cusCode}" readonly>
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input" placeholder="${custoemrDTO.cusCode}" readonly>
 </div>
 
 

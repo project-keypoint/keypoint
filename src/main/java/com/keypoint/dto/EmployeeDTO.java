@@ -1,10 +1,8 @@
 package com.keypoint.dto;
 
-import java.sql.Timestamp;
-
 public class EmployeeDTO {
 	
-	private int empId; // 사원ID
+	private String empId; // 사원ID
 	private String empPass;
 	private String empSalt;
 	private String empName;
@@ -19,7 +17,7 @@ public class EmployeeDTO {
 	private String departmentName; // 부서('영업','자재','생산','인사')
 	private String empPosition; // 직급('사원','대리','부장','이사','대표')
 	private String empHiredate; // 입사일
-	private int empRole; // 권한(1=관리자 / 2=사원 / 3=퇴사자(로그인x))
+	private int empRole; // 권한(1=관리자 / 2=사원 / 3=퇴사자(로그인x)) =>  수정필요
 	private String empLeavedate; // 휴직일 (date)
 	private String empRetiredate; // 퇴사일 (date)
 	
@@ -34,10 +32,10 @@ public class EmployeeDTO {
 	}
 	
 	
-	public int getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
-	public void setEmpId(int empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
 	public String getEmpPass() {

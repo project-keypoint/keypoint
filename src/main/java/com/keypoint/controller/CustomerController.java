@@ -62,29 +62,15 @@ public class CustomerController {
 		
 		
 		if(customerDTO != null) {
-			return "receive/msgSuccess"; // 등록완료->수정해야함
+			return "customer/msgSuccess"; // 등록완료
 		}else {
-			return "receive/msgFailed"; // 등록실패->수정해야함
+			return "customer/msgFailed"; // 등록실패
 		}
 	}
 	
 	
 	
-//	거래처상세보기
-	@GetMapping("/cusDetails")
-	public String cusDetails(Model model, @RequestParam("cusCode") String cusCode) {
-		System.out.println("CustomerController cusInsertPro()");
-		
-		CustomerDTO customerDTO = customerService.getCustomerDetails(cusCode);
-		
-		model.addAttribute("customerDTO", customerDTO);
-		
-		return "customer/cusDetails";
-	}
-	
-	
-	
-	
+
 	
 	
 	
