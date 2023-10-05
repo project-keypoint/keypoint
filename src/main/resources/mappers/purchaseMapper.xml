@@ -11,28 +11,40 @@
 	</insert>
 
   	<select id="getPurchaseList" resultType="com.keypoint.dto.PurchaseDTO">
-		select * from purchaseOrder
-		where poStatus != '삭제됨'
-		order by poCode desc
-		limit #{startRow}, #{pageSize}
+		SELECT po.poCode, po.materialCode, po.materialName, po.poCount, po.poDate, po.payDate, po.materialPrice, po.poPrice, e.empName AS poOwner, po.cusName, po.poStatus
+		FROM purchaseOrder po
+		JOIN employees e ON po.poOwner = e.empid
+		WHERE po.poStatus != '삭제됨'
+		ORDER BY po.poCode DESC
+		LIMIT #{startRow}, #{pageSize}
+
 	</select>
+	
+	
   	
   	<select id="getPurchaseCount" resultType="java.lang.Integer">
 		select count(*) from purchaseOrder 
 	</select>
   	
-  	
+ 
   	<select id="getPurchaseDetails" resultType="com.keypoint.dto.PurchaseDTO">
-		select * from purchaseOrder
-		where poCode = #{poCode};
+		SELECT po.poCode, po.materialCode, po.materialName, po.poCount, po.poDate, po.payDate, po.materialPrice, po.poPrice, e.empName AS poOwner, po.cusName, po.poStatus
+	    FROM purchaseOrder po
+	    JOIN employees e ON po.poOwner = e.empid
+	    WHERE po.poCode = #{poCode}
 	</select>
 	
 	<update id="updatePurchase">
-		UPDATE purchaseOrder
-		SET poCount = #{poCount}, poPrice = #{poPrice}, 
-        	poOwner = #{poOwner},
-        	cusName = #{cusName}, payDate = #{payDate} , materialCode = #{materialCode}, materialName = #{materialName}, materialPrice = #{materialPrice}
-		WHERE poCode = #{poCode}
+		 UPDATE purchaseOrder
+    SET poCount = #{poCount}, 
+        poPrice = #{poPrice}, 
+        poOwner = (SELECT empid FROM employees WHERE empName = #{poOwner}),
+        cusName = #{cusName}, 
+        payDate = #{payDate},
+        materialCode = #{materialCode}, 
+        materialName = #{materialName}, 
+        materialPrice = #{materialPrice}
+    WHERE poCode = #{poCode}
 	</update>
 	
 	<update id="deletePurchase">

@@ -13,7 +13,7 @@ public class PurchaseDTO {
     private String poDate;
     private String payDate;
     private String cusName;
-    private int poOwner;
+    private String poOwner;
     private String poStatus;
     
     
@@ -71,10 +71,10 @@ public class PurchaseDTO {
 	public void setCusName(String cusName) {
 		this.cusName = cusName;
 	}
-	public int getPoOwner() {
+	public String getPoOwner() {
 		return poOwner;
 	}
-	public void setPoOwner(int poOwner) {
+	public void setPoOwner(String poOwner) {
 		this.poOwner = poOwner;
 	}
 	public String getPoStatus() {
