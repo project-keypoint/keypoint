@@ -101,7 +101,7 @@
 			<div id="collapsePages" class="collapse"
 				aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시관리</a> 
+					<a class="collapse-item" href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록</a> 
 					<a class="collapse-item" href="${pageContext.request.contextPath}/line/lineList">라인관리</a> 
 					<a class="collapse-item" href="${pageContext.request.contextPath}/forgot-password.html">실적관리</a>
 					<div class="collapse-divider"></div>
@@ -126,7 +126,7 @@
 		<li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workOrderList">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>작업지시</span></a>
+                    <span>작업지시목록</span></a>
             </li> 
 		
 
