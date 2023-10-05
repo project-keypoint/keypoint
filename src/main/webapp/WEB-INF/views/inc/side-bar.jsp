@@ -46,11 +46,11 @@
 
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/main/notice">
-				<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항</span>
+				<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항(작업중)</span>
 		</a></li> 
 		
 		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/employee/employeeList">
-				<i class="fas fa-fw fa-tachometer-alt"></i> <span>사원관리</span>
+				<i class="fas fa-fw fa-tachometer-alt"></i> <span>사원관리(작업중)</span>
 		</a></li> 
 
 		<!-- Heading -->
@@ -80,11 +80,11 @@
 			<div id="collapseUtilities" class="collapse"
 				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">발주목록</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/stock/">입고목록</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/require/requireList">소요량목록</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/productList">완제품목록</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/material/materialList">자재목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/purchase/purchaseList/">발주목록(작업중)</a> 
+					<a class="collapse-item" href="${pageContext.request.contextPath}/receipt/receiptList/">입고목록(작업중)</a> 
+					<a class="collapse-item" href="${pageContext.request.contextPath}/require/requireList">소요량목록(작업중)</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/product/productList">완제품목록(작업중)</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/material/materialList">자재목록(작업중)</a>
 				</div>
 			</div></li>
 
@@ -101,9 +101,9 @@
 			<div id="collapsePages" class="collapse"
 				aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/line/lineList">라인관리</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/forgot-password.html">실적관리</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록(작업중)</a> 
+					<a class="collapse-item" href="${pageContext.request.contextPath}/line/lineList">라인관리(작업중)</a> 
+					<a class="collapse-item" href="${pageContext.request.contextPath}/forgot-password.html">실적관리(없음)</a>
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
