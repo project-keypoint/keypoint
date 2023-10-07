@@ -35,30 +35,25 @@ public class EmployeeDAO {
 
 
 	// 사원-상세정보
-	public EmployeeDTO getEmployeeDetails(int empId) {
+	public EmployeeDTO getEmployeeDetails(String empId) {
 		System.out.println("EmployeeDAO getEmployeeDetails()");
 		
 		return sqlSession.selectOne(namespace+".getEmployeeDetails", empId);
 	} // getEmployeeDetails
 
-	
-//	// 사원수정
-//	public void updateEmployee(EmployeeDTO employeeDTO) {
-//		System.out.println("EmployeeDAO updateEmployee()");
-//		
-//		sqlSession.update(namespace+".updateEmployee", employeeDTO);
-//	}// updateEmployee
+
+	// 사원-상세정보수정
+	public void updateEmployee(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO updateEmployee()");
+		
+		sqlSession.update(namespace+".updateEmployee", employeeDTO);
+	} // updateEmployee
+
 	
 
 	
-//	public void deleteMember(String empId) {
-//	System.out.println("EmployeeDAO deleteMember()");
-//	sqlSession.update(namespace+".deleteMember", empId);
-//}//deleteMember
 	
 	
 	
-	
-	
-} // 클래스
+} // class
 

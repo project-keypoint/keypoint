@@ -44,7 +44,7 @@ public class EmployeeController {
 	
 	
 	// 사원등록하기
-	@PostMapping("/employeeInsertPro2")
+	@PostMapping("/employeeInsertPro")
 	public String employeeInsertPro(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeController employeeInsertPro()");
 		System.out.println(employeeDTO);
@@ -71,57 +71,44 @@ public class EmployeeController {
 	
 	// 사원-상세정보
 	@GetMapping("/employeeDetails")
-	public String employeeDetails(Model model, @RequestParam("empId") int empId) {
+	public String employeeDetails(Model model, @RequestParam("empId") String empId) {
 		System.out.println("EmployeeController employeeDetails()");
 		
-		EmployeeDTO employeeDTO= employeeService.getEmployeeDetails(empId);
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
 		model.addAttribute("employeeDTO", employeeDTO);
 		
 		return "employee/employeeDetails";
 	}// employeeDetails
 	
 	
-	// 내정보수정 , 모든 사원정보수정
-	// 사원정보수정화면
-//	@GetMapping("/employeeUpdate")
-//	public String receiveUpdate(Model model, @RequestParam("roCode") String roCode) {
-//		System.out.println("ReceiveController receive/receiveUpdate");
-//		
-//		ReceiveDTO receiveDTO = employeeService.getReceiveDetails(roCode);
-//		model.addAttribute("receiveDTO", receiveDTO);
-//		
-//		return "receive/receiveUpdate";
-//	}// employeeUpdate
-//	
-//	// 사원정보수정하기
-//	@PostMapping("/employeeUpdatePro")
-//	public String receiveUpdatePro(ReceiveDTO receiveDTO) {
-//		System.out.println("ReceiveController receive/receiveUpdatePro");
-//		System.out.println(receiveDTO);
-//		
-//		employeeService.employeeUpdatePro(receiveDTO);
-//		
-//		if(receiveDTO != null) {
-//			return "employee/msgSuccess"; // 수정완료
-//		}else {
-//			return "employee/msgFailed"; // 수정실패
-//		}
-//	}// employeeUpdatePro
+	// 사원-상세정보 수정화면
+	@GetMapping("/employeeUpdate")
+	public String employeeUpdate(Model model, @RequestParam("empId") String empId) {
+		System.out.println("EmployeeController employeeUpdate()");
+		
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		
+		return "employee/employeeUpdate";  
+	} // employeeUpdate
+	
+
+	// 사원-상세정보 수정하기
+	@PostMapping("/employeeUpdatePro")
+	public String employeeUpdatePro(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeController employeeUpdatePro()");
+		System.out.println(employeeDTO);
+		
+		employeeService.updateEmployee(employeeDTO);
+		
+		if(employeeDTO != null) {
+			return "employee/msgSuccess"; // 등록완료
+		} else {
+			return "employee/msgFailed"; // 등록실패
+		}
+	
+	} // employeeUpdatePro	
 	
 	
 	
-	
-	
-	
-//	// 사원삭제(보류)
-//	@GetMapping("/delete")
-//	public String deleteMember(String empId) {
-//		System.out.println("EmployeeController deleteMember()");
-//		employeeService.deleteMember(empId);
-//		return ""; 
-//	}
-	
-	
-	
-	
-} // 클래스
+} // class

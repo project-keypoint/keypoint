@@ -59,7 +59,7 @@
 <table class="table-list">
 <tr class="table-head">
 <!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
-	<th>사번</th> 
+	<th>사원번호</th> 
     <th>이름</th> 
     <th>부서</th> 
     <th>직급</th> 
@@ -109,7 +109,7 @@
 <!-- contents end -->
 
 
-<!-- 데이트피커 : 날짜선택요소(달력형식, 직접입력) -->
+<!-- 데이트피커 : 날짜선택요소(달력형식) -->
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
