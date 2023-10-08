@@ -47,14 +47,42 @@
 	</div>
 	<!-- contents end -->
 	<script type="text/javascript">
-		var context = document.getElementById('myChart').getContext('2d');
+    var today = new Date();
+    var labels = [];
+    
+    // 함수를 사용하여 날짜를 원하는 형식으로 포맷팅
+    function formatDate(date) {
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+        var day = date.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
+        return year + '.' + month + '.' + day;
+    }
+
+    // Generating labels for 3 days before today
+    for (var i = 3; i >= 1; i--) {
+        var date = new Date(today);
+        date.setDate(today.getDate() - i);
+        labels.push(formatDate(date));
+    }
+
+    // Adding today's label
+    labels.push(formatDate(today));
+
+    // Generating labels for 3 days after today
+    for (var i = 1; i <= 3; i++) {
+        var date = new Date(today);
+        date.setDate(today.getDate() + i);
+        labels.push(formatDate(date));
+    }
+
+    var context = document
+        .getElementById('myChart')
+        .getContext('2d');
+   
 		var myChart = new Chart(context, {
 			type : 'bar', // 차트의 형태
 			data : { // 차트에 들어갈 데이터
-				labels : [
-				//x 축
-				'2023/10/19', '2023/10/20', '2023/10/21', '2023/10/22',
-						'2023/10/23', '2023/10/24', '2023/10/25' ],
+				labels : labels,
 				datasets : [
 						{ //데이터1
 							label : '키보드1', //차트 제목
