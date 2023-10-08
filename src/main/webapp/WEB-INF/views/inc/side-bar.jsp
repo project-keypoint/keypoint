@@ -29,7 +29,8 @@
 	<!-- Sidebar -->
 	<ul
 		class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-		id="accordionSidebar" style="position: fixed; top: 0rem; height: 100vh;">
+		id="accordionSidebar"
+		style="position: fixed; top: 0rem; height: 100vh;">
 
 		<!-- Sidebar - Brand -->
 		<a
@@ -45,13 +46,15 @@
 		<hr class="sidebar-divider my-0">
 
 		<!-- Nav Item - Dashboard -->
-		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/main/notice">
-				<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항(작업중)</span>
-		</a></li> 
-		
-		<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/employee/employeeList">
-				<i class="fas fa-fw fa-tachometer-alt"></i> <span>사원관리(작업중)</span>
-		</a></li> 
+		<li class="nav-item active"><a class="nav-link"
+			href="${pageContext.request.contextPath}/main/notice"> <i
+				class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항(보류)</span>
+		</a></li>
+
+		<li class="nav-item active"><a class="nav-link"
+			href="${pageContext.request.contextPath}/employee/employeeList">
+			 <i class="fas fa-fw fa-cog"></i>	<span>사원관리(작업중)</span>
+		</a></li>
 
 		<!-- Heading -->
 
@@ -59,15 +62,17 @@
 		<!-- Nav Item - Pages Collapse Menu -->
 		<li class="nav-item"><a class="nav-link collapsed" href="#"
 			data-toggle="collapse" data-target="#collapseTwo"
-			aria-expanded="true" aria-controls="collapseTwo"> <i
-				class="fas fa-fw fa-cog"></i> <span>영업관리</span>
-		</a>
+			aria-expanded="true" aria-controls="collapseTwo"><i
+				class="fas fa-fw fa-chart-area"></i>  <span>영업관리</span> </a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="${pageContext.request.contextPath}/receive/receiveList">수주목록(작업중)</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/receive/shipmentTest">수주+출하(테스트)</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/customer/cusList">거래처관리(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/receive/receiveList">수주목록(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/receive/shipmentTest">수주+출하(테스트)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/customer/cusList">거래처관리(작업중)</a>
 				</div>
 			</div></li>
 
@@ -75,16 +80,21 @@
 		<li class="nav-item"><a class="nav-link collapsed" href="#"
 			data-toggle="collapse" data-target="#collapseUtilities"
 			aria-expanded="true" aria-controls="collapseUtilities"> <i
-				class="fas fa-fw fa-wrench"></i> <span>자재관리</span>
+				class="fas fa-fw fa-folder"></i>  <span>자재관리</span>
 		</a>
 			<div id="collapseUtilities" class="collapse"
 				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="${pageContext.request.contextPath}/purchase/purchaseList/">발주목록(작업중)</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/receipt/receiptList/">입고목록(작업중)</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/require/requireList">소요량목록(작업중)</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/product/productList">완제품목록(작업중)</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/material/materialList">자재목록(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/purchase/purchaseList/">발주목록(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/receipt/receiptList/">입고목록(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/require/requireList">소요량목록(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/product/productList">완제품목록(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/material/materialList">자재목록(작업중)</a>
 				</div>
 			</div></li>
 
@@ -96,39 +106,41 @@
 		<li class="nav-item"><a class="nav-link collapsed" href="#"
 			data-toggle="collapse" data-target="#collapsePages"
 			aria-expanded="true" aria-controls="collapsePages"> <i
-				class="fas fa-fw fa-folder"></i> <span>생산관리</span>
+				class="fas fa-fw fa-wrench"></i> <span>생산관리</span>
 		</a>
 			<div id="collapsePages" class="collapse"
 				aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록(작업중)</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/forgot-password.html">실적관리(없음)</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/line/lineList">라인관리(작업중)</a> 
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록(작업중)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/forgot-password.html">실적관리(없음)</a>
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/line/lineList">라인관리(작업중)</a>
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
-			
+
 		<!-- Nav Item - Charts -->
 		<li class="nav-item"><a class="nav-link collapsed" href="#"
-			data-toggle="collapse" data-target="#qcPages"
-			aria-expanded="true" aria-controls="qcPages"> <i
-				class="fas fa-fw fa-folder"></i> <span>품질관리</span>
+			data-toggle="collapse" data-target="#qcPages" aria-expanded="true"
+			aria-controls="qcPages"> <i class="fas fa-fw fa-tachometer-alt"></i>  <span>품질관리</span>
 		</a>
-			<div id="qcPages" class="collapse"
-				aria-labelledby="headingPages" data-parent="#accordionSidebar">
+			<div id="qcPages" class="collapse" aria-labelledby="headingPages"
+				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="${pageContext.request.contextPath}/qc/qcList">품질검사목록(작업중)</a> 
-					<a class="collapse-item" href="#">폐기관리(없음)</a> 
+					<a class="collapse-item"
+						href="${pageContext.request.contextPath}/qc/qcList">품질검사목록(작업중)</a>
+					<a class="collapse-item" href="#">폐기관리(없음)</a>
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
-		
-		<li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workOrderList">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>작업지시목록</span></a>
-            </li> 
-		
+
+		<li class="nav-item"><a class="nav-link"
+			href="${pageContext.request.contextPath}/workOrder/workOrderList">
+				<i class="fas fa-fw fa-chart-area"></i> <span>작업지시목록</span>
+		</a></li>
+
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">
@@ -136,8 +148,8 @@
 
 	</ul>
 	<!-- End of Sidebar -->
-	
-	 <!-- Bootstrap core JavaScript-->
+
+ <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -153,7 +165,8 @@
     <!-- Page level custom scripts -->
     <script src="${pageContext.request.contextPath}/resources/js/demo/chart-area-demo.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/demo/chart-pie-demo.js"></script>
-	
-	
+
+
+
 </body>
 </html>

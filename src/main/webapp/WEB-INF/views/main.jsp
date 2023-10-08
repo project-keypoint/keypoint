@@ -31,7 +31,7 @@
 		<!-- Main Content -->
 		<a href="${pageContext.request.contextPath}/main/testpage"
 			class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style= "float:right;">
-			<i class="fas fa-download fa-sm text-white-50"></i> testpage</a>
+			<i class="fas fa-download fa-sm text-white-50"></i> 테스트</a>
 		<!-- Begin Page Content -->
 		<div class="container-fluid">
 			<h2>제품 출고 현황</h2>
