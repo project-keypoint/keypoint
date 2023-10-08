@@ -59,15 +59,12 @@
 				</div>
 				<!-- search-bar -->
 				<br>
-				<!-- <div class="select-status"> -->
-				<!-- <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a> -->
-				<!-- <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a> -->
-				<!-- <a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a> -->
-				<!-- <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a> -->
-				<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
-				<!-- <div> -->
-				<!-- </div> -->
-				<!-- </div> -->
+	
+
+
+
+
+
 
 				<div>
 					<table class="table-list">
@@ -80,7 +77,7 @@
 							<th>조회수</th>
 							<th>담당자</th>
 						</tr>
-						<c:forEach var="NoticeDTO" items="${noticeList}">
+						<c:forEach var="noticeDTO" items="${noticeList}">
 							<tr class="table-body">
 								<td><input type="checkbox" id="delete-list"
 									name="delete-list" data-group="delete-list"></td>
@@ -132,18 +129,21 @@
 
 	<!-- contents end -->
 
-	<script type="text/javascript">
-		//수주등록 새창
-		function openInsert() {
-			var url = '${pageContext.request.contextPath}/notice/noticeInsert';
-			var windowWidth = 500;
-			var windowHeight = 675;
-			var windowLeft = (screen.width - windowWidth) / 2;
-			var windowTop = (screen.height - windowHeight) / 2;
-			var newWindow = window.open(url, '_blank', 'width=' + windowWidth
+
+
+
+<script type="text/javascript">
+//수주등록 새창
+function openInsert() {
+	var url = '${pageContext.request.contextPath}/notice/noticeWrite';
+	var windowWidth = 700;
+	var windowHeight = 675;
+	var windowLeft = (screen.width - windowWidth) / 2;
+	var windowTop = (screen.height - windowHeight) / 2;
+	var newWindow = window.open(url, '_blank', 'width=' + windowWidth
 					+ ', height=' + windowHeight + ', left=' + windowLeft
 					+ ', top=' + windowTop);
-		}
+}
 
 		//수주상세내용 새창
 		function openDetails(roCode) {
@@ -183,7 +183,7 @@
 				}
 			});
 		});
-	</script>
+</script>
 </body>
 
 </html>

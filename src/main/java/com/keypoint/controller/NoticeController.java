@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.keypoint.dto.NoticeDTO;
 import com.keypoint.service.NoticeService;
 
+
+
+
 @Controller
 @RequestMapping("/notice/*")
 public class NoticeController {
@@ -19,12 +22,32 @@ public class NoticeController {
 	@Inject
 	private NoticeService noticeService;
 	
+	
+	
+	
+//	--------------------------------------------------------------------------------------------------
+	
+//	공지사항 글쓰기
+	@GetMapping("/noticeWrite")
+	public String noticeWrite() {
+		System.out.println("NoticeController noticeWrite()");
+		
+		
+
+		return "notice/noticeWrite";
+	}
+	
+	
+	
+//	공지사항 리스트
 	@GetMapping("/noticeList")
 	public String noticeList(Model model) {
-		System.out.println("noticeController notice/noticeList");
+		System.out.println("NoticeController noticeList()");
+		
 		List<NoticeDTO> noticeList = noticeService.getNoticeList();
+		
 		model.addAttribute("noticeList", noticeList);
-		System.out.println("noticeList");
+
 	return "notice/noticeList";
 	}
 	

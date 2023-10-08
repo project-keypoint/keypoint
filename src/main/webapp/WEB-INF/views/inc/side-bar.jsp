@@ -33,8 +33,7 @@
 		style="position: fixed; top: 0rem; height: 100vh;">
 
 		<!-- Sidebar - Brand -->
-		<a
-			class="sidebar-brand d-flex align-items-center justify-content-center"
+		<a class="sidebar-brand d-flex align-items-center justify-content-center"
 			href="${pageContext.request.contextPath}/main/main">
 			<div class="sidebar-brand-icon rotate-n-15">
 				<i class="fas fa-laugh-wink"></i>
@@ -46,9 +45,9 @@
 		<hr class="sidebar-divider my-0">
 
 		<!-- Nav Item - Dashboard -->
-		<li class="nav-item active"><a class="nav-link"
-			href="${pageContext.request.contextPath}/main/notice"> <i
-				class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항(보류)</span>
+		<li class="nav-item active">
+		<a class="nav-link" href="${pageContext.request.contextPath}/notice/noticeList">
+			<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항(작업중)</span>
 		</a></li>
 
 		<li class="nav-item active"><a class="nav-link"

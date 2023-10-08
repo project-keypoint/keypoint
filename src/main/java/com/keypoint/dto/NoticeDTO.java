@@ -8,7 +8,7 @@ public class NoticeDTO {
 	
 	
 	private int noticeNum;
-	private int empId;
+	private String empId;
 	private String noticeCategory;
 	private String noticeSubject;
 	private String noticeContent;
@@ -37,10 +37,10 @@ public class NoticeDTO {
 	public void setNoticeNum(int noticeNum) {
 		this.noticeNum = noticeNum;
 	}
-	public int getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
-	public void setEmpId(int empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
 	public String getNoticeCategory() {

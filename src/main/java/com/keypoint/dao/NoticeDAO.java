@@ -12,20 +12,27 @@ import com.keypoint.dto.NoticeDTO;
 @Repository
 public class NoticeDAO {
 
+	
+//	SqlSession 객체생성
 	@Inject
 	private SqlSession sqlSession;
 
-	private static final String nameSpace="com.itwillbs.mappers.NoticeMapper";
+	private static final String nameSpace="com.itwillbs.mappers.noticeMapper";
+
+
 	
+	
+	
+	
+	
+//	-----------------------------------------------------------------------------------
+	
+//	공지사항 리스트
 	public List<NoticeDTO> getNoticeList() {
-	System.out.println("NoticeDTO getNoticeList()");
-	
+		System.out.println("NoticeDAO getNoticeList()");
+		
 		return sqlSession.selectList(nameSpace+".getNoticeList");
-	} // 노티스 목록
-
-	
-
-	
+	}
 	
 	
 	
