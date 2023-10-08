@@ -18,7 +18,7 @@ public class NoticeService {
 	
 	public List<NoticeDTO> getNoticeList(){
 		System.out.println("noticeService getNoticeList()");
-		return noticeDAO.getNoticeLIst();
+		return noticeDAO.getNoticeList();
 		
 	}// 노티스 목록
 	

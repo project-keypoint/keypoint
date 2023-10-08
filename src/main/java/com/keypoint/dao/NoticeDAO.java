@@ -17,11 +17,13 @@ public class NoticeDAO {
 
 	private static final String nameSpace="com.itwillbs.mappers.NoticeMapper";
 	
-	public List<NoticeDTO> getNoticeLIst() {
+	public List<NoticeDTO> getNoticeList() {
 	System.out.println("NoticeDTO getNoticeList()");
 	
 		return sqlSession.selectList(nameSpace+".getNoticeList");
 	} // 노티스 목록
+
+	
 
 	
 	

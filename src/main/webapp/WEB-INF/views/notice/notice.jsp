@@ -41,8 +41,8 @@
 						<div class="search-select">
 							<div class="dropdown">
 								<select name="language" id="language" style="padding-top:5px; padding-bottom:5px; border-radius: 0.35rem;">
-									<option value="javascript">제목</option>
-									<option value="python">제목+내용</option>
+									<option value="noticeSubject">제목</option>
+									<option value="noticeSub+Con">제목+내용</option>
 								</select>
 							</div>
 							<input type="text" id="noticeSubject"
@@ -80,15 +80,15 @@
 							<th>조회수</th>
 							<th>담당자</th>
 						</tr>
-						<c:forEach var="LineDTO" items="${lineList}">
+						<c:forEach var="NoticeDTO" items="${noticeList}">
 							<tr class="table-body">
 								<td><input type="checkbox" id="delete-list"
 									name="delete-list" data-group="delete-list"></td>
-								<td>${LineDTO.lineCode}</td>
-								<td>${LineDTO.lineName}</td>
-								<td>${LineDTO.woCode}</td>
-								<td>${LineDTO.lineMemo}</td>
-								<td>${LineDTO.lineEmp}</td>
+								<td>${noticeDTO.noticeNum}</td>
+								<td>${noticeDTO.noticeSubject}</td>
+								<td>${noticeDTO.noticeDate}</td>
+								<td>${noticeDTO.noticeReadcount}</td>
+<%-- 								<td>${noticeDTO.lineEmp}</td> --%>
 
 
 								<%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
@@ -102,9 +102,7 @@
 								<%--             </c:otherwise> --%>
 								<%--         </c:choose></td><!-- 납품일 null 대신 '-' --> --%>
 								<%--     <td>${receiveDTO.roStatus}</td> --%>
-								<td><input type="button" value="상세내역"
-									class="btn btn-secondary mybutton1"
-									onclick="openDetails('${lineDTO.lineCode}')"></td>
+								
 							</tr>
 						</c:forEach>
 					</table>
