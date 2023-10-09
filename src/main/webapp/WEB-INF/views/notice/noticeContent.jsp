@@ -26,28 +26,30 @@
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
 <div class="page-title">공지사항</div>
 <div class="contents2">
-<div class="search-bar">
-<div class="search-b">
-<div class="search-select">
-<p>업체명</p> 
-<input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
-<input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
-</div>
-</div>
 
-<div class="search-b">
-<div class="search-date">
-<p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
-</div>
-</div>
 
-<div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
-</div>
-</div><!-- search-bar -->
+<!-- <div class="search-bar"> -->
+<!-- <div class="search-b"> -->
+<!-- <div class="search-select"> -->
+<!-- <p>업체명</p>  -->
+<!-- <input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly> -->
+<!-- <input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly> -->
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- <div class="search-b"> -->
+<!-- <div class="search-date"> -->
+<!-- <p>상품명</p>  -->
+<!-- <input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly> -->
+<!-- <input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly> -->
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- <div class="search-button"> -->
+<!-- <input type="button" value="검색" class="btn btn-primary mybutton1"> -->
+<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1"> -->
+<!-- </div> -->
+<!-- </div>search-bar -->
 <br>
 
 
@@ -56,27 +58,21 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>글번호</th> 
-    <th>구분</th> 
-    <th>제목</th> 
-    <th>작성자</th> 
-    <th>조회수</th> 
-    <th>작성일</th> 
+	<th colspan="4">[${noticeDTO.noticeCategory}] ${noticeDTO.noticeSubject}</th> 
 
 </tr>
-<c:forEach var="noticeDTO" items="${noticeList}">
-<tr class="table-body" onclick="location.href='${pageContext.request.contextPath}/notice/noticeContent?noticeNum=${noticeDTO.noticeNum}'">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+<tr class="table-body">
     <td>${noticeDTO.noticeNum}</td>
-    <td>${noticeDTO.noticeCategory}</td>
-    <td>${noticeDTO.noticeSubject}</td>
     <td>${noticeDTO.empName}</td>
-    <td>${noticeDTO.noticeReadcount}</td>
+    <td>조회 ${noticeDTO.noticeReadcount}</td>
     <td>${noticeDTO.noticeDate}</td>
 <%--     <td><fmt:formatDate value=" ${noticeDTO.noticeDate}" pattern="yyyy.MM.dd"/></td> --%>
 </tr>
-</c:forEach>    
+
+<tr class="table-body">
+    <td colspan="4" style="height: 300px;">${noticeDTO.noticeContent}</td>
+</tr>
+
 </table>
 </div><!-- table -->
 
@@ -84,39 +80,21 @@
 
 <div class="content-bottom">
 <div>
-<input type="button" value="글쓰기" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="글목록" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList'">
+<input type="button" value="글수정" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<br>
 </div>
 
 
-<!-- ---------------------페이징---------------- -->
-<div class="page-buttons">
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
-</c:if>
-
-<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}" class="page-button page-button-active">${i}</a>		
-</c:forEach>
-
-<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
-</c:if>	
-
-<!-- <a href="#" class="page-button">&lt;</a> -->
-<!-- <a href="#" class="page-button page-button-active">1</a> -->
-<!-- <a href="#" class="page-button">2</a> -->
-<!-- <a href="#" class="page-button">3</a> -->
-<!-- <a href="#" class="page-button">4</a> -->
-<!-- <a href="#" class="page-button">5</a> -->
-<!-- <a href="#" class="page-button">&gt;</a> -->
-</div><!-- page-button -->
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
 </div><!-- main -->
 
 <!-- contents end -->
+
+
 
 
 
@@ -182,9 +160,9 @@ checkboxes.forEach(function (checkbox) {
 
 
 
-//	공지사항등록 새창
+//	공지사항 글 수정하기
 function openInsert() {
-    var url = '${pageContext.request.contextPath}/notice/noticeWrite';
+    var url = '${pageContext.request.contextPath}/notice/noticeUpdate';
     var windowWidth = 900;
     var windowHeight = 675;
     var windowLeft = (screen.width - windowWidth) / 2;

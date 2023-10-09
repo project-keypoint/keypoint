@@ -6,11 +6,56 @@
 <mapper namespace="com.itwillbs.mappers.noticeMapper">
 
 
+
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		SELECT MAX(noticeNum)
+		FROM notice
+	</select>
+
+
+
+	<insert id="insertNotice">
+		INSERT INTO notice(noticeNum, noticeCategory, noticeSubject,
+							noticeContent, noticeReadcount, noticeDate, noticeFile)
+		VALUES (#{noticeNum}, #{noticeCategory}, #{noticeSubject},
+				#{noticeContent}, #{noticeReadcount}, #{noticeDate}, #{noticeFile})
+	</insert>
+
+
+
   	<select id="getNoticeList" resultType="com.keypoint.dto.NoticeDTO">
-  		SELECT *
-  		FROM notice
+  		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate
+  		FROM notice n LEFT JOIN employees e
+  		ON n.empId = e.empId
   		ORDER BY noticeNum DESC
+  		LIMIT #{startRow}, #{pageSize}
   	</select>
+  
+  
+  
+	<select id="getNoticeCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM notice
+	</select>  
+  
+  
+  
+  	<select id="getNoticeContent" resultType="com.keypoint.dto.NoticeDTO">
+  		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate, n.noticeContent
+  		FROM notice n LEFT JOIN employees e
+  		ON n.empId = e.empId
+  		WHERE noticeNum = #{noticeNum}
+  	</select>
+  
+  
+  
+  	<update id="updateReadcount">
+  		UPDATE notice SET noticeReadcount = #{noticeReadcount} +1
+  		WHERE noticeNum = #{noticeNum}
+  	</update>
+  
+  
+  
   
   
   

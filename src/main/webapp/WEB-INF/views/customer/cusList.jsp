@@ -56,7 +56,6 @@
 
 
 <div style="text-align: right;">
-<input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 </div><br>
 
 
@@ -121,7 +120,6 @@
 	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
 </c:if>	
 
-<a href="#" class="page-button">&gt;</a>
 </div><!-- page-button -->
 </div>
 </div><!-- contents -->
