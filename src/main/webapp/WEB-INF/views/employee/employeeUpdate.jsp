@@ -14,52 +14,77 @@
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 사원 CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/employee.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/employeeDetails.css" rel="stylesheet">
 </head>
 <body>
-<div class="main-details">
 <form action="${pageContext.request.contextPath}/employee/employeeUpdatePro" method="post" onsubmit="return validateForm()">
-<div class="forms-group-receive">
-<div class="page-title-popup">사원상세정보수정</div>
+
+<!-- <div class="page-title-popup">사원상세정보수정</div> -->
+<div class="page-title">사원상세정보수정</div>
+
+<div class="main-details">
 
 <div class="form-group-receive">
+
+<div class="form-group-column">
 <p>사진</p>
 <input type="text" id="empPhoto" class="form-control search-input" placeholder="${employeeDTO.empPhoto}">
 </div>
 
-<div class="form-group-receive">
-<p>사원ID</p>
+<div class="form-group-row">
+
+<div class="form-group-column">
+<p>사원번호</p>
 <input type="text" id="empId" class="form-control search-input" placeholder="${employeeDTO.empId}" readonly>
 </div>
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>이름</p>
 <input type="text" id="empName" class="form-control search-input" placeholder="${employeeDTO.empName}" readonly>
 </div>
 
-<div class="form-group-receive">
+</div>
+
+<div class="form-group-row">
+
+<div class="form-group-column">
 <p>이메일</p>
 <input type="text" id="empEmail" class="form-control search-input" placeholder="${employeeDTO.empEmail}">
 </div>
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>생년월일</p>
 <input type="text" id="empBirth" class="form-control search-input" placeholder="${employeeDTO.empBirth}" readonly>
 </div>
 
-<div class="form-group-receive">
+</div>
+
+<div class="form-group-row">
+
+<div class="form-group-column">
 <p>연락처</p>
 <input type="text" id="empPhone" class="form-control search-input" placeholder="${employeeDTO.empPhone}">
 </div>
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>내선번호</p>
 <input type="text" id="empTel" class="form-control search-input" placeholder="${employeeDTO.empTel}">
 </div>
 
-<div class="form-group-receive">
+</div>
+
+
+<div class="form-group-column">
 <p>주소</p>
 <input type="text" id="empAddress" class="form-control search-input" placeholder="${employeeDTO.empAddress}" readonly>
 </div>
+</div><!-- main-details1 -->
+</div><!-- form-group-receive -->
 
+
+<div class="main-details"><!-- main-details2 -->
 <div class="form-group-receive">
+
+<div class="form-group-row">
+
+<div class="form-group-column">
 <p>부서</p>
 <select id="departmentName" name="departmentName" class="form-control search-input status">
     <option value="영업부" ${employeeDTO.departmentName eq '영업부' ? 'selected' : ''}>영업부</option>
@@ -70,7 +95,7 @@
 </div>
 
 </div>
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>직급</p>
 <select id="empPosition" name="empPosition" class="form-control search-input status">
     <option value="사원" ${employeeDTO.empPosition eq '사원' ? 'selected' : ''}>사원</option>
@@ -81,7 +106,7 @@
 </select>    
 </div>
 
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>재직여부</p>
 <select id="empStatus" name="empStatus" class="form-control search-input status">
     <option value="재직" ${employeeDTO.empStatus eq '재직' ? 'selected' : ''}>재직</option>
@@ -89,23 +114,28 @@
     <option value="퇴직" ${employeeDTO.empStatus eq '퇴직' ? 'selected' : ''}>퇴직</option>
 </select>    
 </div>
+</div>
 
-<div class="form-group-receive">
+
+<div class="form-group-row">
+
+<div class="form-group-column">
 <p>입사일</p>
 <input type="text" id="empHiredate" class="form-control search-input" placeholder="${employeeDTO.empHiredate}">
 </div>
 
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>휴직일</p>
 <input type="text" id="empLeavedate" class="form-control search-input" placeholder="${employeeDTO.empLeavedate}">
 </div>
 
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>퇴직일</p>
 <input type="text" id="empRetiredate" class="form-control search-input" placeholder="${employeeDTO.empRetiredate}">
 </div>
+</div>
 
-<div class="form-group-receive">
+<div class="form-group-column">
 <p>권한(보류)</p>
 <select id="empRole" name="empRole" class="form-control search-input status">
     <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
@@ -114,6 +144,8 @@
     <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
 </select>    
 </div>
+</div><!-- form-group-receive -->
+</div><!-- main-details2 -->
 
 <div class="details-buttons">
 <input type="submit" value="완료" class="btn btn-primary mybutton1">
