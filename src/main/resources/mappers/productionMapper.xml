@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwillbs.mappers.productionMapper">
+
+
+
+	<select id="getProductionList"
+		resultType="com.keypoint.dto.ProductionDTO">
+		select a.poCode, b.woCode, a.poDate, b.woStatus, b.lineCode,
+		b.productCode, b.productName, b.woCount, a.poGood, a.poErr, a.poCause,
+		b.roCode, b.cusCode
+		from production a
+		left join workOrder b on a.woCode = b.woCode
+		where a.woStatus != '삭제'
+		order by a.woCode desc
+		</select>
+		
+
+<!-- 	<select id="getWorkOrderList" -->
+<!-- 		resultType="com.keypoint.dto.WorkOrderDTO"> -->
+<!-- 		select a.woCode, a.cusCode, b.cusName, a.productCode, -->
+<!-- 		c.productName, -->
+<!-- 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode, -->
+<!-- 		a.empId, e.empName -->
+<!-- 		from workOrder a -->
+<!-- 		left join customer b on a.cusCode = b.cusCode -->
+<!-- 		left join product c on a.productCode = c.productCode -->
+<!-- 		left join receivedOrder d on a.roCode = d.roCode -->
+<!-- 		left join employees e on a.empId -->
+<!-- 		= e.empId -->
+<!-- 		where a.woStatus != '삭제' -->
+<!-- 		order by a.woCode DESC -->
+<!-- 	</select> -->
+	
+	
+	
+
+
+
+</mapper>
+
+
+
+

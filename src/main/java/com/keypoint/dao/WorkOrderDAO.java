@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
 
@@ -152,6 +153,78 @@ public class WorkOrderDAO {
 		System.out.println("WorkOrderDAO countEmpList()");
 		return sqlSession.selectOne(namespace+".countEmpList", search);
 	}
+
+	
+	
+	public List<WorkOrderDTO> workList() {
+		System.out.println("WorkOrderDAO workList()");
+		
+		return sqlSession.selectList(namespace + ".workList");
+	}
+	
+	
+	public List<Map<String, Object>> workList(PageDTO pageDTO) {
+		System.out.println("WorkOrderDAO workListPaging()");
+		
+		return sqlSession.selectList(namespace + ".workListPaging", pageDTO);
+	}
+
+	public List<Map<String, Object>> workSearch(Map<String, Object> workSearch, PageDTO pageDTO) {
+		System.out.println("WorkOrderDAO workSearch()");
+		System.out.println("라인 : " + workSearch);
+		
+		workSearch.put("startRow", pageDTO.getStartRow());
+		workSearch.put("pageSize", pageDTO.getPageSize());
+		
+		System.out.println("라인 페이징 : " + workSearch);
+		
+		return sqlSession.selectList(namespace+".workSearch", workSearch);
+	}
+
+	public Integer workTotalCount() {
+		System.out.println("WorkOrderDAO workTotalCount");
+		
+		return sqlSession.selectOne(namespace+".workTotalCount");
+	}
+
+	public Integer workSearchCount(Map<String, Object> workSearch) {
+		System.out.println("WorkOrderDAO workSearchCount");
+		
+		return sqlSession.selectOne(namespace+".workSearchCount", workSearch);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+//	public List<WorkOrderDTO> getWorkList(PageDTO pageDTO) {
+//		System.out.println("WorkOrderDAO getWorkList()");
+//		pageDTO.setStartRow(pageDTO.getStartRow()-1);
+//		return sqlSession.selectList(namespace+".getWorkList", pageDTO);
+//	}
+//
+//
+//
+//	public int getWorkOrderCount(PageDTO pageDTO) {
+//		System.out.println("WorkOrderDAO getWorkOrderCount()");
+//		return sqlSession.selectOne(namespace+".getWorkOrderCount", pageDTO);
+//	}
+//
+//
+//
+//	public WorkOrderDTO getWork(String woCode) {
+//		System.out.println("WorkOrderDAO getWork()");
+//
+//		return sqlSession.selectOne(namespace+".getWork", woCode);
+//	}
 
 
 	

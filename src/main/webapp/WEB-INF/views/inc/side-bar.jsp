@@ -102,7 +102,7 @@
 				aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item" href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록(작업중)</a> 
-					<a class="collapse-item" href="${pageContext.request.contextPath}/forgot-password.html">실적관리(없음)</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/production/productionList">실적관리(없음)</a>
 					<a class="collapse-item" href="${pageContext.request.contextPath}/line/lineList">라인관리(작업중)</a> 
 					<div class="collapse-divider"></div>
 				</div>
@@ -124,9 +124,9 @@
 			</div></li>
 		
 		<li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workOrderList">
+                <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workPop">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>작업지시목록</span></a>
+                    <span>생산 테스트</span></a>
             </li> 
 		
 
