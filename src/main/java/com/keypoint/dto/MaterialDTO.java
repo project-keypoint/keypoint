@@ -5,6 +5,7 @@ public class MaterialDTO {
 	private String materialCode;
 	private String materialName;
 	private String cusCode;
+	private String cusName;
 	private int materialPrice;
 	private int materialCount;
 	private String materialUnit;
@@ -14,8 +15,9 @@ public class MaterialDTO {
 	@Override
 	public String toString() {
 		return "MaterialDTO [materialCode=" + materialCode + ", materialName=" + materialName + ", cusCode=" + cusCode
-				+ ", materialPrice=" + materialPrice + ", materialCount=" + materialCount + ", materialUnit=" + materialUnit
-				+ ", materialMemo=" + materialMemo + ", materialDel=" + materialDel + "]";
+				+ ", cusName=" + cusName + ", materialPrice=" + materialPrice + ", materialCount=" + materialCount
+				+ ", materialUnit=" + materialUnit + ", materialMemo=" + materialMemo + ", materialDel=" + materialDel
+				+ "]";
 	}
 	
 	public String getMaterialCode() {
@@ -35,6 +37,12 @@ public class MaterialDTO {
 	}
 	public void setCusCode(String cusCode) {
 		this.cusCode = cusCode;
+	}
+	public String getCusName() {
+		return cusName;
+	}
+	public void setCusName(String cusName) {
+		this.cusName = cusName;
 	}
 	public int getMaterialPrice() {
 		return materialPrice;
@@ -66,15 +74,6 @@ public class MaterialDTO {
 	public void setMaterialDel(int materialDel) {
 		this.materialDel = materialDel;
 	}
-	
-	
-
-	
-	
-	
-	
-	
-	
 	
 	
 	

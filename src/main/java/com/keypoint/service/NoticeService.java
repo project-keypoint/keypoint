@@ -14,14 +14,23 @@ import com.keypoint.dto.NoticeDTO;
 @Service
 public class NoticeService {
 
+	
+//	NoticeDAO 객체생성
 	@Inject NoticeDAO noticeDAO;
+
+
 	
-	public List<NoticeDTO> getNoticeList(){
-		System.out.println("noticeService getNoticeList()");
-		return noticeDAO.getNoticeList();
+	
+	
+	
+//	-------------------------------------------------------------------
+	
+//	공지사항 리스트
+	public List<NoticeDTO> getNoticeList() {
+		System.out.println("NoticeService getNoticeList()");
 		
-	}// 노티스 목록
-	
+		return noticeDAO.getNoticeList();
+	}
 	
 	
 	

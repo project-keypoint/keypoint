@@ -43,26 +43,26 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">KEYPOINT</h1>
                                     </div>
-                                    <form class="user">
+                                    <form action="${pageContext.request.contextPath}/employee/loginPro" id="join" method="post" class="user" >
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" name="empId"  value="${cookie.empId.value}"
+                                            class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="사원번호">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input type="password" name="empPass" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="비밀번호">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" ${empty cookie.id.value ? "":"checked" }
+                                                class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">아이디 기억하기</label>
                                             </div>
                                         </div>
-                                        <a href="${pageContext.request.contextPath}/main/main" class="btn btn-primary btn-user btn-block">
-                                            로그인
-                                        </a>
-                                        <hr>
+                                        <input type="submit" value="로그인" class="btn btn-primary btn-user btn-block">
+                                      <hr>
                                        
                                     </form>
                                     

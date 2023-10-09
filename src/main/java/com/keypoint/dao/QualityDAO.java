@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.keypoint.dto.QualityDTO;
 
@@ -38,8 +39,18 @@ public class QualityDAO {
 		sqlSession.update(namespace+".updateQc", qualityDTO);
 	}// updateQc() [품질검사(저장)]
 
-
-	
+	@Transactional
+	public boolean qcTransfer(QualityDTO qualityDTO) {
+		System.out.println("QualityDAO qcTransfer()");
+	    try {
+	        sqlSession.update(namespace + ".qcTransferStatus", qualityDTO);
+	        sqlSession.update(namespace + ".qcTransferStock", qualityDTO);
+	        return true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}// qcTransfer [품질검사후 상품이동]
 	
 	
 }

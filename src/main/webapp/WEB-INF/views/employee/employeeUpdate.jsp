@@ -22,8 +22,6 @@
 <div class="forms-group-receive">
 <div class="page-title-popup">사원상세정보수정</div>
 
-
-
 <div class="form-group-receive">
 <p>사진</p>
 <input type="text" id="empPhoto" class="form-control search-input" placeholder="${employeeDTO.empPhoto}">
@@ -117,11 +115,11 @@
 </select>    
 </div>
 
-</div>
 <div class="details-buttons">
 <input type="submit" value="완료" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
+
 </form><!-- form 끝 -->
 </div><!-- main-details -->
 

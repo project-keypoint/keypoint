@@ -7,24 +7,24 @@ public class CustomerDTO {
 	
 	
 	
-	private String cusCode;
-	private String cusName;
-	private String cusCategory;
-	private String cusBusiness;
-	private String cusType;
-	private String cusNumber;
-	private String cusRep;
-	private String cusTel;
-	private String cusHome;
-	private String cusAddress;
-	private String cusResp;
-	private String cusPhone;
-	private String cusEmail;
-	private String cusFax;
-	private String cusMemo;
-	private String cusStatus;
-	private Timestamp cusDate;		// 거래처 등록일
-	
+	private String cusCode;					//	거래처코드
+	private String cusName;					//	거래처명
+	private String cusCategory;				//	거래처구분
+	private String cusBusiness;				//	업태
+	private String cusType;					//	종목
+	private String cusNumber;				//	사업자번호
+	private String cusRep;					//	대표자명
+	private String cusTel;					//	대표전화번호
+	private String cusHome;					//	홈페이지
+	private String cusZonecode;				//	우편번호
+	private String cusAddress;				//	기본주소
+	private String cusAddress_dtail;		//	상세주소
+	private String cusResp;					//	담당자명
+	private String cusPhone;				//	담당자전화번호
+	private String cusEmail;				//	담당자이메일
+	private String cusFax;					//	팩스
+	private String cusMemo;					//	적요
+	private String cusStatus;				//	거래상태
 	
 	
 	
@@ -32,9 +32,10 @@ public class CustomerDTO {
 	public String toString() {
 		return "CustomerDTO [cusCode=" + cusCode + ", cusName=" + cusName + ", cusCategory=" + cusCategory
 				+ ", cusBusiness=" + cusBusiness + ", cusType=" + cusType + ", cusNumber=" + cusNumber + ", cusRep="
-				+ cusRep + ", cusTel=" + cusTel + ", cusHome=" + cusHome + ", cusAddress=" + cusAddress + ", cusResp="
-				+ cusResp + ", cusPhone=" + cusPhone + ", cusEmail=" + cusEmail + ", cusFax=" + cusFax + ", cusMemo="
-				+ cusMemo + ", cusStatus=" + cusStatus + ", cusDate=" + cusDate + "]";
+				+ cusRep + ", cusTel=" + cusTel + ", cusHome=" + cusHome + ", cusZonecode=" + cusZonecode
+				+ ", cusAddress=" + cusAddress + ", cusAddress_dtail=" + cusAddress_dtail + ", cusResp=" + cusResp
+				+ ", cusPhone=" + cusPhone + ", cusEmail=" + cusEmail + ", cusFax=" + cusFax + ", cusMemo=" + cusMemo
+				+ ", cusStatus=" + cusStatus + "]";
 	}
 	
 	
@@ -94,11 +95,23 @@ public class CustomerDTO {
 	public void setCusHome(String cusHome) {
 		this.cusHome = cusHome;
 	}
+	public String getCusZonecode() {
+		return cusZonecode;
+	}
+	public void setCusZonecode(String cusZonecode) {
+		this.cusZonecode = cusZonecode;
+	}
 	public String getCusAddress() {
 		return cusAddress;
 	}
 	public void setCusAddress(String cusAddress) {
 		this.cusAddress = cusAddress;
+	}
+	public String getCusAddress_dtail() {
+		return cusAddress_dtail;
+	}
+	public void setCusAddress_dtail(String cusAddress_dtail) {
+		this.cusAddress_dtail = cusAddress_dtail;
 	}
 	public String getCusResp() {
 		return cusResp;
@@ -136,12 +149,10 @@ public class CustomerDTO {
 	public void setCusStatus(String cusStatus) {
 		this.cusStatus = cusStatus;
 	}
-	public Timestamp getCusDate() {
-		return cusDate;
-	}
-	public void setCusDate(Timestamp cusDate) {
-		this.cusDate = cusDate;
-	}
+	
+	
+	
+	
 	
 	
 	

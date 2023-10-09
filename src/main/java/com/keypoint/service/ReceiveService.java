@@ -24,11 +24,16 @@ public class ReceiveService {
 		
 		receiveDAO.insertReceive(receiveDTO);
 	}// receiveInsertPro() [수주등록Pro]
-
+	
 	public List<ReceiveDTO> getReceiveList() {
 		System.out.println("ReceiveService getReceiveList()");
 		return receiveDAO.getReceiveList();
-	}// getReceiveList [수주목록]
+	}// getReceiveList [수주+출하목록(수주)]
+	
+	public List<ReceiveDTO> getShipmentList() {
+		System.out.println("ReceiveService getShipmentList()");
+		return receiveDAO.getShipmentList();
+	}// getShipmentList [수주+출하목록(출하)]
 
 	public ReceiveDTO getReceiveDetails(String roCode) {
 		System.out.println("ReceiveService getReceiveDetails()");
@@ -49,11 +54,13 @@ public class ReceiveService {
 	}// receiveDelete() [수주삭제]
 
 	
-// 테스트
+
+	public boolean shipComplete(ReceiveDTO receiveDTO) {
+		System.out.println("ReceiveService shipComplete");
+		boolean result = receiveDAO.shipComplete(receiveDTO);
+		return result;
+	}// shipComplete [출하완료]
+
 	
-	public List<ReceiveDTO> getReceiveListTest() {
-		System.out.println("ReceiveService getReceiveListTest()");
-		return receiveDAO.getReceiveListTest();
-	}// getReceiveListTest [수주+출하목록(테스트)]
 
 }

@@ -31,11 +31,15 @@ public class MaterialService {
 		materialDAO.deleteMaterial(materialDTO);
 	}// deleteMaterial
 
-	public MaterialDTO getMaterial(String materialDTO) {
+	public MaterialDTO getMaterial(String materialCode) {
 		System.out.println("MaterialService getMaterial()");
-		return materialDAO.getMaterial(materialDTO);
-	}
+		return materialDAO.getMaterial(materialCode);
+	}// getMaterial
 
+	public void updateMaterial(MaterialDTO materialDTO) {
+		System.out.println("MaterialService updateMaterial()");
+		materialDAO.updateMaterial(materialDTO);
+	}// updateMaterial
 
 	//-----------------------------------------홍렬 자재리스트팝업--------------------------------------------
 	
@@ -53,6 +57,7 @@ public class MaterialService {
 		
 		return materialDAO.countPurchaseList(search);
 	} // countPurchaseList
+
 	
 	// --------------------------------------------------------------------------------------------------
 	

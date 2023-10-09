@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.keypoint.dto.ReceiveDTO;
 
@@ -27,7 +28,12 @@ public class ReceiveDAO {
 	public List<ReceiveDTO> getReceiveList() {
 		System.out.println("ReceiveDAO getReceiveList()");
 		return sqlSession.selectList(namespace+".getReceiveList");
-	}// getReceiveList() [수주목록]
+	}// getReceiveListTest() [수주+출하목록(수주)]
+	
+	public List<ReceiveDTO> getShipmentList() {
+		System.out.println("ReceiveDAO getShipmentList()");
+		return sqlSession.selectList(namespace+".getShipmentList");
+	}// getReceiveListTest() [수주+출하목록(출하)]
 
 	public ReceiveDTO getReceiveDetails(String roCode) {
 		System.out.println("ReceiveDAO getReceiveDetails()");
@@ -48,10 +54,22 @@ public class ReceiveDAO {
 
 // 테스트
 	
-	public List<ReceiveDTO> getReceiveListTest() {
-		System.out.println("ReceiveDAO getReceiveListTest()");
-		return sqlSession.selectList(namespace+".getReceiveListTest");
-	}// getReceiveListTest() [수주+출하목록(테스트)]
+	
+	
+	@Transactional
+	public boolean shipComplete(ReceiveDTO receiveDTO) {
+		System.out.println("ReceiveDAO shipComplete()");
+		try {
+	        sqlSession.update(namespace + ".shipCompleteUpdate", receiveDTO);
+	        sqlSession.update(namespace + ".shipCompleteStock", receiveDTO);
+	        return true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}// shipComplete [출하완료]
+
+	
 	
 	
 }// class

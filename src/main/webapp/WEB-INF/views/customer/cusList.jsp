@@ -66,7 +66,7 @@
 <table class="table-list">
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>거래처코드</th>
+	<th onclick="openDetails('${customerDTO.cusCode}')">거래처코드</th>
     <th>구분</th>
     <th>거래처명</th>
     <th>대표자명</th>
@@ -76,13 +76,14 @@
     <th>담당자명</th>
     <th>담당자이메일</th>
     <th>상태</th>
+    <th>상세</th>
 </tr>
 
 
 <c:forEach var="customerDTO" items="${cusList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td onclick="openDetails('$customerDTO.cusCode')">${customerDTO.cusCode}</td>
+    <td>${customerDTO.cusCode}</td>
     <td>${customerDTO.cusCategory}</td>
     <td>${customerDTO.cusName}</td>
     <td>${customerDTO.cusRep}</td>
@@ -92,6 +93,7 @@
     <td>${customerDTO.cusResp}</td>
     <td>${customerDTO.cusEmail}</td>
     <td>${customerDTO.cusStatus}</td>
+    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${customerDTO.cusCode}')"></td>
 </tr>
 </c:forEach>    
 </table>
@@ -104,13 +106,21 @@
 </div>
 
 
+
+<!-- ---------------------페이징---------------- -->
 <div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}" class="page-button page-button-active">${i}</a>		
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+</c:if>	
+
 <a href="#" class="page-button">&gt;</a>
 </div><!-- page-button -->
 </div>
@@ -187,8 +197,8 @@ checkboxes.forEach(function (checkbox) {
 // 거래처 상세내용 새창
 function openDetails(cusCode) {
     var url = '${pageContext.request.contextPath}/customer/cusDetails?cusCode='+cusCode;
-    var windowWidth = 500;
-    var windowHeight = 675;
+    var windowWidth = 650;
+    var windowHeight = 900;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
@@ -202,6 +212,15 @@ function openInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+
+
+
+
+
+
+
+
+
 </script>
 
 </body>

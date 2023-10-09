@@ -23,7 +23,7 @@
 }
 .main {
 font-family: 'Noto', sans-serif !important;
-/* color: black; */
+color: black;
 padding-left: 30px;
 overflow-y: hidden;
 /* height: 860px; */
@@ -65,7 +65,7 @@ margin-right: 100px;
 margin: 5px 20px 5px 0;
 }
 .search-select p{
-width: 50px;
+width: 60px;
 justify-content: center;
 align-items: center;
 margin-bottom: 0;
@@ -120,7 +120,7 @@ justify-content: space-between;
 margin-top: 15px;
 }
 .page-buttons {
-margin-top: 15px;
+/* margin-top: 15px; */
 margin-bottom: 50px;
 display: flex;
 justify-content: flex-end;
@@ -154,139 +154,76 @@ background: #D3D3D3;
 }
 
 
-.gray-background {
-background-color: #f0f0f0; /* 옅은 회색 배경색 */
+
+
+/* ---------------- 사원:상세정보보기 ---------------- */
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
-
-
-
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 상세내용 */
-.page-title-popup {
-width: 100%;
-font-size: 26px;
-font-weight: bold;
-margin-top: 30px;
-margin-bottom: 30px;
-text-align: center;
-}
 .main-details {
-width: 100%;
-font-family: 'Noto', sans-serif !important;
-color: black;
-display: flex;
-flex-direction: column;
-align-items: center;
-/* margin: 0 0 0 10px; */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
-.form-group-customer {
-text-align: center;
-}
-.form-group-customer {
-display: flex;
-justify-content: flex-start;
-}
-.form-group-customer p {
-width: 120px;
-height: 30px;
-text-align: right;
-margin-right: 10px;
-}
-.form-group-customer a {
-font-size: 15px;
-color: red;
-}
-.form-group-customer input {
-width: 175px;
-height: 30px;	
+.form-group-receive {
+    margin-bottom: 20px;
 }
 
-/* select 시, 폰트.... 아니 왜 폰트크기가 자동으로 알아서 안맞춰지냐고요,, */
-/* .form-group-customer select { */
-/* width: 175px; */
-/* height: 40px;	 */
-/* } */
-
-
-#cusCode.search-input, #cusNumber.search-input, #cusName.search-input, #cusResp.search-input,  
-#cusPhone.search-input, #cusEmail.search-input, #cusMemo.search-input, #cusHome.search-input,#cusAddress.search-input, 
-#cusRep.search-input,#cusTel.search-input, #cusType.search-input, #cusCategory.search-input, 
-#cusStatus.search-input, #cusFax.search-input,  #cusZonecode.search-input, #cusAddress_dtail.search-input {
-width: 280px;
+.form-group-receive p {
+    font-weight: bold;
 }
 
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
 
 .details-buttons {
-display: flex;
-justify-content: center;
-margin-top: 15px;
-margin-bottom: 30px;
+    text-align: center;
+    margin-top: 20px;
 }
-.details-buttons input{
-margin-left: 5px;
-margin-right: 5px;
+
+.mybutton1 {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.form-group-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group-column {
+    flex: 1;
+    margin-right: 10px; /* 각 열 사이의 간격 조절 */
 }
 
 
-/**/
-.status{
-padding: 0 0 0 10px;
-}
-/* 품질검사 새창 */
-.main-details-qc {
-display: flex;
-justify-content: center;
-}
-.qcdetail-left {
-	margin-right: 30px;
-}
 
-.forms-group-qc-receive {
-text-align: center;
-}
-
-.form-group-qc-receive p {
-width: 105px;
-height: 30px;
-text-align: right;
-margin-right: 10px;
-}
-.form-group-qc-receive input {
-/* width: 175px; */
-width: 200px;
-height: 30px;	
-}
-
-.form-group-qc-receive select {
-width: 85px;
-height: 28px;	
-}
-.qc-status.status {
-margin: 0 auto; /* select 요소를 수평 가운데 정렬합니다. */
-display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭니다. */
-}
-#qcPass.search-input, #qcDefect.search-input,
-#qcCount.search-input {
-width: 80px;
-height: 28px;
-}
-#qcDefectRate.search-input, #qcStatus.search-input,
-#qcTest1.search-input, #qcTest2.search-input, #qcTest3.search-input   {
-width: 280px;
-/* height: 28px; */
-}
-.input-center {
-margin: 0 auto; /* 입력 칸을 수평으로 가운데 정렬합니다. */
-display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭니다. */
-text-align: center;
-}
-.hide {
-background: transparent; /* 배경을 투명으로 설정 */
-border: none; /* 테두리를 없애기 */
-text-align: center;
-color: black;
-}
 
 

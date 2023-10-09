@@ -9,6 +9,7 @@
 	<select id="getEmployeeList" resultType="com.keypoint.dto.EmployeeDTO">
 		select *
 		from employees
+		order by empId desc
 	</select>
 
 <!-- 사원등록 -->
@@ -37,5 +38,11 @@
 		where empId = #{empId}
 	</update>
 
+
+	<select id="userCheck" 
+	        resultType="com.keypoint.dto.EmployeeDTO">
+		select * from employees
+		where empId = #{empId} and empPass = #{empPass}
+	</select>
 </mapper>
 

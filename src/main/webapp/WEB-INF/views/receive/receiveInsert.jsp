@@ -21,41 +21,41 @@
 <form action="${pageContext.request.contextPath}/receive/receiveInsertPro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">수주등록</div>
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>수주번호</p>
 <input type="text" id="roCode" name="roCode" class="form-control search-input" placeholder="수주번호" readonly>
 </div>
 <div class="search-bar-popup">
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>업체명</p>
 <input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="업체검색" readonly>
 <input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
 </div>
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>상품명</p>
 <input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" placeholder="상품검색" readonly>
 <input type="text" id="productName" class="form-control search-input inputname" placeholder="상품명" readonly>
 </div>
 </div>
 
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>수주수량</p>
 <input type="number" id="roCount" name="roCount" class="form-control search-input" placeholder="수주수량" min="0">
 </div>
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>수주금액</p>
 <input type="text" id="roPrice" class="form-control search-input" placeholder="수주금액" readonly>
 </div>
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>수주등록일</p>
 <input type="text" id="roDate" name="roDate" class="form-control search-input" placeholder="수주등록일" readonly>
 
 </div>
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>납품예정일</p>
 <input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" placeholder="납품예정일" readonly>
 </div>
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>상태</p>
 <select id="roStatus" name="roStatus" class="form-control search-input status">
         <option value="대기">대기</option>
@@ -66,7 +66,7 @@
 </div>
 
 <div class="search-bar-popup">
-<div class="form-group-receive">
+<div class="form-group-receive-insert">
 <p>당담자</p>
 <input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" placeholder="사원검색" readonly>
 <input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="사원명" readonly>

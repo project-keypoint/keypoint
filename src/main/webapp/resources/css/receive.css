@@ -187,7 +187,8 @@ text-align: center;
 }
 .form-group-receive {
 display: flex;
-justify-content: flex-start;
+/* justify-content: flex-start; */
+justify-content: center;
 }
 .form-group-receive p {
 width: 75px;
@@ -199,6 +200,22 @@ margin-right: 10px;
 width: 175px;
 height: 30px;	
 }
+.form-group-receive-insert {
+display: flex;
+justify-content: flex-start;
+/* justify-content: center; */
+}
+.form-group-receive-insert p {
+width: 75px;
+height: 30px;
+text-align: right;
+margin-right: 10px;
+}
+.form-group-receive-insert input {
+width: 175px;
+height: 30px;	
+}
+
 input[placeholder="업체코드"], input[placeholder="상품코드"], input[placeholder="사원명"],
 input[placeholder="업체검색"], input[placeholder="상품검색"] {
 width: 110px;
@@ -212,11 +229,11 @@ width: 310px;
 #cusCode.search-input, #productCode.search-input {
     width: 110px;
 }
-#empId.search-input, #qcEmpId.search-input,
+#empId.search-input, #qcEmpId.search-input, #shipEmpId.search-input,,
 #prodEmpId.search-input, #roEmpId.search-input {
     width: 150px;
 }
-#empName.search-input, #qcEmpName.search-input,
+#empName.search-input, #qcEmpName.search-input, #shipEmpName.search-input,
 #prodEmpName.search-input, #roEmpName.search-input {
     width: 150px;
 }
@@ -225,6 +242,10 @@ width: 310px;
 }
 #roCode.search-input {
 	width: 310px;
+	margin-right: 25px;
+}
+.f-bold {
+font-weight: bold;
 }
 .form-group-receive select {
 width: 175px;
@@ -244,6 +265,11 @@ margin-right: 5px;
 .status{
 padding: 0 0 0 10px;
 }
+.readonly-color[readonly] {
+    background-color: #ffffff;
+}
+
+
 /* 품질검사 새창 */
 .main-details-qc {
 display: flex;
@@ -314,4 +340,48 @@ background: transparent; /* 배경을 투명으로 설정 */
 border: none; /* 테두리를 없애기 */
 text-align: center;
 color: black;
+}
+/* 출하 추가 */
+.shipment-row {
+display: none;
+}
+.shipCount-div {
+display: flex;
+align-items: center;
+justify-content: space-evenly;
+}
+.shipment-div {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.ei {
+width: 150px;
+height: 30px;	
+}
+.en {
+/* width: 85px; */
+height: 30px;
+}
+.shipCount-input {
+width: 85px;
+height: 30px;
+/* margin: 0 0 0 0; */
+text-align: right;
+font-weight: bold;
+color: red;
+}
+.shipMemo-input {
+width: 375px;
+height: 30px;
+/* margin: 0 0 0 0; */
+text-align: left;
+}
+.shipment-th {
+text-align: center;
+display: flex;
+justify-content: center;
+}
+.text-right {
+text-align: right;
 }

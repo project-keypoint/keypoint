@@ -31,7 +31,7 @@
 </div>
 <div class="form-group-qc-receive">
 <p>생산코드</p>
-<input type="text" id="prodCode" name="prodCode" class="form-control search-input inputcode" value="${qualityDTO.prodCode}" readonly>
+<input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" value="${qualityDTO.poCode}" readonly>
 </div>
 <div class="form-group-qc-receive">
 <p>상품명</p> 
@@ -90,7 +90,7 @@
 	<th>불량</th>
 	<th>최종불량률</th></tr>
 <tr class="table-body">
-	<td><input type="text" id="qcCount" class="form-control search-input input-center hide" placeholder="${qualityDTO.prodCount}" readonly></td>
+	<td><input type="text" id="qcCount" class="form-control search-input input-center hide" placeholder="${qualityDTO.poCount}" readonly></td>
 	<td><input type="number" id="qcPass" name="qcPass" class="form-control search-input input-center" value="${qualityDTO.qcPass}" min="0" oninput="calculateQCDefectRate(); checkTotal()"></td>
 	<td><input type="number" id="qcDefect" name="qcDefect" class="form-control search-input input-center" value="${qualityDTO.qcDefect}" min="0" oninput="calculateQCDefectRate(); checkTotal()"></td>
 	<td><input type="text" id="qcDefectRate" name="qcDefectRate" class="form-control search-input input-center" value="${qualityDTO.qcDefectRate}" min="0"></td>
@@ -104,8 +104,8 @@
 </div>
 <div class="form-group-qc-receive">
 <p>품질검사원</p>
-<input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode" value="${qualityDTO.qcEmpId}" readonly>
-<input type="text" id="empName" class="form-control search-input inputname" placeholder="사원명" readonly>
+<input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode readonly-color" value="${qualityDTO.qcEmpId}" readonly>
+<input type="text" id="empName" class="form-control search-input inputname readonly-color" placeholder="사원명" readonly>
 </div>
 
 <div class="form-group-qc-receive">
@@ -115,18 +115,18 @@
 
 <div class="form-group-qc-receive">
 <p>검사완료일</p> 
-<input type="text" id="qcEndDate" name="qcEndDate" class="form-control search-input" value="${qualityDTO.qcEndDate}" placeholder="" readonly>
+<input type="text" id="qcEndDate" name="qcEndDate" class="form-control search-input readonly-color" value="${qualityDTO.qcEndDate}" placeholder="" readonly>
 </div>
 
 </div>
 </div>
 <div class="details-buttons">
 <input type="submit" value="검사저장" class="btn btn-primary mybutton1">
-<select id="qcStatus" name="qcStatus" class="form-control search-input status qc-status">
-    <option value="대기" ${qualityDTO.qcStatus eq '대기' ? 'selected' : ''}>대기</option>
-    <option value="진행" ${qualityDTO.qcStatus eq '진행' ? 'selected' : ''}>진행</option>
-    <option value="완료" ${qualityDTO.qcStatus eq '완료' ? 'selected' : ''}>완료</option>
-</select>
+<!-- <select id="qcStatus" name="qcStatus" class="form-control search-input status qc-status"> -->
+<%--     <option value="대기" ${qualityDTO.qcStatus eq '대기' ? 'selected' : ''}>대기</option> --%>
+<%--     <option value="진행" ${qualityDTO.qcStatus eq '진행' ? 'selected' : ''}>진행</option> --%>
+<%--     <option value="완료" ${qualityDTO.qcStatus eq '완료' ? 'selected' : ''}>완료</option> --%>
+<!-- </select> -->
 <!-- <input type="button" value="검사완료" class="btn btn-primary mybutton1"> -->
 </div>
 <!-- </form>form 끝 -->
@@ -147,7 +147,7 @@ setPlaceholder('qcTest1', "${qualityDTO.qcTest1}");
 setPlaceholder('qcTest2', "${qualityDTO.qcTest2}");
 setPlaceholder('qcTest3', "${qualityDTO.qcTest3}");
 setPlaceholder('qcDefectRate', "${qualityDTO.qcDefectRate}");
-setPlaceholder('prodCode', "${qualityDTO.prodCode}");
+setPlaceholder('poCode', "${qualityDTO.poCode}");
 
 setPlaceholder('qcStartDate', "${qualityDTO.qcStartDate}");
 setPlaceholder('qcEndDate', "${qualityDTO.qcEndDate}"); //시작일or완료일 컬럼추가하기
@@ -205,7 +205,9 @@ document.addEventListener('DOMContentLoaded', function () {
 //유효성 검사
 function validateForm() {
     // 각 입력 필드 값
-    var qcEmpId = document.getElementById("qcEmpId").value;
+    var qcEmpIdElement = document.getElementById("qcEmpId") || document.getElementById("empId");
+    var qcEmpId = qcEmpIdElement.value;
+    console.log('qcEmpId:', qcEmpId);  // 로깅
     // 빈 필드 검사
     if (qcEmpId === "") {
         alert("[품질검사원]을 입력해주세요.");
@@ -213,7 +215,18 @@ function validateForm() {
     }
     return true;
 }
-
+function validateForm() {
+    // 각 입력 필드 값
+    var qcEndDateElement = document.getElementById("qcEndDate");
+    var qcEndDate = qcEndDateElement.value;
+    console.log('qcEndDate:', qcEndDate);  // 로깅
+    // 빈 필드 검사
+    if (qcEndDate === "") {
+        alert("[검사완료일]을 입력해주세요.");
+        return false; // 제출 방지
+    }
+    return true;
+}
 // 불량률 계산
 function calculateQCDefectRate() {
     // qcPass와 qcDefect 입력값 가져오기
