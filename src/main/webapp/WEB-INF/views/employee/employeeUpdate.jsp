@@ -28,18 +28,18 @@
 
 <div class="form-group-column">
 <p>사진</p>
-<input type="text" id="empPhoto" class="form-control search-input" placeholder="${employeeDTO.empPhoto}">
+<input type="text" id="empPhoto" class="form-control search-input" value="${employeeDTO.empPhoto}">
 </div>
 
 <div class="form-group-row">
 
 <div class="form-group-column">
 <p>사원번호</p>
-<input type="text" id="empId" class="form-control search-input" placeholder="${employeeDTO.empId}" readonly>
+<input type="text" id="empId" class="form-control search-input" value="${employeeDTO.empId}" readonly>
 </div>
 <div class="form-group-column">
 <p>이름</p>
-<input type="text" id="empName" class="form-control search-input" placeholder="${employeeDTO.empName}" readonly>
+<input type="text" id="empName" class="form-control search-input" value="${employeeDTO.empName}" readonly>
 </div>
 
 </div>
@@ -48,11 +48,11 @@
 
 <div class="form-group-column">
 <p>이메일</p>
-<input type="text" id="empEmail" class="form-control search-input" placeholder="${employeeDTO.empEmail}">
+<input type="text" id="empEmail" class="form-control search-input" value="${employeeDTO.empEmail}">
 </div>
 <div class="form-group-column">
 <p>생년월일</p>
-<input type="text" id="empBirth" class="form-control search-input" placeholder="${employeeDTO.empBirth}" readonly>
+<input type="text" id="empBirth" class="form-control search-input" value="${employeeDTO.empBirth}" readonly>
 </div>
 
 </div>
@@ -61,11 +61,11 @@
 
 <div class="form-group-column">
 <p>연락처</p>
-<input type="text" id="empPhone" class="form-control search-input" placeholder="${employeeDTO.empPhone}">
+<input type="text" id="empPhone" class="form-control search-input" value="${employeeDTO.empPhone}">
 </div>
 <div class="form-group-column">
 <p>내선번호</p>
-<input type="text" id="empTel" class="form-control search-input" placeholder="${employeeDTO.empTel}">
+<input type="text" id="empTel" class="form-control search-input" value="${employeeDTO.empTel}">
 </div>
 
 </div>
@@ -73,7 +73,7 @@
 
 <div class="form-group-column">
 <p>주소</p>
-<input type="text" id="empAddress" class="form-control search-input" placeholder="${employeeDTO.empAddress}" readonly>
+<input type="text" id="empAddress" class="form-control search-input" value="${employeeDTO.empAddress}" readonly>
 </div>
 </div><!-- main-details1 -->
 </div><!-- form-group-receive -->
@@ -120,17 +120,17 @@
 
 <div class="form-group-column">
 <p>입사일</p>
-<input type="text" id="empHiredate" class="form-control search-input" placeholder="${employeeDTO.empHiredate}">
+<input type="text" id="empHiredate" class="form-control search-input" value="${employeeDTO.empHiredate}">
 </div>
 
 <div class="form-group-column">
 <p>휴직일</p>
-<input type="text" id="empLeavedate" class="form-control search-input" placeholder="${employeeDTO.empLeavedate}">
+<input type="text" id="empLeavedate" class="form-control search-input" value="${employeeDTO.empLeavedate}">
 </div>
 
 <div class="form-group-column">
 <p>퇴직일</p>
-<input type="text" id="empRetiredate" class="form-control search-input" placeholder="${employeeDTO.empRetiredate}">
+<input type="text" id="empRetiredate" class="form-control search-input" value="${employeeDTO.empRetiredate}">
 </div>
 </div>
 
