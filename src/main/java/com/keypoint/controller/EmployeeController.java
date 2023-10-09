@@ -72,7 +72,7 @@ public class EmployeeController {
 	
 	// 사원-상세정보
 	@GetMapping("/employeeDetails")
-	public String employeeDetails(Model model, @RequestParam("empId") String empId) {
+	public String employeeDetails(Model model, @RequestParam("empId") int empId) {
 		System.out.println("EmployeeController employeeDetails()");
 		
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
@@ -84,7 +84,7 @@ public class EmployeeController {
 	
 	// 사원-상세정보 수정화면
 	@GetMapping("/employeeUpdate")
-	public String employeeUpdate(Model model, @RequestParam("empId") String empId) {
+	public String employeeUpdate(Model model, @RequestParam("empId") int empId) {
 		System.out.println("EmployeeController employeeUpdate()");
 		
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);

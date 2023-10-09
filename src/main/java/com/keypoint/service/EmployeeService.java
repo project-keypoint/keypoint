@@ -33,7 +33,7 @@ public class EmployeeService {
 
 
 	// 사원 - 상세정보
-	public EmployeeDTO getEmployeeDetails(String empId) {
+	public EmployeeDTO getEmployeeDetails(int empId) {
 		System.out.println("EmployeeService getEmployeeDetails()");
 		
 		return employeeDAO.getEmployeeDetails(empId);

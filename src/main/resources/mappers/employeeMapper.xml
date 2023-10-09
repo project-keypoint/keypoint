@@ -9,6 +9,7 @@
 	<select id="getEmployeeList" resultType="com.keypoint.dto.EmployeeDTO">
 		select *
 		from employees
+		order by empId desc
 	</select>
 
 <!-- 사원등록 -->

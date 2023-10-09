@@ -2,7 +2,7 @@ package com.keypoint.dto;
 
 public class EmployeeDTO {
 	
-	private String empId; // 사원ID
+	private int empId; // 사원ID
 	private String empPass;
 	private String empSalt;
 	private String empName;
@@ -32,10 +32,10 @@ public class EmployeeDTO {
 	}
 	
 	
-	public String getEmpId() {
+	public int getEmpId() {
 		return empId;
 	}
-	public void setEmpId(String empId) {
+	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 	public String getEmpPass() {
