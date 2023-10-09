@@ -48,6 +48,13 @@ public class EmployeeService {
 	} // updateEmployee
 
 
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService userCheck()");
+		return employeeDAO.userCheck(employeeDTO);
+	
+	}
+
+
 
 	
 } // class

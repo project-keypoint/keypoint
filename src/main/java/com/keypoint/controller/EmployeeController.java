@@ -3,6 +3,7 @@ package com.keypoint.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -109,6 +110,23 @@ public class EmployeeController {
 	
 	} // employeeUpdatePro	
 	
-	
+		@PostMapping("/loginPro")
+		public String loginPro(EmployeeDTO employeeDTO,HttpSession session) {
+			System.out.println("EmployeeController loginPro()");
+			//로그인 처리
+			System.out.println(employeeDTO);
+			
+			employeeDTO = employeeService.userCheck(employeeDTO);
+			
+			if(employeeDTO != null) {
+				//아이디 비밀번호 일치 => 세션값 생성 => /member/main이동
+				session.setAttribute("empId", employeeDTO.getEmpId());
+				// 주소변경하면서 이동 /main/main
+				return "redirect:/main/main";
+			}else {
+				//아이디 비밀번호 틀림 => member/msg.jsp 이동
+				return "member/msg";
+			}
+		}//	
 	
 } // class

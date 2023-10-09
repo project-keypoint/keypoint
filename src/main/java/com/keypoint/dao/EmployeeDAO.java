@@ -49,6 +49,13 @@ public class EmployeeDAO {
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
 	} // updateEmployee
 
+
+
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO userCheck()");
+		return sqlSession.selectOne(namespace+".userCheck", employeeDTO);
+	}
+
 	
 
 	

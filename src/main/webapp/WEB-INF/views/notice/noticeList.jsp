@@ -75,7 +75,7 @@
 							<th>제목</th>
 							<th>작성날짜</th>
 							<th>조회수</th>
-							<th>담당자</th>
+						
 						</tr>
 						<c:forEach var="noticeDTO" items="${noticeList}">
 							<tr class="table-body">
