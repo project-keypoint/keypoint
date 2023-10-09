@@ -50,7 +50,7 @@ public class EmployeeDAO {
 	} // updateEmployee
 
 
-
+	// 로그인-강수빈
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO userCheck()");
 		return sqlSession.selectOne(namespace+".userCheck", employeeDTO);

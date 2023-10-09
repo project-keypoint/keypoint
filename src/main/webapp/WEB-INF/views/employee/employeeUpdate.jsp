@@ -94,7 +94,6 @@
 </select>    
 </div>
 
-</div>
 <div class="form-group-column">
 <p>직급</p>
 <select id="empPosition" name="empPosition" class="form-control search-input status">
@@ -177,7 +176,7 @@ function openPopup(url) {
 }
 
 
-// 일사일, 휴직일, 퇴직일 검색 데이트피커
+// 입사일, 휴직일, 퇴직일 검색 데이트피커
 $(function() {
     $("#empHiredate").datepicker({
 		dateFormat: 'yy-mm-dd',

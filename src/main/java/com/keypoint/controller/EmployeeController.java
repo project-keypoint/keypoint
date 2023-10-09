@@ -110,34 +110,37 @@ public class EmployeeController {
 	
 	} // employeeUpdatePro	
 	
-		@PostMapping("/loginPro")
-		public String loginPro(EmployeeDTO employeeDTO,HttpSession session) {
-			System.out.println("EmployeeController loginPro()");
-			//로그인 처리
-			System.out.println(employeeDTO);
-			
-			employeeDTO = employeeService.userCheck(employeeDTO);
-			
-			if(employeeDTO != null) {
-				//아이디 비밀번호 일치 => 세션값 생성 => /member/main이동
-				session.setAttribute("empId", employeeDTO.getEmpId());
-				session.setAttribute("empName", employeeDTO.getEmpName());
-				// 주소변경하면서 이동 /main/main
-				return "redirect:/main/main";
-			}else {
-				//아이디 비밀번호 틀림 => member/msg.jsp 이동
-				return "member/msg";
-			}
-		}//	
 	
-//	
-		@GetMapping("/logout")
-		public String logout(HttpSession session) {
-			//세션값 초기화 
-			session.invalidate();
+	
+	// 로그인-강수빈
+	@PostMapping("/loginPro")
+	public String loginPro(EmployeeDTO employeeDTO,HttpSession session) {
+		System.out.println("EmployeeController loginPro()");
+		//로그인 처리
+		System.out.println(employeeDTO);
+			
+		employeeDTO = employeeService.userCheck(employeeDTO);
+			
+		if(employeeDTO != null) {
+			//아이디 비밀번호 일치 => 세션값 생성 => /member/main이동
+			session.setAttribute("empId", employeeDTO.getEmpId());
+			session.setAttribute("empName", employeeDTO.getEmpName());
 			// 주소변경하면서 이동 /main/main
-			return "redirect:/main/login";
-		}//
+			return "redirect:/main/main";
+		}else {
+			//아이디 비밀번호 틀림 => member/msg.jsp 이동
+			return "member/msg";
+		}
+	}//	
+	
+	// 로그아웃-강수빈
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		//세션값 초기화 
+		session.invalidate();
+		// 주소변경하면서 이동 /main/main
+		return "redirect:/main/login";
+	}//
 		
 		
 		

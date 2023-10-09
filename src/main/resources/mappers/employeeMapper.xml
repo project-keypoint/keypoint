@@ -38,7 +38,7 @@
 		where empId = #{empId}
 	</update>
 
-
+<!-- 로그인-강수빈 -->
 	<select id="userCheck" 
 	        resultType="com.keypoint.dto.EmployeeDTO">
 		select * from employees

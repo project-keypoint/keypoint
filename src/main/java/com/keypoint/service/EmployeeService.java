@@ -47,7 +47,9 @@ public class EmployeeService {
 		employeeDAO.updateEmployee(employeeDTO);
 	} // updateEmployee
 
-
+	
+	
+	// 로그인-강수빈
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService userCheck()");
 		return employeeDAO.userCheck(employeeDTO);
