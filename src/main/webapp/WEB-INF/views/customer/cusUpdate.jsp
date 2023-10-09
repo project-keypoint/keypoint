@@ -135,7 +135,7 @@
 
 <div class="form-group-customer">
 <p>적요</p>
-<input type="text" id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px; width:280px;" value="${customerDTO.cusMemo}" onfocus="clearInput(this)" onblur="restoreInput(this)"><br>
+<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px;">${customerDTO.cusMemo}</textarea>
 </div>
 
 <br>

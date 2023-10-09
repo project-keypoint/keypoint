@@ -30,7 +30,7 @@
 
 <div class="form-group-customer">
 <p>제목</p>
-<input type="text" id="noticeSubject" name="noticeSubject" class="form-control search-input">
+<input type="text" id="noticeSubject" name="noticeSubject" class="form-control search-input" value="${noticerDTO.noticeSubject}">
 </div>
 
 
