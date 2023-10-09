@@ -74,8 +74,11 @@
 ~<input type="text" id="roDate2" class="form-control search-input" placeholder="지시일자">
 </div>
 <div class="search-date">
-<p>지시상태</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="지시상태">
-~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="지시상태">
+<p>지시상태</p> 
+<a>지시<input type="checkbox" id="select1" name="select1" class="list-select" value="지시"></a>
+<a>진행<input type="checkbox" id="select2" name="select2" class="list-select" value="진행"></a>
+<a>마감<input type="checkbox" id="select3" name="select3" class="list-select" value="마감"></a>
+<a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
 </div>
 
 </div>
@@ -87,10 +90,12 @@
 <br>
 
 <div class="select-status">
-<a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
+<a>지시<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
 <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
-<a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a>
+<a>마감<input type="checkbox" id="select3" name="select3" class="list-select" checked></a>
 <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
+
+
 <!-- <a>( 체크박스 사용여부 보류중 )</a> -->
 <div>
 <!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->

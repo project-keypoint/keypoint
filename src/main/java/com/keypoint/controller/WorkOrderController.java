@@ -391,6 +391,135 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 	
 	
 	
+	
+	
+	
+	
+	
+	
+//	@RequestMapping(value = "/workOrder/workPop", method = RequestMethod.GET)
+//	public String getWorkPop(HttpServletRequest request, PageDTO pageDTO, Model model) {
+//		System.out.println("workOrderController workPop()");
+//		
+//		String searchLineCd=request.getParameter("searchLineCd");
+//		String searchWorkDate1 =request.getParameter("searchWorkDate1");
+//		String searchWorkDate2 =request.getParameter("searchWorkDate2");
+//		String searchProdCd =request.getParameter("searchProdCd");
+//		String searchWork1;
+//		String searchWork2;
+//		String searchWork3;
+//		if(searchLineCd==null) {
+//			searchWork1 ="대기";
+//			searchWork2 ="진행";
+//			searchWork3 ="완료";
+//		}else{
+//			searchWork1 =request.getParameter("searchWork1");
+//			searchWork2 =request.getParameter("searchWork2");
+//			searchWork3 =request.getParameter("searchWork3");
+//		}
+//		int pageSize=5;
+//
+//		String pageNum=request.getParameter("pageNum");
+//		if(pageNum==null) {
+//			pageNum="1";
+//		}
+//		int currentPage=Integer.parseInt(pageNum);
+//
+//
+//		pageDTO.setPageSize(pageSize);
+//		pageDTO.setPageNum(pageNum);
+//		pageDTO.setCurrentPage(currentPage);
+//
+//		pageDTO.setSearch(searchLineCd);
+//		pageDTO.setSearch2(searchWorkDate1);
+//		pageDTO.setSearch3(searchWorkDate2);
+//		pageDTO.setSearch4(searchProdCd);
+//		pageDTO.setSearch5(searchWork1);
+//		pageDTO.setSearch6(searchWork2);
+//		pageDTO.setSearch7(searchWork3);
+//
+//		List<WorkOrderDTO> workList=workOrderService.getWorkList(pageDTO);
+//
+//		int count = workOrderService.getWorkOrderCount(pageDTO);
+//		int pageBlock=10;
+//		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+//		int endPage=startPage+pageBlock-1;
+//		int pageCount=(count/pageSize)+(count%pageSize==0?0:1);
+//		if(endPage > pageCount) {
+//			endPage = pageCount;
+//		}
+//		pageDTO.setCount(count);
+//		pageDTO.setPageBlock(pageBlock);
+//		pageDTO.setStartPage(startPage);
+//		pageDTO.setEndPage(endPage);
+//		pageDTO.setPageCount(pageCount);
+//
+//
+//		model.addAttribute("workList", workList);
+//		model.addAttribute("pageDTO", pageDTO);
+//
+//		return "workOrder/workPop";
+//	}
+//	@RequestMapping(value = "/workOrder/workClickTr", method = RequestMethod.GET)
+//	public String workClickTr(HttpServletRequest request, WorkOrderDTO workOrderDTO, Model model) {
+//		System.out.println("instructionController workClickTr()");
+//		System.out.println(request.getParameter("clickWoCode"));
+//		String woCode=request.getParameter("clickWoCode");
+//		workOrderService.getWork(woCode);
+//
+//		model.addAttribute("WorkOrderDTO", workOrderDTO);
+//		return "production/productionInsert";
+//	}
+//	
+//	
+	@RequestMapping(value = "/workOrder/workList", method = RequestMethod.GET)
+	public String workList(Model model, HttpServletRequest request, PageDTO pageDTO) {
+		System.out.println("WorkOrderController workList()");
+		
+		String woCode = request.getParameter("woCode");
+		String lineCode = request.getParameter("lineCode");
+		String productCode = request.getParameter("productCode");
+		String productName = request.getParameter("productName");
+		String woCount = request.getParameter("woCount");
+		String lineId = request.getParameter("lineId");
+		String roCode = request.getParameter("roCode");
+		String cusCode = request.getParameter("cusCode");
+		
+		Map<String, Object> workSearch = new HashMap<String, Object>();
+		workSearch.put("woCode", woCode);
+		workSearch.put("lineCode", lineCode);
+		workSearch.put("productCode", productCode);
+		workSearch.put("productName", productName);
+		workSearch.put("woCount", woCount);
+		workSearch.put("lineId", lineId);
+		workSearch.put("roCode", roCode);
+		workSearch.put("cusCode", cusCode);
+		System.out.println(workSearch);
+		
+		List<Map<String, Object>> workList;
+		
+		if(woCode == null && lineCode == null && productCode == null && productName == null && woCount == null 
+				&& lineId == null && roCode == null && cusCode == null) {
+			// 작업지시 전체 조회
+			
+			workList = workOrderService.workList(pageDTO, model);
+			int totalCnt = workOrderService.workTotalCount();
+			model.addAttribute("totalCnt", totalCnt);
+			
+		} else {
+			// 작업지시 검색 조회
+			
+			workList = workOrderService.workSearch(workSearch, pageDTO, model);
+			int searchCnt = workOrderService.workSearchCount(workSearch);
+			model.addAttribute("searchCnt", searchCnt);
+		}
+		
+		System.out.println("작업지시 : " + workList);
+		model.addAttribute("workList", workList);
+		model.addAttribute("workSearch", workSearch);
+		
+		return "workOrder/workList";
+	}
 
 
 }
