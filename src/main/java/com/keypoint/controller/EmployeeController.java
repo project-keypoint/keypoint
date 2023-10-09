@@ -121,6 +121,7 @@ public class EmployeeController {
 			if(employeeDTO != null) {
 				//아이디 비밀번호 일치 => 세션값 생성 => /member/main이동
 				session.setAttribute("empId", employeeDTO.getEmpId());
+				session.setAttribute("empName", employeeDTO.getEmpName());
 				// 주소변경하면서 이동 /main/main
 				return "redirect:/main/main";
 			}else {
@@ -129,4 +130,15 @@ public class EmployeeController {
 			}
 		}//	
 	
+//	
+		@GetMapping("/logout")
+		public String logout(HttpSession session) {
+			//세션값 초기화 
+			session.invalidate();
+			// 주소변경하면서 이동 /main/main
+			return "redirect:/main/login";
+		}//
+		
+		
+		
 } // class
