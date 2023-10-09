@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +32,9 @@ public class QualityController {
 	}// qcList [품질검사목록(+생산목록)]
 	
 	@GetMapping("/qcDetails")
-	public String qcDetails(Model model, @RequestParam("prodCode") String prodCode) {
+	public String qcDetails(Model model, @RequestParam("poCode") String poCode) {
 		System.out.println("QualityController qc/qcDetails");
-		QualityDTO qualityDTO = qualityService.getQcDetails(prodCode);
+		QualityDTO qualityDTO = qualityService.getQcDetails(poCode);
 		model.addAttribute("qualityDTO", qualityDTO);
 		return "qc/qcDetails";
 	}// qcDetails [품질검사상세]
@@ -50,16 +52,10 @@ public class QualityController {
 		}
 	}// qcStart [품질검사등록(시작)]
 	
-//	@GetMapping("/qcUpdate")
-//	public String qcUpdate() {
-//		System.out.println("QualityController qc/qcUpdate");
-//		return "qc/qcUpdate";
-//	}// qcUpdate [품질검사 진행(수정)]
-	
 	@GetMapping("/qcUpdate")
-	public String qcUpdate(Model model, @RequestParam("prodCode") String prodCode) {
+	public String qcUpdate(Model model, @RequestParam("poCode") String poCode) {
 		System.out.println("QualityController qc/qcUpdate");
-		QualityDTO  qualityDTO = qualityService.getQcDetails(prodCode);
+		QualityDTO  qualityDTO = qualityService.getQcDetails(poCode);
 		model.addAttribute("qualityDTO", qualityDTO);
 		return "qc/qcUpdate";
 	}// qcUpdate [품질검사수정(진행)]
@@ -77,7 +73,15 @@ public class QualityController {
 		}
 	}// qcUpdatePro [품질검사(저장)]
 	
-	
+	@PostMapping("/qcTransfer")
+	public ResponseEntity<String> qcTransfer(QualityDTO qualityDTO) {
+	    System.out.println("QualityController qcTransfer");
+	    System.out.println(qualityDTO);
+	    boolean result = qualityService.qcTransfer(qualityDTO);
+	    if (result)
+	        return new ResponseEntity<>("success", HttpStatus.OK);
+	    return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+	}// qcTransfer [품질검사후 상품이동]
 	
 	
 	

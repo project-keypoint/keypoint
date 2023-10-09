@@ -30,15 +30,15 @@
 <div class="search-b">
 <div class="search-select">
 <p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
+<input type="text" id="productCode" class="form-control search-input readonly-color" placeholder="상품코드" style="width:110px;" readonly>
+<input type="text" id="productName" class="form-control search-input readonly-color" placeholder="상품명(클릭)" readonly>
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-date">
-<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly>
-~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일" readonly>
+<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
+~<input type="text" id="shipSdate2" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
 </div>
 </div>
 <div class="search-button">
@@ -71,7 +71,9 @@
     <th>상태</th>
     <th>품질검사원</th>
     <th>검사완료일</th>
-    <th>버튼</th>
+    <th>검사진행</th>
+    <th>완료처리</th>
+    <th>상태</th>
 </tr>
 
 <c:forEach var="qualityDTO" items="${qcList}">
@@ -86,7 +88,7 @@
 	<td>${qualityDTO.shipSdate}</td>
     <td>${qualityDTO.productCode}</td>
     <td>${qualityDTO.productName}</td>
-    <td>${qualityDTO.prodCount}</td>
+    <td>${qualityDTO.poCount}</td>
     <td>
     <c:choose>
         <c:when test="${empty qualityDTO.qcTest1}">-</c:when>
@@ -105,17 +107,17 @@
         <c:otherwise>${qualityDTO.qcTest3}</c:otherwise>
     </c:choose>
     </td>
-    <td>
-    <c:choose>
-        <c:when test="${qualityDTO.qcPass eq 0}">-</c:when>
-        <c:otherwise>${qualityDTO.qcPass}</c:otherwise>
-    </c:choose>
+    <td>${qualityDTO.qcPass}
+<%--     <c:choose> --%>
+<%--         <c:when test="${qualityDTO.qcPass eq 0}">-</c:when> --%>
+<%--         <c:otherwise>${qualityDTO.qcPass}</c:otherwise> --%>
+<%--     </c:choose> --%>
     </td>
-    <td>
-    <c:choose>
-        <c:when test="${qualityDTO.qcDefect eq 0}">-</c:when>
-        <c:otherwise>${qualityDTO.qcDefect}</c:otherwise>
-    </c:choose>
+    <td>${qualityDTO.qcDefect}
+<%--     <c:choose> --%>
+<%--         <c:when test="${qualityDTO.qcDefect eq 0}">-</c:when> --%>
+<%--         <c:otherwise>${qualityDTO.qcDefect}</c:otherwise> --%>
+<%--     </c:choose> --%>
     </td>
     <td>
     <c:choose>
@@ -141,12 +143,20 @@
         <c:otherwise><c:out value="${fn:substring(qualityDTO.qcEndDate, 0, 10)}" /></c:otherwise>
     </c:choose>
     </td>
-    <td><input type="button" value="검사진행(상세)" class="btn btn-secondary mybutton1" onclick="openDetails('${qualityDTO.prodCode}')"></td>
-	<!-- + openDetails(가져갈값넣기) -->
+    <td><input type="button" value="진행(상세)" class="btn btn-info mybutton1" onclick="openDetails('${qualityDTO.poCode}')"></td>
+	<c:choose>
+    <c:when test="${qualityDTO.qcPass + qualityDTO.qcDefect == qualityDTO.poCount && qualityDTO.qcTest1 == '완료' && qualityDTO.qcTest2 == '완료' && qualityDTO.qcTest3 == '완료' && qualityDTO.qcTransfer == '미완료'}">
+<td>
+  <input type="button" value="창고" class="btn btn-primary mybutton1" onclick="confirmQcTransfer('${qualityDTO.qcCode}', '${qualityDTO.productCode}', '${qualityDTO.qcPass}')">
+</td>
+    </c:when>
+    <c:otherwise>
+        <td><input type="button" value="창고" class="btn btn-secondary mybutton1"></td>
+    </c:otherwise>
+	</c:choose>
+	<td>${qualityDTO.qcTransfer}</td>
 </tr>
 </c:forEach>
-
-
 </table>
 </div><!-- table -->
 <div class="content-bottom">
@@ -179,6 +189,30 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+// 품질검사 후 합격상품 재고이동, 상태 완료처리
+function confirmQcTransfer(qcCode, productCode, qcPass) {
+    if (confirm('확인하시겠습니까?')) {
+        $.ajax({
+            type: "POST",
+            url: '${pageContext.request.contextPath}/qc/qcTransfer',
+            data: {
+                "qcCode": qcCode,
+                "productCode": productCode,
+                "qcPass": qcPass
+            },
+            success: function(result) {
+                const data = $.trim(result);
+                if (data === "success") {
+                    alert("완료");
+                    location.reload();
+                } else {
+                    alert("에러");
+                }
+            }
+        });
+    }
+}
+
 //팝업 창을 열어주는 함수
 function openPopup(url) {
     var width = 500;
@@ -189,12 +223,14 @@ function openPopup(url) {
     popupWindow.focus();
 }
 $(document).ready(function() {
- 	// 사원 검색 팝업 열기
+// 사원 검색 팝업
     $("#productCode, #productName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
         openPopup(url);
     });
 });
+
+// 납품예정일 검색 (수정예정)
 $(function() {
     $("#shipSdate1").datepicker({
     	dateFormat: "yy-mm-dd"
@@ -230,15 +266,16 @@ checkboxes.forEach(function (checkbox) {
 });
 
 // 품질상세내용 새창
-function openDetails(prodCode) {
-    var url = '${pageContext.request.contextPath}/qc/qcDetails?prodCode='+prodCode;
+function openDetails(poCode) {
+    var url = '${pageContext.request.contextPath}/qc/qcDetails?poCode='+poCode;
     var windowWidth = 600;
     var windowHeight = 890;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-//수주등록 새창
+
+// 수주등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/receive/receiveInsert';
     var windowWidth = 500;

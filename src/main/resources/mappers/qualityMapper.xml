@@ -6,38 +6,38 @@
 
 	<select id="getQcList" resultType="com.keypoint.dto.QualityDTO">
 		select a.qcCode,
-			   b.prodCode, d.shipSdate, b.woCode, b.productCode, e.productName, b.prodCount, 
+			   b.poCode, d.shipSdate, b.woCode, b.productCode, e.productName, b.poCount, 
        	       a.qcTest1, a.qcTest2, a.qcTest3, a.qcPass, a.qcDefect, a.qcDefectRate,
-       	       a.qcStatus, a.qcEmpId, f.empName as qcEmpName, a.qcStartDate, a.qcEndDate
+       	       a.qcStatus, a.qcEmpId, f.empName as qcEmpName, a.qcStartDate, a.qcEndDate, a.qcTransfer
 		from production b
-		left join qualityControl a on b.prodCode = a.prodCode
+		left join qualityControl a on b.poCode = a.poCode
 		left join workOrder c on b.woCode = c.woCode
 		left join receivedOrder d on d.roCode = c.roCode
 		left join product e on b.productCode = e.productCode
 		left join employees f on a.qcEmpId = f.empId
-		order by qcCode desc
+		order by qcCode asc
 	</select>
 	
 	<select id="getQcDetails" resultType="com.keypoint.dto.QualityDTO">
-		select b.woCode, b.prodCode, b.productCode, e.productName,
+		select b.woCode, b.poCode, b.productCode, e.productName,
 		       b.empId as prodEmpId, (select empName from employees where empId = b.empId) as prodEmpName,
 			   d.shipSdate, a.qcTest1, a.qcTest2, a.qcTest3,
-			   b.prodCount, a.qcPass, a.qcDefect, a.qcDefectRate,
+			   b.poCount, a.qcPass, a.qcDefect, a.qcDefectRate,
 			   a.qcCode, a.qcEmpId, (select empName from employees where empId = a.qcEmpId) as qcEmpName,
-			   a.qcStartDate, a.qcEndDate, a.qcStatus
+			   a.qcStartDate, a.qcEndDate, a.qcStatus, a.qcTransfer
 		from production b
-		left join qualityControl a on b.prodCode = a.prodCode
+		left join qualityControl a on b.poCode = a.poCode
 		left join workOrder c on b.woCode = c.woCode
 		left join receivedOrder d on d.roCode = c.roCode
 		left join product e on b.productCode = e.productCode
-		where b.prodCode = #{prodCode}
+		where b.poCode = #{poCode}
 	</select>
 	
 	<insert id="qcStart">
-		insert into qualityControl (qcCode, prodCode, qcEmpId, qcStartDate, qcStatus,
+		insert into qualityControl (qcCode, poCode, qcEmpId, qcStartDate, qcStatus,
 		                            qcTest1, qcTest2, qcTest3, qcPass, qcDefect)
 		values (CONCAT('QC', DATE_FORMAT(NOW(), '%y%m%d%H%i%s')),
-		       #{prodCode}, #{qcEmpId}, now(), #{qcStatus},
+		       #{poCode}, #{qcEmpId}, now(), #{qcStatus},
 		       #{qcTest1}, #{qcTest2}, #{qcTest3}, #{qcPass}, #{qcDefect})
 	</insert>
 	
@@ -46,7 +46,19 @@
 		SET qcTest1 = #{qcTest1}, qcTest2 = #{qcTest2}, qcTest3 = #{qcTest3},
 		    qcPass = #{qcPass}, qcDefect = #{qcDefect}, qcDefectRate = #{qcDefectRate},
 		    qcEmpId = #{qcEmpId}, qcEndDate = #{qcEndDate}, qcStatus = #{qcStatus}
-		WHERE prodCode = #{prodCode}                        
+		WHERE poCode = #{poCode}                        
+	</update>
+	
+	<update id="qcTransferStatus">
+		UPDATE qualityControl
+		SET qcTransfer = '완료'
+		WHERE qcCode = #{qcCode} AND qcTransfer = '미완료'
+	</update>
+	
+	<update id="qcTransferStock">
+		UPDATE product
+		SET productCount = productCount + #{qcPass}
+		WHERE productCode = #{productCode}
 	</update>
 	
 	
