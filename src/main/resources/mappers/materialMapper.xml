@@ -16,7 +16,9 @@
 	</select>
 	
 	<select id="getMaterial" resultType="com.keypoint.dto.MaterialDTO">
-		select * from material
+		select m.materialCode,m.materialName,m.cusCode,c.cusName,m.materialPrice,m.materialCount,m.materialUnit,m.materialMemo  
+		from material m join customer c
+		on m.cusCode = c.cusCode
 		where materialCode = #{materialCode}
 	</select>	
 
@@ -26,6 +28,12 @@
 		WHERE materialCode = #{materialCode}
 	</update>
 
+	<update id="updateMaterial">
+		UPDATE material
+		SET materialName=#{materialName},cusCode=#{cusCode},materialPrice=#{materialPrice},
+			materialCount=#{materialCount},materialUnit=#{materialUnit},materialMemo=#{materialMemo}
+		WHERE materialCode = #{materialCode}
+	</update>
 
 
 	<select id="getPurchaseMaterialList" resultType="com.keypoint.dto.MaterialDTO">

@@ -34,10 +34,15 @@ public class MaterialDAO {
 		sqlSession.update(namespace+".deleteMaterial", materialDTO);
 	}// deleteMaterial
 
-	public MaterialDTO getMaterial(String materialDTO) {
+	public MaterialDTO getMaterial(String materialCode) {
 		System.out.println("MaterialDAO getMaterial()");
-		return sqlSession.selectOne(namespace+".getMaterial", materialDTO);
-	}
+		return sqlSession.selectOne(namespace+".getMaterial", materialCode);
+	}// getMaterial
+	
+	public void updateMaterial(MaterialDTO materialDTO) {
+		System.out.println("MaterialDAO updateMaterial()");
+		sqlSession.update(namespace+".updateMaterial", materialDTO);
+	}// updateMaterial
 
 	// ---------------------------------홍렬 자재리스트 팝업 ---------------------------------------------------------------
 	
@@ -69,6 +74,7 @@ public class MaterialDAO {
 		return sqlSession.selectOne(namespace+".countPurchaseList", search);
 	
 	} // countPurchaseList
+
 	
 	
 	// -------------------------------------------------------------------------------------

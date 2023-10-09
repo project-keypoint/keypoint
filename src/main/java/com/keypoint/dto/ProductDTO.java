@@ -5,6 +5,7 @@ public class ProductDTO {
 	private String productCode;
 	private String productName;
 	private String cusCode;
+	private String cusName;
 	private int productPrice;
 	private int productCount;
 	private String productUnit;
@@ -13,9 +14,10 @@ public class ProductDTO {
 	@Override
 	public String toString() {
 		return "ProductDTO [productCode=" + productCode + ", productName=" + productName + ", cusCode=" + cusCode
-				+ ", productPrice=" + productPrice + ", productCount=" + productCount + ", productUnit=" + productUnit
-				+ ", productMemo=" + productMemo + "]";
+				+ ", cusName=" + cusName + ", productPrice=" + productPrice + ", productCount=" + productCount
+				+ ", productUnit=" + productUnit + ", productMemo=" + productMemo + "]";
 	}
+	
 	public String getProductCode() {
 		return productCode;
 	}
@@ -33,6 +35,12 @@ public class ProductDTO {
 	}
 	public void setCusCode(String cusCode) {
 		this.cusCode = cusCode;
+	}
+	public String getCusName() {
+		return cusName;
+	}
+	public void setCusName(String cusName) {
+		this.cusName = cusName;
 	}
 	public int getProductPrice() {
 		return productPrice;
@@ -58,8 +66,6 @@ public class ProductDTO {
 	public void setProductMemo(String productMemo) {
 		this.productMemo = productMemo;
 	}
-	
-	
 	
 	
 	

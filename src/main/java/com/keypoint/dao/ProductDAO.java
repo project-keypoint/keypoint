@@ -35,7 +35,12 @@ public class ProductDAO {
 	public ProductDTO getProduct(String productCode) {
 		System.out.println("ProductDAO getProduct()");
 		return sqlSession.selectOne(namespace+".getProduct", productCode);
-	}
+	}// getProduct
+
+	public void updateProduct(ProductDTO productDTO) {
+		System.out.println("ProductDAO updateProduct()");
+		sqlSession.update(namespace+".updateProduct", productDTO);
+	}// updateProduct
 
 	
 	
