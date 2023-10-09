@@ -122,10 +122,79 @@
 
 
 
+<<<<<<< HEAD
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+=======
+
+				<div>
+					<table class="table-list">
+						<tr class="table-head">
+							<th><input type="checkbox" id="delete-list-all"
+								name="delete-list" data-group="delete-list"></th>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성날짜</th>
+							<th>조회수</th>
+						
+						</tr>
+						<c:forEach var="noticeDTO" items="${noticeList}">
+							<tr class="table-body">
+								<td><input type="checkbox" id="delete-list"
+									name="delete-list" data-group="delete-list"></td>
+								<td>${noticeDTO.noticeNum}</td>
+								<td>${noticeDTO.noticeSubject}</td>
+								<td>${noticeDTO.noticeDate}</td>
+								<td>${noticeDTO.noticeReadcount}</td>
+<%-- 								<td>${noticeDTO.lineEmp}</td> --%>
+
+
+								<%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
+								<%--     <td>${receiveDTO.shipSdate}</td> --%>
+								<%--     <td><c:choose> --%>
+								<%--             <c:when test="${not empty receiveDTO.shipDate}"> --%>
+								<%--                 ${receiveDTO.shipDate} --%>
+								<%--             </c:when> --%>
+								<%--             <c:otherwise> --%>
+								<!--                 - -->
+								<%--             </c:otherwise> --%>
+								<%--         </c:choose></td><!-- 납품일 null 대신 '-' --> --%>
+								<%--     <td>${receiveDTO.roStatus}</td> --%>
+								
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				<!-- table -->
+				<div class="content-bottom">
+					<div>
+						<input type="button" value="글쓰기" class="btn btn-primary mybutton1"
+							onclick="openInsert()"> <input type="button" value="삭제"
+							class="btn btn-secondary mybutton1">
+					</div>
+					<div class="page-buttons">
+						<a href="#" class="page-button">&lt;</a> <a href="#"
+							class="page-button page-button-active">1</a> <a href="#"
+							class="page-button">2</a> <a href="#" class="page-button">3</a> <a
+							href="#" class="page-button">4</a> <a href="#"
+							class="page-button">5</a> <a href="#" class="page-button">&gt;</a>
+					</div>
+					<!-- page-button -->
+				</div>
+			</div>
+			<!-- contents -->
+		</div>
+		<!-- 그림자아니야 영역 -->
+	</div>
+	<!-- main -->
+
+	<!-- contents end -->
+
+
+
+>>>>>>> branch 'main' of https://github.com/project-keypoint/keypoint.git
 
 <script type="text/javascript">
 //팝업 창을 열어주는 함수

@@ -6,12 +6,14 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.springframework.ui.Model;
 import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.WorkOrderDAO;
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
-
+import com.keypoint.dto.PageUtil;
 
 @Service
 public class WorkOrderService {
@@ -115,9 +117,80 @@ public class WorkOrderService {
 	}
 
 	
-
-
 	
-
+	public List<WorkOrderDTO> workList() {
+		System.out.println("WorkOrderService workList()");
+		
+		return workOrderDAO.workList();
 	}
+
+	public List<Map<String, Object>> workList(PageDTO pageDTO, Model model) {
+		// 라인 전체 목록
+		System.out.println("WorkOrderService lineList()");
+		
+		int totalCnt = workOrderDAO.workTotalCount();
+		PageUtil.getPaging(pageDTO, model, totalCnt);
+		
+		return workOrderDAO.workList(pageDTO);
+	}
+
+	public List<Map<String, Object>> workSearch(Map<String, Object> workSearch, PageDTO pageDTO, Model model) {
+		System.out.println("WorkOrderService workSearch()");
+		
+		int totalCnt = workOrderDAO.workSearchCount(workSearch);
+		PageUtil.getPaging(pageDTO, model, totalCnt);
+		
+		return workOrderDAO.workSearch(workSearch, pageDTO);
+	}
+
+	public Integer workTotalCount() {
+		System.out.println("WorkOrderService workTotalCount");
+		
+		return workOrderDAO.workTotalCount();
+	}
+
+	public Integer workSearchCount(Map<String, Object> workSearch) {
+		System.out.println("WorkOrderService workSearchCount");
+		
+		return workOrderDAO.workSearchCount(workSearch);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	public List<WorkOrderDTO> getWorkList(PageDTO pageDTO) {
+//		System.out.println("WorkOrderService getWorkList()");
+//
+//		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+//		int endRow = startRow+pageDTO.getPageSize()-1;
+//
+//		pageDTO.setStartRow(startRow);
+//		pageDTO.setEndRow(endRow);
+//		return workOrderDAO.getWorkList(pageDTO);
+//	}
+//
+//	public int getWorkOrderCount(PageDTO pageDTO) {
+//		System.out.println("WorkOrderService getWorkOrderCount()");
+//
+//		return workOrderDAO.getWorkOrderCount(pageDTO);
+//
+//
+//	}
+//	
+//	
+//	public WorkOrderDTO getWork(String woCode) {
+//		System.out.println("WorkOrderService getWork()");
+//
+//		return workOrderDAO.getWork(woCode);
+//		
+//	}
+}
 

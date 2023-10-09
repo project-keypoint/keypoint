@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +23,15 @@ public class ReceiveController {
 	@Inject
 	private ReceiveService receiveService;
 	
-	@GetMapping("/receiveList")
-	public String receiveList(Model model) {
-		System.out.println("ReceiveController receive/receiveList");
+	@GetMapping("/receiveShipList")
+	public String shipmentTest(Model model) {
+		System.out.println("ReceiveController receive/shipmentTest");
 		List<ReceiveDTO> receiveList = receiveService.getReceiveList();
+		List<ReceiveDTO> shipmentList = receiveService.getShipmentList();
 		model.addAttribute("receiveList", receiveList);
-		return "receive/receiveList";
-	}// receiveTest [수주목록] // 페이징은 나중에
+		model.addAttribute("shipmentList", shipmentList);
+		return "receive/receiveShipList";
+	}// receiveShipList [수주&출하 목록]
 	
 	@GetMapping("/receiveInsert")
 	public String receiveInsert() {
@@ -90,21 +94,15 @@ public class ReceiveController {
 		}
 	}// receiveDelete [수주삭제]
 	
-	
-	
-//	@GetMapping("/shipmentTest") // 수주+출하 테스트
-//	public String shipment() {
-//		System.out.println("ReceiveController receive/shipmentTest");
-//		return "receive/shipmentTest";
-//	}// shipmentTest [수주+출하 테스트]
-	
-	@GetMapping("/shipmentTest")
-	public String shipmentTest(Model model) {
-		System.out.println("ReceiveController receive/shipmentTest");
-		List<ReceiveDTO> receiveList = receiveService.getReceiveListTest();
-		model.addAttribute("receiveList", receiveList);
-		return "receive/shipmentTest";
-	}// receiveTest [수주목록] // 페이징은 나중에
+	@PostMapping("/shipComplete")
+	public ResponseEntity<String> qcTransfer(ReceiveDTO receiveDTO) {
+	    System.out.println("ReceiveController shipComplete");
+	    System.out.println(receiveDTO);
+	    boolean result = receiveService.shipComplete(receiveDTO);
+	    if (result)
+	        return new ResponseEntity<>("success", HttpStatus.OK);
+	    return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+	}// shipComplete [출하완료]
 	
 	/////////////////////////////////////////////////////////////////////
 	

@@ -35,7 +35,7 @@ public class EmployeeDAO {
 
 
 	// 사원-상세정보
-	public EmployeeDTO getEmployeeDetails(String empId) {
+	public EmployeeDTO getEmployeeDetails(int empId) {
 		System.out.println("EmployeeDAO getEmployeeDetails()");
 		
 		return sqlSession.selectOne(namespace+".getEmployeeDetails", empId);
@@ -48,6 +48,13 @@ public class EmployeeDAO {
 		
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
 	} // updateEmployee
+
+
+
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO userCheck()");
+		return sqlSession.selectOne(namespace+".userCheck", employeeDTO);
+	}
 
 	
 

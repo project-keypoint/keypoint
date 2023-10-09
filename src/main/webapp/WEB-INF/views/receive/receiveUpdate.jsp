@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,33 +30,55 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" value="${receiveDTO.cusCode}" readonly>
-<input type="text" id="cusName" class="form-control search-input inputname" value="${receiveDTO.cusName}" readonly>
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode readonly-color" value="${receiveDTO.cusCode}" readonly>
+<input type="text" id="cusName" class="form-control search-input inputname readonly-color" value="${receiveDTO.cusName}" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="${receiveDTO.productCode}" readonly>
-<input type="text" id="productName" class="form-control search-input inputname" value="${receiveDTO.productName}" readonly>
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode readonly-color readonly-color" value="${receiveDTO.productCode}" readonly>
+<input type="text" id="productName" class="form-control search-input inputname readonly-color readonly-color" value="${receiveDTO.productName}" readonly>
 </div>
 </div>
 <div class="form-group-receive">
 <p>수주수량</p>
 <input type="number" id="roCount" name="roCount" class="form-control search-input" value="${receiveDTO.roCount}" min="0">
+<p>납품수량</p>
+<c:choose>
+    <c:when test="${not empty receiveDTO.shipDate}">
+        <input type="text" id="shipCount" class="form-control search-input f-bold" placeholder="${receiveDTO.shipCount}" readonly>
+    </c:when>
+    <c:otherwise>
+        <input type="text" id="shipCount" class="form-control search-input f-bold" placeholder="-" readonly>
+    </c:otherwise>
+</c:choose>
 </div>
 <div class="form-group-receive">
 <p>수주금액</p>
-<input type="text" id="roPrice" class="form-control search-input" value="${receiveDTO.roPrice}" readonly>
+<input type="text" id="roPrice" class="form-control search-input" value="<fmt:formatNumber value="${receiveDTO.roPrice}" groupingUsed="true"/>원" readonly>
+<p>납품금액</p>
+<c:choose>
+    <c:when test="${not empty receiveDTO.shipDate}">
+        <input type="text" id="shipPrice" class="form-control search-input f-bold" placeholder="<fmt:formatNumber value="${receiveDTO.shipPrice}" groupingUsed="true"/>원" readonly>
+    </c:when>
+    <c:otherwise>
+        <input type="text" id="shipPrice" class="form-control search-input f-bold" placeholder="-" readonly>
+    </c:otherwise>
+</c:choose> 
+</div>
+<div class="form-group-receive">
+<p>납품메모</p>
+<c:choose>
+    <c:when test="${not empty receiveDTO.shipDate}">
+        <input type="text" id="shipMemo" class="form-control search-input" placeholder="${receiveDTO.shipMemo}" style="width: 445px;" readonly>
+    </c:when>
+    <c:otherwise>
+        <input type="text" id="shipMemo" class="form-control search-input" placeholder="-" style="width: 445px;" readonly>
+    </c:otherwise>
+</c:choose>
 </div>
 <div class="form-group-receive">
 <p>수주등록일</p>
 <input type="text" id="roDate" class="form-control search-input" value="${receiveDTO.roDate}" readonly>
-</div>
-<div class="form-group-receive">
-<p>납품예정일</p>
-<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input" value="${receiveDTO.shipSdate}" readonly>
-</div>
-
-<div class="form-group-receive">
 <p>상태</p>
 <select id="roStatus" name="roStatus" class="form-control search-input status">
     <option value="대기" ${receiveDTO.roStatus eq '대기' ? 'selected' : ''}>대기</option>
@@ -63,12 +87,30 @@
     <option value="취소" ${receiveDTO.roStatus eq '취소' ? 'selected' : ''}>취소</option>
 </select>
 </div>
+<div class="form-group-receive">
+<p>납품예정일</p>
+<input type="text" id="shipSdate" name="shipSdate" class="form-control search-input readonly-color" value="${receiveDTO.shipSdate}" readonly>
+<p>납품일</p>
+<c:choose>
+    <c:when test="${not empty receiveDTO.shipDate}">
+        <input type="text" id="shipDate" class="form-control search-input" placeholder="${receiveDTO.shipDate}" readonly>
+    </c:when>
+    <c:otherwise>
+        <input type="text" id="shipDate" class="form-control search-input" placeholder="-" readonly>
+    </c:otherwise>
+</c:choose>
+</div>
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>담당자</p>
-<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode" value="${receiveDTO.roEmpId}" readonly>
-<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" value="${receiveDTO.roEmpName}" readonly>
+<p>수주자</p>
+<input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode readonly-color" value="${receiveDTO.roEmpId}" style="width: 150px;" readonly>
+<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode readonly-color" value="${receiveDTO.roEmpName}" readonly>
+</div>
+<div class="form-group-receive">
+<p>납품자</p>
+<input type="text" id="shipEmpId"  name="shipEmpId" class="form-control search-input inputcode" value="새컬럼필요" style="width: 150px;" readonly>
+<input type="text" id="shipEmpName" name="shipEmpName" class="form-control search-input inputcode" value="새컬럼필요" readonly>
 </div>
 </div>
 

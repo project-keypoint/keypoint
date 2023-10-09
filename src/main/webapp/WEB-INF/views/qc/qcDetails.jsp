@@ -21,7 +21,6 @@
 <body>
 <form action="${pageContext.request.contextPath}/qc/qcStart" method="post" onsubmit="return validateForm()">
 <div class="main-details">
-<!-- <form action="#" method="post" onsubmit="return validateForm()"> -->
 <div class="forms-group-qc-receive">
 <div class="page-title-popup">품질검사(상세)</div>
 <div class="search-bar-popup-qc">
@@ -32,7 +31,7 @@
 </div>
 <div class="form-group-qc-receive">
 <p>생산코드</p>
-<input type="text" id="prodCode" name="prodCode" class="form-control search-input inputcode" value="${qualityDTO.prodCode}" readonly>
+<input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" value="${qualityDTO.poCode}" readonly>
 </div>
 <div class="form-group-qc-receive">
 <p>상품명</p> 
@@ -67,7 +66,7 @@
 	<th>불량</th>
 	<th>최종불량률</th></tr>
 <tr class="table-body">
-	<td><input type="text" id="qcCount" class="form-control search-input input-center hide" placeholder="${qualityDTO.prodCount}" readonly></td>
+	<td><input type="text" id="qcCount" class="form-control search-input input-center hide" placeholder="${qualityDTO.poCount}" readonly></td>
 	<td><input type="text" id="qcPass" class="form-control search-input input-center hide" placeholder="${qualityDTO.qcPass}" readonly></td>
 	<td><input type="text" id="qcDefect" class="form-control search-input input-center hide" placeholder="${qualityDTO.qcDefect}" readonly></td>
 	<td><input type="text" id="qcDefectRate" class="form-control search-input input-center" placeholder="${qualityDTO.qcDefectRate}" min="0" readonly></td>
@@ -84,22 +83,40 @@
 <c:choose>
   <c:when test="${not empty qualityDTO.qcCode}">
     <input type="text" id="qcEmpId" name="qcEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.qcEmpId}" readonly>
-	<input type="text" id="qcEmpName" class="form-control search-input inputname" placeholder="사원명" readonly>
+	<input type="text" id="qcEmpName" class="form-control search-input inputname" placeholder="${qualityDTO.qcEmpName}" readonly>
   </c:when>
   <c:otherwise>
-    <input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.qcEmpId}" readonly>
-	<input type="text" id="empName" class="form-control search-input inputname" placeholder="사원명" readonly>
+    <input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode readonly-color" placeholder="사원코드(클릭)" readonly>
+	<input type="text" id="empName" class="form-control search-input inputname readonly-color" placeholder="사원명(클릭)" readonly>
   </c:otherwise>
 </c:choose>
 
 </div>
 
 <div class="form-group-qc-receive">
-<p>검사시작일</p> <input type="text" id="qcStartDate" class="form-control search-input" placeholder="${qualityDTO.qcStartDate}" readonly>
+<p>검사시작일</p>
+<%-- <input type="text" id="qcStartDate" class="form-control search-input" placeholder="${qualityDTO.qcStartDate}" readonly> --%>
+<c:choose>
+  <c:when test="${not empty qualityDTO.qcCode}">
+    <input type="text" id="qcStartDate" class="form-control search-input" placeholder="${qualityDTO.qcStartDate}" readonly>
+  </c:when>
+  <c:otherwise>
+    <input type="text" id="qcStartDate" class="form-control search-input" placeholder="-" readonly>
+  </c:otherwise>
+</c:choose>
 </div>
 
 <div class="form-group-qc-receive">
-<p>검사완료일</p> <input type="text" id="qcEndDate" class="form-control search-input" placeholder="${qualityDTO.qcEndDate}" readonly>
+<p>검사완료일</p>
+<%-- <input type="text" id="qcEndDate" class="form-control search-input" placeholder="${qualityDTO.qcEndDate}" readonly> --%>
+<c:choose>
+  <c:when test="${not empty qualityDTO.qcCode}">
+    <input type="text" id="qcEndDate" class="form-control search-input" placeholder="${qualityDTO.qcEndDate}" readonly>
+  </c:when>
+  <c:otherwise>
+    <input type="text" id="qcEndDate" class="form-control search-input" placeholder="-" readonly>
+  </c:otherwise>
+</c:choose>
 </div>
 
 </div>
@@ -115,14 +132,15 @@
 </c:choose>
 
 <c:choose>
-  <c:when test="${not empty qualityDTO.qcCode}">
-    <input type="button" value="검사시작" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/qc/qcUpdate?prodCode=${qualityDTO.prodCode}'">
+  <c:when test="${not empty qualityDTO.qcCode and qualityDTO.qcTransfer eq '미완료'}">
+    <input type="button" value="검사시작" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/qc/qcUpdate?poCode=${qualityDTO.poCode}'">
   </c:when>
   <c:otherwise>
     <input type="button" value="검사시작" class="btn btn-secondary mybutton1">
   </c:otherwise>
 </c:choose>
-<input type="text" id="qcStatus" class="form-control search-input input-center" readonly>
+<%-- <a>${qualityDTO.qcTransfer}</a> --%>
+<!-- <input type="text" id="qcStatus" class="form-control search-input input-center" readonly> -->
 
 </div>
 <!-- </form>form 끝 -->
@@ -136,20 +154,20 @@
 
 <script>
 // 받아온 값이 0 또는 null일 경우 '-'
-function setPlaceholder(id, value) {
-    var inputElement = document.getElementById(id);
-    inputElement.placeholder = (value !== null && value !== "" && value !== "0") ? value : '-';
-}
-setPlaceholder('qcTest1', "${qualityDTO.qcTest1}");
-setPlaceholder('qcTest2', "${qualityDTO.qcTest2}");
-setPlaceholder('qcTest3', "${qualityDTO.qcTest3}");
-setPlaceholder('qcStatus', "${qualityDTO.qcStatus}");
-setPlaceholder('qcDefectRate', "${qualityDTO.qcDefectRate}");
-setPlaceholder('prodCode', "${qualityDTO.prodCode}");
-
-setPlaceholder('qcStartDate', "${qualityDTO.qcStartDate}");
-setPlaceholder('qcEndDate', "${qualityDTO.qcEndDate}"); //시작일or완료일 컬럼추가하기
-setPlaceholder('empName', "${qualityDTO.qcEmpName}");
+document.addEventListener("DOMContentLoaded", function() {
+    function setPlaceholder(id, value) {
+        var inputElement = document.getElementById(id);
+        inputElement.placeholder = (value !== null && value !== "" && value !== "0") ? value : '-';
+    }
+    setPlaceholder('qcTest1', "${qualityDTO.qcTest1}");
+    setPlaceholder('qcTest2', "${qualityDTO.qcTest2}");
+    setPlaceholder('qcTest3', "${qualityDTO.qcTest3}");
+    setPlaceholder('qcStatus', "${qualityDTO.qcStatus}");
+    setPlaceholder('qcDefectRate', "${qualityDTO.qcDefectRate}");
+    setPlaceholder('poCode', "${qualityDTO.poCode}");
+    setPlaceholder('qcStartDate', "${qualityDTO.qcStartDate}");
+    setPlaceholder('qcEndDate', "${qualityDTO.qcEndDate}"); 
+});
 
 function setPlaceholderQcEmp(id, value) {
     var inputElement = document.getElementById(id);
@@ -175,7 +193,7 @@ function openPopup(url) {
     popupWindow.focus();
 }
 $(document).ready(function() {
- 	// 사원 검색 팝업 열기
+// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
         openPopup(url);
@@ -184,7 +202,9 @@ $(document).ready(function() {
 //유효성 검사
 function validateForm() {
     // 각 입력 필드 값
-    var qcEmpId = document.getElementById("qcEmpId").value;
+    var qcEmpIdElement = document.getElementById("qcEmpId") || document.getElementById("empId");
+    var qcEmpId = qcEmpIdElement.value;
+    console.log('qcEmpId:', qcEmpId);  // 로깅
     // 빈 필드 검사
     if (qcEmpId === "") {
         alert("[품질검사원]을 입력해주세요.");

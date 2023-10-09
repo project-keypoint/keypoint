@@ -67,9 +67,7 @@
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/receive/receiveList">수주목록(작업중)</a>
-					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/receive/shipmentTest">수주+출하(테스트)</a>
+						href="${pageContext.request.contextPath}/receive/receiveShipList">수주＆출하목록(작업중)</a>
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/customer/cusList">거래처관리(작업중)</a>
 				</div>
@@ -113,7 +111,7 @@
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록(작업중)</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/forgot-password.html">실적관리(없음)</a>
+						href="${pageContext.request.contextPath}/production/productionList">실적관리(작업중)</a>
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/line/lineList">라인관리(작업중)</a>
 					<div class="collapse-divider"></div>
@@ -135,11 +133,13 @@
 				</div>
 			</div></li>
 
-		<li class="nav-item"><a class="nav-link"
-			href="${pageContext.request.contextPath}/workOrder/workOrderList">
-				<i class="fas fa-fw fa-chart-area"></i> <span>작업지시목록</span>
-		</a></li>
-
+		
+		<li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workPop">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>생산 테스트</span></a>
+            </li> 
+		
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">

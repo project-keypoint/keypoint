@@ -16,13 +16,13 @@
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
     <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+    
 </head>
 <body>
 <%@include file="../inc/top-bar.jsp" %>
 <%@include file="../inc/side-bar.jsp" %>
 <!--  contents start -->
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
-
 <div class="main">
 <!-- 수주영역 [시작] =================================================== -->
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
@@ -32,24 +32,24 @@
 <div class="search-b">
 <div class="search-select">
 <p>업체명</p> 
-<input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
-<input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
+<input type="text" id="cusCode" class="form-control search-input readonly-color" placeholder="업체코드" style="width:110px;" readonly>
+<input type="text" id="cusName" class="form-control search-input readonly-color" placeholder="업체명(클릭)" readonly>
 </div>
 <div class="search-select">
 <p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
+<input type="text" id="productCode" class="form-control search-input readonly-color" placeholder="상품코드" style="width:110px;" readonly>
+<input type="text" id="productName" class="form-control search-input readonly-color" placeholder="상품명(클릭)" readonly>
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-date">
-<p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input" placeholder="수주일자" readonly>
-~<input type="text" id="roDate2" class="form-control search-input" placeholder="수주일자" readonly>
+<p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input readonly-color" placeholder="수주일자" readonly>
+~<input type="text" id="roDate2" class="form-control search-input readonly-color" placeholder="수주일자" readonly>
 </div>
 <div class="search-date">
-<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly>
-~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일" readonly>
+<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
+~<input type="text" id="shipSdate2" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
 </div>
 </div>
 <div class="search-button">
@@ -83,7 +83,7 @@
 <!--     <th>납품일</th> -->
     <th>상태</th>
     <th>상세내역</th>
-    <th>출하</th>
+    <th>납품</th>
 </tr>
 <c:forEach var="receiveDTO" items="${receiveList}">
 <tr class="table-body">
@@ -95,29 +95,40 @@
     <td>${receiveDTO.productName}</td>
     <td>${receiveDTO.productCount}</td>
     <td>${receiveDTO.roCount}</td>
-    <td>${receiveDTO.roPrice}원</td>
+    <td><fmt:formatNumber value="${receiveDTO.roPrice}" groupingUsed="true"/>원</td>
     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td>
     <td>${receiveDTO.shipSdate}</td>
-<%--     <td><c:choose> --%>
-<%--             <c:when test="${not empty receiveDTO.shipDate}"> --%>
-<%--                 ${receiveDTO.shipDate} --%>
-<%--             </c:when> --%>
-<%--             <c:otherwise> --%>
-<!--                 - -->
-<%--             </c:otherwise> --%>
-<%--         </c:choose></td><!-- 납품일 null 대신 '-' --> --%>
     <td>${receiveDTO.roStatus}</td>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td>
-    <td>
+    <td><input type="button" value="상세내역" class="btn btn-info mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td>
 <c:choose>
-  <c:when test="${receiveDTO.productCount >= receiveDTO.roCount}">
-    <input type="button" value="출하" class="btn btn-primary mybutton1">
-  </c:when>
-  <c:otherwise>
-    <input type="button" value="출하" class="btn btn-secondary mybutton1">
-  </c:otherwise>
-</c:choose>
-    </td>
+    <c:when test="${not empty receiveDTO.shipDate}">
+        <td><input type="button" value="완료" class="btn btn-dark mybutton1"></td>
+    </c:when>
+    <c:when test="${receiveDTO.productCount >= receiveDTO.roCount}">
+        <td><input type="button" value="납품" class="btn btn-primary mybutton1 shipment-button"></td>
+    </c:when>
+    <c:otherwise>
+        <td><input type="button" value="납품" class="btn btn-secondary mybutton1"></td>
+    </c:otherwise>
+</c:choose> 
+</tr>
+
+<tr class="shipment-row">
+	<td colspan="2" class="text-right">▶</td>
+	<th colspan="11" class="text-right">
+	<div class="shipment-div">
+	　사원명 :
+	<input type="text" id="shipEmpId" name="shipEmpId" class="form-control search-input inputcode readonly-color ei" placeholder="사원코드(클릭)" readonly>
+	<input type="text" id="shipEmpName" class="form-control search-input inputname readonly-color en" placeholder="사원명(클릭)" readonly>
+	　납품 :
+	<input type="number" id="shipCount" class="form-control search-input inputname input-middle shipCount-input" name="shipCount" value="${receiveDTO.roCount}" min="0" max="${receiveDTO.productCount}">
+	　납품메모 :
+	<input type="text" id="shipMemo" class="form-control search-input inputname input-middle shipMemo-input" name="shipMemo" maxlength="100">
+	</div>
+	</th>
+	<th>
+	<input type='button' value='확인' class='btn btn-danger mybutton1' onclick="confirmShipment('${receiveDTO.roCode}','${receiveDTO.productCode}', this)">
+	</th>
 </tr>
 </c:forEach>    
 </table>
@@ -141,9 +152,9 @@
 </div><!-- 그림자아니야 영역 -->
 <!-- 수주영역 [끝] ==================================================== -->
 
-<!-- 출하영역 [시작] =================================================== -->
+<!-- 납품영역 [시작] =================================================== -->
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">출하현황(전체출하목록)</div>
+<div class="page-title">납품현황(전체납품목록)</div>
 <div class="contents2">
 <!-- <div class="search-bar"> -->
 <!-- <div class="search-b"> -->
@@ -194,14 +205,14 @@
     <th>상품명</th> 
     <th>수주수량(EA)</th>
     <th>납품수량(EA)</th> 
-    <th>예상금액</th> 
+    <th>최종금액</th> 
     <th>수주일자</th>
     <th>납품예정일</th>
     <th>납품일</th>
 <!--     <th>상태</th> -->
     <th>상세내역</th>
 </tr>
-<c:forEach var="receiveDTO" items="${receiveList}">
+<c:forEach var="receiveDTO" items="${shipmentList}">
 <tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${receiveDTO.roCode}</td>
@@ -210,27 +221,18 @@
     <td>${receiveDTO.productCode}</td>
     <td>${receiveDTO.productName}</td>
     <td>${receiveDTO.roCount}</td>
-    <td>???</td>
-    <td>???원</td>
+    <td>${receiveDTO.shipCount}</td>
+    <td><fmt:formatNumber value="${receiveDTO.shipPrice}" groupingUsed="true"/>원</td>
     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td>
     <td>${receiveDTO.shipSdate}</td>
-    <td><c:choose>
-            <c:when test="${not empty receiveDTO.shipDate}">
-                ${receiveDTO.shipDate}
-            </c:when>
-            <c:otherwise>
-                0000-00-00
-            </c:otherwise>
-        </c:choose></td><!-- 납품일 null 대신 '-' -->
-<%--     <td>${receiveDTO.roStatus}</td> --%>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td>
+    <td><c:out value="${fn:substring(receiveDTO.shipDate, 0, 10)}" /></td>
+    <td><input type="button" value="상세내역" class="btn btn-info mybutton1" onclick="openDetails('${receiveDTO.roCode}')"></td>
 </tr>
 </c:forEach>    
 </table>
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<!-- <input type="button" value="수주등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
@@ -245,7 +247,7 @@
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
-<!-- 출하영역 [끝] ==================================================== -->
+<!-- 납품영역 [끝] ==================================================== -->
 </div><!-- main -->
 
 <!-- contents end -->
@@ -255,7 +257,94 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<!-- 행 추가 관련 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+// 납품완료 ajax
+// function confirmShipment(roCode, productCode, button) {
+//     var row = button.parentNode.parentNode;
+//     var shipCount = row.querySelector('#shipCount').value;
+//     var shipMemo = row.querySelector('#shipMemo').value;
+
+//     if (confirm('확인하시겠습니까?')) {
+//         $.ajax({
+//             type: "POST",
+//             url: '${pageContext.request.contextPath}/receive/shipComplete',
+//             data: {
+//                 "roCode": roCode,
+//                 "productCode": productCode,
+//                 "shipCount": shipCount,
+//                 "shipMemo": shipMemo
+//             },
+//             success: function(result) {
+//                 const data = $.trim(result);
+//                 if (data === "success") {
+//                     alert("완료");
+//                     location.reload();
+//                 } else {
+//                     alert("에러");
+//                 }
+//             }
+//         });
+//     }
+// }
+function confirmShipment(roCode, productCode, button) {
+    var row = button.parentNode.parentNode;
+    var shipCount = row.querySelector('#shipCount').value;
+    var shipMemo = row.querySelector('#shipMemo').value;
+
+    var userInput = prompt('진행하려면 "납품"라고 입력하세요.');
+
+    if (userInput === '납품') {
+        $.ajax({
+            type: "POST",
+            url: '${pageContext.request.contextPath}/receive/shipComplete',
+            data: {
+                "roCode": roCode,
+                "productCode": productCode,
+                "shipCount": shipCount,
+                "shipMemo": shipMemo
+            },
+            success: function(result) {
+                const data = $.trim(result);
+                if (data === "success") {
+                    alert("완료");
+                    location.reload();
+                } else {
+                    alert("에러");
+                }
+            }
+        });
+    } else {
+        alert('잘못된 입력입니다.');
+    }
+}
+
+// 숨겨진 행 나타내는 코드(납품수량)
+$(document).ready(function() {
+    $('.shipment-button').click(function() {
+        $(this).closest('tr').next('.shipment-row').toggle();
+    });
+});
+
+// 납품수량 키보드입력방지(min,max값 범위넘는값, '-'문자 방지)
+$(document).ready(function() {
+    $('.shipCount-input').on('input', function() {
+        var min = parseInt($(this).attr('min'));
+        var max = parseInt($(this).attr('max'));
+        var value = $(this).val();
+
+        if (!/^\d+$/.test(value)) {
+            $(this).val(min);
+        } else if (value < min) {
+            $(this).val(min);
+        } else if (value > max) {
+            $(this).val(max);
+        }
+    });
+});
+
 //팝업 창을 열어주는 함수
 function openPopup(url) {
     var width = 500;
@@ -321,8 +410,8 @@ checkboxes.forEach(function (checkbox) {
 // 수주상세내용 새창
 function openDetails(roCode) {
     var url = '${pageContext.request.contextPath}/receive/receiveDetails?roCode='+roCode;
-    var windowWidth = 500;
-    var windowHeight = 675;
+    var windowWidth = 610;
+    var windowHeight = 725;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

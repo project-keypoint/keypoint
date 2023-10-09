@@ -24,15 +24,40 @@ public class ReceiveDTO {
 	private String shipDate; // string
 	private String roStatus; // 등록
 	
+	private int shipCount;
+	private int shipPrice;
+	private String shipMemo;
+	
 	
 	@Override
 	public String toString() {
-		return "ReceiveDTO [roCode="+roCode+",cusCode="+cusCode+",productCode="+productCode+
-				", roEmpId="+roEmpId+",roCount"+roCount+",roPrice"+roPrice+",roDate"+roDate+
-				",shipSdate"+shipSdate+",shipDate"+shipDate+",roStatus"+roStatus+"]";
+		return "ReceiveDTO [testCode=" + testCode + ", testString=" + testString + ", testInt=" + testInt
+				+ ", testDate=" + testDate + ", roCode=" + roCode + ", cusCode=" + cusCode + ", cusName=" + cusName
+				+ ", productCode=" + productCode + ", productName=" + productName + ", productCount=" + productCount
+				+ ", roEmpId=" + roEmpId + ", roEmpName=" + roEmpName + ", roCount=" + roCount + ", roPrice=" + roPrice
+				+ ", roDate=" + roDate + ", shipSdate=" + shipSdate + ", shipDate=" + shipDate + ", roStatus="
+				+ roStatus + ", shipCount=" + shipCount + ", shipMemo=" + shipMemo + "]";
 	}
-
 	
+	
+	public int getShipPrice() {
+		return shipPrice;
+	}
+	public void setShipPrice(int shipPrice) {
+		this.shipPrice = shipPrice;
+	}
+	public int getShipCount() {
+		return shipCount;
+	}
+	public void setShipCount(int shipCount) {
+		this.shipCount = shipCount;
+	}
+	public String getShipMemo() {
+		return shipMemo;
+	}
+	public void setShipMemo(String shipMemo) {
+		this.shipMemo = shipMemo;
+	}
 	public int getProductCount() {
 		return productCount;
 	}

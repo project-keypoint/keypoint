@@ -16,7 +16,9 @@
 	</select>
 	
 	<select id="getProduct" resultType="com.keypoint.dto.ProductDTO">
-		select * from product
+		select p.productCode,p.productName,p.cusCode,c.cusName,p.productPrice,p.productCount,p.productUnit,p.productMemo 
+		from product p join customer c
+		on p.cusCode = c.cusCode
 		where productCode = #{productCode}
 	</select>	
 
@@ -26,6 +28,12 @@
 		WHERE productCode = #{productCode}
 	</update>
 
+	<update id="updateProduct">
+		UPDATE product
+		SET productName=#{productName},cusCode=#{cusCode},productPrice=#{productPrice},
+			productCount=#{productCount},productUnit=#{productUnit},productMemo=#{productMemo}
+		WHERE productCode = #{productCode}
+	</update>
 
 </mapper>
 

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
+import com.keypoint.dto.ProductDTO;
 import com.keypoint.service.MaterialService;
 
 @Controller
@@ -51,13 +53,43 @@ public class MaterialController {
 		
 		materialService.insertMaterial(materialDTO);
 		
-		return "material/close";
+		if(materialDTO != null) {
+			return "material/msgSuccess"; // 등록완료
+		}else {
+			return "material/msgFailed"; // 등록실패
+		}
 	}// materialInsertPro [자재등록]	
 	
 	@GetMapping("/materialUpdate")
-	public String materialUpdate() {
+	public String materialUpdate(Model model, @RequestParam("materialCode") String materialCode) {
+		MaterialDTO materialDTO = materialService.getMaterial(materialCode);
+		System.out.println(materialDTO);
+		model.addAttribute("materialDTO", materialDTO);
 		return "material/materialUpdate";
 	}// materialUpdate [자재수정]
+	
+	@PostMapping("/materialUpdatePro")
+	public String materialUpdatePro(MaterialDTO materialDTO) {
+		System.out.println("MaterialController materialUpdatePro");
+		System.out.println(materialDTO);
+		materialService.updateMaterial(materialDTO);
+		
+		if(materialDTO != null) {
+			return "material/msgSuccess"; // 등록완료
+		}else {
+			return "material/msgFailed"; // 등록실패
+		}
+	}// materialUpdatePro [자재수정]
+	
+	@GetMapping("/materialDelete")
+	public String materialDelete(MaterialDTO materialDTO) {
+		System.out.println("MaterialController materialDelete()");
+		System.out.println(materialDTO);
+		materialService.deleteMaterial(materialDTO);
+		
+		return "material/materialList";
+	}// materialDelete [자재삭제]
+	
 	
 	// ------------------------------------홍렬 자재리스트팝업--------------------------------------
 	
@@ -133,14 +165,7 @@ public class MaterialController {
 	
 	
 	// --------------------------------------------------------------------------------------------------
-	@GetMapping("/materialDelete")
-	public String materialDelete(MaterialDTO materialDTO) {
-		System.out.println("MaterialController materialDelete()");
-		System.out.println(materialDTO);
-		materialService.deleteMaterial(materialDTO);
-		
-		return "material/materialList";
-	}// materialDelete [자재삭제]
+
 	
 	
 	
