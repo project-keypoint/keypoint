@@ -18,27 +18,36 @@
 </head>
 <body>
 <div class="main-details">
-<form action="#">
+<form action="${pageContext.request.contextPath}/require/requireUpdatePro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">소요량수정</div>
+
+<input type="hidden" name="productCode" id="productCode" class="form-control search-input" value="${requireDTO.productCode}">
+
 <div class="form-group-receive">
 <p>완제품명</p>
-<input type="text" id="productName" class="form-control search-input" placeholder="완제품명" readonly>
+<input type="text" name="productName" class="form-control search-input" value="${requireDTO.productName}" readonly>
 </div>
+
+
+<div class="search-bar-popup">
 <div class="form-group-receive">
-<p>자재명</p>
-<input type="text" id="materialName" class="form-control search-input" placeholder="자재명">
+<p>자재코드</p>
+<input type="text" name="materialCode" id="materialCode" class="form-control search-input materialCode" value="${requireDTO.materialCode}">
+<input type="text" name="materialName" id="materialName" class="form-control search-input materianame" value="${requireDTO.materialName}" readonly>
+</div>
 </div>
 
 <div class="form-group-receive">
 <p>자재소요량</p>
-<input type="number" id="roCount" class="form-control search-input" placeholder="자재소요량" min="0">
+<input type="number" name="reqCount" id="reqCount" class="form-control search-input" value="${requireDTO.reqCount}" min="0">
 </div>
-<div class="form-group-receive">
+
+<!-- <div class="form-group-receive">
 <p>단위</p>
 <select name="punit" class="form-control search-input status" required="required">
 <option value="EA" selected="selected">EA</option></select>
-</div>
+</div> -->
 
 </div>
 </div>
@@ -55,50 +64,20 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
 $(document).ready(function() {
-    $("#cusCode").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var cusCode = $("input[name='cusCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
-    });
-});
-$(document).ready(function() {
-    $("#productCode").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var productCode = $("input[name='productCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#productCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+    // 자재명 검색 팝업 열기
+    $("#materialCode, #materialName").click(function() {
+        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
+        openPopup(url);
     });
 });
 

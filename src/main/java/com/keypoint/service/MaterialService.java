@@ -61,6 +61,26 @@ public class MaterialService {
 	
 	// --------------------------------------------------------------------------------------------------
 	
+	//-----------------------------------------홍렬 자재리스트팝업--------------------------------------------
+	
+	public List<MaterialDTO> getPurchaseMaterialList2(Map<String, Object> search) {
+		System.out.println("materialService getPurchaseMaterialList()");
+		
+		
+		return materialDAO.getPurchaseMaterialList2(search);
+	} // getPurchaseMaterialList
+	
+	
+	public Integer countPurchaseList2(Map<String, Object> search) { // 품목 개수
+		System.out.println("materialService countPurchaseList()");
+		
+		
+		return materialDAO.countPurchaseList2(search);
+	} // countPurchaseList
+	
+	
+	// --------------------------------------------------------------------------------------------------
+	
 	
 	
 	

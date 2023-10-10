@@ -69,10 +69,10 @@
     <td>${requireDTO.productCode}</td>
     <td>${requireDTO.productName}</td>
     <td>${requireDTO.materialCode}</td>
-    <td>${requireDTO.materialName}원</td>
+    <td>${requireDTO.materialName}</td>
     <td>${requireDTO.reqCount}</td>
     <td>${requireDTO.materialUnit}</td>
-    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate()">
+    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${requireDTO.productCode}', '${requireDTO.materialCode}')">
     	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
 </tr>
 </c:forEach> 
@@ -106,50 +106,27 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
 $(document).ready(function() {
-    $("#cusCode").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var cusCode = $("input[name='cusCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+    // 상품명 검색 팝업 열기
+    $("#productCode, #productName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        openPopup(url);
     });
 });
 $(document).ready(function() {
-    $("#productCode").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var productCode = $("input[name='productCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#productCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+    // 자재명 검색 팝업 열기
+    $("#materialCode, #materialName").click(function() {
+        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
+        openPopup(url);
     });
 });
 // //업체명(거래처) 검색 새창
@@ -209,8 +186,8 @@ checkboxes.forEach(function (checkbox) {
 });
 
 // 자재수정 새창
-function openUpdate() {
-    var url = '${pageContext.request.contextPath}/require/requireUpdate';
+function openUpdate(productCode,materialCode) {
+    var url = '${pageContext.request.contextPath}/require/requireUpdate?productCode='+productCode/* +'&materialCode='+materialCode' */;
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
