@@ -317,10 +317,23 @@ color: black;
 }
 
 
-/* ---------------- 사원:상세정보보기 ---------------- */
+/* ---------------- 사원등록 ---------------- */
 
 
-
+.input[type="file" i] {
+    appearance: none;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-overflow: ellipsis;
+    white-space-collapse: preserve;
+    text-wrap: nowrap;
+    text-align: start !important;
+    padding: initial;
+    border: initial;
+    overflow: hidden !important;
+}
 
 
 
