@@ -65,7 +65,7 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+<!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
 	<th>발주코드</th>
     <th>자재코드</th>
     <th>자재명</th>
@@ -82,7 +82,7 @@
 
 <c:forEach var="purchaseDTO" items="${purchaseList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+<!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${purchaseDTO.poCode}</td>
     <td>${purchaseDTO.materialCode}</td>
     <td>${purchaseDTO.materialName}</td>
@@ -111,7 +111,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="발주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
 
 

@@ -64,7 +64,7 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+<!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
 	<th>입고코드</th>
     <th>발주코드</th>
     <th>자재명</th>
@@ -80,7 +80,7 @@
 
 <c:forEach var="receiptDTO" items="${receiptList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+<!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${receiptDTO.grCode}</td>
     <td>${receiptDTO.poCode}</td>
     <td>${receiptDTO.materialName}</td>
@@ -132,7 +132,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="입고등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
