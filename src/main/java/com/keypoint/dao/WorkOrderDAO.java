@@ -77,9 +77,9 @@ public class WorkOrderDAO {
 	}
 
 
-	public Integer countWorkList(Map<String, Object> search) { // 품목 개수(for 페이징)
-		System.out.println("WorkOrderDAO countWorkList()");
-		return sqlSession.selectOne(namespace+".countWorkList", search);
+	public Integer countProdList(Map<String, Object> search) { // 품목 개수(for 페이징)
+		System.out.println("WorkOrderDAO countProdList()");
+		return sqlSession.selectOne(namespace+".countProdList", search);
 		
 	
 	}
@@ -160,43 +160,24 @@ public class WorkOrderDAO {
 	}
 
 	
-	
-	public List<WorkOrderDTO> workList() {
-		System.out.println("WorkOrderDAO workList()");
+	public List<WorkOrderDTO> getWorkList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO getWorkList()");
 		
-		return sqlSession.selectList(namespace + ".workList");
-	}
-	
-	
-	public List<Map<String, Object>> workList(PageDTO pageDTO) {
-		System.out.println("WorkOrderDAO workListPaging()");
-		
-		return sqlSession.selectList(namespace + ".workListPaging", pageDTO);
+		if(search.get("woCode")==null) {
+			search.put("woCode", "");
+		}
+		if(search.get("roCode")==null) {
+			search.put("roCode", "");
+		}
+		return sqlSession.selectList(namespace+".workList", search);
 	}
 
-	public List<Map<String, Object>> workSearch(Map<String, Object> workSearch, PageDTO pageDTO) {
-		System.out.println("WorkOrderDAO workSearch()");
-		System.out.println("라인 : " + workSearch);
-		
-		workSearch.put("startRow", pageDTO.getStartRow());
-		workSearch.put("pageSize", pageDTO.getPageSize());
-		
-		System.out.println("라인 페이징 : " + workSearch);
-		
-		return sqlSession.selectList(namespace+".workSearch", workSearch);
-	}
 
-	public Integer workTotalCount() {
-		System.out.println("WorkOrderDAO workTotalCount");
-		
-		return sqlSession.selectOne(namespace+".workTotalCount");
+	public int countWorkList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countWorkList()");
+		return sqlSession.selectOne(namespace+".countWorkList", search);
 	}
-
-	public Integer workSearchCount(Map<String, Object> workSearch) {
-		System.out.println("WorkOrderDAO workSearchCount");
-		
-		return sqlSession.selectOne(namespace+".workSearchCount", workSearch);
-	}
+	
 	
 	
 	

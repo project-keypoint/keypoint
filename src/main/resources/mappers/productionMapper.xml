@@ -12,7 +12,11 @@
 		roCode, cusCode, empName)
 		values(CONCAT('PO', DATE_FORMAT(NOW(),
 		'%y%m%d%H%i%s')),
-		#{woCode},#{productCode},#{lineCode},#{empId},#{poCount},#{poDate},
+		#{woCode},#{productCode},#{lineCode},#{empId},
+		<if test="poCount == null">NULL</if>
+		<if test="poCount != null">#{poCount}</if>
+		,
+		,#{poDate},
 		<if test="qcDefectRate == null">NULL</if>
 		<if test="qcDefectRate != null">#{qcDefectRate}</if>
 		,

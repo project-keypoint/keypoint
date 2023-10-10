@@ -94,10 +94,14 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+var defaultWidth = 500;
+var defaultHeight = 500;
 //팝업 창을 열어주는 함수
-function openPopup(url) {
-    var width = 500;
-    var height = 500;
+function openPopup(url, width, height) {
+    
+	width = width || defaultWidth;
+    height = height || defaultHeight;
+    
     var left = (screen.width - width) / 2;
     var top = (screen.height - height) / 2;
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
@@ -107,7 +111,7 @@ $(document).ready(function() {
 	
 	$("#woCode, #woCode").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workList';
-        openPopup(url);
+        openPopup(url, 600, 700);
     });
     // 수주코드 검색 팝업 열기
     $("#roCode, #roCode").click(function() {

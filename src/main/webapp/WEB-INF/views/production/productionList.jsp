@@ -117,7 +117,7 @@
 					</div>
 				</div>
 
-				<div class="page-title">작업지시</div>
+				<div class="page-title">생산실적등록</div>
 
 
 				<div>

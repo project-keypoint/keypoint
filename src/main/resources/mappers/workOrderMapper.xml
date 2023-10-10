@@ -8,7 +8,7 @@
 	<insert id="insertWorkOrder">
 		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode,
 		productCode, materialCode, woCount, woStatus, woDate, productName,
-		cusCode, empName)
+		cusCode, empName, cusName)
 		values(CONCAT('WO', DATE_FORMAT(NOW(),
 		'%y%m%d%H%i%s')),
 		#{roCode},#{empId},#{lineCode},
@@ -19,7 +19,7 @@
 		<if test="materialCode == null">NULL</if>
 		<if test="materialCode != null">#{materialCode}</if>
 		,
-		#{woCount},#{woStatus},#{woDate},#{productName},#{cusCode},#{empName})
+		#{woCount},#{woStatus},#{woDate},#{productName},#{cusCode},#{empName},#{cusName})
 	</insert>
 
 	<select id="getWorkOrderList"
@@ -103,7 +103,7 @@
 		#{startRow}, #{pageSize}
 	</select>
 
-	<select id="countWorkList" resultType="java.lang.Integer">
+	<select id="countProdList" resultType="java.lang.Integer">
 		select count(*)
 		from product
 		<if test="productCode!=null and productName!=null">
@@ -194,7 +194,7 @@
 	<select id="countEmpList" resultType="java.lang.Integer">
 		select count(*)
 		from employees
-		<if test="lineCode!=null">
+		<if test="empId!=null and empName!=null">
 			where
 			empId like CONCAT('%', #{empId}, '%')
 		</if>
@@ -202,52 +202,29 @@
 
 	
 	
-	
-<!-- 	작업지시 전체 목록 조회 -->
-	<select id="workList" resultType="com.keypoint.dto.WorkOrderDTO">
-		<include refid="List" />
-		ORDER BY woCode DESC
+	<select id="workList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select woCode, roCode, lineCode, productCode, productName, woCount, cusCode, cusName
+		from workOrder
+		where
+		woCode like
+		CONCAT('%', #{woCode}, '%') and
+		roCode like CONCAT('%', #{roCode},
+		'%')
+		order by woCode desc
+		limit #{startRow}, #{pageSize}
 	</select>
-	
-	<!-- line 전체 select 구문 + 페이징 -->
-	<select id="workListPaging" resultType="com.keypoint.dto.WorkOrderDTO">
-		<include refid="List" />
-		ORDER BY woCode DESC
-		LIMIT #{startRow}, #{pageSize}
+
+	<select id="countWorkList" resultType="java.lang.Integer">
+		select count(*)
+		from workOrder
+		<if test="woCode!=null and roCode!=null">
+			where
+			woCode like CONCAT('%', #{woCode}, '%') and
+			roCode like CONCAT('%', #{roCode}, '%')
+		</if>
 	</select>
-	
-	<!-- line 조회 select 구문 + 페이징 -->
-	<select id="workSearch" resultType="com.keypoint.dto.WorkOrderDTO">
-		<include refid="List" />
-		WHERE woCode LIKE CONCAT('%', #{woCode}, '%')
-		AND lineCode LIKE CONCAT('%', #{lineCode}, '%')
-		ORDER BY woCode DESC
-		LIMIT #{startRow}, #{pageSize}
-	</select>
-	
-	<!-- line 전체 개수 -->
-	<select id="workTotalCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM workOrder
-	</select>
-	
-	<!-- line 조회 개수 -->
-	<select id="workSearchCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM workOrder
-		WHERE woCode LIKE CONCAT('%', #{woCode}, '%')
-		
-	</select>
-	
-	<sql id="List">
-		SELECT woCode,
-	   		   lineCode,
-			   productCode,
-			   productName,
-			   woCount,
-			   lineId,
-			   roCode,
-			   cusCode
-		FROM workOrder
-	</sql>
+
 	
 	
 	
