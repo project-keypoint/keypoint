@@ -65,7 +65,7 @@
 <div class="select-status">
 <a>재직자<input type="checkbox" id="select1" name="select1" class="list-select"></a>
 <a>휴직자<input type="checkbox" id="select2" name="select2" class="list-select"></a>
-<a>퇴사자<input type="checkbox" id="select3" name="select3" class="list-select"></a>
+<a>퇴직자<input type="checkbox" id="select3" name="select3" class="list-select"></a>
 </div>
 
 <div>
@@ -107,15 +107,34 @@
 <input type="button" value="사원등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
+
+
+<!-- -------------- 페이징처리 -------------- -->
 <div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
-<a href="#" class="page-button">&gt;</a>
+
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+	<c:choose>
+		<c:when test="${i eq pageDTO.currentPage}">
+			<a href="#" class="page-button page-button-active">${i}</a>
+		</c:when>
+		<c:otherwise>
+			<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+</c:if>
+
 </div><!-- page-button -->
+<!-- -------------- // 페이징처리 -------------- -->
+
+
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
@@ -140,18 +159,18 @@ function openPopup(url) {
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
-$(document).ready(function() {
-    // 사원명 검색 팝업 열기
-    $("#empId, #empName").click(function() {
-        var url = '${pageContext.request.contextPath}/employee/employeeList';
-        openPopup(url);
-    });
-    // 부서명 검색 팝업 열기
-    $("#departmentId, #departmentName").click(function() {
-        var url = '${pageContext.request.contextPath}/employee/employeeList';
-        openPopup(url);
-    });
-});
+// $(document).ready(function() {
+//     // 사원명 검색 팝업 열기
+//     $("#empId, #empName").click(function() {
+//         var url = '${pageContext.request.contextPath}/employee/employeeList';
+//         openPopup(url);
+//     });
+//     // 부서명 검색 팝업 열기
+//     $("#departmentId, #departmentName").click(function() {
+//         var url = '${pageContext.request.contextPath}/employee/employeeList';
+//         openPopup(url);
+//     });
+// });
 
 // 사원 상세내용 새창
 function openDetails(empId) {

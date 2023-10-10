@@ -8,22 +8,39 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.EmployeeDTO;
+import com.keypoint.dto.PageDTO;
 
 @Repository
 public class EmployeeDAO {
 	
+	// 마이바티스 객체생성
 	@Inject
 	private SqlSession sqlSession;
 	
 	private static final String namespace="com.itwillbs.mappers.employeeMapper";
 	
 	
+	// ---------------------------------------------------------------------------
+
+	
+	// 로그인-강수빈
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO userCheck()");
+		return sqlSession.selectOne(namespace+".userCheck", employeeDTO);
+	}
+	
 	// 사원목록
-	public List<EmployeeDTO> getEmployeeList() {
+	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO) {
 		System.out.println("EmployeeDAO getEmployeeList()");
-		return sqlSession.selectList(namespace+".getEmployeeList");
+		
+		return sqlSession.selectList(namespace+".getEmployeeList", pageDTO);
 	}// getEmployeeList
 	
+	public int getEmployeeCount() {
+		System.out.println("CustomerDAO getEmployeeCount()");
+
+		return sqlSession.selectOne(namespace+".getEmployeeCount");
+	} // getEmployeeCount
 	
 	
 	// 사원등록
@@ -50,12 +67,14 @@ public class EmployeeDAO {
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
 	} // updateEmployee
 
+	
+	
+	
 
-	// 로그인-강수빈
-	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeDAO userCheck()");
-		return sqlSession.selectOne(namespace+".userCheck", employeeDTO);
-	}
+
+
+
+
 
 	
 
