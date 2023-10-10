@@ -111,19 +111,21 @@ h2{
 <br>
 </form>
 <table>
-<tr><th>발주코드</th><th>자재명</th></tr>
+<tr><th>발주코드</th><th>자재명</th><th>발주수량</th></tr>
 <c:forEach var="purchaseOrderList" items="${purchaseOrderList}">
-<tr onclick="selectWork('${purchaseOrderList.poCode }','${purchaseOrderList.materialName }')"> <!-- ,'${itemList.itemId}' -->
+<tr onclick="selectWork('${purchaseOrderList.poCode }','${purchaseOrderList.materialName }','${purchaseOrderList.poCount }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${purchaseOrderList.poCode}</td>
 	<td id="con">${purchaseOrderList.materialName}</td>
+	<td id="con">${purchaseOrderList.poCount}</td>
 	</tr>
 
     <script type="text/javascript">
 
-        function selectWork(a,b){ // 부모창으로 값 넘기기
+        function selectWork(a,b,c){ // 부모창으로 값 넘기기
 		  
           opener.document.getElementById("poCode").value = a
           opener.document.getElementById("materialName").value = b
+          opener.document.getElementById("poCount").value = c
 //           opener.document.getElementById("pid").value = c
           window.close();
 
@@ -139,26 +141,26 @@ h2{
 
     <!-- 1페이지 이전 -->
 	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&pageNum=${pageDTO.currentPage-1}"><</a>
+	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&poCount=${search.poCount}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
 <!-- 10페이지 이전 -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
+	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&poCount=${search.poCount}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
+	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&poCount=${search.poCount}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
 	</c:forEach>
 
 <!-- 1페이지 다음 -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&pageNum=${pageDTO.currentPage+1}">></a>
+	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&poCount=${search.poCount}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
 <!-- 10페이지 다음 -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
+	<a href="${pageContext.request.contextPath }/purchase/purchaseOrderList?poCode=${search.poCode}&materialName=${search.materialName}&poCount=${search.poCount}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>
 	
 </div>

@@ -54,8 +54,8 @@
 	</update>
   
 
-  <select id="getPurchaseOrderList" resultType="com.keypoint.dto.PurchaseDTO">
-   select poCode, materialName
+<select id="getPurchaseOrderList" resultType="com.keypoint.dto.PurchaseDTO">
+   select poCode, materialName, poCount
    from purchaseOrder
    where 
    poCode like CONCAT('%', #{poCode}, '%') and 
@@ -63,19 +63,19 @@
    and poStatus = '발주대기'
    order by poCode desc 
    limit #{startRow}, #{pageSize}  
-   </select>
-  
-   <select id="countPurchaseOrderList" resultType="java.lang.Integer">
+</select>
+
+<select id="countPurchaseOrderList" resultType="java.lang.Integer">
    select count(*)
    from purchaseOrder
    <if test="poCode!=null and materialName!=null">
    where 
    poCode like CONCAT('%', #{poCode}, '%') and
-   materialName like CONCAT('%', #{materialName}, '%')
+   materialName like CONCAT('%', #{materialName}, '%') 
    and poStatus = '발주대기'
    </if>   
-   </select>
-  
+</select>
+
   
   
   

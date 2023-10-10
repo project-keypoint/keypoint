@@ -171,6 +171,23 @@ public class PurchaseController {
 		String poCode = request.getParameter("poCode");
 		String materialName = request.getParameter("materialName");
 		
+		String poCountParam = request.getParameter("poCount"); // 파라미터 가져오기
+
+		int poCount = 0; // 기본값을 0으로 설정하거나, 다른 적절한 기본값 설정
+
+		if (poCountParam != null && !poCountParam.isEmpty()) {
+		    try {
+		    	poCount = Integer.parseInt(poCountParam); // 변환 시도
+		    } catch (NumberFormatException e) {
+		        // 변환 실패 시 예외 처리
+		        // 예외 처리를 어떻게 할지에 대한 로직을 작성하거나, 기본값을 다른 값으로 설정할 수 있음
+		    }
+		}
+		
+		
+		
+		
+		
 		// 한 화면에 보여줄 글 개수 설정
 		int pageSize = 5; // sql문에 들어가는 항목
 		
@@ -193,6 +210,7 @@ public class PurchaseController {
 		Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
 		search.put("poCode", poCode);
 		search.put("materialName", materialName);
+		search.put("poCount", poCount);
 		search.put("startRow", pageDTO.getStartRow());
 		search.put("pageSize", pageDTO.getPageSize());
 	 

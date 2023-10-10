@@ -146,18 +146,18 @@ public class ReceiptController {
 	
 	@GetMapping("/receiptComplete")
 	public String receiptComplete(Model model, @RequestParam("grCode") String grCode) {
-		System.out.println("receiptController receipt/receiptUpdate");
+		System.out.println("receiptController receipt/receiptComplete");
 		
-		ReceiptDTO receiptDTO = receiptService.getReceiptDetails(grCode);
+		ReceiptDTO receiptDTO = receiptService.getReceiptDetails2(grCode);
 		model.addAttribute("receiptDTO", receiptDTO);
-		return "receipt/receiptUpdate";
+		return "receipt/receiptComplete";
 	}// purchaseUpdate [발주수정]
 	
 	@PostMapping("/receiptCompletePro")
 	public String receiptCompletePro(ReceiptDTO receiptDTO) {
-		System.out.println("receiptController receipt/receiptUpdatePro");
+		System.out.println("receiptController receipt/receiptCompletePro");
 		System.out.println(receiptDTO);
-		receiptService.receiptUpdatePro(receiptDTO);
+		receiptService.receiptUpdatePro2(receiptDTO);
 		
 		if(receiptDTO != null) {
 			return "receipt/msgSuccess"; // 등록완료

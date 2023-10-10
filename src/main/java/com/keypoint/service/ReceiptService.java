@@ -64,6 +64,20 @@ public class ReceiptService {
 	}// purchaseUpdatePro() [발주수정Pro]
 	
 	
+	public ReceiptDTO getReceiptDetails2(String grCode) {
+		System.out.println("ReceiptService getReceiptDetails2()");
+		
+		return receiptDAO.getReceiptDetails2(grCode);
+	}// getReceiptDetails [입고상세]
+	
+	public void receiptUpdatePro2(ReceiptDTO receiptDTO) {
+		System.out.println("receiptService receiptUpdatePro2()");
+		System.out.println(receiptDTO);
+//		receiveDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
+		receiptDAO.updateReceipt2(receiptDTO);
+	}// purchaseUpdatePro() [발주수정Pro]
+	
+	
 	
 	
 	

@@ -30,18 +30,23 @@
 </div>
 
 <div class="form-group-receive">
-<p>입고예정수량</p>
+<p>입고예정량</p>
 <input type="number" id="grCount" name="grCount" class="form-control search-input" value="${receiptDTO.grCount}" min="0" readonly>
 </div>
 
 <div class="form-group-receive">
-<p>입고완료수량</p>
+<p>입고완료량</p>
 <input type="number" id="grEcount" name="grEcount" class="form-control search-input" placeholder="입고완료수량" min="1">
 </div>
 
 <div class="form-group-receive">
-<p>입고완료날짜</p>
+<p>완료날짜</p>
 <input type="text" id="grEdate" name="grEdate" class="form-control search-input" readonly>
+</div>
+
+<div class="form-group-receive">
+<p>입고상태</p>
+<input type="text" id="grStatus" name="grStatus" class="form-control search-input" value="${receiptDTO.grStatus }" readonly>
 </div>
 
 </div>
@@ -86,6 +91,29 @@ function openPopup(url) {
     });
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 현재 날짜를 가져옵니다.
+        var today = new Date();
+        
+        // 날짜를 'YYYY-MM-DD' 형식으로 포맷팅합니다.
+        var formattedDate = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+        
+        // #grEdate 요소에 현재 날짜를 자동으로 입력합니다.
+        $("#grEdate").val(formattedDate);
+        
+        // grEcount 입력값이 grCount를 초과하지 못하도록 제한합니다.
+        $("#grEcount").on("input", function() {
+            var grCount = parseInt($("#grCount").val());
+            var grEcount = parseInt($(this).val());
+            
+            if (grEcount > grCount) {
+                alert("입고완료수량은 입고예정수량을 초과할 수 없습니다.");
+                $(this).val(grCount); // grCount로 값을 변경합니다.
+            }
+        });
+    });
+</script>
 
 
 

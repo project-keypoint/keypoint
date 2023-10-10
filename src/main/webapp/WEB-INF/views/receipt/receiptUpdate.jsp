@@ -34,6 +34,11 @@
 <p>발주서</p>
 <input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" value="${receiptDTO.poCode}" readonly>
 </div>
+
+<div class="form-group-receive">
+<p>발주량</p>
+<input type="text" id="poCount" name="poCount" class="form-control search-input inputcode" value="${receiptDTO.poCount}" readonly>
+</div>
 </div>
 
 <div class="form-group-receive">
@@ -67,7 +72,7 @@
 
 <div class="form-group-receive">
 <p>입고상태</p>
-<input type="text" id="grStatus" name="grStatus" class="form-control search-input" value="입고대기" readonly>
+<input type="text" id="grStatus" name="grStatus" class="form-control search-input" value="${receiptDTO.grStatus}" readonly>
 </div>
 
 </div>
@@ -134,6 +139,22 @@ $(function() {
 </script>
 <!-- // 발주날짜(현재날짜) 이후로 납기일자 선택하게끔 설정 -->
 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // grCount         poCount
+        // grEcount 입력값이 grCount를 초과하지 못하도록 제한합니다.
+        $("#grCount").on("input", function() {
+            var poCount = parseInt($("#poCount").val());
+            var grCount = parseInt($(this).val());
+            
+            if (grCount > poCount) {
+                alert("입고예정수량은 발주수량을 초과할 수 없습니다.");
+                $(this).val(poCount); // grCount로 값을 변경합니다.
+            }
+        });
+    });
+</script>
 
 
 
