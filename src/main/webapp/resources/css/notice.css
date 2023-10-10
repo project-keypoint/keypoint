@@ -140,12 +140,12 @@ border: 1px solid #D3D3D3;
 border-radius: 0;
 margin: 0 -1px;
 }
-.page-button:hover {
+.page-buttons:hover {
 color: black;
 background: #D3D3D3;
 text-decoration: none;
 }
-.page-button-active {
+.page-buttons-active {
 background: #D3D3D3;
 }
 .mybutton1 {
@@ -153,10 +153,26 @@ background: #D3D3D3;
     height: 32px;
 }
 
-
-.gray-background {
-background-color: #f0f0f0; /* 옅은 회색 배경색 */
+.current-page {
+    color: gray; /* 회색으로 변경하려는 색상을 지정하세요 */
+    /* 여기에 다른 스타일 속성을 추가할 수 있습니다. */
 }
+
+
+.table-container {
+    width: 300px; /* 원하는 표의 고정된 너비 설정 */
+    margin: 0 auto; /* 가운데 정렬을 위한 왼쪽 및 오른쪽 여백 자동 조절 */
+/*     text-align: center; 표 안의 내용을 가운데 정렬 */
+  }
+
+.table-container table {
+    width: 100%; /* 표의 너비를 100%로 설정하여 부모 컨테이너에 맞춤 */
+    border-collapse: collapse; /* 표의 셀 경계를 병합하여 스타일링 */
+  }
+
+.table-container td {
+    padding: 10px; /* 셀 내부 여백 설정 */
+  }
 
 
 
@@ -284,5 +300,10 @@ border: none; /* 테두리를 없애기 */
 text-align: center;
 color: black;
 }
+
+
+
+
+
 
 

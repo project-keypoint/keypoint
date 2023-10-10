@@ -131,46 +131,23 @@ public class NoticeController {
 	
 //	공지사항 내용보기
 	@GetMapping("/noticeContent")
-	public String noticeContent(HttpServletRequest request, Model model) {
+	public String noticeContent(NoticeDTO noticeDTO, Model model) {
 		System.out.println("NoticeController noticeContent()");
 
 		
 //		공지사항 글 가져오기
-		int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
-		NoticeDTO noticeDTO = noticeService.getNoticeContent(noticeNum);
+		noticeDTO = noticeService.getNoticeContent(noticeDTO.getNoticeNum());
 		model.addAttribute("noticeDTO", noticeDTO);
 		
 //		조회수
-		noticeService.updateReadcount(noticeNum);
+		noticeService.updateReadcount(noticeDTO.getNoticeNum());
 		
 		return "notice/noticeContent";
 	}
 	
 	
 	
-	
-//	공지사항 내용수정
-	@GetMapping("/noticeUpdate")
-	public String noticeUpdate(HttpServletRequest request, Model model) {
-		System.out.println("NoticeController noticeUpdate()");
 
-		
-//		공지사항 글 가져오기
-		int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
-		NoticeDTO noticeDTO = noticeService.getNoticeContent(noticeNum);
-		model.addAttribute("noticeDTO", noticeDTO);
-
-		return "notice/noticeUpdate";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

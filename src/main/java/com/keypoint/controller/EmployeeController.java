@@ -1,16 +1,22 @@
 package com.keypoint.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.service.EmployeeService;
@@ -19,9 +25,14 @@ import com.keypoint.service.EmployeeService;
 @RequestMapping("/employee/*")
 public class EmployeeController {
 	
+	// EmployeeService 객체생성
 	@Inject
 	private EmployeeService employeeService;
 	
+	// upload 폴더 파일경로 객체생성
+	// name = "uploadPath"
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 	
 	// 사원목록
 	@GetMapping("/employeeList")
@@ -109,6 +120,39 @@ public class EmployeeController {
 		}
 	
 	} // employeeUpdatePro	
+	
+	
+	// 사원등록-사진첨부
+	@PostMapping("/photoPro")
+	public String photoPro(HttpServletRequest request, MultipartFile empPhoto) throws Exception{
+		System.out.println("EmployeeController photoPro()");
+		// name = "file" => MultipartFile file 이름 동일하게 해야 함
+		
+		EmployeeDTO employeeDTO = new EmployeeDTO();
+
+		// 첨부파일 업로드 => pom.xml에 프로그램 설치
+		// servlet-context.xml에 설정
+		// 첨부파일을 원하는 곳에 복사(업로드)
+		// 파일이름 => 랜덤문자_첨부파일이름
+		UUID uuid = UUID.randomUUID();
+//		String filename = uuid.toString()+"_"+첨부파일이름;
+		String filename = uuid.toString()+"_"+empPhoto.getOriginalFilename();
+		// 첨부파일 복사(업로드)
+//		FileCopyUtils.copy(원본파일, upload폴더파일(경로, 파일이름));
+//		file.getBytes() 원본파일 => upload 첨부파일 복사(업로드)
+		FileCopyUtils.copy(empPhoto.getBytes(), new File(uploadPath, filename));
+		
+		// boardDTO에 첨부파일이름 저장
+		employeeDTO.setEmpPhone(filename);
+		
+		employeeService.insertEmployee(employeeDTO);
+		
+		return "redirect:/employee/employeelist";
+	} // photoPro
+	
+	
+	
+	
 	
 	
 	

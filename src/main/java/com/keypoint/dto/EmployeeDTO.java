@@ -141,8 +141,7 @@ public class EmployeeDTO {
 		this.empRetiredate = empRetiredate;
 	}
 
-	
-	
+
 	
 
 }

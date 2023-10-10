@@ -26,30 +26,42 @@
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
 <div class="page-title">공지사항</div>
 <div class="contents2">
+
 <div class="search-bar">
-<div class="search-b">
-<div class="search-select">
-<p>업체명</p> 
-<input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
-<input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
-</div>
-</div>
 
 <div class="search-b">
-<div class="search-date">
-<p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
-</div>
-</div>
+<div class="search-select">
+
+<select id="search_option" name="search_option" class="form-control search-input"> 
+	<option value=""> 선택하세요 </option>
+	<option value="전체">전체</option>
+	<option value="영업">영업</option>
+	<option value="생산">생산</option>
+	<option value="자재">자재</option>
+	<option value="인사">인사</option>
+</select>
+
+<input type="text" id="keyword" class="form-control search-input">
+
+</div><!-- search-select -->
+</div><!-- search-b -->
 
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
 </div><!-- search-bar -->
-<br>
 
+
+<br>
+<br>
+<div class="select-status">
+<a>전체<input type="checkbox" id="select1" name="select1" class="list-select"></a>
+<a>영업<input type="checkbox" id="select2" name="select2" class="list-select"></a>
+<a>생산<input type="checkbox" id="select3" name="select3" class="list-select"></a>
+<a>자재<input type="checkbox" id="select4" name="select4" class="list-select"></a>
+<a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+</div>
 
 
 
@@ -73,8 +85,7 @@
     <td>${noticeDTO.noticeSubject}</td>
     <td>${noticeDTO.empName}</td>
     <td>${noticeDTO.noticeReadcount}</td>
-    <td>${noticeDTO.noticeDate}</td>
-<%--     <td><fmt:formatDate value=" ${noticeDTO.noticeDate}" pattern="yyyy.MM.dd"/></td> --%>
+    <td><fmt:formatDate value="${noticeDTO.noticeDate}" pattern="yy.MM.dd"/></td>
 </tr>
 </c:forEach>    
 </table>
@@ -92,24 +103,29 @@
 <!-- ---------------------페이징---------------- -->
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
+	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
 </c:if>
 
 <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}" class="page-button page-button-active">${i}</a>		
+	<c:choose>
+		<c:when test="${i eq pageDTO.currentPage}">
+			<a href="#" class="page-button page-button-active">${i}</a>
+		</c:when>
+		<c:otherwise>
+                <a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+		</c:otherwise>
+	</c:choose>
 </c:forEach>
 
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
-</c:if>	
+	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+</c:if>
 
-<!-- <a href="#" class="page-button">&lt;</a> -->
-<!-- <a href="#" class="page-button page-button-active">1</a> -->
-<!-- <a href="#" class="page-button">2</a> -->
-<!-- <a href="#" class="page-button">3</a> -->
-<!-- <a href="#" class="page-button">4</a> -->
-<!-- <a href="#" class="page-button">5</a> -->
-<!-- <a href="#" class="page-button">&gt;</a> -->
+
+
+
+
+
 </div><!-- page-button -->
 </div>
 </div><!-- contents -->
@@ -122,79 +138,10 @@
 
 
 
-<<<<<<< HEAD
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-=======
-
-				<div>
-					<table class="table-list">
-						<tr class="table-head">
-							<th><input type="checkbox" id="delete-list-all"
-								name="delete-list" data-group="delete-list"></th>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성날짜</th>
-							<th>조회수</th>
-						
-						</tr>
-						<c:forEach var="noticeDTO" items="${noticeList}">
-							<tr class="table-body">
-								<td><input type="checkbox" id="delete-list"
-									name="delete-list" data-group="delete-list"></td>
-								<td>${noticeDTO.noticeNum}</td>
-								<td>${noticeDTO.noticeSubject}</td>
-								<td>${noticeDTO.noticeDate}</td>
-								<td>${noticeDTO.noticeReadcount}</td>
-<%-- 								<td>${noticeDTO.lineEmp}</td> --%>
-
-
-								<%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
-								<%--     <td>${receiveDTO.shipSdate}</td> --%>
-								<%--     <td><c:choose> --%>
-								<%--             <c:when test="${not empty receiveDTO.shipDate}"> --%>
-								<%--                 ${receiveDTO.shipDate} --%>
-								<%--             </c:when> --%>
-								<%--             <c:otherwise> --%>
-								<!--                 - -->
-								<%--             </c:otherwise> --%>
-								<%--         </c:choose></td><!-- 납품일 null 대신 '-' --> --%>
-								<%--     <td>${receiveDTO.roStatus}</td> --%>
-								
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-				<!-- table -->
-				<div class="content-bottom">
-					<div>
-						<input type="button" value="글쓰기" class="btn btn-primary mybutton1"
-							onclick="openInsert()"> <input type="button" value="삭제"
-							class="btn btn-secondary mybutton1">
-					</div>
-					<div class="page-buttons">
-						<a href="#" class="page-button">&lt;</a> <a href="#"
-							class="page-button page-button-active">1</a> <a href="#"
-							class="page-button">2</a> <a href="#" class="page-button">3</a> <a
-							href="#" class="page-button">4</a> <a href="#"
-							class="page-button">5</a> <a href="#" class="page-button">&gt;</a>
-					</div>
-					<!-- page-button -->
-				</div>
-			</div>
-			<!-- contents -->
-		</div>
-		<!-- 그림자아니야 영역 -->
-	</div>
-	<!-- main -->
-
-	<!-- contents end -->
-
-
-
->>>>>>> branch 'main' of https://github.com/project-keypoint/keypoint.git
 
 <script type="text/javascript">
 //팝업 창을 열어주는 함수
