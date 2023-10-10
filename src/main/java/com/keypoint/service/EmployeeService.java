@@ -32,7 +32,7 @@ public class EmployeeService {
 	}// insertEmployee
 
 
-	// 사원-상세정보
+	// 사원 - 상세정보
 	public EmployeeDTO getEmployeeDetails(int empId) {
 		System.out.println("EmployeeService getEmployeeDetails()");
 		
@@ -40,23 +40,23 @@ public class EmployeeService {
 	} // getEmployeeDetails
 
 
-	
+	// 사원 - 상세정보수정
+	public void updateEmployee(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService updateEmployee()");
+		
+		employeeDAO.updateEmployee(employeeDTO);
+	} // updateEmployee
 
-//	// 사원수정
-//	public void updateEmployee(EmployeeDTO employeeDTO) {
-//		System.out.println("EmployeeService updateEmployee()");
-//		
-//		employeeDAO.updateEmployee(employeeDTO);
-//	}// updateEmployee
 	
 	
+	// 로그인-강수빈
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService userCheck()");
+		return employeeDAO.userCheck(employeeDTO);
 	
+	}
+
+
+
 	
-// 사원삭제(보류)
-//	public void deleteMember(String empId) {
-//	System.out.println("EmployeeService deleteMember()");
-//	employeeDAO.deleteMember(empId);
-//}// delete	
-	
-	
-} // 클래스
+} // class

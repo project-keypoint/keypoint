@@ -29,23 +29,30 @@
 <div class="contents2">
 
 <div class="search-bar">
+
 <div class="search-b">
 <div class="search-select">
 
+<select id="search_option" name="search_option" class="form-control search-input"> 
+	<option value=""> 선택하세요 </option>
+	<option value="이름">이름</option>
+	<option value="사원번호">사원번호</option>
+	<option value="내선번호">내선번호</option>
+	<option value="부서">부서</option>
+</select>
 
-<p>사원명</p> 
-<input type="text" id="empId" class="form-control search-input" placeholder="사원ID" style="width:110px;" readonly>
-<input type="text" id="empName" class="form-control search-input" placeholder="사원명(클릭)" readonly>
+<input type="text" id="keyword" class="form-control search-input">
+
 </div><!-- search-select -->
 </div><!-- search-b -->
 
-<div class="search-b">
-<div class="search-select">
-<p>부서명</p> 
-<input type="text" id="departmentId" class="form-control search-input" placeholder="부서코드" style="width:110px;" readonly>
-<input type="text" id="departmentName" class="form-control search-input" placeholder="부서명(클릭)" readonly>
-</div>
-</div>
+<!-- <div class="search-b"> -->
+<!-- <div class="search-select"> -->
+<!-- <p>부서명</p>  -->
+<!-- <input type="text" id="departmentId" class="form-control search-input" placeholder="부서코드" style="width:110px;" readonly> -->
+<!-- <input type="text" id="departmentName" class="form-control search-input" placeholder="부서명(클릭)" readonly> -->
+<!-- </div> -->
+<!-- </div> -->
 
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1">
@@ -55,11 +62,17 @@
 
 <br>
 
+<div class="select-status">
+<a>재직자<input type="checkbox" id="select1" name="select1" class="list-select"></a>
+<a>휴직자<input type="checkbox" id="select2" name="select2" class="list-select"></a>
+<a>퇴사자<input type="checkbox" id="select3" name="select3" class="list-select"></a>
+</div>
+
 <div>
 <table class="table-list">
 <tr class="table-head">
 <!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
-	<th>사번</th> 
+	<th>사원번호</th> 
     <th>이름</th> 
     <th>부서</th> 
     <th>직급</th> 
@@ -69,6 +82,7 @@
     <th>재직여부</th>
     <th>상세내역</th>
 </tr>
+
 <c:forEach var="employeeDTO" items="${employeeList}">
 <tr class="table-body">
 
@@ -109,7 +123,7 @@
 <!-- contents end -->
 
 
-<!-- 데이트피커 : 날짜선택요소(달력형식, 직접입력) -->
+<!-- 데이트피커 : 날짜선택요소(달력형식) -->
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

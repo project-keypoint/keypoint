@@ -19,16 +19,16 @@
 
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/employee/employeeInsertPro2" method="post">
+<form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post">
 <!-- onsubmit="return validateForm()" -->
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
 
 
-<div class="form-group-customer">
-<p>사원ID</p>
-<input type="text" id="empId" name="empId" class="form-control search-input" readonly>
-</div>
+<!-- <div class="form-group-customer"> -->
+<!-- <p>사원ID</p> -->
+<!-- <input type="text" id="empId" name="empId" class="form-control search-input" readonly> -->
+<!-- </div> -->
 
 <div class="form-group-customer">
 <p>비밀번호</p>
@@ -77,10 +77,10 @@
 <div class="form-group-customer">
 <p>부서</p>
 <select id="departmentName" name="departmentName" class="form-control search-input">
-        <option value="영업">영업</option>
-        <option value="생산">생산</option>
-        <option value="자재">자재</option>
-        <option value="인사">인사</option>
+        <option value="영업부">영업</option>
+        <option value="생산부">생산</option>
+        <option value="자재부">자재</option>
+        <option value="인사부">인사</option>
 </select>
 </div>
 
@@ -109,6 +109,25 @@
 <p>사진</p>
 <input type="text" id="empPhoto" name="empPhoto" class="form-control search-input">
 </div>
+
+<!-- 이게 맞나..? 나중에 수정에서 재직여부 수정가능한가?? -->
+<div class="form-group-customer" style="display: none;">
+<p>재직여부</p>
+<input type="hidden" id="empStatus" name="empStatus" class="form-control search-input" value="재직">
+</div>
+
+<!-- 기본권한이 1이므로 화면에서는 안 보이게 하고 싶음 -->
+<div class="form-group-customer">
+<p>권한(보류)</p>
+<select id="empRole" name="empRole" class="form-control search-input">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+</select>
+</div>
+
+<p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴사자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 
 
 </div>
@@ -144,18 +163,40 @@ function openPopup(url) {
 
 // 생년월일, 일사일 검색 데이트피커
 $(function() {
-    $("#empBirth").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
+	$("#empBirth").datepicker({
+		dateFormat: 'yy-mm-dd', //달력 날짜 형태
+		showOtherMonths: true, //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+		showMonthAfterYear:true, // 월- 년 순서가아닌 년도 - 월 순서
+		changeYear: true, //option값 년 선택 가능
+		changeMonth: true, //option값 월 선택 가능
+		yearSuffix: "년", //달력의 년도 부분 뒤 텍스트
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분 텍스트
+		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분
+		dayNamesMin: ['일','월','화','수','목','금','토'], //달력의 요일 텍스트
+		dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'], //달력의 요일
+		yearRange: '1950:2023'
+	});
+	
+
     $("#empHiredate").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
+		dateFormat: 'yy-mm-dd',
+		showOtherMonths: true,
+		showMonthAfterYear:true,
+		changeYear: true,
+		changeMonth: true,
+		yearSuffix: "년",
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분 텍스트
+		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분
+		dayNamesMin: ['일','월','화','수','목','금','토'], //달력의 요일 텍스트
+		dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'], //달력의 요일
+		yearRange: '1950:2023'
+	});
 });
 
 
-// 주소
+// 주소 검색 API
 function sample6_execDaumPostcode() {
-	  new daum.Postcode({
+	new daum.Postcode({
 	    oncomplete: function(data) {
 	      var fullAddress = data.address; // 선택한 주소 변수에 저장
 	      var extraAddress = ''; // 조합형 주소 변수 초기화
@@ -223,31 +264,3 @@ function sample6_execDaumPostcode() {
 </script>
 </body>
 </html>
-
-
-<!-- <body> -->
-<%-- <form action="${pageContext.request.contextPath}/employee/add" name="employeeInsert" id="employeeInsert" method="post"> --%>
-<!-- <input type="text" name = "empId" id="empId"> -->
-<!-- <input type="text" id="empPass"> -->
-<!-- <input type="text" id="empSalt"> -->
-<!-- <input type="text" id="empName"> -->
-<!-- <input type="text" id="empPhoto"> -->
-<!-- <input type="text" id="empBirth"> -->
-<!-- <input type="text" id="empPhone"> -->
-<!-- <input type="text" id="empEmail"> -->
-<!-- <input type="text" id="empAddress"> -->
-<!-- <input type="text" id="empStatus"> -->
-<!-- <input type="text" id="departmentId"> -->
-<!-- <input type="text" id="departmentName"> -->
-<!-- <input type="text" id="empPosition"> -->
-<!-- <input type="text" id="empHiredate"> -->
-<!-- <input type="text" id="empRole"> -->
-<!-- <input type="text" id="empLeavedate"> -->
-<!-- <input type="submit" value="등록" class="btn btn-primary mybutton1"> -->
-<!-- </form> -->
-<!-- </body> -->
-
-
-
-
-

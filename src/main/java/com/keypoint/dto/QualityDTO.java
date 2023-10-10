@@ -3,6 +3,7 @@ package com.keypoint.dto;
 public class QualityDTO {
 	
 	private String prodCode;
+	private String poCode;
 	private String woCode;
 	private String productCode;
 	private String productName;
@@ -10,6 +11,7 @@ public class QualityDTO {
 	private int prodEmpId;
 	private String prodEmpName;
 	private int prodCount;
+	private int poCount;
 	private String prodDate;
 //	private String qcDefectRate; 보류
 	
@@ -25,6 +27,7 @@ public class QualityDTO {
 	private String qcTest1;
 	private String qcTest2;
 	private String qcTest3;
+	private String qcTransfer;
 	
 	private String dpCode;
 //	private int dpEmpId;
@@ -34,6 +37,24 @@ public class QualityDTO {
 	
 	
 	
+	public String getQcTransfer() {
+		return qcTransfer;
+	}
+	public void setQcTransfer(String qcTransfer) {
+		this.qcTransfer = qcTransfer;
+	}
+	public String getPoCode() {
+		return poCode;
+	}
+	public void setPoCode(String poCode) {
+		this.poCode = poCode;
+	}
+	public int getPoCount() {
+		return poCount;
+	}
+	public void setPoCount(int poCount) {
+		this.poCount = poCount;
+	}
 	public String getQcStartDate() {
 		return qcStartDate;
 	}

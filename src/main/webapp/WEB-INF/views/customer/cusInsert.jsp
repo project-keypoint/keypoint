@@ -37,16 +37,18 @@
 
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>거래처구분</p>
-<input type="radio" id="cusCategory" name="cusCategory" class="form-control search-input" value="납입처"> 납입처
-<input type="radio" id="cusCategory" name="cusCategory" class="form-control search-input" value="납품처"> 납품처
+<select id="cusCategory" name="cusCategory" class="form-control search-input">
+        <option value="납입처">납입처</option>
+        <option value="납품처">납품처</option>
+</select>
 </div>
 
 
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>사업자번호</p>
-<input type="text" id="cusNumber" class="form-control search-input" placeholder="-없이 10자리 입력하세요" >
-<input type="button" id="dubSubmit" value="중복확인" class="btn btn-primary mybutton2">
+<input type="text" id="cusNumber" name="cusNumber" class="form-control search-input" placeholder="-없이 10자리 입력하세요" onblur="checkDuplicate()">
 </div>
+<div class="divdup"></div>
 
 
 
@@ -98,8 +100,7 @@
 
 <div class="form-group-customer">
 <p><a style="color: red;">*</a>주소</p>
-<input type="text" id="zonecode" name="zonecode" class="form-control search-input" placeholder="우편번호">
-<input type="button" onclick="sample6_execDaumPostcode()"id="dubSubmit" value="우편번호" class="btn btn-primary mybutton2">
+<input type="text" id="cusZonecode" name="cusZonecode" class="form-control search-input" placeholder="우편번호 (여기를 클릭하세요)" onclick="sample6_execDaumPostcode()">
 </div>
 
 <div class="form-group-customer">
@@ -140,7 +141,7 @@
 
 <div class="form-group-customer">
 <p>적요</p>
-<input type="text" id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px; width:280px;"><br>
+<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px;"></textarea>
 </div>
 
 <br>
@@ -195,7 +196,7 @@ function sample6_execDaumPostcode() {
 	      }
 
 	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
-	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
+	      document.getElementById('cusZonecode').value = data.zonecode; // 우편번호
 	      document.getElementById('cusAddress').value = fullAddress; // 기본주소
 
 	      // 상세주소 입력란으로 포커스 이동
@@ -286,6 +287,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+function checkDuplicate() {
+// 입력된 사업자번호 가져오기
+    var cusNumber = document.getElementById("cusNumber").value;
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/customer/cusNumberCheck',
+        data: { 'cusNumber': cusNumber },
+        success: function (result) {
+            if (result == 'iddup') {
+                alert("중복");
+            } else {
+                alert("사용가능");
+            }
+        }
+    });
+}
 
 
 

@@ -53,16 +53,32 @@ public class ProductController {
 		productService.insertProduct(productDTO);
 		
 		if(productDTO != null) {
-			return "require/msgSuccess"; // 등록완료
+			return "product/msgSuccess"; // 등록완료
 		}else {
-			return "require/msgFailed"; // 등록실패
+			return "product/msgFailed"; // 등록실패
 		}
 	}// productInsertPro [완제품등록]
 	
 	@GetMapping("/productUpdate")
-	public String productUpdate() {
+	public String productUpdate(Model model, @RequestParam("productCode") String productCode) {
+		ProductDTO productDTO = productService.getProduct(productCode);
+		System.out.println(productDTO);
+		model.addAttribute("productDTO", productDTO);
 		return "product/productUpdate";
 	}// productUpdate [완제품수정]
+	
+	@PostMapping("/productUpdatePro")
+	public String productUpdatePro(ProductDTO productDTO) {
+		System.out.println("ProductController productUpdatePro");
+		System.out.println(productDTO);
+		productService.updateProduct(productDTO);
+		
+		if(productDTO != null) {
+			return "product/msgSuccess"; // 등록완료
+		}else {
+			return "product/msgFailed"; // 등록실패
+		}
+	}// productUpdatePro [완제품수정]
 	
 	@GetMapping("/productDelete")
 	public String productDelete(ProductDTO productDTO) {

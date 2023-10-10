@@ -18,37 +18,40 @@
 </head>
 <body>
 <div class="main-details">
-<form action="#">
+<form action="${pageContext.request.contextPath}/material/materialUpdatePro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">자재수정</div>
+
+<input type="hidden" name="materialCode" id="materialCode" class="form-control search-input" value="${materialDTO.materialCode}">
+
 <div class="form-group-receive">
 <p>자재명</p>
-<input type="text" id="materialName" class="form-control search-input" placeholder="자재명">
+<input type="text" name="materialName" id="materialName" class="form-control search-input"  value="${materialDTO.materialName}">
 </div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
-<input type="text" id="cusCode" class="form-control search-input inputcode" placeholder="업체검색">
-<input type="text" id="cusName" class="form-control search-input inputname" placeholder="업체명" readonly>
+<input type="text" name="cusCode" id="cusCode" class="form-control search-input inputcode"  value="${materialDTO.cusCode}">
+<input type="text" name="cusName" id="cusName" class="form-control search-input inputname" value="${materialDTO.cusName}" readonly>
 </div>
 </div>
 <div class="form-group-receive">
 <p>매입단가</p>
-<input type="text" id="roPrice" class="form-control search-input" placeholder="매입단가">원
+<input type="text" name="materialPrice" id="materialPrice" class="form-control search-input" value="${materialDTO.materialPrice}">원
 </div>
 <div class="form-group-receive">
 <p>초기수량</p>
-<input type="number" id="roCount" class="form-control search-input" placeholder="초기수량" min="0">
+<input type="number" name="materialCount" id="materialCount" class="form-control search-input" value="${materialDTO.materialCount}" min="0">
 </div>
 <div class="form-group-receive">
 <p>단위</p>
-<select name="punit" class="form-control search-input status" required="required">
+<select name="materialUnit" class="form-control search-input status" required="required">
 <option value="EA" selected="selected">EA</option></select>
 <button class="btn btn-primary mybutton1" onclick="openAddUnit()">단위추가</button>
 </div>
 <div class="form-group-receive">
 <p>비고</p>
-<textarea rows="5px" cols="25px" id="roDate" class="form-control search-input textarea" placeholder="비고"></textarea>
+<textarea rows="5px" cols="25px" name="materialMemo" class="form-control search-input textarea" value="${materialDTO.materialMemo}"></textarea>
 </div>
 
 </div>

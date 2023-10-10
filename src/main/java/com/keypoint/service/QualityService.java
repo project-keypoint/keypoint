@@ -1,7 +1,6 @@
 package com.keypoint.service;
 
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,8 +43,11 @@ public class QualityService {
 		qualityDAO.updateQc(qualityDTO);
 	}// qcUpdatePro [품질검사(저장)]
 
-
-	
+	public boolean qcTransfer(QualityDTO qualityDTO) {
+	    System.out.println("QualityService qcTransfer()");
+	    boolean result = qualityDAO.qcTransfer(qualityDTO);
+	    return result;
+	}// qcTransfer [품질검사후 상품이동]
 	
 	
 }

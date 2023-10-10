@@ -8,24 +8,106 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.NoticeDTO;
+import com.keypoint.dto.PageDTO;
 
 @Repository
 public class NoticeDAO {
 
+	
+//	SqlSession 객체생성
 	@Inject
 	private SqlSession sqlSession;
 
-	private static final String nameSpace="com.itwillbs.mappers.NoticeMapper";
-	
-	public List<NoticeDTO> getNoticeLIst() {
-	System.out.println("NoticeDTO getNoticeList()");
-	
-		return sqlSession.selectList(nameSpace+".getNoticeList");
-	} // 노티스 목록
+	private static final String nameSpace="com.itwillbs.mappers.noticeMapper";
+
 
 	
 	
 	
+	
+	
+//	-----------------------------------------------------------------------------------
+	
+//	최대값
+	public Integer getMaxNum() {
+		System.out.println("NoticeDAO getMaxNum()");
+		
+		return sqlSession.selectOne(nameSpace+".getMaxNum");
+	}
+	
+
+//	공지사항 글쓰기
+	public void insertNotice(NoticeDTO noticeDTO) {
+		System.out.println("NoticeDAO insertNotice()");
+
+		sqlSession.insert(nameSpace+".insertNotice", noticeDTO);
+	}
+
+
+	
+//	공지사항 리스트
+	public List<NoticeDTO> getNoticeList(PageDTO pageDTO) {
+		System.out.println("NoticeDAO getNoticeList()");
+		
+		return sqlSession.selectList(nameSpace+".getNoticeList", pageDTO);
+	}
+
+	
+//	
+	public int getNoticeCount() {
+		System.out.println("NoticeDAO getNoticeCount()");
+
+		return sqlSession.selectOne(nameSpace+".getNoticeCount");
+	}
+
+
+	
+//	공지사항 내용보기
+	public NoticeDTO getNoticeContent(int noticeNum) {
+		System.out.println("NoticeDAO getNoticeContent()");
+
+		return sqlSession.selectOne(nameSpace+".getNoticeContent", noticeNum);
+	}
+
+
+	
+//	조회수
+	public void updateReadcount(int noticeNum) {
+		System.out.println("NoticeDAO updateReadcount()");
+		
+		sqlSession.update(nameSpace+".updateReadcount", noticeNum);
+	}
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
 	
 	
 	

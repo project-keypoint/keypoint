@@ -9,23 +9,40 @@
 	<select id="getEmployeeList" resultType="com.keypoint.dto.EmployeeDTO">
 		select *
 		from employees
+		order by empId desc
 	</select>
-
-<!-- 사원-상세정보 -->
-	<select id="getEmployeeDetails" resultType="com.keypoint.dto.EmployeeDTO">
-		select empId, empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail
-		, empAddress, empStatus, departmentName, empPosition, empHiredate, empLeavedate, empRetiredate
-		from employees
-		where empId = #{empId}
-	</select>
-
 
 <!-- 사원등록 -->
 	<insert id="insertEmployee">
-		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, empAddress, departmentName, empPosition, empHiredate, empRole)
-		values (#{empPass}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail}, #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empRole})
+		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
+		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
+		values (#{empPass}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
+			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
 	</insert>
+	
+<!-- 사원-상세정보 -->
+	<select id="getEmployeeDetails" resultType="com.keypoint.dto.EmployeeDTO">
+		select empId, empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, empAddress,
+		empStatus, departmentName, empPosition, empHiredate, empLeavedate, empRetiredate, empRole
+		from employees
+		where empId = #{empId}
+	</select>	
 
+<!-- 사원-상세정보수정 -->
+	<update id="updateEmployee">
+		update employees
+		set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
+		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
+		empPosition = #{empPosition}, empHiredate = #{empHiredate}, empLeavedate = #{empLeavedate},
+		empRetiredate = #{empRetiredate}, empRole = #{empRole}
+		where empId = #{empId}
+	</update>
 
+<!-- 로그인-강수빈 -->
+	<select id="userCheck" 
+	        resultType="com.keypoint.dto.EmployeeDTO">
+		select * from employees
+		where empId = #{empId} and empPass = #{empPass}
+	</select>
 </mapper>
 

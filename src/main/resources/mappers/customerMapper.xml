@@ -11,28 +11,49 @@
 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
 		SELECT *
 		FROM customer
-		ORDER BY cusCode desc
+		ORDER BY cusCode DESC
+		LIMIT #{startRow}, #{pageSize}
 	</select>
 
 
 	<insert id="insertCustomer">
-		INSERT INTO customer (cusName, cusCategory, cusBusiness, cusType, cusNumber, cusRep,
-								cusTel, cusHome, cusAddress, cusResp, cusPhone, cusEmail,
-								cusFax, cusMemo, cusStatus, cusDate)
-		VALUES(
-				#{cusName}, #{cusCategory}, #{cusBusiness}, #{cusType}, #{cusNumber}, #{cusRep},
-				#{cusTel}, #{cusHome}, #{cusAddress}, #{cusResp}, #{cusPhone}, #{cusEmail},
-				#{cusFax}, #{cusMemo}, #{cusStatus}, #{cusDate})
+		INSERT INTO customer (	cusName, cusCategory, cusBusiness, cusType, cusNumber,
+								cusRep, cusTel, cusHome, cusZonecode, cusAddress, cusAddress_dtail,
+								cusResp, cusPhone, cusEmail, cusFax, cusMemo, cusStatus)
+		VALUES(	#{cusName}, #{cusCategory}, #{cusBusiness}, #{cusType}, #{cusNumber},
+				#{cusRep}, #{cusTel}, #{cusHome}, #{cusZonecode}, #{cusAddress}, #{cusAddress_dtail},
+				#{cusResp}, #{cusPhone}, #{cusEmail}, #{cusFax}, #{cusMemo}, #{cusStatus})
 	</insert>
 
 
-
+	<select id="getCusDetails" resultType="com.keypoint.dto.CustomerDTO">
+		SELECT *
+		FROM customer
+		WHERE cusCode = #{cusCode}
+	</select>
 	
 
+	<update id="updateCustomer">
+		UPDATE customer
+		SET	cusName = #{cusName}, cusCategory = #{cusCategory}, cusBusiness= #{cusBusiness}, cusType= #{cusType}, cusNumber= #{cusNumber},
+			cusRep = #{cusRep}, cusTel = #{cusTel}, cusHome = #{cusHome}, cusZonecode = #{cusZonecode}, cusAddress = #{cusAddress},
+			cusAddress_dtail = #{cusAddress_dtail}, cusResp = #{cusResp}, cusPhone = #{cusPhone}, cusEmail = #{cusEmail}, cusFax = #{cusFax},
+			cusMemo = #{cusMemo}, cusStatus = #{cusStatus}
+		WHERE cusCode = #{cusCode}
+	</update>
 
 
-
-
+	<select id="cusNumberCheck" resultType="com.keypoint.dto.CustomerDTO">
+		SELECT *
+		FROM customer
+		WHERE cusNumber = #{cusNumber}
+	</select>
+	
+	
+	<select id="getCusCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM customer
+	</select>
 
 
 

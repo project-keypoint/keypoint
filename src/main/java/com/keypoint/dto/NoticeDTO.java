@@ -2,19 +2,22 @@ package com.keypoint.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class NoticeDTO {
 
 	
 	
 	
-	private int noticeNum;
-	private int empId;
-	private String noticeCategory;
-	private String noticeSubject;
-	private String noticeContent;
-	private Timestamp noticeDate;
-	private int noticeReadcount;
-	private String noticeFile;
+	private int noticeNum;				//	글번호
+	private String empId;				//	작성사 아이디(사원번호)
+	private String noticeCategory;		//	구분
+	private String noticeSubject;		//	제목
+	private String noticeContent;		//	내용
+	private Timestamp noticeDate;		//	작성일
+	private int noticeReadcount;		//	조회수
+	private String noticeFile;			//	파일첨부
+	private String empName;				//	작성자
 	
 	
 	
@@ -23,10 +26,8 @@ public class NoticeDTO {
 	public String toString() {
 		return "NoticeDTO [noticeNum=" + noticeNum + ", empId=" + empId + ", noticeCategory=" + noticeCategory
 				+ ", noticeSubject=" + noticeSubject + ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate
-				+ ", noticeReadcount=" + noticeReadcount + ", noticeFile=" + noticeFile + "]";
+				+ ", noticeReadcount=" + noticeReadcount + ", noticeFile=" + noticeFile + ", empName=" + empName + "]";
 	}
-	
-	
 	
 	
 	
@@ -37,10 +38,10 @@ public class NoticeDTO {
 	public void setNoticeNum(int noticeNum) {
 		this.noticeNum = noticeNum;
 	}
-	public int getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
-	public void setEmpId(int empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
 	public String getNoticeCategory() {
@@ -79,11 +80,12 @@ public class NoticeDTO {
 	public void setNoticeFile(String noticeFile) {
 		this.noticeFile = noticeFile;
 	}
-	
-	
-	
-	
-	
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
 	
 	
 	

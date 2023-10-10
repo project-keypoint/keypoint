@@ -33,7 +33,12 @@ public class ProductService {
 	public ProductDTO getProduct(String productCode) {
 		System.out.println("ProductService getProduct()");
 		return productDAO.getProduct(productCode);
-	}
+	}// getProduct
+
+	public void updateProduct(ProductDTO productDTO) {
+		System.out.println("ProductService updateProduct()");
+		productDAO.updateProduct(productDTO);
+	}// updateProduct
 
 
 
