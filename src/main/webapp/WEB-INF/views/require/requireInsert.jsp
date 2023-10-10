@@ -33,7 +33,7 @@
 <div class="form-group-receive">
 <p>자재코드</p>
 <input type="text" name="materialCode" id="materialCode" class="form-control search-input materialCode" placeholder="자재코드">
-<input type="text" name="materiaName" id="materiaName" class="form-control search-input materianame" placeholder="자재명" readonly>
+<input type="text" name="materialName" id="materialName" class="form-control search-input materianame" placeholder="자재명" readonly>
 </div>
 </div>
 
@@ -72,6 +72,13 @@ $(document).ready(function() {
     // 상품명 검색 팝업 열기
     $("#productCode, #productName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        openPopup(url);
+    });
+});
+$(document).ready(function() {
+    // 자재명 검색 팝업 열기
+    $("#materialCode, #materialName").click(function() {
+        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
         openPopup(url);
     });
 });

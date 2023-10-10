@@ -32,10 +32,15 @@ public class RequireDAO {
 		sqlSession.delete(namespace+".deleteRequire", requireDTO);
 	}// deleteRequire
 
-	public RequireDTO getRequire(String requireCode) {
+	public RequireDTO getRequire(String productCode) {
 		System.out.println("RequireDAO getRequire()");
-		return sqlSession.selectOne(namespace+".getRequire", requireCode);
+		return sqlSession.selectOne(namespace+".getRequire", productCode);
 	}
+
+	public void updateRequire(RequireDTO requireDTO) {
+		System.out.println("RequireDAO updateRequire()");
+		sqlSession.delete(namespace+".updateRequire", requireDTO);
+	}// updateRequire
 
 	
 	

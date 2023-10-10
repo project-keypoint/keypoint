@@ -30,10 +30,15 @@ public class RequireService {
 		requireDAO.deleteRequire(requireDTO);
 	}// deleteRequire
 
-	public RequireDTO getRequire(String requireCode) {
+	public RequireDTO getRequire(String productCode) {
 		System.out.println("RequireService getRequire()");
-		return requireDAO.getRequire(requireCode);
-	}
+		return requireDAO.getRequire(productCode);
+	}// getRequire
+
+	public void updateRequire(RequireDTO requireDTO) {
+		System.out.println("RequireService updateRequire()");
+		requireDAO.updateRequire(requireDTO);
+	}// updateRequire
 
 
 
