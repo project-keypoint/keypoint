@@ -112,14 +112,14 @@ h2{
 <table>
 <tr><th>자재코드</th><th>자재명</th></tr>
 <c:forEach var="purchaseMaterialList2" items="${purchaseMaterialList2}">
-<tr onclick="selectWork('${purchaseMaterialList.materialCode }','${purchaseMaterialList2.materialName }')"> <!-- ,'${itemList.itemId}' -->
+<tr onclick="selectWork('${purchaseMaterialList2.materialCode }','${purchaseMaterialList2.materialName }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${purchaseMaterialList2.materialCode}</td>
 	<td id="con">${purchaseMaterialList2.materialName}</td>
 	</tr>
 
     <script type="text/javascript">
 
-        function selectWork(a,b{ // 부모창으로 값 넘기기
+        function selectWork(a,b){ // 부모창으로 값 넘기기
 		  
           opener.document.getElementById("materialCode").value = a
           opener.document.getElementById("materialName").value = b

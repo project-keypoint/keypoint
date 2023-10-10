@@ -26,10 +26,10 @@
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>자재코드</p> <input type="text" id="materialCode" class="form-control search-input" placeholder="자재코드 ">
+<p>자재코드</p> <input type="text" name="materialCode" id="materialCode" class="form-control search-input" placeholder="자재코드 ">
 </div>
 <div class="search-select">
-<p>자재명</p> <input type="text" id="materialName" class="form-control search-input" placeholder="자재명 ">
+<p>자재명</p> <input type="text" name="materialName" id="materialName" class="form-control search-input" placeholder="자재명 ">
 </div>
 </div>
 
@@ -112,7 +112,7 @@ function openPopup(url) {
 $(document).ready(function() {
     // 상품명 검색 팝업 열기
     $("#materialCode, #materialName").click(function() {
-        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList';
+        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
         openPopup(url);
     });
 });
