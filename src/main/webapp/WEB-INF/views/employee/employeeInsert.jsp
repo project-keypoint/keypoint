@@ -32,7 +32,7 @@
 <!-- </div> -->
 
 <div class="form-group-customer">
-<p>비밀번호(여기 나와야하나.?)</p>
+<p>비밀번호(수정필요)</p>
 <input type="text" id="empPass" name="empPass" class="form-control search-input" >
 </div>
 
