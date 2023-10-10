@@ -33,10 +33,30 @@
 		update employees
 		set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
 		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
-		empPosition = #{empPosition}, empHiredate = #{empHiredate}, empLeavedate = #{empLeavedate},
-		empRetiredate = #{empRetiredate}, empRole = #{empRole}
+		empPosition = #{empPosition},   empRole = #{empRole} 
+		<if test ="empLeavedate != null" >
+		,empLeavedate= #{empLeavedate}
+		</if>
+		<if test ="empRetiredate != null" >
+		,empRetiredate= #{empRetiredate}
+		</if>
+		<if test ="empHiredate != null" >
+		,empHiredate= #{empHiredate}
+		</if>
+		
 		where empId = #{empId}
+		 
+<!-- 		날짜 값은 다 뺌 -->
+<!-- 		update employees -->
+<!-- 		set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel},  -->
+<!-- 		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName}, -->
+<!-- 		empPosition = #{empPosition}, -->
+<!-- 		empRole = #{empRole} -->
+<!-- 		where empId = #{empId} -->
 	</update>
+<!-- 	empLeavedate = #{empLeavedate}, -->
+<!-- 		empRetiredate = #{empRetiredate}, -->
+<!-- 	empHiredate = #{empHiredate}, -->
 
 <!-- 로그인-강수빈 -->
 	<select id="userCheck" 

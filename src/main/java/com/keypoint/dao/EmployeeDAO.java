@@ -45,7 +45,7 @@ public class EmployeeDAO {
 	// 사원-상세정보수정
 	public void updateEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO updateEmployee()");
-		System.out.println(employeeDTO);
+		System.out.println( "dto출력됨" + employeeDTO);
 		
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
 	} // updateEmployee
