@@ -86,11 +86,17 @@
     <td>${receiptDTO.materialName}</td>
     <td>${receiptDTO.poCount}EA</td>
     <td>${receiptDTO.grCount}EA</td>
-    <td>${receiptDTO.grEcount == 0 ? '-' : (receiptDTO.grEcount - receiptDTO.grCount)}</td>
+    <td>${receiptDTO.grEcount == 0 ? '-' : (receiptDTO.grCount - receiptDTO.grEcount)}</td>
     <td>${receiptDTO.grEcount == 0 ? '-' : receiptDTO.grEcount}</td>
     <td>${receiptDTO.grDate}</td>
     <td>${receiptDTO.grOwner}</td>
-    <td>${receiptDTO.grStatus}</td>
+    <td>
+    ${receiptDTO.grStatus}
+    <c:if test="${receiptDTO.grStatus eq '입고완료'}">
+    	<br>
+        (${receiptDTO.grEdate})
+    </c:if>
+    </td>
     <td>
     <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
     <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete('${receiptDTO.grCode}')">
@@ -230,7 +236,7 @@ function openUpdate() {
 }
 
 //입고처리 새창
-function openComplete() {
+function openComplete(grCode) {
     var url = '${pageContext.request.contextPath}/receipt/receiptComplete?grCode='+grCode;
     var windowWidth = 500;
     var windowHeight = 600;
@@ -249,6 +255,12 @@ function openDetails(grCode) {
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
 </script>
+
+
+
+
+
+
 
 </body>
 </html>

@@ -30,9 +30,14 @@
 </div>
 
 <div class="search-bar-popup">
+
 <div class="form-group-receive">
 <p>자재코드</p>
 <input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="자재검색" readonly>
+</div>
+
+<div class="form-group-receive">
+<p>자재명</p>
 <input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명" readonly>
 </div>
 
@@ -40,6 +45,7 @@
 <p>자재단가</p>
 <input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가" readonly>
 </div>
+
 </div>
 
 <div class="form-group-receive">
@@ -55,20 +61,24 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자</p>
+<p>담당코드</p>
 <input type="text" id="empId" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색" readonly>
-<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="담당자명" readonly>
 </div>
 
-<!-- <div class="form-group-receive"> -->
-<!-- <p>담당자</p> -->
-<!-- <input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색"> -->
-<!-- </div> -->
+<div class="form-group-receive">
+<p>담당자명</p>
+<input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="담당자명" readonly>
+</div>
+</div>
 
+<div class="search-bar-popup">
+<div class="form-group-receive">
+<p>거래코드</p>
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="거래처검색" readonly>
+</div>
 
 <div class="form-group-receive">
-<p>거래처</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="거래처검색" readonly>
+<p>거래처명</p>
 <input type="text" id="cusName" name="cusName" class="form-control search-input inputname" placeholder="거래처명" readonly>
 </div>
 </div>

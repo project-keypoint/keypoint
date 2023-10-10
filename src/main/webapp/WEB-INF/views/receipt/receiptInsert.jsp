@@ -33,7 +33,16 @@
 <div class="form-group-receive">
 <p>발주서</p>
 <input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" placeholder="발주코드" readonly>
+</div>
+
+<div class="form-group-receive">
+<p>자재명</p>
 <input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명" readonly>
+</div>
+
+<div class="form-group-receive">
+<p>발주수량</p>
+<input type="text" id="poCount" name="poCount" class="form-control search-input inputname" placeholder="발주수량" readonly>
 </div>
 </div>
 
@@ -44,8 +53,12 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자</p>
-<input type="text" id="empId" name="grOwner" class="form-control search-input inputcode" placeholder="담당자검색" readonly>
+<p>당담코드</p>
+<input type="text" id="empId" name="grOwner" class="form-control search-input inputcode" placeholder="당담코드" readonly>
+</div>
+
+<div class="form-group-receive">
+<p>담당자명</p>
 <input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode" placeholder="담당자명" readonly>
 </div>
 </div>
@@ -99,7 +112,7 @@ function openPopup(url) {
 }
 $(document).ready(function() {
     // 업체명 검색 팝업 열기
-    $("#poCode, #materialName").click(function() {
+    $("#poCode, #materialName, #poCount").click(function() {
         var url = '${pageContext.request.contextPath}/purchase/purchaseOrderList';
         openPopup(url);
     });
@@ -242,6 +255,26 @@ function validateForm() {
 }
 </script>
 <!-- // 필수입력항목 메시지 -->
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // grCount         poCount
+        // grEcount 입력값이 grCount를 초과하지 못하도록 제한합니다.
+        $("#grCount").on("input", function() {
+            var poCount = parseInt($("#poCount").val());
+            var grCount = parseInt($(this).val());
+            
+            if (grCount > poCount) {
+                alert("입고예정수량은 발주수량을 초과할 수 없습니다.");
+                $(this).val(poCount); // grCount로 값을 변경합니다.
+            }
+        });
+    });
+</script>
+
+
+
 
 
 </body>

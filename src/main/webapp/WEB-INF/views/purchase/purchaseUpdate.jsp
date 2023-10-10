@@ -33,6 +33,10 @@
 <div class="form-group-receive">
 <p>자재코드</p>
 <input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" value="${purchaseDTO.materialCode}" readonly>
+</div>
+
+<div class="form-group-receive">
+<p>자재명</p>
 <input type="text" id="materialName" name="materialName" class="form-control search-input inputname" value="${purchaseDTO.materialName}" readonly>
 </div>
 
@@ -96,7 +100,7 @@
 
 <div class="form-group-receive">
 <p>발주상태</p>
-<input type="text" id="poStatus" name="poStatus" class="form-control search-input" value="발주대기" readonly>
+<input type="text" id="poStatus" name="poStatus" class="form-control search-input" value="${purchaseDTO.poStatus}" readonly>
 </div>
 
 </div>

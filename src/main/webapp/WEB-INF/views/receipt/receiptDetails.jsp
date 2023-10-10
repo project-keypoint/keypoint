@@ -34,7 +34,11 @@
 <div class="form-group-receive">
 <p>발주서</p>
 <input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" placeholder="${receiptDTO.poCode}" readonly>
-<!-- <input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="자재명" readonly> -->
+</div>
+
+<div class="form-group-receive">
+<p>발주량</p>
+<input type="text" id="poCount" name="poCount" class="form-control search-input inputcode" placeholder="${receiptDTO.poCount}" readonly>
 </div>
 </div>
 

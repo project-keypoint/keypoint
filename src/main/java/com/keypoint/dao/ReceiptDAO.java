@@ -52,6 +52,21 @@ public class ReceiptDAO {
 		sqlSession.update(namespace+".updateReceipt",receiptDTO);
 	}// updateReceipt() [발주수정]
 	
+	// ------------------------------------------------------------------------------
+	
+	public ReceiptDTO getReceiptDetails2(String grCode) {
+		System.out.println("ReceiptDAO getReceiptDetails2()");
+		
+		return sqlSession.selectOne(namespace+".getReceiptDetails2", grCode);
+	}// getReceiptDetails() [입고상세]
+	
+	public void updateReceipt2(ReceiptDTO receiptDTO) {
+		System.out.println("ReceiptPurchaseDAO updateReceipt2()");
+		System.out.println(receiptDTO);
+		
+		sqlSession.update(namespace+".updateReceipt2",receiptDTO);
+	}// updateReceipt() [발주수정]
+	
 	
 	
 	

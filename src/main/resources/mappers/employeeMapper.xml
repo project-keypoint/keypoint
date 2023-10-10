@@ -15,9 +15,9 @@
 <!-- 사원등록 -->
 	<insert id="insertEmployee">
 		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
-		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
+		                                   empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
 		values (#{empPass}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
-			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
+			       #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
 	</insert>
 	
 <!-- 사원-상세정보 -->
@@ -34,33 +34,21 @@
 		set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
 		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
 		empPosition = #{empPosition},   empRole = #{empRole} 
-		<if test ="empLeavedate != null" >
-		,empLeavedate= #{empLeavedate}
+<!-- 		값들이 비어있어도 넘어가게!!!! -->
+		<if test="empLeavedate != null and empLeavedate != ''">
+    	, empLeavedate = #{empLeavedate}
 		</if>
-		<if test ="empRetiredate != null" >
-		,empRetiredate= #{empRetiredate}
+		<if test ="empRetiredate != null and empRetiredate != ''">
+		, empRetiredate= #{empRetiredate}
 		</if>
-		<if test ="empHiredate != null" >
-		,empHiredate= #{empHiredate}
+		<if test ="empHiredate != null and empHiredate != ''">
+		, empHiredate= #{empHiredate}
 		</if>
-		
 		where empId = #{empId}
-		 
-<!-- 		날짜 값은 다 뺌 -->
-<!-- 		update employees -->
-<!-- 		set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel},  -->
-<!-- 		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName}, -->
-<!-- 		empPosition = #{empPosition}, -->
-<!-- 		empRole = #{empRole} -->
-<!-- 		where empId = #{empId} -->
-	</update>
-<!-- 	empLeavedate = #{empLeavedate}, -->
-<!-- 		empRetiredate = #{empRetiredate}, -->
-<!-- 	empHiredate = #{empHiredate}, -->
+	</update> 
 
 <!-- 로그인-강수빈 -->
-	<select id="userCheck" 
-	        resultType="com.keypoint.dto.EmployeeDTO">
+	<select id="userCheck"  resultType="com.keypoint.dto.EmployeeDTO">
 		select * from employees
 		where empId = #{empId} and empPass = #{empPass}
 	</select>

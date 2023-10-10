@@ -34,6 +34,11 @@
 <div class="form-group-receive">
 <p>자재코드</p>
 <input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="${purchaseDTO.materialCode}" readonly>
+
+</div>
+
+<div class="form-group-receive">
+<p>자재명</p>
 <input type="text" id="materialName" name="materialName" class="form-control search-input inputname" placeholder="${purchaseDTO.materialName}" readonly>
 </div>
 
@@ -55,19 +60,13 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자</p>
+<p>당담자명</p>
 <%-- <input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="${purchaseDTO.poOwner}" readonly> --%>
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" placeholder="${purchaseDTO.poOwner}" readonly>
 </div>
 
-<!-- <div class="form-group-receive"> -->
-<!-- <p>담당자</p> -->
-<!-- <input type="text" id="poOwner" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색"> -->
-<!-- </div> -->
-
-
 <div class="form-group-receive">
-<p>거래처</p>
+<p>거래처명</p>
 <input type="text" id="cusName" name="cusName" class="form-control search-input inputcode" placeholder="${purchaseDTO.cusName}" readonly>
 </div>
 </div>
