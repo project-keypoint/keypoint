@@ -101,8 +101,10 @@
 
 </div>
 <div class="details-buttons">
-<input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/purchase/purchaseUpdate?poCode=${purchaseDTO.poCode}'">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
+	<c:if test="${purchaseDTO.poStatus eq '발주대기'}">
+        <input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/purchase/purchaseUpdate?poCode=${purchaseDTO.poCode}'">
+        <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
+    </c:if>
 </div>
 
 </div><!-- main-details -->

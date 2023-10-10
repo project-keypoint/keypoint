@@ -93,7 +93,14 @@
     <td>${purchaseDTO.poPrice}원</td>
     <td>${purchaseDTO.poOwner}</td>
     <td>${purchaseDTO.cusName}</td>
-    <td>${purchaseDTO.poStatus}</td>
+    <td>
+    	<c:choose>
+                <c:when test="${purchaseDTO.poStatus eq '발주완료'}">
+                    <span style="color: skyblue;">${purchaseDTO.poStatus}</span>
+                </c:when>
+                <c:otherwise>${purchaseDTO.poStatus}</c:otherwise>
+            </c:choose>
+    </td>
     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${purchaseDTO.poCode}')"></td>
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
