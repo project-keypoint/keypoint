@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
 import com.keypoint.dto.ReceiptDTO;
+import com.keypoint.service.PurchaseService;
 import com.keypoint.service.ReceiptService;
 
 @Controller
@@ -24,6 +25,9 @@ public class ReceiptController {
 	// ReceiptService 객체생성
 	@Inject
 	private ReceiptService receiptService;
+	
+	@Inject
+	private PurchaseService purchaseService;
 	
 	// --------------------------------------------------------------------------------
 	
@@ -40,6 +44,13 @@ public class ReceiptController {
 		
 		//등록 처리
 		System.out.println(receiptDTO);
+		
+		
+		// 입고등록시 발주완료 업데이트
+		PurchaseDTO purchaseDTO = new PurchaseDTO();
+	    purchaseDTO.setPoCode(receiptDTO.getPoCode());
+	    purchaseDTO.setPoStatus("발주완료");
+	    purchaseService.updatePurchaseOrderStatus(purchaseDTO);
 		
 		receiptService.insertReceipt(receiptDTO);
 		
