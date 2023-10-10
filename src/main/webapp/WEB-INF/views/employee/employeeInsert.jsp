@@ -19,8 +19,9 @@
 
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post">
-<!-- onsubmit="return validateForm()" -->
+<!-- 폼들의 위치가 이게 맞나..? 특히 }/employee/photoPro 이 form이 여기가 맞아...? -->
+<form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath }/employee/photoPro" method="post" enctype="multipart/form-data">
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
 
@@ -31,7 +32,7 @@
 <!-- </div> -->
 
 <div class="form-group-customer">
-<p>비밀번호</p>
+<p>비밀번호(수정필요)</p>
 <input type="text" id="empPass" name="empPass" class="form-control search-input" >
 </div>
 
@@ -105,10 +106,12 @@
 <input type="text" id="empHiredate" name="empHiredate" class="form-control search-input">
 </div>
 
+
 <div class="form-group-customer">
 <p>사진</p>
-<input type="text" id="empPhoto" name="empPhoto" class="form-control search-input">
+<input type="file" id="empPhoto" name="empPhoto" class="form-control search-input">
 </div>
+
 
 <!-- 이게 맞나..? 나중에 수정에서 재직여부 수정가능한가?? -->
 <div class="form-group-customer" style="display: none;">
@@ -127,7 +130,7 @@
 </select>
 </div>
 
-<p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴사자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
+<p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 
 
 </div>
@@ -136,12 +139,11 @@
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->
+</form>
 </div><!-- main-details -->
 
 
-
-
-<!-- 데이트피커 : 날짜선택요소(달력형식, 직접입력) -->
+<!-- 데이트피커 : 날짜선택요소(달력형식) -->
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -174,9 +176,8 @@ $(function() {
 		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분
 		dayNamesMin: ['일','월','화','수','목','금','토'], //달력의 요일 텍스트
 		dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'], //달력의 요일
-		yearRange: '1950:2023'
+		yearRange: '1980:2023'
 	});
-	
 
     $("#empHiredate").datepicker({
 		dateFormat: 'yy-mm-dd',
@@ -189,7 +190,7 @@ $(function() {
 		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분
 		dayNamesMin: ['일','월','화','수','목','금','토'], //달력의 요일 텍스트
 		dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'], //달력의 요일
-		yearRange: '1950:2023'
+		yearRange: '1980:2023'
 	});
 });
 
@@ -221,46 +222,31 @@ function sample6_execDaumPostcode() {
 	  }).open();
 	}
 	
-// $(document).ready(function() {
-//     // 업체명 검색 팝업 열기
-//     $("#cusCode, #cusName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-//         openPopup(url);
-//     });
-//     // 상품명 검색 팝업 열기
-//     $("#productCode, #productName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-//         openPopup(url);
-//     });
-//  	// 사원 검색 팝업 열기
-//     $("#empId, #empName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-//         openPopup(url);
-//     });
-// });
 
-// 유효성 검사
-// function validateForm() {
-//     // 각 입력 필드 값
-//     var cusCode = document.getElementById("cusCode").value;
-//     var productCode = document.getElementById("productCode").value;
-//     var roCount = document.getElementById("roCount").value;
-//     var roDate = document.getElementById("roDate").value;
-//     var shipSdate = document.getElementById("shipSdate").value;
-//     var roEmpId = document.getElementById("roEmpId").value;
-//     // 빈 필드 검사
-//     if (cusCode === "" || productCode === "" || roCount === "" ||
-//     	roDate === "" || shipSdate === "" || roEmpId === "") {
-//         alert("모든 내용을 입력해주세요.");
-//         return false; // 제출 방지
-//     }
-//     // 추가 유효성 검사
-//     if (roCount == 0) {
-//         alert("몇개부터 가능하도록 할까");
-//         return false; // 제출 방지
-//     }
-//     return true;
-// }
+//유효성 검사
+function validateForm() {
+//	각 필수 입력 필드 값
+    var empName = document.getElementById("empName").value;
+    var empAddress = document.getElementById("empAddress").value;
+    var empPhone = document.getElementById("empPhone").value;
+    var empTel = document.getElementById("empTel").value;
+    var empEmail = document.getElementById("empEmail").value;
+    var departmentName = document.getElementById("departmentName").value;
+    var empPosition = document.getElementById("empPosition").value;
+    var empBirth = document.getElementById("empBirth").value;
+    var empHiredate = document.getElementById("empHiredate").value;
+    
+// 	빈 필드 검사
+    if (empName === "" || empAddress === "" || empPhone === "" ||
+    	empTel === "" || empEmail === "" || departmentName === "" || empPosition === "" ||
+    	empBirth === "" || empHiredate === "") {
+        alert("모든 내용을 입력해주세요.");
+        return false; // 제출 방지
+    }
+    return true;
+}	
+
+
 </script>
 </body>
 </html>

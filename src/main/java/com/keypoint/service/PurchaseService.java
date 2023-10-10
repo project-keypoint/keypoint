@@ -98,7 +98,10 @@ public class PurchaseService {
 	
 	// --------------------------------------------------------------------------------------------------
 	
-	
+	public void updatePurchaseOrderStatus(PurchaseDTO purchaseDTO) {
+	    purchaseDAO.updatePurchaseOrderStatus(purchaseDTO);
+	} // updatePurchaseOrderStatus
+
 	
 	
 	

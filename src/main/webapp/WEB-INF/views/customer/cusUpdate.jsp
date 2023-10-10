@@ -33,8 +33,8 @@
 <div class="form-group-customer">
 <p>거래처구분</p>
 <select id="cusCategory" name="cusCategory" class="form-control search-input">
-	<option value="납입처" ${customerDTO.cusStatus eq '납입처' ? 'selected' : ''}>납입처</option>
-	<option value="납품처" ${customerDTO.cusStatus eq '납품처' ? 'selected' : ''}>납품처</option>
+	<option value="납입처" ${customerDTO.cusCategory eq '납입처' ? 'selected' : ''}>납입처</option>
+	<option value="납품처" ${customerDTO.cusCategory eq '납품처' ? 'selected' : ''}>납품처</option>
 </select>
 </div>
 
@@ -67,8 +67,8 @@
 <div class="form-group-customer">
 <p>업태</p>
 <select id="cusBusiness" name="cusBusiness" class="form-control search-input">
-    <option value="도매 및 소매업" ${customerDTO.cusStatus eq '도매 및 소매업' ? 'selected' : ''}>도매 및 소매업</option>
-    <option value="제조업" ${customerDTO.cusStatus eq '제조업' ? 'selected' : ''}>제조업</option>
+    <option value="도매 및 소매업" ${customerDTO.cusBusiness eq '도매 및 소매업' ? 'selected' : ''}>도매 및 소매업</option>
+    <option value="제조업" ${customerDTO.cusBusiness eq '제조업' ? 'selected' : ''}>제조업</option>
 </select>
 </div>
 
@@ -85,9 +85,12 @@
         <option value="흡음제">흡음제</option>
         <option value="플레이트">플레이트</option>
         <option value="PCB">PCB</option>
-        <option value="키보드(적축)">키보드(적축)</option>
-        <option value="키보드(청축)">키보드(청축)</option>
-        <option value="키보드(갈축)">키보드(갈축)</option>
+        <option value="키보드A(적축)">키보드A(적축)</option>
+        <option value="키보드A(청축)">키보드A(청축)</option>
+        <option value="키보드A(갈축)">키보드A(갈축)</option>
+        <option value="키보드B(적축)">키보드B(적축)</option>
+        <option value="키보드B(청축)">키보드B(청축)</option>
+        <option value="키보드B(갈축)">키보드B(갈축)</option>
 </select>
 </div>
 
@@ -144,8 +147,8 @@
 <div class="form-group-customer">
 <p>상태</p>
 <select id="cusStatus" name="cusStatus" class="form-control search-input">
-        <option value="거래중" selected>거래중</option>
-        <option value="거래중지">거래중지</option>
+    <option value="거래중" ${customerDTO.cusStatus eq '거래중' ? 'selected' : ''}>거래중</option>
+    <option value="거래중지" ${customerDTO.cusStatus eq '거래중지' ? 'selected' : ''}>거래중지</option>
 </select>
 </div>
 </div>

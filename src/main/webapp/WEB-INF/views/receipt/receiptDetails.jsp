@@ -77,7 +77,9 @@
 
 </div>
 <div class="details-buttons">
-<input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/receipt/receiptUpdate?grCode=${receiptDTO.grCode}'">
+<c:if test="${receiptDTO.grStatus eq '입고대기'}">
+        <input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/receipt/receiptUpdate?grCode=${receiptDTO.grCode}'">
+    </c:if>
 </div>
 
 </div><!-- main-details -->

@@ -64,7 +64,7 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+<!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
 	<th>입고코드</th>
     <th>발주코드</th>
     <th>자재명</th>
@@ -80,7 +80,7 @@
 
 <c:forEach var="receiptDTO" items="${receiptList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+<!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${receiptDTO.grCode}</td>
     <td>${receiptDTO.poCode}</td>
     <td>${receiptDTO.materialName}</td>
@@ -91,16 +91,38 @@
     <td>${receiptDTO.grDate}</td>
     <td>${receiptDTO.grOwner}</td>
     <td>
-    ${receiptDTO.grStatus}
-    <c:if test="${receiptDTO.grStatus eq '입고완료'}">
-    	<br>
-        (${receiptDTO.grEdate})
-    </c:if>
+    <c:choose>
+                <c:when test="${receiptDTO.grStatus eq '입고완료'}">
+                    <span style="color: skyblue;">${receiptDTO.grStatus}</span>
+                    <c:if test="${not empty receiptDTO.grEdate}">
+                        <br>
+                        <span style="color: skyblue;">(${receiptDTO.grEdate})</span>
+                    </c:if>
+                </c:when>
+                <c:otherwise>
+                    ${receiptDTO.grStatus}
+                    <c:if test="${not empty receiptDTO.grEdate}">
+                        <br>
+                        (${receiptDTO.grEdate})
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
     </td>
-    <td>
-    <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
-    <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete('${receiptDTO.grCode}')">
-    </td>
+    <c:choose>
+    <c:when test="${receiptDTO.grStatus eq '입고대기'}">
+        <td>
+            <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
+            <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete('${receiptDTO.grCode}')">
+        </td>
+    </c:when>
+    <c:otherwise>
+        <td>
+            <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
+            <input type="button" value="입고완료" class="btn btn-danger mybutton1">
+        </td>
+    </c:otherwise>
+</c:choose>
+    
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
 </c:forEach>
@@ -110,7 +132,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="입고등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">

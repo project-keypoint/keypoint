@@ -1,6 +1,7 @@
 package com.keypoint.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -98,9 +99,14 @@ public class ReceiveService {
 		boolean result = receiveDAO.shipComplete(receiveDTO);
 		return result;
 	}// shipComplete [출하완료]
-
+	
+	
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	
-	
+	////다중삭제 테스트
+	public void receiveDeleteChecked(ReceiveDTO receiveDTO) {
+		System.out.println("ReceiveService receiveDeleteChecked()");
+		receiveDAO.receiveDeleteChecked(receiveDTO);
+	}
 	
 }

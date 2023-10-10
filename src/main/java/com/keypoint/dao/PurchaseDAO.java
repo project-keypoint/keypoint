@@ -94,7 +94,10 @@ public class PurchaseDAO {
 	// -------------------------------------------------------------------------------------
 	
 	
-	
+	public void updatePurchaseOrderStatus(PurchaseDTO purchaseDTO) {
+	    sqlSession.update(namespace + ".updatePurchaseOrderStatus", purchaseDTO);
+	} // updatePurchaseOrderStatus
+
 	
 	
 	

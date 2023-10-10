@@ -1,6 +1,7 @@
 package com.keypoint.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ReceiveDTO {
 	
@@ -28,6 +29,13 @@ public class ReceiveDTO {
 	private int shipPrice;
 	private String shipMemo;
 	
+	private List<String> roCodes;
+	public List<String> getRoCodes() {
+        return roCodes;
+    }
+    public void setRoCodes(List<String> roCodes) {
+        this.roCodes = roCodes;
+    }
 	
 	@Override
 	public String toString() {
@@ -38,7 +46,6 @@ public class ReceiveDTO {
 				+ ", roDate=" + roDate + ", shipSdate=" + shipSdate + ", shipDate=" + shipDate + ", roStatus="
 				+ roStatus + ", shipCount=" + shipCount + ", shipMemo=" + shipMemo + "]";
 	}
-	
 	
 	public int getShipPrice() {
 		return shipPrice;

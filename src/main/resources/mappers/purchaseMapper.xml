@@ -75,7 +75,23 @@
    and poStatus = '발주대기'
    </if>   
 </select>
-
+  
+  <update id="updatePurchaseOrderStatus">
+    UPDATE purchaseOrder
+    SET poStatus = #{poStatus}
+    WHERE poCode = #{poCode}
+</update>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

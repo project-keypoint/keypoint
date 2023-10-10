@@ -99,5 +99,17 @@
 		WHERE productCode = #{productCode}
 	</update>
 	
+	<update id="receiveDeleteChecked">
+		UPDATE receivedOrder
+		SET roStatus = '삭제'
+		WHERE roCode IN (
+       <foreach item="roCode" collection="roCodes" open="" separator="," close="">
+           #{roCode}
+       </foreach>
+		)
+	</update>
+
+
+	
 </mapper>
 

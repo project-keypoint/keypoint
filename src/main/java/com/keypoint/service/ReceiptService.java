@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.keypoint.dao.PurchaseDAO;
 import com.keypoint.dao.ReceiptDAO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
@@ -16,6 +17,7 @@ public class ReceiptService {
 
 	@Inject
 	private ReceiptDAO receiptDAO;
+	
 	
 	// -------------------------------------------------------------------------------------
 	
@@ -78,9 +80,7 @@ public class ReceiptService {
 	}// purchaseUpdatePro() [발주수정Pro]
 	
 	
-	
-	
-	
+	//------------------------------------------------------------------------------
 	
 	
 	
