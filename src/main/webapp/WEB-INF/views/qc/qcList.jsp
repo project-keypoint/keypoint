@@ -163,15 +163,26 @@
 <div>
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
-<div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
-<a href="#" class="page-button">&gt;</a>
-</div><!-- page-button -->
+
+<div id="page_control" class="page-buttons">
+    <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+        <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+    </c:if>
+    <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+        <c:choose>
+            <c:when test="${i eq pageDTO.pageNum}">
+                <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${i}&search=${pageDTO.search}" class="page-button page-button-active">${i}</a>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+    <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+        <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
+    </c:if>
+</div>
+
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
