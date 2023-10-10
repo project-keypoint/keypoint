@@ -113,7 +113,7 @@
 // 삭제 확인메세지
 function confirmDelete() {
     if (confirm("정말로 삭제하시겠습니까?")) {
-        location.href = '${pageContext.request.contextPath}/receive/receiveDelete?roCode=${receiveDTO.roCode}';
+        location.href = '${pageContext.request.contextPath}/workOrder/workOrderDelete?woCode=${workOrderDTO.woCode}';
     } else {
     	
     }

@@ -85,8 +85,7 @@
 	<update id="deleteWorkOrder">
 		UPDATE workOrder
 		SET woStatus = '삭제'
-		WHERE woCode =
-		#{woCode}
+		WHERE woCode = #{woCode}
 	</update>
 
 
