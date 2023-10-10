@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,7 +31,7 @@ public class ReceiveController {
 		System.out.println("ReceiveController receive/shipmentTest");
 		
 		String search = request.getParameter("search");
-		int pageSize = 3; //한 화면에 보여줄 글개수 설정
+		int pageSize = 5; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
 			pageNum = "1";
@@ -63,7 +64,7 @@ public class ReceiveController {
 		// =======================================
 		
 		String search1 = request.getParameter("search1");
-		int pageSize1 = 1; //한 화면에 보여줄 글개수 설정
+		int pageSize1 = 2; //한 화면에 보여줄 글개수 설정
 		String pageNum1=request.getParameter("pageNum1");
 		if(pageNum1 == null) {
 			pageNum1 = "1";
@@ -184,5 +185,19 @@ public class ReceiveController {
 		System.out.println("ReceiveController receive/test");
 		return "receive/test";
 	}// test [테스트페이지]
+	
+	//// 다중삭제 테스트
+	@PostMapping("/receiveDeleteChecked")
+	public ResponseEntity<String> receiveDeleteChecked(@RequestBody ReceiveDTO receiveDTO) {
+	    try {
+	        receiveService.receiveDeleteChecked(receiveDTO);
+	        return ResponseEntity.ok("success");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	    }
+	}
+
+
 	
 }//class

@@ -93,6 +93,14 @@ public class ReceiveDAO {
 	        return false;
 	    }
 	}// shipComplete [출하완료]
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	////다중삭제 테스트
+	public void receiveDeleteChecked(ReceiveDTO receiveDTO) {
+		System.out.println("ReceiveDAO receiveDeleteChecked()");
+		sqlSession.update(namespace + ".receiveDeleteChecked", receiveDTO);
+	}
 
 	
 }// class

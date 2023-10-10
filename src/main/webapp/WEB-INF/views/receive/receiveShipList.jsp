@@ -22,7 +22,6 @@
 <%@include file="../inc/top-bar.jsp" %>
 <%@include file="../inc/side-bar.jsp" %>
 <!--  contents start -->
-<!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <!-- 수주영역 [시작] =================================================== -->
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
@@ -69,7 +68,7 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+	<th><input type="checkbox" id="delete-list-receiveAll" name="delete-list-receive" data-group="delete-list-receive"></th>
 	<th>수주번호</th> 
     <th>업체코드</th> 
     <th>업체명</th> 
@@ -80,14 +79,13 @@
     <th>수주금액</th> 
     <th>수주일자</th>
     <th>납품예정일</th>
-<!--     <th>납품일</th> -->
     <th>상태</th>
     <th>상세내역</th>
     <th>납품</th>
 </tr>
 <c:forEach var="receiveDTO" items="${receiveList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+	<td><input type="checkbox" id="delete-list-receive" name="delete-list-receive" data-group="delete-list-receive"></td>
     <td>${receiveDTO.roCode}</td>
     <td>${receiveDTO.cusCode}</td>
     <td>${receiveDTO.cusName}</td>
@@ -136,7 +134,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="수주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteReceive()">
 </div>
 
 <div id="page_control_receive" class="page-buttons">
@@ -167,48 +165,10 @@
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
 <div class="page-title">납품현황(전체납품목록)</div>
 <div class="contents2">
-<!-- <div class="search-bar"> -->
-<!-- <div class="search-b"> -->
-<!-- <div class="search-select"> -->
-<!-- <p>업체명</p>  -->
-<!-- <input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly> -->
-<!-- <input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly> -->
-<!-- </div> -->
-<!-- <div class="search-select"> -->
-<!-- <p>상품명</p>  -->
-<!-- <input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly> -->
-<!-- <input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly> -->
-<!-- </div> -->
-<!-- </div> -->
-
-<!-- <div class="search-b"> -->
-<!-- <div class="search-date"> -->
-<!-- <p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input" placeholder="수주일자" readonly> -->
-<!-- ~<input type="text" id="roDate2" class="form-control search-input" placeholder="수주일자" readonly> -->
-<!-- </div> -->
-<!-- <div class="search-date"> -->
-<!-- <p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input" placeholder="납품예정일" readonly> -->
-<!-- ~<input type="text" id="shipSdate2" class="form-control search-input" placeholder="납품예정일" readonly> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="search-button"> -->
-<!-- <input type="button" value="검색" class="btn btn-primary mybutton1"> -->
-<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1"> -->
-<!-- </div> -->
-<!-- </div>search-bar -->
-<!-- <br> -->
-<!-- <div class="select-status"> -->
-<!-- <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a> -->
-<!-- <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a> -->
-<!-- <a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a> -->
-<!-- <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a> -->
-<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
-<!-- </div> -->
-
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+	<th><input type="checkbox" id="delete-list-shipmentAll" name="delete-list" data-group="delete-list-shipment"></th>
 	<th>수주번호</th> 
     <th>업체코드</th> 
     <th>업체명</th> 
@@ -220,12 +180,11 @@
     <th>수주일자</th>
     <th>납품예정일</th>
     <th>납품일</th>
-<!--     <th>상태</th> -->
     <th>상세내역</th>
 </tr>
 <c:forEach var="receiveDTO" items="${shipmentList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+	<td><input type="checkbox" id="delete-list-shipment" name="delete-list-shipment" data-group="delete-list-shipment"></td>
     <td>${receiveDTO.roCode}</td>
     <td>${receiveDTO.cusCode}</td>
     <td>${receiveDTO.cusName}</td>
@@ -270,7 +229,6 @@
 </div><!-- 그림자아니야 영역 -->
 <!-- 납품영역 [끝] ==================================================== -->
 </div><!-- main -->
-
 <!-- contents end -->
 
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
@@ -282,34 +240,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-// 납품완료 ajax
-// function confirmShipment(roCode, productCode, button) {
-//     var row = button.parentNode.parentNode;
-//     var shipCount = row.querySelector('#shipCount').value;
-//     var shipMemo = row.querySelector('#shipMemo').value;
+// 다중삭제 테스트
+function deleteReceive() {
+  // 선택된 체크박스 요소들을 가져옵니다.
+  var checkboxes = $('input[name="delete-list-receive"]:checked');
+  // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
+  if (checkboxes.length === 0) {
+    alert("삭제할 항목을 선택해주세요.");
+    return;
+  }
+  // 선택된 체크박스의 ${receiveDTO.roCode} 값을 배열에 저장합니다.
+  var roCodes = [];
+  checkboxes.each(function() {
+    var row = $(this).closest('.table-body');
+    var roCode = row.find('td:nth-child(2)').text(); // 두 번째 열에 해당하는 값
+    roCodes.push(roCode);
+  });
+   // 확인용 로그 출력
+   console.log("전송 데이터:", JSON.stringify({ roCodes: roCodes }));
+   // Ajax 요청을 보냅니다.
+   $.ajax({
+     type: "POST",
+     url: '${pageContext.request.contextPath}/receive/receiveDeleteChecked',
+     contentType: "application/json",
+     data: JSON.stringify({ roCodes: roCodes }),
+     success: function(result) {
+       console.log(result);
+       alert("성공");
+       location.reload();
+     },
+     error: function(xhr, status, error) {
+    	   console.error('Error:', xhr.responseText);
+    	   alert('Error: ' + xhr.responseText);
+    	}
 
-//     if (confirm('확인하시겠습니까?')) {
-//         $.ajax({
-//             type: "POST",
-//             url: '${pageContext.request.contextPath}/receive/shipComplete',
-//             data: {
-//                 "roCode": roCode,
-//                 "productCode": productCode,
-//                 "shipCount": shipCount,
-//                 "shipMemo": shipMemo
-//             },
-//             success: function(result) {
-//                 const data = $.trim(result);
-//                 if (data === "success") {
-//                     alert("완료");
-//                     location.reload();
-//                 } else {
-//                     alert("에러");
-//                 }
-//             }
-//         });
-//     }
-// }
+   });
+}
+
+// 납품 ajax처리
 function confirmShipment(roCode, productCode, button) {
     var row = button.parentNode.parentNode;
     var shipCount = row.querySelector('#shipCount').value;
@@ -403,30 +371,36 @@ $(function() {
     });
 });
 
-// 체크박스(삭제용) 전체선택
-var selectAllCheckbox = document.getElementById("delete-list-all");
-var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
-selectAllCheckbox.addEventListener("change", function () {
+//체크박스 전체선택하는 코드(수주&납품)
+function handleCheckboxGroup(selectAllCheckbox, checkboxes) {
+    selectAllCheckbox.addEventListener("change", function () {
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    });
     checkboxes.forEach(function (checkbox) {
-        checkbox.checked = selectAllCheckbox.checked;
+        checkbox.addEventListener("change", function () {
+            if (!this.checked) {
+                selectAllCheckbox.checked = false;
+            } else {
+                var allChecked = true;
+                checkboxes.forEach(function (c) {
+                    if (!c.checked) {
+                        allChecked = false;
+                    }
+                });
+                selectAllCheckbox.checked = allChecked;
+            }
+        });
     });
-});
-checkboxes.forEach(function (checkbox) {
-    checkbox.addEventListener("change", function () {
-        if (!this.checked) {
-            selectAllCheckbox.checked = false;
-        } else {
-            // 모든 체크박스가 선택되었는지 확인
-            var allChecked = true;
-            checkboxes.forEach(function (c) {
-                if (!c.checked) {
-                    allChecked = false;
-                }
-            });
-            selectAllCheckbox.checked = allChecked;
-        }
-    });
-});
+}
+var selectAllReceive = document.getElementById("delete-list-receiveAll");
+var checkReceive = document.querySelectorAll('[data-group="delete-list-receive"]');
+handleCheckboxGroup(selectAllReceive, checkReceive); //수주체크
+
+var selectAllShipment = document.getElementById("delete-list-shipmentAll");
+var checkShipment = document.querySelectorAll('[data-group="delete-list-shipment"]');
+handleCheckboxGroup(selectAllShipment, checkShipment); //납품체크
 
 // 수주상세내용 새창
 function openDetails(roCode) {
