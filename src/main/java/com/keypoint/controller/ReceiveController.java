@@ -3,6 +3,7 @@ package com.keypoint.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.ReceiveService;
 
@@ -24,12 +26,77 @@ public class ReceiveController {
 	private ReceiveService receiveService;
 	
 	@GetMapping("/receiveShipList")
-	public String shipmentTest(Model model) {
+	public String shipmentTest(HttpServletRequest request,Model model) {
 		System.out.println("ReceiveController receive/shipmentTest");
-		List<ReceiveDTO> receiveList = receiveService.getReceiveList();
-		List<ReceiveDTO> shipmentList = receiveService.getShipmentList();
+		
+		String search = request.getParameter("search");
+		int pageSize = 3; //한 화면에 보여줄 글개수 설정
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		PageDTO pageDTO =new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setSearch(search);
+		
+		List<ReceiveDTO> receiveList = receiveService.getReceiveList(pageDTO);
+		
+		int count = receiveService.getReceiveCount(pageDTO);
+		System.out.println("count"+count+"pagesize"+pageSize);
+		int pageBlock = 5; // 한화면에 보여줄 페이지 개수 설정
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		System.out.println("컨트롤러startPage"+startPage);
+		int endPage = startPage + pageBlock -1;
+		int pageCount = count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		// =======================================
+		
+		String search1 = request.getParameter("search1");
+		int pageSize1 = 1; //한 화면에 보여줄 글개수 설정
+		String pageNum1=request.getParameter("pageNum1");
+		if(pageNum1 == null) {
+			pageNum1 = "1";
+		}
+		int currentPage1 = Integer.parseInt(pageNum1);
+		PageDTO pageDTO1 =new PageDTO();
+		pageDTO1.setPageSize(pageSize1);
+		pageDTO1.setPageNum(pageNum1);
+		pageDTO1.setCurrentPage(currentPage1);
+		pageDTO1.setSearch(search1);
+		
+		List<ReceiveDTO> shipmentList = receiveService.getShipmentList(pageDTO1);
+		
+		int count1 = receiveService.getShipmentCount(pageDTO1);
+		System.out.println("count1"+count1+"pagesize1"+pageSize1);
+		int pageBlock1 = 5; // 한화면에 보여줄 페이지 개수 설정
+		int startPage1=(currentPage1-1)/pageBlock1*pageBlock1+1;
+		System.out.println("컨트롤러startPage1"+startPage1);
+		int endPage1 = startPage1 + pageBlock1 -1;
+		int pageCount1 = count1/pageSize1+(count1%pageSize1==0?0:1);
+		if(endPage1 > pageCount1) {
+			endPage1 = pageCount1;
+		}
+		pageDTO1.setCount(count1);
+		pageDTO1.setPageBlock(pageBlock1);
+		pageDTO1.setStartPage(startPage1);
+		pageDTO1.setEndPage(endPage1);
+		pageDTO1.setPageCount(pageCount1);
+		
 		model.addAttribute("receiveList", receiveList);
+		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("shipmentList", shipmentList);
+		model.addAttribute("pageDTO1", pageDTO1);
 		return "receive/receiveShipList";
 	}// receiveShipList [수주&출하 목록]
 	

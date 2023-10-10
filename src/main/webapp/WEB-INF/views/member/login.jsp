@@ -47,12 +47,12 @@
                                         <div class="form-group">
                                             <input type="text" name="empId"  value="${cookie.empId.value}"
                                             class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                id="InputempNum" aria-describedby="emailHelp"
                                                 placeholder="사원번호">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="empPass" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="비밀번호">
+                                                id="InputempPass" placeholder="비밀번호">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -91,6 +91,63 @@
 
     <!-- Custom scripts for all pages-->
     <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
+
+<script type="text/javascript">
+// 아이디기억하기
+$(document).ready(function(){
+  
+     
+    var key = getCookie("key");
+    $("#InputempNum").val(key); 
+      
+    if($("#InputempNum").val() != ""){
+        $("#customCheck").attr("checked", true); 
+    }
+      
+    $("#customCheck").change(function(){ 
+        if($("#customCheck").is(":checked")){ 
+            setCookie("key", $("#InputempNum").val(), 7); 
+        }else{ 
+            deleteCookie("key");
+        }
+    });
+      
+    
+    $("#InputempNum").keyup(function(){ 
+        if($("#customCheck").is(":checked")){ 
+            setCookie("key", $("#InputempNum").val(), 7); 
+        }
+    });
+});
+  
+function setCookie(cookieName, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+    document.cookie = cookieName + "=" + cookieValue;
+}
+  
+function deleteCookie(cookieName){
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() - 1);
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+  
+function getCookie(cookieName) {
+    cookieName = cookieName + '=';
+    var cookieData = document.cookie;
+    var start = cookieData.indexOf(cookieName);
+    var cookieValue = '';
+    if(start != -1){
+        start += cookieName.length;
+        var end = cookieData.indexOf(';', start);
+        if(end == -1)end = cookieData.length;
+        cookieValue = cookieData.substring(start, end);
+    }
+    return unescape(cookieValue);
+}
+
+</script>
 
 </body>
 

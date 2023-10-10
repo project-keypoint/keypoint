@@ -22,13 +22,28 @@ public class WorkOrderService {
 	private WorkOrderDAO workOrderDAO;
 	
 	
-	public List<WorkOrderDTO> getWorkOrderList() {
+	public List<WorkOrderDTO> getWorkOrderList(PageDTO pageDTO) {
 		System.out.println("WorkOrderService getWorkOrderList()");
-		return workOrderDAO.getWorkOrderList();
+		// 10개씩 가져올때 현페이지에 대한 시작하는 행번호 구하기
+		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize() + 1;
+				// 끝나는 행번호 구하기
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+				
+				// 디비 startRow - 1
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		System.out.println("startRow"+startRow+"endRow"+endRow);
+		return workOrderDAO.getWorkOrderList(pageDTO);
+	}// 작업지시 목록
+	
+	public int getWorkOrderCount() {
+		System.out.println("WorkOrderService getWorkOrderCount()");
+		return workOrderDAO.getWorkOrderCount();
 	}
+	
 		
 	public WorkOrderDTO getWorkOrderDetails(String woCode) {
-		System.out.println("ReceiveService getReceiveDetails()");
+		System.out.println("WorkOrderService getWorkOrderDetails()");
 		return workOrderDAO.getWorkOrderDetails(woCode);
 	}// getReceiveDetails [작업지시상세]
 	

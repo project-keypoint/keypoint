@@ -39,6 +39,13 @@
 		where a.woStatus != '삭제'
 		order by a.woCode desc
 	</select>
+	
+	<select id="getWorkOrderCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM workOrder
+		WHERE woStatus != '삭제'
+	</select>
+	
 
 	<select id="getWorkOrderDetails"
 		resultType="com.keypoint.dto.WorkOrderDTO">

@@ -16,7 +16,19 @@
 		left join product e on b.productCode = e.productCode
 		left join employees f on a.qcEmpId = f.empId
 		order by qcCode asc
+		limit #{startRow}, #{pageSize}
 	</select>
+	
+	<select id="getQcCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) as row_count
+		FROM production b
+		LEFT JOIN qualityControl a ON b.poCode = a.poCode
+		LEFT JOIN workOrder c ON b.woCode = c.woCode
+		LEFT JOIN receivedOrder d ON d.roCode = c.roCode
+		LEFT JOIN product e ON b.productCode = e.productCode
+		LEFT JOIN employees f ON a.qcEmpId = f.empId;
+	</select>
+	
 	
 	<select id="getQcDetails" resultType="com.keypoint.dto.QualityDTO">
 		select b.woCode, b.poCode, b.productCode, e.productName,

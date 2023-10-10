@@ -147,15 +147,20 @@
 <input type="button" value="작업지시등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
-<div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
-<a href="#" class="page-button">&gt;</a>
-</div><!-- page-button -->
+<div id="page_control_receive" class="page-buttons">
+    <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage}" 
+                   end="${pageDTO.endPage}" step="1">
+	<a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+</c:if>
+</div>
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
@@ -292,35 +297,7 @@ function openInsert() {
 </script>
 
 <br>
-<div class="center">
-<div id="pagination">
 
-    <!-- 1페이지 이전 -->
-	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.currentPage-1}"><</a>
-	</c:if>
-
-<!-- 10페이지 이전 -->
-	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
-	</c:if>
-	
-	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
-	</c:forEach>
-
-<!-- 1페이지 다음 -->	
-	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.currentPage+1}">></a>
-	</c:if>
-
-<!-- 10페이지 다음 -->
- 	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
-	</c:if>
-	
-</div>
-</div>
 
 
 </body>

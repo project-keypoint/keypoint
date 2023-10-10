@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.QualityDTO;
 
 @Repository
@@ -19,11 +20,21 @@ public class QualityDAO {
 	
 	private static final String namespace="com.itwillbs.mappers.qualityMapper";
 	
-	public List<QualityDTO> getQcList() {
+//	public List<QualityDTO> getQcList() {
+//		System.out.println("QualityDAO getQcList()");
+//		return sqlSession.selectList(namespace+".getQcList");
+//	}// getQcList [품질검사목록]
+	
+	public List<QualityDTO> getQcList(PageDTO pageDTO) {
 		System.out.println("QualityDAO getQcList()");
-		return sqlSession.selectList(namespace+".getQcList");
+		return sqlSession.selectList(namespace+".getQcList", pageDTO);
 	}// getQcList [품질검사목록]
-
+	
+	public int getQcCount(PageDTO pageDTO) {
+		System.out.println("QualityDAO getQcCount()");
+		return sqlSession.selectOne(namespace+".getQcCount", pageDTO);
+	}
+	
 	public QualityDTO getQcDetails(String prodCode) {
 		System.out.println("QualityDAO getQcDetails()");
 		return sqlSession.selectOne(namespace+".getQcDetails", prodCode);
@@ -51,6 +62,5 @@ public class QualityDAO {
 	        return false;
 	    }
 	}// qcTransfer [품질검사후 상품이동]
-	
-	
+
 }
