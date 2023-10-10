@@ -39,7 +39,7 @@
 
 <div class="form-group-receive">
 <p>입고수량</p>
-<input type="number" id="grCount" name="grCount" class="form-control search-input" placeholder="입고예정수량" min="0">
+<input type="number" id="grCount" name="grCount" class="form-control search-input" placeholder="입고예정수량" min="1">
 </div>
 
 <div class="search-bar-popup">

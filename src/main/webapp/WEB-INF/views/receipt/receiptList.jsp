@@ -84,16 +84,16 @@
     <td>${receiptDTO.grCode}</td>
     <td>${receiptDTO.poCode}</td>
     <td>${receiptDTO.materialName}</td>
-    <td>${receiptDTO.poCount}</td>
-    <td>${receiptDTO.grCount}</td>
-    <td>-</td> 
-    <td>${receiptDTO.grEcount}</td>
+    <td>${receiptDTO.poCount}EA</td>
+    <td>${receiptDTO.grCount}EA</td>
+    <td>${receiptDTO.grEcount == 0 ? '-' : (receiptDTO.grEcount - receiptDTO.grCount)}</td>
+    <td>${receiptDTO.grEcount == 0 ? '-' : receiptDTO.grEcount}</td>
     <td>${receiptDTO.grDate}</td>
     <td>${receiptDTO.grOwner}</td>
     <td>${receiptDTO.grStatus}</td>
     <td>
     <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
-    <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete()">
+    <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete('${receiptDTO.grCode}')">
     </td>
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
@@ -231,7 +231,7 @@ function openUpdate() {
 
 //입고처리 새창
 function openComplete() {
-    var url = '${pageContext.request.contextPath}/receipt/receiptComplete';
+    var url = '${pageContext.request.contextPath}/receipt/receiptComplete?grCode='+grCode;
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
