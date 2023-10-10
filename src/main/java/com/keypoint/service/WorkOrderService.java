@@ -65,10 +65,13 @@ public class WorkOrderService {
 	}// workOrderUpdatePro() [작업지시수정Pro]
 	
 	public void workOrderDelete(WorkOrderDTO workOrderDTO) {
-		System.out.println("WorkOrderService receiveUpdatePro()");
+		System.out.println("WorkOrderService workOrderUpdatePro()");
 		System.out.println(workOrderDTO);
 		workOrderDAO.deleteWorkOrder(workOrderDTO);
 	}// receiveDelete() [작업지시삭제]
+	
+	
+	
 	
 	
 	

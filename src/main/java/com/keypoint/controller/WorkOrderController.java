@@ -121,7 +121,7 @@ public class WorkOrderController {
 	
 	@PostMapping("/workOrderUpdatePro")
 	public String workOrderUpdatePro(WorkOrderDTO workOrderDTO) {
-		System.out.println("ReceiveController workOrder/workOrderUpdatePro");
+		System.out.println("WorkOrderController workOrder/workOrderUpdatePro");
 		System.out.println(workOrderDTO);
 		workOrderService.workOrderUpdatePro(workOrderDTO);
 		
@@ -135,7 +135,7 @@ public class WorkOrderController {
 	
 	@GetMapping("/workOrderDelete")
 	public String workOrderDelete(WorkOrderDTO workOrderDTO) {
-		System.out.println("ReceiveController receive/receiveDelete");
+		System.out.println("WorkOrderController workOrder/workOrderDelete");
 		System.out.println(workOrderDTO);
 		workOrderService.workOrderUpdatePro(workOrderDTO);
 		
