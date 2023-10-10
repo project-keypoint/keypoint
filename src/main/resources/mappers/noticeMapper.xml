@@ -50,9 +50,11 @@
   
   
   	<update id="updateReadcount">
-  		UPDATE notice SET noticeReadcount = #{noticeReadcount} +1
+  		UPDATE notice 
+  		SET noticeReadcount = noticeReadcount +1
   		WHERE noticeNum = #{noticeNum}
   	</update>
+  
   
   
   

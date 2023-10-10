@@ -78,9 +78,6 @@ public class NoticeDAO {
 		sqlSession.update(nameSpace+".updateReadcount", noticeNum);
 	}
 
-	
-
-
 
 
 

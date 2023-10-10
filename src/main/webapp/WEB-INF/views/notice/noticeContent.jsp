@@ -28,28 +28,6 @@
 <div class="contents2">
 
 
-<!-- <div class="search-bar"> -->
-<!-- <div class="search-b"> -->
-<!-- <div class="search-select"> -->
-<!-- <p>업체명</p>  -->
-<!-- <input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly> -->
-<!-- <input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly> -->
-<!-- </div> -->
-<!-- </div> -->
-
-<!-- <div class="search-b"> -->
-<!-- <div class="search-date"> -->
-<!-- <p>상품명</p>  -->
-<!-- <input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly> -->
-<!-- <input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly> -->
-<!-- </div> -->
-<!-- </div> -->
-
-<!-- <div class="search-button"> -->
-<!-- <input type="button" value="검색" class="btn btn-primary mybutton1"> -->
-<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1"> -->
-<!-- </div> -->
-<!-- </div>search-bar -->
 <br>
 
 
@@ -65,13 +43,13 @@
     <td>${noticeDTO.noticeNum}</td>
     <td>${noticeDTO.empName}</td>
     <td>조회 ${noticeDTO.noticeReadcount}</td>
-    <td>${noticeDTO.noticeDate}</td>
-<%--     <td><fmt:formatDate value=" ${noticeDTO.noticeDate}" pattern="yyyy.MM.dd"/></td> --%>
+	<td><fmt:formatDate value="${noticeDTO.noticeDate}" pattern="yy.MM.dd"/></td>
+    
+</tr>
+<tr class="table-body">
+    <td colspan="4">${noticeDTO.noticeContent}</td>
 </tr>
 
-<tr class="table-body">
-    <td colspan="4" style="height: 300px;">${noticeDTO.noticeContent}</td>
-</tr>
 
 </table>
 </div><!-- table -->
@@ -87,13 +65,14 @@
 </div>
 
 
+
+
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
 </div><!-- main -->
 
 <!-- contents end -->
-
 
 
 
@@ -115,19 +94,6 @@ function openPopup(url) {
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
-$(document).ready(function() {
-    // 업체명 검색 팝업 열기
-    $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-        openPopup(url);
-    });
-    // 상품명 검색 팝업 열기
-    $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-        openPopup(url);
-    });
-});
-
 
 
 // 체크박스(삭제용) 전체선택
