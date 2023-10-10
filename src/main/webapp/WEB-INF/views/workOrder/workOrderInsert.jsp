@@ -95,6 +95,7 @@ function openPopup(url) {
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
+
 $(document).ready(function() {
     // 수주코드 검색 팝업 열기
     $("#roCode, #roCode").click(function() {
@@ -117,13 +118,18 @@ $(document).ready(function() {
         openPopup(url);
     });
     
- 	// 사원 검색 팝업 열기
-    $("#empId, #empName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-        openPopup(url);
-    });
+//  // 라인명 검색 팝업 열기
+//     $("#lineCode, #lineCode").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workList';
+//         openPopup(url);
+//     });
+ 
+  	// 사원 검색 팝업 열기
+     $("#empId, #empName").click(function() {
+       var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+       openPopup(url);
+     });
 });
-
 
 
 

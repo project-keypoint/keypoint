@@ -10,6 +10,7 @@ public class PageUtil {
 
 		
 		// 한 페이지의 시작글 번호  = (현재페이지 - 1) / 블록*블록+1
+		System.out.println(pageDTO.getPageBlock());
 		int startPage=(pageDTO.getCurrentPage()-1)/pageDTO.getPageBlock()*pageDTO.getPageBlock()+1;
 		
 		// 한 페이지의 마지막 글 번호 = 시작페이지 + 블록-1

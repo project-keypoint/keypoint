@@ -149,7 +149,7 @@ public class WorkOrderController {
 	
 	
 	@RequestMapping(value = "/workProdList", method = RequestMethod.GET)
-	public String workProdList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
+	public String workProdList(Model model, HttpServletRequest request) { // 품목 리스트
 		String productCode = request.getParameter("productCode");
 		String productName = request.getParameter("productName");
 		
@@ -161,6 +161,9 @@ public class WorkOrderController {
 		if(pageNum==null) {
 			pageNum="1";
 		}
+		
+		PageDTO pageDTO = new PageDTO();
+		
 		// 페이지번호를 정수형 변경
 		int currentPage=Integer.parseInt(pageNum);
 		pageDTO.setPageSize(pageSize);
@@ -168,6 +171,7 @@ public class WorkOrderController {
 		pageDTO.setCurrentPage(currentPage);
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1; // sql문에 들어가는 항목
 		int endRow = startRow+pageDTO.getPageSize()-1;
+		
 		
 		pageDTO.setStartRow(startRow-1); // limit startRow (0이 1열이기 때문 1을 뺌)
 		pageDTO.setEndRow(endRow);
