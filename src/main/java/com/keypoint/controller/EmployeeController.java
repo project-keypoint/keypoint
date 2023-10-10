@@ -75,7 +75,7 @@ public class EmployeeController {
 	public String employeeList(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController employeelist()");
 		
-		// 한 화면에 보여줄 글개수 설정
+		// 한 화면에 보여줄 사원 수 설정
 		int pageSize = 10;
 		// 현 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
@@ -97,6 +97,9 @@ public class EmployeeController {
 		// 페이징처리
 		// 전체 사원 수 가져오기
 		int count = employeeService.getEmployeeCount();
+		
+		// 전체 사원 수 employeeCount에 담기
+		model.addAttribute("employeeCount", count);
 		
 		// 한 화면에 보여줄 사원 수 설정
 		int pageBlock = 10;
