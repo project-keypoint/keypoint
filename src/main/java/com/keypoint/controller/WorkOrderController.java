@@ -144,7 +144,7 @@ public class WorkOrderController {
 		}else {
 			return "workOrder/msgFailed"; // 등록실패
 		}
-	}// workOrderDelete [작업지시삭제]
+	}// receiveDelete [수주삭제]
 	
 	
 	
