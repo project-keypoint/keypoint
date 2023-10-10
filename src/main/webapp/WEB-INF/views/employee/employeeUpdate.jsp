@@ -67,16 +67,15 @@
 <p>내선번호</p>
 <input type="text" id="empTel" name="empTel" class="form-control search-input" value="${employeeDTO.empTel}">
 </div>
-
 </div>
-
 
 <div class="form-group-column">
 <p>주소</p>
 <input type="text" id="empAddress" name="empAddress" class="form-control search-input" value="${employeeDTO.empAddress}" readonly>
 </div>
-</div><!-- main-details1 -->
+
 </div><!-- form-group-receive -->
+</div><!-- main-details1 -->
 
 
 <div class="main-details"><!-- main-details2 -->
@@ -113,31 +112,28 @@
     <option value="퇴직" ${employeeDTO.empStatus eq '퇴직' ? 'selected' : ''}>퇴직</option>
 </select>    
 </div>
-</div>
 
+</div>
 
 <div class="form-group-row">
-
-<div class="form-group-column">
-<p>입사일</p>
-<input type="text" id="empHiredate" name="empHiredate" class="form-control search-input" value="${employeeDTO.empHiredate}">
-</div>
-
-<div class="form-group-column">
-<p>휴직일</p>
-<input type="text" id="empLeavedate" name="empLeavedate" class="form-control search-input" value="${employeeDTO.empLeavedate}">
-</div>
-
-<div class="form-group-column">
-<p>퇴직일</p>
-<input type="text" id="empRetiredate" name="empRetiredate" class="form-control search-input" value="${employeeDTO.empRetiredate}">
-</div>
+    <div class="form-group-column">
+        <p>입사일</p>
+        <input type="text" id="empHiredate" name="empHiredate" class="form-control search-input" value="${employeeDTO.empHiredate}">
+    </div>
+    <div class="form-group-column">
+        <p>휴직일</p>
+        <input type="text" id="empLeavedate" name="empLeavedate" class="form-control search-input" value="${employeeDTO.empLeavedate}">
+    </div>
+    <div class="form-group-column">
+        <p>퇴직일</p>
+        <input type="text" id="empRetiredate" name="empRetiredate" class="form-control search-input" value="${employeeDTO.empRetiredate}">
+    </div>
 </div>
 
 <div class="form-group-column">
 <p>권한(보류)</p>
 <select id="empRole" name="empRole" class="form-control search-input status">
-    <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option> 
+    <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
     <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
     <option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
     <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
@@ -152,8 +148,6 @@
 </div>
 
 </form><!-- form 끝 -->
-</div><!-- main-details -->
-
 
 
 <!-- 데이트피커 : 날짜선택요소(달력형식) -->
