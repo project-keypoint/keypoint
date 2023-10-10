@@ -33,13 +33,51 @@ public class WorkOrderController {
 	private LineService lineService;
 	
 	@GetMapping("/workOrderList")
-	public String workOrderList(Model model) {
+	public String workOrderList(HttpServletRequest request, Model model) {
 		System.out.println("WorkOrderController workOrder/workOrderList");
-		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList();
+		
+		int pageSize = 10; //한 화면에 보여줄 글개수 설정
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		
+		PageDTO pageDTO =new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList(pageDTO);
 		List<LineDTO> lineList = lineService.getLineList();
 		System.out.println(workOrderList.get(0).getEmpName());
+		
+		int count = workOrderService.getWorkOrderCount();	
+		
+		int pageBlock = 10; // 한화면에 보여줄 페이지 개수 설정
+		
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		
+		int endPage = startPage + pageBlock -1;
+		
+		int pageCount = count/pageSize+(count%pageSize==0?0:1);
+		
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		
+		
 		model.addAttribute("lineList", lineList);
 		model.addAttribute("workOrderList", workOrderList);
+		model.addAttribute("pageDTO", pageDTO);
+		
 		return "workOrder/workOrderList";
 	}// workOrder [작업지시]
 	
