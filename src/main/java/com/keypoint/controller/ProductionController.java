@@ -54,7 +54,7 @@ public class ProductionController {
 	
 	@PostMapping("/productionInsertPro")
 	public String productionInsertPro(ProductionDTO productionDTO) {
-		System.out.println("ReceiveController workOrder/workOrderInsertPro");
+		System.out.println("ProductionController workOrder/workOrderInsertPro");
 		System.out.println(productionDTO);
 		productionService.productionInsertPro(productionDTO);
 		

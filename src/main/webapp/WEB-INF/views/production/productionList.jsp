@@ -158,6 +158,7 @@
 								<%-- 									<td><c:out value="${fn:substring(productionDTO.woDate, 0, 10)}" /></td> --%>
 								<%-- 								<td>${productionDTO.woStatus}</td> --%>
 								<%-- 								<td>${productionDTO.productCode}</td> --%>
+								<td>${productionDTO.roCode}</td>
 								<td>${productionDTO.cusCode}</td>
 								<%-- 								<td>${productionDTO.empName}</td> --%>
 
@@ -337,6 +338,15 @@
 				}
 			});
 		});
+		// 작업지시상세내용 새창
+		function openDetails(poCode) {
+		    var url = '${pageContext.request.contextPath}/production/productionDetails?poCode=' + poCode;
+		    var windowWidth = 560;
+		    var windowHeight = 720;
+		    var windowLeft = (screen.width - windowWidth) / 2;
+		    var windowTop = (screen.height - windowHeight) / 2;
+		    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+		}
 		//작업지시등록 새창
 		function openInsert() {
 		    var url = '${pageContext.request.contextPath}/production/productionInsert';

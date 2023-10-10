@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/workOrder/workOrderInsertPro" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/production/productionInsertPro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">생산실적등록</div>
 <div class="form-group-receive-insert">
@@ -192,14 +192,14 @@ function validateForm() {
     var woCount = document.getElementById("woCount").value;
     var lineCode = document.getElementById("lineCode").value;
     var woDate = document.getElementById("woDate").value;
-    var shipSdate = document.getElementById("shipSdate").value;
+    var poDate = document.getElementById("poDate").value;
     var empId = document.getElementById("empId").value;
     
     console.log("cusCode: " + cusCode);
     // 빈 필드 검사
     if (cusCode === "" || productCode === "" ||
     		woCount === "" || lineCode === "" || woDate === "" ||
-    		shipSdate === "" || empId === "") {
+    		poDate === "" || empId === "") {
         alert("모든 내용을 입력해주세요.");
         return false; // 제출 방지
     }

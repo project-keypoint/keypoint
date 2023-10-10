@@ -16,7 +16,7 @@
 		<if test="poCount == null">NULL</if>
 		<if test="poCount != null">#{poCount}</if>
 		,
-		,#{poDate},
+		#{poDate},
 		<if test="qcDefectRate == null">NULL</if>
 		<if test="qcDefectRate != null">#{qcDefectRate}</if>
 		,
