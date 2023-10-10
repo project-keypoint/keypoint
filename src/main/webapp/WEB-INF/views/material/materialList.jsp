@@ -110,7 +110,7 @@ function openPopup(url) {
     popupWindow.focus();
 }
 $(document).ready(function() {
-    // 상품명 검색 팝업 열기
+    // 자재명 검색 팝업 열기
     $("#materialCode, #materialName").click(function() {
         var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
         openPopup(url);

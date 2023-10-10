@@ -39,19 +39,19 @@
 		<div class="main-chart"
 			style="display: flex; flex-direction: row; flex-wrap: wrap;">
 
-			<div style="width: 700px; height: 700px;">
+			<div style="width: 750px; height: 400px; margin:30px; ">
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart"></canvas>
 			</div>
-			<div style="width: 700px; height: 700px;">
+			<div style="width: 750px; height: 400px; margin:30px; ">
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart2"></canvas>
 			</div>
-			<div style="width: 700px; height: 700px;">
+			<div style="width: 750px; height: 400px; margin:30px; ">
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart3"></canvas>
 			</div>
-			<div style="width: 700px; height: 700px;">
+			<div style="width: 750px; height: 400px; margin:30px; ">
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart4"></canvas>
 			</div>
@@ -64,45 +64,36 @@
 	<!-- contents end -->
 	<script type="text/javascript">
 		// 차트1 pie
-		var today = new Date();
-		var labels = [];
+var today = new Date(); // 현재 날짜를 얻음
+var labels = [];
 
-		// 함수를 사용하여 날짜를 원하는 형식으로 포맷팅
-		function formatDate(date) {
-			var year = date.getFullYear();
-			var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
-			var day = date.getDate().toString().padStart(2, '0'); // 일을 2자리로 포맷팅
-			return year + '.' + month + '.' + day;
-		}
+// 함수를 사용하여 날짜를 원하는 형식으로 포맷팅 (yyyy/mm)
+function formatDate(date) {
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷팅
+    return year + '/' + month; // 년/월 형식으로 출력
+}
 
-		// Generating labels for 3 days before today
-		for (var i = 3; i >= 1; i--) {
-			var date = new Date(today);
-			date.setDate(today.getDate() - i);
-			labels.push(formatDate(date));
-		}
+// Generating labels for the last 6 months, including this month
+for (var i = 0; i < 6; i++) {
+    var date = new Date(today.getFullYear(), today.getMonth() - i, 1); // 이전 달의 첫 번째 날을 얻음
+    labels.push(formatDate(date));
+}
 
-		// Adding today's label
-		labels.push(formatDate(today));
-
-		// Generating labels for 3 days after today
-		for (var i = 1; i <= 3; i++) {
-			var date = new Date(today);
-			date.setDate(today.getDate() + i);
-			labels.push(formatDate(date));
-		}
+// 배열을 반대로 정렬
+labels.reverse();
 
 		var context = document.getElementById('myChart').getContext('2d');
 
 		var myChart = new Chart(context, {
-			type : 'pie', // 차트의 형태
+			type : 'line', // 차트의 형태
 			data : { // 차트에 들어갈 데이터
 				labels : labels,
 				datasets : [
 						{ //데이터1
 							label : '키보드1', //차트 제목
 							fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-							data : [ 111, 66, 25, 55, 43, 115, 23 //x축 label에 대응되는 데이터 값
+							data : [ 111, 66, 25, 55, 43, 115 //x축 label에 대응되는 데이터 값
 							],
 							backgroundColor : [
 							//색상
@@ -111,8 +102,8 @@
 							'rgba(255, 206, 86, 0.2)',
 							'rgba(75, 185, 192, 0.2)',
 							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 166, 64, 0.2)',
-							'rgba(0, 255, 213, 0.2)'
+							'rgba(255, 166, 64, 0.2)'
+							
 
 							],
 							borderColor : [
@@ -122,8 +113,8 @@
 							'rgba(255, 206, 86, 1)', 
 							'rgba(75, 185, 192, 1)',
 							'rgba(153, 102, 255, 1)', 
-							'rgba(255, 166, 64, 1)',
-							'rgba(0, 255, 213, 1)' 
+							'rgba(255, 166, 64, 1)'
+							 
 							
 
 							//                                 
@@ -521,7 +512,7 @@
 		var context = document.getElementById('myChart4').getContext('2d');
 
 		var myChart = new Chart(context, {
-			type : 'line', // 차트의 형태
+			type : 'bar', // 차트의 형태
 			data : { // 차트에 들어갈 데이터
 				labels : labels,
 				datasets : [

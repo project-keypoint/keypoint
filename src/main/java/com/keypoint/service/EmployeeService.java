@@ -44,6 +44,11 @@ public class EmployeeService {
 	public void updateEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService updateEmployee()");
 		
+		// 챗선생이 알려줌 
+//        employeeDTO.setEmpLeavedate(null);
+//        employeeDTO.setEmpRetiredate(null);
+//        employeeDTO.setEmpHiredate(null);
+		
 		employeeDAO.updateEmployee(employeeDTO);
 	} // updateEmployee
 

@@ -23,7 +23,11 @@
 		left join product c on a.productCode = c.productCode
 		left join employees d on a.roEmpId = d.empId
 		where a.roStatus != '삭제' and a.shipDate is null
+		<if test="search != null">
+		and a.roCode like CONCAT('%',#{search},'%') 
+		</if>
 		order by a.roCode desc
+		limit #{startRow}, #{pageSize}
 	</select>
 	
 	<select id="getShipmentList" resultType="com.keypoint.dto.ReceiveDTO">
@@ -37,6 +41,19 @@
 		left join employees d on a.roEmpId = d.empId
 		where a.roStatus != '삭제' and a.shipDate is not null
 		order by a.roCode desc
+		limit #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getReceiveCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM receivedOrder
+		WHERE roStatus != '삭제' AND shipDate IS NULL
+	</select>
+	
+	<select id="getShipmentCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM receivedOrder
+		WHERE roStatus != '삭제' AND shipDate IS NOT NULL
 	</select>
 	
 	<select id="getReceiveDetails" resultType="com.keypoint.dto.ReceiveDTO">
@@ -82,5 +99,5 @@
 		WHERE productCode = #{productCode}
 	</update>
 	
-	
 </mapper>
+

@@ -19,7 +19,7 @@ public class EmployeeDTO {
 	private String empHiredate; // 입사일
 	private int empRole; // 권한(1=관리자 / 2=사원 / 3=퇴사자(로그인x)) =>  수정필요
 	private String empLeavedate; // 휴직일
-	private String empRetiredate; // 퇴사일
+	private String empRetiredate; // 퇴직일
 	
 	@Override
 	public String toString() {

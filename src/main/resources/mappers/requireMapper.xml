@@ -18,16 +18,26 @@
 		order by productCode desc
 	</select>
 	
-<!-- 	<select id="getRequire" resultType="com.keypoint.dto.RequireDTO">
-		select * from requirement
-		where requireCode = #{requireCode}
-	</select>	 -->
+	<select id="getRequire" resultType="com.keypoint.dto.RequireDTO">
+		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit
+		from requirement r join product p
+		on r.productCode = p.productCode
+		join material m
+		on r.materialCode = m.materialCode
+		where r.productCode = #{productCode}
+	</select>
 
 	<delete id="deleteRequire">
 		delete from requirement
 		where productCode = #{productCode}
 		and materialCode = #{materialCode}
 	</delete>
+	
+	<update id="updateRequire">
+		UPDATE requirement
+		SET materialCode=#{materialCode},reqCount=#{reqCount}
+		WHERE productCode = #{productCode}
+	</update>	
 
 
 </mapper>

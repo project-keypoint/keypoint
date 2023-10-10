@@ -15,9 +15,9 @@
 <!-- 사원등록 -->
 	<insert id="insertEmployee">
 		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
-		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
+		                                   empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
 		values (#{empPass}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
-			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
+			       #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
 	</insert>
 	
 <!-- 사원-상세정보 -->
@@ -33,14 +33,22 @@
 		update employees
 		set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
 		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
-		empPosition = #{empPosition}, empHiredate = #{empHiredate}, empLeavedate = #{empLeavedate},
-		empRetiredate = #{empRetiredate}, empRole = #{empRole}
+		empPosition = #{empPosition},   empRole = #{empRole} 
+<!-- 		값들이 비어있어도 넘어가게!!!! -->
+		<if test="empLeavedate != null and empLeavedate != ''">
+    	, empLeavedate = #{empLeavedate}
+		</if>
+		<if test ="empRetiredate != null and empRetiredate != ''">
+		, empRetiredate= #{empRetiredate}
+		</if>
+		<if test ="empHiredate != null and empHiredate != ''">
+		, empHiredate= #{empHiredate}
+		</if>
 		where empId = #{empId}
-	</update>
+	</update> 
 
 <!-- 로그인-강수빈 -->
-	<select id="userCheck" 
-	        resultType="com.keypoint.dto.EmployeeDTO">
+	<select id="userCheck"  resultType="com.keypoint.dto.EmployeeDTO">
 		select * from employees
 		where empId = #{empId} and empPass = #{empPass}
 	</select>

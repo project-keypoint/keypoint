@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.keypoint.dto.RequireDTO;
 import com.keypoint.dto.RequireDTO;
+import com.keypoint.dto.RequireDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.RequireService;
 
@@ -53,12 +54,30 @@ public class RequireController {
 		}else {
 			return "require/msgFailed"; // 등록실패
 		}
-	}// requireInsertPro [완제품등록]
+	}// requireInsertPro [소요량등록]
 	
 	@GetMapping("/requireUpdate")
-	public String requireUpdate() {
+	public String requireUpdate(Model model, @RequestParam("productCode") String productCode) {
+		RequireDTO requireDTO = requireService.getRequire(productCode);
+		System.out.println(requireDTO);
+		model.addAttribute("requireDTO", requireDTO);
 		return "require/requireUpdate";
 	}// requireUpdate [소요량수정]
+	
+	@PostMapping("/requireUpdatePro")
+	public String requireUpdatePro(RequireDTO requireDTO) {
+		System.out.println("RequireController requireUpdatePro");
+		System.out.println(requireDTO);
+		requireService.updateRequire(requireDTO);
+		
+		if(requireDTO != null) {
+			return "require/msgSuccess"; // 등록완료
+		}else {
+			return "require/msgFailed"; // 등록실패
+		}
+	}// requireUpdatePro [소요량수정]
+	
+	
 	
 	@GetMapping("/requireDelete")
 	public String requireDelete(RequireDTO requireDTO) {

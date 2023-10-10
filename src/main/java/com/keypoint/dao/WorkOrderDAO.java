@@ -21,9 +21,14 @@ public class WorkOrderDAO {
 	private static final String namespace="com.itwillbs.mappers.workOrderMapper";
 	
 	
-	public List<WorkOrderDTO> getWorkOrderList() {
+	public List<WorkOrderDTO> getWorkOrderList(PageDTO pageDTO) {
 		System.out.println("WorkOrderDAO getWorkOrderList()");
 		return sqlSession.selectList(namespace+".getWorkOrderList");
+	}
+	
+	public int getWorkOrderCount() {
+		System.out.println("WorkOrderDAO getWorkOrderCount()");
+		return sqlSession.selectOne(namespace+".getWorkOrderCount");
 	}
 	
 	
