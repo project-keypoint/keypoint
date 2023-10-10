@@ -78,6 +78,36 @@ public class MaterialDAO {
 	
 	
 	// -------------------------------------------------------------------------------------
+	// ---------------------------------홍렬 자재리스트 팝업 ---------------------------------------------------------------
+	
+	public List<MaterialDTO> getPurchaseMaterialList2(Map<String,Object> search) { // 품목리스트 들고오기 (품번, 품명만..)
+		System.out.println("materialDAO getPurchaseMaterialList()");
+		
+		System.out.println("materialCode"+search.get("materialCode"));
+		System.out.println("materialName"+search.get("materialName"));
+		System.out.println("startRow"+search.get("startRow"));
+		System.out.println("pageSize"+search.get("pageSize"));
+		
+		if(search.get("materialName")==null) {
+			search.put("materialName", "");
+		}
+		if(search.get("materialCode")==null) {
+			search.put("materialCode", "");
+		}
+		return sqlSession.selectList(namespace+".getPurchaseMaterialList2", search);
+	} // getPurchaseMaterialList
+	
+	
+	public Integer countPurchaseList2(Map<String, Object> search) { // 품목 개수(for 페이징)
+		System.out.println("materialDAO countPurchaseList()");
+		
+		return sqlSession.selectOne(namespace+".countPurchaseList2", search);
+		
+	} // countPurchaseList
+	
+	
+	
+	// -------------------------------------------------------------------------------------
 
 	
 	

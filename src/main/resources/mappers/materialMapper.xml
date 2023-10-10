@@ -57,6 +57,26 @@
 	   materialPrice like CONCAT('%', #{materialPrice}, '%') 
 	   </if>   
 	</select>
+	
+	<select id="getPurchaseMaterialList2" resultType="com.keypoint.dto.MaterialDTO">
+	   select materialCode, materialName
+	   from material
+	   where 
+	   materialCode like CONCAT('%', #{materialCode}, '%') and 
+	   materialName like CONCAT('%', #{materialName}, '%')
+	   order by materialCode desc 
+	   limit #{startRow}, #{pageSize}  
+	</select>
+	  
+	<select id="countPurchaseList2" resultType="java.lang.Integer">
+	   select count(*)
+	   from material
+	   <if test="materialCode!=null and materialName!=null">
+	   where 
+	   materialCode like CONCAT('%', #{materialCode}, '%') and
+	   materialName like CONCAT('%', #{materialName}, '%')
+	   </if>   
+	</select>
 
 
 
