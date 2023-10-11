@@ -43,6 +43,12 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>4.2.2.RELEASE</version>
 		</dependency>
+<!-- 		 salt 암호화 위해 추가  -->
+		 <dependency> 
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.15</version> <!-- 현재 버전에 맞게 업데이트 -->
+    </dependency>
 		<!-- JDBC설치파일코드 https://mvnrepository.com/ 사이트 검색 MySQL Connector Java -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
