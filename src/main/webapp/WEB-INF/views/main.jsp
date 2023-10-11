@@ -36,16 +36,20 @@
 			class="fas fa-download fa-sm text-white-50"></i> 테스트
 		</a>
 		<!-- Begin Page Content -->
-		<h2>제품 출고 현황</h2> 
+		<h4>공지사항</h4> 
+		<div class="recentnotice">
+		공지사항목록자리
 		
+		
+		</div>
+		<h4>출고현황</h4>
 		<div class="main-chart"
 			style="display: flex; flex-direction: row; flex-wrap: wrap;">
-
 			<div style="width: 750px; height: 400px; margin:30px; ">월별출고량
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart"></canvas>
 			</div>
-			<div style="width: 750px; height: 400px; margin:30px; ">차트2
+			<div style="width: 750px; height: 400px; margin:30px; ">월제품판매량
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart2"></canvas>
 			</div>
@@ -89,7 +93,7 @@ labels.reverse();
 		var context = document.getElementById('myChart').getContext('2d');
 
 		var myChart = new Chart(context, {
-			type : 'line', // 차트의 형태
+			type : 'bar', // 차트의 형태
 			data : { // 차트에 들어갈 데이터
 				labels : labels,
 				datasets : [

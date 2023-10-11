@@ -71,10 +71,10 @@
 			<td class="btn_bgtd_timeout" align="right"><script
 					type="text/javascript" charset="utf-8"
 					src="/js_std/kor/util/timeoutchk.js"></script> <span id="timer"
-				style="position: relative; top: 22px;"></span> &nbsp; <a
+				style="position: relative; top: 24px;"></span> &nbsp; <a
 				href="javascript:refreshTimer();"><img
 					src="${pageContext.request.contextPath}/resources/img/icon_reload.png" align="top"
-					style="position: relative;top: 19px;height: 1rem; width: 1rem;"></a> &nbsp;&nbsp;&nbsp;</td>
+					style="position: relative;top: 21px;height: 1rem; width: 1rem;"></a> &nbsp;&nbsp;&nbsp;</td>
 
 			<div class="topbar-divider d-none d-sm-block"></div>
 
@@ -83,7 +83,7 @@
 				class="nav-link dropdown-toggle" href="#" id="userDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <span
-					class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.empId}
+					class="mr-2 d-none d-lg-inline text-gray-600 ">${sessionScope.empId}
 						/ ${sessionScope.empName} 님</span> <img
 					class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/img/undraw_profile.svg" style=" position: relative;
   top: -3px;">
