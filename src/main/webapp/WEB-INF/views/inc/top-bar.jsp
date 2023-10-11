@@ -73,8 +73,8 @@
 					src="/js_std/kor/util/timeoutchk.js"></script> <span id="timer"
 				style="position: relative; top: 22px;"></span> &nbsp; <a
 				href="javascript:refreshTimer();"><img
-					src="/images_std/kor/btn/btn_time_extension.gif" align="top"
-					style="position: relative; top: 20px;"></a> &nbsp;&nbsp;&nbsp;</td>
+					src="${pageContext.request.contextPath}/resources/img/icon_reload.png" align="top"
+					style="position: relative;top: 19px;height: 1rem; width: 1rem;"></a> &nbsp;&nbsp;&nbsp;</td>
 
 			<div class="topbar-divider d-none d-sm-block"></div>
 
@@ -85,7 +85,8 @@
 				aria-expanded="false"> <span
 					class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.empId}
 						/ ${sessionScope.empName} 님</span> <img
-					class="img-profile rounded-circle" src="img/undraw_profile.svg">
+					class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/img/undraw_profile.svg" style=" position: relative;
+  top: -3px;">
 			</a> <!-- Dropdown - User Information -->
 				<div
 					class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
