@@ -32,8 +32,29 @@
 
 <div class="form-group-column">
 <p>사진</p>
-<input type="text" id="empPhoto" class="form-control search-input" placeholder="${employeeDTO.empPhoto}" readonly>
+<input type=text id="empPhoto" name="empPhoto" class="form-control search-input" placeholder="${employeeDTO.empPhoto}" readonly>
+        <img src="${pageContext.request.contextPath }/resources/upload/${employeeDTO.empPhoto}" 
+         width="200" height="200">
 </div>
+<!-- type을 file로 하면 파일첨부 버튼이 뜸, text로..?? -->
+
+<!-- <div id="empPhoto" style="width: 300px; height: 230px; margin-left:33%; padding: 0%;"> -->
+<!-- <img src="../resources/img/test.png" alt="..." width="270px" height="200px" class="img-circle profile_img">				 -->
+<!-- <br><br><input type="file" name="file" accept="image/*"></div> -->
+
+
+<!-- <tr><td>사진</td> -->
+<%--     <td><a href="${pageContext.request.contextPath }/resources/upload/${employeeDTO.empPhoto}" download> --%>
+<%--         ${employeeDTO.empPhoto}</a> --%>
+<%--         <img src="${pageContext.request.contextPath }/resources/upload/${employeeDTO.empPhoto}"  --%>
+<!--          width="200" height="200"> -->
+<!--         </td></tr> -->
+
+
+
+
+
+
 
 <div class="form-group-row">
 

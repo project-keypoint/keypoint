@@ -90,6 +90,7 @@ public class CustomerController {
 		
 		model.addAttribute("cusList", cusList);
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("cusCount", count);
 		
 		return "customer/cusList";
 	}

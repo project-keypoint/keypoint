@@ -48,6 +48,8 @@
 	<url-pattern>/*</url-pattern>
 </filter-mapping>
 
+	
+
 <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
@@ -57,4 +59,20 @@
     <url-pattern>*.js</url-pattern>
 
 </servlet-mapping>
+
+<filter>
+		<filter-name>accessFilter</filter-name>
+		<filter-class>com.keypoint.security.AccessFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>accessFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 세션은 '분'이 기준단위 -->
+	<session-config>
+             <session-timeout>180</session-timeout>
+      </session-config>
+
 </web-app>

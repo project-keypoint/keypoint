@@ -215,6 +215,7 @@ public class EmployeeController {
 		
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 
+		
 		// 첨부파일 업로드 => pom.xml에 프로그램 설치
 		// servlet-context.xml에 설정
 		// 첨부파일을 원하는 곳에 복사(업로드)
@@ -228,11 +229,31 @@ public class EmployeeController {
 		FileCopyUtils.copy(empPhoto.getBytes(), new File(uploadPath, filename));
 		
 		// boardDTO에 첨부파일이름 저장
-		employeeDTO.setEmpPhone(filename);
+		employeeDTO.setEmpPhoto(filename);
+		
+		// 사원등록 목록이 다 넘어갈 수 있게
+		employeeDTO.setEmpName(request.getParameter("empName"));
+		employeeDTO.setEmpAddress(request.getParameter("empAddress"));
+		employeeDTO.setEmpPhone(request.getParameter("empPhone"));
+		employeeDTO.setEmpTel(request.getParameter("empTel"));
+		employeeDTO.setEmpEmail(request.getParameter("empEmail"));
+		
+		employeeDTO.setDepartmentName(request.getParameter("departmentName"));
+		employeeDTO.setEmpPosition(request.getParameter("empPosition"));
+		
+		employeeDTO.setEmpBirth(request.getParameter("empBirth"));
+		employeeDTO.setEmpHiredate(request.getParameter("empHiredate"));
+		employeeDTO.setEmpStatus(request.getParameter("empStatus"));
+		
+//		employeeDTO.setEmpRole(request.getParameter("empRole"));
 		
 		employeeService.insertEmployee(employeeDTO);
 		
-		return "redirect:/employee/employeelist";
+		if(employeeDTO != null) {
+			return "employee/msgSuccess"; // 등록완료
+		} else {
+			return "employee/msgFailed"; // 등록실패
+		}
 	} // photoPro
 	
 	

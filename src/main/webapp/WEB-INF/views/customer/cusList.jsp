@@ -52,11 +52,17 @@
 </div><!-- search-bar -->
 <br>
 
-<div class="select-status">
+
+<div class="select-status" style="display: flex; justify-content: space-between;">
+  <div style="display: flex; justify-content: flex-start;">
 <a>전체<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
 <a>거래중<input type="checkbox" id="select2" name="select2" class="list-select" ></a>
 <a>거래중지<input type="checkbox" id="select3" name="select3" class="list-select" ></a>
+  </div>
+  <a style="text-align: right;">총 ${cusCount}건</a>
 </div>
+
+
 
 
 <div>

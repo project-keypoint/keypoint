@@ -8,7 +8,7 @@
 	<insert id="insertWorkOrder">
 		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode,
 		productCode, materialCode, woCount, woStatus, woDate, productName,
-		cusCode, empName, cusName)
+		cusCode, empName, cusName, shipSdate)
 		values(CONCAT('WO', DATE_FORMAT(NOW(),
 		'%y%m%d%H%i%s')),
 		#{roCode},#{empId},#{lineCode},
@@ -19,7 +19,7 @@
 		<if test="materialCode == null">NULL</if>
 		<if test="materialCode != null">#{materialCode}</if>
 		,
-		#{woCount},#{woStatus},#{woDate},#{productName},#{cusCode},#{empName},#{cusName})
+		#{woCount},#{woStatus},#{woDate},#{productName},#{cusCode},#{empName},#{cusName},#{shipSdate})
 	</insert>
 
 	<select id="getWorkOrderList"
@@ -27,7 +27,7 @@
 		select a.woCode, a.cusCode, b.cusName, a.productCode,
 		c.productName,
 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
-		a.empId, e.empName
+		a.empId, e.empName, d.shipSdate
 		from workOrder a
 		left join customer b on a.cusCode =
 		b.cusCode
@@ -140,22 +140,29 @@
 
 	<select id="workRoCodeList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
-		select roCode
+		select roCode, cusCode, productCode, roCount, shipSdate
 		from receivedOrder
-		where
-		roCode like CONCAT('%',
-		#{roCode}, '%')
+		where 
+		roCode like
+		CONCAT('%', #{roCode}, '%') and
+		productCode like CONCAT('%', #{productCode},
+		'%')
+		order by roCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
 
 	<select id="countWorkRoCodeList" resultType="java.lang.Integer">
 		select count(*)
 		from receivedOrder
-		<if test="roCode!=null">
+		<if test="roCode!=null and productCode!=null">
 			where
-			roCode like CONCAT('%', #{roCode}, '%')
+			roCode like CONCAT('%', #{roCode}, '%') and
+			productCode like CONCAT('%', #{productCode}, '%')
 		</if>
 	</select>
+	
+	
+
 
 
 	<select id="workLineList"

@@ -116,7 +116,8 @@
     <th>상품코드</th> 
     <th>상품명</th> 
     <th>라인코드</th> 
-    <th>지시수량</th> 
+    <th>지시수량</th>
+    <th>납품예정일</th> 
     <th>작업지시자</th> 
     <th>상세내역</th>
 </tr>
@@ -135,6 +136,7 @@
     <td>${workOrderDTO.productName}</td>
     <td>${workOrderDTO.lineCode}</td>
     <td>${workOrderDTO.woCount}</td>
+    <td>${workOrderDTO.shipSdate}</td>
     <td>${workOrderDTO.empName}</td>
 
     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${workOrderDTO.woCode}')"></td>
@@ -147,6 +149,7 @@
 <input type="button" value="작업지시등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
+
 <div id="page_control_receive" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 	<a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
@@ -174,50 +177,25 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
 $(document).ready(function() {
-    $("#cusCode").click(function() {
-        // 업체코드 입력란의 값을 가져옵니다.
-        var cusCode = $("input[name='cusCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#cusCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+    // 업체명 검색 팝업 열기
+    $("#cusCode, #cusName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+        openPopup(url);
     });
-});
-$(document).ready(function() {
-    $("#productCode").click(function() {
-        // 상품코드 입력란의 값을 가져옵니다.
-        var productCode = $("input[name='productCode']").val();
-        // 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-        // 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-        
-        $(document).ready(function() {
-	        $("#productCode").click(function() {
-	            // 팝업 창 크기 및 위치 설정
-	            var width = 500;
-	            var height = 500;
-	            var left = (screen.width - width) / 2;
-	            var top = (screen.height - height) / 2;
-	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
-	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-	            // 팝업 창 포커스
-	            popupWindow.focus();
-	        });
-	    });
+    // 상품명 검색 팝업 열기
+    $("#productCode, #productName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        openPopup(url);
     });
 });
 // //업체명(거래처) 검색 새창

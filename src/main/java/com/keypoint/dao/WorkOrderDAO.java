@@ -114,6 +114,9 @@ public class WorkOrderDAO {
 		if(search.get("roCode")==null) {
 			search.put("roCode", "");
 		}
+		if(search.get("productCode")==null) {
+			search.put("productCode", "");
+		}
 		return sqlSession.selectList(namespace+".workRoCodeList", search);
 	
 	}

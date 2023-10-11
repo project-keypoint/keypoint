@@ -28,8 +28,6 @@
 <div class="contents2">
 
 
-
-
 <div>
 <table class="table-list">
 <tr class="table-head">
@@ -37,10 +35,10 @@
 
 </tr>
 <tr class="table-body">
-    <td>${noticeDTO.noticeNum}</td>
+    <td>번호 ${noticeDTO.noticeNum}</td>
     <td>${noticeDTO.empName}</td>
     <td>조회 ${noticeDTO.noticeReadcount}</td>
-	<td><fmt:formatDate value="${noticeDTO.noticeDate}" pattern="yy.MM.dd"/></td>
+	<td>작성일 <fmt:formatDate value="${noticeDTO.noticeDate}" pattern="yy.MM.dd"/></td>
 </tr>
 
 <tr class="table-body">
@@ -59,7 +57,7 @@
 <div>
 <input type="button" value="글목록" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList'">
 <input type="button" value="글수정" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="location.href='${pageContext.request.contextPath}/notice/noticeDeletePro?noticeNum=${noticeDTO.noticeNum}'">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
 <br>
 </div>
 
@@ -73,7 +71,6 @@
 </div><!-- main -->
 
 <!-- contents end -->
-
 
 
 
@@ -134,10 +131,6 @@ checkboxes.forEach(function (checkbox) {
 });
 
 
-
-
-
-
 //	공지사항수정하기 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/notice/noticeUpdate?noticeNum=${noticeDTO.noticeNum}';
@@ -147,6 +140,18 @@ function openInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+
+
+
+//삭제 확인메세지
+function confirmDelete() {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+        location.href = '${pageContext.request.contextPath}/notice/noticeDeletePro?noticeNum=${noticeDTO.noticeNum}';
+    } else {
+    	
+    }
+}
+
 </script>
 
 </body>

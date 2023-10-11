@@ -78,6 +78,7 @@ public class NoticeDAO {
 		sqlSession.update(nameSpace+".updateReadcount", noticeNum);
 	}
 
+	
 
 //	글수정
 	public void updateNotice(NoticeDTO noticeDTO) {
@@ -86,6 +87,7 @@ public class NoticeDAO {
 		sqlSession.update(nameSpace+".updateNotice", noticeDTO);
 	}
 
+	
 
 //	글삭제
 	public void deleteNotice(NoticeDTO noticeDTO) {

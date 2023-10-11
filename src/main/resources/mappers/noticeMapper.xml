@@ -66,10 +66,9 @@
   
   
   	<delete id="deleteNotice">
-  		SELECT *
+  		DELETE
   		FROM notice
   		WHERE noticeNum = #{noticeNum}
-  		
   	</delete>
   
   

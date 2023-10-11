@@ -28,6 +28,11 @@
 
 
 
+<div class="form-group-customer" style="display: none;">
+<p>글번호</p>
+<input type="text" id="noticeNum" name="noticeNum" class="form-control search-input" value="${noticeDTO.noticeNum}">
+</div>
+
 <div class="form-group-customer">
 <p>제목</p>
 <input type="text" id="noticeSubject" name="noticeSubject" class="form-control search-input" value="${noticeDTO.noticeSubject}">
