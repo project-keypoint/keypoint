@@ -36,25 +36,26 @@
 			class="fas fa-download fa-sm text-white-50"></i> 테스트
 		</a>
 		<!-- Begin Page Content -->
-		<h2>제품 출고 현황</h2>
+		<h2>제품 출고 현황</h2> 
+		
 		<div class="main-chart"
 			style="display: flex; flex-direction: row; flex-wrap: wrap;">
 
-			<div style="width: 750px; height: 400px; margin:30px; ">
+			<div style="width: 750px; height: 400px; margin:30px; ">차트1
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart"></canvas>
 			</div>
-			<div style="width: 750px; height: 400px; margin:30px; ">
+			<div style="width: 750px; height: 400px; margin:30px; ">차트2
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart2"></canvas>
 			</div>
-			<div style="width: 750px; height: 400px; margin:30px; ">
+			<div style="width: 750px; height: 400px; margin:30px; ">차트3
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart3"></canvas>
 			</div>
-			<div style="width: 750px; height: 400px; margin:30px; ">
+			<div style="width: 750px; height: 400px; margin:30px; ">차트4
 				<!--차트가 그려질 부분-->
-				<canvas id="myChart4"></canvas>
+				<canvas id="myChart4"><canvas>
 			</div>
 			
 
@@ -177,7 +178,7 @@ labels.reverse();
 						{ //데이터1
 							label : '키보드1', //차트 제목
 							fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-							data : [ 111, 66, 25, 55, 43, 115, 23 //x축 label에 대응되는 데이터 값
+							data : [ 111, 66, 25, 55, 43, 115 //x축 label에 대응되는 데이터 값
 							],
 							backgroundColor : [
 							//색상
@@ -185,16 +186,16 @@ labels.reverse();
 									'rgba(230, 0, 8, 0.2)',
 									'rgba(230, 0, 8, 0.2)',
 									'rgba(230, 0, 8, 0.2)',
-									'rgba(230, 0, 8, 0.2)',
 									'rgba(230, 0, 8, 0.2)'
+									
 
 							],
 							borderColor : [
 							//경계선 색상
 							'rgba(230, 0, 8, 1)', 'rgba(230, 0, 8, 1)',
 									'rgba(230, 0, 8, 1)', 'rgba(230, 0, 8, 1)',
-									'rgba(230, 0, 8, 1)', 'rgba(230, 0, 8, 1)',
 									'rgba(230, 0, 8, 1)', 'rgba(230, 0, 8, 1)'
+									
 
 							//                                 
 							],
@@ -337,56 +338,7 @@ labels.reverse();
 							borderWidth : 1
 						//경계선 굵기
 						}// 데이터6끝
-						,
-						{ //데이터7
-							label : '키보드7', //차트 제목
-							fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-							data : [ 121, 119, 215, 120, 123, 216, 45 //x축 label에 대응되는 데이터 값
-							],
-							backgroundColor : [
-							//색상
-							'rgba(255, 0, 128, 0.2)', 'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)' ],
-							borderColor : [
-							//경계선 색상
-							'rgba(255, 0, 128, 1)', 'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)' ],
-							borderWidth : 1
-						//경계선 굵기
-						}// 데이터7끝
-						,
-						{ //데이터8
-							label : '키보드8', //차트 제목
-							fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-							data : [ 211, 149, 75, 210, 23, 146, 55 //x축 label에 대응되는 데이터 값
-							],
-							backgroundColor : [
-							//색상
-							'rgba(0, 255, 213, 0.2)', 'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)' ],
-							borderColor : [
-							//경계선 색상
-							'rgba(0, 255, 213, 1)', 'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)' ],
-							borderWidth : 1
-						//경계선 굵기
-						}// 데이터8끝
+						
 						, ]
 			// 데이터전체 set 끝
 			},
@@ -681,56 +633,7 @@ labels.reverse();
 							borderWidth : 1
 						//경계선 굵기
 						}// 데이터6끝
-						,
-						{ //데이터7
-							label : '키보드7', //차트 제목
-							fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-							data : [ 121, 119, 215, 120, 123, 216, 45 //x축 label에 대응되는 데이터 값
-							],
-							backgroundColor : [
-							//색상
-							'rgba(255, 0, 128, 0.2)', 'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)',
-									'rgba(255, 0, 128, 0.2)' ],
-							borderColor : [
-							//경계선 색상
-							'rgba(255, 0, 128, 1)', 'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)',
-									'rgba(255, 0, 128, 1)' ],
-							borderWidth : 1
-						//경계선 굵기
-						}// 데이터7끝
-						,
-						{ //데이터8
-							label : '키보드8', //차트 제목
-							fill : false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-							data : [ 211, 149, 75, 210, 23, 146, 55 //x축 label에 대응되는 데이터 값
-							],
-							backgroundColor : [
-							//색상
-							'rgba(0, 255, 213, 0.2)', 'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)',
-									'rgba(0, 255, 213, 0.2)' ],
-							borderColor : [
-							//경계선 색상
-							'rgba(0, 255, 213, 1)', 'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)',
-									'rgba(0, 255, 213, 1)' ],
-							borderWidth : 1
-						//경계선 굵기
-						}// 데이터8끝
+						
 						, ]
 			// 데이터전체 set 끝
 			},
@@ -745,57 +648,7 @@ labels.reverse();
 			}
 		}); // 차트끝
 	
-		// 세션타이머
-		var timer;
-		$(document).ready(function(){
-		    
-		    doTimer($("#sessionTimeOut").val());
-		    $(document).on('click', "i[id='sessionRefresh']", function(){
-		        clearTimeout(timer);
-		        doTimer($("#sessionTimeOut").val());
-		    });
-		});
-		 
-		function sessionTimeOut() {
-		      return new Promise(function(resolve, reject) {
-		        $.get('/sessionTimeOutLogOut.do', function(response) {
-		          if (response) {
-		              console.log("time2");
-		            resolve(response);
-		          }
-		          reject(new Error("Request is failed"));
-		        });
-		      });
-		    }
-		 
-		function doTimer(time){
-		    var date = new Date(null);
-		    if(time){
-		        date.setSeconds(time);
-		        document.getElementById("sessionTimer").innerHTML = date.toISOString().substr(11,8);
-		        if(time == 0){
-		            sessionTimeOut().then(function(data){
-		                clearTimeout(timer);
-		                alertMessage(messageType.type.E, "세션이 만료되었습니다.",
-		                        "다시 로그인해주세요", function(){location.href = "/logoutProcess.do";}  )
-		                return;
-		            }).catch(function(err){
-		                console.error(err);
-		            });
-		 
-		            return;
-		            
-		        }
-		 
-		        --time;
-		        timer = setTimeout(doTimer, 1000, time);
-		    }
-		    return;
-		}
-		 
 	</script>
-
-
 
 </body>
 </html>
