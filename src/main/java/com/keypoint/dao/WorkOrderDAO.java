@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
+import com.keypoint.dto.WorkRoDTO;
 
 @Repository
 public class WorkOrderDAO {
@@ -35,8 +36,16 @@ public class WorkOrderDAO {
 	
 	public void insertWorkOrder(WorkOrderDTO workOrderDTO) {
 		System.out.println("WorkOrderDAO insertWorkOrder()");
+//		System.out.println("woDate:" + workOrderDTO.getWoDate());
+//		System.out.println("empName:" + workOrderDTO.getEmpName());
+		System.out.println("mfgCode:" + workOrderDTO.getMfgCode());
+		System.out.println("materialCode:" + workOrderDTO.getMaterialCode());
+		System.out.println("productCode:" + workOrderDTO.getProductCode());
+		System.out.println("woCount:" + workOrderDTO.getWoCount());
+		System.out.println("woStatus:" + workOrderDTO.getWoStatus());
 		System.out.println("woDate:" + workOrderDTO.getWoDate());
-		System.out.println("empName:" + workOrderDTO.getEmpName());
+		System.out.println("productName:" + workOrderDTO.getProductName());
+		
 		
 		sqlSession.insert(namespace+".insertWorkOrder", workOrderDTO);
 		
@@ -108,7 +117,7 @@ public class WorkOrderDAO {
 	}
 
 
-	public List<WorkOrderDTO> getWorkRoCodeList(Map<String, Object> search) {
+	public List<WorkRoDTO> getWorkRoCodeList(Map<String, Object> search) {
 		System.out.println("WorkOrderDAO getWorkRoCodeList()");
 		
 		if(search.get("roCode")==null) {

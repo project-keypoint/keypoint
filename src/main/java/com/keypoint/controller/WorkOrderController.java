@@ -19,6 +19,7 @@ import com.keypoint.dto.LineDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
+import com.keypoint.dto.WorkRoDTO;
 import com.keypoint.service.LineService;
 import com.keypoint.service.WorkOrderService;
 
@@ -296,7 +297,7 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 	search.put("startRow", pageDTO.getStartRow());
 	search.put("pageSize", pageDTO.getPageSize());
 
-	List<WorkOrderDTO> workRoCodeList = workOrderService.getWorkRoCodeList(search);
+	List<WorkRoDTO> workRoCodeList = workOrderService.getWorkRoCodeList(search);
 		
 	//페이징 처리
 	int count = workOrderService.countWorkRoCodeList(search);
