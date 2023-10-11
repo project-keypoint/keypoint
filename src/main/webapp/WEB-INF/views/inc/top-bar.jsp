@@ -77,7 +77,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" onclick="openDetails('${sessionScope.empId}')">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -111,7 +111,20 @@
     <script src="resources/js/demo/chart-area-demo.js"></script>
     <script src="resources/js/demo/chart-pie-demo.js"></script>
 
+<script type="text/javascript">
+//사원 상세내용 새창
+function openDetails(empId) {
+	// 연결되는지 보기위해
+//     var url = '${pageContext.request.contextPath}/employee/employeeDetails';
+ 	var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='+empId;
+    var windowWidth = 500;
+    var windowHeight = 850;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
 
+</script>
 
 </body>
 </html>

@@ -34,19 +34,28 @@ public class AccessFilter implements Filter {
 			if (httpRequest.getSession().getAttribute("empId") != null) {
 				// 사용자가 로그인되어 있으면 요청을 허용
 				chain.doFilter(request, response);
+//			} else {
+//				// 사용자가 로그인되어 있지 않으면 경고 메시지를 표시한 후 로그인 페이지로 이동 여부를 확인
+//				String loginPage = httpRequest.getContextPath() + "/main/login";
+//				String alertMessage = "로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?";
+//				String confirmationScript = String.format(
+//						"if(confirm('%s')){window.location.href='%s';} else {window.close();}", alertMessage,
+//						loginPage);
+//				;
+//
+//				httpResponse.setContentType("text/html;charset=UTF-8");
+//				PrintWriter out = httpResponse.getWriter();
+//				out.println("<script>" + confirmationScript + "</script>");
 			} else {
-				// 사용자가 로그인되어 있지 않으면 경고 메시지를 표시한 후 로그인 페이지로 이동 여부를 확인
-				String loginPage = httpRequest.getContextPath() + "/main/login";
-				String alertMessage = "로그인이 필요한 서비스입니다. 로그인 페이지로 이동하시겠습니까?";
-				String confirmationScript = String.format(
-						"if(confirm('%s')){window.location.href='%s';} else {window.close();}", alertMessage,
-						loginPage);
-				;
-
-				httpResponse.setContentType("text/html;charset=UTF-8");
-				PrintWriter out = httpResponse.getWriter();
-				out.println("<script>" + confirmationScript + "</script>");
-			}
+                // 사용자가 로그인되어 있지 않으면 알림창 띄우고 로그인 페이지로 리다이렉트
+                String alertScript = "<script>alert('로그인이 필요합니다.'); window.location.href='" +
+                        httpRequest.getContextPath() + "/main/login'</script>";
+                httpResponse.setContentType("text/html;charset=UTF-8");
+                httpResponse.getWriter().write(alertScript);
+                
+                
+            }
+			
 		}
 	}
 
