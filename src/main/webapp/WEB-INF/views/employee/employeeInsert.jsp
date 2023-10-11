@@ -20,8 +20,8 @@
 <body>
 <div class="main-details">
 <!-- 폼들의 위치가 이게 맞나..? 특히 }/employee/photoPro 이 form이 여기가 맞아...? -->
-<form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()">
-<form action="${pageContext.request.contextPath }/employee/photoPro" method="post" enctype="multipart/form-data">
+<%-- <form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()"> --%>
+<form action="${pageContext.request.contextPath }/employee/photoPro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
 
@@ -113,6 +113,22 @@
 </div>
 
 
+<div class="form-group-customer"> 
+            		<div class="form-group-customer">
+            		<img id="preview" width="200" height="230" style="border-radius: 3px" )></div>
+            		<div class="imgbtn">
+					<label for="file">
+					  <span class="btn btn-outline-danger btn-icon-text" style="width: 200px;">
+					  <i class="ti-upload btn-icon-prepend">
+					  </i>사진 업로드하기
+					  </span>
+					</label>
+            		<input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);"></div>
+            	</div>
+<!-- accept="image/*": 이 속성은 업로드할 수 있는 파일 형식을 제한 함. "image/*"로 설정된 경우, 사용자는 이미지 파일만 선택할 수 있음. -->
+
+
+
 <!-- 이게 맞나..? 나중에 수정에서 재직여부 수정가능한가?? -->
 <div class="form-group-customer" style="display: none;">
 <p>재직여부</p>
@@ -139,7 +155,6 @@
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->
-</form>
 </div><!-- main-details -->
 
 
@@ -245,6 +260,23 @@ function validateForm() {
     }
     return true;
 }	
+
+// 첨부파일 미리보기
+function setThumbnail(event) {
+  // 선택된 파일 정보 가져오기
+  var input = event.target;
+  var file = input.files[0];
+  
+  // FileReader 객체 사용하여 파일 읽기
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    // 읽은 파일을 이미지로 변환하여 미리보기
+    var img = document.getElementById("preview");
+    img.src = e.target.result;
+  }
+  reader.readAsDataURL(file);
+}
+
 
 
 </script>

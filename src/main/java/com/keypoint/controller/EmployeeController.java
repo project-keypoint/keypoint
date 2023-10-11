@@ -215,6 +215,7 @@ public class EmployeeController {
 		
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 
+		
 		// 첨부파일 업로드 => pom.xml에 프로그램 설치
 		// servlet-context.xml에 설정
 		// 첨부파일을 원하는 곳에 복사(업로드)
@@ -228,7 +229,21 @@ public class EmployeeController {
 		FileCopyUtils.copy(empPhoto.getBytes(), new File(uploadPath, filename));
 		
 		// boardDTO에 첨부파일이름 저장
+		employeeDTO.setEmpPhoto(filename);
+		
+		// 사원등록 목록이 다 넘어갈 수 있게(오류뜸)
+		employeeDTO.setEmpName(empNameValue);
+		employeeDTO.setEmpAddress(filename);
 		employeeDTO.setEmpPhone(filename);
+		employeeDTO.setEmpTel(filename);
+		employeeDTO.setEmpEmail(filename);
+		employeeDTO.setEmpStatus(filename);
+		employeeDTO.setEmpBirth(filename);
+		employeeDTO.setEmpHiredate(filename);
+		employeeDTO.setEmpName(filename);
+//		employeeDTO.setEmpRole(filename);
+	
+		
 		
 		employeeService.insertEmployee(employeeDTO);
 		
