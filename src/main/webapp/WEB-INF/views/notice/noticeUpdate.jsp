@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항등록</title>
+<title>공지사항수정</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -19,10 +19,10 @@
 
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/notice/noticeWritePro" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/notice/noticeUpdatePro" method="post" onsubmit="return validateForm()">
 
 <div class="forms-group-customer">
-<div class="page-title-popup">공지사항등록</div>
+<div class="page-title-popup">공지사항수정</div>
 
 
 
@@ -30,27 +30,28 @@
 
 <div class="form-group-customer">
 <p>제목</p>
-<input type="text" id="noticeSubject" name="noticeSubject" class="form-control search-input">
+<input type="text" id="noticeSubject" name="noticeSubject" class="form-control search-input" value="${noticeDTO.noticeSubject}">
 </div>
 
 
 
 <div class="form-group-customer">
 <p>구분</p>
-<select id="noticeCategory" name="noticeCategory" class="form-control search-input">
-        <option value="전체">전체</option>
-        <option value="영업">영업</option>
-        <option value="생산">생산</option>
-        <option value="자재">자재</option>
-        <option value="인사">인사</option>
-</select>
+<input type="text" id="noticeCategory" name="noticeCategory" class="form-control search-input" value="${noticeDTO.noticeCategory}" readonly="readonly">
+<!-- <select id="noticeCategory" name="noticeCategory" class="form-control search-input"> -->
+<!--         <option value="전체">전체</option> -->
+<!--         <option value="영업">영업</option> -->
+<!--         <option value="생산">생산</option> -->
+<!--         <option value="자재">자재</option> -->
+<!--         <option value="인사">인사</option> -->
+<!-- </select> -->
 </div>
 
 
 
 <div class="form-group-customer">
 <p>내용</p>
-<textarea id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px; resize: none;"></textarea>
+<textarea id="noticeContent" name="noticeContent" class="form-control search-input"  style="height: 300px; resize: none;">${noticeDTO.noticeContent}</textarea>
 </div>
 
 
@@ -71,7 +72,7 @@
 
 
 <div class="details-buttons">
-<input type="submit" id="noticeSubmit" value="등록" class="btn btn-primary mybutton1">
+<input type="submit" id="noticeSubmit" value="수정" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->
@@ -90,9 +91,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-
-
-
 
 
 

@@ -56,6 +56,21 @@
   	</update>
   
   
+
+	<update id="updateNotice">
+		UPDATE notice
+		SET noticeSubject = #{noticeSubject}, noticeContent = #{noticeContent}, noticeCategory = #{noticeCategory}
+		WHERE noticeNum = #{noticeNum}
+	</update>
+  
+  
+  
+  	<delete id="deleteNotice">
+  		SELECT *
+  		FROM notice
+  		WHERE noticeNum = #{noticeNum}
+  		
+  	</delete>
   
   
   
