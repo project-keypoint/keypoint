@@ -55,13 +55,17 @@
 
 <br>
 <br>
-<div class="select-status">
-<a>전체<input type="checkbox" id="select1" name="select1" class="list-select"></a>
-<a>영업<input type="checkbox" id="select2" name="select2" class="list-select"></a>
-<a>생산<input type="checkbox" id="select3" name="select3" class="list-select"></a>
-<a>자재<input type="checkbox" id="select4" name="select4" class="list-select"></a>
-<a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+<div class="select-status" style="display: flex; justify-content: space-between;">
+  <div style="display: flex; justify-content: flex-start;">
+    <a>전체<input type="checkbox" id="select1" name="select1" class="list-select"></a>
+    <a>영업<input type="checkbox" id="select2" name="select2" class="list-select"></a>
+    <a>생산<input type="checkbox" id="select3" name="select3" class="list-select"></a>
+    <a>자재<input type="checkbox" id="select4" name="select4" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+  </div>
+  <a style="text-align: right;">총 ${noticeCount}건</a>
 </div>
+
 
 
 

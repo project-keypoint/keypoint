@@ -54,7 +54,13 @@ public class NoticeController {
 		
 		noticeService.insertNotice(noticeDTO);
 		
-		return "redirect:/notice/noticeList";
+		
+		if(noticeDTO != null) {
+			return "notice/msgSuccess"; // 등록완료
+		} else {
+			return "notice/msgFailed"; // 등록실패
+		}
+		
 		
 	}
 	
@@ -66,6 +72,7 @@ public class NoticeController {
 	@GetMapping("/noticeList")
 	public String noticeList(Model model, HttpServletRequest request) {
 		System.out.println("NoticeController noticeList()");
+		
 		
 //		한 화면에 보여줄 글 개수 설정
 		int pageSize = 10;
@@ -122,6 +129,7 @@ public class NoticeController {
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("noticeCount", count);
 
 	return "notice/noticeList";
 	}
@@ -129,7 +137,7 @@ public class NoticeController {
 	
 	
 	
-//	공지사항 내용보기
+//	글 내용보기
 	@GetMapping("/noticeContent")
 	public String noticeContent(NoticeDTO noticeDTO, Model model) {
 		System.out.println("NoticeController noticeContent()");
@@ -148,7 +156,7 @@ public class NoticeController {
 	
 	
 	
-//	공지사항 수정화면
+//	글 수정화면
 	@GetMapping("/noticeUpdate")
 	public String noticeUpdate(NoticeDTO noticeDTO, Model model) {
 		System.out.println("NoticeController noticeUpdate()");
@@ -165,7 +173,7 @@ public class NoticeController {
 	
 	
 	
-//	공지사항 수정하기
+//	글 수정하기
 	@PostMapping("/noticeUpdatePro")
 	public String noticeUpdatePro(NoticeDTO noticeDTO) {
 		System.out.println("NoticeController noticeUpdatePro()");
@@ -185,7 +193,7 @@ public class NoticeController {
 	
 	
 	
-//	공지사항 글삭제
+//	글 삭제--임시
 	@GetMapping("/noticeDeletePro")
 	public String noticeDeletePro(NoticeDTO noticeDTO) {
 		System.out.println("NoticeController noticeDeletePro()");
