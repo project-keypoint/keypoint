@@ -29,6 +29,7 @@
 	<div class="contents"
 		style="position: absolute; left: 15rem; height: 100%; overflow: visible;">
 		<!-- Main Content -->
+		<div id="sessionTimer"></div>
 		<a href="${pageContext.request.contextPath}/main/testpage"
 			class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
 			style="float: right;"> <i
@@ -55,6 +56,7 @@
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart4"></canvas>
 			</div>
+			
 
 		</div>
 		<!-- /.container-fluid -->
@@ -741,8 +743,59 @@ labels.reverse();
 					} ]
 				}
 			}
+		}); // 차트끝
+	
+		// 세션타이머
+		var timer;
+		$(document).ready(function(){
+		    
+		    doTimer($("#sessionTimeOut").val());
+		    $(document).on('click', "i[id='sessionRefresh']", function(){
+		        clearTimeout(timer);
+		        doTimer($("#sessionTimeOut").val());
+		    });
 		});
+		 
+		function sessionTimeOut() {
+		      return new Promise(function(resolve, reject) {
+		        $.get('/sessionTimeOutLogOut.do', function(response) {
+		          if (response) {
+		              console.log("time2");
+		            resolve(response);
+		          }
+		          reject(new Error("Request is failed"));
+		        });
+		      });
+		    }
+		 
+		function doTimer(time){
+		    var date = new Date(null);
+		    if(time){
+		        date.setSeconds(time);
+		        document.getElementById("sessionTimer").innerHTML = date.toISOString().substr(11,8);
+		        if(time == 0){
+		            sessionTimeOut().then(function(data){
+		                clearTimeout(timer);
+		                alertMessage(messageType.type.E, "세션이 만료되었습니다.",
+		                        "다시 로그인해주세요", function(){location.href = "/logoutProcess.do";}  )
+		                return;
+		            }).catch(function(err){
+		                console.error(err);
+		            });
+		 
+		            return;
+		            
+		        }
+		 
+		        --time;
+		        timer = setTimeout(doTimer, 1000, time);
+		    }
+		    return;
+		}
+		 
 	</script>
+
+
 
 </body>
 </html>
