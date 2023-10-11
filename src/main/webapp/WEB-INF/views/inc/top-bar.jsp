@@ -152,7 +152,7 @@
 		}
 
 		function fncClearTime() {
-		    iSecond = 10800; // 세션 시간을 초 단위로 설정 (예: 2시간 / 계산 60*n분)
+		    iSecond = 10800; // 세션 시간을 초 단위로 설정 (예: 3시간 60*180분 / 계산 60*n분)
 		}
 
 		function initTimer() {
