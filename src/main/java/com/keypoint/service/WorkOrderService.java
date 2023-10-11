@@ -81,9 +81,9 @@ public class WorkOrderService {
 	}
 
 
-	public Integer countWorkList(Map<String, Object> search) { // 품목 개수
-		System.out.println("PerformServiceImpl countWorklist()");
-		return workOrderDAO.countWorkList(search);
+	public Integer countProdList(Map<String, Object> search) { // 품목 개수
+		System.out.println("WorkOrderService countProdList()");
+		return workOrderDAO.countProdList(search);
 	}
 
 
@@ -136,41 +136,14 @@ public class WorkOrderService {
 
 	
 	
-	public List<WorkOrderDTO> workList() {
-		System.out.println("WorkOrderService workList()");
-		
-		return workOrderDAO.workList();
+	public List<WorkOrderDTO> getWorkList(Map<String, Object> search) {
+		System.out.println("WorkOrderService workList()");		
+		return workOrderDAO.getWorkList(search);
 	}
 
-	public List<Map<String, Object>> workList(PageDTO pageDTO, Model model) {
-		// 라인 전체 목록
-		System.out.println("WorkOrderService lineList()");
-		
-		int totalCnt = workOrderDAO.workTotalCount();
-		PageUtil.getPaging(pageDTO, model, totalCnt);
-		
-		return workOrderDAO.workList(pageDTO);
-	}
-
-	public List<Map<String, Object>> workSearch(Map<String, Object> workSearch, PageDTO pageDTO, Model model) {
-		System.out.println("WorkOrderService workSearch()");
-		
-		int totalCnt = workOrderDAO.workSearchCount(workSearch);
-		PageUtil.getPaging(pageDTO, model, totalCnt);
-		
-		return workOrderDAO.workSearch(workSearch, pageDTO);
-	}
-
-	public Integer workTotalCount() {
-		System.out.println("WorkOrderService workTotalCount");
-		
-		return workOrderDAO.workTotalCount();
-	}
-
-	public Integer workSearchCount(Map<String, Object> workSearch) {
-		System.out.println("WorkOrderService workSearchCount");
-		
-		return workOrderDAO.workSearchCount(workSearch);
+	public int countWorkList(Map<String, Object> search) {
+		System.out.println("WorkOrderService countWorkList()");
+		return workOrderDAO.countWorkList(search);
 	}
 	
 	

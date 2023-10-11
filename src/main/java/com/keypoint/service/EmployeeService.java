@@ -8,20 +8,51 @@ import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.EmployeeDAO;
 import com.keypoint.dto.EmployeeDTO;
+import com.keypoint.dto.PageDTO;
 
 @Service
 public class EmployeeService {
 	
+	// MemberDAO 객체생성
 	@Inject
 	private EmployeeDAO employeeDAO;
 	
 	
+	// -------------------------------------------------------------------
+	
+	
+	// 로그인-강수빈
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService userCheck()");
+		
+		return employeeDAO.userCheck(employeeDTO);
+	}
+	
+	
 	// 사원목록
-	public List<EmployeeDTO> getEmployeeList() {
+	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO) {
 		System.out.println("EmployeeService getEmployeeList");
 
-		return employeeDAO.getEmployeeList();
+		// 10개씩 가져올때 현페이지에 대한 시작하는 행번호 구하기
+//		int startRow = (현페이지번호-1)*pageSize + 1;
+		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize() + 1;
+		// 끝나는 행번호 구하기
+//		int endRow = startRow + pageSize - 1;
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+		
+		// 디비 startRow - 1
+		pageDTO.setStartRow(startRow-1);
+		pageDTO.setEndRow(endRow);
+		
+		return employeeDAO.getEmployeeList(pageDTO);
 	} // getEmployeeList
+	
+	public int getEmployeeCount() {
+		System.out.println("EmployeeService getEmployeeCount()");
+		
+		return employeeDAO.getEmployeeCount();
+	} // getEmployeeCount
+	
 	
 	
 	// 사원등록
@@ -47,14 +78,10 @@ public class EmployeeService {
 		employeeDAO.updateEmployee(employeeDTO);
 	} // updateEmployee
 
+
 	
 	
-	// 로그인-강수빈
-	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeService userCheck()");
-		
-		return employeeDAO.userCheck(employeeDTO);
-	}
+
 
 
 

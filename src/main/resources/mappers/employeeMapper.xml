@@ -5,12 +5,27 @@
 <mapper namespace="com.itwillbs.mappers.employeeMapper">
 
 
+
+<!-- 로그인-강수빈 -->
+	<select id="userCheck"  resultType="com.keypoint.dto.EmployeeDTO">
+		select * from employees
+		where empId = #{empId} and empPass = #{empPass}
+	</select>
+	
+	
 <!-- 사원목록 --> 
 	<select id="getEmployeeList" resultType="com.keypoint.dto.EmployeeDTO">
 		select *
 		from employees
-		order by empId desc
+		order by empId DESC
+		LIMIT #{startRow}, #{pageSize}
 	</select>
+	
+	<select id="getEmployeeCount" resultType="java.lang.Integer">
+		select count(*) 
+		from employees
+	</select>
+
 
 <!-- 사원등록 -->
 	<insert id="insertEmployee">
@@ -47,10 +62,9 @@
 		where empId = #{empId}
 	</update> 
 
-<!-- 로그인-강수빈 -->
-	<select id="userCheck"  resultType="com.keypoint.dto.EmployeeDTO">
-		select * from employees
-		where empId = #{empId} and empPass = #{empPass}
-	</select>
+
+	
+	
+	
 </mapper>
 

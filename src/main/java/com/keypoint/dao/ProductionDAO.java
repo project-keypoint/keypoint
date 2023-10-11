@@ -23,5 +23,13 @@ public class ProductionDAO {
 	}
 	
 	
+	public void insertProduction(ProductionDTO productionDTO) {
+		System.out.println("ProductionDAO insertProduction()");
+		System.out.println("poDate:" + productionDTO.getPoDate());
+		
+		sqlSession.insert(namespace+".insertProduction", productionDTO);
+		
+	}
+	
 	
 }

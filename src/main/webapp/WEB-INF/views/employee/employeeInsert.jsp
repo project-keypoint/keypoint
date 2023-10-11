@@ -32,7 +32,7 @@
 <!-- </div> -->
 
 <div class="form-group-customer">
-<p>비밀번호(여기 나와야하나.?)</p>
+<p>비밀번호(수정필요)</p>
 <input type="text" id="empPass" name="empPass" class="form-control search-input" >
 </div>
 
@@ -130,7 +130,7 @@
 </select>
 </div>
 
-<p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴사자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
+<p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 
 
 </div>

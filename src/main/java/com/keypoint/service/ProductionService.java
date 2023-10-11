@@ -26,6 +26,15 @@ public class ProductionService {
 		return productionDAO.getProductionList();
 	}
 	
+	public void productionInsertPro(ProductionDTO productionDTO) {
+		System.out.println("productionService productionInsertPro()");
+		
+//		workOrderDTO.setWoDate(new Timestamp(System.currentTimeMillis()));
+		
+		productionDAO.insertProduction(productionDTO);
+		
+	} // insertWorkOrder
+	
 	
 	
 	

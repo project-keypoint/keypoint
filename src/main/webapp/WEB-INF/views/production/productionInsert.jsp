@@ -18,11 +18,11 @@
 </head>
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/workOrder/workOrderInsertPro" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/production/productionInsertPro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">생산실적등록</div>
 <div class="form-group-receive-insert">
-<p>작업지시번호</p>
+<p>지시번호</p>
 <input type="text" id="woCode" name="woCode" class="form-control search-input" value="작업지시번호" >
 </div>
 <div class="search-bar-popup">
@@ -39,7 +39,7 @@
 <input type="text" id="lineCode" name="lineCode" class="form-control search-input" value="라인코드">
 </div>
 <div class="form-group-receive">
-<p>상품코드</p><p>상품명</p>
+<p>상품명</p>
 <input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="상품검색">
 <input type="text" id="productName" name="productName" class="form-control search-input inputname" value="상품코드" readonly>
 </div>
@@ -57,8 +57,9 @@
 <p>불량</p>
 <input type="number" id="poErr" name="poErr" class="form-control search-input" value="불량">
 </div>
+<div class="form-group-receive">
 <p>불량사유</p>
-<input type="text" id="poCause" name="poCause" class="form-control search-input" value="불량사유">
+<input type="text" id="poCause" name="poCause" class="form-control search-input" value="">
 </div>
 <div class="form-group-receive">
 <p>수주번호</p>
@@ -93,16 +94,25 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+var defaultWidth = 500;
+var defaultHeight = 500;
 //팝업 창을 열어주는 함수
-function openPopup(url) {
-    var width = 500;
-    var height = 500;
+function openPopup(url, width, height) {
+    
+	width = width || defaultWidth;
+    height = height || defaultHeight;
+    
     var left = (screen.width - width) / 2;
     var top = (screen.height - height) / 2;
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
 $(document).ready(function() {
+	
+	$("#woCode, #woCode").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workList';
+        openPopup(url, 600, 700);
+    });
     // 수주코드 검색 팝업 열기
     $("#roCode, #roCode").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
@@ -137,8 +147,8 @@ $(document).ready(function() {
 
 // 지시일자 클릭시 현재날짜로 변경
 document.addEventListener('DOMContentLoaded', function () {
-    var woDateInput = document.getElementById("woDate");
-woDateInput.addEventListener("click", function () {
+    var poDateInput = document.getElementById("poDate");
+poDateInput.addEventListener("click", function () {
 	var today = new Date();
 	var yyyy = today.getFullYear();
 	var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -147,15 +157,15 @@ woDateInput.addEventListener("click", function () {
 	var mi = String(today.getMinutes()).padStart(2, '0');
 	var ss = String(today.getSeconds()).padStart(2, '0');
 	var formattedDate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + mi;
-	woDateInput.value = formattedDate;
-	woDateInput.readOnly = true;
-	woDateInput.placeholder = "";
+	poDateInput.value = formattedDate;
+	poDateInput.readOnly = true;
+	poDateInput.placeholder = "";
     });
 });
 // 지시일자(현재날짜) 이후로 납품예정일 선택 설정
 // 지시일자 입력란의 값 가져오기
-var woDateInput = document.getElementById("woDate");
-var woDateValue = woDateInput.value;
+var poDateInput = document.getElementById("poDate");
+var poDateValue = woDateInput.value;
 
 // 지시일자를 현재 년월일로 설정 (YYYY-MM-DD 형식)
 var today = new Date();
@@ -182,14 +192,14 @@ function validateForm() {
     var woCount = document.getElementById("woCount").value;
     var lineCode = document.getElementById("lineCode").value;
     var woDate = document.getElementById("woDate").value;
-    var shipSdate = document.getElementById("shipSdate").value;
+    var poDate = document.getElementById("poDate").value;
     var empId = document.getElementById("empId").value;
     
     console.log("cusCode: " + cusCode);
     // 빈 필드 검사
     if (cusCode === "" || productCode === "" ||
     		woCount === "" || lineCode === "" || woDate === "" ||
-    		shipSdate === "" || empId === "") {
+    		poDate === "" || empId === "") {
         alert("모든 내용을 입력해주세요.");
         return false; // 제출 방지
     }

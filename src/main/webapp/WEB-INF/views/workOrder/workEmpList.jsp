@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,54 +8,48 @@
 <title></title>
 
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="32x32" href="/resources/image/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/resources/image/favicon-32x32.png">
 
 <style type="text/css">
-
 @import
 	url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css)
 	;
-	
-	
-body{
+
+body {
 	font-family: 'NanumSquare', sans-serif;
 }
 
-
-
 /* 페이징 */
-
-
 #pagination {
-  display: inline-block;
+	display: inline-block;
 }
 
 #pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+	border: 1px solid #ddd;
 }
-
-
 
 #pagination a.active {
 	background-color: #b9b9b9;
-  color: white;
-  border: 1px solid #b9b9b9;
+	color: white;
+	border: 1px solid #b9b9b9;
 }
 
-#pagination a:hover:not(.active,.none) {background-color: #ddd;}
+#pagination a:hover:not(.active, .none) {
+	background-color: #ddd;
+}
 
 .center {
-  text-align: center;
+	text-align: center;
 }
 
-
 table {
-	margin : 0px auto;
+	margin: 0px auto;
 	border: 1px #a39485 solid;
 	font-size: .9em;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
@@ -63,7 +57,6 @@ table {
 	border-collapse: collapse;
 	border-radius: 5px;
 	overflow: hidden;
-	
 }
 
 th {
@@ -72,10 +65,8 @@ th {
 	font-weight: 700;
 }
 
-
 td, th {
 	padding: 1em .5em;
-	
 	vertical-align: middle;
 }
 
@@ -84,82 +75,93 @@ td {
 	background: #fff;
 	text-align: center;
 }
-h2{
+
+h2 {
 	text-align: center;
 }
 
-#con:hover{
-	background-color : #e1e1e1;
-	cursor:pointer;
+#con:hover {
+	background-color: #e1e1e1;
+	cursor: pointer;
 }
-
 </style>
 </head>
 <body>
-<h2>
-담당자 조회
-</h2>
-<br>
-<form>
-<table>
-<tr>
-	<td>사원아이디</td><td><input type="text" name="empId" style="width:100px;"></td>
-	<td>사원이름</td><td><input type="text" name="empName" style="width:100px;"></td>
-	<td><input type="submit" value="조회"></td></tr>
-</table>
-</form>
-<table>
-<tr><th>사원아이디</th><th>사원이름</th></tr>
-<c:forEach var="workEmpList" items="${workEmpList}">
-<tr onclick="selectWork('${workEmpList.empId}','${workEmpList.empName }')"> <!-- ,'${itemList.itemId}' -->
-	<td id="con">${workEmpList.empId}</td>
-	<td id="con">${workEmpList.empName}</td>
-	</tr>
+	<h2>담당자 조회</h2>
+	<br>
+	<form>
+		<table>
+			<tr>
+				<td>사원아이디</td>
+				<td><input type="text" name="empId" style="width: 100px;"></td>
+				<td>사원이름</td>
+				<td><input type="text" name="empName" style="width: 100px;"></td>
+				<td><input type="submit" value="조회"></td>
+			</tr>
+		</table>
+	</form>
+	<table>
+		<tr>
+			<th>사원아이디</th>
+			<th>사원이름</th>
+		</tr>
+		<c:forEach var="workEmpList" items="${workEmpList}">
+			<tr
+				onclick="selectWork('${workEmpList.empId}','${workEmpList.empName }')">
+				<%-- 				,'${itemList.itemId}' --%>
+				<td id="con">${workEmpList.empId}</td>
+				<td id="con">${workEmpList.empName}</td>
+			</tr>
 
-    <script type="text/javascript">
+			<script type="text/javascript">
+				function selectWork(a, b) { // 부모창으로 값 넘기기
 
-        function selectWork(a,b){ // 부모창으로 값 넘기기
-		  
-          opener.document.getElementById("empId").value = a
-          opener.document.getElementById("empName").value = b
-//           opener.document.getElementById("pid").value = c
-          window.close();
+					opener.document.getElementById("empId").value = a
+					opener.document.getElementById("empName").value = b
+					//           opener.document.getElementById("pid").value = c
+					window.close();
 
-        }
+				}
+			</script>
 
-   </script>
+		</c:forEach>
+	</table>
+	<br>
+	<div class="center">
+		<div id="pagination">
 
-</c:forEach>
-</table>
-<br>
-<div class="center">
-<div id="pagination">
+			<!-- 1페이지 이전 -->
+			<c:if test="${pageDTO.currentPage > 1}">
+				<a
+					href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.currentPage-1}"><</a>
+			</c:if>
 
-    <!-- 1페이지 이전 -->
-	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.currentPage-1}"><</a>
-	</c:if>
+			<!-- 10페이지 이전 -->
+			<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+				<a
+					href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
+			</c:if>
 
-<!-- 10페이지 이전 -->
-	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
-	</c:if>
-	
-	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
-	</c:forEach>
+			<c:forEach var="i" begin="${pageDTO.startPage }"
+				end="${pageDTO.endPage }" step="1">
+				<a
+					href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${i}"
+					<c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a>
+			</c:forEach>
 
-<!-- 1페이지 다음 -->	
-	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.currentPage+1}">></a>
-	</c:if>
+			<!-- 1페이지 다음 -->
+			<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
+				<a
+					href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.currentPage+1}">></a>
+			</c:if>
 
-<!-- 10페이지 다음 -->
- 	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
-	</c:if>
-	
-</div>
-</div>
+			<!-- 10페이지 다음 -->
+			<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+				<a
+					href="${pageContext.request.contextPath }/workOrder/workEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
+			</c:if>
+
+		</div>
+	</div>
 </body>
 </html>

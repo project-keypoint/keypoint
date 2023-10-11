@@ -5,7 +5,29 @@
 
 <mapper namespace="com.itwillbs.mappers.productionMapper">
 
-
+	
+	<insert id="insertProduction">
+		insert into production(poCode, woCode, productCode, lineCode, empId, poCount, 
+		poDate, qcDefectRate, woStatus, productName, woCount, poGood, poErr, poCause,
+		roCode, cusCode, empName)
+		values(CONCAT('PO', DATE_FORMAT(NOW(),
+		'%y%m%d%H%i%s')),
+		#{woCode},#{productCode},#{lineCode},#{empId},
+		<if test="poCount == null">NULL</if>
+		<if test="poCount != null">#{poCount}</if>
+		,
+		#{poDate},
+		<if test="qcDefectRate == null">NULL</if>
+		<if test="qcDefectRate != null">#{qcDefectRate}</if>
+		,
+		<if test="woStatus == null">NULL</if>
+		<if test="woStatus != null">#{woStatus}</if>
+		,
+		#{productName},#{woCount},#{poGood},#{poErr},#{poCause},#{roCode},#{cusCode},#{empName})
+	</insert>
+	
+	
+	
 
 	<select id="getProductionList"
 		resultType="com.keypoint.dto.ProductionDTO">
