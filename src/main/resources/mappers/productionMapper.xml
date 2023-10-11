@@ -40,7 +40,15 @@
 		order by a.woCode desc
 		</select>
 		
-
+	
+	<select id="getProductionCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM production
+<!-- 		WHERE woStatus != '삭제' -->
+	</select>
+	
+	
+	
 <!-- 	<select id="getWorkOrderList" -->
 <!-- 		resultType="com.keypoint.dto.WorkOrderDTO"> -->
 <!-- 		select a.woCode, a.cusCode, b.cusName, a.productCode, -->

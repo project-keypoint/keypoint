@@ -270,7 +270,7 @@ public String workCusList(Model model, HttpServletRequest request, PageDTO pageD
 @RequestMapping(value = "/workRoCodeList", method = RequestMethod.GET)
 public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
 	String roCode = request.getParameter("roCode");
-	
+	String productCode = request.getParameter("productCode");
 	// 한 화면에 보여줄 글 개수 설정
 	int pageSize = 5; // sql문에 들어가는 항목
 	
@@ -292,6 +292,7 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 
 	Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
 	search.put("roCode", roCode);
+	search.put("productCode", productCode);
 	search.put("startRow", pageDTO.getStartRow());
 	search.put("pageSize", pageDTO.getPageSize());
 

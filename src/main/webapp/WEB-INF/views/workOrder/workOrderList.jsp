@@ -116,7 +116,8 @@
     <th>상품코드</th> 
     <th>상품명</th> 
     <th>라인코드</th> 
-    <th>지시수량</th> 
+    <th>지시수량</th>
+    <th>납품예정일</th> 
     <th>작업지시자</th> 
     <th>상세내역</th>
 </tr>
@@ -135,6 +136,7 @@
     <td>${workOrderDTO.productName}</td>
     <td>${workOrderDTO.lineCode}</td>
     <td>${workOrderDTO.woCount}</td>
+    <td>${workOrderDTO.shipSdate}</td>
     <td>${workOrderDTO.empName}</td>
 
     <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${workOrderDTO.woCode}')"></td>
@@ -147,6 +149,7 @@
 <input type="button" value="작업지시등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
+
 <div id="page_control_receive" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 	<a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>

@@ -21,6 +21,10 @@
 <form action="${pageContext.request.contextPath}/workOrder/workOrderInsertPro" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
 <div class="page-title-popup">작업지시등록</div>
+<div class="form-group-receive-insert">
+<p>수주번호</p>
+<input type="text" id="roCode" name="roCode" class="form-control search-input" value="수주번호">
+</div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>업체명</p>
@@ -33,10 +37,7 @@
 <input type="text" id="productName" name="productName" class="form-control search-input inputname" value="상품코드" readonly>
 </div>
 </div>
-<div class="form-group-receive">
-<p>수주번호</p>
-<input type="text" id="roCode" name="roCode" class="form-control search-input" value="수주번호">
-</div>
+
 <div class="form-group-receive">
 <p>지시수량</p>
 <input type="number" id="woCount" name="woCount" class="form-control search-input" placeholder="지시수량" min="0" >

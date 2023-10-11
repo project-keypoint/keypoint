@@ -175,21 +175,25 @@
 <input type="button" value="실적등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
-				<div class="page-buttons">
-					<a href="#" class="page-button">&lt;</a> <a href="#"
-						class="page-button page-button-active">1</a> <a href="#"
-						class="page-button">2</a> <a href="#" class="page-button">3</a> <a
-						href="#" class="page-button">4</a> <a href="#" class="page-button">5</a>
-					<a href="#" class="page-button">&gt;</a>
-				</div>
-				<!-- page-button -->
-			</div>
-		</div>
-		<!-- contents -->
-	</div>
-	<!-- 그림자아니야 영역 -->
 
-	<!-- main -->
+<div id="page_control_receive" class="page-buttons">
+    <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/production/productionList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage}" 
+                   end="${pageDTO.endPage}" step="1">
+	<a href="${pageContext.request.contextPath}/production/productionList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/production/productionList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+</c:if>
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- 그림자아니야 영역 -->
+</div><!-- main -->
 
 	<!-- contents end -->
 
