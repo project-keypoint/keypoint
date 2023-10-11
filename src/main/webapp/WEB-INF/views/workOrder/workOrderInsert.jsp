@@ -40,7 +40,7 @@
 
 <div class="form-group-receive">
 <p>지시수량</p>
-<input type="number" id="woCount" name="woCount" class="form-control search-input" placeholder="지시수량" min="0" >
+<input type="number" id="roCount" name="roCount" class="form-control search-input" placeholder="지시수량" min="0" >
 </div>
 <div class="form-group-receive">
 <p>라인코드</p>
