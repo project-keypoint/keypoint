@@ -78,11 +78,11 @@
 
 </tr>
 <c:forEach var="noticeDTO" items="${noticeList}">
-<tr class="table-body" onclick="location.href='${pageContext.request.contextPath}/notice/noticeContent?noticeNum=${noticeDTO.noticeNum}'">
+<tr class="table-body" >
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${noticeDTO.noticeNum}</td>
     <td>${noticeDTO.noticeCategory}</td>
-    <td>${noticeDTO.noticeSubject}</td>
+    <td onclick="location.href='${pageContext.request.contextPath}/notice/noticeContent?noticeNum=${noticeDTO.noticeNum}'">${noticeDTO.noticeSubject}</td>
     <td>${noticeDTO.empName}</td>
     <td>${noticeDTO.noticeReadcount}</td>
     <td><fmt:formatDate value="${noticeDTO.noticeDate}" pattern="yy.MM.dd"/></td>
