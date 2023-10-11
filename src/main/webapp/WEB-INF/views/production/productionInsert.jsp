@@ -36,17 +36,17 @@
 </div>
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="lineCode" name="lineCode" class="form-control search-input" value="라인코드">
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input" value="라인코드" readonly>
 </div>
 <div class="form-group-receive">
 <p>상품명</p>
-<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="상품검색">
+<input type="text" id="productCode" name="productCode" class="form-control search-input inputcode" value="상품검색" readonly>
 <input type="text" id="productName" name="productName" class="form-control search-input inputname" value="상품코드" readonly>
 </div>
 </div>
 <div class="form-group-receive">
 <p>지시수량</p>
-<input type="number" id="woCount" name="woCount" class="form-control search-input" placeholder="지시수량" min="0" >
+<input type="number" id="woCount" name="woCount" class="form-control search-input" placeholder="지시수량" min="0" readonly>
 </div>
 
 <div class="form-group-receive">
@@ -63,12 +63,12 @@
 </div>
 <div class="form-group-receive">
 <p>수주번호</p>
-<input type="text" id="roCode" name="roCode" class="form-control search-input" value="수주번호">
+<input type="text" id="roCode" name="roCode" class="form-control search-input" value="수주번호" readonly>
 </div>
 <div class="form-group-receive">
 <p>거래처</p>
-<input type="text" id="cusCode" name="cusCode" class="form-control search-input" value=거래처코드>
-<input type="text" id="cusName" name="cusName" class="form-control search-input" value="거래처명">
+<input type="text" id="cusCode" name="cusCode" class="form-control search-input" value=거래처코드 readonly>
+<input type="text" id="cusName" name="cusName" class="form-control search-input" value="거래처명" readonly>
 </div>
 
 <div class="search-bar-popup">
@@ -113,26 +113,26 @@ $(document).ready(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workList';
         openPopup(url, 600, 700);
     });
-    // 수주코드 검색 팝업 열기
-    $("#roCode, #roCode").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
-        openPopup(url);
-    });
-    // 업체명 검색 팝업 열기
-    $("#cusCode, #cusCode").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-        openPopup(url);
-    });
- // 상품명 검색 팝업 열기
-    $("#productCode, #productCode").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-        openPopup(url);
-    });
- // 라인명 검색 팝업 열기
-    $("#lineCode, #lineCode").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
-        openPopup(url);
-    });
+//     // 수주코드 검색 팝업 열기
+//     $("#roCode, #roCode").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
+//         openPopup(url);
+//     });
+//     // 업체명 검색 팝업 열기
+//     $("#cusCode, #cusCode").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+//         openPopup(url);
+//     });
+//  // 상품명 검색 팝업 열기
+//     $("#productCode, #productCode").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+//         openPopup(url);
+//     });
+//  // 라인명 검색 팝업 열기
+//     $("#lineCode, #lineCode").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workLineList';
+//         openPopup(url);
+//     });
     
  	// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {
