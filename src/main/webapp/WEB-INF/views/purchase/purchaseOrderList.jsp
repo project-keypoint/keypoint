@@ -110,8 +110,23 @@ h2{
 </table>
 <br>
 </form>
+
+
+<c:choose>
+    <c:when test="${empty purchaseOrderList}">
+        <table>
+            <tr>
+                <td colspan="6">입고할 발주서가 없습니다, 발주 먼저 등록하세요.</td>
+            </tr>
+        </table>
+    </c:when>
+    <c:otherwise>
+
+
 <table>
 <tr><th>발주코드</th><th>자재명</th><th>발주수량</th></tr>
+
+
 <c:forEach var="purchaseOrderList" items="${purchaseOrderList}">
 <tr onclick="selectWork('${purchaseOrderList.poCode }','${purchaseOrderList.materialName }','${purchaseOrderList.poCount }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${purchaseOrderList.poCode}</td>
@@ -135,6 +150,11 @@ h2{
 
 </c:forEach>
 </table>
+
+</c:otherwise>
+</c:choose>
+
+
 <br>
 <div class="center">
 <div id="pagination">

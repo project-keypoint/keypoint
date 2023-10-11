@@ -16,6 +16,32 @@
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
     <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+    
+    
+        
+    <style type="text/css">
+    
+    /* 일반 페이지 버튼 스타일 */
+.page-button {
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+.page-button-active {
+    color: black;
+    background-color: #ccc; /* 회색 배경색 사용 */
+    border: 1px solid #ccc; /* 원하는 테두리 스타일로 변경 가능 */
+    padding: 5px 10px;
+    text-decoration: none;
+}
+    
+    
+    </style>
+    
+    
+    
 </head>
 
 <body>
@@ -135,18 +161,17 @@
 <!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
 <div class="page-buttons">
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}" class="page-button">&lt;</a>
-</c:if>
-
-<c:forEach var="i" begin="${pageDTO.startPage}" 
-                   end="${pageDTO.endPage}" step="1">
-	<a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+    <c:choose>
+        <c:when test="${i == pageDTO.pageNum}">
+            <a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${i}" class="page-button">${i}</a>
+        </c:otherwise>
+    </c:choose>
 </c:forEach>
 
-<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/receipt/receiptList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
-</c:if>
 </div><!-- page-button -->
 </div>
 </div><!-- contents -->

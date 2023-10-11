@@ -19,11 +19,10 @@
 		LIMIT #{startRow}, #{pageSize}
 
 	</select>
-	
-	
   	
   	<select id="getPurchaseCount" resultType="java.lang.Integer">
 		select count(*) from purchaseOrder 
+		WHERE poStatus != '삭제됨'
 	</select>
   	
  

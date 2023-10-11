@@ -60,7 +60,7 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자</p>
+<p>당담자명</p>
 <input type="text" id="empName" name="poOwner" class="form-control search-input inputcode" placeholder="담당자검색" value="${purchaseDTO.poOwner}" readonly>
 <input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="담당자명" readonly hidden >
 </div>
@@ -72,7 +72,7 @@
 
 
 <div class="form-group-receive">
-<p>거래처</p>
+<p>거래처명</p>
 <input type="text" id="cusCode" name="cusCode" class="form-control search-input inputcode" placeholder="거래처검색" hidden readonly>
 <input type="text" id="cusName" name="cusName" class="form-control search-input inputname" placeholder="거래처명" value="${purchaseDTO.cusName}" readonly >
 </div>

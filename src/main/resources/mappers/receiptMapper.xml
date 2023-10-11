@@ -24,6 +24,7 @@
 
 	<select id="getReceiptCount" resultType="java.lang.Integer">
 		select count(*) from goodsReceipt 
+		WHERE grStatus != '삭제됨'
 	</select>
 
 	<select id="getReceiptDetails" resultType="com.keypoint.dto.ReceiptDTO">
