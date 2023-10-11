@@ -41,6 +41,7 @@
 			#{empName},
 			#{cusName},
 			#{shipSdate}
+		)
 	</insert>
 
 	<select id="getWorkOrderList"
