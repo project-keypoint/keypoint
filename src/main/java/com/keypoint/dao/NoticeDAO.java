@@ -79,7 +79,20 @@ public class NoticeDAO {
 	}
 
 
+//	글수정
+	public void updateNotice(NoticeDTO noticeDTO) {
+		System.out.println("NoticeDAO updateNotice()");
+		
+		sqlSession.update(nameSpace+".updateNotice", noticeDTO);
+	}
 
+
+//	글삭제
+	public void deleteNotice(NoticeDTO noticeDTO) {
+		System.out.println("NoticeDAO deleteNotice()");
+
+		sqlSession.delete(nameSpace+".deleteNotice", noticeDTO);
+	}
 
 
 

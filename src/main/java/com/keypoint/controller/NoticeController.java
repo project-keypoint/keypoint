@@ -147,10 +147,54 @@ public class NoticeController {
 	
 	
 	
-
+	
+//	공지사항 수정화면
+	@GetMapping("/noticeUpdate")
+	public String noticeUpdate(NoticeDTO noticeDTO, Model model) {
+		System.out.println("NoticeController noticeUpdate()");
+		
+		
+//		공지사항 글 가져오기
+		noticeDTO = noticeService.getNoticeContent(noticeDTO.getNoticeNum());
+		model.addAttribute("noticeDTO", noticeDTO);
+		
+	
+		return "notice/noticeUpdate";
+	}
 	
 	
 	
+	
+//	공지사항 수정하기
+	@PostMapping("/noticeUpdatePro")
+	public String noticeUpdatePro(NoticeDTO noticeDTO) {
+		System.out.println("NoticeController noticeUpdatePro()");
+		System.out.println(noticeDTO);
+		
+		noticeService.updateNotice(noticeDTO);
+		
+		if(noticeDTO != null) {
+			return "notice/msgSuccess"; // 등록완료
+		} else {
+			return "notice/msgFailed"; // 등록실패
+		}
+		
+		
+	}
+	
+	
+	
+	
+//	공지사항 글삭제
+	@GetMapping("/noticeDeletePro")
+	public String noticeDeletePro(NoticeDTO noticeDTO) {
+		System.out.println("NoticeController noticeDeletePro()");
+		
+		noticeService.deleteNotice(noticeDTO);
+		
+	
+		return "redirect:/notice/noticeList";
+	}
 	
 	
 	

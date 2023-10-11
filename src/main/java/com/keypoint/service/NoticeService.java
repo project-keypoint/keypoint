@@ -85,7 +85,32 @@ public class NoticeService {
 	}
 
 
+
+
 	
+//	글 수정
+	public void updateNotice(NoticeDTO noticeDTO) {
+		System.out.println("NoticeService updateNotice()");
+		
+		noticeDAO.updateNotice(noticeDTO);
+	}
+	
+	
+	
+//	글삭제
+	public void deleteNotice(NoticeDTO noticeDTO) {
+		System.out.println("NoticeService deleteNotice()");
+
+		noticeDAO.deleteNotice(noticeDTO);
+	}
+
+
+
+
+
+
+
+
 	
 	
 	
