@@ -22,11 +22,13 @@
 	</insert>
 
 
-
   	<select id="getNoticeList" resultType="com.keypoint.dto.NoticeDTO">
   		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate
   		FROM notice n LEFT JOIN employees e
   		ON n.empId = e.empId
+  		<if test="search != null">
+			WHERE noticeSubject like CONCAT('%', #{search}, '%')
+		</if>
   		ORDER BY noticeNum DESC
   		LIMIT #{startRow}, #{pageSize}
   	</select>
@@ -36,6 +38,9 @@
 	<select id="getNoticeCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM notice
+		<if test="search != null">
+			WHERE noticeSubject like CONCAT('%', #{search}, '%')
+		</if>
 	</select>  
   
   

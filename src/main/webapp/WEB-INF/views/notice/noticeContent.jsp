@@ -42,10 +42,19 @@
 </tr>
 
 <tr class="table-body">
+    <td colspan="4">
+        <div>첨부파일 ${noticeDTO.noticeFile}</div>
+<%--         <a href="${pageContext.request.contextPath}/resources/upload/${boardDTO.file}" download> --%>
+<%--         <%=boardDTO.getFile() %></a><img src="${pageContext.request.contextPath}/resources/upload/<%=boardDTO.getFile() %>"  width="200" height="200"> --%>
+    </td>
+</tr>
+
+<tr class="table-body">
     <td colspan="4" style="height: 300px; text-align: left;">
         <div style="padding-left: 20px;">${noticeDTO.noticeContent}</div>
     </td>
 </tr>
+
 
 
 </table>
