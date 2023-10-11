@@ -61,15 +61,12 @@
                                                 <label class="custom-control-label" for="customCheck">아이디 기억하기</label>
                                             </div>
                                         </div>
+                                       
                                         <input type="submit" value="로그인" class="btn btn-primary btn-user btn-block">
-                                      <hr>
+                                      
                                        
                                     </form>
-                                    
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">비밀번호 재설정</a>
-                                    </div>
-                                    
+  
                                 </div>
                             </div>
                         </div>
