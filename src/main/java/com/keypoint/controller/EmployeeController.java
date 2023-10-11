@@ -231,23 +231,29 @@ public class EmployeeController {
 		// boardDTO에 첨부파일이름 저장
 		employeeDTO.setEmpPhoto(filename);
 		
-		// 사원등록 목록이 다 넘어갈 수 있게(오류뜸)
-		employeeDTO.setEmpName(empNameValue);
-		employeeDTO.setEmpAddress(filename);
-		employeeDTO.setEmpPhone(filename);
-		employeeDTO.setEmpTel(filename);
-		employeeDTO.setEmpEmail(filename);
-		employeeDTO.setEmpStatus(filename);
-		employeeDTO.setEmpBirth(filename);
-		employeeDTO.setEmpHiredate(filename);
-		employeeDTO.setEmpName(filename);
-//		employeeDTO.setEmpRole(filename);
-	
+		// 사원등록 목록이 다 넘어갈 수 있게
+		employeeDTO.setEmpName(request.getParameter("empName"));
+		employeeDTO.setEmpAddress(request.getParameter("empAddress"));
+		employeeDTO.setEmpPhone(request.getParameter("empPhone"));
+		employeeDTO.setEmpTel(request.getParameter("empTel"));
+		employeeDTO.setEmpEmail(request.getParameter("empEmail"));
 		
+		employeeDTO.setDepartmentName(request.getParameter("departmentName"));
+		employeeDTO.setEmpPosition(request.getParameter("empPosition"));
+		
+		employeeDTO.setEmpBirth(request.getParameter("empBirth"));
+		employeeDTO.setEmpHiredate(request.getParameter("empHiredate"));
+		employeeDTO.setEmpStatus(request.getParameter("empStatus"));
+		
+//		employeeDTO.setEmpRole(request.getParameter("empRole"));
 		
 		employeeService.insertEmployee(employeeDTO);
 		
-		return "redirect:/employee/employeelist";
+		if(employeeDTO != null) {
+			return "employee/msgSuccess"; // 등록완료
+		} else {
+			return "employee/msgFailed"; // 등록실패
+		}
 	} // photoPro
 	
 	

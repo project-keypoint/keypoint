@@ -19,7 +19,6 @@
 
 <body>
 <div class="main-details">
-<!-- 폼들의 위치가 이게 맞나..? 특히 }/employee/photoPro 이 form이 여기가 맞아...? -->
 <%-- <form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()"> --%>
 <form action="${pageContext.request.contextPath }/employee/photoPro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 <div class="forms-group-customer">
@@ -107,10 +106,10 @@
 </div>
 
 
-<div class="form-group-customer">
-<p>사진</p>
-<input type="file" id="empPhoto" name="empPhoto" class="form-control search-input">
-</div>
+<!-- <div class="form-group-customer"> -->
+<!-- <p>사진</p> -->
+<!-- <input type="file" id="empPhoto" name="empPhoto" class="form-control search-input"> -->
+<!-- </div> -->
 
 
 <div class="form-group-customer"> 
