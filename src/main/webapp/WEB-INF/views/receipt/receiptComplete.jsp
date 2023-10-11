@@ -19,7 +19,7 @@
 <body>
 
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/receipt/receiptCompletePro" id="receiptInsert" method="post" >
+<form action="${pageContext.request.contextPath}/receipt/receiptCompletePro" id="receiptInsert" method="post" onsubmit="return validateForm()">
 
 <div class="forms-group-receive">
 <div class="page-title-popup">입고처리</div>
@@ -115,7 +115,25 @@ function openPopup(url) {
     });
 </script>
 
-
+<!-- 필수입력항목 메시지 -->
+<script>
+function validateForm() {
+    // 각 입력 필드 값
+    var grCode = document.getElementById("grCode").value;
+    var grCount = document.getElementById("grCount").value;
+    var grEcount = document.getElementById("grEcount").value;
+    var grEdate = document.getElementById("grEdate").value;
+    var grStatus = document.getElementById("grStatus").value;
+    // 빈 필드 검사
+    if (grCode === "" || grCount === "" || grEcount === "" ||
+    		grEdate === "" || grStatus === "") {
+        alert("모든 내용을 입력해주세요.");
+        return false; // 제출 방지
+    }
+    return true;
+}
+</script>
+<!-- // 필수입력항목 메시지 -->
 
 </body>
 </html>

@@ -178,7 +178,7 @@ $(document).ready(function() {
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/purchase/test2'; // 업체 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2'; // 업체 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
@@ -202,7 +202,7 @@ $(document).ready(function() {
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
-	            var url = '${pageContext.request.contextPath}/purchase/test2'; // 상품 검색 페이지의 URL.
+	            var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2'; // 상품 검색 페이지의 URL.
 	            var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	            // 팝업 창 포커스
 	            popupWindow.focus();
