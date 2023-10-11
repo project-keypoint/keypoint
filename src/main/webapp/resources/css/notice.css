@@ -223,6 +223,16 @@ height: 400;
 
 
 
+  /* 파일 선택 버튼 숨김 */
+  input[type="file"]::-webkit-file-upload-button,
+  input[type="file"]::-webkit-file-upload-button::before {
+    content: none;
+    display: none;
+  }
+
+
+
+
 #noticeSubject.search-input, #noticeCategory.search-input, #noticeContent.search-input, #noticeFile.search-input {
 width: 500px;
 height: 400;
@@ -284,7 +294,7 @@ display: block; /* 가운데 정렬을 적용하려면 블록 요소로 만듭�
 width: 80px;
 height: 28px;
 }
-#qcDefectRate.search-input, #qcStatus.search-input,
+#qcDefectRate.search-input, #qcStatus.search-input, #empName.search-input
 #qcTest1.search-input, #qcTest2.search-input, #qcTest3.search-input   {
 width: 280px;
 /* height: 28px; */

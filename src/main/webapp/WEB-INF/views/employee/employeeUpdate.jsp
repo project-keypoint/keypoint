@@ -17,7 +17,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/employeeDetails.css" rel="stylesheet">
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/employee/employeeUpdatePro" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/employee/employeeUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <!-- <div class="page-title-popup">사원상세정보수정</div> -->
 <div class="page-title">사원상세정보수정</div>
@@ -26,10 +26,25 @@
 
 <div class="form-group-receive">
 
+<!-- -------------------- 사진첨부 -------------------- -->
 <div class="form-group-column">
-<p>사진</p>
-<input type="text" id="empPhoto" name="empPhoto" class="form-control search-input" value="${employeeDTO.empPhoto}">
-</div>
+<!-- <p>사진</p> -->
+<!-- <img id="preview" width="200" height="230" style="border-radius: 3px"> -->
+<img id="preview" src="${pageContext.request.contextPath }/resources/upload/${employeeDTO.empPhoto}" 
+     width="200" height="200">
+</div>   
+
+<label for="file">
+<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;">
+<i class="ti-upload btn-icon-prepend"></i>사진수정하기 
+</span>   
+</label>
+
+<div class="imgbtn">
+<input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
+<%-- <input type="text" id="empPhoto" name="empPhoto" class="form-control search-input" value="${employeeDTO.empPhoto}"> --%>
+<!-- </div> -->
+<!-- -------------------- // 사진첨부 -------------------- -->
 
 <div class="form-group-row">
 
@@ -215,6 +230,21 @@ $(function() {
 	});
 });
 
+//첨부파일 미리보기
+function setThumbnail(event) {
+  // 선택된 파일 정보 가져오기
+  var input = event.target;
+  var file = input.files[0];
+  
+  // FileReader 객체 사용하여 파일 읽기
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    // 읽은 파일을 이미지로 변환하여 미리보기
+    var img = document.getElementById("preview");
+    img.src = e.target.result;
+  }
+  reader.readAsDataURL(file);
+}
 
 // 주소 검색 API
 // function sample6_execDaumPostcode() {

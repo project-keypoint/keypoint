@@ -1,6 +1,9 @@
 package com.keypoint.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -8,10 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.NoticeDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.service.NoticeService;
@@ -51,6 +57,7 @@ public class NoticeController {
 	public String noticeWritePro(NoticeDTO noticeDTO) {
 		System.out.println("NoticeController noticeWritePro()");
 		System.out.println(noticeDTO);
+
 		
 		noticeService.insertNotice(noticeDTO);
 		
@@ -60,11 +67,49 @@ public class NoticeController {
 		} else {
 			return "notice/msgFailed"; // 등록실패
 		}
-		
-		
 	}
 	
 	
+	
+//	글쓰기 - 첨부파일
+	@PostMapping("/noticeFilePro")
+	public String noticeFilePro(HttpServletRequest request, MultipartFile noticeFile) throws Exception{
+		System.out.println("NoticeController niticeFile()");
+///		name="file" -> MultipartFile file과 이름 동일
+	
+		NoticeDTO noticeDTO = new NoticeDTO();
+		
+// 		글쓰기 내용을 전부 담기
+		noticeDTO.setNoticeSubject(request.getParameter("noticeSubject"));
+		noticeDTO.setNoticeCategory(request.getParameter("noticeCategory"));
+		noticeDTO.setNoticeContent(request.getParameter("noticeContent"));
+
+// 		파일이름 => 랜덤문자_첨부파일이름
+		UUID uuid = UUID.randomUUID();
+		
+		
+//		uuid.toString()+"_"+첨부파일이름;
+		String filename = uuid.toString()+"_"+noticeFile.getOriginalFilename();
+		
+// 		첨부파일 복사(업로드)
+//		FileCopyUtils.copy(원본파일, upload폴더파일(경로, 파일이름));
+//		file.getBytes() 원본파일 => upload 첨부파일 복사(업로드)
+		FileCopyUtils.copy(noticeFile.getBytes(), new File(uploadPath, filename));
+		
+//		noticeDTO에 첨부파일이름 저장
+		noticeDTO.setNoticeFile(filename);
+		
+
+		
+		noticeService.insertNotice(noticeDTO);
+		
+		
+		if(noticeDTO != null) {
+			return "notice/msgSuccess"; // 등록완료
+		} else {
+			return "notice/msgFailed"; // 등록실패
+		}
+	}
 	
 	
 	
@@ -72,6 +117,12 @@ public class NoticeController {
 	@GetMapping("/noticeList")
 	public String noticeList(Model model, HttpServletRequest request) {
 		System.out.println("NoticeController noticeList()");
+		
+//		NoticeDTO noticeDTO = new NoticeDTO();
+//		noticeDTO.getEmpName();
+		
+//		검색어 가져오기
+		String search = request.getParameter("search");
 		
 		
 //		한 화면에 보여줄 글 개수 설정
