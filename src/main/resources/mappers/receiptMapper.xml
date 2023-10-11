@@ -61,6 +61,44 @@
 
 
 
+
+
+<update id="deleteGoodsReceipt">
+    UPDATE goodsReceipt
+    SET grStatus = '삭제됨'
+    WHERE grCode = #{grCode}
+</update>
+
+<select id="getRelatedPurchaseOrderCode" resultType="java.lang.String">
+    SELECT poCode
+    FROM purchaseOrder
+    WHERE poCode = (SELECT poCode FROM goodsReceipt WHERE grCode = #{grCode})
+</select>
+
+<update id="deletePurchaseOrder">
+    UPDATE purchaseOrder
+    SET poStatus = '삭제됨'
+    WHERE poCode = #{poCode}
+</update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 </mapper>
 

@@ -79,12 +79,22 @@
 <div class="details-buttons">
 <c:if test="${receiptDTO.grStatus eq '입고대기'}">
         <input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/receipt/receiptUpdate?grCode=${receiptDTO.grCode}'">
+    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
     </c:if>
 </div>
 
 </div><!-- main-details -->
 
-
+<script>
+// 삭제 확인메세지
+function confirmDelete() {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+        location.href = '${pageContext.request.contextPath}/receipt/receiptDelete?grCode=${receiptDTO.grCode}';
+    } else {
+    	
+    }
+}
+</script>
 
 
 

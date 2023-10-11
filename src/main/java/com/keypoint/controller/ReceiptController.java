@@ -180,7 +180,16 @@ public class ReceiptController {
 	
 	//------------------------------------------------------------------------------------------
 	
-	
+	@GetMapping("/receiptDelete")
+    public String receiptDelete(ReceiptDTO receiptDTO,@RequestParam("grCode") String grCode) {
+        receiptService.deleteReceiptAndRelatedData(grCode);
+        
+        if(receiptDTO != null) {
+			return "receipt/msgSuccess"; // 등록완료
+		}else {
+			return "receipt/msgFailed"; // 등록실패
+		}
+    } // receiptDelete
 	
 	
 	

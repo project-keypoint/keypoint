@@ -18,6 +18,9 @@ public class ReceiptService {
 	@Inject
 	private ReceiptDAO receiptDAO;
 	
+//	@Inject
+//    private PurchaseDAO purchaseDAO;
+	
 	
 	// -------------------------------------------------------------------------------------
 	
@@ -82,7 +85,16 @@ public class ReceiptService {
 	
 	//------------------------------------------------------------------------------
 	
-	
+	public void deleteReceiptAndRelatedData(String grCode) {
+        // 1. GoodsReceipt 삭제
+        receiptDAO.deleteGoodsReceipt(grCode);
+        
+        // 2. 연관된 PurchaseOrder를 찾고 삭제
+        String poCode = receiptDAO.getRelatedPurchaseOrderCode(grCode);
+        if (poCode != null) {
+            receiptDAO.deletePurchaseOrder(poCode);
+        }
+    } // deleteReceiptAndRelatedData
 	
 	
 	

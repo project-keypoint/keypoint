@@ -68,7 +68,22 @@ public class ReceiptDAO {
 	}// updateReceipt() [발주수정]
 	
 	
+	//----------------------------------------------------------------------------------
 	
+	// GoodsReceipt 삭제
+    public void deleteGoodsReceipt(String grCode) {
+        sqlSession.update(namespace + ".deleteGoodsReceipt", grCode);
+    } // deleteGoodsReceipt
+
+    // GoodsReceipt와 연관된 PurchaseOrder 코드 가져오기
+    public String getRelatedPurchaseOrderCode(String grCode) {
+        return sqlSession.selectOne(namespace + ".getRelatedPurchaseOrderCode", grCode);
+    } // getRelatedPurchaseOrderCode
+
+    // PurchaseOrder 삭제
+    public void deletePurchaseOrder(String poCode) {
+        sqlSession.update(namespace + ".deletePurchaseOrder", poCode);
+    } // deletePurchaseOrder
 	
 	
 	
