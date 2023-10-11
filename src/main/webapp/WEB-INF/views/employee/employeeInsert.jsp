@@ -83,7 +83,8 @@
 
 <div class="form-group-customer">
 <p>연락처</p>
-<input type="tel" id="empPhone" name="empPhone" class="form-control search-input">
+<input type="text" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()">
+<div class="divdup"></div>
 </div>
 
 <div class="form-group-customer">
@@ -244,6 +245,25 @@ function sample6_execDaumPostcode() {
 	  }).open();
 	}
 	
+	
+// 중복값 확인	
+function checkDuplicate() {
+	// 입력된 연락처 가져오기
+	    var cusNumber = document.getElementById("empPhone").value;
+
+	    $.ajax({
+	        url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
+	        data: { 'empPhone': empPhone },
+	        success: function (result) {
+	            if (result == 'iddup') {
+	                alert("중복");
+	            } else {
+	                alert("사용가능");
+	            }
+	        }
+	    });
+	}	
+	
 
 //유효성 검사
 function validateForm() {
@@ -258,6 +278,7 @@ function validateForm() {
     var empBirth = document.getElementById("empBirth").value;
     var empHiredate = document.getElementById("empHiredate").value;
     
+    
 // 	빈 필드 검사
     if (empName === "" || empAddress === "" || empPhone === "" ||
     	empTel === "" || empEmail === "" || departmentName === "" || empPosition === "" ||
@@ -267,6 +288,7 @@ function validateForm() {
     }
     return true;
 }	
+
 
 // 첨부파일 미리보기
 function setThumbnail(event) {
