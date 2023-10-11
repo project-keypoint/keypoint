@@ -52,7 +52,7 @@
 		select a.woCode, a.cusCode, b.cusName, a.productCode,
 		c.productName,
 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
-		a.empId, e.empName
+		a.empId, e.empName, d.shipSdate
 		from workOrder a
 		left join customer b on a.cusCode =
 		b.cusCode

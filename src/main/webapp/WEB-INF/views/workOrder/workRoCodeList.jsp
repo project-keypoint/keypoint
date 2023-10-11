@@ -104,27 +104,27 @@ h2{
 <table>
 <tr>
 	<td>수주코드</td><td><input type="text" name="roCode" style="width:100px;"></td>
-	<td>상품명</td><td><input type="text" name="productName" style="width:100px;"></td>
+	<td>상품코드</td><td><input type="text" name="productCode" style="width:100px;"></td>
 	<td><input type="submit" value="조회"></td></tr>
 </table>
 </form>
 <table>
 <tr><th>수주코드</th>
 	<th>업체코드</th>
-	<th>업체명</th>
+<!-- 	<th>업체명</th> -->
 	<th>상품코드</th>
-	<th>상품명</th>
+<!-- 	<th>상품명</th> -->
 	<th>수주수량</th>
 	<th>납품예정일</th>
 </tr>
 <c:forEach var="workRoCodeList" items="${workRoCodeList}">
-<tr onclick="selectWork('${workRoCodeList.roCode}','${workRoCodeList.cusCode}','${workRoCodeList.cusName}','${workRoCodeList.productCode}'
-				,'${workRoCodeList.productName},'${workRoCodeList.roCount},'${workRoCodeList.shipSdate}')">
+<tr onclick="selectWork('${workRoCodeList.roCode}','${workRoCodeList.cusCode}','${workRoCodeList.productCode}'
+				,'${workRoCodeList.roCount},'${workRoCodeList.shipSdate}')">
 	<td id="con">${workRoCodeList.roCode}</td>
 	<td id="con">${workRoCodeList.cusCode}</td>
-	<td id="con">${workRoCodeList.cusName}</td>
+<%-- 	<td id="con">${workRoCodeList.cusName}</td> --%>
 	<td id="con">${workRoCodeList.productCode}</td>
-	<td id="con">${workRoCodeList.productName}</td>
+<%-- 	<td id="con">${workRoCodeList.productName}</td> --%>
 	<td id="con">${workRoCodeList.roCount}</td>
 	<td id="con">${workRoCodeList.shipSdate}</td>
 <%-- 	<td id="con">${workInstructList.woName}</td> --%>
@@ -155,26 +155,26 @@ h2{
 
     <!-- 1페이지 이전 -->
 	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&roCode=${search.productName}&pageNum=${pageDTO.currentPage-1}"><</a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&productCode=${search.productCode}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
 <!-- 10페이지 이전 -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&roCode=${search.productName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&productCode=${search.productCode}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&roCode=${search.productName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&productCode=${search.productCode}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
 	</c:forEach>
 
 <!-- 1페이지 다음 -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&roCode=${search.productName}&pageNum=${pageDTO.currentPage+1}">></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&productCode=${search.productCode}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
 <!-- 10페이지 다음 -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&roCode=${search.productName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
+	<a href="${pageContext.request.contextPath }/workOrder/workRoCodeList?roCode=${search.roCode}&productCode=${search.productCode}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>
 	
 </div>
