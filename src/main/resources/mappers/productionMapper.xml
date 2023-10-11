@@ -36,7 +36,7 @@
 		b.roCode, b.cusCode
 		from production a
 		left join workOrder b on a.woCode = b.woCode
-		where a.woStatus != '삭제'
+		where b.woStatus != '삭제'
 		order by a.woCode desc
 		</select>
 		
