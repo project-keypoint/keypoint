@@ -16,11 +16,21 @@
      => 자동으로 프로그램 설치 Maven환경	=> 코드 검색
      => pom.xml 파일 넣기 => 자동으로 프로그램이 다운 받아짐
      디비연결 객체생성	 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://itwillbs-rds-class1-team3.cwyqfeylunq5.ap-northeast-2.rds.amazonaws.com:3306/keypoint?useSSL=false&amp;serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="class10420"></property>
+	</bean>
+	
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
+    <constructor-arg ref="dataSourceSpied" /> 
+    <property name="logFormatter"> 
+        <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter"> 
+            <property name="loggingType" value="MULTI_LINE" /> 
+            <property name="sqlPrefix" value="SQL : "/> 
+        </bean> 
+    </property> 
 	</bean>
 	
 	<!-- https://mybatis.org/mybatis-3/ko/index.html 

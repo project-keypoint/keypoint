@@ -119,7 +119,7 @@ h2{
 </tr>
 <c:forEach var="workRoCodeList" items="${workRoCodeList}">
 <tr onclick="selectWork('${workRoCodeList.roCode}','${workRoCodeList.cusCode}','${workRoCodeList.productCode}'
-				,'${workRoCodeList.roCount},'${workRoCodeList.shipSdate}')">
+				,'${workRoCodeList.roCount}','${workRoCodeList.shipSdate}')">
 	<td id="con">${workRoCodeList.roCode}</td>
 	<td id="con">${workRoCodeList.cusCode}</td>
 <%-- 	<td id="con">${workRoCodeList.cusName}</td> --%>
@@ -136,11 +136,11 @@ h2{
 		  
           opener.document.getElementById("roCode").value = a
           opener.document.getElementById("cusCode").value = b
-          opener.document.getElementById("cusName").value = c
-          opener.document.getElementById("productCode").value = d
-          opener.document.getElementById("productName").value = e
-          opener.document.getElementById("roCount").value = f
-          opener.document.getElementById("shipSdate").value = g
+//           opener.document.getElementById("cusName").value = c
+          opener.document.getElementById("productCode").value = c
+//           opener.document.getElementById("productName").value = e
+          opener.document.getElementById("woCount").value = d
+          opener.document.getElementById("shipSdate").value = e
           window.close();
 
         }
