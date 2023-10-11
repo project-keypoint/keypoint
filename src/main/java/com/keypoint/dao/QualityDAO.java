@@ -56,11 +56,17 @@ public class QualityDAO {
 	    try {
 	        sqlSession.update(namespace + ".qcTransferStatus", qualityDTO);
 	        sqlSession.update(namespace + ".qcTransferStock", qualityDTO);
+	        sqlSession.insert(namespace + ".qcTransferDefect", qualityDTO);
 	        return true;
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return false;
 	    }
 	}// qcTransfer [품질검사후 상품이동]
+
+	public void qcDeleteChecked(QualityDTO qualityDTO) {
+		System.out.println("QualityDAO qcDeleteChecked()");
+		sqlSession.update(namespace + ".qcDeleteChecked", qualityDTO);
+	}// qcDeleteChecked [품질검사 다중삭제(체크)]
 
 }

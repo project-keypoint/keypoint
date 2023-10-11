@@ -203,7 +203,7 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteShipment()">
 </div>
 <div id="pagination_control_shipment" class="page-buttons">
     <c:if test="${pageDTO1.startPage > pageDTO1.pageBlock}">
@@ -240,13 +240,62 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-// 다중삭제 테스트
+// 다중삭제(수주)
 function deleteReceive() {
   // 선택된 체크박스 요소들을 가져옵니다.
   var checkboxes = $('input[name="delete-list-receive"]:checked');
   // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
   if (checkboxes.length === 0) {
     alert("삭제할 항목을 선택해주세요.");
+    return;
+  }
+  //입력 대화상자 표시
+  var userInput = prompt("수주 목록을 삭제합니다.\n삭제하려면 '삭제'라고 입력하세요.");
+
+  if (userInput !== "삭제") {
+    return;
+  }
+  // 선택된 체크박스의 ${receiveDTO.roCode} 값을 배열에 저장합니다.
+  var roCodes = [];
+  checkboxes.each(function() {
+    var row = $(this).closest('.table-body');
+    var roCode = row.find('td:nth-child(2)').text(); // 두 번째 열에 해당하는 값
+    roCodes.push(roCode);
+  });
+   // 확인용 로그 출력
+   console.log("전송 데이터:", JSON.stringify({ roCodes: roCodes }));
+   // Ajax 요청을 보냅니다.
+   $.ajax({
+     type: "POST",
+     url: '${pageContext.request.contextPath}/receive/receiveDeleteChecked',
+     contentType: "application/json",
+     data: JSON.stringify({ roCodes: roCodes }),
+     success: function(result) {
+       console.log(result);
+       alert("성공");
+       location.reload();
+     },
+     error: function(xhr, status, error) {
+    	   console.error('Error:', xhr.responseText);
+    	   alert('Error: ' + xhr.responseText);
+    	}
+
+   });
+}
+
+//다중삭제(납품)
+function deleteShipment() {
+  // 선택된 체크박스 요소들을 가져옵니다.
+  var checkboxes = $('input[name="delete-list-shipment"]:checked');
+  // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
+  if (checkboxes.length === 0) {
+    alert("삭제할 항목을 선택해주세요.");
+    return;
+  }
+  //입력 대화상자 표시
+  var userInput = prompt("납품 목록을 삭제합니다.\n삭제하려면 '삭제'라고 입력하세요.");
+
+  if (userInput !== "삭제") {
     return;
   }
   // 선택된 체크박스의 ${receiveDTO.roCode} 값을 배열에 저장합니다.

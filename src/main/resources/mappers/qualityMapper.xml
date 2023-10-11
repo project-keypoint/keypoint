@@ -15,6 +15,7 @@
 		left join receivedOrder d on d.roCode = c.roCode
 		left join product e on b.productCode = e.productCode
 		left join employees f on a.qcEmpId = f.empId
+		where (a.qcStatus != '삭제' OR a.qcStatus IS NULL)
 		order by qcCode asc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -73,6 +74,19 @@
 		WHERE productCode = #{productCode}
 	</update>
 	
+	<update id="qcDeleteChecked">
+		UPDATE qualityControl
+		SET qcStatus = '삭제'
+		WHERE poCode IN (
+       <foreach item="poCode" collection="poCodes" open="" separator="," close="">
+           #{poCode}
+       </foreach>
+		)
+	</update>
 	
+	<insert id="qcTransferDefect">
+		INSERT INTO disposedItems (disCode, disItemCode, disCount, disDate, disEmpId, disMemo)
+		VALUES (#{disCode}, #{productCode}, #{qcDefect}, now(), #{qcEmpId}, '품질검사 불량');
+	</insert>
 	
 </mapper>

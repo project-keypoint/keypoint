@@ -56,7 +56,10 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+	<th>
+	<input type="checkbox" id="delete-list-qcAll" name="delete-list-qc" data-group="delete-list-qc">
+	<input type="hidden" name="poCode" value="">
+	</th>
 	<th>품질검사코드</th>
 	<th>납품예정일</th>
     <th>상품코드</th>
@@ -78,7 +81,10 @@
 
 <c:forEach var="qualityDTO" items="${qcList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+	<td>
+	<input type="checkbox" id="delete-list-qc" name="delete-list-qc" data-group="delete-list-qc">
+	<input type="hidden" id="poCode" name="poCode" value="${qualityDTO.poCode}">
+	</td>
 	<td>
 	<c:choose>
         <c:when test="${empty qualityDTO.qcCode}">-</c:when>
@@ -147,7 +153,7 @@
 	<c:choose>
     <c:when test="${qualityDTO.qcPass + qualityDTO.qcDefect == qualityDTO.poCount && qualityDTO.qcTest1 == '완료' && qualityDTO.qcTest2 == '완료' && qualityDTO.qcTest3 == '완료' && qualityDTO.qcTransfer == '미완료'}">
 <td>
-  <input type="button" value="창고" class="btn btn-primary mybutton1" onclick="confirmQcTransfer('${qualityDTO.qcCode}', '${qualityDTO.productCode}', '${qualityDTO.qcPass}')">
+  <input type="button" value="창고" class="btn btn-primary mybutton1" onclick="confirmQcTransfer('${qualityDTO.qcCode}', '${qualityDTO.productCode}', '${qualityDTO.qcPass}', '${qualityDTO.qcDefect}', '${qualityDTO.qcEmpId}')">
 </td>
     </c:when>
     <c:otherwise>
@@ -161,7 +167,7 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteQc()">
 </div>
 
 <div id="page_control" class="page-buttons">
@@ -201,7 +207,7 @@
 
 <script type="text/javascript">
 // 품질검사 후 합격상품 재고이동, 상태 완료처리
-function confirmQcTransfer(qcCode, productCode, qcPass) {
+function confirmQcTransfer(qcCode, productCode, qcPass, qcDefect, qcEmpId) {
     if (confirm('확인하시겠습니까?')) {
         $.ajax({
             type: "POST",
@@ -209,7 +215,9 @@ function confirmQcTransfer(qcCode, productCode, qcPass) {
             data: {
                 "qcCode": qcCode,
                 "productCode": productCode,
-                "qcPass": qcPass
+                "qcPass": qcPass,
+                "qcDefect": qcDefect,
+                "qcEmpId": qcEmpId
             },
             success: function(result) {
                 const data = $.trim(result);
@@ -252,29 +260,76 @@ $(function() {
 });
 
 // 체크박스(삭제용) 전체선택
-var selectAllCheckbox = document.getElementById("delete-list-all");
-var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
-selectAllCheckbox.addEventListener("change", function () {
+function handleCheckboxGroup(selectAllCheckbox, checkboxes) {
+    selectAllCheckbox.addEventListener("change", function () {
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    });
     checkboxes.forEach(function (checkbox) {
-        checkbox.checked = selectAllCheckbox.checked;
+        checkbox.addEventListener("change", function () {
+            if (!this.checked) {
+                selectAllCheckbox.checked = false;
+            } else {
+                var allChecked = true;
+                checkboxes.forEach(function (c) {
+                    if (!c.checked) {
+                        allChecked = false;
+                    }
+                });
+                selectAllCheckbox.checked = allChecked;
+            }
+        });
     });
-});
-checkboxes.forEach(function (checkbox) {
-    checkbox.addEventListener("change", function () {
-        if (!this.checked) {
-            selectAllCheckbox.checked = false;
-        } else {
-            // 모든 체크박스가 선택되었는지 확인
-            var allChecked = true;
-            checkboxes.forEach(function (c) {
-                if (!c.checked) {
-                    allChecked = false;
-                }
-            });
-            selectAllCheckbox.checked = allChecked;
-        }
-    });
-});
+}
+var selectAllReceive = document.getElementById("delete-list-qcAll");
+var checkReceive = document.querySelectorAll('[data-group="delete-list-qc"]');
+handleCheckboxGroup(selectAllReceive, checkReceive); //수주체크
+
+//다중삭제(품질검사)
+function deleteQc() {
+  // 선택된 체크박스 요소들을 가져옵니다.
+  var checkboxes = $('input[name="delete-list-qc"]:checked');
+  // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
+  if (checkboxes.length === 0) {
+    alert("삭제할 항목을 선택해주세요.");
+    return;
+  }
+  
+  var userInput = prompt("품질검사 목록을 삭제합니다. 삭제하려면 '삭제'라고 입력하세요.");
+  
+  if (userInput !== "삭제") {
+    return;
+  }
+  
+  // 선택된 체크박스의 poCode 값을 배열에 저장합니다.
+  var poCodes = [];
+  
+  checkboxes.each(function() {
+    var row = $(this).closest('.table-body');
+    var poCode = row.find('input[name="poCode"]').val(); // input 요소에서 value 값 가져오기
+    poCodes.push(poCode);
+  });
+   // 확인용 로그 출력
+   console.log("전송 데이터:", JSON.stringify({ poCodes: poCodes }));
+   // Ajax 요청을 보냅니다.
+   $.ajax({
+     type: "POST",
+     url: '${pageContext.request.contextPath}/qc/qcDeleteChecked',
+     contentType: "application/json",
+     data: JSON.stringify({ poCodes: poCodes }),
+     success: function(result) {
+       console.log(result);
+       alert("성공");
+       location.reload();
+     },
+     error: function(xhr, status, error) {
+    	   console.error('Error:', xhr.responseText);
+    	   alert('Error: ' + xhr.responseText);
+    	}
+   });
+}
+
 
 // 품질상세내용 새창
 function openDetails(poCode) {

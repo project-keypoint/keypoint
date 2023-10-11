@@ -11,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.QualityDTO;
+import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.QualityService;
 
 @Controller
@@ -40,7 +42,7 @@ public class QualityController {
 		String search = request.getParameter("search");
 		
 		//한 화면에 보여줄 글개수 설정
-		int pageSize = 2;
+		int pageSize = 5;
 		// 현 페이지 번호 가져오기
 		String pageNum=request.getParameter("pageNum");
 		// 페이지 번호가 없을 경우 => "1"로 설정
@@ -131,13 +133,37 @@ public class QualityController {
 	public ResponseEntity<String> qcTransfer(QualityDTO qualityDTO) {
 	    System.out.println("QualityController qcTransfer");
 	    System.out.println(qualityDTO);
+	    
+	    String disCode = codeChangeProduct("DISP");//
+	    qualityDTO.setDisCode(disCode);
+	    
 	    boolean result = qualityService.qcTransfer(qualityDTO);
 	    if (result)
 	        return new ResponseEntity<>("success", HttpStatus.OK);
 	    return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
 	}// qcTransfer [품질검사후 상품이동]
 	
+	private int numP = 1;
+	public String codeChangeProduct(String code_id) {
+        return String.format("%s%05d", code_id, numP++);
+    }// disCode 자동증가(상품)
 	
+	@PostMapping("/qcDeleteChecked")
+	public ResponseEntity<String> receiveDeleteChecked(@RequestBody QualityDTO qualityDTO) {
+	    try {
+	        qualityService.qcDeleteChecked(qualityDTO);
+	        return ResponseEntity.ok("success");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	    }
+	}// qcDeleteChecked [품질검사 다중삭제(체크)]
+	
+	@GetMapping("/disposedList") // 폐기목록 페이지
+	public String test() {
+		System.out.println("QualityController qc/disposedList");
+		return "qc/disposedList";
+	}// disposedList [폐기목록 페이지]
 	
 	
 }//class
