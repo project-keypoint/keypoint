@@ -174,27 +174,24 @@
 						<input type="button" value="삭제"
 							class="btn btn-secondary mybutton1">
 					</div>
-
-					<div id="page_control_receive" class="page-buttons">
-						<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-							<a
-								href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}"
-								class="page-button">&lt;</a>
-						</c:if>
-
-						<c:forEach var="i" begin="${pageDTO.startPage}"
-							end="${pageDTO.endPage}" step="1">
-							<a
-								href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${i}"
-								class="page-button page-button-active">${i}</a>
-						</c:forEach>
-
-						<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-							<a
-								href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}"
-								class="page-button">&gt;</a>
-						</c:if>
-					</div>
+					<div id="page_control" class="page-buttons">
+  					  <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+      					  <a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+   					 </c:if>
+   					 <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+     				   <c:choose>
+           			 <c:when test="${i eq pageDTO.pageNum}">
+              			  <a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${i}&search=${pageDTO.search}" class="page-button page-button-active">${i}</a>
+          			  </c:when>
+         			   <c:otherwise>
+             			   <a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+         			   </c:otherwise>
+        				</c:choose>
+   					 </c:forEach>
+  					  <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+      					  <a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
+   						 </c:if>
+							</div>
 				</div>
 			</div>
 			<!-- contents -->

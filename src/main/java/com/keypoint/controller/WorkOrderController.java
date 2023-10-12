@@ -51,7 +51,7 @@ public class WorkOrderController {
 		pageDTO.setCurrentPage(currentPage);
 		
 		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList(pageDTO);
-		List<LineDTO> lineList = lineService.getLineList();
+		List<LineDTO> lineList = lineService.getLineList(pageDTO);
 		System.out.println(workOrderList.get(0).getEmpName());
 		
 		int count = workOrderService.getWorkOrderCount();	

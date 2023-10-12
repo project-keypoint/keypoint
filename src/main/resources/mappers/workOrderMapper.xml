@@ -60,6 +60,7 @@
 		= e.empId
 		where a.woStatus != '삭제'
 		order by a.woCode desc
+		limit #{startRow}, #{pageSize}
 	</select>
 	
 	<select id="getWorkOrderCount" resultType="java.lang.Integer">
