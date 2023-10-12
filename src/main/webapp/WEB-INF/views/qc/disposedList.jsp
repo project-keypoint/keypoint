@@ -48,18 +48,59 @@
 </div><!-- search-bar -->
 <br>
 <div class="dis-select-buttons">
-<div>
-<input type="button" class="btn btn-secondary mybutton1" value="전체">
-<input type="button" class="btn btn-secondary mybutton1" value="상품">
-<input type="button" class="btn btn-secondary mybutton1" value="자재">
+<div style="display: flex;">
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="">
+<c:choose>
+<c:when test="${pageDTO.search eq '' or empty pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="DISQ">
+<c:choose>
+<c:when test="${'DISQ' eq pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="DISP">
+<c:choose>
+<c:when test="${'DISP' eq pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="DISM">
+<c:choose>
+<c:when test="${'DISM' eq pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="자재">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="자재">
+</c:otherwise>
+</c:choose>
+</form>
 </div>
 <div>
-<input type="button" class="btn btn-secondary mybutton1" value="상품">
-<input type="button" class="btn btn-secondary mybutton1" value="자재">
+<input type="button" class="btn btn-secondary mybutton1" value="상품" onclick="toggleTable('hide1', 'hide2')">
+<input type="button" class="btn btn-secondary mybutton1" value="자재" onclick="toggleTable('hide2', 'hide1')">
 </div>
 </div>
 <div style="display: flex; justify-content: space-between;">
-<div style="width: 69%;">
+<div style="width: 74%;">
 <table class="table-list">
 <tr class="table-head">
 	<th>폐기코드</th>
@@ -69,7 +110,7 @@
     <th>담당자</th>
     <th>이름</th>
     <th>폐기일자</th>
-    <th>폐기내용</th>
+    <th>　　　폐기내용　　　</th>
 </tr>
 <c:forEach var="qualityDTO" items="${disposedList}">
 <tr class="table-body">
@@ -88,14 +129,15 @@
 	<td>${qualityDTO.disCount}</td>
 	<td>${qualityDTO.disEmpId}</td>
 	<td>${qualityDTO.disEmpName}</td>
-	<td><c:out value="${fn:substring(qualityDTO.disDate, 0, 10)}" /></td>
+	<td><c:out value="${fn:substring(qualityDTO.disDate, 0, 16)}" /></td>
 	<td>${qualityDTO.disMemo}</td>
 </tr>
 </c:forEach>  
 </table><!-- table1 -->
 <div class="content-bottom">
 <div>
-<input type="button" value="추가(상품)" class="btn btn-primary mybutton1" onclick="openDisInsert()">
+<input type="button" value="추가(상품)" class="btn btn-primary mybutton1" onclick="openDisPInsert()">
+<input type="button" value="추가(자재)" class="btn btn-primary mybutton1" onclick="openDisMInsert()">
 </div>
 <div id="page_control" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -117,8 +159,9 @@
 </div>
 </div>
 </div>
-<div class="page-buttons" style="width: 29%;">
-<table id="content1" class="table-list" style="display: none;">
+<div class="page-buttons" style="width: 24%;">
+<div id="hide1" style="width: 100%;">
+<table id="content1" class="table-list">
 <tr class="table-head">
 	<th>상품코드</th>
 	<th>　상품명　</th>
@@ -132,7 +175,8 @@
 </tr>
 </c:forEach>
 </table><!-- 상품 disSum -->
-
+</div>
+<div id="hide2" style="display: none; width: 100%;">
 <table id="content2" class="table-list">
 <tr class="table-head">
 	<th>자재코드</th>
@@ -147,6 +191,7 @@
 </tr>
 </c:forEach>
 </table><!-- 자재 disSum -->
+</div>
 </div>
 
 
@@ -165,15 +210,32 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-//폐기등록 새창
-function openDisInsert() {
-    var url = '${pageContext.request.contextPath}/qc/disInsert';
+//폐기등록 새창(상품)
+function openDisPInsert() {
+    var url = '${pageContext.request.contextPath}/qc/disInsertP';
     var windowWidth = 500;
     var windowHeight = 425;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+//폐기등록 새창(자재)
+function openDisMInsert() {
+    var url = '${pageContext.request.contextPath}/qc/disInsertM';
+    var windowWidth = 500;
+    var windowHeight = 425;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+// disSum switch
+function toggleTable(showId, hideId) {
+	  var showTable = document.getElementById(showId);
+	  var hideTable = document.getElementById(hideId);
+
+	  showTable.style.display = "block";
+	  hideTable.style.display = "none";
+	}
 </script>
 
 </body>
