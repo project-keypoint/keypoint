@@ -45,10 +45,38 @@ public class QualityDTO {
     private String disItemCode;
     private int disCount;
     private String disEmpId;
+    private String disEmpName;
     private String disMemo;
     private String disDate;
+    private int disSum;
+    private String materialCode;
+    private String materialName;
     
     
+	public String getMaterialCode() {
+		return materialCode;
+	}
+	public void setMaterialCode(String materialCode) {
+		this.materialCode = materialCode;
+	}
+	public String getMaterialName() {
+		return materialName;
+	}
+	public void setMaterialName(String materialName) {
+		this.materialName = materialName;
+	}
+	public int getDisSum() {
+		return disSum;
+	}
+	public void setDisSum(int disSum) {
+		this.disSum = disSum;
+	}
+	public String getDisEmpName() {
+		return disEmpName;
+	}
+	public void setDisEmpName(String disEmpName) {
+		this.disEmpName = disEmpName;
+	}
 	public String getDisCode() {
 		return disCode;
 	}

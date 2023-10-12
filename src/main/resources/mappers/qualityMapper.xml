@@ -89,4 +89,46 @@
 		VALUES (#{disCode}, #{productCode}, #{qcDefect}, now(), #{qcEmpId}, '품질검사 불량');
 	</insert>
 	
+	<insert id="disPInsert">
+		INSERT INTO disposedItems (disCode, disItemCode, disCount, disDate, disEmpId, disMemo)
+		VALUES (#{disCode}, #{productCode}, #{disCount}, now(), #{disEmpId}, #{disMemo});
+	</insert>
+	
+	<update id="disPMinus">
+		UPDATE product 
+		SET productCount = productCount - #{disCount}
+		WHERE productCode = #{productCode}
+	</update>
+	
+	<select id="getDisposedList" resultType="com.keypoint.dto.QualityDTO">
+		select a.disCode, a.disItemCode, b.productName, c.materialName, a.disCount,
+		         a.disEmpId, d.empName as disEmpName, a.disDate, a.disMemo
+		from disposedItems a
+		left join product b on a.disItemCode = b.productCode
+		left join material c on a.disItemCode = c.materialCode
+		left join employees d on a.disEmpId = d.empId
+		order by a.disCode desc
+		limit #{startRow}, #{pageSize}
+	</select>
+	<select id="getDisposedCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM disposedItems
+	</select>
+	
+	<select id="getDisposedSum" resultType="com.keypoint.dto.QualityDTO">
+		SELECT productCode, productName,
+	   			   IFNULL((SELECT SUM(disCount)
+	                           FROM disposedItems
+                               WHERE disItemCode = productCode), 0) AS disSum
+		FROM product;
+	</select>
+	
+	<select id="getDisposedSumMat" resultType="com.keypoint.dto.QualityDTO">
+		SELECT materialCode, materialName,
+	   			   IFNULL((SELECT SUM(disCount)
+	                           FROM disposedItems
+                               WHERE disItemCode = materialCode), 0) AS disSum
+		FROM material;
+	</select>
+	
 </mapper>

@@ -244,6 +244,9 @@ width: 310px;
 	width: 310px;
 	margin-right: 25px;
 }
+#disMemo.search-input {
+	width: 335px;
+}
 .f-bold {
 font-weight: bold;
 }
@@ -384,4 +387,9 @@ justify-content: center;
 }
 .text-right {
 text-align: right;
+}
+.dis-select-buttons {
+display: flex;
+justify-content: space-between;
+margin-bottom: 5px;
 }

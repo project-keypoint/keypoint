@@ -68,5 +68,32 @@ public class QualityDAO {
 		System.out.println("QualityDAO qcDeleteChecked()");
 		sqlSession.update(namespace + ".qcDeleteChecked", qualityDTO);
 	}// qcDeleteChecked [품질검사 다중삭제(체크)]
+	
+	@Transactional
+	public void disPInsert(QualityDTO qualityDTO) {
+		System.out.println("QualityDAO disInsert()");
+		sqlSession.insert(namespace + ".disPInsert", qualityDTO);
+		sqlSession.update(namespace + ".disPMinus", qualityDTO);
+	}// disInsert [폐기등록]
+
+	public List<QualityDTO> getDisposedList(PageDTO pageDTO) {
+		System.out.println("DisposedDAO getDisposedList()");
+		return sqlSession.selectList(namespace+".getDisposedList", pageDTO);
+	}
+
+	public int getDisposedCount(PageDTO pageDTO) {
+		System.out.println("DisposedDAO getDisposedCount()");
+		return sqlSession.selectOne(namespace+".getDisposedCount");
+	}
+
+	public List<QualityDTO> getDisposedSum() {
+		System.out.println("DisposedDAO getDisposedSum()");
+		return sqlSession.selectList(namespace+".getDisposedSum");
+	}
+
+	public List<QualityDTO> getDisposedSumMat() {
+		System.out.println("DisposedDAO getDisposedSumMat()");
+		return sqlSession.selectList(namespace+".getDisposedSumMat");
+	}
 
 }

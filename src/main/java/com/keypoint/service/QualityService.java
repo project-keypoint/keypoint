@@ -74,5 +74,46 @@ public class QualityService {
 		qualityDAO.qcDeleteChecked(qualityDTO);
 	}// qcDeleteChecked [품질검사 다중삭제(체크)]
 
+	public void disPInsert(QualityDTO qualityDTO) {
+		System.out.println("QualityService disInsertPro()");
+		String disCode = codeChangeDisPro("DISP");//
+	    qualityDTO.setDisCode(disCode);
+	    
+		qualityDAO.disPInsert(qualityDTO);
+	}// disInsert [폐기등록]
+	
+	private int numP = 1;
+	public String codeChangeDisPro(String code_id) {
+        return String.format("%s%04d", code_id, numP++);
+    }// disCode 자동증가(상품)
+
+	public List<QualityDTO> getDisposedList(PageDTO pageDTO) {
+		System.out.println("QualityService getDisposedList()");
+		// 10개씩 가져올때 현페이지에 대한 시작하는 행번호 구하기
+		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize() + 1;
+		// 끝나는 행번호 구하기
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+		
+		// 디비 startRow - 1
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		System.out.println("startRow"+startRow+"endRow"+endRow);
+		return qualityDAO.getDisposedList(pageDTO);
+	}
+
+	public int getDisposedCount(PageDTO pageDTO) {
+		System.out.println("DisposedService getDisposedCount()");
+		return qualityDAO.getDisposedCount(pageDTO);
+	}
+
+	public List<QualityDTO> getDisposedSum() {
+		System.out.println("QualityService getDisposedSum()");
+		return qualityDAO.getDisposedSum();
+	}
+
+	public List<QualityDTO> getDisposedSumMat() {
+		System.out.println("QualityService getDisposedSumMat()");
+		return qualityDAO.getDisposedSumMat();
+	}
 	
 }
