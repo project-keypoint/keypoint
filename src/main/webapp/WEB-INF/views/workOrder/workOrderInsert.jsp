@@ -36,18 +36,16 @@
 				</div>
 				<div class="search-bar-popup">
 					<div class="form-group-receive">
-						<p>업체명</p>
+						<p>업체코드</p>
 						<input type="text" id="cusCode" name="cusCode"
-							class="form-control search-input inputcode" value="업체검색">
-						<input type="text" id="cusName" name="cusName"
-							class="form-control search-input inputname" value="업체명" readonly>
+							class="form-control search-input inputcode" value="업체검색" readonly>
+						
 					</div>
 					<div class="form-group-receive">
-						<p>상품명</p>
+						<p>상품코드</p>
 						<input type="text" id="productCode" name="productCode"
-							class="form-control search-input inputcode" value="상품검색">
-						<input type="text" id="productName" name="productName"
-							class="form-control search-input inputname" value="상품코드" readonly>
+							class="form-control search-input inputcode" value="상품검색" readonly>
+						
 					</div>
 				</div>
 

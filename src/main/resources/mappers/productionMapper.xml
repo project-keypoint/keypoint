@@ -8,7 +8,7 @@
 	
 	<insert id="insertProduction">
 		insert into production(poCode, woCode, productCode, lineCode, empId, poCount, 
-		poDate, qcDefectRate, woStatus, productName, woCount, poGood, poErr, poCause,
+		poDate, qcDefectRate, woStatus, productName,woCount, poGood, poErr, poCause,
 		roCode, cusCode, empName)
 		values(CONCAT('PO', DATE_FORMAT(NOW(),
 		'%y%m%d%H%i%s')),
@@ -32,7 +32,7 @@
 	<select id="getProductionList"
 		resultType="com.keypoint.dto.ProductionDTO">
 		select a.poCode, b.woCode, a.poDate, b.woStatus, b.lineCode,
-		b.productCode, b.productName, b.woCount, a.poGood, a.poErr, a.poCause,
+		b.productCode, b.productName, a.woCount, a.poGood, a.poErr, a.poCause,
 		b.roCode, b.cusCode
 		from production a
 		left join workOrder b on a.woCode = b.woCode
@@ -43,9 +43,10 @@
 		
 	
 	<select id="getProductionCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM production
-<!-- 		WHERE woStatus != '삭제' -->
+		select COUNT(*)
+		from production a
+		left join workOrder b on a.woCode = b.woCode
+		where b.woStatus != '삭제'
 	</select>
 	
 	

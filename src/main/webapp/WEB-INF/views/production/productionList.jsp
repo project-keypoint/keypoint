@@ -151,7 +151,7 @@
 								<td>${productionDTO.lineCode}</td>
 								<td>${productionDTO.productCode}</td>
 								<td>${productionDTO.productName}</td>
-								<td>${productionDTO.woCount}</td>
+								<td>${productionDTO.poCount}</td>
 								<td>${productionDTO.poGood}</td>
 								<td>${productionDTO.poErr}</td>
 								<td>${productionDTO.poCause}</td>
@@ -171,7 +171,13 @@
 				</div>
 				<!-- table -->
 				<div class="content-bottom">
-<div id="page_control" class="page-buttons">
+				<div>
+						<input type="button" value="생산실적등록"
+							class="btn btn-primary mybutton1" onclick="openInsert()">
+						<input type="button" value="삭제"
+							class="btn btn-secondary mybutton1">
+					</div>
+					<div id="page_control" class="page-buttons">
   					  <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
       					  <a href="${pageContext.request.contextPath}/production/productionList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
    					 </c:if>

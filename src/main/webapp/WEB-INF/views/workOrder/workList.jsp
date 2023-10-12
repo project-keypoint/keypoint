@@ -112,12 +112,12 @@ h2 {
 			<th>지시수량</th>
 			<th>수주번호</th>
 			<th>거래처코드</th>
-			<th>거래처명<th>
+			<th>거래처명</th>
 		</tr>
 		<c:forEach var="workList" items="${workList}">
 			<tr 
-				onclick="selectWork('${workList.woCode}','${workList.lineCode}','${workList.productCode}','${workList.productName}'
-				,'${workList.woCount}','${workList.roCode}','${workList.cusCode}','${workList.cusName}')">
+				onclick="selectWork('${workList.woCode}','${workList.lineCode}','${workList.productCode}'
+				,'${workList.productName}','${workList.woCount}','${workList.roCode}','${workList.cusCode}','${workList.cusName}')">
 				<td id="con">${workList.woCode}</td>
 				<td id="con">${workList.lineCode}</td>
 				<td id="con">${workList.productCode}</td>
