@@ -153,7 +153,7 @@
 		}
 
 		function fncClearTime() {
-		    iSecond = 10800; // 세션 시간을 초 단위로 설정 (예: 3시간 60*180분 / 계산 60*n분)
+		    iSecond = 1800; // 세션 시간을 초 단위로 설정 (예: 3시간 60*180분 / 계산 60*n분)
 		}
 
 		function initTimer() {
@@ -181,8 +181,10 @@
 		    var hours = Math.floor(seconds / 3600);
 		    var minutes = Math.floor((seconds % 3600) / 60);
 		    var remainingSeconds = seconds % 60;
-		    return "&nbsp;" + Lpad(hours, 2) + "시간 " + Lpad(minutes, 2) + "분 " + Lpad(remainingSeconds, 2) + "초 ";
+		    return "&nbsp;"  + Lpad(minutes, 2) + "분 " + Lpad(remainingSeconds, 2) + "초 ";
+			//        + Lpad(hours, 2) + "시간 " 붙여넣으면 시간나옴
 		}
+		
 
 		function Lpad(str, len) {
 		    str = str + "";
