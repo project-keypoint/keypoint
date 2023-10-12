@@ -354,14 +354,20 @@ function setThumbnail(event) {
   }
   reader.readAsDataURL(file);
 }
-
-
-
-
-
-
-
-
+// 비밀번호값 불러오기
+document.addEventListener("DOMContentLoaded", function() {
+    // Ajax 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "${pageContext.request.contextPath}/employee/getInitialPass", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var initialPass = xhr.responseText;
+            var empPassField = document.getElementById("empPass");
+            empPassField.value = initialPass; // empPass 필드에 서버에서 받은 값을 설정
+        }
+    };
+    xhr.send();
+});
 
 </script>
 </body>

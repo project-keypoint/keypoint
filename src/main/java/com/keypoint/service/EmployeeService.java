@@ -86,6 +86,11 @@ public class EmployeeService {
 
 		return employeeDAO.empPhoneCheck(empPhone);
 	} // empPhoneCheck
+
+
+	public int getInitialPass() {
+        return employeeDAO.getInitialPass();
+    }
 	
 
 

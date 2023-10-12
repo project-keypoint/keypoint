@@ -71,6 +71,12 @@
 		where empPhone = #{empPhone}
 	</select>
 	
+	<select id="getInitialPass" resultType="java.lang.Integer">
+		select (max(empId) + 1)
+		from employees
+		
+	</select>
+	
 	
 </mapper>
 

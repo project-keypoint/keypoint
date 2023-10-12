@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.keypoint.dto.PageDTO;
@@ -257,7 +258,13 @@ public class EmployeeController {
 	} // photoPro
 	
 	
-
+	
+	@GetMapping("/getInitialPass")
+	@ResponseBody
+	public String getInitialPass() {
+	    int initialPass = employeeService.getInitialPass();
+	    return String.valueOf(initialPass);
+	}
 
 	
 	

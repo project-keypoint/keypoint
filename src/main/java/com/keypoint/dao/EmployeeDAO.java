@@ -75,6 +75,10 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".empPhoneCheck", empPhone);
 	} // empPhoneCheck
 
+	 public int getInitialPass() {
+	        return sqlSession.selectOne(namespace+".getInitialPass");
+	    }
+
 	
 	
 	
