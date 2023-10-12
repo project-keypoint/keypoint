@@ -55,7 +55,7 @@
 
 <div class="form-group-receive">
 <p>발주금액</p>
-<input type="text" class="form-control search-input" id="poPrice" name="poPrice" placeholder="발주금액">
+<input type="text" class="form-control search-input" id="poPrice" name="poPrice" placeholder="발주금액" readonly>
 </div>
 
 

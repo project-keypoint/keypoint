@@ -113,7 +113,16 @@
     <td>${receiptDTO.poCount}EA</td>
     <td>${receiptDTO.grCount}EA</td>
     <td>${receiptDTO.grEcount == 0 ? '-' : (receiptDTO.grCount - receiptDTO.grEcount)}</td>
-    <td>${receiptDTO.grEcount == 0 ? '-' : receiptDTO.grEcount}</td>
+    <td>
+     <c:choose>
+	    <c:when test="${receiptDTO.grEcount == 0}">
+	        <span style="color: black;">-</span>
+	    </c:when>
+	    <c:otherwise>
+	        <span style="color: skyblue;">${receiptDTO.grEcount}</span>
+	    </c:otherwise>
+	</c:choose>
+    </td>
     <td>${receiptDTO.grDate}</td>
     <td>${receiptDTO.grOwner}</td>
     <td>
@@ -303,6 +312,30 @@ function openDetails(grCode) {
 }
 </script>
 
+
+<script type="text/javascript">
+    // 이 함수는 'grEcount' 값을 업데이트할 때 호출됩니다.
+    function updateGrEcount(grCode, newGrEcount) {
+        // 'grEcount' 업데이트 로직을 수행한 후에
+        // 특정 'grCode'의 'grEcount' 값을 'newGrEcount'로 업데이트한 경우,
+        // 해당 행의 텍스트 색상을 변경합니다.
+        
+        // 예를 들어, jQuery를 사용하여 해당 업데이트를 수행할 수 있습니다.
+        // 아래는 예시 코드입니다:
+        
+        // 예시: 'grCode'가 'yourGrCode'이고 'newGrEcount'가 5라면
+        var yourGrCode = 'yourGrCode';
+        var newGrEcount = 5;
+        
+        if (grCode === yourGrCode) {
+            var grEcountElement = document.getElementById('grEcount_' + yourGrCode); // 해당 행의 'grEcount' 엘리먼트
+            if (grEcountElement) {
+                grEcountElement.style.color = 'skyblue'; // 색상을 하늘색으로 변경
+                grEcountElement.textContent = newGrEcount; // 텍스트 업데이트
+            }
+        }
+    }
+</script>
 
 
 
