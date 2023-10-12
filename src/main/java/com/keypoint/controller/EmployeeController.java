@@ -257,8 +257,8 @@ public class EmployeeController {
 	} // photoPro
 	
 	
-	
-	
+
+
 	
 	
 

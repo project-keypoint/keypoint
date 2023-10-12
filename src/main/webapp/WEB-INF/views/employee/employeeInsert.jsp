@@ -26,7 +26,7 @@
 
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
-</div>
+<!-- </div> -->
 
 <!-- <div class="form-group-customer"> -->
 <!-- <p>사원ID</p> -->
@@ -81,11 +81,22 @@
 <!-- // 주소 -->
 
 
+<!-- <div class="form-group-customer"> -->
+<!-- <p>연락처</p> -->
+<!-- <input type="text" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()"> -->
+<!-- <div class="divdup"></div> -->
+<!-- </div> -->
+
+
 <div class="form-group-customer">
-<p>연락처</p>
-<input type="text" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()">
-<div class="divdup"></div>
+    <p>연락처</p>
+    <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()">
 </div>
+    <div class="divdup"></div>
+
+
+
+
 
 <div class="form-group-customer">
 <p>내선번호</p>
@@ -155,6 +166,10 @@
 </div>
 
 <p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
+
+</div>
+
+
 
 <div class="details-buttons">
 <input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
@@ -246,24 +261,74 @@ function sample6_execDaumPostcode() {
 	}
 	
 	
-// 중복값 확인	
-function checkDuplicate() {
-	// 입력된 연락처 가져오기
-	    var cusNumber = document.getElementById("empPhone").value;
+// // 테스트	empPhone
+// //연락처 하이픈 + 글자 수 고정
+// document.addEventListener("DOMContentLoaded", function() {
+//   var empPhoneInput = document.getElementById("empPhone");
 
-	    $.ajax({
-	        url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
-	        data: { 'empPhone': empPhone },
-	        success: function (result) {
-	            if (result == 'iddup') {
-	                alert("중복");
-	            } else {
-	                alert("사용가능");
-	            }
-	        }
-	    });
-	}	
+// // 연락처 하이픈 추가
+//   function formatEmpPhone(inputField, maxLength) {
+//     inputField.addEventListener("input", function() {
+//       var inputValue = inputField.value;
+
+// //		하이픈(-)을 제외한 숫자만 추출
+//       var numericValue = inputValue.replace(/[^0-9]/g, "");
+
+// //		0000-00-0000 형식
+//       var formattedValue = numericValue.slice(0, 4) + "-" + numericValue.slice(4, 6) + "-" + numericValue.slice(6);
+
+// //		maxLength 길이로 고정합니다.
+//       if (formattedValue.length > maxLength) {
+//         formattedValue = formattedValue.slice(0, maxLength);
+//       }
+
+// //		포맷된 값을 입력 필드에 설정
+//       inputField.value = formattedValue;
+//     });
+//   }
 	
+// //	길이고정(12, 12, 13)
+//   formatEmpPhone(EmpPhoneInput, 12);
+// });
+// // 테스트중
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//중복확인
+function checkDuplicate() {
+// 입력된 연락처 가져오기
+    var empPhone = document.getElementById("empPhone").value;
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
+        data: { 'empPhone': empPhone },
+        success: function (result) {
+            if (result == 'iddup') {
+                alert("중복");
+            } else {
+                alert("사용가능");
+            }
+        }
+    });
+}
+
+
 
 //유효성 검사
 function validateForm() {
@@ -305,6 +370,12 @@ function setThumbnail(event) {
   }
   reader.readAsDataURL(file);
 }
+
+
+
+
+
+
 
 
 
