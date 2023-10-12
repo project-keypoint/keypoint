@@ -428,7 +428,7 @@ hr {
 
 small,
 .small {
-  font-size: 80%;
+  font-size: 100%;
   font-weight: 400;
 }
 
@@ -10125,10 +10125,11 @@ a:focus {
   margin-top: -.25rem;
 }
 
-.sidebar .nav-item .nav-link .img-profile,
+
 .topbar .nav-item .nav-link .img-profile {
   height: 2rem;
   width: 2rem;
+  
 }
 
 .topbar {

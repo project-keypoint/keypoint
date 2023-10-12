@@ -128,7 +128,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/qc/qcList">품질검사목록(작업중)</a>
-					<a class="collapse-item" href="#">폐기관리(없음)</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/qc/disposedList">폐기관리(작업중)</a>
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>

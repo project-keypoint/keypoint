@@ -23,6 +23,8 @@
 		<property name="password" value="class10420"></property>
 	</bean>
 	
+	
+	
 	<!-- https://mybatis.org/mybatis-3/ko/index.html 
      https://mybatis.org/mybatis-3/ko/getting-started.html-->
 <!--  mybatis 설정 -->

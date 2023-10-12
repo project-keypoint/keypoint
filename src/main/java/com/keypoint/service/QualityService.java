@@ -69,5 +69,10 @@ public class QualityService {
 	    return result;
 	}// qcTransfer [품질검사후 상품이동]
 
+	public void qcDeleteChecked(QualityDTO qualityDTO) {
+		System.out.println("QualityService qcDeleteChecked()");
+		qualityDAO.qcDeleteChecked(qualityDTO);
+	}// qcDeleteChecked [품질검사 다중삭제(체크)]
+
 	
 }

@@ -62,12 +62,13 @@
 
 <br>
 
-<div class="select-status">
+<div class="select-status" style="display: flex; justify-content: space-between;">
+<div style="display: flex; justify-content: flex-start;">
 <a>재직자<input type="checkbox" id="select1" name="select1" class="list-select"></a>
 <a>휴직자<input type="checkbox" id="select2" name="select2" class="list-select"></a>
 <a>퇴직자<input type="checkbox" id="select3" name="select3" class="list-select"></a>
-<br>
-<a>총 사원수 : ${employeeCount}명</a>
+</div>
+<a style="text-align: right;">총 사원수 : ${employeeCount}명</a>
 </div>
 
 

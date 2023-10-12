@@ -15,8 +15,14 @@
 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO">
 	SELECT *  
 	from line 
-    ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED);
+    ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED)
+    LIMIT #{startRow}, #{pageSize};
 	</select>
+
+	<select id="getLineCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM line
+	</select> 
 
 	<insert id="lineInsert" >
 		insert into line (lineCode, lineName, lineMemo, lineEmp)

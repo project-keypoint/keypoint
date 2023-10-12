@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>사원등록</title>
+<br>
+<p><a style="color: red; font-size: 17px;">사진, 권한빼고 다 입력해야함</a></p>
 
 <!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,14 +23,34 @@
 <div class="main-details">
 <%-- <form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()"> --%>
 <form action="${pageContext.request.contextPath }/employee/photoPro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
-
+</div>
 
 <!-- <div class="form-group-customer"> -->
 <!-- <p>사원ID</p> -->
 <!-- <input type="text" id="empId" name="empId" class="form-control search-input" readonly> -->
 <!-- </div> -->
+
+
+<!-- -------------------- 사진첨부 -------------------- -->
+<!-- <div class="form-group-customer">  -->
+
+<div class="form-group-customer">
+	<img id="preview" width="200" height="230" style="border-radius: 3px">
+</div>
+
+<div class="imgbtn">
+<label for="file">
+<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;">
+<i class="ti-upload btn-icon-prepend"></i>사진 업로드하기
+</span>
+</label>
+<input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
+<!-- accept="image/*": 이 속성은 업로드할 수 있는 파일 형식을 제한 함. "image/*"로 설정된 경우, 사용자는 이미지 파일만 선택할 수 있음. -->
+<!-- -------------------- // 사진첨부 -------------------- -->
+
 
 <div class="form-group-customer">
 <p>비밀번호(수정필요)</p>
@@ -61,7 +83,8 @@
 
 <div class="form-group-customer">
 <p>연락처</p>
-<input type="tel" id="empPhone" name="empPhone" class="form-control search-input">
+<input type="text" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()">
+<div class="divdup"></div>
 </div>
 
 <div class="form-group-customer">
@@ -112,20 +135,6 @@
 <!-- </div> -->
 
 
-<div class="form-group-customer"> 
-            		<div class="form-group-customer">
-            		<img id="preview" width="200" height="230" style="border-radius: 3px" )></div>
-            		<div class="imgbtn">
-					<label for="file">
-					  <span class="btn btn-outline-danger btn-icon-text" style="width: 200px;">
-					  <i class="ti-upload btn-icon-prepend">
-					  </i>사진 업로드하기
-					  </span>
-					</label>
-            		<input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);"></div>
-            	</div>
-<!-- accept="image/*": 이 속성은 업로드할 수 있는 파일 형식을 제한 함. "image/*"로 설정된 경우, 사용자는 이미지 파일만 선택할 수 있음. -->
-
 
 
 <!-- 이게 맞나..? 나중에 수정에서 재직여부 수정가능한가?? -->
@@ -147,12 +156,12 @@
 
 <p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 
-
-</div>
 <div class="details-buttons">
 <input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
+
+
 </form><!-- form 끝 -->
 </div><!-- main-details -->
 
@@ -236,6 +245,25 @@ function sample6_execDaumPostcode() {
 	  }).open();
 	}
 	
+	
+// 중복값 확인	
+function checkDuplicate() {
+	// 입력된 연락처 가져오기
+	    var cusNumber = document.getElementById("empPhone").value;
+
+	    $.ajax({
+	        url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
+	        data: { 'empPhone': empPhone },
+	        success: function (result) {
+	            if (result == 'iddup') {
+	                alert("중복");
+	            } else {
+	                alert("사용가능");
+	            }
+	        }
+	    });
+	}	
+	
 
 //유효성 검사
 function validateForm() {
@@ -250,6 +278,7 @@ function validateForm() {
     var empBirth = document.getElementById("empBirth").value;
     var empHiredate = document.getElementById("empHiredate").value;
     
+    
 // 	빈 필드 검사
     if (empName === "" || empAddress === "" || empPhone === "" ||
     	empTel === "" || empEmail === "" || departmentName === "" || empPosition === "" ||
@@ -259,6 +288,7 @@ function validateForm() {
     }
     return true;
 }	
+
 
 // 첨부파일 미리보기
 function setThumbnail(event) {

@@ -70,9 +70,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- 세션은 '분'이 기준단위 -->
-	<session-config>
-             <session-timeout>180</session-timeout>
-      </session-config>
+	
 
 </web-app>

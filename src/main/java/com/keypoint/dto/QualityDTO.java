@@ -1,5 +1,7 @@
 package com.keypoint.dto;
 
+import java.util.List;
+
 public class QualityDTO {
 	
 	private String prodCode;
@@ -29,14 +31,63 @@ public class QualityDTO {
 	private String qcTest3;
 	private String qcTransfer;
 	
-	private String dpCode;
-//	private int dpEmpId;
-	private String dpDate;
-	
 	private String shipSdate;
 	
+	private List<String> poCodes;
+	public List<String> getPoCodes() {
+        return poCodes;
+    }
+    public void setRoCodes(List<String> poCodes) {
+        this.poCodes = poCodes;
+    }
 	
-	
+    private String disCode;
+    private String disItemCode;
+    private int disCount;
+    private String disEmpId;
+    private String disMemo;
+    private String disDate;
+    
+    
+	public String getDisCode() {
+		return disCode;
+	}
+	public void setDisCode(String disCode) {
+		this.disCode = disCode;
+	}
+	public String getDisItemCode() {
+		return disItemCode;
+	}
+	public void setDisItemCode(String disItemCode) {
+		this.disItemCode = disItemCode;
+	}
+	public int getDisCount() {
+		return disCount;
+	}
+	public void setDisCount(int disCount) {
+		this.disCount = disCount;
+	}
+	public String getDisEmpId() {
+		return disEmpId;
+	}
+	public void setDisEmpId(String disEmpId) {
+		this.disEmpId = disEmpId;
+	}
+	public String getDisMemo() {
+		return disMemo;
+	}
+	public void setDisMemo(String disMemo) {
+		this.disMemo = disMemo;
+	}
+	public String getDisDate() {
+		return disDate;
+	}
+	public void setDisDate(String disDate) {
+		this.disDate = disDate;
+	}
+	public void setPoCodes(List<String> poCodes) {
+		this.poCodes = poCodes;
+	}
 	public String getQcTransfer() {
 		return qcTransfer;
 	}
@@ -96,12 +147,6 @@ public class QualityDTO {
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-	public String getDpDate() {
-		return dpDate;
-	}
-	public void setDpDate(String dpDate) {
-		this.dpDate = dpDate;
 	}
 	public String getShipSdate() {
 		return shipSdate;
@@ -174,12 +219,6 @@ public class QualityDTO {
 	}
 	public void setQcStatus(String qcStatus) {
 		this.qcStatus = qcStatus;
-	}
-	public String getDpCode() {
-		return dpCode;
-	}
-	public void setDpCode(String dpCode) {
-		this.dpCode = dpCode;
 	}
 	public String getQcTest1() {
 		return qcTest1;

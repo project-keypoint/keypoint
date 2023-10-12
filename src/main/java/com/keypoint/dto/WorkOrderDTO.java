@@ -21,15 +21,19 @@ public class WorkOrderDTO {
 	private String empName; // 사원 명
 	private String shipSdate; // 납품예정일
 
+	
+
 	@Override
 	public String toString() {
 		return "WorkOrderDTO [woCode=" + woCode + ", roCode=" + roCode + ", empId=" + empId + ", lineCode=" + lineCode
-				+ ", lineName=" + lineName +  ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode=" + materialCode
-				+ ", woCount=" + woCount + ", woStatus=" + woStatus + ", woDate=" + woDate + ", productName="
-				+ productName + ", cusCode=" + cusCode + ", cusName=" + cusName + ", empName=" + empName
-				+ ", shipSdate=" + shipSdate + "]";
+				+ ", lineName=" + lineName + ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode="
+				+ materialCode + ", woCount=" + woCount + ", woStatus=" + woStatus + ", woDate=" + woDate
+				+ ", productName=" + productName + ", cusCode=" + cusCode + ", cusName=" + cusName + ", empName="
+				+ empName + ", shipSdate=" + shipSdate + "]";
 	}
 
+	
+	
 	public String getWoCode() {
 		return woCode;
 	}

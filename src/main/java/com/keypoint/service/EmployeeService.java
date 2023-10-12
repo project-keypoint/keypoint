@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.EmployeeDAO;
+import com.keypoint.dto.CustomerDTO;
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.PageDTO;
 
@@ -19,8 +21,7 @@ public class EmployeeService {
 	
 	
 	// -------------------------------------------------------------------
-	
-	
+  
 	// 로그인-강수빈
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService userCheck()");
@@ -79,7 +80,12 @@ public class EmployeeService {
 	} // updateEmployee
 
 
-	
+	//	사원 등록 - 연락처 중복체크
+	public EmployeeDTO empPhoneCheck(String empPhone) {
+		System.out.println("EmployeeService EmployeeDTO()");
+
+		return employeeDAO.empPhoneCheck(empPhone);
+	} // empPhoneCheck
 	
 
 
