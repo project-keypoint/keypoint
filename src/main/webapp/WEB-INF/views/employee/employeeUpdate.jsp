@@ -17,7 +17,8 @@
     <link href="${pageContext.request.contextPath}/resources/css/employeeDetails.css" rel="stylesheet">
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/employee/employeeUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+<%-- <form action="${pageContext.request.contextPath}/employee/employeeUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()"> --%>
+<form action="${pageContext.request.contextPath}/employee/photoUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <!-- <div class="page-title-popup">사원상세정보수정</div> -->
 <div class="page-title">사원상세정보수정</div>
@@ -39,6 +40,8 @@
 <i class="ti-upload btn-icon-prepend"></i>사진수정하기 
 </span>   
 </label>
+<input type="hidden" name="oldfile" value="${employeeDTO.empPhoto}">
+${employeeDTO.empPhoto}
 
 <div class="imgbtn">
 <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>

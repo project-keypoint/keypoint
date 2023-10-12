@@ -3,15 +3,15 @@ package com.keypoint.dto;
 public class EmployeeDTO {
 	
 	private int empId; // 사원ID
-	private String empPass;
-	private String empSalt;
-	private String empName;
-	private String empPhoto;
-	private String empBirth; //
+	private String empPass; // 비밀번호
+	private String empSalt; // 암호화
+	private String empName; // 이름
+	private String empPhoto; // 사진
+	private String empBirth; // 생년월일
 	private String empPhone; // 연락처
 	private String empTel; // 내선번호
-	private String empEmail;
-	private String empAddress;
+	private String empEmail; // 이메일
+	private String empAddress; // 주소
 	private String empStatus; // 재직여부('재직','휴직','퇴직')
 	private String departmentId; // 부서ID(보류)
 	private String departmentName; // 부서('영업','자재','생산','인사')
