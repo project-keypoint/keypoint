@@ -62,6 +62,14 @@
     <a>생산<input type="checkbox" id="select3" name="select3" class="list-select"></a>
     <a>자재<input type="checkbox" id="select4" name="select4" class="list-select"></a>
     <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
+    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
   </div>
   <a style="text-align: right;">총 ${noticeCount}건</a>
 </div>
