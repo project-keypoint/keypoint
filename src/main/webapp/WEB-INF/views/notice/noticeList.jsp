@@ -107,7 +107,7 @@
 <!-- ---------------------페이징---------------- -->
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
 </c:if>
 
 <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
@@ -116,13 +116,13 @@
 			<a href="#" class="page-button page-button-active">${i}</a>
 		</c:when>
 		<c:otherwise>
-                <a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+                <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
 </c:if>
 
 
