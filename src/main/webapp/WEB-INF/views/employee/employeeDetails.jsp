@@ -55,7 +55,10 @@
 
 
 
-
+<div class="form-group-column">
+<p>비밀번호</p>
+<input type="text" id="empPass" name="empPass" class="form-control search-input" value="${employeeDTO.empPass}" readonly>
+</div>
 
 
 <div class="form-group-row">
@@ -162,6 +165,7 @@
 <input type="button" value="수정" class="btn btn-primary mybutton1" 
 	   onclick="location.href='${pageContext.request.contextPath}/employee/employeeUpdate?empId=${employeeDTO.empId}'">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
+<input type="button" value="비밀번호 초기화" class="btn btn-secondary mybutton1" onclick="#">
 </div>
 
 

@@ -70,11 +70,17 @@ public class QualityDAO {
 	}// qcDeleteChecked [품질검사 다중삭제(체크)]
 	
 	@Transactional
-	public void disPInsert(QualityDTO qualityDTO) {
-		System.out.println("QualityDAO disInsert()");
-		sqlSession.insert(namespace + ".disPInsert", qualityDTO);
-		sqlSession.update(namespace + ".disPMinus", qualityDTO);
-	}// disInsert [폐기등록]
+	public void disInsertP(QualityDTO qualityDTO) {
+		System.out.println("QualityDAO disInsertP()");
+		sqlSession.insert(namespace + ".disInsertP", qualityDTO);
+		sqlSession.update(namespace + ".disMinusP", qualityDTO);
+	}// disInsertP [폐기등록(상품)]
+	
+	public void disInsertM(QualityDTO qualityDTO) {
+		System.out.println("QualityDAO disInsertM()");
+		sqlSession.insert(namespace + ".disInsertM", qualityDTO);
+		sqlSession.update(namespace + ".disMinusM", qualityDTO);
+	}// disInsertM [폐기등록(자재)]
 
 	public List<QualityDTO> getDisposedList(PageDTO pageDTO) {
 		System.out.println("DisposedDAO getDisposedList()");
@@ -83,7 +89,7 @@ public class QualityDAO {
 
 	public int getDisposedCount(PageDTO pageDTO) {
 		System.out.println("DisposedDAO getDisposedCount()");
-		return sqlSession.selectOne(namespace+".getDisposedCount");
+		return sqlSession.selectOne(namespace+".getDisposedCount", pageDTO);
 	}
 
 	public List<QualityDTO> getDisposedSum() {
@@ -99,5 +105,7 @@ public class QualityDAO {
 	public Integer getMaxNum(String code_id) {
 		return sqlSession.selectOne(namespace+".getMaxNum", code_id);
 	}
+
+	
 
 }

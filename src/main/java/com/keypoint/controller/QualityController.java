@@ -1,6 +1,8 @@
 package com.keypoint.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.QualityDTO;
-import com.keypoint.dto.ReceiveDTO;
+import com.keypoint.service.MaterialService;
 import com.keypoint.service.QualityService;
 
 @Controller
@@ -27,13 +31,8 @@ public class QualityController {
 	@Inject
 	private QualityService qualityService;
 	
-//	@GetMapping("/qcList")
-//	public String qcList(Model model) {
-//		System.out.println("QualityController qc/qcList");
-//		List<QualityDTO> qcList = qualityService.getQcList();
-//		model.addAttribute("qcList", qcList);
-//		return "qc/qcList";
-//	}// qcList [품질검사목록(+생산목록)]
+	@Inject
+	private MaterialService materialService;
 	
 	@GetMapping("/qcList")
 	public String qcList(HttpServletRequest request,Model model) {
@@ -160,7 +159,7 @@ public class QualityController {
 		System.out.println("QualityController qc/disposedList");
 		
 		String search = request.getParameter("search");
-		int pageSize = 5; //한 화면에 보여줄 글개수 설정
+		int pageSize = 10; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
 			pageNum = "1";
@@ -201,10 +200,10 @@ public class QualityController {
 	
 	
 	
-	@GetMapping("/disInsert") // 폐기목록 페이지
+	@GetMapping("/disInsertP") // 폐기목록 페이지
 	public String disInsertP() {
-		System.out.println("QualityController qc/disInsert");
-		return "qc/disInsert";
+		System.out.println("QualityController qc/disInsertP");
+		return "qc/disInsertP";
 	}// disInsert [폐기등록(상품)]
 	
 	@PostMapping("/disInsertProduct") // 폐기목록 페이지
@@ -212,7 +211,7 @@ public class QualityController {
 		System.out.println("QualityController qc/disInsertProduct");
 		System.out.println(qualityDTO);
 		
-		qualityService.disPInsert(qualityDTO);
+		qualityService.disInsertP(qualityDTO);
 		
 		if(qualityDTO != null) {
 			return "receive/msgSuccess"; // 등록완료
@@ -221,25 +220,25 @@ public class QualityController {
 		}
 	}// disInsert [폐기등록(상품)Pro]
 	
-//	@GetMapping("/disInsertM") // 폐기목록 페이지
-//	public String disInsertM() {
-//		System.out.println("QualityController qc/disInsertM");
-//		return "qc/disInsertM";
-//	}// disInsert [폐기등록(자재)]
-//	
-//	@PostMapping("/disInsertProduct") // 폐기목록 페이지
-//	public String disInsertMPro(QualityDTO qualityDTO) {
-//		System.out.println("QualityController qc/disInsertMaterial");
-//		System.out.println(qualityDTO);
-//		
-//		qualityService.disMInsert(qualityDTO);
-//		
-//		if(qualityDTO != null) {
-//			return "receive/msgSuccess"; // 등록완료
-//		}else {
-//			return "receive/msgFailed"; // 등록실패
-//		}
-//	}// disInsert [폐기등록(자재)Pro]
+	@GetMapping("/disInsertM") // 폐기목록 페이지
+	public String disInsertM() {
+		System.out.println("QualityController qc/disInsertM");
+		return "qc/disInsertM";
+	}// disInsert [폐기등록(자재)]
+	
+	@PostMapping("/disInsertMaterial") // 폐기목록 페이지
+	public String disInsertMPro(QualityDTO qualityDTO) {
+		System.out.println("QualityController qc/disInsertMaterial");
+		System.out.println(qualityDTO);
+		
+		qualityService.disInsertM(qualityDTO);
+		
+		if(qualityDTO != null) {
+			return "receive/msgSuccess"; // 등록완료
+		}else {
+			return "receive/msgFailed"; // 등록실패
+		}
+	}// disInsert [폐기등록(자재)Pro]
 	
 	public String codeChangeDis(String code_id) {
 		Integer numP = qualityService.getMaxNum(code_id);
@@ -249,6 +248,60 @@ public class QualityController {
 		return String.format("%s%05d", code_id, ++numP);
     }// disCode 자동증가(품질)
 	
+	@RequestMapping(value = "/materialList", method = RequestMethod.GET)
+	public String materialList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
+		String materialCode = request.getParameter("materialCode");
+		String materialName = request.getParameter("materialName");
+		
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize = 5; // sql문에 들어가는 항목
+		
+		// 현페이지 번호 가져오기
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		// 페이지번호를 정수형 변경
+		int currentPage=Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1; // sql문에 들어가는 항목
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setStartRow(startRow-1); // limit startRow (0이 1열이기 때문 1을 뺌)
+		pageDTO.setEndRow(endRow);
+	
+		Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
+		search.put("materialCode", materialCode);
+		search.put("materialName", materialName);
+		search.put("startRow", pageDTO.getStartRow());
+		search.put("pageSize", pageDTO.getPageSize());
+	 
+		List<MaterialDTO> materialList = materialService.getPurchaseMaterialList(search);
+				
+			//페이징 처리
+		int count = materialService.countPurchaseList(search);
+	
+		int pageBlock = 10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+		 	endPage = pageCount;
+		 }
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+				
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("search", search);
+		model.addAttribute("materialList", materialList);
+		return "qc/materialList";
+	} // purchaseMaterialList
 }//class
 	
 	

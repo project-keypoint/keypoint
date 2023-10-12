@@ -89,15 +89,26 @@
 		VALUES (#{disCode}, #{productCode}, #{qcDefect}, now(), #{qcEmpId}, '품질검사 불량');
 	</insert>
 	
-	<insert id="disPInsert">
+	<insert id="disInsertP">
 		INSERT INTO disposedItems (disCode, disItemCode, disCount, disDate, disEmpId, disMemo)
 		VALUES (#{disCode}, #{productCode}, #{disCount}, now(), #{disEmpId}, #{disMemo});
 	</insert>
 	
-	<update id="disPMinus">
+	<update id="disMinusP">
 		UPDATE product 
 		SET productCount = productCount - #{disCount}
 		WHERE productCode = #{productCode}
+	</update>
+	
+	<insert id="disInsertM">
+		INSERT INTO disposedItems (disCode, disItemCode, disCount, disDate, disEmpId, disMemo)
+		VALUES (#{disCode}, #{materialCode}, #{disCount}, now(), #{disEmpId}, #{disMemo});
+	</insert>
+	
+	<update id="disMinusM">
+		UPDATE material 
+		SET materialCount = materialCount - #{disCount}
+		WHERE materialCode = #{materialCode}
 	</update>
 	
 	<select id="getDisposedList" resultType="com.keypoint.dto.QualityDTO">
@@ -107,12 +118,18 @@
 		left join product b on a.disItemCode = b.productCode
 		left join material c on a.disItemCode = c.materialCode
 		left join employees d on a.disEmpId = d.empId
-		order by a.disCode desc
+		<if test="search != null">
+			where a.disCode like CONCAT(#{search},'%') 
+		</if>
+		order by a.disDate desc
 		limit #{startRow}, #{pageSize}
 	</select>
 	<select id="getDisposedCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM disposedItems
+		<if test="search != null">
+			where disCode like CONCAT(#{search},'%')
+		</if>
 	</select>
 	
 	<select id="getDisposedSum" resultType="com.keypoint.dto.QualityDTO">

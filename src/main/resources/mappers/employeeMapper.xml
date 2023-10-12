@@ -71,10 +71,12 @@
 		where empPhone = #{empPhone}
 	</select>
 	
+	
+	
+<!-- 강수빈 - 비밀번호 값 가져오기 -->
 	<select id="getInitialPass" resultType="java.lang.Integer">
 		select (max(empId) + 1)
 		from employees
-		
 	</select>
 	
 	

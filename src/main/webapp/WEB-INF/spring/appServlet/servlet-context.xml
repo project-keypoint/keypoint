@@ -36,9 +36,14 @@
 	<!-- 	파일 업로드 폴더 지정 -->
 	<!-- 	본인 경로에 맞게 value값 수정 필요 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
+<!-- 		이상희 경로 -->
 <!-- 		<beans:constructor-arg value="//Users//kiky//git//keypoint//src//main//webapp//resources//upload"></beans:constructor-arg> -->
-		<beans:constructor-arg value="D:\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
+<!-- 		진유정 노트북 경로 -->
+		<beans:constructor-arg value="E:\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
 	</beans:bean>
-	
+
+
+
+
 	
 </beans:beans>
