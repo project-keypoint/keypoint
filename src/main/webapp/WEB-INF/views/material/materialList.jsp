@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +64,7 @@
     <td>${materialDTO.materialCode}</td>
     <td>${materialDTO.materialName}</td>
     <td>${materialDTO.cusCode}</td>
-    <td>${materialDTO.materialPrice}원</td>
+    <td><fmt:formatNumber value="${materialDTO.materialPrice}" groupingUsed="true"/>원</td>
     <td>${materialDTO.materialCount}</td>
     <td>${materialDTO.materialUnit}</td>
     <td>${materialDTO.materialMemo}</td>

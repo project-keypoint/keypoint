@@ -64,7 +64,7 @@
 </tr>
 
 <c:forEach var="requireDTO" items="${requireList}">
-<tr class="table-body">
+<tr class="targetCell">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${requireDTO.productCode}</td>
     <td>${requireDTO.productName}</td>
@@ -106,6 +106,18 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+// 셀 열 병합
+$(document).ready(function () {
+          $(".targetCell").each(function () {
+              var rows = $(".targetCell:contains('" + $(this).text() + "')");
+              if (rows.length > 1) {
+                  rows.eq(0).attr("rowspan", rows.length);
+                  rows.not(":eq(0)").remove(); 
+              } 
+          });
+      });
+      
+      
 //팝업 창을 열어주는 함수
 function openPopup(url) {
     var width = 500;

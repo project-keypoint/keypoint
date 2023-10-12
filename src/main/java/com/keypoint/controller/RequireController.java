@@ -28,6 +28,12 @@ public class RequireController {
 	private RequireService requireService;
 	
 //	가상주소 http://localhost:8080/keypoint/require/requireList
+	@GetMapping("/test")
+	public String test() {
+		return "require/test";
+	}// requireList [소요량목록]
+
+	//	가상주소 http://localhost:8080/keypoint/require/requireList
 	@GetMapping("/requireList")
 	public String requireList(Model model) {
 		List<RequireDTO> requireList = requireService.getRequireList();

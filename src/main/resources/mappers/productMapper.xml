@@ -16,12 +16,12 @@
 	</select>
 	
 	<select id="getProduct" resultType="com.keypoint.dto.ProductDTO">
-		select p.productCode,p.productName,p.cusCode,c.cusName,p.productPrice,p.productCount,p.productUnit,p.productMemo 
-		from product p join customer c
+		select p.productCode,p.productName,p.cusCode,c.cusName,p.productPrice,p.productCount,p.productUnit,p.productMemo  
+		from product p left join customer c
 		on p.cusCode = c.cusCode
 		where productCode = #{productCode}
 	</select>	
-
+	
 	<update id="deleteProduct">
 		UPDATE product
 		SET productDel = 1
