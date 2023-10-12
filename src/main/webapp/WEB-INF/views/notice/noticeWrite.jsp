@@ -15,11 +15,13 @@
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- customer CSS 적용-->
     <link href="${pageContext.request.contextPath}/resources/css/notice.css" rel="stylesheet">
+    
+
 </head>
 
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/notice/noticeWritePro" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/notice/noticeFilePro" method="post" enctype="multipart/form-data">
 
 <div class="forms-group-customer">
 <div class="page-title-popup">공지사항등록</div>
@@ -31,6 +33,11 @@
 <div class="form-group-customer">
 <p>제목</p>
 <input type="text" id="noticeSubject" name="noticeSubject" class="form-control search-input">
+</div>
+
+<div class="form-group-customer">
+<p>작성자</p>
+<input type="text" id="empName" name="empName" class="form-control search-input" value="${empName}" readonly="readonly">
 </div>
 
 
@@ -50,15 +57,26 @@
 
 <div class="form-group-customer">
 <p>내용</p>
-<textarea id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px; resize: none;"></textarea>
+<textarea 	id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px; resize: none;"></textarea>
 </div>
+
+
+
+
 
 
 
 <div class="form-group-customer">
+<label for="file">
 <p>첨부파일</p>
-<input type="text" id="noticeFile" name="noticeFile" class="form-control search-input">
+</label>
+<input type="file" id="noticeFile" name="noticeFile" class="form-control search-input" readonly="readonly">
 </div>
+
+
+
+
+
 
 
 
@@ -92,9 +110,21 @@
 <script type="text/javascript">
 
 
-
-
-
+//첨부파일 미리보기
+// function setThumbnail(event) {
+//   // 선택된 파일 정보 가져오기
+//   var input = event.target;
+//   var file = input.files[0];
+  
+//   // FileReader 객체 사용하여 파일 읽기
+//   var reader = new FileReader();
+//   reader.onload = function(e) {
+//     // 읽은 파일을 이미지로 변환하여 미리보기
+//     var img = document.getElementById("preview");
+//     img.src = e.target.result;
+//   }
+//   reader.readAsDataURL(file);
+// }
 
 
 
