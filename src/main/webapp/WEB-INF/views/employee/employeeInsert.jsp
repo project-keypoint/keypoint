@@ -292,23 +292,7 @@ function sample6_execDaumPostcode() {
 // });
 // // 테스트중
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 //중복확인
 function checkDuplicate() {
