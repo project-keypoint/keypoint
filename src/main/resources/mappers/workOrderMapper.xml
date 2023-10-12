@@ -6,20 +6,42 @@
 <mapper namespace="com.itwillbs.mappers.workOrderMapper">
 
 	<insert id="insertWorkOrder">
-		insert into workOrder(woCode, roCode, empId, lineCode, mfgCode,
-		productCode, materialCode, woCount, woStatus, woDate, productName,
-		cusCode, empName, cusName, shipSdate)
-		values(CONCAT('WO', DATE_FORMAT(NOW(),
-		'%y%m%d%H%i%s')),
-		#{roCode},#{empId},#{lineCode},
-		<if test="mfgCode == null">NULL</if>
-		<if test="mfgCode != null">#{mfgCode}</if>
-		,
-		#{productCode},
-		<if test="materialCode == null">NULL</if>
-		<if test="materialCode != null">#{materialCode}</if>
-		,
-		#{woCount},#{woStatus},#{woDate},#{productName},#{cusCode},#{empName},#{cusName},#{shipSdate})
+		insert into workOrder(
+				woCode,
+				roCode,
+				empId,
+				lineCode,
+				mfgCode,
+				productCode,
+				materialCode,
+				woCount,
+				woStatus,
+				woDate,
+				productName,
+				cusCode,
+				empName,
+				cusName,
+				shipSdate
+			)
+		values(
+		 	CONCAT('WO', DATE_FORMAT(NOW(),'%y%m%d%H%i%s')),
+			#{roCode},
+			#{empId},
+			#{lineCode},
+			<if test = "mfgCode == null">NULL</if>
+			<if test = "mfgCode != null">#{mfgCode}</if>,
+			#{productCode},
+			<if test = "materialCode == null">NULL</if>
+			<if test = "materialCode != null">#{materialCode}</if>,
+			#{woCount},
+			#{woStatus},
+			#{woDate},
+			#{productName},
+			#{cusCode},
+			#{empName},
+			#{cusName},
+			#{shipSdate}
+		)
 	</insert>
 
 	<select id="getWorkOrderList"
@@ -27,7 +49,7 @@
 		select a.woCode, a.cusCode, b.cusName, a.productCode,
 		c.productName,
 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
-		a.empId, e.empName, d.shipSdate
+		a.empId, e.empName, d.shipSdate, d.roCount
 		from workOrder a
 		left join customer b on a.cusCode =
 		b.cusCode
@@ -139,8 +161,13 @@
 
 
 	<select id="workRoCodeList"
-		resultType="com.keypoint.dto.WorkOrderDTO">
-		select roCode, cusCode, productCode, roCount, shipSdate
+		resultType="com.keypoint.dto.WorkRoDTO">
+		select 
+			roCode, 
+			cusCode, 
+			productCode, 
+			roCount, 
+			shipSdate
 		from receivedOrder
 		where 
 		roCode like

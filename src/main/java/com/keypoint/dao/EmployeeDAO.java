@@ -68,6 +68,14 @@ public class EmployeeDAO {
 	} // updateEmployee
 
 	
+	//	사원 등록 - 연락처 중복체크
+	public EmployeeDTO empPhoneCheck(String empPhone) {
+		System.out.println("EmployeeDAO empPhoneCheck()");
+		
+		return sqlSession.selectOne(namespace+".empPhoneCheck", empPhone);
+	} // empPhoneCheck
+
+	
 	
 	
 

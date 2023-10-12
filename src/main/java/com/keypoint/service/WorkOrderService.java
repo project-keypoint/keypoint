@@ -13,6 +13,7 @@ import com.keypoint.dao.WorkOrderDAO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
+import com.keypoint.dto.WorkRoDTO;
 import com.keypoint.dto.PageUtil;
 
 @Service
@@ -99,7 +100,7 @@ public class WorkOrderService {
 	}
 
 
-	public List<WorkOrderDTO> getWorkRoCodeList(Map<String, Object> search) {
+	public List<WorkRoDTO> getWorkRoCodeList(Map<String, Object> search) {
 		System.out.println("WorkOrderService getWorkRoCodeList()");
 		return workOrderDAO.getWorkRoCodeList(search);
 	}
