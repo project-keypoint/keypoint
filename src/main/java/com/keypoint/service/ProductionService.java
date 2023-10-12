@@ -53,5 +53,26 @@ public class ProductionService {
 	
 	
 	
+	public ProductionDTO getProductionDetails(String poCode) {
+		System.out.println("WorkOrderService getWorkOrderDetails()");
+		return productionDAO.getProductionDetails(poCode);
+	}// getReceiveDetails [생산실적상세]
+	
+	
+	
+	public void productionUpdatePro(ProductionDTO productionDTO) {
+		System.out.println("ProductionService productionUpdatePro()");
+//		workOrderDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
+		productionDAO.updateProduction(productionDTO);
+	}// workOrderUpdatePro() [작업지시수정Pro]
+	
+	
+	public void productionDelete(ProductionDTO productionDTO) {
+		System.out.println("ProductionService productionUpdatePro()");
+		System.out.println(productionDTO);
+		productionDAO.deleteProduction(productionDTO);
+	}// productionDelete() [작업지시삭제]
+	
+	
 	
 }

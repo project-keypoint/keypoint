@@ -26,84 +26,99 @@
 	<div class="main-details">
 		<!-- <div class="page-title">작업지시상세</div> -->
 		<div class="forms-group-receive">
-			<div class="page-title-popup">작업지시상세</div>
+			<div class="page-title-popup">생산실적상세</div>
 			<div class="form-group-receive">
 				<p>실적코드</p>
-				<input type="text" id="woCode" class="form-control search-input"
-					value="${workOrderDTO.woCode}" readonly>
-			</div>
+				<input type="text" id="poCode" class="form-control search-input"
+					value="${productionDTO.poCode}" readonly>
+			</div>			
 			<div class="search-bar-popup">
 				<div class="form-group-receive">
-					<p>업체명</p>
-					<input type="text" id="cusCode" name="cusCode"
+					<p>실적일자</p>
+					<input type="text" id="poDate" name="poDate"
 						class="form-control search-input inputcode"
-						value="${workOrderDTO.cusCode}" readonly> <input
-						type="text" id="cusName" name="cusName"
-						class="form-control search-input inputname"
-						value="${workOrderDTO.cusName}" readonly>
+						value="${productionDTO.poDate}" readonly> 
+<!-- 						<input type="text" id="cusName" name="cusName" -->
+<!-- 						class="form-control search-input inputname" -->
+<%-- 						value="${workOrderDTO.cusName}" readonly> --%>
 				</div>
 				<div class="form-group-receive">
-					<p>상품명</p>
-					<input type="text" id="productCode" name="productCode"
+					<p>라인코드</p>
+					<input type="text" id="lineCode" name="lineCode"
 						class="form-control search-input inputcode"
-						value="${workOrderDTO.productCode}" readonly> <input
-						type="text" id="productName" name="productName"
-						class="form-control search-input inputname"
-						value="${workOrderDTO.productName}" readonly>
+						value="${productionDTO.lineCode}" readonly> 
+<!-- 						<input type="text" id="productName" name="productName" -->
+<!-- 						class="form-control search-input inputname" -->
+<%-- 						value="${workOrderDTO.productName}" readonly> --%>
 				</div>
-			</div>
 			<div class="form-group-receive">
-				<p>수주번호</p>
-				<input type="text" id="roCode" name="roCode"
+				<p>상품명</p>
+				<input type="text" id="productCode" name="productCode"
 					class="form-control search-input"
-					value="${workOrderDTO.roCode}" readonly>
+					value="${productionDTO.productCode}" readonly>
+						<input type="text" id="productName" name="productName" 
+						class="form-control search-input inputname"
+						value="${productionDTO.productName}" readonly>
+			</div>
 			</div>
 			<div class="form-group-receive">
 				<p>지시수량</p>
-				<input type="number" id="woCount" name="woCount"
+				<input type="number" id="poCount" name="poCount"
 					class="form-control search-input"
-					value="${workOrderDTO.woCount}" min="0" readonly>
+					value="${productionDTO.poCount}" min="0" readonly>
 			</div>
 			<div class="form-group-receive">
-				<p>라인코드</p>
-				<input type="text" id="lineCode" name="lineCode"
+				<p>양품</p>
+				<input type="text" id="poGood" name="poGood"
 					class="form-control search-input"
-					value="${workOrderDTO.lineCode}" readonly>
+					value="${productionDTO.poGood}" readonly>
 			</div>
 			<div class="form-group-receive">
-				<p>지시일자</p>
-				<input type="text" id="woDate" name="woDate"
+				<p>불량</p>
+				<input type="text" id="poErr" name="poErr"
 					class="form-control search-input"
-					value="${workOrderDTO.woDate}" readonly>
+					value="${productionDTO.poErr}" readonly>
 			</div>
 			<div class="form-group-receive">
-				<p>납품예정일</p>
-				<input type="text" id="shipSdate" name="shipSdate"
+				<p>불량사유</p>
+				<input type="text" id="poCause" name="poCause"
 					class="form-control search-input"
-					value="${workOrderDTO.shipSdate}" readonly>
+					value="${productionDTO.poCause}" readonly>
+			</div>
+<!-- 			<div class="form-group-receive"> -->
+<!-- 				<p>상태</p> -->
+<!-- 				<input type="text" id="woStatus" class="form-control search-input" -->
+<%-- 					value="${productionDTO.woStatus}" readonly> --%>
+<!-- 			</div> -->
+			<div class="form-group-receive">
+				<p>수주번호</p>
+				<input type="text" id="roCode" class="form-control search-input"
+					value="${productionDTO.roCode}" readonly>
 			</div>
 			<div class="form-group-receive">
-				<p>상태</p>
-				<input type="text" id="woStatus" class="form-control search-input"
-					value="${workOrderDTO.woStatus}" readonly>
+				<p>거래처</p>
+				<input type="text" id="cusCode" class="form-control search-input"
+					value="${productionDTO.cusCode}" readonly>
+					<input type="text" id="cusName" class="form-control search-input"
+					value="${productionDTO.cusName}" readonly>
 			</div>
 
-			<div class="search-bar-popup">
-				<div class="form-group-receive">
-					<p>담당자</p>
-					<input type="text" id="empId" name="empId"
-						class="form-control search-input inputcode"
-						value="${workOrderDTO.empId}" readonly> <input
-						type="text" id="empName" name="empName"
-						class="form-control search-input inputcode"
-						value="${workOrderDTO.empName}" readonly>
-				</div>
-			</div>
+<!-- 			<div class="search-bar-popup"> -->
+<!-- 				<div class="form-group-receive"> -->
+<!-- 					<p>담당자</p> -->
+<!-- 					<input type="text" id="empId" name="empId" -->
+<!-- 						class="form-control search-input inputcode" -->
+<%-- 						value="${productionDTO.empId}" readonly> <input --%>
+<!-- 						type="text" id="empName" name="empName" -->
+<!-- 						class="form-control search-input inputcode" -->
+<%-- 						value="${productionDTO.empName}" readonly> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
 
 		</div>
 		<div class="details-buttons">
 			<input type="button" value="수정" class="btn btn-primary mybutton1"
-				onclick="location.href='${pageContext.request.contextPath}/workOrder/workOrderUpdate?woCode=${workOrderDTO.woCode}'">
+				onclick="location.href='${pageContext.request.contextPath}/production/productionUpdate?poCode=${productionDTO.poCode}'">
 			<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
 		</div>
 	</div>
@@ -113,7 +128,7 @@
 // 삭제 확인메세지
 function confirmDelete() {
     if (confirm("정말로 삭제하시겠습니까?")) {
-        location.href = '${pageContext.request.contextPath}/workOrder/workOrderDelete?woCode=${workOrderDTO.woCode}';
+        location.href = '${pageContext.request.contextPath}/production/productionDelete?poCode=${productionDTO.poCode}';
     } else {
     	
     }

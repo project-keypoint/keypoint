@@ -169,7 +169,7 @@
 			productCode, 
 			roCount, 
 			shipSdate
-		from receivedOrder
+		from receivedOrder 
 		where 
 		roCode like
 		CONCAT('%', #{roCode}, '%') and
@@ -239,13 +239,21 @@
 	
 	<select id="workList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
-		select woCode, roCode, lineCode, productCode, productName, woCount, cusCode, cusName
-		from workOrder
+		select 
+			wo.woCode, 
+			wo.roCode, 
+			wo.lineCode, 
+			wo.productCode, 
+			p.productName, 
+			wo.woCount, 
+			wo.cusCode, 
+			c.cusName
+		from workOrder wo
+		left join product p on wo.productCode = p.productCode
+		left join customer c on wo.cusCode = c.cusCode
 		where
-		woCode like
-		CONCAT('%', #{woCode}, '%') and
-		roCode like CONCAT('%', #{roCode},
-		'%')
+			woCode like CONCAT('%', #{woCode}, '%') 
+			and roCode like CONCAT('%', #{roCode}, '%')
 		order by woCode desc
 		limit #{startRow}, #{pageSize}
 	</select>

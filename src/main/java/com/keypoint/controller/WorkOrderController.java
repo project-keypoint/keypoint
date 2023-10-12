@@ -319,6 +319,7 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 	model.addAttribute("pageDTO", pageDTO);
 	model.addAttribute("search", search);
 	model.addAttribute("workRoCodeList", workRoCodeList);
+	System.out.println(workRoCodeList);
 	return "workOrder/workRoCodeList";
 }
 
@@ -489,6 +490,8 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("search", search);
 		model.addAttribute("workList", workList);
+		System.out.println(workList);
+		
 		return "workOrder/workList";
 	}
 

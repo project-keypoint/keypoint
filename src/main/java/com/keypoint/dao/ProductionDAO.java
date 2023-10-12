@@ -39,4 +39,26 @@ public class ProductionDAO {
 	}
 	
 	
+	public ProductionDTO getProductionDetails(String poCode) {
+		System.out.println("ProductionDAO getProductionDetails()");
+		return sqlSession.selectOne(namespace+".getProductionDetails", poCode);
+	}
+	
+	
+	public void updateProduction(ProductionDTO productionDTO) {
+		System.out.println("ProductionDAO updateProduction()");
+		sqlSession.update(namespace+".updateProduction",productionDTO);
+		System.out.println(productionDTO);
+		
+	}// updateProduction() [생산실적수정]
+	
+	public void deleteProduction(ProductionDTO productionDTO) {
+		System.out.println("ProductionDAO deleteProduction()");
+		System.out.println(productionDTO);
+		sqlSession.update(namespace+".deleteProduction",productionDTO);
+	}// deleteProduction() [생산실적삭제]
+	
+	
+	
+	
 }

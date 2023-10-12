@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keypoint.dto.LineDTO;
 import com.keypoint.dto.PageDTO;
@@ -78,6 +79,7 @@ public class ProductionController {
 		model.addAttribute("lineList", lineList);
 		model.addAttribute("productionList", productionList);
 		model.addAttribute("pageDTO", pageDTO);
+		System.out.println(productionList);
 		
 		return "production/productionList";
 	}// productionList [생산실적]
@@ -104,6 +106,51 @@ public class ProductionController {
 	}// workOrderInsertPro [작업지시등록Pro]
 	
 	
+	
+	@GetMapping("/productionDetails")
+	public String productionDetails(Model model, @RequestParam("poCode") String poCode) {
+		System.out.println("ProductionController production/productionDetails");
+		ProductionDTO productionDTO = productionService.getProductionDetails(poCode);
+		model.addAttribute("productionDTO", productionDTO);
+		return "production/productionDetails";
+	}// workOrderDetails [작업지시상세]
+	
+	
+	@GetMapping("/productionUpdate")
+	public String productionUpdate(Model model, @RequestParam("poCode") String poCode) {
+		System.out.println("ProductionController production/productionUpdate");
+		ProductionDTO productionDTO = productionService.getProductionDetails(poCode);
+		model.addAttribute("productionDTO", productionDTO);
+		return "production/productionUpdate";
+	}// workOrderUpdate [작업지시수정]
+	
+	
+	@PostMapping("/productionUpdatePro")
+	public String productionUpdatePro(ProductionDTO productionDTO) {
+		System.out.println("WorkOrderController production/productionUpdatePro");
+		System.out.println(productionDTO);
+		productionService.productionUpdatePro(productionDTO);
+		
+		if(productionDTO != null) {
+			return "production/msgSuccess"; // 등록완료
+		}else {
+			return "production/msgFailed"; // 등록실패
+		}
+	}// workOrderUpdatePro [작업지시수정Pro]
+	
+	
+	@GetMapping("/productionDelete")
+	public String productionDelete(ProductionDTO productionDTO) {
+		System.out.println("ProductionController production/productionDelete");
+		System.out.println(productionDTO);
+		productionService.productionUpdatePro(productionDTO);
+		
+		if(productionDTO != null) {
+			return "production/msgSuccess"; // 등록완료
+		}else {
+			return "production/msgFailed"; // 등록실패
+		}
+	}// workOrderDelete [작업지시삭제]
 	
 	
 	

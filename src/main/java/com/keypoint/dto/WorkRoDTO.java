@@ -5,8 +5,10 @@ import java.sql.Timestamp;
 public class WorkRoDTO {
 
 	private String roCode; // 작업지시코드
-	private String cusCode; // 수주코드
-	private String productCode; // 작업지시자
+	private String cusCode; // 업체코드
+	private String cusName;
+	private String productCode; // 상품코드
+	private String productName; 
 	private String roCount; // 라인코드
 	private String shipSdate; // 납품예정일
 	
@@ -21,13 +23,36 @@ public class WorkRoDTO {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "WorkRoDTO [roCode=" + roCode + ", cusCode=" + cusCode + ", productCode=" + productCode + ", roCount="
-				+ roCount + ", shipSdate=" + shipSdate + "]";
+		return "WorkRoDTO [roCode=" + roCode + ", cusCode=" + cusCode + ", cusName=" + cusName + ", productCode="
+				+ productCode + ", productName=" + productName + ", roCount=" + roCount + ", shipSdate=" + shipSdate
+				+ "]";
 	}
-	
-	
+
+	public String getCusName() {
+		return cusName;
+	}
+
+	public void setCusName(String cusName) {
+		this.cusName = cusName;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	public String getRoCode() {
 		return roCode;
 	}

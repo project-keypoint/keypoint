@@ -46,7 +46,7 @@ public class WorkOrderService {
 	public WorkOrderDTO getWorkOrderDetails(String woCode) {
 		System.out.println("WorkOrderService getWorkOrderDetails()");
 		return workOrderDAO.getWorkOrderDetails(woCode);
-	}// getReceiveDetails [작업지시상세]
+	}// getWorkOrderDetails [작업지시상세]
 	
 	
 	public void workOrderInsertPro(WorkOrderDTO workOrderDTO) {
@@ -69,7 +69,7 @@ public class WorkOrderService {
 		System.out.println("WorkOrderService workOrderUpdatePro()");
 		System.out.println(workOrderDTO);
 		workOrderDAO.deleteWorkOrder(workOrderDTO);
-	}// receiveDelete() [작업지시삭제]
+	}// workOrderDelete() [작업지시삭제]
 	
 	
 	

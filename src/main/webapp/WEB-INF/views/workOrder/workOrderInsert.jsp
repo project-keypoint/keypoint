@@ -73,10 +73,10 @@
 					<p>상태</p>
 					<select id="woStatus" name="woStatus"
 						class="form-control search-input status">
-						<option value="대기">대기</option>
 						<option value="진행">진행</option>
-						<option value="완료">완료</option>
-						<option value="취소">취소</option>
+<!-- 						<option value="진행">진행</option> -->
+<!-- 						<option value="완료">완료</option> -->
+<!-- 						<option value="취소">취소</option> -->
 					</select>
 				</div>
 
