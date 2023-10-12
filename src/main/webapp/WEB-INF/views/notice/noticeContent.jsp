@@ -30,6 +30,7 @@
 
 <div>
 <table class="table-list">
+
 <tr class="table-head">
 	<th colspan="4">[${noticeDTO.noticeCategory}] ${noticeDTO.noticeSubject}</th> 
 

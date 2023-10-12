@@ -21,6 +21,10 @@ public class PageDTO {
 	private String search6;
 	private String search7;
 	private String search8;
+	
+	
+	
+	private String cusStatus;
 
 	
 	
@@ -66,6 +70,14 @@ public class PageDTO {
 	public int getPageBlock() {
 		return pageBlock;
 	}
+	public String getCusStatus() {
+		return cusStatus;
+	}
+
+	public void setCusStatus(String cusStatus) {
+		this.cusStatus = cusStatus;
+	}
+
 	public void setPageBlock(int pageBlock) {
 		this.pageBlock = pageBlock;
 	}

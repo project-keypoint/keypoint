@@ -155,7 +155,7 @@ public class NoticeController {
 		}
 		
 //		pageDTO에 담기
-		pageDTO.setCount(pageCount);
+		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);

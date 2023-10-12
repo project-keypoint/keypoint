@@ -8,15 +8,19 @@
 
 
 
+
 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
-		SELECT *
-		FROM customer
-		<if test="search != null">
-			WHERE cusName like CONCAT('%', #{search}, '%')
-		</if>
-		ORDER BY cusCode DESC
-		LIMIT #{startRow}, #{pageSize}
+	  SELECT *
+	  FROM customer
+	  <if test="search != null">
+	    WHERE cusName LIKE CONCAT('%', #{search}, '%')
+	  </if>
+	  ORDER BY
+	    CASE WHEN cusStatus = '거래중지' THEN 1 ELSE 0 END, -- '거래중지' 레코드를 아래로 이동
+	    cusCode DESC
+	  LIMIT #{startRow}, #{pageSize}
 	</select>
+	
 
 
 	<insert id="insertCustomer">
