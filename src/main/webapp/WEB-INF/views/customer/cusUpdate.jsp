@@ -40,9 +40,10 @@
 
 
 <div class="form-group-customer">
-<p>사업자번호</p>
-<input type="text" id="cusNumber" name="cusNumber" class="form-control search-input" value="${customerDTO.cusNumber}">
+    <p>사업자번호</p>
+    <input type="text" id="cusNumber" name="cusNumber" class="form-control search-input" onfocus="clearInput(this)" onblur="performActions(this)" value="${customerDTO.cusNumber}">
 </div>
+
 
 
 
@@ -285,19 +286,43 @@ formatCusPhone(cusPhoneInput, 13);
 
 
 
-
-
-//	원래의 값에 포커스-> 사라짐 / 포커스 사라지면 -> 원래의 값
+//	포커스 들어가면 원래의 값 삭제
 function clearInput(inputElement) {
     inputElement.setAttribute("data-original-value", inputElement.value); // 원래 값 저장
     inputElement.value = ""; // 입력 값을 지움
 }
 
+
+//	포커스 빠지면 원래의 값 복원
 function restoreInput(inputElement) {
     if (inputElement.value === "") {
         inputElement.value = inputElement.getAttribute("data-original-value"); // 원래 값 복원
     }
 }
+
+
+//	사업자번호 중복확인
+function checkDuplicate(inputElement) {
+    var cusNumber = inputElement.value;
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/customer/cusNumberCheck',
+        data: { 'cusNumber': cusNumber },
+        success: function (result) {
+            if (result == 'iddup') {
+                alert("중복");
+            } else {
+                alert("사용가능");
+            }
+        }
+    });
+}
+
+function performActions(inputElement) {
+    restoreInput(inputElement); // 입력값 복원
+    checkDuplicate(inputElement); // 중복 확인
+}
+
 
 
 

@@ -41,7 +41,7 @@ public class CustomerController {
 		String search = request.getParameter("search");
 		
 //		한 화면에 보여줄 글 개수 설정
-		int pageSize = 3;
+		int pageSize = 10;
 		
 //		현재의 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
@@ -61,6 +61,8 @@ public class CustomerController {
 		
 //		검색어 저장
 		pageDTO.setSearch(search);
+		
+		pageDTO.setCusStatus(request.getParameter("cusStatus"));
 		
 		List<CustomerDTO> cusList = customerService.getCusList(pageDTO);
 		
@@ -87,7 +89,7 @@ public class CustomerController {
 		}
 		
 //		pageDTO에 담기
-		pageDTO.setCount(pageCount);
+		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);

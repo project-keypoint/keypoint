@@ -216,8 +216,9 @@ document.addEventListener("DOMContentLoaded", function() {
   var cusTelInput = document.getElementById("cusTel");
   var cusPhoneInput = document.getElementById("cusPhone");
   
-
-// 사업자번호 하이픈 추가
+  
+  
+//사업자번호 하이픈 추가
   function formatCusNumber(inputField, maxLength) {
     inputField.addEventListener("input", function() {
       var inputValue = inputField.value;
@@ -237,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function() {
       inputField.value = formattedValue;
     });
   }
+  
 
 // 대표전화번호 하이픈 추가
   function formatCusTel(inputField, maxLength) {

@@ -18,15 +18,21 @@ public class NoticeDTO {
 	private int noticeReadcount;		//	조회수
 	private String noticeFile;			//	파일첨부
 	private String empName;				//	작성자
+	private String noticeStatus;		//	글상태
 	
 	
 	
 	
+
+
+
+
 	@Override
 	public String toString() {
 		return "NoticeDTO [noticeNum=" + noticeNum + ", empId=" + empId + ", noticeCategory=" + noticeCategory
 				+ ", noticeSubject=" + noticeSubject + ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate
-				+ ", noticeReadcount=" + noticeReadcount + ", noticeFile=" + noticeFile + ", empName=" + empName + "]";
+				+ ", noticeReadcount=" + noticeReadcount + ", noticeFile=" + noticeFile + ", empName=" + empName
+				+ ", noticeStatus=" + noticeStatus + "]";
 	}
 	
 	
@@ -86,7 +92,13 @@ public class NoticeDTO {
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
-	
+	public String getNoticeStatus() {
+		return noticeStatus;
+	}
+	public void setNoticeStatus(String noticeStatus) {
+		this.noticeStatus = noticeStatus;
+	}
+
 	
 	
 	

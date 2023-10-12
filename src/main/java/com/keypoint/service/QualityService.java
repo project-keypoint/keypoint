@@ -87,13 +87,22 @@ public class QualityService {
 		return qualityDAO.getMaxNum(code_id);
 	}
 	
-	public void disPInsert(QualityDTO qualityDTO) {
-		System.out.println("QualityService disInsertPro()");
+	public void disInsertP(QualityDTO qualityDTO) {
+		System.out.println("QualityService disInsertP()");
 		String disCode = codeChangeDis("DISP");//
 	    qualityDTO.setDisCode(disCode);
 	    
-		qualityDAO.disPInsert(qualityDTO);
+		qualityDAO.disInsertP(qualityDTO);
 	}// disInsert [폐기등록(상품)]
+	
+	public void disInsertM(QualityDTO qualityDTO) {
+		System.out.println("QualityService disInsertM()");
+		String disCode = codeChangeDis("DISM");//
+	    qualityDTO.setDisCode(disCode);
+	    
+		qualityDAO.disInsertM(qualityDTO);
+	}// disInsertM [폐기등록(자재)]
+	
 // ======================================================//	
 	public List<QualityDTO> getDisposedList(PageDTO pageDTO) {
 		System.out.println("QualityService getDisposedList()");
