@@ -58,6 +58,8 @@
 	   </if>   
 	</select>
 	
+	
+	
 	<select id="getPurchaseMaterialList2" resultType="com.keypoint.dto.MaterialDTO">
 	   select materialCode, materialName
 	   from material

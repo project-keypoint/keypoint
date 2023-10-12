@@ -97,10 +97,13 @@ public class ReceiptService {
     } // deleteReceiptAndRelatedData
 	
 	
+	// -----------------------------------------------------------
 	
-	
-	
-	
+	// ReceiptService.java
+	public void updateMaterialCount(ReceiptDTO receiptDTO) {
+	    receiptDAO.updateMaterialCount(receiptDTO);
+	}
+
 	
 	
 } // class

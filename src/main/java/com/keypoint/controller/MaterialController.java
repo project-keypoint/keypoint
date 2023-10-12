@@ -98,19 +98,20 @@ public class MaterialController {
 	public String purchaseMaterialList(Model model, HttpServletRequest request, PageDTO pageDTO) { // 품목 리스트
 		String materialCode = request.getParameter("materialCode");
 		String materialName = request.getParameter("materialName");
+		String materialPrice = request.getParameter("materialPrice");
 		
-		String materialPriceParam = request.getParameter("materialPrice"); // 파라미터 가져오기
+//		String materialPriceParam = request.getParameter("materialPrice"); // 파라미터 가져오기
 
-		int materialPrice = 0; // 기본값을 0으로 설정하거나, 다른 적절한 기본값 설정
+//		int materialPrice = 0; // 기본값을 0으로 설정하거나, 다른 적절한 기본값 설정
 
-		if (materialPriceParam != null && !materialPriceParam.isEmpty()) {
-		    try {
-		        materialPrice = Integer.parseInt(materialPriceParam); // 변환 시도
-		    } catch (NumberFormatException e) {
-		        // 변환 실패 시 예외 처리
-		        // 예외 처리를 어떻게 할지에 대한 로직을 작성하거나, 기본값을 다른 값으로 설정할 수 있음
-		    }
-		}
+//		if (materialPriceParam != null && !materialPriceParam.isEmpty()) {
+//		    try {
+//		        materialPrice = Integer.parseInt(materialPriceParam); // 변환 시도
+//		    } catch (NumberFormatException e) {
+//		        // 변환 실패 시 예외 처리
+//		        // 예외 처리를 어떻게 할지에 대한 로직을 작성하거나, 기본값을 다른 값으로 설정할 수 있음
+//		    }
+//		}
 		
 		// 한 화면에 보여줄 글 개수 설정
 		int pageSize = 5; // sql문에 들어가는 항목

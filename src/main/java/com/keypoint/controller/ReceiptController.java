@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -169,6 +170,10 @@ public class ReceiptController {
 		System.out.println("receiptController receipt/receiptCompletePro");
 		System.out.println(receiptDTO);
 		receiptService.receiptUpdatePro2(receiptDTO);
+		//----------------------
+		 // materialCount 업데이트
+	    receiptService.updateMaterialCount(receiptDTO);
+		//---------------------------
 		
 		if(receiptDTO != null) {
 			return "receipt/msgSuccess"; // 등록완료
@@ -191,11 +196,7 @@ public class ReceiptController {
 		}
     } // receiptDelete
 	
-	
-	
-	
-	
-	
+	// -----------------------------------------------------------------------------------------
 	
 	
 	

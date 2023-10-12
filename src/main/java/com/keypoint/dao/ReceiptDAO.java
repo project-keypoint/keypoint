@@ -85,10 +85,13 @@ public class ReceiptDAO {
         sqlSession.update(namespace + ".deletePurchaseOrder", poCode);
     } // deletePurchaseOrder
 	
-	
-	
-	
-	
+	// -------------------------------------------------------------------------------
+    
+ // ReceiptDAO.java
+    public void updateMaterialCount(ReceiptDTO receiptDTO) {
+        sqlSession.update(namespace + ".updateMaterialCount", receiptDTO);
+    }
+
 	
 	
 	

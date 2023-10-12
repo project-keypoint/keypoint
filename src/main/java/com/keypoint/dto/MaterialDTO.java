@@ -6,7 +6,7 @@ public class MaterialDTO {
 	private String materialName;
 	private String cusCode;
 	private String cusName;
-	private int materialPrice;
+	private String materialPrice;
 	private int materialCount;
 	private String materialUnit;
 	private String materialMemo;
@@ -44,10 +44,10 @@ public class MaterialDTO {
 	public void setCusName(String cusName) {
 		this.cusName = cusName;
 	}
-	public int getMaterialPrice() {
+	public String getMaterialPrice() {
 		return materialPrice;
 	}
-	public void setMaterialPrice(int materialPrice) {
+	public void setMaterialPrice(String materialPrice) {
 		this.materialPrice = materialPrice;
 	}
 	public int getMaterialCount() {
