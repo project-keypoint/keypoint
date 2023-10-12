@@ -134,7 +134,7 @@ public class QualityController {
 	    System.out.println("QualityController qcTransfer");
 	    System.out.println(qualityDTO);
 	    
-	    String disCode = codeChangeProduct("DISP");//
+	    String disCode = codeChangeDisQc("DISQ");//
 	    qualityDTO.setDisCode(disCode);
 	    
 	    boolean result = qualityService.qcTransfer(qualityDTO);
@@ -144,7 +144,7 @@ public class QualityController {
 	}// qcTransfer [품질검사후 상품이동]
 	
 	private int numP = 1;
-	public String codeChangeProduct(String code_id) {
+	public String codeChangeDisQc(String code_id) {
         return String.format("%s%05d", code_id, numP++);
     }// disCode 자동증가(상품)
 	
@@ -159,11 +159,77 @@ public class QualityController {
 	    }
 	}// qcDeleteChecked [품질검사 다중삭제(체크)]
 	
-	@GetMapping("/disposedList") // 폐기목록 페이지
-	public String test() {
+//	@GetMapping("/disposedList") // 폐기목록 페이지
+//	public String disposedList() {
+//		System.out.println("QualityController qc/disposedList");
+//		return "qc/disposedList";
+//	}// disposedList [폐기목록]
+	
+	@GetMapping("/disposedList")
+	public String disposedList(HttpServletRequest request,Model model) {
 		System.out.println("QualityController qc/disposedList");
+		
+		String search = request.getParameter("search");
+		int pageSize = 2; //한 화면에 보여줄 글개수 설정
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		PageDTO pageDTO =new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setSearch(search);
+		
+		List<QualityDTO> disposedList = qualityService.getDisposedList(pageDTO);
+		List<QualityDTO> disposedSum = qualityService.getDisposedSum();
+		List<QualityDTO> disposedSumMat = qualityService.getDisposedSumMat();
+		
+		int count = qualityService.getDisposedCount(pageDTO);
+		System.out.println("count"+count+"pagesize"+pageSize);
+		int pageBlock = 5; // 한화면에 보여줄 페이지 개수 설정
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		System.out.println("컨트롤러startPage"+startPage);
+		int endPage = startPage + pageBlock -1;
+		int pageCount = count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		model.addAttribute("disposedList", disposedList);
+		model.addAttribute("disposedSum", disposedSum);
+		model.addAttribute("disposedSumMat", disposedSumMat);
+		model.addAttribute("pageDTO", pageDTO);
 		return "qc/disposedList";
-	}// disposedList [폐기목록 페이지]
+	}// receiveShipList [수주&출하 목록]
+	
+	
+	
+	@GetMapping("/disInsert") // 폐기목록 페이지
+	public String disInsert() {
+		System.out.println("QualityController qc/disInsert");
+		return "qc/disInsert";
+	}// disInsert [폐기등록]
+	
+	@PostMapping("/disInsertProduct") // 폐기목록 페이지
+	public String disInsertPro(QualityDTO qualityDTO) {
+		System.out.println("QualityController qc/disInsertProduct");
+		System.out.println(qualityDTO);
+		
+		qualityService.disPInsert(qualityDTO);
+		
+		if(qualityDTO != null) {
+			return "receive/msgSuccess"; // 등록완료
+		}else {
+			return "receive/msgFailed"; // 등록실패
+		}
+	}// disInsert [폐기등록Pro]
 	
 	
 }//class
