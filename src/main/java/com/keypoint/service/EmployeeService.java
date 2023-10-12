@@ -88,6 +88,7 @@ public class EmployeeService {
 	} // empPhoneCheck
 
 
+	// 강수빈 - 비밀번호 값 가져오기
 	public int getInitialPass() {
         return employeeDAO.getInitialPass();
     }

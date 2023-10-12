@@ -75,6 +75,8 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".empPhoneCheck", empPhone);
 	} // empPhoneCheck
 
+	
+	 // 강수빈 - 비밀번호 값 가져오기
 	 public int getInitialPass() {
 	        return sqlSession.selectOne(namespace+".getInitialPass");
 	    }

@@ -52,6 +52,13 @@
 <!-- -------------------- // 사진첨부 -------------------- -->
 
 
+<!-- <div class="form-group-customer"> -->
+<!-- <p>사진</p> -->
+<!-- <input type="file" id="empPhoto" name="empPhoto" class="form-control search-input"> -->
+<!-- </div> -->
+
+
+
 <div class="form-group-customer">
 <p>비밀번호(수정필요)</p>
 <input type="text" id="empPass" name="empPass" class="form-control search-input" >
@@ -140,13 +147,6 @@
 </div>
 
 
-<!-- <div class="form-group-customer"> -->
-<!-- <p>사진</p> -->
-<!-- <input type="file" id="empPhoto" name="empPhoto" class="form-control search-input"> -->
-<!-- </div> -->
-
-
-
 
 <!-- 이게 맞나..? 나중에 수정에서 재직여부 수정가능한가?? -->
 <div class="form-group-customer" style="display: none;">
@@ -169,8 +169,6 @@
 
 </div>
 
-
-
 <div class="details-buttons">
 <input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
@@ -188,6 +186,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- 주소API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 
 <script type="text/javascript">
 // 팝업 창을 열어주는 함수
@@ -260,40 +259,7 @@ function sample6_execDaumPostcode() {
 	  }).open();
 	}
 	
-	
-// // 테스트	empPhone
-// //연락처 하이픈 + 글자 수 고정
-// document.addEventListener("DOMContentLoaded", function() {
-//   var empPhoneInput = document.getElementById("empPhone");
 
-// // 연락처 하이픈 추가
-//   function formatEmpPhone(inputField, maxLength) {
-//     inputField.addEventListener("input", function() {
-//       var inputValue = inputField.value;
-
-// //		하이픈(-)을 제외한 숫자만 추출
-//       var numericValue = inputValue.replace(/[^0-9]/g, "");
-
-// //		0000-00-0000 형식
-//       var formattedValue = numericValue.slice(0, 4) + "-" + numericValue.slice(4, 6) + "-" + numericValue.slice(6);
-
-// //		maxLength 길이로 고정합니다.
-//       if (formattedValue.length > maxLength) {
-//         formattedValue = formattedValue.slice(0, maxLength);
-//       }
-
-// //		포맷된 값을 입력 필드에 설정
-//       inputField.value = formattedValue;
-//     });
-//   }
-	
-// //	길이고정(12, 12, 13)
-//   formatEmpPhone(EmpPhoneInput, 12);
-// });
-// // 테스트중
-	
-
-	
 //중복확인
 function checkDuplicate() {
 // 입력된 연락처 가져오기
@@ -354,6 +320,8 @@ function setThumbnail(event) {
   }
   reader.readAsDataURL(file);
 }
+
+
 // 비밀번호값 불러오기
 document.addEventListener("DOMContentLoaded", function() {
     // Ajax 요청 보내기

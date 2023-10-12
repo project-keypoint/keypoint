@@ -258,7 +258,7 @@ public class EmployeeController {
 	} // photoPro
 	
 	
-	
+	// 강수빈 - 비밀번호 값 가져오기
 	@GetMapping("/getInitialPass")
 	@ResponseBody
 	public String getInitialPass() {
