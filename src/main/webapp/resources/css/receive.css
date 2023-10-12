@@ -30,11 +30,11 @@ overflow-y: hidden;
 height: calc(100%-4.375rem);
 }
 .card {
-width: 1400px;
+width: 1500px;
 margin-bottom: 24px;
 }
 .contents2 {
-width: 1300px;
+width: 1400px;
 margin-left: 50px;
 margin-right: 50px;
 }

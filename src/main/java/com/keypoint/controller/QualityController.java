@@ -129,12 +129,13 @@ public class QualityController {
 		}
 	}// qcUpdatePro [품질검사(저장)]
 	
+	
 	@PostMapping("/qcTransfer")
 	public ResponseEntity<String> qcTransfer(QualityDTO qualityDTO) {
 	    System.out.println("QualityController qcTransfer");
 	    System.out.println(qualityDTO);
 	    
-	    String disCode = codeChangeDisQc("DISQ");//
+	    String disCode = codeChangeDis("DISQ");//
 	    qualityDTO.setDisCode(disCode);
 	    
 	    boolean result = qualityService.qcTransfer(qualityDTO);
@@ -142,11 +143,6 @@ public class QualityController {
 	        return new ResponseEntity<>("success", HttpStatus.OK);
 	    return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
 	}// qcTransfer [품질검사후 상품이동]
-	
-	private int numP = 1;
-	public String codeChangeDisQc(String code_id) {
-        return String.format("%s%05d", code_id, numP++);
-    }// disCode 자동증가(상품)
 	
 	@PostMapping("/qcDeleteChecked")
 	public ResponseEntity<String> receiveDeleteChecked(@RequestBody QualityDTO qualityDTO) {
@@ -159,18 +155,12 @@ public class QualityController {
 	    }
 	}// qcDeleteChecked [품질검사 다중삭제(체크)]
 	
-//	@GetMapping("/disposedList") // 폐기목록 페이지
-//	public String disposedList() {
-//		System.out.println("QualityController qc/disposedList");
-//		return "qc/disposedList";
-//	}// disposedList [폐기목록]
-	
 	@GetMapping("/disposedList")
 	public String disposedList(HttpServletRequest request,Model model) {
 		System.out.println("QualityController qc/disposedList");
 		
 		String search = request.getParameter("search");
-		int pageSize = 2; //한 화면에 보여줄 글개수 설정
+		int pageSize = 5; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
 			pageNum = "1";
@@ -212,13 +202,13 @@ public class QualityController {
 	
 	
 	@GetMapping("/disInsert") // 폐기목록 페이지
-	public String disInsert() {
+	public String disInsertP() {
 		System.out.println("QualityController qc/disInsert");
 		return "qc/disInsert";
-	}// disInsert [폐기등록]
+	}// disInsert [폐기등록(상품)]
 	
 	@PostMapping("/disInsertProduct") // 폐기목록 페이지
-	public String disInsertPro(QualityDTO qualityDTO) {
+	public String disInsertPPro(QualityDTO qualityDTO) {
 		System.out.println("QualityController qc/disInsertProduct");
 		System.out.println(qualityDTO);
 		
@@ -229,8 +219,35 @@ public class QualityController {
 		}else {
 			return "receive/msgFailed"; // 등록실패
 		}
-	}// disInsert [폐기등록Pro]
+	}// disInsert [폐기등록(상품)Pro]
 	
+//	@GetMapping("/disInsertM") // 폐기목록 페이지
+//	public String disInsertM() {
+//		System.out.println("QualityController qc/disInsertM");
+//		return "qc/disInsertM";
+//	}// disInsert [폐기등록(자재)]
+//	
+//	@PostMapping("/disInsertProduct") // 폐기목록 페이지
+//	public String disInsertMPro(QualityDTO qualityDTO) {
+//		System.out.println("QualityController qc/disInsertMaterial");
+//		System.out.println(qualityDTO);
+//		
+//		qualityService.disMInsert(qualityDTO);
+//		
+//		if(qualityDTO != null) {
+//			return "receive/msgSuccess"; // 등록완료
+//		}else {
+//			return "receive/msgFailed"; // 등록실패
+//		}
+//	}// disInsert [폐기등록(자재)Pro]
+	
+	public String codeChangeDis(String code_id) {
+		Integer numP = qualityService.getMaxNum(code_id);
+		if(numP == null) {
+			numP = 0;
+		}
+		return String.format("%s%05d", code_id, ++numP);
+    }// disCode 자동증가(품질)
 	
 }//class
 	

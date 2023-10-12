@@ -96,4 +96,8 @@ public class QualityDAO {
 		return sqlSession.selectList(namespace+".getDisposedSumMat");
 	}
 
+	public Integer getMaxNum(String code_id) {
+		return sqlSession.selectOne(namespace+".getMaxNum", code_id);
+	}
+
 }

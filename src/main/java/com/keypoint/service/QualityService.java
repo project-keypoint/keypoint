@@ -73,20 +73,28 @@ public class QualityService {
 		System.out.println("QualityService qcDeleteChecked()");
 		qualityDAO.qcDeleteChecked(qualityDTO);
 	}// qcDeleteChecked [품질검사 다중삭제(체크)]
-
+	
+// ======================================================//
+	public String codeChangeDis(String code_id) {
+		Integer num = getMaxNum(code_id);
+		if(num == null) {
+			num = 0;
+		}
+		return String.format("%s%04d", code_id, ++num);
+    }// disCode 자동증가(상품)
+	
+	public Integer getMaxNum(String code_id) {
+		return qualityDAO.getMaxNum(code_id);
+	}
+	
 	public void disPInsert(QualityDTO qualityDTO) {
 		System.out.println("QualityService disInsertPro()");
-		String disCode = codeChangeDisPro("DISP");//
+		String disCode = codeChangeDis("DISP");//
 	    qualityDTO.setDisCode(disCode);
 	    
 		qualityDAO.disPInsert(qualityDTO);
-	}// disInsert [폐기등록]
-	
-	private int numP = 1;
-	public String codeChangeDisPro(String code_id) {
-        return String.format("%s%04d", code_id, numP++);
-    }// disCode 자동증가(상품)
-
+	}// disInsert [폐기등록(상품)]
+// ======================================================//	
 	public List<QualityDTO> getDisposedList(PageDTO pageDTO) {
 		System.out.println("QualityService getDisposedList()");
 		// 10개씩 가져올때 현페이지에 대한 시작하는 행번호 구하기
@@ -115,5 +123,5 @@ public class QualityService {
 		System.out.println("QualityService getDisposedSumMat()");
 		return qualityDAO.getDisposedSumMat();
 	}
-	
+
 }

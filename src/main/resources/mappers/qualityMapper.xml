@@ -131,4 +131,9 @@
 		FROM material;
 	</select>
 	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		SELECT MAX(CAST(SUBSTRING(disCode, 5) AS SIGNED)) as max_num
+		FROM disposedItems
+		WHERE disCode LIKE CONCAT(#{code_id}, '%')
+	</select>
 </mapper>
