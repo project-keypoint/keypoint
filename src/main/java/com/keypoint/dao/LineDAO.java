@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.LineDTO;
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 
 
@@ -21,12 +22,18 @@ public class LineDAO {
 	private static final String namespace="com.itwillbs.mappers.lineMapper";
 
 	
-	public List<LineDTO> getLineList() {
+	public List<LineDTO> getLineList(PageDTO pageDTO) {
 		System.out.println("LineDAO getLineList()");
-		return sqlSession.selectList(namespace+".getLineList");
+		return sqlSession.selectList(namespace+".getLineList" , pageDTO);
 	}// 라인목록조회
 
 
+	public int getLineCount() {
+		System.out.println("LineDAO getLineCount()");
+
+		return sqlSession.selectOne(namespace+".getLineCount");
+	}
+	
 	public void lineInsert(LineDTO lineDTO) {
 		System.out.println("LineDAO lineInsert()");
 		sqlSession.insert(namespace+".lineInsert",lineDTO);

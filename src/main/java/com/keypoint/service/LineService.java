@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.LineDAO;
 import com.keypoint.dto.LineDTO;
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 
 
@@ -17,11 +18,29 @@ public class LineService {
 	@Inject LineDAO lineDAO;
 	
 
-	public List<LineDTO> getLineList() {
+	public List<LineDTO> getLineList(PageDTO pageDTO) {
 		System.out.println("LineService getLineList()");
-		return lineDAO.getLineList();
+
+		//		10개씩 가져올 때, 현페이지에 대한 시작하는 행번호 구하기
+//		int startRow = (현재페이지번호 -1) * pageSize + 1;
+		int startRow = (pageDTO.getCurrentPage() -1) * pageDTO.getPageSize() + 1;
+		
+//		끝나는 행 번호 구하기
+//		int endRow = startRow + pageSize -1;
+		int endRow = startRow + pageDTO.getPageSize() -1;
+		
+//		디비 startRow -1
+		pageDTO.setStartRow(startRow -1);
+		pageDTO.setEndRow(endRow);
+		
+		return lineDAO.getLineList(pageDTO);
 	}// getLineList
 
+	public int getLineCount() {
+		System.out.println("LineService getLineCount()");
+
+		return lineDAO.getLineCount();
+	}
 
 	public void lineInsertPro(LineDTO lineDTO) {
 		System.out.println("LineService lineInsertPro()");
@@ -42,5 +61,8 @@ public class LineService {
 //		receiveDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
 		lineDAO.lineUpdate(lineDTO);
 	}// receiveUpdatePro() [수주수정Pro]
+
+
+	
 
 }
