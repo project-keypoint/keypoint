@@ -20,7 +20,7 @@ public class ProductionDAO {
 	
 	public List<ProductionDTO> getProductionList(PageDTO pageDTO) {
 		System.out.println("ProductionDAO getProductionList()");
-		return sqlSession.selectList(namespace+".getProductionList");
+		return sqlSession.selectList(namespace+".getProductionList", pageDTO);
 	}
 	
 	public int getProductionCount() {

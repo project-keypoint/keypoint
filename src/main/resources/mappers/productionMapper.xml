@@ -38,6 +38,7 @@
 		left join workOrder b on a.woCode = b.woCode
 		where b.woStatus != '삭제'
 		order by a.woCode desc
+		limit #{startRow}, #{pageSize}
 		</select>
 		
 	
