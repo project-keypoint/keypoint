@@ -20,7 +20,6 @@ public class WorkOrderDTO {
 	private String cusName; // 거래처 명
 	private String empName; // 사원 명
 	private String shipSdate; // 납품예정일
-	private String roCount; // 수주수량
 
 	
 
@@ -30,7 +29,7 @@ public class WorkOrderDTO {
 				+ ", lineName=" + lineName + ", mfgCode=" + mfgCode + ", productCode=" + productCode + ", materialCode="
 				+ materialCode + ", woCount=" + woCount + ", woStatus=" + woStatus + ", woDate=" + woDate
 				+ ", productName=" + productName + ", cusCode=" + cusCode + ", cusName=" + cusName + ", empName="
-				+ empName + ", shipSdate=" + shipSdate + ", roCount=" + roCount + "]";
+				+ empName + ", shipSdate=" + shipSdate + "]";
 	}
 
 	
@@ -162,14 +161,6 @@ public class WorkOrderDTO {
 
 	public void setLineName(String lineName) {
 		this.lineName = lineName;
-	}
-
-	public String getRoCount() {
-		return roCount;
-	}
-
-	public void setRoCount(String roCount) {
-		this.roCount = roCount;
 	}
 	
 	

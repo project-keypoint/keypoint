@@ -63,7 +63,13 @@
 	</update> 
 
 
-	
+
+<!-- 사원 등록 - 연락처 중복체크 -->
+	<select id="empPhoneCheck" resultType="com.keypoint.dto.EmployeeDTO">
+		select *
+		from employees
+		where empPhone = #{empPhone}
+	</select>
 	
 	
 </mapper>
