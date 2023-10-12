@@ -37,8 +37,11 @@ public class CustomerController {
 	public String cusList(HttpServletRequest request, Model model) {
 		System.out.println("CustomerController cusList()");
 		
+//		검색어 가져오기
+		String search = request.getParameter("search");
+		
 //		한 화면에 보여줄 글 개수 설정
-		int pageSize = 10;
+		int pageSize = 3;
 		
 //		현재의 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
@@ -55,6 +58,9 @@ public class CustomerController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		
+//		검색어 저장
+		pageDTO.setSearch(search);
 		
 		List<CustomerDTO> cusList = customerService.getCusList(pageDTO);
 		

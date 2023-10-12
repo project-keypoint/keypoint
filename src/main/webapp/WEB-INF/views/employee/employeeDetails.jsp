@@ -36,6 +36,7 @@
 <%-- <input type=text id="empPhoto" name="empPhoto" class="form-control search-input" placeholder="${employeeDTO.empPhoto}" readonly> --%>
         <img src="${pageContext.request.contextPath }/resources/upload/${employeeDTO.empPhoto}" 
          width="200" height="200">
+         
 </div>
 <!-- // 사진부분 -->
 

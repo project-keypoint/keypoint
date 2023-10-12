@@ -43,9 +43,9 @@
 
 <tr class="table-body">
     <td colspan="4">
-        <div>첨부파일 ${noticeDTO.noticeFile}</div>
-<%--         <a href="${pageContext.request.contextPath}/resources/upload/${boardDTO.file}" download> --%>
-<%--         <%=boardDTO.getFile() %></a><img src="${pageContext.request.contextPath}/resources/upload/<%=boardDTO.getFile() %>"  width="200" height="200"> --%>
+    <div style="text-align: left;">ㅤㅤ첨부파일 
+		<a href="${pageContext.request.contextPath}/resources/upload/${noticeDTO.noticeFile}" download>${noticeDTO.noticeFile}</a>
+	</div>
     </td>
 </tr>
 

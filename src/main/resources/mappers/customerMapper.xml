@@ -11,6 +11,9 @@
 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
 		SELECT *
 		FROM customer
+		<if test="search != null">
+			WHERE cusName like CONCAT('%', #{search}, '%')
+		</if>
 		ORDER BY cusCode DESC
 		LIMIT #{startRow}, #{pageSize}
 	</select>
@@ -53,6 +56,9 @@
 	<select id="getCusCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM customer
+		<if test="search != null">
+			WHERE cusName like CONCAT('%', #{search}, '%')
+		</if>
 	</select>
 
 

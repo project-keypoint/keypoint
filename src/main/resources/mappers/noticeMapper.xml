@@ -15,11 +15,12 @@
 
 
 	<insert id="insertNotice">
-		INSERT INTO notice(noticeNum, noticeCategory, noticeSubject,
+		INSERT INTO notice(noticeNum, empId, noticeCategory, noticeSubject,
 							noticeContent, noticeReadcount, noticeDate, noticeFile)
-		VALUES (#{noticeNum}, #{noticeCategory}, #{noticeSubject},
+		VALUES (#{noticeNum}, #{empId}, #{noticeCategory}, #{noticeSubject},
 				#{noticeContent}, #{noticeReadcount}, #{noticeDate}, #{noticeFile})
 	</insert>
+
 
 
   	<select id="getNoticeList" resultType="com.keypoint.dto.NoticeDTO">

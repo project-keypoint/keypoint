@@ -14,8 +14,10 @@
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- 수주 CSS 적용-->
+    <!--  CSS 적용-->
     <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+    
+    
 </head>
 <body>
 <%@include file="../inc/top-bar.jsp" %>
@@ -41,7 +43,7 @@
 	<option value="인사">인사</option>
 </select>
 
-<input type="text" id="keyword" class="form-control search-input">
+<input type="text" id="search" class="form-control search-input">
 
 </div><!-- search-select -->
 </div><!-- search-b -->
@@ -54,23 +56,7 @@
 
 
 <br>
-<br>
-<div class="select-status" style="display: flex; justify-content: space-between;">
-  <div style="display: flex; justify-content: flex-start;">
-    <a>전체<input type="checkbox" id="select1" name="select1" class="list-select"></a>
-    <a>영업<input type="checkbox" id="select2" name="select2" class="list-select"></a>
-    <a>생산<input type="checkbox" id="select3" name="select3" class="list-select"></a>
-    <a>자재<input type="checkbox" id="select4" name="select4" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-    <a>인사<input type="checkbox" id="select5" name="select5" class="list-select"></a>
-  </div>
+<div class="select-status" style="text-align: right;">
   <a style="text-align: right;">총 ${noticeCount}건</a>
 </div>
 
@@ -83,7 +69,7 @@
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
 	<th>글번호</th> 
     <th>구분</th> 
-    <th>제목</th> 
+    <th>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ제목ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</th> 
     <th>작성자</th> 
     <th>조회수</th> 
     <th>작성일</th> 
@@ -94,7 +80,7 @@
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${noticeDTO.noticeNum}</td>
     <td>${noticeDTO.noticeCategory}</td>
-    <td onclick="location.href='${pageContext.request.contextPath}/notice/noticeContent?noticeNum=${noticeDTO.noticeNum}'">${noticeDTO.noticeSubject}</td>
+    <td onclick="location.href='${pageContext.request.contextPath}/notice/noticeContent?noticeNum=${noticeDTO.noticeNum}'" style="text-align: left;">ㅤㅤ${noticeDTO.noticeSubject}</td>
     <td>${noticeDTO.empName}</td>
     <td>${noticeDTO.noticeReadcount}</td>
     <td><fmt:formatDate value="${noticeDTO.noticeDate}" pattern="yy.MM.dd"/></td>
@@ -115,7 +101,7 @@
 <!-- ---------------------페이징---------------- -->
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+	<a href="${pageContext.request.contextPath}/notnice/noticeList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
 </c:if>
 
 <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
@@ -124,15 +110,14 @@
 			<a href="#" class="page-button page-button-active">${i}</a>
 		</c:when>
 		<c:otherwise>
-                <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+			<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
 </c:if>
-
 
 
 

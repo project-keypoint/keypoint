@@ -37,6 +37,7 @@
 
 <div class="form-group-customer">
 <p>작성자</p>
+<input type="hidden" id="empId" name="empId" class="form-control search-input" value="${empId}">
 <input type="text" id="empName" name="empName" class="form-control search-input" value="${empName}" readonly="readonly">
 </div>
 
@@ -67,9 +68,7 @@
 
 
 <div class="form-group-customer">
-<label for="file">
 <p>첨부파일</p>
-</label>
 <input type="file" id="noticeFile" name="noticeFile" class="form-control search-input" readonly="readonly">
 </div>
 

@@ -52,26 +52,8 @@ public class NoticeController {
 	
 	
 	
-//	공지사항 글쓰기
-	@PostMapping("/noticeWritePro")
-	public String noticeWritePro(NoticeDTO noticeDTO) {
-		System.out.println("NoticeController noticeWritePro()");
-		System.out.println(noticeDTO);
-
-		
-		noticeService.insertNotice(noticeDTO);
-		
-		
-		if(noticeDTO != null) {
-			return "notice/msgSuccess"; // 등록완료
-		} else {
-			return "notice/msgFailed"; // 등록실패
-		}
-	}
 	
-	
-	
-//	글쓰기 - 첨부파일
+//	글쓰기 + 첨부파일
 	@PostMapping("/noticeFilePro")
 	public String noticeFilePro(HttpServletRequest request, MultipartFile noticeFile) throws Exception{
 		System.out.println("NoticeController niticeFile()");
@@ -80,6 +62,7 @@ public class NoticeController {
 		NoticeDTO noticeDTO = new NoticeDTO();
 		
 // 		글쓰기 내용을 전부 담기
+		noticeDTO.setEmpId(request.getParameter("empId"));
 		noticeDTO.setNoticeSubject(request.getParameter("noticeSubject"));
 		noticeDTO.setNoticeCategory(request.getParameter("noticeCategory"));
 		noticeDTO.setNoticeContent(request.getParameter("noticeContent"));
@@ -118,15 +101,13 @@ public class NoticeController {
 	public String noticeList(Model model, HttpServletRequest request) {
 		System.out.println("NoticeController noticeList()");
 		
-//		NoticeDTO noticeDTO = new NoticeDTO();
-//		noticeDTO.getEmpName();
 		
 //		검색어 가져오기
 		String search = request.getParameter("search");
 		
 		
 //		한 화면에 보여줄 글 개수 설정
-		int pageSize = 10;
+		int pageSize = 5;
 		
 //		현재 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
@@ -143,6 +124,9 @@ public class NoticeController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);		
+		
+//		검색어 저장
+		pageDTO.setSearch(search);
 		
 		
 		List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);
