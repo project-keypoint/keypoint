@@ -37,7 +37,7 @@
 </div>
 <div class="form-group-receive">
 <p>담당자</p>
-<input type="text" id="lineEmp" name="lineEmp" class="form-control search-input inputcode" value="${lineDTO.lineEmp }"  >
+<input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${lineDTO.empName }"  >
 </div>
 </div> 
 <!-- search-bar-popup end -->

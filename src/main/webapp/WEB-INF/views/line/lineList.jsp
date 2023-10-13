@@ -40,19 +40,19 @@
 <div class="search-b">
 <div class="search-select">
 <p>라인</p> 
-<input type="text" id="lineCode" class="form-control search-input" placeholder="라인코드" style="width:110px;" readonly>
-<input type="text" id="lineName" class="form-control search-input" placeholder="라인이름" readonly>
+<input type="text" name="search" id="lineCode" class="form-control search-input" placeholder="라인코드" style="width:150px;" readonly>
+
 </div>
 <div class="search-select">
 <p>담당자</p> 
 <input type="text" id="empId" class="form-control search-input" placeholder="담당자코드" style="width:110px;" readonly>
-<input type="text" id="empName" class="form-control search-input" placeholder="담당자이름" readonly>
+<input type="text" name="search2" id="empName" class="form-control search-input" placeholder="담당자이름" readonly>
 </div>
 </div>
 
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 </div>
 </div><!-- search-bar -->
 <br>
@@ -85,7 +85,7 @@
     <td>${LineDTO.lineName}</td>
 <%--     <td>${LineDTO.woCode}</td> --%>
     <td>${LineDTO.lineMemo}</td>
-    <td>${LineDTO.lineEmp}</td>
+    <td>${LineDTO.empName}</td>
     <td><button class = "status">대기중</button></td>
    
 <%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
@@ -221,7 +221,32 @@ checkboxes.forEach(function (checkbox) {
         }
     });
 });
-
+//검색하기
+function doSearch() {
+        var query = {"search" : $("#lineCode").val(), "search2" : $("#empName").val()};
+        $.ajax({
+            url : "${pageContext.request.contextPath}/line/lineList",
+            type : "get",
+            data : query,
+            dataType : "text",
+            success : function(data){
+                if (query.search == "" && query.search2 == "") {
+                    location.href = "${pageContext.request.contextPath}/line/lineList";
+                } else {
+                    location.href = "${pageContext.request.contextPath}/line/lineList?search=" + $("#lineCode").val() + "&search2=" + $("#empName").val();
+                }
+            }
+        });
+    
+}
+function resetSearch() {
+    // lineCode 입력 필드의 값을 빈 문자열로 설정하여 초기화합니다.
+    $("#lineCode").val("");
+    // empId 입력 필드의 값을 빈 문자열로 설정하여 초기화합니다.
+    $("#empId").val("");
+ 	// empName 입력 필드의 값을 빈 문자열로 설정하여 초기화합니다.
+    $("#empName").val("");
+}
 </script>
 </body>
 

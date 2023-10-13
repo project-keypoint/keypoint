@@ -13,8 +13,15 @@
 <!-- 	</select> -->
 	
 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO">
-	SELECT *  
+	SELECT lineCode, lineName, lineMemo, empName
 	from line 
+    <if test="search != null">
+			where lineCode = #{search} 
+		</if>
+		<if test="search2 != null">
+			or empName = #{search2}
+		</if>
+    
     ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED)
     LIMIT #{startRow}, #{pageSize};
 	</select>
@@ -25,13 +32,13 @@
 	</select> 
 
 	<insert id="lineInsert" >
-		insert into line (lineCode, lineName, lineMemo, lineEmp)
-		values( #{lineCode}, #{lineName}, #{lineMemo}, #{lineEmp})
+		insert into line (lineCode, lineName, lineMemo, empName)
+		values( #{lineCode}, #{lineName}, #{lineMemo}, #{empName})
 	
 	</insert>
 
 	<select id="getLineDetails" resultType="com.keypoint.dto.LineDTO">
-		select lineCode, lineName, lineMemo, lineEmp
+		select lineCode, lineName, lineMemo, empName
 		from line 
 		where lineCode = #{lineCode}
 	</select>
@@ -41,7 +48,7 @@
 		SET lineCode = #{lineCode},  
         	lineName = #{lineName},
         	lineMemo = #{lineMemo},
-        	lineEmp = #{lineEmp} 	
+        	empName = #{empName} 	
 		WHERE lineCode = #{lineCode}
 	</update>
 

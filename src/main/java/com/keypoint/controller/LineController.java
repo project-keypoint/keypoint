@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keypoint.dto.LineDTO;
-import com.keypoint.dto.NoticeDTO;
+
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.LineService;
@@ -30,6 +30,10 @@ public class LineController {
 		System.out.println("LineController lineList()");
 		
 
+		// 검색어 가져오기
+		String search = request.getParameter("search");
+		String search2 = request.getParameter("search2");
+				
 //		한 화면에 보여줄 글 개수 설정
 		int pageSize = 10;
 		
@@ -49,7 +53,10 @@ public class LineController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);		
 		
-		
+		// 검색어 저장
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+				
 		List<LineDTO> lineList = lineService.getLineList(pageDTO);
 		
 		

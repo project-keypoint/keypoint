@@ -5,14 +5,14 @@ public class LineDTO {
 	private String lineCode;
 	private String lineName;
 	private String lineMemo;
-	private String lineEmp;
+	private String empName;
 //	private String woCode;
 
 	
 	@Override
 	public String toString() {
-		return "LineDTO [lineCode=" + lineCode + ", lineName=" + lineName + ", lineMemo=" + lineMemo + ", lineEmp="
-				+ lineEmp + "]";
+		return "LineDTO [lineCode=" + lineCode + ", lineName=" + lineName + ", lineMemo=" + lineMemo + ", empName="
+				+ empName + "]";
 	}
 	
 
@@ -40,12 +40,12 @@ public class LineDTO {
 		this.lineMemo = lineMemo;
 	}
 
-	public String getLineEmp() {
-		return lineEmp;
+	public String getEmpName() {
+		return empName;
 	}
 
-	public void setLineEmp(String lineEmp) {
-		this.lineEmp = lineEmp;
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
 
 //	public String getWoCode() {
