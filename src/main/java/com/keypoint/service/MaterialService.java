@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.MaterialDAO;
 import com.keypoint.dto.MaterialDTO;
+import com.keypoint.dto.PageDTO;
 
 @Service
 public class MaterialService {
@@ -21,9 +22,16 @@ public class MaterialService {
 		materialDAO.insertMaterial(materialDTO);
 	}// insertMaterial
 
-	public List<MaterialDTO> getMaterialList() {
+	public List<MaterialDTO> getMaterialList(PageDTO pageDTO) {
 		System.out.println("MaterialService getMaterialList()");
-		return materialDAO.getMaterialList();
+		// 10개씩 가져올 때 현 페이지에 대한 시작하는 행번호 구하기
+		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+		// 끝나는 행번호 구하기
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setStartRow(startRow-1);
+		pageDTO.setEndRow(endRow);		
+		return materialDAO.getMaterialList(pageDTO);
 	}// getMaterialList
 
 	public void deleteMaterial(MaterialDTO materialDTO) {
@@ -40,6 +48,11 @@ public class MaterialService {
 		System.out.println("MaterialService updateMaterial()");
 		materialDAO.updateMaterial(materialDTO);
 	}// updateMaterial
+	
+	public int getMaterialCount(PageDTO pageDTO) {
+		System.out.println("MaterialService getMaterialCount()");
+		return materialDAO.getMaterialCount(pageDTO);
+	}// getMaterialCount	
 
 	//-----------------------------------------홍렬 자재리스트팝업--------------------------------------------
 	
@@ -77,6 +90,8 @@ public class MaterialService {
 		
 		return materialDAO.countPurchaseList2(search);
 	} // countPurchaseList
+
+
 	
 	
 	// --------------------------------------------------------------------------------------------------

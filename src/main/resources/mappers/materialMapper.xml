@@ -9,11 +9,24 @@
 		values(#{materialName},#{cusCode},#{materialPrice},#{materialCount},#{materialUnit},#{materialMemo})
 	</insert>
 
+<!-- 	검색어 포함 -->
 	<select id="getMaterialList" resultType="com.keypoint.dto.MaterialDTO">
 		select * from material
 		where materialDel = 0
+		<if test="search != null">
+			and materialCode = #{search} 
+		</if>		
 		order by materialCode desc
+		limit #{startRow},#{pageSize}
 	</select>
+	
+<!-- 	검색어 포함 -->
+	<select id="getMaterialCount" resultType="java.lang.Integer">
+		select count(materialCode) from material
+		<if test="search != null">
+			where materialCode = #{search} 
+		</if>
+	</select>		
 	
 	<select id="getMaterial" resultType="com.keypoint.dto.MaterialDTO">
 		select m.materialCode,m.materialName,m.cusCode,c.cusName,m.materialPrice,m.materialCount,m.materialUnit,m.materialMemo  
