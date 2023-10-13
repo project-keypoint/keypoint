@@ -84,9 +84,20 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <span
 					class="mr-2 d-none d-lg-inline text-gray-600 ">${sessionScope.empId}
-						/ ${sessionScope.empName} 님</span> <img
-					class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/img/undraw_profile.svg" style=" position: relative;
-  top: -3px;">
+						/ ${sessionScope.empName} 님</span> 
+					
+
+<!-- 프로필사진 수정중입니다 -->
+<% 
+String empPhoto = (String) session.getAttribute("empPhoto"); 
+String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resources/img/test.png";
+%>
+
+<img class="img-profile rounded-circle" src="<%= imgSrc %>" style="position: relative; top: -3px;">
+<!-- // 프로필사진 수정중입니다 -->
+
+  
+  
 			</a> <!-- Dropdown - User Information -->
 				<div
 					class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
