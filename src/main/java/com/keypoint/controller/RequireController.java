@@ -63,7 +63,7 @@ public class RequireController {
 		List<RequireDTO> requireList = requireService.getRequireList(pageDTO);
 		
 		// 전체 글개수 가져오기
-		int count = requireService.getBoardCount(pageDTO);
+		int count = requireService.getRequireCount(pageDTO);
 		// 한 화면에 보여줄 페이지 개수 설정
 		int pageBlock = 10;
 		// 시작하는 페이지 번호

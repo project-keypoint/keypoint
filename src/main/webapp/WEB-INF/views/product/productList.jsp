@@ -29,13 +29,13 @@
 <div class="search-b">
 <div class="search-select">
 <p style="width:65px;">완제품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
+<input type="text" name="search" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
 <input type="text" id="productName" class="form-control search-input" placeholder="완제품명" readonly>
 </div>
 </div>
 
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
 </div><!-- search-bar -->
@@ -80,13 +80,18 @@
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
-<a href="#" class="page-button">&gt;</a>
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/product/productList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage}" 
+                   end="${pageDTO.endPage}" step="1">
+<a href="${pageContext.request.contextPath}/product/productList?pageNum=${i}&search=${pageDTO.search}">${i}</a> 
+</c:forEach>
+<!-- 끝페이지번호  전체페이지수 비교 => 전체페이지수 크면 => Next보임 -->
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/product/productList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
+</c:if>
 </div><!-- page-button -->
 </div>
 </div><!-- contents -->
@@ -204,6 +209,26 @@ function confirmDelete(productCode) {
     			location.reload();
     		}
     	});
+    } 
+}
+
+//검색하기
+function doSearch() {
+    if (confirm($("#productCode").val())) {
+        var query = {"search" : $("#productCode").val()};
+        $.ajax({
+            url : "${pageContext.request.contextPath}/product/productList",
+            type : "get",
+            data : query,
+            dataType : "text",
+            success : function(data){
+                if (query.search == "") {
+                    location.href = "${pageContext.request.contextPath}/product/productList";
+                } else {
+                    location.href = "${pageContext.request.contextPath}/product/productList?search=" + $("#productCode").val();
+                }
+            }
+        });
     } 
 }
 </script>

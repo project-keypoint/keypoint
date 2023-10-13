@@ -27,7 +27,7 @@
 	</select>
 
 <!-- 	검색어 포함 -->
-	<select id="getBoardCount" resultType="java.lang.Integer">
+	<select id="getRequireCount" resultType="java.lang.Integer">
 		select count(productCode) from requirement
 		<if test="search != null">
 			where productCode = #{search} 
