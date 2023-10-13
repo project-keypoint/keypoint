@@ -35,27 +35,21 @@
 
 
 <!-- -------------------- 사진첨부 -------------------- -->
-<!-- <div class="form-group-customer">  -->
+<div class="form-group-customer"> 
 
 <div class="form-group-customer">
-	<img id="preview" width="200" height="230" style="border-radius: 3px">
+        <img src="${pageContext.request.contextPath }/resources/img/test.png" id="preview" width="200" height="230" style="border-radius: 3px">
 </div>
 
 <div class="imgbtn">
 <label for="file">
-<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;">
+<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;"> 
 <i class="ti-upload btn-icon-prepend"></i>사진 업로드하기
 </span>
 </label>
 <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
 <!-- accept="image/*": 이 속성은 업로드할 수 있는 파일 형식을 제한 함. "image/*"로 설정된 경우, 사용자는 이미지 파일만 선택할 수 있음. -->
 <!-- -------------------- // 사진첨부 -------------------- -->
-
-
-<!-- <div class="form-group-customer"> -->
-<!-- <p>사진</p> -->
-<!-- <input type="file" id="empPhoto" name="empPhoto" class="form-control search-input"> -->
-<!-- </div> -->
 
 
 
@@ -86,13 +80,6 @@
 <input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소">
 </div>
 <!-- // 주소 -->
-
-
-<!-- <div class="form-group-customer"> -->
-<!-- <p>연락처</p> -->
-<!-- <input type="text" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()"> -->
-<!-- <div class="divdup"></div> -->
-<!-- </div> -->
 
 
 <div class="form-group-customer">
@@ -257,26 +244,6 @@ function sample6_execDaumPostcode() {
 	}
 	
 
-// //중복확인(연락처)
-// function checkDuplicate() {
-// // 입력된 연락처 가져오기
-//     var empPhone = document.getElementById("empPhone").value;
-
-//     $.ajax({
-//         url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
-//         data: { 'empPhone': empPhone },
-//         success: function (result) {
-//             if (result == 'iddup') {
-//                 alert("중복");
-//             } else {
-//                 alert("사용가능");
-//             }
-//         }
-//     });
-// }
-
-
-
 // 중복확인(연락처, 내선번호, 이메일)
 function checkDuplicate(type) {
     var empPhone = document.getElementById("empPhone").value;
@@ -369,6 +336,14 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     xhr.send();
 });
+
+
+
+
+
+
+
+
 
 </script>
 </body>
