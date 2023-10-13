@@ -1,3 +1,5 @@
+employeeinsert
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -97,22 +99,19 @@
 
 <div class="form-group-customer">
     <p>연락처</p>
-    <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()">
+    <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate('phone')">
 </div>
     <div class="divdup"></div>
 
 
-
-
-
 <div class="form-group-customer">
 <p>내선번호</p>
-<input type="tel" id="empTel" name="empTel" class="form-control search-input">
+<input type="tel" id="empTel" name="empTel" class="form-control search-input" onblur="checkDuplicate('tel')">
 </div>
 
 <div class="form-group-customer">
 <p>이메일</p>
-<input type="text" id="empEmail" name="empEmail" class="form-control search-input">
+<input type="text" id="empEmail" name="empEmail" class="form-control search-input" onblur="checkDuplicate('email')">
 </div>
 
 <div class="form-group-customer">
@@ -260,14 +259,41 @@ function sample6_execDaumPostcode() {
 	}
 	
 
-//중복확인
-function checkDuplicate() {
-// 입력된 연락처 가져오기
+// //중복확인(연락처)
+// function checkDuplicate() {
+// // 입력된 연락처 가져오기
+//     var empPhone = document.getElementById("empPhone").value;
+
+//     $.ajax({
+//         url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
+//         data: { 'empPhone': empPhone },
+//         success: function (result) {
+//             if (result == 'iddup') {
+//                 alert("중복");
+//             } else {
+//                 alert("사용가능");
+//             }
+//         }
+//     });
+// }
+
+
+
+// 중복확인(연락처, 내선번호, 이메일)
+function checkDuplicate(type) {
     var empPhone = document.getElementById("empPhone").value;
+    var empTel = document.getElementById("empTel").value;
+    var empEmail = document.getElementById("empEmail").value;
 
     $.ajax({
-        url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
-        data: { 'empPhone': empPhone },
+        url: '${pageContext.request.contextPath}/employee/empCheck',
+        data: {
+            empPhone: empPhone,
+            empTel: empTel,
+            empEmail: empEmail,
+            type:type           
+            
+        },
         success: function (result) {
             if (result == 'iddup') {
                 alert("중복");
@@ -294,6 +320,7 @@ function validateForm() {
     var empHiredate = document.getElementById("empHiredate").value;
     
     
+    
 // 	빈 필드 검사
     if (empName === "" || empAddress === "" || empPhone === "" ||
     	empTel === "" || empEmail === "" || departmentName === "" || empPosition === "" ||
@@ -303,6 +330,7 @@ function validateForm() {
     }
     return true;
 }	
+
 
 
 // 첨부파일 미리보기

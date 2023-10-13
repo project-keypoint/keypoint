@@ -21,7 +21,7 @@ public class EmployeeService {
 	
 	
 	// -------------------------------------------------------------------
-  
+ 
 	// 로그인-강수빈
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService userCheck()");
@@ -29,6 +29,14 @@ public class EmployeeService {
 		return employeeDAO.userCheck(employeeDTO);
 	}
 	
+	// 강수빈 - 비밀번호 값 가져오기
+	public int getInitialPass() {
+        return employeeDAO.getInitialPass();
+    }
+	
+	
+	
+	// -------------------------------------------------------------------
 	
 	// 사원목록
 	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO) {
@@ -55,7 +63,6 @@ public class EmployeeService {
 	} // getEmployeeCount
 	
 	
-	
 	// 사원등록
 	public void insertEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService insertEmployee()");
@@ -80,20 +87,13 @@ public class EmployeeService {
 	} // updateEmployee
 
 
-	//	사원 등록 - 연락처 중복체크
-	public EmployeeDTO empPhoneCheck(String empPhone) {
-		System.out.println("EmployeeService EmployeeDTO()");
-
-		return employeeDAO.empPhoneCheck(empPhone);
+	// 사원등록 - 중복체크(연락처, 내선번호, 이메일)
+	public EmployeeDTO empCheck(String type, String Emp) {
+		System.out.println("EmployeeService EmployeeDTO()"); 
+		System.out.println(type);
+		
+		return employeeDAO.empCheck(type,Emp);
 	} // empPhoneCheck
-
-
-	// 강수빈 - 비밀번호 값 가져오기
-	public int getInitialPass() {
-        return employeeDAO.getInitialPass();
-    }
-	
-
 
 
 

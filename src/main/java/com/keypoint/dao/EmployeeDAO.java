@@ -22,13 +22,21 @@ public class EmployeeDAO {
 	
 	// ---------------------------------------------------------------------------
 
-	
 	// 로그인-강수빈
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO userCheck()");
 		return sqlSession.selectOne(namespace+".userCheck", employeeDTO);
 	}
 	
+	 // 강수빈 - 비밀번호 값 가져오기
+	 public int getInitialPass() {
+	        return sqlSession.selectOne(namespace+".getInitialPass");
+	    }
+	 
+	 
+	 
+	// ---------------------------------------------------------------------------
+	 
 	// 사원목록
 	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO) {
 		System.out.println("EmployeeDAO getEmployeeList()");
@@ -67,21 +75,28 @@ public class EmployeeDAO {
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
 	} // updateEmployee
 
-	
-	//	사원 등록 - 연락처 중복체크
-	public EmployeeDTO empPhoneCheck(String empPhone) {
+	// 사원등록 - 중복체크(연락처, 내선번호, 이메일)
+	public EmployeeDTO empCheck(String type, String Emp) {
 		System.out.println("EmployeeDAO empPhoneCheck()");
-		
-		return sqlSession.selectOne(namespace+".empPhoneCheck", empPhone);
+		if (type.equals("phone")) {
+			String empPhone = Emp;
+			
+			return sqlSession.selectOne(namespace+".empPhoneCheck", empPhone);
+		}
+		else if(type.equals("tel")) {
+			String empTel = Emp;
+			
+			return sqlSession.selectOne(namespace+".empTelCheck", empTel);
+			}
+		else if(type.equals("email")) {
+			String empEmail = Emp;
+			
+			return sqlSession.selectOne(namespace+".empEmailCheck", empEmail);
+			}
+		else {
+		return null;
+		}
 	} // empPhoneCheck
-
-	
-	 // 강수빈 - 비밀번호 값 가져오기
-	 public int getInitialPass() {
-	        return sqlSession.selectOne(namespace+".getInitialPass");
-	    }
-
-	
 	
 	
 

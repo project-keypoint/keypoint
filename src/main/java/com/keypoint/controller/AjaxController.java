@@ -54,36 +54,48 @@ public class AjaxController {
 		
 	}
 	
-
 	
-//	사원등록 - 연락처 중복확인
-	@GetMapping("/employee/empPhoneCheck")
-	public ResponseEntity<String> empPhoneCheck(HttpServletRequest request) {
-//		ResponseEntity : 응답/출력 결과를 저장하는 파일 제공
-		System.out.println("AjaxController empPhoneCheck()");
+//	--------------------------------------------------------------------------
+	
+// 사원등록 - 중복확인(연락처, 내선번호, 이메일)
+		@GetMapping("/employee/empCheck")
+		public ResponseEntity<String> empCheck(HttpServletRequest request) {
+		    System.out.println("AjaxController empPhoneCheck()");
+		    
+		    String empPhone = request.getParameter("empPhone");
+		    String empTel = request.getParameter("empTel");
+		    String empEmail = request.getParameter("empEmail");
+		    String type = request.getParameter("type");
+		    
+		    String result ="";
+		    String emp  = "";
+		    
+		    System.out.println(empPhone);
+		    System.out.println(empTel);
+		    System.out.println(empEmail);
+		    System.out.println(type);
 		
-		String empPhone = request.getParameter("empPhone");
-		EmployeeDTO employeeDTO = employeeService.empPhoneCheck(empPhone);
-		String result = "";
-		
-		if (employeeDTO != null) {
-//			연락처 있음 -> 중복
-			result = "iddup";
-			
-		} else {
-//			연락처 없음 -> 사용가능
-			result = "idok";
-		}
-		
-//		출력 -> 결과를 가지고 돌아가는 개념
-		ResponseEntity<String> entity = new ResponseEntity<String>(result, HttpStatus.OK);
-		
-		return entity;
-		
-	} // empPhoneCheck
+		    if (type.equals("phone")) {
+		    	emp = empPhone;
+		    }
+		    
+		    else if(type.equals("tel")) {
+		    	emp = empTel;
+		    }
+		    
+		    else if(type.equals("email")) {
+		    	emp = empEmail;
+		    }
+		    
+		    if (employeeService.empCheck(type,emp) != null) {
+		        result = "iddup";
+		    } else {
+		        result = "idok";
+		    }
+		    ResponseEntity<String> entity = new ResponseEntity<String>(result, HttpStatus.OK);
+		    
+		    return entity;
+		} // empCheck
 	
 	
-	
-	
-	
-}
+} // calss
