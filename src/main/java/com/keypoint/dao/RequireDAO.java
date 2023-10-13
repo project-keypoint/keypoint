@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.RequireDTO;
 
 @Repository
@@ -23,9 +24,9 @@ public class RequireDAO {
 		sqlSession.insert(namespace+".insertRequire", requireDTO);
 	}// insertRequire
 
-	public List<RequireDTO> getRequireList() {
+	public List<RequireDTO> getRequireList(PageDTO pageDTO) {
 		System.out.println("RequireDAO getRequireList()");
-		return sqlSession.selectList(namespace+".getRequireList");
+		return sqlSession.selectList(namespace+".getRequireList", pageDTO);
 	}// getRequireList
 
 	public void deleteRequire(RequireDTO requireDTO) {
@@ -42,6 +43,11 @@ public class RequireDAO {
 		System.out.println("RequireDAO updateRequire()");
 		sqlSession.delete(namespace+".updateRequire", requireDTO);
 	}// updateRequire
+
+	public int getBoardCount(PageDTO pageDTO) {
+		System.out.println("RequireDAO getBoardCount()");
+		return sqlSession.selectOne(namespace+".getBoardCount", pageDTO);
+	}
 
 	
 	

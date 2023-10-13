@@ -28,10 +28,9 @@
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>완제품코드</p> <input type="text" id="productCode" class="form-control search-input" placeholder="완제품코드 ">
-</div>
-<div class="search-select">
-<p>완제품명</p> <input type="text" id="productName" class="form-control search-input" placeholder="완제품명 ">
+<p style="width:65px;">완제품명</p> 
+<input type="text" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
+<input type="text" id="productName" class="form-control search-input" placeholder="완제품명" readonly>
 </div>
 </div>
 
@@ -80,7 +79,15 @@
 <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
-
+<div class="page-buttons">
+<a href="#" class="page-button">&lt;</a>
+<a href="#" class="page-button page-button-active">1</a>
+<a href="#" class="page-button">2</a>
+<a href="#" class="page-button">3</a>
+<a href="#" class="page-button">4</a>
+<a href="#" class="page-button">5</a>
+<a href="#" class="page-button">&gt;</a>
+</div><!-- page-button -->
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->

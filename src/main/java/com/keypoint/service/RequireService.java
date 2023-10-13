@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.RequireDAO;
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.RequireDTO;
 
 @Service
@@ -21,9 +22,16 @@ public class RequireService {
 		requireDAO.insertRequire(requireDTO);
 	}// insertRequire
 
-	public List<RequireDTO> getRequireList() {
+	public List<RequireDTO> getRequireList(PageDTO pageDTO) {
 		System.out.println("RequireService getRequireList()");
-		return requireDAO.getRequireList();
+		// 10개씩 가져올 때 현 페이지에 대한 시작하는 행번호 구하기
+		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+		// 끝나는 행번호 구하기
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setStartRow(startRow-1);
+		pageDTO.setEndRow(endRow);		
+		return requireDAO.getRequireList(pageDTO);
 	}// getRequireList
 
 	public void deleteRequire(RequireDTO requireDTO) {
@@ -40,6 +48,11 @@ public class RequireService {
 		System.out.println("RequireService updateRequire()");
 		requireDAO.updateRequire(requireDTO);
 	}// updateRequire
+
+	public int getBoardCount(PageDTO pageDTO) {
+		System.out.println("RequireService getBoardCount()");
+		return requireDAO.getBoardCount(pageDTO);
+	}
 
 
 
