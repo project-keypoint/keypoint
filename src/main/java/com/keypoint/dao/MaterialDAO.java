@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.MaterialDTO;
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.WorkOrderDTO;
 
 @Repository
@@ -24,9 +25,9 @@ public class MaterialDAO {
 		sqlSession.insert(namespace+".insertMaterial", materialDTO);
 	}// insertMaterial
 
-	public List<MaterialDTO> getMaterialList() {
+	public List<MaterialDTO> getMaterialList(PageDTO pageDTO) {
 		System.out.println("MaterialDAO getMaterialList()");
-		return sqlSession.selectList(namespace+".getMaterialList");
+		return sqlSession.selectList(namespace+".getMaterialList", pageDTO);
 	}// getMaterialList
 
 	public void deleteMaterial(MaterialDTO materialDTO) {
@@ -43,6 +44,11 @@ public class MaterialDAO {
 		System.out.println("MaterialDAO updateMaterial()");
 		sqlSession.update(namespace+".updateMaterial", materialDTO);
 	}// updateMaterial
+	
+	public int getMaterialCount(PageDTO pageDTO) {
+		System.out.println("MaterialDAO getMaterialCount()");
+		return sqlSession.selectOne(namespace+".getMaterialCount", pageDTO);
+	}// getMaterialCount	
 
 	// ---------------------------------홍렬 자재리스트 팝업 ---------------------------------------------------------------
 	
@@ -104,6 +110,8 @@ public class MaterialDAO {
 		return sqlSession.selectOne(namespace+".countPurchaseList2", search);
 		
 	} // countPurchaseList
+
+
 	
 	
 	
