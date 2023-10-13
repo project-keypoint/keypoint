@@ -114,6 +114,7 @@ height: 16px;
 margin: 0 0 5px 10px;
 }
 .content-bottom {
+height: 78px;	
 display: flex;
 justify-content: space-between;
 margin-top: 15px;

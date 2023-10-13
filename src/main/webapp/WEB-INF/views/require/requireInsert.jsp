@@ -25,14 +25,14 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>완제품코드</p>
-<input type="text" name="productCode" id="productCode" class="form-control search-input productCode" placeholder="완제품코드">
+<input type="text" name="productCode" id="productCode" class="form-control search-input productCode" style="width:110px;" placeholder="완제품코드">
 <input type="text" name="productName" id="productName" class="form-control search-input productname" placeholder="완제품명" readonly>
 </div>
 </div>
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>자재코드</p>
-<input type="text" name="materialCode" id="materialCode" class="form-control search-input materialCode" placeholder="자재코드">
+<input type="text" name="materialCode" id="materialCode" class="form-control search-input materialCode" style="width:110px;" placeholder="자재코드">
 <input type="text" name="materialName" id="materialName" class="form-control search-input materianame" placeholder="자재명" readonly>
 </div>
 </div>

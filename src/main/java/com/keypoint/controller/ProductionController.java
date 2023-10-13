@@ -143,7 +143,7 @@ public class ProductionController {
 	public String productionDelete(ProductionDTO productionDTO) {
 		System.out.println("ProductionController production/productionDelete");
 		System.out.println(productionDTO);
-		productionService.productionUpdatePro(productionDTO);
+		productionService.productionDelete(productionDTO);
 		
 		if(productionDTO != null) {
 			return "production/msgSuccess"; // 등록완료

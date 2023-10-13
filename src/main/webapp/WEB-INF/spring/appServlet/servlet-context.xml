@@ -39,7 +39,9 @@
 <!-- 		이상희 경로 -->
 <!-- 		<beans:constructor-arg value="//Users//kiky//git//keypoint//src//main//webapp//resources//upload"></beans:constructor-arg> -->
 <!-- 		진유정 노트북 경로 -->
-		<beans:constructor-arg value="E:\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
+<!-- 		<beans:constructor-arg value="E:\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg> -->
+<!-- 		진유정 학원 컴퓨터 경로 -->
+		<beans:constructor-arg value="D:\\WEB\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg>
 	</beans:bean>
 
 

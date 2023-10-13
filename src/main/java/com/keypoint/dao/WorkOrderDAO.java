@@ -65,7 +65,7 @@ public class WorkOrderDAO {
 	public void deleteWorkOrder(WorkOrderDTO workOrderDTO) {
 		System.out.println("WorkOrderDAO deleteWorkOrder()");
 		System.out.println(workOrderDTO);
-		sqlSession.update(namespace+".deleteWorkOrder",workOrderDTO);
+		sqlSession.update(namespace+".deleteWorkOrder",workOrderDTO);	
 	}// deleteWorkOrder() [작업지시삭제]
 	
 

@@ -15,19 +15,14 @@
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- customer CSS 적용-->
     <link href="${pageContext.request.contextPath}/resources/css/notice.css" rel="stylesheet">
-    
-
 </head>
 
 <body>
 <div class="main-details">
-<form action="${pageContext.request.contextPath}/notice/noticeFilePro" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/notice/noticeWritePro" method="post">
 
 <div class="forms-group-customer">
 <div class="page-title-popup">공지사항등록</div>
-
-
-
 
 
 <div class="form-group-customer">
@@ -56,36 +51,27 @@
 
 
 
-<div class="form-group-customer">
-<p>내용</p>
-<textarea 	id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px; resize: none;"></textarea>
-</div>
-
-
-
-
-
-
+<!-- <div class="form-group-customer"> -->
+<!-- <p>내용</p> -->
+<!-- <textarea 	id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px; resize: none;"></textarea> -->
+<!-- </div> -->
 
 <div class="form-group-customer">
-<p>첨부파일</p>
-<input type="file" id="noticeFile" name="noticeFile" class="form-control search-input" readonly="readonly">
+    <p>내용</p>
+    <textarea id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px;"></textarea>
 </div>
 
+<div class="form-group-customer" style="display: none;">
+<p>상태</p>
+<input type="text" id="noticeStatus" name="noticeStatus" class="form-control search-input" value="등록">
+</div>
 
-
-
-
-
-
-
-
+<!-- <div class="form-group-customer"> -->
+<!-- <p>첨부파일</p> -->
+<!-- <input type="file" id="noticeFile" name="noticeFile" class="form-control search-input" readonly="readonly"> -->
+<!-- </div> -->
 <br>
-
-
-
 </div>
-
 
 <div class="details-buttons">
 <input type="submit" id="noticeSubmit" value="등록" class="btn btn-primary mybutton1">
@@ -93,7 +79,6 @@
 </div>
 </form><!-- form 끝 -->
 </div><!-- main-details -->
-
 
 
 
@@ -108,23 +93,12 @@
 
 <script type="text/javascript">
 
-
-//첨부파일 미리보기
-// function setThumbnail(event) {
-//   // 선택된 파일 정보 가져오기
-//   var input = event.target;
-//   var file = input.files[0];
-  
-//   // FileReader 객체 사용하여 파일 읽기
-//   var reader = new FileReader();
-//   reader.onload = function(e) {
-//     // 읽은 파일을 이미지로 변환하여 미리보기
-//     var img = document.getElementById("preview");
-//     img.src = e.target.result;
-//   }
-//   reader.readAsDataURL(file);
-// }
-
+document.getElementById('noticeContent').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        // 엔터 키를 눌렀을 때 줄 바꿈을 하도록 처리
+        this.value += '\n';
+        e.preventDefault(); // 기본 엔터 키 동작 비활성화
+    }
 
 
 

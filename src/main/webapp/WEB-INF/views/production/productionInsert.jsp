@@ -111,7 +111,7 @@ $(document).ready(function() {
 	
 	$("#woCode, #woCode").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workList';
-        openPopup(url, 600, 700);
+        openPopup(url, 650, 750);
     });
 //     // 수주코드 검색 팝업 열기
 //     $("#roCode, #roCode").click(function() {

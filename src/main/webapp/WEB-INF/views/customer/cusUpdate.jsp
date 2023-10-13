@@ -77,21 +77,21 @@
 <div class="form-group-customer">
 <p>종목</p>
 <select id="cusType" name="cusType" class="form-control search-input">
-        <option value="키캡">키캡</option>
-        <option value="스위치(적축)">스위치(적축)</option>
-        <option value="스위치(청축)">스위치(청축)</option>
-        <option value="스위치(갈축)">스위치(갈축)</option>
-        <option value="프레임(상부)">프레임(상부)</option>
-        <option value="프레임(하부)">프레임(하부)</option>
-        <option value="흡음제">흡음제</option>
-        <option value="플레이트">플레이트</option>
-        <option value="PCB">PCB</option>
-        <option value="키보드A(적축)">키보드A(적축)</option>
-        <option value="키보드A(청축)">키보드A(청축)</option>
-        <option value="키보드A(갈축)">키보드A(갈축)</option>
-        <option value="키보드B(적축)">키보드B(적축)</option>
-        <option value="키보드B(청축)">키보드B(청축)</option>
-        <option value="키보드B(갈축)">키보드B(갈축)</option>
+	 <option value="키캡" ${customerDTO.cusType eq '키캡' ? 'selected' : ''}>키캡</option>
+	 <option value="스위치(적축)" ${customerDTO.cusType eq '스위치(적축)' ? 'selected' : ''}>스위치(적축)</option>
+	 <option value="스위치(청축)" ${customerDTO.cusType eq '스위치(청축)' ? 'selected' : ''}>스위치(청축)</option>
+	 <option value="스위치(갈축)" ${customerDTO.cusType eq '스위치(갈축)' ? 'selected' : ''}>스위치(갈축)</option>
+	 <option value="프레임(상부)" ${customerDTO.cusType eq '프레임(상부)' ? 'selected' : ''}>프레임(상부)</option>
+	 <option value="프레임(하부)" ${customerDTO.cusType eq '프레임(하부)' ? 'selected' : ''}>프레임(하부)</option>
+	 <option value="흡음제" ${customerDTO.cusType eq '흡음제' ? 'selected' : ''}>흡음제</option>
+	 <option value="플레이트" ${customerDTO.cusType eq '플레이트' ? 'selected' : ''}>플레이트</option>
+	 <option value="PCB" ${customerDTO.cusType eq 'PCB' ? 'selected' : ''}>PCB</option>
+	 <option value="키보드A(적축)" ${customerDTO.cusType eq '키보드A(적축)' ? 'selected' : ''}>키보드A(적축)</option>
+	 <option value="키보드A(청축)" ${customerDTO.cusType eq '키보드A(청축)' ? 'selected' : ''}>키보드A(청축)</option>
+	 <option value="키보드A(갈축)" ${customerDTO.cusType eq '키보드A(갈축)' ? 'selected' : ''}>키보드A(갈축)</option>
+	 <option value="키보드B(적축)" ${customerDTO.cusType eq '키보드B(적축)' ? 'selected' : ''}>키보드B(적축)</option>
+	 <option value="키보드B(청축)" ${customerDTO.cusType eq '키보드B(청축)' ? 'selected' : ''}>키보드B(청축)</option>
+	 <option value="키보드B(갈축)" ${customerDTO.cusType eq '키보드B(갈축)' ? 'selected' : ''}>키보드B(갈축)</option>
 </select>
 </div>
 

@@ -52,47 +52,20 @@ public class NoticeController {
 	
 	
 	
-	
-//	글쓰기 + 첨부파일
-	@PostMapping("/noticeFilePro")
-	public String noticeFilePro(HttpServletRequest request, MultipartFile noticeFile) throws Exception{
-		System.out.println("NoticeController niticeFile()");
-///		name="file" -> MultipartFile file과 이름 동일
-	
-		NoticeDTO noticeDTO = new NoticeDTO();
-		
-// 		글쓰기 내용을 전부 담기
-		noticeDTO.setEmpId(request.getParameter("empId"));
-		noticeDTO.setNoticeSubject(request.getParameter("noticeSubject"));
-		noticeDTO.setNoticeCategory(request.getParameter("noticeCategory"));
-		noticeDTO.setNoticeContent(request.getParameter("noticeContent"));
-
-// 		파일이름 => 랜덤문자_첨부파일이름
-		UUID uuid = UUID.randomUUID();
-		
-		
-//		uuid.toString()+"_"+첨부파일이름;
-		String filename = uuid.toString()+"_"+noticeFile.getOriginalFilename();
-		
-// 		첨부파일 복사(업로드)
-//		FileCopyUtils.copy(원본파일, upload폴더파일(경로, 파일이름));
-//		file.getBytes() 원본파일 => upload 첨부파일 복사(업로드)
-		FileCopyUtils.copy(noticeFile.getBytes(), new File(uploadPath, filename));
-		
-//		noticeDTO에 첨부파일이름 저장
-		noticeDTO.setNoticeFile(filename);
-		
-
+//	공지사항 글쓰기
+	@PostMapping("/noticeWritePro")
+	public String noticeWritePro(NoticeDTO noticeDTO) {
+		System.out.println("NoticeController noticeWritePro()");
 		
 		noticeService.insertNotice(noticeDTO);
-		
-		
+	
 		if(noticeDTO != null) {
 			return "notice/msgSuccess"; // 등록완료
 		} else {
 			return "notice/msgFailed"; // 등록실패
-		}
+		}	
 	}
+	
 	
 	
 	
@@ -131,6 +104,9 @@ public class NoticeController {
 		
 		List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);
 		
+//		'등록' 글 수만 가져오기
+		int insertCount = noticeService.getinserCount();
+		
 		
 //		페이징
 //		게시판 전체 글 개수 가져오기
@@ -164,7 +140,7 @@ public class NoticeController {
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("noticeCount", count);
+		model.addAttribute("insertCount", insertCount);
 
 	return "notice/noticeList";
 	}
@@ -217,12 +193,10 @@ public class NoticeController {
 		noticeService.updateNotice(noticeDTO);
 		
 		if(noticeDTO != null) {
-			return "notice/msgSuccess"; // 등록완료
+			return "notice/msgUpSuccess"; // 등록완료
 		} else {
 			return "notice/msgFailed"; // 등록실패
 		}
-		
-		
 	}
 	
 	

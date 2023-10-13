@@ -11,6 +11,12 @@
 		select * from employees
 		where empId = #{empId} and empPass = #{empPass}
 	</select>
+		
+<!-- 강수빈 - 비밀번호 값 가져오기 -->
+	<select id="getInitialPass" resultType="java.lang.Integer">
+		select (max(empId) + 1)
+		from employees
+	</select>
 	
 	
 <!-- 사원목록 --> 
@@ -25,7 +31,6 @@
 		select count(*) 
 		from employees
 	</select>
-
 
 <!-- 사원등록 -->
 	<insert id="insertEmployee">
@@ -63,21 +68,19 @@
 	</update> 
 
 
+<!-- 사원 등록 - 중복체크(연락처, 내선번호, 이메일) -->
+	<select id="empPhoneCheck" resultType="com.keypoint.dto.EmployeeDTO"> 
+		select * from employees 
+		where empPhone = #{empPhone} LIMIT 1 </select>
+	<select id="empTelCheck" resultType="com.keypoint.dto.EmployeeDTO"> 
+		select * from employees 
+		where empTel = #{empTel} LIMIT 1 </select>
+	<select id="empEmailCheck" resultType="com.keypoint.dto.EmployeeDTO"> 
+		select * from employees 
+		where empEmail = #{empEmail} LIMIT 1 </select>
+	
+	
 
-<!-- 사원 등록 - 연락처 중복체크 -->
-	<select id="empPhoneCheck" resultType="com.keypoint.dto.EmployeeDTO">
-		select *
-		from employees
-		where empPhone = #{empPhone}
-	</select>
-	
-	
-	
-<!-- 강수빈 - 비밀번호 값 가져오기 -->
-	<select id="getInitialPass" resultType="java.lang.Integer">
-		select (max(empId) + 1)
-		from employees
-	</select>
 	
 	
 </mapper>

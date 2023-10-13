@@ -134,12 +134,6 @@
 			</div></li>
 
 		
-		<li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/workOrder/workPop">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>생산 테스트</span></a>
-            </li> 
-		
 
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">

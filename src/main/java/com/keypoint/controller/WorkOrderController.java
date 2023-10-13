@@ -138,7 +138,7 @@ public class WorkOrderController {
 	public String workOrderDelete(WorkOrderDTO workOrderDTO) {
 		System.out.println("WorkOrderController workOrder/workOrderDelete");
 		System.out.println(workOrderDTO);
-		workOrderService.workOrderUpdatePro(workOrderDTO);
+		workOrderService.workOrderDelete(workOrderDTO);
 		
 		if(workOrderDTO != null) {
 			return "workOrder/msgSuccess"; // 등록완료

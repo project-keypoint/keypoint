@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +28,33 @@
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>완제품코드</p> <input type="text" id="productCode" class="form-control search-input" placeholder="완제품코드 ">
+<p>완제품명</p> 
+<input type="text" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
+<input type="text" id="productName" class="form-control search-input" placeholder="완제품명" readonly>
+</div>
+</div>
+
+<div class="search-b">
+<div class="search-select">
+<p>자재명</p> 
+<input type="text" id="materialCode" class="form-control search-input" placeholder="자재코드" style="width:110px;" readonly>
+<input type="text" id="materialName" class="form-control search-input" placeholder="자재명" readonly>
+</div>
+
+</div>
+
+
+<div class="search-button">
+<input type="button" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1">
+</div>
+</div><!-- search-bar -->
+<!-- <div class="page-title">소요량목록</div>
+<div class="contents2">
+<div class="search-bar">
+<div class="search-b">
+<div class="search-select">
+<p>완제품코드</p> <input type="text" name="productCode" id="productCode" class="form-control search-input" placeholder="완제품코드 ">
 </div>
 <div class="search-select">
 <p>완제품명</p> <input type="text" id="productName" class="form-control search-input" placeholder="완제품명 ">
@@ -34,7 +62,7 @@
 </div>
 <div class="search-b">
 <div class="search-select">
-<p>자재코드</p> <input type="text" id="materialCode" class="form-control search-input" placeholder="자재코드 ">
+<p>자재코드</p> <input type="text" name="materialCode" id="materialCode" class="form-control search-input" placeholder="자재코드 ">
 </div>
 <div class="search-select">
 <p>자재명</p> <input type="text" id="materialName" class="form-control search-input" placeholder="자재명 ">
@@ -45,7 +73,7 @@
 <input type="button" value="검색" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
-</div><!-- search-bar -->
+</div>search-bar -->
 <br>
 
 
@@ -64,7 +92,7 @@
 </tr>
 
 <c:forEach var="requireDTO" items="${requireList}">
-<tr class="targetCell">
+<tr class="table-body">
 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
     <td>${requireDTO.productCode}</td>
     <td>${requireDTO.productName}</td>
@@ -75,7 +103,7 @@
     <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${requireDTO.productCode}', '${requireDTO.materialCode}')">
     	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
 </tr>
-</c:forEach> 
+</c:forEach>    
 
 </table>
 </div><!-- table -->
@@ -106,18 +134,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-// 셀 열 병합
-$(document).ready(function () {
-          $(".targetCell").each(function () {
-              var rows = $(".targetCell:contains('" + $(this).text() + "')");
-              if (rows.length > 1) {
-                  rows.eq(0).attr("rowspan", rows.length);
-                  rows.not(":eq(0)").remove(); 
-              } 
-          });
-      });
-      
-      
 //팝업 창을 열어주는 함수
 function openPopup(url) {
     var width = 500;
@@ -197,18 +213,18 @@ checkboxes.forEach(function (checkbox) {
     });
 });
 
-// 자재수정 새창
-function openUpdate(productCode,materialCode) {
-    var url = '${pageContext.request.contextPath}/require/requireUpdate?productCode='+productCode/* +'&materialCode='+materialCode' */;
+// 소요량등록 새창
+function openInsert() {
+    var url = '${pageContext.request.contextPath}/require/requireInsert';
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-//자재등록 새창
-function openInsert() {
-    var url = '${pageContext.request.contextPath}/require/requireInsert';
+// 소요량수정 새창
+function openUpdate(productCode,materialCode) {
+    var url = '${pageContext.request.contextPath}/require/requireUpdate?productCode='+productCode+'&materialCode='+materialCode;
     var windowWidth = 500;
     var windowHeight = 600;
     var windowLeft = (screen.width - windowWidth) / 2;

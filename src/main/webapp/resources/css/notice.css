@@ -233,7 +233,9 @@ height: 400;
 
 
 
-#noticeSubject.search-input, #noticeCategory.search-input, #noticeContent.search-input, #noticeFile.search-input {
+#noticeSubject.search-input, #noticeCategory.search-input, 
+#noticeContent.search-input, #noticeFile.search-input,
+#empName.search-input {
 width: 500px;
 height: 400;
 margin-bottom: 10px;

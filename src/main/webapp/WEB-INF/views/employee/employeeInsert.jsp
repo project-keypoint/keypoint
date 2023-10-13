@@ -35,27 +35,21 @@
 
 
 <!-- -------------------- 사진첨부 -------------------- -->
-<!-- <div class="form-group-customer">  -->
+<div class="form-group-customer"> 
 
 <div class="form-group-customer">
-	<img id="preview" width="200" height="230" style="border-radius: 3px">
+        <img src="${pageContext.request.contextPath }/resources/img/test.png" id="preview" width="200" height="230" style="border-radius: 3px">
 </div>
 
 <div class="imgbtn">
 <label for="file">
-<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;">
+<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;"> 
 <i class="ti-upload btn-icon-prepend"></i>사진 업로드하기
 </span>
 </label>
 <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
 <!-- accept="image/*": 이 속성은 업로드할 수 있는 파일 형식을 제한 함. "image/*"로 설정된 경우, 사용자는 이미지 파일만 선택할 수 있음. -->
 <!-- -------------------- // 사진첨부 -------------------- -->
-
-
-<!-- <div class="form-group-customer"> -->
-<!-- <p>사진</p> -->
-<!-- <input type="file" id="empPhoto" name="empPhoto" class="form-control search-input"> -->
-<!-- </div> -->
 
 
 
@@ -88,31 +82,21 @@
 <!-- // 주소 -->
 
 
-<!-- <div class="form-group-customer"> -->
-<!-- <p>연락처</p> -->
-<!-- <input type="text" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()"> -->
-<!-- <div class="divdup"></div> -->
-<!-- </div> -->
-
-
 <div class="form-group-customer">
     <p>연락처</p>
-    <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate()">
+    <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate('phone')">
 </div>
     <div class="divdup"></div>
 
 
-
-
-
 <div class="form-group-customer">
 <p>내선번호</p>
-<input type="tel" id="empTel" name="empTel" class="form-control search-input">
+<input type="tel" id="empTel" name="empTel" class="form-control search-input" onblur="checkDuplicate('tel')">
 </div>
 
 <div class="form-group-customer">
 <p>이메일</p>
-<input type="text" id="empEmail" name="empEmail" class="form-control search-input">
+<input type="text" id="empEmail" name="empEmail" class="form-control search-input" onblur="checkDuplicate('email')">
 </div>
 
 <div class="form-group-customer">
@@ -260,20 +244,34 @@ function sample6_execDaumPostcode() {
 	}
 	
 
-//중복확인
-function checkDuplicate() {
-// 입력된 연락처 가져오기
+// 중복확인(연락처, 내선번호, 이메일)
+function checkDuplicate(type) {
     var empPhone = document.getElementById("empPhone").value;
+    var empTel = document.getElementById("empTel").value;
+    var empEmail = document.getElementById("empEmail").value;
 
     $.ajax({
-        url: '${pageContext.request.contextPath}/employee/empPhoneCheck',
-        data: { 'empPhone': empPhone },
+        url: '${pageContext.request.contextPath}/employee/empCheck',
+        data: {
+            empPhone: empPhone,
+            empTel: empTel,
+            empEmail: empEmail,
+            type:type           
+            
+        },
         success: function (result) {
             if (result == 'iddup') {
                 alert("중복");
-            } else {
-                alert("사용가능");
-            }
+                if(type=="phone"){
+                document.getElementById("empPhone").value = "";
+                }
+                if(type=="tel"){
+                    document.getElementById("empTel").value = "";
+                    }
+                if(type=="email"){
+                    document.getElementById("empEmail").value = "";
+                    }
+            } 
         }
     });
 }
@@ -294,6 +292,7 @@ function validateForm() {
     var empHiredate = document.getElementById("empHiredate").value;
     
     
+    
 // 	빈 필드 검사
     if (empName === "" || empAddress === "" || empPhone === "" ||
     	empTel === "" || empEmail === "" || departmentName === "" || empPosition === "" ||
@@ -303,6 +302,7 @@ function validateForm() {
     }
     return true;
 }	
+
 
 
 // 첨부파일 미리보기
@@ -336,6 +336,14 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     xhr.send();
 });
+
+
+
+
+
+
+
+
 
 </script>
 </body>
