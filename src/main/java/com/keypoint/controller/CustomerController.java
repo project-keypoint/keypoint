@@ -39,6 +39,9 @@ public class CustomerController {
 		
 //		검색어 가져오기
 		String search = request.getParameter("search");
+
+//		'거래중'인 글 개수만 가져오기
+		int insertCount = customerService.getInsertCount();
 		
 //		한 화면에 보여줄 글 개수 설정
 		int pageSize = 10;
@@ -98,7 +101,7 @@ public class CustomerController {
 		
 		model.addAttribute("cusList", cusList);
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("cusCount", count);
+		model.addAttribute("insertCount", insertCount);
 		
 		return "customer/cusList";
 	}

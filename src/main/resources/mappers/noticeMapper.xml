@@ -15,9 +15,9 @@
 
 
 	<insert id="insertNotice">
-		INSERT INTO notice(noticeNum, empId, noticeCategory, noticeSubject,
+		INSERT INTO notice(noticeNum, empId, noticeCategory, noticeSubject, noticeStatus,
 							noticeContent, noticeReadcount, noticeDate, noticeFile)
-		VALUES (#{noticeNum}, #{empId}, #{noticeCategory}, #{noticeSubject},
+		VALUES (#{noticeNum}, #{empId}, #{noticeCategory}, #{noticeSubject}, #{noticeStatus},
 				#{noticeContent}, #{noticeReadcount}, #{noticeDate}, #{noticeFile})
 	</insert>
 
@@ -27,9 +27,7 @@
   		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate
   		FROM notice n LEFT JOIN employees e
   		ON n.empId = e.empId
-  		<if test="search != null">
-			WHERE noticeSubject like CONCAT('%', #{search}, '%')
-		</if>
+		WHERE noticeStatus != '삭제'
   		ORDER BY noticeNum DESC
   		LIMIT #{startRow}, #{pageSize}
   	</select>
@@ -39,6 +37,7 @@
 	<select id="getNoticeCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM notice
+		WHERE noticeStatus != '삭제'
 		<if test="search != null">
 			WHERE noticeSubject like CONCAT('%', #{search}, '%')
 		</if>
@@ -72,15 +71,19 @@
   
   
   	<delete id="deleteNotice">
-  		DELETE
-  		FROM notice
-  		WHERE noticeNum = #{noticeNum}
+		UPDATE notice
+		SET noticeStatus = '삭제'
+		WHERE noticeNum = #{noticeNum}
   	</delete>
   
   
   
-  
-  
+  	<select id="getinserCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM notice
+		WHERE noticeStatus = '등록'
+  	</select>
+  	
   
   
   

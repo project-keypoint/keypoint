@@ -56,6 +56,7 @@ public class CustomerDAO {
 	}
 
 
+//	사업자번호 중복체크
 	public CustomerDTO cusNumberCheck(String cusNumber) {
 		System.out.println("CustomerDAO cusNumberCheck()");
 
@@ -63,10 +64,19 @@ public class CustomerDAO {
 	}
 
 
+//	전체 거래처 수
 	public int getCusCount() {
 		System.out.println("CustomerDAO getCusCount()");
 
 		return sqlSession.selectOne(namespace+".getCusCount");
+	}
+
+
+//	'등록'인 거래처 개수 	
+	public int getInsertCount() {
+		System.out.println("CustomerDAO getInsertCount()");
+
+		return sqlSession.selectOne(namespace+".getInsertCount");
 	}
 
 

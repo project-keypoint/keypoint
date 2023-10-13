@@ -53,13 +53,26 @@ public class NoticeService {
 	public List<NoticeDTO> getNoticeList(PageDTO pageDTO) {
 		System.out.println("NoticeService getNoticeList()");
 		
+//		10개씩 가져올 때, 현페이지에 대한 시작하는 행번호 구하기
+//		int startRow = (현재페이지번호 -1) * pageSize + 1;
+		int startRow = (pageDTO.getCurrentPage() -1) * pageDTO.getPageSize() + 1;
+		
+//		끝나는 행 번호 구하기
+//		int endRow = startRow + pageSize -1;
+		int endRow = startRow + pageDTO.getPageSize() -1;
+		
+//		디비 startRow -1
+		pageDTO.setStartRow(startRow -1);
+		pageDTO.setEndRow(endRow);
+		
+		
 		return noticeDAO.getNoticeList(pageDTO);
 	}
 
 
 
 
-//	
+//	전체 글 수 
 	public int getNoticeCount() {
 		System.out.println("NoticeService getNoticeCount()");
 
@@ -86,7 +99,6 @@ public class NoticeService {
 
 
 
-
 	
 //	글 수정
 	public void updateNotice(NoticeDTO noticeDTO) {
@@ -102,6 +114,15 @@ public class NoticeService {
 		System.out.println("NoticeService deleteNotice()");
 
 		noticeDAO.deleteNotice(noticeDTO);
+	}
+
+
+
+//	'등록' 글 수 가져오기
+	public int getinserCount() {
+		System.out.println("NoticeService deleteNotice()");
+
+		return noticeDAO.getinserCount();
 	}
 
 

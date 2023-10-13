@@ -38,41 +38,21 @@
 <input type="text" id="noticeSubject" name="noticeSubject" class="form-control search-input" value="${noticeDTO.noticeSubject}">
 </div>
 
-
-
 <div class="form-group-customer">
 <p>구분</p>
 <input type="text" id="noticeCategory" name="noticeCategory" class="form-control search-input" value="${noticeDTO.noticeCategory}" readonly="readonly">
-<!-- <select id="noticeCategory" name="noticeCategory" class="form-control search-input"> -->
-<!--         <option value="전체">전체</option> -->
-<!--         <option value="영업">영업</option> -->
-<!--         <option value="생산">생산</option> -->
-<!--         <option value="자재">자재</option> -->
-<!--         <option value="인사">인사</option> -->
-<!-- </select> -->
 </div>
-
-
 
 <div class="form-group-customer">
 <p>내용</p>
 <textarea id="noticeContent" name="noticeContent" class="form-control search-input"  style="height: 300px; resize: none;">${noticeDTO.noticeContent}</textarea>
 </div>
 
-
-
-<div class="form-group-customer">
-<p>첨부파일</p>
-<input type="text" id="noticeFile" name="noticeFile" class="form-control search-input">
-</div>
-
-
-
-
+<!-- <div class="form-group-customer"> -->
+<!-- <p>첨부파일</p> -->
+<!-- <input type="text" id="noticeFile" name="noticeFile" class="form-control search-input"> -->
+<!-- </div> -->
 <br>
-
-
-
 </div>
 
 
@@ -82,8 +62,6 @@
 </div>
 </form><!-- form 끝 -->
 </div><!-- main-details -->
-
-
 
 
 

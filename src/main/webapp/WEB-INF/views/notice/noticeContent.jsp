@@ -42,13 +42,7 @@
 	<td>작성일 <fmt:formatDate value="${noticeDTO.noticeDate}" pattern="yy.MM.dd"/></td>
 </tr>
 
-<tr class="table-body">
-    <td colspan="4">
-    <div style="text-align: left;">ㅤㅤ첨부파일 
-		<a href="${pageContext.request.contextPath}/resources/upload/${noticeDTO.noticeFile}" download>${noticeDTO.noticeFile}</a>
-	</div>
-    </td>
-</tr>
+
 
 <tr class="table-body">
     <td colspan="4" style="height: 300px; text-align: left;">

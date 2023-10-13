@@ -59,7 +59,7 @@
 <a>거래중<input type="checkbox" id="select2" name="select2" class="list-select" ></a>
 <a>거래중지<input type="checkbox" id="select3" name="select3" class="list-select" ></a>
   </div>
-  <a style="text-align: right;">총 ${cusCount}건</a>
+  <a style="text-align: right;">총 ${insertCount}건</a>
 </div>
 
 

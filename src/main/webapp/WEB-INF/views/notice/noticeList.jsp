@@ -35,7 +35,6 @@
 <div class="search-select">
 
 <select id="search_option" name="search_option" class="form-control search-input"> 
-	<option value=""> 선택하세요 </option>
 	<option value="전체">전체</option>
 	<option value="영업">영업</option>
 	<option value="생산">생산</option>
@@ -57,7 +56,7 @@
 
 <br>
 <div class="select-status" style="text-align: right;">
-  <a style="text-align: right;">총 ${noticeCount}건</a>
+  <a style="text-align: right;">총 ${insertCount}건</a>
 </div>
 
 
@@ -118,7 +117,6 @@
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
 </c:if>
-
 
 
 </div><!-- page-button -->
