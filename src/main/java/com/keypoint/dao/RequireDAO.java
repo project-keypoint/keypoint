@@ -1,6 +1,7 @@
 package com.keypoint.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -32,9 +33,9 @@ public class RequireDAO {
 		sqlSession.delete(namespace+".deleteRequire", requireDTO);
 	}// deleteRequire
 
-	public RequireDTO getRequire(String productCode) {
-		System.out.println("RequireDAO getRequire()");
-		return sqlSession.selectOne(namespace+".getRequire", productCode);
+	public RequireDTO getRequire(Map<String, Object> param) {
+	    System.out.println("RequireDAO getRequire()");
+	    return sqlSession.selectOne(namespace+".getRequire", param);
 	}
 
 	public void updateRequire(RequireDTO requireDTO) {

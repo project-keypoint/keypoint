@@ -20,11 +20,12 @@
 	
 	<select id="getRequire" resultType="com.keypoint.dto.RequireDTO">
 		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit
-		from requirement r join product p
+		from requirement r left join product p
 		on r.productCode = p.productCode
-		join material m
+		left join material m
 		on r.materialCode = m.materialCode
 		where r.productCode = #{productCode}
+		and m.materialCode = #{materialCode}
 	</select>
 
 	<delete id="deleteRequire">
@@ -35,8 +36,9 @@
 	
 	<update id="updateRequire">
 		UPDATE requirement
-		SET materialCode=#{materialCode},reqCount=#{reqCount}
+		SET reqCount=#{reqCount}
 		WHERE productCode = #{productCode}
+		and materialCode = #{materialCode}
 	</update>	
 
 
