@@ -9,14 +9,33 @@
 		values(#{productCode},#{materialCode},#{reqCount})
 	</insert>
 
+<!-- 	검색어 포함 -->
 	<select id="getRequireList" resultType="com.keypoint.dto.RequireDTO">
 		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit
-		from requirement r join product p
+		from requirement r left join product p
 		on r.productCode = p.productCode
-		join material m
+		left join material m
 		on r.materialCode = m.materialCode
-		order by productCode desc
+		<if test="search != null">
+			where r.productCode = #{search} 
+		</if>
+		<if test="search2 != null">
+			or r.materialCode = #{search2}
+		</if>
+		order by r.productCode desc
+		limit #{startRow},#{pageSize}
 	</select>
+
+<!-- 	검색어 포함 -->
+	<select id="getBoardCount" resultType="java.lang.Integer">
+		select count(productCode) from requirement
+		<if test="search != null">
+			where productCode = #{search} 
+		</if>
+		<if test="search2 != null">
+			or materialCode = #{search2}
+		</if>
+	</select>	
 	
 	<select id="getRequire" resultType="com.keypoint.dto.RequireDTO">
 		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit

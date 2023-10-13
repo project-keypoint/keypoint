@@ -43,7 +43,7 @@
 
 <div class="form-group-receive">
 <p>자재단가</p>
-<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가" readonly>
+<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="자재단가"  readonly>
 </div>
 
 </div>
@@ -281,8 +281,6 @@ function validateForm() {
     return true;
 }
 </script>
-<!-- // 필수입력항목 메시지 -->
-
 
 </body>
 </html>

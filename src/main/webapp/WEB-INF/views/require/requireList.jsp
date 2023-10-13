@@ -28,52 +28,27 @@
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
-<p>완제품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
+<p style="width:65px;">완제품명</p> 
+<input type="text" name="search" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
 <input type="text" id="productName" class="form-control search-input" placeholder="완제품명" readonly>
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-select">
-<p>자재명</p> 
-<input type="text" id="materialCode" class="form-control search-input" placeholder="자재코드" style="width:110px;" readonly>
+<p style="width:50px;">자재명</p> 
+<input type="text" name="search2" id="materialCode" class="form-control search-input" placeholder="자재코드" style="width:110px;" readonly>
 <input type="text" id="materialName" class="form-control search-input" placeholder="자재명" readonly>
 </div>
-
 </div>
 
 
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
 </div><!-- search-bar -->
-<!-- <div class="page-title">소요량목록</div>
-<div class="contents2">
-<div class="search-bar">
-<div class="search-b">
-<div class="search-select">
-<p>완제품코드</p> <input type="text" name="productCode" id="productCode" class="form-control search-input" placeholder="완제품코드 ">
-</div>
-<div class="search-select">
-<p>완제품명</p> <input type="text" id="productName" class="form-control search-input" placeholder="완제품명 ">
-</div>
-</div>
-<div class="search-b">
-<div class="search-select">
-<p>자재코드</p> <input type="text" name="materialCode" id="materialCode" class="form-control search-input" placeholder="자재코드 ">
-</div>
-<div class="search-select">
-<p>자재명</p> <input type="text" id="materialName" class="form-control search-input" placeholder="자재명 ">
-</div>
-</div>
 
-<div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
-</div>
-</div>search-bar -->
 <br>
 
 
@@ -113,13 +88,18 @@
 <input type="button" value="삭제" class="btn btn-secondary mybutton1">
 </div>
 <div class="page-buttons">
-<a href="#" class="page-button">&lt;</a>
-<a href="#" class="page-button page-button-active">1</a>
-<a href="#" class="page-button">2</a>
-<a href="#" class="page-button">3</a>
-<a href="#" class="page-button">4</a>
-<a href="#" class="page-button">5</a>
-<a href="#" class="page-button">&gt;</a>
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage}" 
+                   end="${pageDTO.endPage}" step="1">
+<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}&search=${pageDTO.search}">${i}</a> 
+</c:forEach>
+<!-- 끝페이지번호  전체페이지수 비교 => 전체페이지수 크면 => Next보임 -->
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
+</c:if>
 </div><!-- page-button -->
 </div>
 </div><!-- contents -->
@@ -246,6 +226,30 @@ function confirmDelete(productCode,materialCode) {
     	});
     } 
 }
+
+
+//검색하기
+function doSearch() {
+    if (confirm($("#productCode").val())) {
+        var query = {"search" : $("#productCode").val(), "search2" : $("#materialCode").val()};
+        alert("jjj");
+        $.ajax({
+            url : "${pageContext.request.contextPath}/require/requireList",
+            type : "get",
+            data : query,
+            dataType : "text",
+            success : function(data){
+                if (query.search == "" && query.search2 == "") {
+                    location.href = "${pageContext.request.contextPath}/require/requireList";
+                } else {
+                    location.href = "${pageContext.request.contextPath}/require/requireList?search=" + $("#productCode").val() + "&search2=" + $("#materialCode").val();
+                }
+            }
+        });
+    } 
+}
+
+
 </script>
 
 </body>
