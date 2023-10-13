@@ -17,6 +17,9 @@
     JOIN employees e ON gr.grOwner = e.empid
     JOIN purchaseOrder po ON gr.poCode = po.poCode
     WHERE gr.grStatus != '삭제됨'
+    <if test="search != null">
+		and po.materialCode = #{search} 
+	</if>
     ORDER BY gr.grCode DESC
     LIMIT #{startRow}, #{pageSize}
 </select>

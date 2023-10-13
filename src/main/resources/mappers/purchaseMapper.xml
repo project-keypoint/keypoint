@@ -15,6 +15,9 @@
 		FROM purchaseOrder po
 		JOIN employees e ON po.poOwner = e.empid
 		WHERE po.poStatus != '삭제됨'
+		<if test="search != null">
+			and po.materialCode = #{search} 
+		</if>
 		ORDER BY po.poCode DESC
 		LIMIT #{startRow}, #{pageSize}
 

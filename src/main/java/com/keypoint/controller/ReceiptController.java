@@ -69,6 +69,12 @@ public class ReceiptController {
 	public String receiptList(HttpServletRequest request, Model model) {
 		System.out.println("ReceiptController receipt/receiptList");
 		
+		//---------------------------
+			String search = request.getParameter("search");
+		//---------------------------
+		
+		
+		
 		//한 화면에 보여줄 글개수 설정
 		int pageSize = 10;
 		// 현 페이지 번호 가져오기
@@ -85,6 +91,14 @@ public class ReceiptController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		
+		//--------------------
+		// 검색어 저장
+		pageDTO.setSearch(search);
+		//--------------------
+		
+		
+		
 		
 		List<ReceiptDTO> receiptList = receiptService.getReceiptList(pageDTO);
 		

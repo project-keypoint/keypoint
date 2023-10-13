@@ -64,6 +64,10 @@ public class PurchaseController {
 	public String purchaseList(HttpServletRequest request, Model model) {
 		System.out.println("PurchaseController purchase/purchaseList");
 		
+		//---------------------------
+		String search = request.getParameter("search");
+		//---------------------------
+		
 		//한 화면에 보여줄 글개수 설정
 		int pageSize = 10;
 		// 현 페이지 번호 가져오기
@@ -80,6 +84,13 @@ public class PurchaseController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		
+
+		//--------------------
+		// 검색어 저장
+		pageDTO.setSearch(search);
+		//--------------------
+		
 		
 		List<PurchaseDTO> purchaseList = purchaseService.getPurchaseList(pageDTO);
 		
@@ -104,7 +115,6 @@ public class PurchaseController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		
 		
 		model.addAttribute("purchaseList", purchaseList);
 		model.addAttribute("pageDTO", pageDTO);

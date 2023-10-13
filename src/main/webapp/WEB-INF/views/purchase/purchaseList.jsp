@@ -42,14 +42,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
 </head>
 
 <body>
@@ -67,19 +59,19 @@
 
 <div class="search-b">
 <div class="search-select">
-<p>코드</p> <input type="text" id="materialCode" name="materialCode" class="form-control search-input" placeholder="자재코드">
+<p>코드</p> <input type="text" id="materialCode" name="materialCode" class="form-control search-input" placeholder="자재코드" readonly>
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-select">
-<p>자재명</p> <input type="text" id="materialName" name="materialName" class="form-control search-input" placeholder="자재명 ">
+<p>자재명</p> <input type="text" id="materialName" name="materialName" class="form-control search-input" placeholder="자재명 " readonly>
 </div>
 </div>
 
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
 </div>
 </div><!-- search-bar -->
 <br>
@@ -273,6 +265,44 @@ function openDetails(poCode) {
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
 </script>
+
+
+<script>
+//검색하기
+function doSearch() {
+        var query = {"search" : $("#materialCode").val()};
+        $.ajax({
+            url : "${pageContext.request.contextPath}/purchase/purchaseList",
+            type : "get",
+            data : query,
+            dataType : "text",
+            success : function(data){
+                if (query.search == "") {
+                    location.href = "${pageContext.request.contextPath}/purchase/purchaseList";
+                } else {
+                    location.href = "${pageContext.request.contextPath}/purchase/purchaseList?search=" + $("#materialCode").val();
+                }
+            }
+        });
+}
+
+
+
+
+</script>
+
+
+<script>
+function cancelSearch() {
+    location.href = "${pageContext.request.contextPath}/purchase/purchaseList";
+}
+</script>
+
+
+
+
+
+
 
 </body>
 </html>
