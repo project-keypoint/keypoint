@@ -35,7 +35,7 @@
 		<if test="poCount != null">#{poCount}</if>,
 		#{poDate},
 		<if test="qcDefectRate == null">NULL</if>
-		<if test="qcDefectRate != null">#{qcDefectRate}</if>,
+		<if test="qcDefectRate != null">#{qcDefectRate}</if>,	
 		<if test="woStatus == null">NULL</if>
 		<if test="woStatus != null">#{woStatus}</if>,
 			#{productName},
@@ -56,7 +56,7 @@
 		a.poCode, 
 		b.woCode, 
 		a.poDate,
-		b.woStatus, 
+		a.woStatus, 
 		a.lineCode,
 		b.productCode, 
 		c.productName, 
@@ -69,7 +69,7 @@
 		from production a
 		left join workOrder b on a.woCode = b.woCode
 		left join product c on b.productCode = c.productCode
-		where b.woStatus != '삭제'
+		where a.woStatus != '삭제'
 		order by a.poDate desc
 		limit #{startRow}, #{pageSize}
 		</select>
@@ -87,10 +87,11 @@
 		resultType="com.keypoint.dto.ProductionDTO">
 		select a.poCode, b.woCode, a.poDate, b.woStatus, b.lineCode,
 		b.productCode, c.productName, a.poCount, a.poGood, a.poErr, a.poCause,
-		b.roCode, b.cusCode
+		b.roCode, b.cusCode, d.cusName
 		from production a
 		left join workOrder b on a.woCode = b.woCode
 		left join product c on b.productCode = c.productCode
+		left join customer d on b.cusCode = d.cusCode 
 		where poCode = #{poCode}
 	</select>
 	
@@ -115,21 +116,7 @@
 	</update>
 	
 	
-<!-- 	<select id="getWorkOrderList" -->
-<!-- 		resultType="com.keypoint.dto.WorkOrderDTO"> -->
-<!-- 		select a.woCode, a.cusCode, b.cusName, a.productCode, -->
-<!-- 		c.productName, -->
-<!-- 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode, -->
-<!-- 		a.empId, e.empName -->
-<!-- 		from workOrder a -->
-<!-- 		left join customer b on a.cusCode = b.cusCode -->
-<!-- 		left join product c on a.productCode = c.productCode -->
-<!-- 		left join receivedOrder d on a.roCode = d.roCode -->
-<!-- 		left join employees e on a.empId -->
-<!-- 		= e.empId -->
-<!-- 		where a.woStatus != '삭제' -->
-<!-- 		order by a.woCode DESC -->
-<!-- 	</select> -->
+
 	
 	
 	

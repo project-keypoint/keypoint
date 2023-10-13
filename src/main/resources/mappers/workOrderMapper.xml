@@ -95,8 +95,7 @@
 		roCode = #{roCode},
 		woCount = #{woCount},
 		lineCode = #{lineCode},
-		woDate
-		= #{woDate},
+		woDate = #{woDate},
 		<!-- shipSdate = #{shipSdate}, -->
 		woStatus = #{woStatus},
 		empId = #{empId},
@@ -254,6 +253,7 @@
 		where
 			woCode like CONCAT('%', #{woCode}, '%') 
 			and roCode like CONCAT('%', #{roCode}, '%')
+			and wo.woStatus != '삭제'
 		order by woCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -265,6 +265,7 @@
 			where
 			woCode like CONCAT('%', #{woCode}, '%') and
 			roCode like CONCAT('%', #{roCode}, '%')
+			and woStatus != '삭제'
 		</if>
 	</select>
 
