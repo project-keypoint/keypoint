@@ -53,7 +53,7 @@ public class NoticeDAO {
 	}
 
 	
-//	
+//	전체 글 수 
 	public int getNoticeCount() {
 		System.out.println("NoticeDAO getNoticeCount()");
 
@@ -93,7 +93,15 @@ public class NoticeDAO {
 	public void deleteNotice(NoticeDTO noticeDTO) {
 		System.out.println("NoticeDAO deleteNotice()");
 
-		sqlSession.delete(nameSpace+".deleteNotice", noticeDTO);
+		sqlSession.update(nameSpace+".deleteNotice", noticeDTO);
+	}
+
+	
+//	'등록' 글 수 가져오기
+	public int getinserCount() {
+		System.out.println("NoticeDAO getinserCount()");
+
+		return sqlSession.selectOne(nameSpace+".getinserCount");
 	}
 
 

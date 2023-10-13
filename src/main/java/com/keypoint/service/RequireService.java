@@ -1,6 +1,7 @@
 package com.keypoint.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,9 +31,9 @@ public class RequireService {
 		requireDAO.deleteRequire(requireDTO);
 	}// deleteRequire
 
-	public RequireDTO getRequire(String productCode) {
+	public RequireDTO getRequire(Map<String, Object> param) {
 		System.out.println("RequireService getRequire()");
-		return requireDAO.getRequire(productCode);
+		return requireDAO.getRequire(param);
 	}// getRequire
 
 	public void updateRequire(RequireDTO requireDTO) {

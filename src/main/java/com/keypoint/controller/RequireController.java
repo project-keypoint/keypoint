@@ -1,6 +1,7 @@
 package com.keypoint.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -52,8 +53,11 @@ public class RequireController {
 		System.out.println("RequireController requireInsertPro()");
 		//회원가입 처리
 		System.out.println(requireDTO);
-		
-		requireService.insertRequire(requireDTO);
+		try {
+			requireService.insertRequire(requireDTO);
+		} catch (Exception e) {
+			return "require/msgDuplicated"; // 등록실패
+		}
 		
 		if(requireDTO != null) {
 			return "require/msgSuccess"; // 등록완료
@@ -63,10 +67,12 @@ public class RequireController {
 	}// requireInsertPro [소요량등록]
 	
 	@GetMapping("/requireUpdate")
-	public String requireUpdate(Model model, @RequestParam("productCode") String productCode) {
-		RequireDTO requireDTO = requireService.getRequire(productCode);
-		System.out.println(requireDTO);
+	public String requireUpdate(@RequestParam Map<String,Object> param, Model model) {
+		System.out.println(param);
+		model.addAttribute("param", param);
+		RequireDTO requireDTO = requireService.getRequire(param);
 		model.addAttribute("requireDTO", requireDTO);
+		System.out.println(requireDTO);
 		return "require/requireUpdate";
 	}// requireUpdate [소요량수정]
 	

@@ -79,11 +79,19 @@ public class CustomerService {
 	}
 
 
-
+//	모든 거래처 수
 	public int getCusCount() {
 		System.out.println("CustomerService getCusCount()");
 		
 		return customerDAO.getCusCount();
+	}
+
+
+//	'등록'인 거래처 수
+	public int getInsertCount() {
+		System.out.println("CustomerService getInsertCount()");
+
+		return customerDAO.getInsertCount();
 	}
 
 

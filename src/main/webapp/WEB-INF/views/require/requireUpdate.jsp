@@ -22,7 +22,8 @@
 <div class="forms-group-receive">
 <div class="page-title-popup">소요량수정</div>
 
-<input type="hidden" name="productCode" id="productCode" class="form-control search-input" value="${requireDTO.productCode}">
+<input type="hidden" name="productCode" id="productCode" class="form-control search-input" value="${param.productCode}">
+<input type="hidden" name="materialCode" id="materialCode" class="form-control search-input" value="${param.materialCode}">
 
 <div class="form-group-receive">
 <p>완제품명</p>
@@ -30,12 +31,9 @@
 </div>
 
 
-<div class="search-bar-popup">
 <div class="form-group-receive">
-<p>자재코드</p>
-<input type="text" name="materialCode" id="materialCode" class="form-control search-input materialCode" value="${requireDTO.materialCode}">
+<p>자재명</p>
 <input type="text" name="materialName" id="materialName" class="form-control search-input materianame" value="${requireDTO.materialName}" readonly>
-</div>
 </div>
 
 <div class="form-group-receive">
@@ -64,22 +62,22 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-//팝업 창을 열어주는 함수
-function openPopup(url) {
-    var width = 500;
-    var height = 500;
-    var left = (screen.width - width) / 2;
-    var top = (screen.height - height) / 2;
-    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-    popupWindow.focus();
-}
-$(document).ready(function() {
-    // 자재명 검색 팝업 열기
-    $("#materialCode, #materialName").click(function() {
-        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
-        openPopup(url);
-    });
-});
+// //팝업 창을 열어주는 함수
+// function openPopup(url) {
+//     var width = 500;
+//     var height = 500;
+//     var left = (screen.width - width) / 2;
+//     var top = (screen.height - height) / 2;
+//     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+//     popupWindow.focus();
+// }
+// $(document).ready(function() {
+//     // 자재명 검색 팝업 열기
+//     $("#materialCode, #materialName").click(function() {
+//         var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
+//         openPopup(url);
+//     });
+// });
 
 // 수주일자 클릭시 현재날짜로 변경
 document.addEventListener('DOMContentLoaded', function () {

@@ -66,6 +66,11 @@
 	</select>
 
 
+	<select id="getInsertCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM customer
+		WHERE cusStatus = '거래중'		
+	</select>
 
 
 

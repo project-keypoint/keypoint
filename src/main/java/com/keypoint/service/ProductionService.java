@@ -46,7 +46,7 @@ public class ProductionService {
 		System.out.println("productionService productionInsertPro()");
 		
 //		workOrderDTO.setWoDate(new Timestamp(System.currentTimeMillis()));
-		
+		productionDTO.setWoStatus("완료");
 		productionDAO.insertProduction(productionDTO);
 		
 	} // insertWorkOrder
