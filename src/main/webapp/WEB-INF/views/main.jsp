@@ -29,55 +29,48 @@
 	<div class="contents"
 		style="position: absolute; left: 15rem; height: 100%; overflow: visible;">
 		<!-- Main Content -->
-	
-		
+
+
 		<!-- Begin Page Content -->
-		<h4>공지사항</h4>
-		<a class="nav-link" href="${pageContext.request.contextPath}/notice/noticeList" >
-		<span style="border:none; background:none; float:right">더보기</span></a>
-		<hr style="margin-top: 2rem;">
 		
 		<div class="mainNotice">
-			<table class="recentNotice" style="border:1px solid;">
-				
-				<tr class="table-head" >
-					
-					<th>글번호</th>
-					<th>구분</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>조회수</th>
-					<th>작성일</th>
-				</tr>
-			</table>
-		
+			<div id="news_notice">
+				<h3 class="recentNotice">Notice</h3>
+				<a class="nav-link"
+			href="${pageContext.request.contextPath}/notice/noticeList"> <span
+			style="border: none; background: none; float: right">더보기</span></a>
+				<table >
+				</table>
+			</div>
 		</div>
 		<hr>
 		<h4>출하현황</h4>
 		<div class="main-chart"
 			style="display: flex; flex-direction: row; flex-wrap: wrap;">
+
 			<div style="width: 750px; height: 400px; margin: 30px;">
 				매월출고량
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart"></canvas>
 			</div>
+
 			<div style="width: 750px; height: 400px; margin: 30px;">
 				제품별판매량
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart2"></canvas>
 			</div>
+
 			<div style="width: 750px; height: 400px; margin: 30px;">
 				출고품목비율
 				<!--차트가 그려질 부분-->
 				<canvas id="myChart3"></canvas>
 			</div>
-			<div style="width: 750px; height: 400px; margin: 30px;">
-				아직고민중
-				<!--차트가 그려질 부분-->
-				<canvas id="myChart4"></canvas>
-					
-			
-			</div>
+
+			<!-- 			<div style="width: 750px; height: 400px; margin: 30px;"> -->
+			<!-- 				아직고민중 -->
+			<!-- 				차트가 그려질 부분 -->
+			<!-- 				<canvas id="myChart4"></canvas> -->
+			<!-- 			</div> -->
 
 
 		</div>
@@ -86,6 +79,9 @@
 		<!-- End of Main Content -->
 	</div>
 	<!-- contents end -->
+	<script type="text/javascript" 
+        src="${pageContext.request.contextPath}/resources/script/jquery-3.7.0.js"></script>
+ 
 	<script type="text/javascript">
 		// 차트1 pie
 		var today = new Date(); // 현재 날짜를 얻음
@@ -398,15 +394,15 @@
 							borderWidth : 1
 						//경계선 굵기
 						} /* ,
-						                        {
-						                            label: 'test2',
-						                            fill: false,
-						                            data: [
-						                                8, 34, 12, 24
-						                            ],
-						                            backgroundColor: 'rgb(157, 109, 12)',
-						                            borderColor: 'rgb(157, 109, 12)'
-						                        } */
+											                        {
+											                            label: 'test2',
+											                            fill: false,
+											                            data: [
+											                                8, 34, 12, 24
+											                            ],
+											                            backgroundColor: 'rgb(157, 109, 12)',
+											                            borderColor: 'rgb(157, 109, 12)'
+											                        } */
 						]
 					},
 					options : {
@@ -632,7 +628,27 @@
 				}
 			}
 		}); // 차트끝
-	</script>
 
+     
+		</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    // 페이지 로딩 시 자동으로 공지사항 목록을 출력합니다.
+    $.ajax({
+        url: '${pageContext.request.contextPath}/notice/recentNotice',
+        dataType: 'json',
+        success: function(result){
+            // json 배열 반복, 추가 출력
+            $.each(result, function(index, item){
+                var date = new Date(item.noticeDate);
+                var d = date.getFullYear() + '.' + (date.getMonth() + 1) + '.' + date.getDate(); // 날짜 형식 수정
+                $('table').append('<tr><td class="contxt"><a href="${pageContext.request.contextPath}/notice/noticeContent?noticeNum=' + item.noticeNum + '">' + item.noticeNum + ' ' + item.noticeCategory + ' ' + item.noticeSubject + ' ' + item.noticeReadcount + ' '+ d +'</a></td></tr>'); // 문자열 연결 수정
+            });                                                                
+        }
+    });//ajax
+});
+
+</script>
 </body>
 </html>

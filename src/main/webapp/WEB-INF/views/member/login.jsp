@@ -144,6 +144,12 @@ function getCookie(cookieName) {
     return unescape(cookieValue);
 }
 
+
+window.onload = function() {
+  // 페이지가 로드될 때 input 요소에 포커스를 설정합니다.
+  document.getElementById("InputempPass").focus();
+};
+
 </script>
 
 </body>

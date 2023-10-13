@@ -1,5 +1,7 @@
 package com.keypoint.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.keypoint.dto.CustomerDTO;
 import com.keypoint.dto.EmployeeDTO;
+import com.keypoint.dto.NoticeDTO;
+import com.keypoint.dto.PageDTO;
 import com.keypoint.service.CustomerService;
 import com.keypoint.service.EmployeeService;
+import com.keypoint.service.NoticeService;
 
 
 @RestController
@@ -25,7 +30,8 @@ public class AjaxController {
 	private CustomerService customerService;
 	@Inject
 	private EmployeeService employeeService;
-	
+	@Inject
+	private NoticeService noticeService;
 	
 //	--------------------------------------------------------------------------
 //	사업자번호 중복확인
@@ -98,4 +104,36 @@ public class AjaxController {
 		} // empCheck
 	
 	
+		
+		//	가상주소 http://localhost:8080/FunWeb/notice/recentNotice
+//		@RequestMapping(value = "/notice/recentNotice", method = RequestMethod.GET)
+		@GetMapping("/notice/recentNotice")
+		public ResponseEntity<List<NoticeDTO>> recentNotice() {
+			//ResponseEntity : 응답출력결과 저장하는 파일 제공
+			System.out.println("AjaxController recentNotice()");
+			//페이징처리(최근글 5개)
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(5);
+			pageDTO.setPageNum("1");
+			pageDTO.setCurrentPage(1);
+			
+	List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);
+			// List<BoardDTO> boardList 
+//	           => json변경하는 프로그램설치(jackson-databind 설치)
+//	           => 자동으로 json 으로 변경
+			
+			//출력 => 결과 가지고 join.jsp 이동(되돌아감)
+	ResponseEntity<List<NoticeDTO>> entity = new 
+	ResponseEntity<List<NoticeDTO>>(noticeList, HttpStatus.OK);
+			
+			return entity;
+		}//
+		
+		
+		
+		
+		
+		
+		
+		
 } // calss
