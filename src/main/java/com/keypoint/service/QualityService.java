@@ -18,11 +18,6 @@ public class QualityService {
 	@Inject
 	private QualityDAO qualityDAO;
 	
-//	public List<QualityDTO> getQcList() {
-//		System.out.println("QualityService getQcList()");
-//		return qualityDAO.getQcList();
-//	}// getQcList [품질검사목록]
-	
 	public List<QualityDTO> getQcList(PageDTO pageDTO) {
 		System.out.println("QualityService getQcList()");
 		// 10개씩 가져올때 현페이지에 대한 시작하는 행번호 구하기

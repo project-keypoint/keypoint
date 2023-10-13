@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수주목록</title>
+<title>수주&amp;납품</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
@@ -16,7 +16,6 @@
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
     <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
-    
 </head>
 <body>
 <%@include file="../inc/top-bar.jsp" %>
@@ -27,43 +26,75 @@
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
 <div class="page-title">수주현황(전체수주목록)</div>
 <div class="contents2">
+<form action="${pageContext.request.contextPath}/receive/receiveShipList" method="get">
 <div class="search-bar">
+<div class="search-b">
+<div style="margin-bottom: -15px;"></div>
+<div class="status-check">
+<div class="search-date3">
+<a style="font-weight: bold;">대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기"
+<c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
+<a>진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
+<c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
+</div>
+<div class="search-date3">
+<a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
+<c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
+<a>취소<input type="checkbox" id="select4" name="check4" class="list-select" value="취소"
+<c:if test="${not empty pageDTO.check4}">checked</c:if>></a>
+</div>
+</div>
+</div>
+
 <div class="search-b">
 <div class="search-select">
 <p>업체명</p> 
-<input type="text" id="cusCode" class="form-control search-input readonly-color" placeholder="업체코드" style="width:110px;" readonly>
-<input type="text" id="cusName" class="form-control search-input readonly-color" placeholder="업체명(클릭)" readonly>
+<input type="text" id="cusCode" name="search" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search ? '업체코드' : ''}" value="${pageDTO.search}" readonly>
+<input type="text" id="cusName" name="search7" class="form-control search-input readonly-color" 
+       placeholder="${empty pageDTO.search8 ? '업체명(클릭)' : ''}" value="${pageDTO.search7}" readonly>
 </div>
 <div class="search-select">
 <p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input readonly-color" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input readonly-color" placeholder="상품명(클릭)" readonly>
+<input type="text" id="productCode" name="search2" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search2 ? '상품코드' : ''}" value="${pageDTO.search2}" readonly>
+<input type="text" id="productName" name="search8" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search8 ? '상품명(클릭)' : ''}" value="${pageDTO.search8}" readonly>
+       
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-date">
-<p>수주일자</p> <input type="text" id="roDate1" class="form-control search-input readonly-color" placeholder="수주일자" readonly>
-~<input type="text" id="roDate2" class="form-control search-input readonly-color" placeholder="수주일자" readonly>
+<p>수주일자</p>
+<input type="text" id="roDateStart" name="search3" class="form-control search-input readonly-color" 
+       placeholder="${empty pageDTO.search3 ? '수주일자' : ''}" value="${pageDTO.search3}" readonly>
+~<input type="text" id="roDate2" name="search4" class="form-control search-input readonly-color" 
+        placeholder="${empty pageDTO.search4 ? '수주일자' : ''}" value="${pageDTO.search4}" readonly>
 </div>
 <div class="search-date">
-<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
-~<input type="text" id="shipSdate2" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
+<p>납품예정일</p>
+<input type="text" id="shipSdate1" name="search5" class="form-control search-input readonly-color" 
+       placeholder="${empty pageDTO.search5 ? '납품예정일' : ''}" value="${pageDTO.search5}" readonly>
+~<input type="text" id="shipSdate2" name="search6" class="form-control search-input readonly-color" 
+        placeholder="${empty pageDTO.search6 ? '납품예정일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="submit" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 </div>
 </div><!-- search-bar -->
+</form>
+
 <br>
-<div class="select-status">
-<a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
-<a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
-<a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a>
-<a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a>
-<a>( 체크박스 사용여부 보류중 )</a>
-</div>
+<!-- <div class="select-status"> -->
+<!-- <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a> -->
+<!-- <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a> -->
+<!-- <a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a> -->
+<!-- <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a> -->
+<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
+<!-- </div> -->
 
 <div>
 <table class="table-list">
@@ -139,7 +170,7 @@
 
 <div id="page_control_receive" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&pageNum1=${pageDTO1.pageNum}&search=${pageDTO.search}" class="page-button">&lt;</a>
+        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&pageNum1=${pageDTO1.pageNum}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&lt;</a>
     </c:if>
     <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
         <c:choose>
@@ -147,12 +178,12 @@
                 <a href="#" class="page-button page-button-active">${i}</a>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${i}&pageNum1=${pageDTO1.pageNum}&search=${pageDTO.search}" class="page-button">${i}</a>
+                <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${i}&pageNum1=${pageDTO1.pageNum}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
     <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-        <a href="${request.contextPath}/receive/receiveShipList?pageNum=${startpageshipment + blockpageshipment}&pageNum1=${currentPage1}&search=${search}" class="button">&gt;</a> 
+        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&pageNum1=${pageDTO1.pageNum}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&gt;</a> 
     </c:if> 
 </div>
 
@@ -207,7 +238,7 @@
 </div>
 <div id="pagination_control_shipment" class="page-buttons">
     <c:if test="${pageDTO1.startPage > pageDTO1.pageBlock}">
-        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.pageNum}&pageNum1=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.pageNum}&pageNum1=${pageDTO1.startPage - pageDTO1.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&lt;</a>
     </c:if>
     <c:forEach var="i" begin="${pageDTO1.startPage}" end="${pageDTO1.endPage}" step="1">
         <c:choose>
@@ -215,12 +246,12 @@
                 <a href="#" class="page-button page-button-active">${i}</a>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.pageNum}&pageNum1=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+                <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.pageNum}&pageNum1=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
-	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-        <a href="${request.contextPath}/receive/receiveShipList?pageNum=${currentPage}&pageNum1=${startpagereceive + blockpagereceive}&search=${search}" class="button">&gt;</a> 
+	<c:if test="${pageDTO1.endPage < pageDTO1.pageCount}">
+        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${currentPage}&pageNum1=${pageDTO1.startPage + pageDTO1.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&gt;</a> 
     </c:if> 
 </div>
 </div>
@@ -237,10 +268,26 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- 행 추가 관련 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 
 <script type="text/javascript">
-// 다중삭제 테스트
+//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
+$(function() {
+    $("#roDateStart").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#roDate2").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#shipSdate1").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#shipSdate2").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+});
+
+// 다중삭제
 function deleteReceive() {
   // 선택된 체크박스 요소들을 가져옵니다.
   var checkboxes = $('input[name="delete-list-receive"]:checked');
@@ -273,7 +320,6 @@ function deleteReceive() {
     	   console.error('Error:', xhr.responseText);
     	   alert('Error: ' + xhr.responseText);
     	}
-
    });
 }
 
@@ -332,6 +378,7 @@ $(document).ready(function() {
             $(this).val(max);
         }
     });
+    
 });
 
 //팝업 창을 열어주는 함수
@@ -353,21 +400,6 @@ $(document).ready(function() {
     $("#productCode, #productName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
         openPopup(url);
-    });
-});
-//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
-$(function() {
-    $("#roDate1").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#roDate2").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#shipSdate1").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#shipSdate2").datepicker({
-    	dateFormat: "yy-mm-dd"
     });
 });
 
@@ -419,6 +451,32 @@ function openInsert() {
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
+
+//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+function resetSearch() {
+	$("#cusCode").val("");
+    $("#cusName").val("");
+    $("#productCode").val("");
+    $("#productName").val("");
+    $("#roDate1").val("");
+    $("#roDate2").val("");
+    $("#shipSdate1").val("");
+    $("#shipSdate2").val("");
+
+    $("#cusCode").attr("placeholder", "업체코드");
+    $("#cusName").attr("placeholder", "업체명(클릭)");
+    $("#productCode").attr("placeholder", "상품코드");
+    $("#productName").attr("placeholder", "상품명(클릭)");
+    $("#roDate1").attr("placeholder", "수주일자");
+    $("#roDate2").attr("placeholder", "수주일자");
+    $("#shipSdate1").attr("placeholder", "납품예정일");
+    $("#shipSdate2").attr("placeholder", "납품예정일");
+    
+    $('#select1').prop('checked', false);
+    $('#select2').prop('checked', false);
+    $('#select3').prop('checked', false);
+    $('#select4').prop('checked', false);
 }
 </script>
 

@@ -31,6 +31,19 @@ public class ReceiveController {
 		System.out.println("ReceiveController receive/shipmentTest");
 		
 		String search = request.getParameter("search");
+		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
+		String search4 = request.getParameter("search4");
+		String search5 = request.getParameter("search5");
+		String search6 = request.getParameter("search6");
+		String search7 = request.getParameter("search7");
+		String search8 = request.getParameter("search8");
+		
+		String check1 = request.getParameter("check1");
+		String check2 = request.getParameter("check2");
+		String check3 = request.getParameter("check3");
+		String check4 = request.getParameter("check4");
+		
 		int pageSize = 5; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
@@ -42,9 +55,20 @@ public class ReceiveController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+		pageDTO.setSearch4(search4);
+		pageDTO.setSearch5(search5);
+		pageDTO.setSearch6(search6);
+		pageDTO.setSearch7(search7);
+		pageDTO.setSearch8(search8);
+		pageDTO.setCheck1(check1);
+		pageDTO.setCheck2(check2);
+		pageDTO.setCheck3(check3);
+		pageDTO.setCheck4(check4);
 		
 		List<ReceiveDTO> receiveList = receiveService.getReceiveList(pageDTO);
-		
+		System.out.println(pageDTO);
 		int count = receiveService.getReceiveCount(pageDTO);
 		System.out.println("count"+count+"pagesize"+pageSize);
 		int pageBlock = 5; // 한화면에 보여줄 페이지 개수 설정

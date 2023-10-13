@@ -20,11 +20,6 @@ public class QualityDAO {
 	
 	private static final String namespace="com.itwillbs.mappers.qualityMapper";
 	
-//	public List<QualityDTO> getQcList() {
-//		System.out.println("QualityDAO getQcList()");
-//		return sqlSession.selectList(namespace+".getQcList");
-//	}// getQcList [품질검사목록]
-	
 	public List<QualityDTO> getQcList(PageDTO pageDTO) {
 		System.out.println("QualityDAO getQcList()");
 		return sqlSession.selectList(namespace+".getQcList", pageDTO);

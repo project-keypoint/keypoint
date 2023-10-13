@@ -20,12 +20,12 @@
 <div class="main-details">
 <form action="${pageContext.request.contextPath}/qc/disInsertMaterial" method="post" onsubmit="return validateForm()">
 <div class="forms-group-receive">
-<div class="page-title-popup">폐기등록</div>
+<div class="page-title-popup">폐기등록(자재)</div>
 <div class="search-bar-popup">
 <div class="form-group-receive-insert">
 <p>자재명</p>
-<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode" placeholder="상품검색" readonly>
-<input type="text" id="materialName" class="form-control search-input inputname" placeholder="상품명" readonly>
+<input type="text" id="materialCode" name="materialCode" class="form-control search-input inputcode readonly-color" placeholder="자재검색" readonly>
+<input type="text" id="materialName" class="form-control search-input inputname readonly-color" placeholder="자재명" readonly>
 </div>
 </div>
 <div class="form-group-receive-insert">
@@ -39,8 +39,8 @@
 <div class="search-bar-popup">
 <div class="form-group-receive-insert">
 <p>당담자</p>
-<input type="text" id="empId" name="disEmpId" class="form-control search-input inputcode" placeholder="사원검색" readonly>
-<input type="text" id="empName" class="form-control search-input inputcode" placeholder="사원명" readonly>
+<input type="text" id="empId" name="disEmpId" class="form-control search-input inputcode readonly-color"  style="width: 150px;" placeholder="사원검색" readonly>
+<input type="text" id="empName" class="form-control search-input inputcode readonly-color" placeholder="사원명" readonly>
 </div>
 </div>
 
@@ -68,7 +68,7 @@ function openPopup(popurl) {
     popupWindow.focus();
 }
 $(document).ready(function() {
-    // 상품명 검색 팝업 열기
+    // 자재명 검색 팝업 열기
     $("#materialCode, #materialName").click(function() {
         var url = '${pageContext.request.contextPath}/qc/materialList';
         openPopup(url);
@@ -81,7 +81,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    var maxLength = 20; // 최대 글자 수
+    var maxLength = 18; // 최대 글자 수
 
     $("#disMemo").on("input", function() {
         var text = $(this).val();

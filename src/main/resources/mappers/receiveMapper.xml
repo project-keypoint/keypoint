@@ -22,10 +22,51 @@
 		left join customer b on a.cusCode = b.cusCode
 		left join product c on a.productCode = c.productCode
 		left join employees d on a.roEmpId = d.empId
-		where a.roStatus != '삭제' and a.shipDate is null
-		<if test="search != null">
-		and a.roCode like CONCAT('%',#{search},'%') 
+		<where>
+		a.roStatus != '삭제' and 
+		a.shipDate is null
+		<choose>
+        <when test="(check1 == null or check1 == '') and 
+                    (check2 == null or check2 == '') and
+                    (check3 == null or check3 == '') and
+                    (check4 == null or check4== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check1 != null and check1 != ''">
+                    OR (a.roStatus = #{check1})
+                </if>
+                <if test="check2 != null and check2 != ''">
+                    OR (a.roStatus = #{check2})
+                </if>
+                <if test="check3 != null and check3 != ''">
+                    OR (a.roStatus = #{check3})
+                </if>
+                <if test="check4 != null and check4 != ''">
+                    OR (a.roStatus = #{check4})
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose>  
+		<if test="search != null and search != ''">
+			and (a.cusCode = #{search})
 		</if>
+    	<if test="search2 != null and search2 != ''">
+			and (a.productCode = #{search2})
+    	</if>
+    	<if test="search3 != null and search3 != ''">
+			and (a.roDate &gt;= #{search3}) 
+    	</if>
+    	<if test="search4 != null and search4 != ''">
+			and (a.roDate &lt;= #{search4}) 
+    	</if>
+        <if test="search5 != null and search5 != ''">
+            and (a.shipSdate &gt;= #{search5})
+        </if>
+        <if test="search6!=null and search6 != ''">
+            and (a.shipSdate &lt;=#{search6})
+        </if>
+		</where>
 		order by a.roCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -47,7 +88,51 @@
 	<select id="getReceiveCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM receivedOrder
-		WHERE roStatus != '삭제' AND shipDate IS NULL
+		<where>
+		roStatus != '삭제' and 
+		shipDate is null
+		<choose>
+        <when test="(check1 == null or check1 == '') and 
+                    (check2 == null or check2 == '') and
+                    (check3 == null or check3 == '') and
+                    (check4 == null or check4== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check1 != null and check1 != ''">
+                    OR (roStatus = #{check1})
+                </if>
+                <if test="check2 != null and check2 != ''">
+                    OR (roStatus = #{check2})
+                </if>
+                <if test="check3 != null and check3 != ''">
+                    OR (roStatus = #{check3})
+                </if>
+                <if test="check4 != null and check4 != ''">
+                    OR (roStatus = #{check4})
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose>  
+		<if test="search != null and search != ''">
+			and (cusCode = #{search})
+		</if>
+    	<if test="search2 != null and search2 != ''">
+			and (productCode = #{search2})
+    	</if>
+    	<if test="search3 != null and search3 != ''">
+			and (roDate &gt;= #{search3}) 
+    	</if>
+    	<if test="search4 != null and search4 != ''">
+			and (roDate &lt;= #{search4}) 
+    	</if>
+        <if test="search5 != null and search5 != ''">
+            and (shipSdate &gt;= #{search5})
+        </if>
+        <if test="search6!=null and search6 != ''">
+            and (shipSdate &lt;=#{search6})
+        </if>
+		</where>
 	</select>
 	
 	<select id="getShipmentCount" resultType="java.lang.Integer">

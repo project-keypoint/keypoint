@@ -57,12 +57,18 @@ background: #E5E5E5;
 align-items: baseline;
 justify-content: space-between;
 }
-.search-date, .search-select {
+.search-date,.search-date2, .search-select {
 display: flex;
 justify-content: center;
 align-items: center;
 margin-right: 100px;
 margin: 5px 20px 5px 0;
+}
+.search-date3 {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+margin: 5px 0 5px 0;
 }
 .search-select p{
 width: 50px;
@@ -77,6 +83,14 @@ align-items: center;
 margin-bottom: 0;
 /* margin-left: 30px; */
 }
+.search-date2 p{
+/* width: 90px; */
+justify-content: center;
+align-items: center;
+margin-bottom: 0;
+margin-right: 8px;
+/* margin-left: 30px; */
+}
 .search-b {
 display: flex;
 flex-direction: column;
@@ -85,6 +99,12 @@ flex-direction: column;
 margin-left: 5px;
 margin-right: 5px;
 width: 200px;
+}
+.status-check {
+border: 1px solid #D3D3D3;
+padding-left: 10px;
+border-radius: 3px;
+background: white;
 }
 .table-list {
 width: 100%;
@@ -120,11 +140,16 @@ justify-content: space-between;
 margin-top: 15px;
 }
 .page-buttons {
-/* margin-top: 15px; */
 margin-bottom: 50px;
 display: flex;
 justify-content: flex-end;
 align-items: center;
+}
+.yoko {
+margin-bottom: 50px;
+display: flex;
+justify-content: flex-end;
+align-items: flex-start;
 }
 .page-button {
 cursor: pointer;
@@ -217,16 +242,16 @@ height: 30px;
 }
 
 input[placeholder="업체코드"], input[placeholder="상품코드"], input[placeholder="사원명"],
-input[placeholder="업체검색"], input[placeholder="상품검색"] {
+input[placeholder="업체검색"], input[placeholder="상품검색"], input[placeholder="자재코드"] {
 width: 110px;
 }
-input[placeholder="업체명"], input[placeholder="상품명"] {
+input[placeholder="업체명"], input[placeholder="상품명"], input[placeholder="자재명"] {
 width: 190px;
 }
 input[placeholder="수주번호"]{
 width: 310px;
 }
-#cusCode.search-input, #productCode.search-input {
+#cusCode.search-input, #productCode.search-input, #materialCode.search-input {
     width: 110px;
 }
 #empId.search-input, #qcEmpId.search-input, #shipEmpId.search-input,,
@@ -237,7 +262,7 @@ width: 310px;
 #prodEmpName.search-input, #roEmpName.search-input {
     width: 150px;
 }
-#cusName.search-input, #productName.search-input {
+#cusName.search-input, #productName.search-input, #materialName.search-input {
     width: 190px;
 }
 #roCode.search-input {
@@ -245,7 +270,7 @@ width: 310px;
 	margin-right: 25px;
 }
 #disMemo.search-input {
-	width: 335px;
+	width: 310px;
 }
 .f-bold {
 font-weight: bold;
@@ -392,4 +417,8 @@ text-align: right;
 display: flex;
 justify-content: space-between;
 margin-bottom: 5px;
+}
+.select2 {
+width: 175px;
+height: 30px;
 }

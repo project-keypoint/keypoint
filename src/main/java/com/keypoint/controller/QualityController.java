@@ -37,11 +37,18 @@ public class QualityController {
 	@GetMapping("/qcList")
 	public String qcList(HttpServletRequest request,Model model) {
 		System.out.println("QualityController qc/qcList");
-		//검색어 가져오기 
-		String search = request.getParameter("search");
+		String search3 = request.getParameter("search3");
+		String search4 = request.getParameter("search4");
+		String search5 = request.getParameter("search5");
+		String search6 = request.getParameter("search6");
+		
+		String check1 = request.getParameter("check1");
+		String check2 = request.getParameter("check2");
+		String check3 = request.getParameter("check3");
+		String check4 = request.getParameter("check4");
 		
 		//한 화면에 보여줄 글개수 설정
-		int pageSize = 5;
+		int pageSize = 1;
 		// 현 페이지 번호 가져오기
 		String pageNum=request.getParameter("pageNum");
 		// 페이지 번호가 없을 경우 => "1"로 설정
@@ -55,7 +62,14 @@ public class QualityController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		//검색어 저장
-		pageDTO.setSearch(search);
+		pageDTO.setSearch3(search3);
+		pageDTO.setSearch4(search4);
+		pageDTO.setSearch5(search5);
+		pageDTO.setSearch6(search6);
+		pageDTO.setCheck1(check1);
+		pageDTO.setCheck2(check2);
+		pageDTO.setCheck3(check3);
+		pageDTO.setCheck4(check4);
 		
 		List<QualityDTO> qcList = qualityService.getQcList(pageDTO);
 		
@@ -158,8 +172,20 @@ public class QualityController {
 	public String disposedList(HttpServletRequest request,Model model) {
 		System.out.println("QualityController qc/disposedList");
 		
-		String search = request.getParameter("search");
-		int pageSize = 10; //한 화면에 보여줄 글개수 설정
+//		String search = request.getParameter("search");
+		String search3 = request.getParameter("search3");
+		String search4 = request.getParameter("search4");
+		String search5 = request.getParameter("search5");
+		String search6 = request.getParameter("search6");
+		String search7 = request.getParameter("search7");
+		String search8 = request.getParameter("search8");
+		
+//		String check1 = request.getParameter("check1");
+		String check2 = request.getParameter("check2");
+		String check3 = request.getParameter("check3");
+		String check4 = request.getParameter("check4");
+		
+		int pageSize = 2; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
 			pageNum = "1";
@@ -169,7 +195,17 @@ public class QualityController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
-		pageDTO.setSearch(search);
+//		pageDTO.setSearch(search);
+		pageDTO.setSearch3(search3);
+		pageDTO.setSearch4(search4);
+		pageDTO.setSearch5(search5);
+		pageDTO.setSearch6(search6);
+		pageDTO.setSearch7(search7);
+		pageDTO.setSearch8(search8);
+//		pageDTO.setCheck1(check1);
+		pageDTO.setCheck2(check2);
+		pageDTO.setCheck3(check3);
+		pageDTO.setCheck4(check4);
 		
 		List<QualityDTO> disposedList = qualityService.getDisposedList(pageDTO);
 		List<QualityDTO> disposedSum = qualityService.getDisposedSum();
