@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.ProductDAO;
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ProductDTO;
 
 @Service
@@ -20,9 +21,16 @@ public class ProductService {
 		productDAO.insertProduct(productDTO);
 	}// insertProduct
 
-	public List<ProductDTO> getProductList() {
+	public List<ProductDTO> getProductList(PageDTO pageDTO) {
 		System.out.println("ProductService getProductList()");
-		return productDAO.getProductList();
+		// 10개씩 가져올 때 현 페이지에 대한 시작하는 행번호 구하기
+		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+		// 끝나는 행번호 구하기
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setStartRow(startRow-1);
+		pageDTO.setEndRow(endRow);			
+		return productDAO.getProductList(pageDTO);
 	}// getProductList
 
 	public void deleteProduct(ProductDTO productDTO) {
@@ -39,6 +47,11 @@ public class ProductService {
 		System.out.println("ProductService updateProduct()");
 		productDAO.updateProduct(productDTO);
 	}// updateProduct
+
+	public int getProductCount(PageDTO pageDTO) {
+		System.out.println("ProductService getProductCount()");
+		return productDAO.getProductCount(pageDTO);
+	}
 
 
 

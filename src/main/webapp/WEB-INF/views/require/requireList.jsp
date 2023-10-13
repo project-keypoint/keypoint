@@ -232,7 +232,6 @@ function confirmDelete(productCode,materialCode) {
 function doSearch() {
     if (confirm($("#productCode").val())) {
         var query = {"search" : $("#productCode").val(), "search2" : $("#materialCode").val()};
-        alert("jjj");
         $.ajax({
             url : "${pageContext.request.contextPath}/require/requireList",
             type : "get",

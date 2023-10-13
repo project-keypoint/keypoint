@@ -9,11 +9,24 @@
 		values(#{productName},#{cusCode},#{productPrice},#{productCount},#{productUnit},#{productMemo})
 	</insert>
 
+<!-- 	검색어 포함 -->
 	<select id="getProductList" resultType="com.keypoint.dto.ProductDTO">
 		select * from product
 		where productDel = 0
+		<if test="search != null">
+			and productCode = #{search} 
+		</if>
 		order by productCode desc
+		limit #{startRow},#{pageSize}
 	</select>
+	
+<!-- 	검색어 포함 -->
+	<select id="getProductCount" resultType="java.lang.Integer">
+		select count(productCode) from product
+		<if test="search != null">
+			where productCode = #{search} 
+		</if>
+	</select>		
 	
 	<select id="getProduct" resultType="com.keypoint.dto.ProductDTO">
 		select p.productCode,p.productName,p.cusCode,c.cusName,p.productPrice,p.productCount,p.productUnit,p.productMemo  

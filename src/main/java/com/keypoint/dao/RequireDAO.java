@@ -44,9 +44,9 @@ public class RequireDAO {
 		sqlSession.delete(namespace+".updateRequire", requireDTO);
 	}// updateRequire
 
-	public int getBoardCount(PageDTO pageDTO) {
-		System.out.println("RequireDAO getBoardCount()");
-		return sqlSession.selectOne(namespace+".getBoardCount", pageDTO);
+	public int getRequireCount(PageDTO pageDTO) {
+		System.out.println("RequireDAO getRequireCount()");
+		return sqlSession.selectOne(namespace+".getRequireCount", pageDTO);
 	}
 
 	

@@ -49,9 +49,9 @@ public class RequireService {
 		requireDAO.updateRequire(requireDTO);
 	}// updateRequire
 
-	public int getBoardCount(PageDTO pageDTO) {
+	public int getRequireCount(PageDTO pageDTO) {
 		System.out.println("RequireService getBoardCount()");
-		return requireDAO.getBoardCount(pageDTO);
+		return requireDAO.getRequireCount(pageDTO);
 	}
 
 

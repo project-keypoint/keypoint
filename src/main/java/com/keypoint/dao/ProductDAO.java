@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ProductDTO;
 
 @Repository
@@ -22,9 +23,9 @@ public class ProductDAO {
 		sqlSession.insert(namespace+".insertProduct", productDTO);
 	}// insertProduct
 
-	public List<ProductDTO> getProductList() {
+	public List<ProductDTO> getProductList(PageDTO pageDTO) {
 		System.out.println("ProductDAO getProductList()");
-		return sqlSession.selectList(namespace+".getProductList");
+		return sqlSession.selectList(namespace+".getProductList", pageDTO);
 	}// getProductList
 
 	public void deleteProduct(ProductDTO productDTO) {
@@ -41,6 +42,11 @@ public class ProductDAO {
 		System.out.println("ProductDAO updateProduct()");
 		sqlSession.update(namespace+".updateProduct", productDTO);
 	}// updateProduct
+
+	public int getProductCount(PageDTO pageDTO) {
+		System.out.println("ProductDAO getProductCount()");
+		return sqlSession.selectOne(namespace+".getProductCount", pageDTO);
+	}
 
 	
 	
