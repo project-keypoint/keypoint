@@ -218,7 +218,7 @@ public class EmployeeController {
 	
 	
 // -------------------------------- 첨부파일 관련 		
-	// 사원등록-사진첨부
+	// 사원등록 - 사진첨부하기
 	@PostMapping("/photoPro")
 	// 첨부파일은 boardDTO에 못 담음
 	public String photoPro(HttpServletRequest request, MultipartFile empPhoto) throws Exception{
@@ -243,6 +243,8 @@ public class EmployeeController {
 		employeeDTO.setEmpPhoto(filename);
 		
 		// 목록이 다 넘어갈 수 있게
+		// 비밀번호
+		employeeDTO.setEmpPass(request.getParameter("empPass"));
 		// 이름, 주소, 연락처, 내선번호, 이메일
 		employeeDTO.setEmpName(request.getParameter("empName"));
 		employeeDTO.setEmpAddress(request.getParameter("empAddress"));
@@ -271,7 +273,8 @@ public class EmployeeController {
 		}
 	} // photoPro
 	
-	// 사원수정-첨부파일 수정하기
+	
+	// 사원수정 - 첨부파일 수정하기
 		@PostMapping("/photoUpdatePro")
 		// 첨부파일은 boardDTO에 못 담음
 		public String photoUpdatePro(HttpServletRequest request, MultipartFile empPhoto)throws Exception {

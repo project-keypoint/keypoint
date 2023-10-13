@@ -1,5 +1,3 @@
-employeeinsert
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -297,9 +295,16 @@ function checkDuplicate(type) {
         success: function (result) {
             if (result == 'iddup') {
                 alert("중복");
-            } else {
-                alert("사용가능");
-            }
+                if(type=="phone"){
+                document.getElementById("empPhone").value = "";
+                }
+                if(type=="tel"){
+                    document.getElementById("empTel").value = "";
+                    }
+                if(type=="email"){
+                    document.getElementById("empEmail").value = "";
+                    }
+            } 
         }
     });
 }

@@ -59,7 +59,7 @@ public class EmployeeDAO {
 	}// insertEmployee
 
 
-	// 사원-상세정보
+	// 사원-상세정보 화면보이게
 	public EmployeeDTO getEmployeeDetails(int empId) {
 		System.out.println("EmployeeDAO getEmployeeDetails()");
 		
@@ -67,7 +67,7 @@ public class EmployeeDAO {
 	} // getEmployeeDetails
 
 
-	// 사원-상세정보수정
+	// 사원-상세정보 수정하기
 	public void updateEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO updateEmployee()");
 		System.out.println(employeeDTO);
@@ -75,6 +75,7 @@ public class EmployeeDAO {
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
 	} // updateEmployee
 
+	
 	// 사원등록 - 중복체크(연락처, 내선번호, 이메일)
 	public EmployeeDTO empCheck(String type, String Emp) {
 		System.out.println("EmployeeDAO empPhoneCheck()");
