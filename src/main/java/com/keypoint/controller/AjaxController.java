@@ -65,28 +65,7 @@ public class AjaxController {
 		
 	}
 	
-	
-	
-//	--------------------------------------------------------------------------
-//	공지사항 검색
-	@GetMapping("/notice/noticeSearch")
-	public List<Object> noticeSearch(@RequestParam("searchType") String searchType, 
-												@RequestParam("searchKeyword") String searchKeyword, Model model) throws Exception{
-		System.out.println("AjaxController noticeSearch()");
-		
-		NoticeDTO noticeDTO = new NoticeDTO();
-		
-		noticeDTO.setSearchType(searchType);
-		noticeDTO.setSearchKeyword(searchKeyword);
-		
 
-		return noticeService.getSearchList(noticeDTO);
-		
-	}
-	
-	
-	
-	
 	
 //	--------------------------------------------------------------------------
 	

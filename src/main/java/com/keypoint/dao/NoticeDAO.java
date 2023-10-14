@@ -106,13 +106,6 @@ public class NoticeDAO {
 	}
 
 
-//	공지사항 검색
-	public List<Object> getSearchList(NoticeDTO noticeDTO) throws Exception{
-		System.out.println("NoticeDAO getSearchList()");
-
-		return sqlSession.selectList(nameSpace+".getSearchList", noticeDTO);
-	}
-
 
 
 

@@ -22,28 +22,54 @@
 	</insert>
 
 
+ 
+    
+  
 
-  	<select id="getNoticeList" resultType="com.keypoint.dto.NoticeDTO">
-  		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate
-  		FROM notice n LEFT JOIN employees e
-  		ON n.empId = e.empId
-		WHERE noticeStatus != '삭제'
-  		ORDER BY noticeNum DESC
-  		LIMIT #{startRow}, #{pageSize}
-  	</select>
+  
+	<select id="getNoticeList" resultType="com.keypoint.dto.NoticeDTO">
+	   SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate
+	   FROM notice n
+	   LEFT JOIN employees e ON n.empId = e.empId
+	   WHERE n.noticeStatus != '삭제'
+	   <choose>
+	       <when test="searchType == 'all'">
+	           AND n.noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+	       </when>
+	       <when test="searchType == 'sales'">
+	           AND n.noticeCategory = '영업' AND n.noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+	       </when>
+	       <when test="searchType == 'production'">
+	           AND n.noticeCategory = '생산' AND n.noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+	       </when>
+	       <when test="searchType == 'materials'">
+	           AND n.noticeCategory = '자재' AND n.noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+	       </when>
+	       <when test="searchType == 'personnel'">
+	           AND n.noticeCategory = '인사' AND n.noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+	       </when>
+	   </choose>
+	   ORDER BY n.noticeNum DESC
+	   LIMIT #{startRow}, #{pageSize}
+	</select>
+
   
   
   
+	 
 	<select id="getNoticeCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM notice
-		WHERE noticeStatus != '삭제'
-		<if test="search != null">
-			WHERE noticeSubject like CONCAT('%', #{search}, '%')
-		</if>
-	</select>  
-  
-  
+	    SELECT COUNT(*)
+	    FROM notice
+	    <where>
+	    noticeStatus != '삭제'
+	    <if test="searchType != null and searchType ! = ''">
+	    AND (noticeSubject = #{searchType})
+	    </if>
+	    </where>
+	</select>
+	  
+	  
+	  
   
   	<select id="getNoticeContent" resultType="com.keypoint.dto.NoticeDTO">
   		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate, n.noticeContent
@@ -78,6 +104,7 @@
   
   
   
+  
   	<select id="getinserCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM notice
@@ -85,36 +112,7 @@
   	</select>
   	
   
-  
- 	<select id="getSearchList" resultType="com.keypoint.dto.NoticeDTO" parameterType="com.keypoint.dto.NoticeDTO">
-  		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate
-  		FROM notice n LEFT JOIN employees e
-  		ON n.empId = e.empId
- 		<choose>
- 		<when test="searchType != null and searchType.equals(all)">
- 		AND all LIKE CONCAT('%', #{searchKeyword}, '%')
- 		</when>
- 		<when test="searchType != null and searchType.equals(sales)">
- 		 AND sales LIKE CONCAT('%', #{searchKeyword}, '%')
- 		</when>
- 		<when test="searchType != null and searchType.equals(production)">
- 		AND all LIKE CONCAT('%', #{searchKeyword}, '%')
- 		</when>
- 		<when test="searchType != null and searchType.equals(meterials)">
- 		 AND sales LIKE CONCAT('%', #{searchKeyword}, '%')
- 		</when>
- 		<when test="searchType != null and searchType.equals(personnel)">
- 		 AND sales LIKE CONCAT('%', #{searchKeyword}, '%')
- 		</when>
- 		</choose>
-		WHERE noticeStatus != '삭제'
-  		ORDER BY noticeNum DESC
-  		LIMIT #{startRow}, #{pageSize} 	
- 	</select>
-  
-  
-  
-  
+
   
   
   

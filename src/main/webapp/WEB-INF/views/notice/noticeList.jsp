@@ -29,30 +29,38 @@
 <div class="page-title">공지사항</div>
 <div class="contents2">
 
+<form action="${pageContext.request.contextPath}/notice/noticeList" method="get" name="search">
 <div class="search-bar">
-<form id="search-form" name="search-form" autocomplete="off">
 <div class="search-b">
 <div class="search-select">
 
-<select id=searchType name="searchType" class="form-control search-input"> 
+<select id="searchType" name="searchType" class="form-control search-input"> 
 	<option value="all">전체</option>
 	<option value="sales">영업</option>
 	<option value="production">생산</option>
-	<option value="meterials">자재</option>
+	<option value="materials">자재</option>
 	<option value="personnel">인사</option>
 </select>
 
 <input type="text" id="searchKeyword" name="searchKeyword" class="form-control search-input">
 
-</div><!-- search-select -->
-</div><!-- search-b -->
+</div> <!--  search-select  -->
+</div> <!-- search-b -->
 
 <div class="search-button">
-<input type="button" onclick="getSearchList()" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="submit" value="검색" class="btn btn-primary mybutton1">
+<input type="submit" value="취소" class="btn btn-secondary mybutton1" onclick="${pageContext.request.contextPath}/notice/noticeList">
 </div>
+</div><!--  search-bar -->
 </form>
-</div><!-- search-bar -->
+
+
+
+
+
+
+
+
 
 
 <br>
@@ -101,23 +109,29 @@
 <!-- ---------------------페이징---------------- -->
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+    <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&searchType=${pageDTO.searchType}&searchKeyword=${pageDTO.searchKeyword}" class="page-button">&lt;</a>
 </c:if>
 
-<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<c:choose>
-		<c:when test="${i eq pageDTO.currentPage}">
-			<a href="#" class="page-button page-button-active">${i}</a>
-		</c:when>
-		<c:otherwise>
-			<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
-		</c:otherwise>
-	</c:choose>
+<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+    <c:choose>
+        <c:when test="${i eq pageDTO.currentPage}">
+            <a href="#" class="page-button page-button-active">${i}</a>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&searchType=${pageDTO.searchType}&searchKeyword=${pageDTO.searchKeyword}" class="page-button">${i}</a>
+        </c:otherwise>
+    </c:choose>
 </c:forEach>
 
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+    <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&searchType=${pageDTO.searchType}&searchKeyword=${pageDTO.searchKeyword}" class="page-button">&gt;</a>
 </c:if>
+
+
+
+
+
+
 
 
 </div><!-- page-button -->
@@ -140,31 +154,31 @@
 <script type="text/javascript">
 
 
-//	검색 AJAX
- function getSearchList() {
-	ajax({
-		type : 'GET',
-		url : '${pageContext.request.contextPath}/notice/noticeSearch',
-		date : $("form[search-form]").serialize(),
-		success : function(result) {
-			result.forEach(function(item) {
-				str='<tr>'
-				str+= "<td>"++"</td>";
-				str+= "<td>"+item.noticeNum+"</td>";
-				str+="<td>"+item.noticeCategory+"</td>"
-				str+="<td><a href=+"</td>"
+// //	검색 AJAX
+//  function getSearchList() {
+// 	ajax({
+// 		type : 'GET',
+// 		url : '${pageContext.request.contextPath}/notice/noticeSearch',
+// 		date : $("form[search-form]").serialize(),
+// 		success : function(result) {
+// 			result.forEach(function(item) {
+// 				str='<tr>'
+// 				str+= "<td>"++"</td>";
+// 				str+= "<td>"+item.noticeNum+"</td>";
+// 				str+="<td>"+item.noticeCategory+"</td>"
+// 				str+="<td><a href=+"</td>"
 				
-			})
+// 			})
 			
-		}
+// 		}
 		
 		
 		
-	})
+// 	})
 	
 	
 	
-}
+// }
 
 
 

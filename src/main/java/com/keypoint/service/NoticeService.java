@@ -127,15 +127,6 @@ public class NoticeService {
 	}
 
 
-//	공지사항 검색
-	public List<Object> getSearchList(NoticeDTO noticeDTO) throws Exception{
-		System.out.println("NoticeService getSearchList()");
-
-		return noticeDAO.getSearchList(noticeDTO);
-	}
-
-
-
 
 
 

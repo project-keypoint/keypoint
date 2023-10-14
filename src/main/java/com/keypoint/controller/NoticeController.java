@@ -100,8 +100,8 @@ public class NoticeController {
 		pageDTO.setCurrentPage(currentPage);		
 		
 //		검색어 저장
-		pageDTO.setSearch(searchType);
-		pageDTO.setSearch(searchKeyword);
+		pageDTO.setSearchType(searchType);
+		pageDTO.setSearchKeyword(searchKeyword);
 		
 		
 		List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);
