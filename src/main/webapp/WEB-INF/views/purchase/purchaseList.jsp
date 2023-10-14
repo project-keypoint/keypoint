@@ -76,17 +76,6 @@
 </div><!-- search-bar -->
 <br>
 
-<div class="select-status">
-<a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
-<a>완료<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
-<a>취소<input type="checkbox" id="select3" name="select3" class="list-select"></a>
-<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
-<div>
-<!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
-<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
-</div>
-</div>
-
 <div>
 <table class="table-list">
 <tr class="table-head">
