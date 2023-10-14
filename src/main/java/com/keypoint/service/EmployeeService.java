@@ -39,7 +39,7 @@ public class EmployeeService {
 	
 	// -------------------------------------------------------------------
 	
-	// 사원목록
+	// 사원목록(+검색)
 	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO) {
 		System.out.println("EmployeeService getEmployeeList");
 
@@ -57,10 +57,11 @@ public class EmployeeService {
 		return employeeDAO.getEmployeeList(pageDTO);
 	} // getEmployeeList
 	
-	public int getEmployeeCount() {
+	// 페이징(검색) 관련
+	public int getEmployeeCount(PageDTO pageDTO) {
 		System.out.println("EmployeeService getEmployeeCount()");
 		
-		return employeeDAO.getEmployeeCount();
+		return employeeDAO.getEmployeeCount(pageDTO);
 	} // getEmployeeCount
 	
 	

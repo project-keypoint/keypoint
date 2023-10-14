@@ -38,19 +38,21 @@ public class EmployeeDAO {
 	 
 	// ---------------------------------------------------------------------------
 	 
-	// 사원목록
+	// 사원목록(+검색)
 	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO) {
 		System.out.println("EmployeeDAO getEmployeeList()");
 		
 		return sqlSession.selectList(namespace+".getEmployeeList", pageDTO);
 	}// getEmployeeList
 	
-	public int getEmployeeCount() {
-		System.out.println("CustomerDAO getEmployeeCount()");
-
-		return sqlSession.selectOne(namespace+".getEmployeeCount");
-	} // getEmployeeCount
 	
+	// 페이징(검색) 관련
+	public int getEmployeeCount(PageDTO pageDTO) {
+	    System.out.println("CustomerDAO getEmployeeCount()");
+	    
+	    return sqlSession.selectOne(namespace + ".getEmployeeCount", pageDTO);
+	} // getEmployeeCount
+
 	
 	// 사원등록
 	public void insertEmployee(EmployeeDTO employeeDTO) {
