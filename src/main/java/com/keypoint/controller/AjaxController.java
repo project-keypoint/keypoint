@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keypoint.dto.CustomerDTO;
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.NoticeDTO;
@@ -110,26 +112,8 @@ public class AjaxController {
 		} // empCheck
 	
 	
-		
 
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		//	가상주소 http://localhost:8080/FunWeb/notice/recentNotice
 //		@RequestMapping(value = "/notice/recentNotice", method = RequestMethod.GET)

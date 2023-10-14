@@ -87,14 +87,15 @@
 						/ ${sessionScope.empName} 님</span> 
 					
 
-<!-- 프로필사진 수정중입니다 -->
+<!-- 프로필사진 가져오기 -->
 <% 
 String empPhoto = (String) session.getAttribute("empPhoto"); 
+// 사진을 등록하지 않았을 경우 기본 이미지(test.png)로 보이게
 String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resources/img/test.png";
 %>
 
 <img class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/upload/${sessionScope.empPhoto}"  style="position: relative; top: -3px; border: solid 1px black;">
-<!-- // 프로필사진 수정중입니다 -->
+<!-- // 프로필사진 가져오기 -->
 
   
   
