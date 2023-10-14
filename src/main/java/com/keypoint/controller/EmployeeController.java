@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -53,6 +54,7 @@ public class EmployeeController {
 			//아이디 비밀번호 일치 => 세션값 생성 => /member/main이동
 			session.setAttribute("empId", employeeDTO.getEmpId());
 			session.setAttribute("empName", employeeDTO.getEmpName());
+			session.setAttribute("empPhoto",employeeDTO.getEmpPhoto());
 			// 주소변경하면서 이동 /main/main
 			return "redirect:/main/main";
 		}else {
@@ -333,5 +335,5 @@ public class EmployeeController {
 
 // -------------------------------- 첨부파일 관련 			
 		
-		
+//		
 } // class

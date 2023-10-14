@@ -80,8 +80,6 @@
 		where empEmail = #{empEmail} LIMIT 1 </select>
 	
 	
-
-	
 	
 </mapper>
 

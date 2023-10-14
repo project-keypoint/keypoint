@@ -95,7 +95,6 @@ public class EmployeeService {
 		return employeeDAO.empCheck(type,Emp);
 	} // empPhoneCheck
 
-
-
 	
+
 } // class

@@ -44,7 +44,7 @@
 
 		<!-- Topbar Navbar -->
 		<ul class="navbar-nav ml-auto">
-
+			
 			<!-- Nav Item - Search Dropdown (Visible Only XS) -->
 			<li class="nav-item dropdown no-arrow d-sm-none"><a
 				class="nav-link dropdown-toggle" href="#" id="searchDropdown"
@@ -93,7 +93,7 @@ String empPhoto = (String) session.getAttribute("empPhoto");
 String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resources/img/test.png";
 %>
 
-<img class="img-profile rounded-circle" src="<%= imgSrc %>" style="position: relative; top: -3px;">
+<img class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/upload/${sessionScope.empPhoto}"  style="position: relative; top: -3px; border: solid 1px black;">
 <!-- // 프로필사진 수정중입니다 -->
 
   
@@ -204,7 +204,7 @@ String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resou
 		    }
 		    return str;
 		}
-
+	// 프로필 사진 가져오기
 
 	</script>
 
