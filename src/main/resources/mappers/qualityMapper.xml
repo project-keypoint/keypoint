@@ -298,4 +298,27 @@
 		FROM disposedItems
 		WHERE disCode LIKE CONCAT(#{code_id}, '%')
 	</select>
+	
+	<select id="getProductList" resultType="com.keypoint.dto.QualityDTO">
+		select productCode, productName, productPrice
+		from product
+		where
+		productCode like CONCAT('%', #{productCode}, '%') and
+		productName like
+		CONCAT('%', #{productName}, '%')
+		order by productCode desc
+		limit
+		#{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getProductCount" resultType="java.lang.Integer">
+		select count(*)
+		from product
+		<if test="productCode!=null and productName!=null">
+			where
+			productCode like CONCAT('%', #{productCode}, '%') and
+			productName like CONCAT('%', #{productName}, '%')
+		</if>
+	</select>
+	
 </mapper>

@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+@font-face {
+    font-family: 'Noto';
+    src: url('../fonts/NotoSansKR-Regular.otf') format('opentype');
+}
+body {
+	font-family: 'Noto', sans-serif !important;
+	font-size: 16px;
+	color: black;
+	text-align: center;
+}
+.center {
+	text-align: center;
+}
+h4 {
+	margin: 20px 0;
+	font-weight: bold;
+}
+.search-top {
+display: flex;
+justify-content: space-between;
+margin: 5px auto 0;
+width: 450px;
+margin-bottom: 10px;
+/* padding: 0 10px; */
+}
+table {
+	margin: 0px auto;
+	width: 450px;
+	border-collapse: collapse;
+	border-radius: 3px;
+	overflow: hidden;
+}
+td, th {
+	padding: 10px;
+}
+th {
+	text-align: center;
+	font-weight: bold;
+	background: #e5e5e5;
+	border: 1px solid #ddd;
+}
+td {
+	text-align: center;
+	background: #fff;
+	border: 1px #ddd solid;
+}
+#con:hover {
+	background-color: #eee;
+	cursor: pointer;
+}
+.mybutton1 {
+    line-height: 0;
+    height: 30px;
+    width: 45px;
+    padding: 0;
+}
+input {
+	width: 100px;
+	border: 1px solid #d3d3d3;
+	border-radius: 3px;
+}
+
+/* 페이징 */
+#pagination {
+	display: inline-block;
+}
+#pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+	border: 1px solid #ddd;
+}
+#pagination a.active {
+	background-color: #b9b9b9;
+	color: white;
+	border: 1px solid #b9b9b9;
+}
+#pagination a:hover:not(.active, .none) {
+	background-color: #ddd;
+}

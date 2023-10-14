@@ -337,7 +337,60 @@ public class QualityController {
 		model.addAttribute("search", search);
 		model.addAttribute("materialList", materialList);
 		return "qc/materialList";
-	} // purchaseMaterialList
+	} // materialList
+	
+	@RequestMapping(value = "/productList", method = RequestMethod.GET)
+	public String productList(Model model, HttpServletRequest request) { // 품목 리스트
+		String productCode = request.getParameter("productCode");
+		String productName = request.getParameter("productName");
+		
+		int pageSize = 5;
+
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		PageDTO pageDTO = new PageDTO();
+		
+		int currentPage=Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setStartRow(startRow-1);
+		pageDTO.setEndRow(endRow);
+
+		Map<String,Object> search = new HashMap<>();
+		search.put("productCode", productCode);
+		search.put("productName", productName);
+		search.put("startRow", pageDTO.getStartRow());
+		search.put("pageSize", pageDTO.getPageSize());
+ 
+		List<QualityDTO> productList = qualityService.getProductList(search);
+			
+		int count = qualityService.getProductCount(search);
+		int pageBlock = 10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+		 	endPage = pageCount;
+		 }
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+				
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("search", search);
+		model.addAttribute("productList", productList);
+		return "qc/productList";
+	}
+	
 }//class
 	
 	

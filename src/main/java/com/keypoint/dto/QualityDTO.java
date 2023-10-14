@@ -52,7 +52,15 @@ public class QualityDTO {
     private String materialCode;
     private String materialName;
     
+    private int productPrice;
     
+    
+	public int getProductPrice() {
+		return productPrice;
+	}
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
 	public String getMaterialCode() {
 		return materialCode;
 	}

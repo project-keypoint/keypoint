@@ -2,6 +2,7 @@ package com.keypoint.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -126,6 +127,16 @@ public class QualityService {
 	public List<QualityDTO> getDisposedSumMat() {
 		System.out.println("QualityService getDisposedSumMat()");
 		return qualityDAO.getDisposedSumMat();
+	}
+
+	public List<QualityDTO> getProductList(Map<String, Object> search) {
+		System.out.println("QualityService getProductList()");
+		return qualityDAO.getProductList(search);
+	}
+
+	public int getProductCount(Map<String, Object> search) {
+		System.out.println("QualityService getProductCount()");
+		return qualityDAO.getProductCount(search);
 	}
 
 }

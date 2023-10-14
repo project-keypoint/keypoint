@@ -11,7 +11,6 @@
 <title>수주&amp;납품</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
@@ -27,17 +26,14 @@
 <div class="page-title">수주현황(전체수주목록)</div>
 <div class="contents2">
 <form action="${pageContext.request.contextPath}/receive/receiveShipList" method="get">
-<div class="search-bar">
-<div class="search-b">
-<div style="margin-bottom: -15px;"></div>
-<div class="status-check">
+<div class="search-b" style="margin-bottom: -15px;">
+<!-- <div style="margin-bottom: -15px;"></div> -->
+<div class="status-check" style="background: #E5E5E5; border: none;">
 <div class="search-date3">
-<a style="font-weight: bold;">대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기"
+<a style="font-weight: bold;">　대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기"
 <c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
 <a>진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
 <c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
-</div>
-<div class="search-date3">
 <a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
 <c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
 <a>취소<input type="checkbox" id="select4" name="check4" class="list-select" value="취소"
@@ -45,6 +41,24 @@
 </div>
 </div>
 </div>
+<div class="search-bar">
+<!-- <div class="search-b"> -->
+<!-- <div style="margin-bottom: -15px;"></div> -->
+<!-- <div class="status-check"> -->
+<!-- <div class="search-date3"> -->
+<!-- <a style="font-weight: bold;">대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기" -->
+<%-- <c:if test="${not empty pageDTO.check1}">checked</c:if>></a> --%>
+<!-- <a>진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행" -->
+<%-- <c:if test="${not empty pageDTO.check2}">checked</c:if>></a> --%>
+<!-- </div> -->
+<!-- <div class="search-date3"> -->
+<!-- <a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료" -->
+<%-- <c:if test="${not empty pageDTO.check3}">checked</c:if>></a> --%>
+<!-- <a>취소<input type="checkbox" id="select4" name="check4" class="list-select" value="취소" -->
+<%-- <c:if test="${not empty pageDTO.check4}">checked</c:if>></a> --%>
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
 
 <div class="search-b">
 <div class="search-select">

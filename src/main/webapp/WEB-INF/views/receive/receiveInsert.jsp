@@ -39,8 +39,9 @@
 </div>
 
 <div class="form-group-receive-insert">
+<input type="hidden" id="productPrice" readonly>
 <p>수주수량</p>
-<input type="number" id="roCount" name="roCount" class="form-control search-input" placeholder="수주수량" min="0">
+<input type="number" id="roCount" name="roCount" class="form-control search-input" placeholder="수주수량" min="0" oninput="calculateRoPrice()">
 </div>
 <div class="form-group-receive-insert">
 <p>수주금액</p>
@@ -104,7 +105,7 @@ $(document).ready(function() {
     });
     // 상품명 검색 팝업 열기
     $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        var url = '${pageContext.request.contextPath}/qc/productList';
         openPopup(url);
     });
  	// 사원 검색 팝업 열기
@@ -173,6 +174,23 @@ function validateForm() {
     }
     return true;
 }
+
+function calculateRoPrice() {
+    var roCountValue = parseInt(document.getElementById('roCount').value);
+    var productPriceValue = parseInt(document.getElementById('productPrice').value);
+
+    // 계산 수행 및 결과 표시
+    var roPriceValue = roCountValue * productPriceValue;
+
+    if (!isNaN(roPriceValue)) {
+        document.getElementById('roPrice').value = roPriceValue.toLocaleString() + '원';
+      } else {
+        document.getElementById('roPrice').value = '';
+      }
+}
+
+// 초기 로드 시 자동으로 한 번 실행
+calculateRoPrice();
 </script>
 </body>
 </html>
