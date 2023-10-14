@@ -28,23 +28,23 @@
 
 <form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
 <div class="search-bar">
-<div class="search-b">
-<!-- <div style="margin-bottom: -15px;"></div> -->
-<div class="status-check">
-<div class="search-date3">
-<a>품질<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
-<c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
-</div>
-<div class="search-date3">
-<a>상품<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
-<c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
-</div>
-<div class="search-date3">
-<a>자재<input type="checkbox" id="select4" name="check4" class="list-select" value="취소"
-<c:if test="${not empty pageDTO.check4}">checked</c:if>></a>
-</div>
-</div>
-</div>
+<!-- <div class="search-b"> -->
+<!-- <!-- <div style="margin-bottom: -15px;"></div> -->
+<!-- <div class="status-check"> -->
+<!-- <div class="search-date3"> -->
+<!-- <a>품질<input type="checkbox" id="select2" name="check2" class="list-select" value="진행" -->
+<%-- <c:if test="${not empty pageDTO.check2}">checked</c:if>></a> --%>
+<!-- </div> -->
+<!-- <div class="search-date3"> -->
+<!-- <a>상품<input type="checkbox" id="select3" name="check3" class="list-select" value="완료" -->
+<%-- <c:if test="${not empty pageDTO.check3}">checked</c:if>></a> --%>
+<!-- </div> -->
+<!-- <div class="search-date3"> -->
+<!-- <a>자재<input type="checkbox" id="select4" name="check4" class="list-select" value="취소" -->
+<%-- <c:if test="${not empty pageDTO.check4}">checked</c:if>></a> --%>
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
 
 <div class="search-b">
 <div class="search-select">
@@ -73,59 +73,68 @@
         placeholder="${empty pageDTO.search6 ? '폐기일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
-<div class="search-button">
-<input type="submit" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
+<!-- <div class="search-button"> -->
+<!-- <input type="submit" value="검색" class="btn btn-primary mybutton1"> -->
+<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()"> -->
+<!-- </div> -->
+<div style="display: flex; flex-direction: column; width: 145px;">
+<div class="search-button" style="margin-bottom: 5px;">
+<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
+</div>
+<div class="search-button" style="display: flex; justify-content: space-between;">
+<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/qc/disposedList'" style="width: 48.6%;">
+<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
+</div>
 </div>
 </div><!-- search-bar -->
 </form>
 <br>
 <div class="dis-select-buttons">
 <div style="display: flex;">
-<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
-<!-- <input type="hidden" name="search" value=""> -->
-<%-- <c:choose> --%>
-<%-- <c:when test="${pageDTO.search eq '' or empty pageDTO.search}"> --%>
-<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;"> -->
-<%-- </c:when> --%>
-<%-- <c:otherwise> --%>
-<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;"> -->
-<%-- </c:otherwise> --%>
-<%-- </c:choose> --%>
-<!-- </form> -->
-<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
-<!-- <input type="hidden" name="search" value="DISQ"> -->
-<%-- <c:choose> --%>
-<%-- <c:when test="${'DISQ' eq pageDTO.search}"> --%>
-<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="품질" style="margin-right: 4px;"> -->
-<%-- </c:when> --%>
-<%-- <c:otherwise> --%>
-<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="품질" style="margin-right: 4px;"> -->
-<%-- </c:otherwise> --%>
-<%-- </c:choose> --%>
-<!-- </form> -->
-<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
-<!-- <input type="hidden" name="search" value="DISP"> -->
-<%-- <c:choose> --%>
-<%-- <c:when test="${'DISP' eq pageDTO.search}"> --%>
-<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="상품" style="margin-right: 4px;"> -->
-<%-- </c:when> --%>
-<%-- <c:otherwise> --%>
-<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="상품" style="margin-right: 4px;"> -->
-<%-- </c:otherwise> --%>
-<%-- </c:choose> --%>
-<!-- </form> -->
-<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
-<!-- <input type="hidden" name="search" value="DISM"> -->
-<%-- <c:choose> --%>
-<%-- <c:when test="${'DISM' eq pageDTO.search}"> --%>
-<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="자재"> -->
-<%-- </c:when> --%>
-<%-- <c:otherwise> --%>
-<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="자재"> -->
-<%-- </c:otherwise> --%>
-<%-- </c:choose> --%>
-<!-- </form> -->
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="">
+<c:choose>
+<c:when test="${pageDTO.search eq '' or empty pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="DISQ">
+<c:choose>
+<c:when test="${'DISQ' eq pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="DISP">
+<c:choose>
+<c:when test="${'DISP' eq pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
+<input type="hidden" name="search" value="DISM">
+<c:choose>
+<c:when test="${'DISM' eq pageDTO.search}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="자재">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="자재">
+</c:otherwise>
+</c:choose>
+</form>
 </div>
 <div>
 <input type="button" class="btn btn-secondary mybutton1" value="상품" onclick="toggleTable('hide1', 'hide2')">

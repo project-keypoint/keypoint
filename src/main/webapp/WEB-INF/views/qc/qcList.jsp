@@ -27,24 +27,37 @@
 <div class="contents2">
 
 <form action="${pageContext.request.contextPath}/qc/qcList" method="get">
-<div class="search-bar" style="align-items: normal;">
-
-<!-- <div class="search-b"> -->
-<!-- <div style="margin-bottom: 0px;"></div> -->
-<div class="status-check">
+<div class="search-b" style="margin-bottom: -25px;">
+<div class="status-check" style="background: #E5E5E5; border: none;">
 <div class="search-date3">
-<a style="font-weight: bold;">미등록<input type="checkbox" id="select4" name="check4" class="list-select" value="미등록"
+<a style="font-weight: bold;">　미등록<input type="checkbox" id="select4" name="check4" class="list-select" value="미등록"
 <c:if test="${not empty pageDTO.check4}">checked</c:if>></a>
 <a>대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기"
 <c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
-</div>
-<div class="search-date3">
-<a>　진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
+<a>진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
 <c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
 <a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
 <c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
 </div>
 </div>
+</div>
+<div class="search-bar" style="align-items: normal;">
+<!-- <div class="search-b"> -->
+<!-- <div style="margin-bottom: 0px;"></div> -->
+<!-- <div class="status-check"> -->
+<!-- <div class="search-date3"> -->
+<!-- <a style="font-weight: bold;">미등록<input type="checkbox" id="select4" name="check4" class="list-select" value="미등록" -->
+<%-- <c:if test="${not empty pageDTO.check4}">checked</c:if>></a> --%>
+<!-- <a>대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기" -->
+<%-- <c:if test="${not empty pageDTO.check1}">checked</c:if>></a> --%>
+<!-- </div> -->
+<!-- <div class="search-date3"> -->
+<!-- <a>　진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행" -->
+<%-- <c:if test="${not empty pageDTO.check2}">checked</c:if>></a> --%>
+<!-- <a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료" -->
+<%-- <c:if test="${not empty pageDTO.check3}">checked</c:if>></a> --%>
+<!-- </div> -->
+<!-- </div> -->
 <!-- </div> -->
 
 <div class="search-b">
@@ -68,10 +81,19 @@
         placeholder="${empty pageDTO.search6 ? '납품예정일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
-<div class="search-button">
-<div style="margin-bottom: 15px;"></div>
-<input type="submit" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
+<!-- <div class="search-button"> -->
+<!-- <div style="margin-bottom: 15px;"></div> -->
+<!-- <input type="submit" value="검색" class="btn btn-primary mybutton1"> -->
+<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()"> -->
+<!-- </div> -->
+<div style="display: flex; flex-direction: column; width: 145px; margin-top: -14px;">
+<div class="search-button" style="margin-bottom: 5px;">
+<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
+</div>
+<div class="search-button" style="display: flex; justify-content: space-between;">
+<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/qc/qcList'" style="width: 48.6%;">
+<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
+</div>
 </div>
 </div><!-- search-bar -->
 </form>
@@ -217,8 +239,8 @@
 <!-- 리스트 -->
 
 </div><!-- main -->
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 <!-- contents end -->
 
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->

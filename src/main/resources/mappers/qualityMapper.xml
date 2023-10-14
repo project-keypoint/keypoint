@@ -227,7 +227,7 @@
             and (a.disDate &lt;=#{search6})
         </if>
         </where>
-		order by a.disDate desc
+		order by a.disDate DESC
 		limit #{startRow}, #{pageSize}
 	</select>
 	<select id="getDisposedCount" resultType="java.lang.Integer">

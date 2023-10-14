@@ -172,7 +172,7 @@ public class QualityController {
 	public String disposedList(HttpServletRequest request,Model model) {
 		System.out.println("QualityController qc/disposedList");
 		
-//		String search = request.getParameter("search");
+		String search = request.getParameter("search");
 		String search3 = request.getParameter("search3");
 		String search4 = request.getParameter("search4");
 		String search5 = request.getParameter("search5");
@@ -195,7 +195,7 @@ public class QualityController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
-//		pageDTO.setSearch(search);
+		pageDTO.setSearch(search);
 		pageDTO.setSearch3(search3);
 		pageDTO.setSearch4(search4);
 		pageDTO.setSearch5(search5);
