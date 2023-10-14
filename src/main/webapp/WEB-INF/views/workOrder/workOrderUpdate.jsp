@@ -51,7 +51,7 @@
 </div>
 <div class="form-group-receive">
 <p>지시일자</p>
-<input type="text" id="woDate" name="woDate" class="form-control search-input" value="${workOrderDTO.woDate}">
+<input type="text" id="woDate" name="woDate" class="form-control search-input" value="${workOrderDTO.woDate}" readonly>
 </div>
 <div class="form-group-receive">
 <p>납품예정일</p>
@@ -60,10 +60,8 @@
 <div class="form-group-receive">
 <p>상태</p>
 <select id="woStatus" name="woStatus" class="form-control search-input status">
-    <option value="대기" ${workOrderDTO.woStatus eq '대기' ? 'selected' : ''}>대기</option>
     <option value="진행" ${workOrderDTO.woStatus eq '진행' ? 'selected' : ''}>진행</option>
     <option value="완료" ${workOrderDTO.woStatus eq '완료' ? 'selected' : ''}>완료</option>
-    <option value="취소" ${workOrderDTO.woStatus eq '취소' ? 'selected' : ''}>취소</option>
 </select>
 </div>
 
@@ -111,15 +109,15 @@ $(document).ready(function() {
 	        openPopup(url);
 	    });
     // 업체명 검색 팝업 열기
-    $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-        openPopup(url);
-    });
+//     $("#cusCode, #cusName").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+//         openPopup(url);
+//     });
     // 상품명 검색 팝업 열기
-    $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-        openPopup(url);
-    });
+//     $("#productCode, #productName").click(function() {
+//         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+//         openPopup(url);
+//     });
  	// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
