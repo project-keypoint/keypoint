@@ -2,6 +2,7 @@ package com.keypoint.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -81,10 +82,19 @@ public class EmployeeController {
 	}
 	
 	
+	
+	// -------------------------------------------------------------------
+	
+	
 	// 사원목록
 	@GetMapping("/employeeList")
 	public String employeeList(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController employeelist()");
+		
+		// 검색어 가져오기
+		String search = request.getParameter("search");
+		String search2 = request.getParameter("search2");
+		
 		
 		// 한 화면에 보여줄 사원 수 설정
 		int pageSize = 10;
@@ -102,6 +112,10 @@ public class EmployeeController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		
+		// 검색어 저장
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
 		
 		List<EmployeeDTO> employeeList = employeeService.getEmployeeList(pageDTO);
 		
@@ -137,7 +151,7 @@ public class EmployeeController {
 		
 		model.addAttribute("employeeList", employeeList);
 		model.addAttribute("pageDTO", pageDTO);
-		
+
 		return "employee/employeeList";		
 	} // employeeList
 	

@@ -195,7 +195,7 @@ function openInsert() {
 
 
 
- //검색어
+// 검색어(검색)
 function fun1() {
 	
 	if(document.search.search.value=="") {
@@ -211,7 +211,11 @@ function fun1() {
 	
 		document.search.submit();
 }
-
+ 
+ // 검색어(취소)
+function cancelSearch() {
+    location.href = "${pageContext.request.contextPath}/employee/employeeList";
+}
  
 
 </script>
