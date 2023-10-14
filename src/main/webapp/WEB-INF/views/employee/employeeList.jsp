@@ -24,9 +24,15 @@
 
 <!--  contents start -->
 <div class="main">
- <div class="card shadow" > <!-- 그림자아니야 영역 -->
-  <div class="page-title">사원목록(사원기본정보)</div>
-   <div class="contents2">
+  <div class="card shadow"><!-- 그림자아니야 영역 -->
+    <div class="page-title">사원목록(사원기본정보)
+      <img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;">
+    </div>
+    <div class="contents2">
+ 
+
+
 
 <!-- 검색부분 -->
     <div class="search-bar">
@@ -77,8 +83,7 @@
       <a>휴직<input type="checkbox" id="select2" name="status" class="list-select" value="휴직"></a>
       <a>퇴직<input type="checkbox" id="select3" name="status" class="list-select" value="퇴직"></a>
 	   <!-- 초기화 이미지 추가 -->
-       <img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
-        style="height: 1rem; width: 1rem; cursor: pointer; position: relative; top: 2px;">
+
      </div>
       <a style="text-align: right;">총 사원수 : ${employeeCount}명</a>
     </div>
@@ -200,13 +205,16 @@ function openInsert() {
 }
 
 
- // 검색부분
+
+
+ // 검색부분 - 취소버튼 누르면 초기화되게(화면 바뀌지x)
 function cancelSearch() {
   // 검색 폼 초기화
   document.search_form.search.value = '';
   document.search_form.search2.value = '';
 }
 
+ // 검색부분 - 검색어 조건
 function fun1() {
 	if(document.search_form.search.value=="") {
 		alert("검색 조건을 선택하세요")
@@ -220,17 +228,16 @@ function fun1() {
 		}
 	
 		document.search_form.submit();
-
 }
-
 </script>
- 
 
 
 <script>
+
 // 체크박스부분
+
 $(document).ready(function() {
-  // 페이지 들어오면 아무 체크박스도 선택하지 않고 모든 행을 보이게 설정
+  // 페이지 로딩 시 초기 설정
   $("tr.table-body").show();
 
   $("input[name='status']").change(function() {
@@ -243,13 +250,22 @@ $(document).ready(function() {
     filterTableByStatus($(this).val());
   });
 
-  // 초기화 버튼 처리
+  // 초기화 버튼 클릭 시
   $("#resetFilters").click(function() {
-    // 아무 체크박스도 선택되지 않고 모든 행을 보이게 설정
+    // 모든 체크박스 해제
     $("input[name='status']").prop("checked", false);
     $("tr.table-body").show();
+
+    // 검색 필드 초기화
+    $("#search").val("");
+    $("#search2").val("");
+    
+    // 페이지 다시 로드
+    document.search_form.submit();
+    
   });
 
+  // 체크박스 누르면 해당하는 리스트 나오게
   function filterTableByStatus(status) {
     if (status === '재직') {
       $("tr.table-body[data-status='재직']").show();
@@ -264,8 +280,16 @@ $(document).ready(function() {
   }
 });
 
+
+
 </script>
 
+<!--   초기화 버튼 처리 -->
+<!--   $("#resetFilters").click(function() { -->
+<!--     // 아무 체크박스도 선택되지 않고 모든 행을 보이게 설정 -->
+<!--     $("input[name='status']").prop("checked", false); -->
+<!--     $("tr.table-body").show(); -->
+<!--   }); -->
 
 
 
