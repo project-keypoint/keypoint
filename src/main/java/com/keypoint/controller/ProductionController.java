@@ -109,6 +109,12 @@ public class ProductionController {
 	public String productionInsertPro(ProductionDTO productionDTO) {
 		System.out.println("ProductionController workOrder/workOrderInsertPro");
 		System.out.println(productionDTO);
+		
+		WorkOrderDTO workOrderDTO = new WorkOrderDTO();
+		workOrderDTO.setWoCode(productionDTO.getWoCode());
+		workOrderDTO.setWoStatus("완료");
+		workOrderService.updateWorkOrderStatus(workOrderDTO);
+		
 		productionService.productionInsertPro(productionDTO);
 		
 		if(productionDTO != null) {

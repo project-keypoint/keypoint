@@ -189,6 +189,11 @@ public class WorkOrderDAO {
 		System.out.println("WorkOrderDAO countWorkList()");
 		return sqlSession.selectOne(namespace+".countWorkList", search);
 	}
+
+	public void updateWorkOrderStatus(WorkOrderDTO workOrderDTO) {
+		System.out.println("WorkOrderDAO updateWorkOrderStatus()");
+		sqlSession.update(namespace+".updateWorkOrderStatus", workOrderDTO);
+	}// updateWorkOrderStatus
 	
 	
 	

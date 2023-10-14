@@ -146,6 +146,10 @@ public class WorkOrderService {
 		System.out.println("WorkOrderService countWorkList()");
 		return workOrderDAO.countWorkList(search);
 	}
+
+	public void updateWorkOrderStatus(WorkOrderDTO workOrderDTO) {
+		workOrderDAO.updateWorkOrderStatus(workOrderDTO);
+	}
 	
 	
 	
