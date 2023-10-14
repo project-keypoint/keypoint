@@ -62,11 +62,30 @@
 	    FROM notice
 	    <where>
 	    noticeStatus != '삭제'
-	    <if test="searchType != null and searchType ! = ''">
-	    AND (noticeSubject = #{searchType})
-	    </if>
-	    </where>
+	    <if test="searchType != null and searchKeyword != null">
+		<choose>
+		<when test="searchType == 'all'">
+			AND noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>
+		<when test="searchType == 'sales'"> 
+			AND noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>
+		<when test="searchType == 'production'">
+			AND noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>
+		<when test="searchType == 'materials'"> 
+			AND noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>
+		<when test="searchType == 'personnel'"> 
+			AND noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>
+		</choose>
+		</if>
+		</where>
 	</select>
+	  
+	
+	  
 	  
 	  
 	  

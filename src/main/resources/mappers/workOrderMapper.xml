@@ -58,7 +58,34 @@
 		receivedOrder d on a.roCode = d.roCode
 		left join employees e on a.empId
 		= e.empId
-		where a.woStatus != '삭제'
+		<where>
+		a.woStatus != '삭제'
+		
+		<choose>
+        <when test="(check1 == null or check1 == '') and 
+                    (check2 == null or check2== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check1 != null and check1 != ''">
+                    OR (a.woStatus = #{check1})
+                </if>
+                <if test="check2 != null and check2 != ''">
+                    OR (a.woStatus = #{check2})
+                </if>               
+            </trim>    
+        </otherwise>    
+		</choose>  
+		<if test="search1 != null and search1 != ''">
+			and (a.productCode = #{search1})
+		</if>    	
+    	<if test="search3 != null and search3 != ''">
+			and (a.woDate &gt;= #{search3}) 
+    	</if>
+    	<if test="search4 != null and search4 != ''">
+			and (a.woDate &lt;= #{search4}) 
+    	</if>
+		</where>
 		order by a.woCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -66,7 +93,34 @@
 	<select id="getWorkOrderCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM workOrder
-		WHERE woStatus != '삭제'
+		<where>
+		woStatus != '삭제'
+		<choose>
+        <when test="(check1 == null or check1 == '') and 
+                    (check2 == null or check2== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check1 != null and check1 != ''">
+                    OR (woStatus = #{check1})
+                </if>
+                <if test="check2 != null and check2 != ''">
+                    OR (woStatus = #{check2})
+                </if>               
+            </trim>    
+        </otherwise>    
+		</choose>  
+		<if test="search1 != null and search1 != ''">
+			and (productCode = #{search1})
+		</if>    	
+    	<if test="search3 != null and search3 != ''">
+			and (woDate &gt;= #{search3}) 
+    	</if>
+    	<if test="search4 != null and search4 != ''">
+			and (woDate &lt;= #{search4}) 
+    	</if>
+		</where>
+		
 	</select>
 	
 

@@ -112,7 +112,7 @@ public class NoticeController {
 		
 //		페이징
 //		게시판 전체 글 개수 가져오기
-		int count = noticeService.getNoticeCount();
+		int count = noticeService.getNoticeCount(pageDTO);
 		
 //		한 화면에 보여줄 페이지 개수 설정
 		int pageBlock = 10;
@@ -139,7 +139,7 @@ public class NoticeController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
-		
+		model.addAttribute("noticeCount", count);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("insertCount", insertCount);

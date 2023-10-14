@@ -40,6 +40,14 @@ public class ProductionController {
 	public String productionList(HttpServletRequest request, Model model) {
 		System.out.println("ProductionController production/productionList");
 		
+		String search1 = request.getParameter("search1");
+		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
+		String search4 = request.getParameter("search4");
+		
+		
+		
+		
 		int pageSize = 10; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
@@ -52,12 +60,17 @@ public class ProductionController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setSearch1(search1);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+		pageDTO.setSearch4(search4);
+		
 		
 		List<ProductionDTO> productionList = productionService.getProductionList(pageDTO);
-		List<LineDTO> lineList = lineService.getLineList(pageDTO);
+//		List<LineDTO> lineList = lineService.getLineList(pageDTO);
 	//		System.out.println(productionList.get(0).getEmpName());
 		
-		int count = productionService.getProductionCount();	
+		int count = productionService.getProductionCount(pageDTO);	
 		
 		int pageBlock = 10; // 한화면에 보여줄 페이지 개수 설정
 		
@@ -76,7 +89,7 @@ public class ProductionController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
-		model.addAttribute("lineList", lineList);
+//		model.addAttribute("lineList", lineList);
 		model.addAttribute("productionList", productionList);
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println(productionList);

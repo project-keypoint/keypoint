@@ -86,7 +86,7 @@ public class EmployeeController {
 	// -------------------------------------------------------------------
 	
 	
-	// 사원목록
+	// 사원목록(+검색, 페이징)
 	@GetMapping("/employeeList")
 	public String employeeList(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController employeelist()");
@@ -121,7 +121,7 @@ public class EmployeeController {
 		
 		// 페이징처리
 		// 전체 사원 수 가져오기
-		int count = employeeService.getEmployeeCount();
+		int count = employeeService.getEmployeeCount(pageDTO);
 		
 		// 전체 사원 수 employeeCount에 담기
 		model.addAttribute("employeeCount", count);

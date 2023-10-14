@@ -55,10 +55,10 @@ public class NoticeDAO {
 
 	
 //	전체 글 수 
-	public int getNoticeCount() {
+	public int getNoticeCount(PageDTO pageDTO) {
 		System.out.println("NoticeDAO getNoticeCount()");
 
-		return sqlSession.selectOne(nameSpace+".getNoticeCount");
+		return sqlSession.selectOne(nameSpace+".getNoticeCount", pageDTO);
 	}
 
 

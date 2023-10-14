@@ -37,6 +37,16 @@ public class WorkOrderController {
 	public String workOrderList(HttpServletRequest request, Model model) {
 		System.out.println("WorkOrderController workOrder/workOrderList");
 		
+		String search1 = request.getParameter("search1");
+		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
+		String search4 = request.getParameter("search4");
+		
+		String check1 = request.getParameter("check1");
+		String check2 = request.getParameter("check2");
+		
+		
+		
 		int pageSize = 10; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
@@ -49,12 +59,19 @@ public class WorkOrderController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setSearch1(search1);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+		pageDTO.setSearch4(search4);		
+		pageDTO.setCheck1(check1);
+		pageDTO.setCheck2(check2);
+		
 		
 		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList(pageDTO);
-		List<LineDTO> lineList = lineService.getLineList(pageDTO);
+//		List<LineDTO> lineList = lineService.getLineList(pageDTO);
 //		System.out.println(workOrderList.get(0).getEmpName());
 		
-		int count = workOrderService.getWorkOrderCount();	
+		int count = workOrderService.getWorkOrderCount(pageDTO);	
 		
 		int pageBlock = 10; // 한화면에 보여줄 페이지 개수 설정
 		
@@ -73,9 +90,7 @@ public class WorkOrderController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
-		
-		
-		model.addAttribute("lineList", lineList);
+//		model.addAttribute("lineList", lineList);
 		model.addAttribute("workOrderList", workOrderList);
 		model.addAttribute("pageDTO", pageDTO);
 		

@@ -23,9 +23,9 @@ public class ProductionDAO {
 		return sqlSession.selectList(namespace+".getProductionList", pageDTO);
 	}
 	
-	public int getProductionCount() {
+	public int getProductionCount(PageDTO pageDTO) {
 		System.out.println("ProductionDAO getProductionCount()");
-		return sqlSession.selectOne(namespace+".getProductionCount");
+		return sqlSession.selectOne(namespace+".getProductionCount", pageDTO);
 	}
 	
 	

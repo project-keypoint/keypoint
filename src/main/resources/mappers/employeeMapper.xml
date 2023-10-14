@@ -44,10 +44,20 @@
 </select>
 	
 
-	<select id="getEmployeeCount" resultType="java.lang.Integer">
-		select count(*) 
-		from employees
-	</select>
+<select id="getEmployeeCount" resultType="java.lang.Integer">
+select count(*) 
+from employees
+<where>
+<if test="search != null and search2 != null">
+<choose>
+<when test="search == 'empName'"> and empName like CONCAT('%', #{search2}, '%') </when>
+<when test="search == 'empId'"> and empId like CONCAT('%', #{search2}, '%') </when>
+<when test="search == 'empTel'"> and empTel like CONCAT('%', #{search2}, '%') </when>
+<when test="search == 'departmentName'"> and departmentName like CONCAT('%', #{search2}, '%') </when>
+</choose>
+</if>
+</where>
+</select>
 
 <!-- 사원등록 -->
 	<insert id="insertEmployee">

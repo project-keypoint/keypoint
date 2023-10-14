@@ -35,9 +35,9 @@ public class ProductionService {
 		return productionDAO.getProductionList(pageDTO);
 	}
 		
-	public int getProductionCount() {
+	public int getProductionCount(PageDTO pageDTO) {
 		System.out.println("ProductionService getProductionCount()");
-		return productionDAO.getProductionCount();
+		return productionDAO.getProductionCount(pageDTO);
 	}
 	
 	

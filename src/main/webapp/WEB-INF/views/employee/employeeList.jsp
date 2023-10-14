@@ -29,12 +29,16 @@
 <div class="contents2">
 
 
+
+
+
 <!-- 검색부분 -->
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
 
-<form name="search" method="get" action="${pageContext.request.contextPath}/employee/employeeList" id="selectBox" name="selectBox2" onsubmit="return fun1()">
+<form name="search_form" method="get" action="${pageContext.request.contextPath}/employee/employeeList" 
+ id="selectBox" name="selectBox2" onsubmit="return fun1()">
                        
  <div style="float: left;">
  <select id="search" name="search" class="form-control search-input">
@@ -46,9 +50,11 @@
  </select>
 
 </div>
- <div style="float: left;"><span id="text_search"><input class="form-control search-input" type="text" name="search2"></span></div>                     
- <div style="float: left; magin-top: 3px;"><span id="icon_search">
- </span></div>
+ <div style="float: left;">
+ 	<span id="text_search"><input class="form-control search-input" type="text" name="search2"></span>
+ </div>                     
+ <div style="float: left; magin-top: 3px;">
+ <span id="icon_search"></span></div>
 	                    
  </form>
   
@@ -123,7 +129,8 @@
 <div class="page-buttons">
 
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+	<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=
+	${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">&lt;</a>
 </c:if>
 
 <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
@@ -132,13 +139,15 @@
 			<a href="#" class="page-button page-button-active">${i}</a>
 		</c:when>
 		<c:otherwise>
-			<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+			<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=
+			${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">${i}</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-button">&gt;</a>
+	<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=
+	${pageDTO.startPage + pageDTO.pageBlock}&search2=${pageDTO.search2}" class="page-button">&gt;</a>
 </c:if>
 
 </div><!-- page-button -->
@@ -198,18 +207,18 @@ function openInsert() {
 // 검색어(검색)
 function fun1() {
 	
-	if(document.search.search.value=="") {
+	if(document.search_form.search.value=="") {
 		alert("검색 조건을 선택하세요")
-		document.search.search.focus();
+		document.search_form.search.focus();
 		return false;
 	}
-	if(document.search.search2.value==0) {
+	if(document.search_form.search2.value==0) {
 		alert("검색어를 입력하세요");
-		document.search.search2.focus();
+		document.search_form.search2.focus();
 		return false;
 		}
 	
-		document.search.submit();
+		document.search_form.submit();
 }
  
  // 검색어(취소)

@@ -74,10 +74,10 @@ public class NoticeService {
 
 
 //	전체 글 수 
-	public int getNoticeCount() {
+	public int getNoticeCount(PageDTO pageDTO) {
 		System.out.println("NoticeService getNoticeCount()");
 
-		return noticeDAO.getNoticeCount();
+		return noticeDAO.getNoticeCount(pageDTO);
 	}
 
 

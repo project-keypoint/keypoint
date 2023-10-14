@@ -45,77 +45,48 @@
 			<!-- 그림자아니야 영역 -->
 			<div class="page-title">실적관리</div>
 			<div class="contents2">
+			<form action="${pageContext.request.contextPath}/production/productionList" method="get">	
+			
+			
+			
+			
 				<div class="search-bar">
 					<div class="search-b">
-
-						<div class="form-group-workOrder">
-							<p>
-								라인 <select id="LineCode" name="LineCode"
-									class="custom-select form-control lineCode">
-									<!-- 						<option value="" selected>전체</option> -->
-									<!-- 						<option value="라인1">라인1</option> -->
-									<!--   						<option value="라인2">라인2</option> -->
-									<!--  						<option value="라인3">라인3</option> -->
-									<!--   						<option value="라인4">라인4</option> -->
-									<!--  						<option value="라인5">라인5</option> -->
-									<!--  						<option value="라인6">라인6</option> -->
-									<c:forEach var="LineDTO" items="${lineList}">
-										<option value="${LineDTO.lineCode}">${LineDTO.lineCode}</option>
-									</c:forEach>
-								</select>
-							</p>
+						<div class="search-select">				 		
+							<p>상품명</p> 
+						<input type="text" id="productCode" name="search1" class="form-control search-input readonly-color"
+      					 placeholder="${empty pageDTO.search1 ? '상품코드' : ''}" value="${pageDTO.search1}" readonly>
+						<input type="text" id="productName" name="search2" class="form-control search-input readonly-color"
+     					 placeholder="${empty pageDTO.search2 ? '상품명(클릭)' : ''}" value="${pageDTO.search2}" readonly>
 						</div>
-
-						<!-- <div class="search-select"> -->
-						<!-- <p>업체명</p> <input type="text" id="cusCode" class="form-control search-input" placeholder="업체검색 "> -->
-						<!-- </div> -->
-						<div class="search-select">
-							<p>상품명</p>
-							<input type="text" id="productCode"
-								class="form-control search-input" placeholder="상품코드 "> <input
-								type="text" id="productName" class="form-control search-input"
-								placeholder="상품명 ">
 						</div>
-					</div>
-
-					<div class="search-b">
+						
+						
+						<div class="search-b">
 						<div class="search-date">
-							<p>지시일자</p>
-							<input type="text" id="roDate1" class="form-control search-input"
-								placeholder="지시일자"> ~<input type="text" id="roDate2"
-								class="form-control search-input" placeholder="지시일자">
+						<p>실적일자</p>
+						<input type="text" id="poDate1" name="search3" class="form-control search-input readonly-color" 
+      					 placeholder="${empty pageDTO.search3 ? '실적일자' : ''}" value="${pageDTO.search3}" readonly>
+						~<input type="text" id="poDate2" name="search4" class="form-control search-input readonly-color" 
+       					 placeholder="${empty pageDTO.search4 ? '실적일자' : ''}" value="${pageDTO.search4}" readonly>
 						</div>
-						<div class="search-date">
-							<p>실적일자</p>
-							<input type="text" id="poDate1"
-								class="form-control search-input" placeholder="연도-월-일" readonly>
-							~<input type="text" id="poDate2"
-								class="form-control search-input" placeholder="연도-월-일" readonly>
 						</div>
-
-					</div>
-					<div class="search-button">
-						<input type="button" value="검색" class="btn btn-primary mybutton1">
-						<input type="button" value="취소"
-							class="btn btn-secondary mybutton1">
-					</div>
+						
+						
+						<div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;">
+				<div class="search-button" style="margin-bottom: 5px;">
+				<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
 				</div>
-				<!-- search-bar -->
-				<br>
-
-				<div class="select-status">
-					<a>대기<input type="checkbox" id="select1" name="select1"
-						class="list-select" checked></a> <a>진행<input
-						type="checkbox" id="select2" name="select2" class="list-select"
-						checked></a> <a>완료<input type="checkbox" id="select3"
-						name="select3" class="list-select" checked></a> <a>취소<input
-						type="checkbox" id="select4" name="select4" class="list-select"></a>
-					<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
-					<div>
+				<div class="search-button" style="display: flex; justify-content: space-between;">
+				<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/production/productionList'" style="width: 48.6%;">
+				<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
+				</div>
+				</div>
+				</div><!-- search-bar -->
+				
+				</form>
 						<!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
 						<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
-					</div>
-				</div>
 
 				<div class="page-title">생산실적등록</div>
 
@@ -209,111 +180,30 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script type="text/javascript">
+		//팝업 창을 열어주는 함수
+		function openPopup(url) {
+			var width = 500;
+			var height = 500;
+			var left = (screen.width - width) / 2;
+			var top = (screen.height - height) / 2;
+			var popupWindow = window.open(url, '_blank', "width=" + width
+					+ ", height=" + height + ", left=" + left + ", top=" + top);
+			popupWindow.focus();
+		}
 		$(document)
 				.ready(
-						function() {
-							$("#cusCode")
+						function() {							
+							// 상품명 검색 팝업 열기
+							$("#productCode, #productName")
 									.click(
 											function() {
-												// 업체코드 입력란의 값을 가져옵니다.
-												var cusCode = $(
-														"input[name='cusCode']")
-														.val();
-												// 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-												// 예: 업체코드를 이용하여 검색하고 결과를 표시합니다.
-
-												$(document)
-														.ready(
-																function() {
-																	$(
-																			"#cusCode")
-																			.click(
-																					function() {
-																						// 팝업 창 크기 및 위치 설정
-																						var width = 400;
-																						var height = 400;
-																						var left = (screen.width - width) / 2;
-																						var top = (screen.height - height) / 2;
-																						// 팝업 창 열기
-																						var url = '${pageContext.request.contextPath}/receive/empty'; // 업체 검색 페이지의 URL.
-																						var popupWindow = window
-																								.open(
-																										url,
-																										'_blank',
-																										"width="
-																												+ width
-																												+ ", height="
-																												+ height
-																												+ ", left="
-																												+ left
-																												+ ", top="
-																												+ top);
-																						// 팝업 창 포커스
-																						popupWindow
-																								.focus();
-																					});
-																});
-											});
-						});
-		$(document)
-				.ready(
-						function() {
-							$("#productCode")
-									.click(
-											function() {
-												// 상품코드 입력란의 값을 가져옵니다.
-												var productCode = $(
-														"input[name='productCode']")
-														.val();
-												// 여기에서 검색 기능을 구현하고, 필요한 로직을 수행합니다.
-												// 예: 상품코드를 이용하여 검색하고 결과를 표시합니다.
-
-												$(document)
-														.ready(
-																function() {
-																	$(
-																			"#productCode")
-																			.click(
-																					function() {
-																						// 팝업 창 크기 및 위치 설정
-																						var width = 500;
-																						var height = 500;
-																						var left = (screen.width - width) / 2;
-																						var top = (screen.height - height) / 2;
-																						// 팝업 창 열기
-																						var url = '${pageContext.request.contextPath}/workOrder/workProdList'; // 상품 검색 페이지의 URL.
-																						var popupWindow = window
-																								.open(
-																										url,
-																										'_blank',
-																										"width="
-																												+ width
-																												+ ", height="
-																												+ height
-																												+ ", left="
-																												+ left
-																												+ ", top="
-																												+ top);
-																						// 팝업 창 포커스
-																						popupWindow
-																								.focus();
-																					});
-																});
+												var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+												openPopup(url);
 											});
 						});
 		
-		
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
 
 		$(function() {
-			$("#roDate1").datepicker({
-				dateFormat : "yy-mm-dd"
-			});
-			$("#roDate2").datepicker({
-				dateFormat : "yy-mm-dd"
-			});
 			$("#poDate1").datepicker({
 				dateFormat : "yy-mm-dd"
 			});
@@ -365,60 +255,31 @@
 		    var windowTop = (screen.height - windowHeight) / 2;
 		    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 		}
+		
+		
+		//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+		function resetSearch() {
+			
+		    $("#productCode").val("");
+		    $("#productName").val("");		   
+		    $("#poDate1").val("");
+		    $("#poDate2").val("");
+
+		   
+		    $("#productCode").attr("placeholder", "상품코드");
+		    $("#productName").attr("placeholder", "상품명(클릭)");
+		    $("#poDate1").attr("placeholder", "지시일자");
+		    $("#poDate2").attr("placeholder", "지시일자");
+		   
+		    
+		   
+		}
+		
+		
 		</script>
 	
 
-<!-- 	<br> -->
-<!-- 	<div class="center"> -->
-<!-- 		<div id="pagination"> -->
 
-<!-- 			<!-- 1페이지 이전 --> 
-<%-- 			<c:if test="${pageDTO.currentPage > 1}"> --%>
-<!-- 				<a -->
-<%-- 					href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.currentPage-1}"><</a> --%>
-<%-- 			</c:if> --%>
-
-<!-- 			<!-- 10페이지 이전 --> 
-<%-- 			<c:if test="${pageDTO.startPage > pageDTO.pageBlock}"> --%>
-<!-- 				<a -->
-<%-- 					href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a> --%>
-<%-- 			</c:if> --%>
-
-<%-- 			<c:forEach var="i" begin="${pageDTO.startPage }" --%>
-<%-- 				end="${pageDTO.endPage }" step="1"> --%>
-<!-- 				<a -->
-<%-- 					href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${i}" --%>
-<%-- 					<c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> --%>
-<%-- 			</c:forEach> --%>
-
-<!-- 			<!-- 1페이지 다음 --> 
-<%-- 			<c:if test="${pageDTO.currentPage < pageDTO.pageCount}"> --%>
-<!-- 				<a -->
-<%-- 					href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.currentPage+1}">></a> --%>
-<%-- 			</c:if> --%>
-
-<!-- 			<!-- 10페이지 다음 --> 
-<%-- 			<c:if test="${pageDTO.endPage < pageDTO.pageCount}"> --%>
-<!-- 				<a -->
-<%-- 					href="${pageContext.request.contextPath }/workOrder/workProdList?productCode=${search.productCode}&itemName=${search.productName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a> --%>
-<%-- 			</c:if> --%>
-
-<!-- 		</div> -->
-<!-- 	</div> -->
-
-
-
-
-	<!-- 	<br><br><br> -->
-	<!-- 	<div id="f">생산실적</div> -->
-
-
-	<!--     <div id="PerformList_ajax"> -->
-	<!-- 	<table border="1"> -->
-	<!-- 	<tr id="th"><th>품번</th><th>품명</th><th>실적일</th><th>양불여부</th><th>실적수량</th><th>단위</th><th>불량사유</th></tr> -->
-	<!-- 	<tr id="con"><td colspan="7"> 실적 등록할 작업 지시를 클릭해주세요 </td></tr> -->
-	<!--     </table> -->
-	<!--     </div> -->
 
 
 </body>
