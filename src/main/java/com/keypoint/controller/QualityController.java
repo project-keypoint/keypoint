@@ -227,6 +227,8 @@ public class QualityController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
+		System.out.println("응"+pageDTO);
+		
 		model.addAttribute("disposedList", disposedList);
 		model.addAttribute("disposedSum", disposedSum);
 		model.addAttribute("disposedSumMat", disposedSumMat);

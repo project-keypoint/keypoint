@@ -87,6 +87,7 @@
 </div>
 </div>
 </div><!-- search-bar -->
+<input type="hidden" name="search" value="${pageDTO.search}">
 </form>
 <br>
 <div class="dis-select-buttons">
@@ -183,20 +184,20 @@
 </div>
 <div id="page_control" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&lt;</a>
+        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&lt;</a>
     </c:if>
     <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
         <c:choose>
             <c:when test="${i eq pageDTO.pageNum}">
-                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button page-button-active">${i}</a>
+                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button page-button-active">${i}</a>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">${i}</a>
+                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
     <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&gt;</a>
+        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&gt;</a>
     </c:if>
 </div>
 </div>
