@@ -26,22 +26,10 @@ public class ReceiveDAO {
 		sqlSession.insert(namespace+".insertReceive",receiveDTO);
 	}// insertReceive() [수주등록]
 	
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-//	public List<ReceiveDTO> getReceiveList() {
-//		System.out.println("ReceiveDAO getReceiveList()");
-//		return sqlSession.selectList(namespace+".getReceiveList");
-//	}// getReceiveListTest() [수주+출하목록(수주)]
-	
 	public List<ReceiveDTO> getReceiveList(PageDTO pageDTO) {
 		System.out.println("ReceiveDAO getReceiveList()");
 		return sqlSession.selectList(namespace+".getReceiveList", pageDTO);
 	}// getReceiveListTest() [수주+출하목록(수주)]
-	
-//	public List<ReceiveDTO> getShipmentList() {
-//		System.out.println("ReceiveDAO getShipmentList()");
-//		return sqlSession.selectList(namespace+".getShipmentList");
-//	}// getReceiveListTest() [수주+출하목록(출하)]
 	
 	public List<ReceiveDTO> getShipmentList(PageDTO pageDTO1) {
 		System.out.println("ReceiveDAO getShipmentList()");
@@ -50,12 +38,12 @@ public class ReceiveDAO {
 	
 	public int getReceiveCount(PageDTO pageDTO) {
 		System.out.println("ReceiveDAO getReceiveCount()");
-		return sqlSession.selectOne(namespace+".getReceiveCount");
+		return sqlSession.selectOne(namespace+".getReceiveCount", pageDTO);
 	}
 	
 	public int getShipmentCount(PageDTO pageDTO1) {
 		System.out.println("ReceiveDAO getShipmentCount()");
-		return sqlSession.selectOne(namespace+".getShipmentCount");
+		return sqlSession.selectOne(namespace+".getShipmentCount", pageDTO1);
 	}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////

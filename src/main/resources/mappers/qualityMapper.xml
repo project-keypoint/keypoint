@@ -15,19 +15,86 @@
 		left join receivedOrder d on d.roCode = c.roCode
 		left join product e on b.productCode = e.productCode
 		left join employees f on a.qcEmpId = f.empId
-		where (a.qcStatus != '삭제' OR a.qcStatus IS NULL)
+		<where>
+		(a.qcStatus != '삭제' OR a.qcStatus IS NULL)
+		<choose>
+        <when test="(check1 == null or check1 == '') and 
+                    (check2 == null or check2 == '') and
+                    (check3 == null or check3 == '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check1 != null and check1 != ''">
+                    OR (a.qcStatus = #{check1})
+                </if>
+                <if test="check2 != null and check2 != ''">
+                    OR (a.qcStatus = #{check2})
+                </if>
+                <if test="check3 != null and check3 != ''">
+                    OR (a.qcStatus = #{check3})
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose>
+		<if test="check4 != null and check4 != ''">
+			and (a.qcCode is null)
+    	</if>
+    	<if test="search3 != null and search3 != ''">
+			and (b.productCode = #{search3})
+    	</if>
+        <if test="search5 != null and search5 != ''">
+            and (d.shipSdate &gt;= #{search5})
+        </if>
+        <if test="search6!=null and search6 != ''">
+            and (d.shipSdate &lt;=#{search6})
+        </if>
+		</where>
 		order by qcCode asc
 		limit #{startRow}, #{pageSize}
 	</select>
 	
 	<select id="getQcCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) as row_count
+		SELECT COUNT(*)
 		FROM production b
 		LEFT JOIN qualityControl a ON b.poCode = a.poCode
 		LEFT JOIN workOrder c ON b.woCode = c.woCode
 		LEFT JOIN receivedOrder d ON d.roCode = c.roCode
 		LEFT JOIN product e ON b.productCode = e.productCode
-		LEFT JOIN employees f ON a.qcEmpId = f.empId;
+		LEFT JOIN employees f ON a.qcEmpId = f.empId
+		<where>
+		(a.qcStatus != '삭제' OR a.qcStatus IS NULL)
+		<choose>
+        <when test="(check1 == null or check1 == '') and 
+                    (check2 == null or check2 == '') and
+                    (check3 == null or check3 == '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check1 != null and check1 != ''">
+                    OR (a.qcStatus = #{check1})
+                </if>
+                <if test="check2 != null and check2 != ''">
+                    OR (a.qcStatus = #{check2})
+                </if>
+                <if test="check3 != null and check3 != ''">
+                    OR (a.qcStatus = #{check3})
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose> 
+		<if test="check4 != null and check4 != ''">
+			and (a.qcCode is null)
+    	</if>
+    	<if test="search3 != null and search3 != ''">
+			and (b.productCode = #{search3})
+    	</if>
+        <if test="search5 != null and search5 != ''">
+            and (d.shipSdate &gt;= #{search5})
+        </if>
+        <if test="search6!=null and search6 != ''">
+            and (d.shipSdate &lt;=#{search6})
+        </if>
+		</where>
 	</select>
 	
 	
@@ -118,18 +185,96 @@
 		left join product b on a.disItemCode = b.productCode
 		left join material c on a.disItemCode = c.materialCode
 		left join employees d on a.disEmpId = d.empId
-		<if test="search != null">
-			where a.disCode like CONCAT(#{search},'%') 
-		</if>
+		<where>
+		<choose>
+        <when test="(check2 == null or check2 == '') and
+                    (check3 == null or check3 == '') and
+                    (check4 == null or check4== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check2 != null and check2 != ''">
+                    OR (a.disCode like 'DISQ%')
+                </if>
+                <if test="check3 != null and check3 != ''">
+                    OR (a.disCode like 'DISP%')
+                </if>
+                <if test="check4 != null and check4 != ''">
+                    OR (a.disCode like 'DISM%')
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose>
+		<choose>
+        <when test="(search3 == null or search3 == '') and
+                    (search7 == null or search7== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="search3 != null and search3 != ''">
+                    OR (a.disItemCode = #{search3})
+                </if>
+                <if test="search7 != null and search7 != ''">
+                    OR (a.disItemCode = #{search7})
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose> 
+        <if test="search5 != null and search5 != ''">
+            and (a.disDate &gt;= #{search5})
+        </if>
+        <if test="search6!=null and search6 != ''">
+            and (a.disDate &lt;=#{search6})
+        </if>
+        </where>
 		order by a.disDate desc
 		limit #{startRow}, #{pageSize}
 	</select>
 	<select id="getDisposedCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM disposedItems
-		<if test="search != null">
-			where disCode like CONCAT(#{search},'%')
-		</if>
+		<where>
+		<choose>
+        <when test="(check2 == null or check2 == '') and
+                    (check3 == null or check3 == '') and
+                    (check4 == null or check4== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="check2 != null and check2 != ''">
+                    OR (disCode like 'DISQ%')
+                </if>
+                <if test="check3 != null and check3 != ''">
+                    OR (disCode like 'DISP%')
+                </if>
+                <if test="check4 != null and check4 != ''">
+                    OR (disCode like 'DISM%')
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose>
+		<choose>
+        <when test="(search3 == null or search3 == '') and
+                    (search7 == null or search7== '')">
+        </when>
+        <otherwise>
+            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+                <if test="search3 != null and search3 != ''">
+                    OR (disItemCode = #{search3})
+                </if>
+                <if test="search7 != null and search7 != ''">
+                    OR (disItemCode = #{search7})
+                </if>
+            </trim>    
+        </otherwise>    
+		</choose> 
+        <if test="search5 != null and search5 != ''">
+            and (disDate &gt;= #{search5})
+        </if>
+        <if test="search6!=null and search6 != ''">
+            and (disDate &lt;=#{search6})
+        </if>
+        </where>
 	</select>
 	
 	<select id="getDisposedSum" resultType="com.keypoint.dto.QualityDTO">

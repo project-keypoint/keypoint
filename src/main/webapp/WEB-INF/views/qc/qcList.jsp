@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>품질검사대상</title>
+<title>품질검사</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
@@ -26,33 +26,62 @@
 <div class="page-title">품질검사목록</div>
 <div class="contents2">
 
-<div class="search-bar">
+<form action="${pageContext.request.contextPath}/qc/qcList" method="get">
+<div class="search-bar" style="align-items: normal;">
+
+<!-- <div class="search-b"> -->
+<!-- <div style="margin-bottom: 0px;"></div> -->
+<div class="status-check">
+<div class="search-date3">
+<a style="font-weight: bold;">미등록<input type="checkbox" id="select4" name="check4" class="list-select" value="미등록"
+<c:if test="${not empty pageDTO.check4}">checked</c:if>></a>
+<a>대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기"
+<c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
+</div>
+<div class="search-date3">
+<a>　진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
+<c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
+<a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
+<c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
+</div>
+</div>
+<!-- </div> -->
+
 <div class="search-b">
+<div style="margin-bottom: 8px;"></div>
 <div class="search-select">
 <p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input readonly-color" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input readonly-color" placeholder="상품명(클릭)" readonly>
+<input type="text" id="productCode" name="search3" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search3 ? '상품코드' : ''}" value="${pageDTO.search3}" readonly>
+<input type="text" id="productName" name="search4" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search4 ? '상품명(클릭)' : ''}" value="${pageDTO.search4}" readonly>
 </div>
 </div>
 
 <div class="search-b">
-<div class="search-date">
-<p>납품예정일</p> <input type="text" id="shipSdate1" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
-~<input type="text" id="shipSdate2" class="form-control search-input readonly-color" placeholder="납품예정일" readonly>
+<div style="margin-bottom: 8px;"></div>
+<div class="search-date2">
+<p>납품예정일</p>
+<input type="text" id="shipSdate1" name="search5" class="form-control search-input readonly-color" 
+       placeholder="${empty pageDTO.search5 ? '납품예정일' : ''}" value="${pageDTO.search5}" readonly>
+~<input type="text" id="shipSdate2" name="search6" class="form-control search-input readonly-color" 
+        placeholder="${empty pageDTO.search6 ? '납품예정일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<div style="margin-bottom: 15px;"></div>
+<input type="submit" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 </div>
 </div><!-- search-bar -->
+</form>
 <br>
-<div class="select-status">
-<a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
-<a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a>
-<a>완료<input type="checkbox" id="select3" name="select3" class="list-select"></a>
-<a>( 체크박스 사용여부 보류중 )</a>
-<div>
+<!-- <div class="select-status"> -->
+<!-- <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a> -->
+<!-- <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a> -->
+<!-- <a>완료<input type="checkbox" id="select3" name="select3" class="list-select"></a> -->
+<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
+<!-- <div> -->
 <div>
 <table class="table-list">
 <tr class="table-head">
@@ -114,16 +143,8 @@
     </c:choose>
     </td>
     <td>${qualityDTO.qcPass}
-<%--     <c:choose> --%>
-<%--         <c:when test="${qualityDTO.qcPass eq 0}">-</c:when> --%>
-<%--         <c:otherwise>${qualityDTO.qcPass}</c:otherwise> --%>
-<%--     </c:choose> --%>
     </td>
     <td>${qualityDTO.qcDefect}
-<%--     <c:choose> --%>
-<%--         <c:when test="${qualityDTO.qcDefect eq 0}">-</c:when> --%>
-<%--         <c:otherwise>${qualityDTO.qcDefect}</c:otherwise> --%>
-<%--     </c:choose> --%>
     </td>
     <td>
     <c:choose>
@@ -133,7 +154,7 @@
     </td>
     <td>
 	<c:choose>
-        <c:when test="${empty qualityDTO.qcStatus}">대기</c:when>
+        <c:when test="${empty qualityDTO.qcStatus}">-</c:when>
         <c:otherwise>${qualityDTO.qcStatus}</c:otherwise>
     </c:choose>
 	</td>
@@ -172,20 +193,20 @@
 
 <div id="page_control" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-        <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+        <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}" class="page-button">&lt;</a>
     </c:if>
     <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
         <c:choose>
             <c:when test="${i eq pageDTO.pageNum}">
-                <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${i}&search=${pageDTO.search}" class="page-button page-button-active">${i}</a>
+                <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&search3=${pageDTO.search3}&check4=${pageDTO.check4}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}" class="page-button page-button-active">${i}</a>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+                <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&search3=${pageDTO.search3}&check4=${pageDTO.check4}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}" class="page-button">${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
     <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-        <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
+        <a href="${pageContext.request.contextPath}/qc/qcList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}" class="page-button">&gt;</a>
     </c:if>
 </div>
 
@@ -242,7 +263,7 @@ function openPopup(url) {
     popupWindow.focus();
 }
 $(document).ready(function() {
-// 사원 검색 팝업
+// 상품 검색 팝업
     $("#productCode, #productName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
         openPopup(url);
@@ -350,6 +371,24 @@ function openInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+
+//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+function resetSearch() {
+    $("#productCode").val("");
+    $("#productName").val("");
+    $("#shipSdate1").val("");
+    $("#shipSdate2").val("");
+
+    $("#productCode").attr("placeholder", "상품코드");
+    $("#productName").attr("placeholder", "상품명(클릭)");
+    $("#shipSdate1").attr("placeholder", "납품예정일");
+    $("#shipSdate2").attr("placeholder", "납품예정일");
+    
+    $('#select1').prop('checked', false);
+    $('#select2').prop('checked', false);
+    $('#select3').prop('checked', false);
+}
+
 </script>
 
 </body>

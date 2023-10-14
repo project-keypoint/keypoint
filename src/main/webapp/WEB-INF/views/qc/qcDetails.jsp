@@ -40,7 +40,7 @@
 </div>
 <div class="form-group-qc-receive">
 <p>상품생산자</p>
-<input type="text" id="prodEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.prodEmpId}" readonly>
+<input type="text" id="prodEmpId" class="form-control search-input inputcode" style="width: 150px;" placeholder="${qualityDTO.prodEmpId}" readonly>
 <input type="text" id="prodEmpName" class="form-control search-input inputname" placeholder="${qualityDTO.prodEmpName}" readonly>
 </div>
 <div class="form-group-qc-receive">
@@ -82,11 +82,11 @@
 <p>품질검사원</p>
 <c:choose>
   <c:when test="${not empty qualityDTO.qcCode}">
-    <input type="text" id="qcEmpId" name="qcEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.qcEmpId}" readonly>
+    <input type="text" id="qcEmpId" name="qcEmpId" class="form-control search-input inputcode" style="width: 150px;" placeholder="${qualityDTO.qcEmpId}" readonly>
 	<input type="text" id="qcEmpName" class="form-control search-input inputname" placeholder="${qualityDTO.qcEmpName}" readonly>
   </c:when>
   <c:otherwise>
-    <input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode readonly-color" placeholder="사원코드(클릭)" readonly>
+    <input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode readonly-color" style="width: 155px;" placeholder="사원코드(클릭)" readonly>
 	<input type="text" id="empName" class="form-control search-input inputname readonly-color" placeholder="사원명(클릭)" readonly>
   </c:otherwise>
 </c:choose>

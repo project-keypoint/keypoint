@@ -21,18 +21,9 @@ public class ReceiveService {
 	public void receiveInsertPro(ReceiveDTO receiveDTO) {
 		System.out.println("ReceiveService receiveInsertPro()");
 		receiveDTO.setShipDate(null);
-//		receiveDTO.setRoDate(new Timestamp(System.currentTimeMillis()));
-//		receiveDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
 		
 		receiveDAO.insertReceive(receiveDTO);
 	}// receiveInsertPro() [수주등록Pro]
-	
-/////////////////////////////////////////////////////////////////////////////////////////////
-	
-//	public List<ReceiveDTO> getReceiveList() {
-//		System.out.println("ReceiveService getReceiveList()");
-//		return receiveDAO.getReceiveList();
-//	}// getReceiveList [수주+출하목록(수주)]
 	
 	public List<ReceiveDTO> getReceiveList(PageDTO pageDTO) {
 		System.out.println("ReceiveService getReceiveList()");
@@ -72,8 +63,6 @@ public class ReceiveService {
 		return receiveDAO.getShipmentCount(pageDTO1);
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-	
 	public ReceiveDTO getReceiveDetails(String roCode) {
 		System.out.println("ReceiveService getReceiveDetails()");
 		return receiveDAO.getReceiveDetails(roCode);
@@ -82,7 +71,6 @@ public class ReceiveService {
 	public void receiveUpdatePro(ReceiveDTO receiveDTO) {
 		System.out.println("ReceiveService receiveUpdatePro()");
 		System.out.println(receiveDTO);
-//		receiveDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
 		receiveDAO.updateReceive(receiveDTO);
 	}// receiveUpdatePro() [수주수정Pro]
 
@@ -92,21 +80,15 @@ public class ReceiveService {
 		receiveDAO.deleteReceive(receiveDTO);
 	}// receiveDelete() [수주삭제]
 
-	
-
 	public boolean shipComplete(ReceiveDTO receiveDTO) {
 		System.out.println("ReceiveService shipComplete");
 		boolean result = receiveDAO.shipComplete(receiveDTO);
 		return result;
 	}// shipComplete [출하완료]
 	
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////
-	
-	////다중삭제 테스트
 	public void receiveDeleteChecked(ReceiveDTO receiveDTO) {
 		System.out.println("ReceiveService receiveDeleteChecked()");
 		receiveDAO.receiveDeleteChecked(receiveDTO);
-	}
+	}// 다중삭제(수주)
 	
 }

@@ -22,27 +22,54 @@ public class PageDTO {
 	private String search7;
 	private String search8;
 	
-	
-	
 	private String cusStatus;
-
 	
+	//check박스값
+	private String check1;
+	private String check2;
+	private String check3;
+	private String check4;
 	
 	@Override
 	public String toString() {
 		return "PageDTO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
 				+ startRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", count=" + count + ", pageCount=" + pageCount + ", endRow=" + endRow + "]";
+				+ ", count=" + count + ", pageCount=" + pageCount + ", endRow=" + endRow + ", search=" + search
+				+ ", search2=" + search2 + ", search3=" + search3 + ", search4=" + search4 + ", search5=" + search5
+				+ ", search6=" + search6 + ", search7=" + search7 + ", search8=" + search8 + ", check1=" + check1
+				+ ", check2=" + check2 + ", check3=" + check3 + ", check4=" + check4 + ", cusStatus=" + cusStatus + "]";
 	}
-
+	
+	public String getCheck1() {
+		return check1;
+	}
+	public void setCheck1(String check1) {
+		this.check1 = check1;
+	}
+	public String getCheck2() {
+		return check2;
+	}
+	public void setCheck2(String check2) {
+		this.check2 = check2;
+	}
+	public String getCheck3() {
+		return check3;
+	}
+	public void setCheck3(String check3) {
+		this.check3 = check3;
+	}
+	public String getCheck4() {
+		return check4;
+	}
+	public void setCheck4(String check4) {
+		this.check4 = check4;
+	}
 	public int getEndRow() {
 		return endRow;
 	}
-
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
 	}
-	
 	public int getPageSize() {
 		return pageSize;
 	}

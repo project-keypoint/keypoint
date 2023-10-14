@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>품질검사대상</title>
+<title>폐기</title>
 	<!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <!--     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
@@ -23,76 +23,109 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">품질검사목록</div>
+<div class="page-title">폐기목록</div>
 <div class="contents2">
 
+<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
 <div class="search-bar">
+<div class="search-b">
+<!-- <div style="margin-bottom: -15px;"></div> -->
+<div class="status-check">
+<div class="search-date3">
+<a>품질<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
+<c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
+</div>
+<div class="search-date3">
+<a>상품<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
+<c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
+</div>
+<div class="search-date3">
+<a>자재<input type="checkbox" id="select4" name="check4" class="list-select" value="취소"
+<c:if test="${not empty pageDTO.check4}">checked</c:if>></a>
+</div>
+</div>
+</div>
+
 <div class="search-b">
 <div class="search-select">
 <p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input readonly-color" placeholder="상품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input readonly-color" placeholder="상품명(클릭)" readonly>
+<input type="text" id="productCode" name="search3" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search3 ? '상품코드' : ''}" value="${pageDTO.search3}" readonly>
+<input type="text" id="productName" name="search4" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search4 ? '상품명(클릭)' : ''}" value="${pageDTO.search4}" readonly>
+</div>
+<div class="search-select">
+<p>자재명</p> 
+<input type="text" id="materialCode" name="search7" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search7 ? '자재코드' : ''}" value="${pageDTO.search7}" readonly>
+<input type="text" id="materialName" name="search8" class="form-control search-input readonly-color"
+       placeholder="${empty pageDTO.search8 ? '자재명(클릭)' : ''}" value="${pageDTO.search8}" readonly>
+       
 </div>
 </div>
 
 <div class="search-b">
-<div class="search-date">
-<p>폐기일</p> <input type="text" id="shipSdate1" class="form-control search-input readonly-color" placeholder="폐기일" readonly>
-~<input type="text" id="shipSdate2" class="form-control search-input readonly-color" placeholder="폐기일" readonly>
+<div class="search-date2">
+<p>폐기일</p>
+<input type="text" id="disDate1" name="search5" class="form-control search-input readonly-color" 
+       placeholder="${empty pageDTO.search5 ? '폐기일' : ''}" value="${pageDTO.search5}" readonly>
+~<input type="text" id="disDate2" name="search6" class="form-control search-input readonly-color" 
+        placeholder="${empty pageDTO.search6 ? '폐기일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="submit" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 </div>
 </div><!-- search-bar -->
+</form>
 <br>
 <div class="dis-select-buttons">
 <div style="display: flex;">
-<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
-<input type="hidden" name="search" value="">
-<c:choose>
-<c:when test="${pageDTO.search eq '' or empty pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
-</c:when>
-<c:otherwise>
-<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
-</c:otherwise>
-</c:choose>
-</form>
-<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
-<input type="hidden" name="search" value="DISQ">
-<c:choose>
-<c:when test="${'DISQ' eq pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
-</c:when>
-<c:otherwise>
-<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
-</c:otherwise>
-</c:choose>
-</form>
-<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
-<input type="hidden" name="search" value="DISP">
-<c:choose>
-<c:when test="${'DISP' eq pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
-</c:when>
-<c:otherwise>
-<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
-</c:otherwise>
-</c:choose>
-</form>
-<form action="${pageContext.request.contextPath}/qc/disposedList" method="get">
-<input type="hidden" name="search" value="DISM">
-<c:choose>
-<c:when test="${'DISM' eq pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="자재">
-</c:when>
-<c:otherwise>
-<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="자재">
-</c:otherwise>
-</c:choose>
-</form>
+<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
+<!-- <input type="hidden" name="search" value=""> -->
+<%-- <c:choose> --%>
+<%-- <c:when test="${pageDTO.search eq '' or empty pageDTO.search}"> --%>
+<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;"> -->
+<%-- </c:when> --%>
+<%-- <c:otherwise> --%>
+<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;"> -->
+<%-- </c:otherwise> --%>
+<%-- </c:choose> --%>
+<!-- </form> -->
+<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
+<!-- <input type="hidden" name="search" value="DISQ"> -->
+<%-- <c:choose> --%>
+<%-- <c:when test="${'DISQ' eq pageDTO.search}"> --%>
+<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="품질" style="margin-right: 4px;"> -->
+<%-- </c:when> --%>
+<%-- <c:otherwise> --%>
+<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="품질" style="margin-right: 4px;"> -->
+<%-- </c:otherwise> --%>
+<%-- </c:choose> --%>
+<!-- </form> -->
+<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
+<!-- <input type="hidden" name="search" value="DISP"> -->
+<%-- <c:choose> --%>
+<%-- <c:when test="${'DISP' eq pageDTO.search}"> --%>
+<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="상품" style="margin-right: 4px;"> -->
+<%-- </c:when> --%>
+<%-- <c:otherwise> --%>
+<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="상품" style="margin-right: 4px;"> -->
+<%-- </c:otherwise> --%>
+<%-- </c:choose> --%>
+<!-- </form> -->
+<%-- <form action="${pageContext.request.contextPath}/qc/disposedList" method="get"> --%>
+<!-- <input type="hidden" name="search" value="DISM"> -->
+<%-- <c:choose> --%>
+<%-- <c:when test="${'DISM' eq pageDTO.search}"> --%>
+<!-- <input type="submit" class="btn btn-dark mybutton1 dis-btn" value="자재"> -->
+<%-- </c:when> --%>
+<%-- <c:otherwise> --%>
+<!-- <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="자재"> -->
+<%-- </c:otherwise> --%>
+<%-- </c:choose> --%>
+<!-- </form> -->
 </div>
 <div>
 <input type="button" class="btn btn-secondary mybutton1" value="상품" onclick="toggleTable('hide1', 'hide2')">
@@ -141,25 +174,25 @@
 </div>
 <div id="page_control" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&lt;</a>
     </c:if>
     <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
         <c:choose>
             <c:when test="${i eq pageDTO.pageNum}">
-                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&search=${pageDTO.search}" class="page-button page-button-active">${i}</a>
+                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button page-button-active">${i}</a>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+                <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${i}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
     <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
+        <a href="${pageContext.request.contextPath}/qc/disposedList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&gt;</a>
     </c:if>
 </div>
 </div>
 </div>
-<div class="page-buttons" style="width: 24%;">
+<div class="yoko" style="width: 24%;">
 <div id="hide1" style="width: 100%;">
 <table id="content1" class="table-list">
 <tr class="table-head">
@@ -210,6 +243,27 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+//팝업 창을 열어주는 함수
+function openPopup(url) {
+    var width = 500;
+    var height = 500;
+    var left = (screen.width - width) / 2;
+    var top = (screen.height - height) / 2;
+    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+    popupWindow.focus();
+}
+$(document).ready(function() {
+// 상품 검색 팝업
+    $("#productCode, #productName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        openPopup(url);
+    });
+// 자재명 검색 팝업 열기
+    $("#materialCode, #materialName").click(function() {
+        var url = '${pageContext.request.contextPath}/qc/materialList';
+        openPopup(url);
+    });
+});
 //폐기등록 새창(상품)
 function openDisPInsert() {
     var url = '${pageContext.request.contextPath}/qc/disInsertP';
@@ -228,7 +282,7 @@ function openDisMInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-// disSum switch
+// disSum 스위치
 function toggleTable(showId, hideId) {
 	  var showTable = document.getElementById(showId);
 	  var hideTable = document.getElementById(hideId);
@@ -236,6 +290,38 @@ function toggleTable(showId, hideId) {
 	  showTable.style.display = "block";
 	  hideTable.style.display = "none";
 	}
+
+//납품예정일 검색 (수정예정)
+$(function() {
+    $("#disDate1").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#disDate2").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+});
+
+//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+function resetSearch() {
+    $("#productCode").val("");
+    $("#productName").val("");
+    $("#materialCode").val("");
+    $("#materialName").val("");
+    $("#disDate1").val("");
+    $("#disDate2").val("");
+
+    $("#productCode").attr("placeholder", "상품코드");
+    $("#productName").attr("placeholder", "상품명(클릭)");
+    $("#materialCode").attr("placeholder", "자재코드");
+    $("#materialName").attr("placeholder", "자재명(클릭)");
+    $("#disDate1").attr("placeholder", "폐기일");
+    $("#disDate2").attr("placeholder", "폐기일");
+    
+    $('#select1').prop('checked', false);
+    $('#select2').prop('checked', false);
+    $('#select3').prop('checked', false);
+    $('#select4').prop('checked', false);
+}
 </script>
 
 </body>

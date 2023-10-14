@@ -40,7 +40,7 @@
 </div>
 <div class="form-group-qc-receive">
 <p>상품생산자</p>
-<input type="text" id="prodEmpId" class="form-control search-input inputcode" placeholder="${qualityDTO.prodEmpId}" readonly>
+<input type="text" id="prodEmpId" class="form-control search-input inputcode" style="width: 150px;" placeholder="${qualityDTO.prodEmpId}" readonly>
 <input type="text" id="prodEmpName" class="form-control search-input inputname" placeholder="${qualityDTO.prodEmpName}" readonly>
 </div>
 <div class="form-group-qc-receive">
@@ -104,7 +104,7 @@
 </div>
 <div class="form-group-qc-receive">
 <p>품질검사원</p>
-<input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode readonly-color" value="${qualityDTO.qcEmpId}" readonly>
+<input type="text" id="empId" name="qcEmpId" class="form-control search-input inputcode readonly-color" style="width: 155px;" value="${qualityDTO.qcEmpId}" readonly>
 <input type="text" id="empName" class="form-control search-input inputname readonly-color" placeholder="사원명" readonly>
 </div>
 
