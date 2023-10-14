@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.keypoint.dto.CustomerDTO;
@@ -32,6 +34,9 @@ public class AjaxController {
 	private EmployeeService employeeService;
 	@Inject
 	private NoticeService noticeService;
+	
+	
+	
 	
 //	--------------------------------------------------------------------------
 //	사업자번호 중복확인
@@ -59,6 +64,28 @@ public class AjaxController {
 		return entity;
 		
 	}
+	
+	
+	
+//	--------------------------------------------------------------------------
+//	공지사항 검색
+	@GetMapping("/notice/noticeSearch")
+	public List<Object> noticeSearch(@RequestParam("searchType") String searchType, 
+												@RequestParam("searchKeyword") String searchKeyword, Model model) throws Exception{
+		System.out.println("AjaxController noticeSearch()");
+		
+		NoticeDTO noticeDTO = new NoticeDTO();
+		
+		noticeDTO.setSearchType(searchType);
+		noticeDTO.setSearchKeyword(searchKeyword);
+		
+
+		return noticeService.getSearchList(noticeDTO);
+		
+	}
+	
+	
+	
 	
 	
 //	--------------------------------------------------------------------------
@@ -105,6 +132,26 @@ public class AjaxController {
 	
 	
 		
+
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//	가상주소 http://localhost:8080/FunWeb/notice/recentNotice
 //		@RequestMapping(value = "/notice/recentNotice", method = RequestMethod.GET)
 		@GetMapping("/notice/recentNotice")
@@ -128,6 +175,17 @@ public class AjaxController {
 			
 			return entity;
 		}//
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

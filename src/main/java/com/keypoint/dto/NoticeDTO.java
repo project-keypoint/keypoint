@@ -21,9 +21,13 @@ public class NoticeDTO {
 	private String noticeStatus;		//	글상태
 	
 	
+//	검색
+	private String searchType;			//	검색 타입
+	private String searchKeyword;		//	검색 키워드
 	
 	
-
+	
+	
 
 
 
@@ -32,12 +36,13 @@ public class NoticeDTO {
 		return "NoticeDTO [noticeNum=" + noticeNum + ", empId=" + empId + ", noticeCategory=" + noticeCategory
 				+ ", noticeSubject=" + noticeSubject + ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate
 				+ ", noticeReadcount=" + noticeReadcount + ", noticeFile=" + noticeFile + ", empName=" + empName
-				+ ", noticeStatus=" + noticeStatus + "]";
+				+ ", noticeStatus=" + noticeStatus + ", searchType=" + searchType + ", searchKeyword=" + searchKeyword
+				+ "]";
 	}
 	
 	
-	
-	
+
+
 	public int getNoticeNum() {
 		return noticeNum;
 	}
@@ -98,7 +103,22 @@ public class NoticeDTO {
 	public void setNoticeStatus(String noticeStatus) {
 		this.noticeStatus = noticeStatus;
 	}
+	public String getSearchType() {
+		return searchType;
+	}
 
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	
+	
+	
 	
 	
 	

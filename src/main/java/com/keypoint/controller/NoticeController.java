@@ -76,7 +76,8 @@ public class NoticeController {
 		
 		
 //		검색어 가져오기
-		String search = request.getParameter("search");
+		String searchType = request.getParameter("searchType");
+		String searchKeyword = request.getParameter("searchKeyword");
 		
 		
 //		한 화면에 보여줄 글 개수 설정
@@ -99,7 +100,8 @@ public class NoticeController {
 		pageDTO.setCurrentPage(currentPage);		
 		
 //		검색어 저장
-		pageDTO.setSearch(search);
+		pageDTO.setSearch(searchType);
+		pageDTO.setSearch(searchKeyword);
 		
 		
 		List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);

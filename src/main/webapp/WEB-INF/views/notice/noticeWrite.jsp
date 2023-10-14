@@ -50,15 +50,9 @@
 </div>
 
 
-
-<!-- <div class="form-group-customer"> -->
-<!-- <p>내용</p> -->
-<!-- <textarea 	id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px; resize: none;"></textarea> -->
-<!-- </div> -->
-
 <div class="form-group-customer">
     <p>내용</p>
-    <textarea id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px;"></textarea>
+    <textarea id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px;" ></textarea>
 </div>
 
 <div class="form-group-customer" style="display: none;">
@@ -84,7 +78,6 @@
 
 
 
-
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -93,14 +86,11 @@
 
 <script type="text/javascript">
 
-document.getElementById('noticeContent').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        // 엔터 키를 눌렀을 때 줄 바꿈을 하도록 처리
-        this.value += '\n';
-        e.preventDefault(); // 기본 엔터 키 동작 비활성화
-    }
 
-
+    
+    
+    
+    
 
 
 </script>

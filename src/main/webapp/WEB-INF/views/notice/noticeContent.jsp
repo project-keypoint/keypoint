@@ -46,7 +46,7 @@
 
 <tr class="table-body">
     <td colspan="4" style="height: 300px; text-align: left;">
-        <div style="padding-left: 20px;">${noticeDTO.noticeContent}</div>
+        <div style="padding-left: 20px; white-space: pre-line;">${noticeDTO.noticeContent}</div>
     </td>
 </tr>
 
