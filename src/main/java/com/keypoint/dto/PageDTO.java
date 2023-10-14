@@ -14,6 +14,7 @@ public class PageDTO {
 	
 	//검색어 pageDTO에 담아간다.
 	private String search;
+	private String search1;
 	private String search2;
 	private String search3;
 	private String search4;
@@ -30,16 +31,35 @@ public class PageDTO {
 	private String check3;
 	private String check4;
 	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "PageDTO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
 				+ startRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", count=" + count + ", pageCount=" + pageCount + ", endRow=" + endRow + ", search=" + search
-				+ ", search2=" + search2 + ", search3=" + search3 + ", search4=" + search4 + ", search5=" + search5
-				+ ", search6=" + search6 + ", search7=" + search7 + ", search8=" + search8 + ", check1=" + check1
-				+ ", check2=" + check2 + ", check3=" + check3 + ", check4=" + check4 + ", cusStatus=" + cusStatus + "]";
+				+ ", search1=" + search1 + ", search2=" + search2 + ", search3=" + search3 + ", search4=" + search4
+				+ ", search5=" + search5 + ", search6=" + search6 + ", search7=" + search7 + ", search8=" + search8
+				+ ", cusStatus=" + cusStatus + ", check1=" + check1 + ", check2=" + check2 + ", check3=" + check3
+				+ ", check4=" + check4 + "]";
 	}
-	
+
+
+
+	public String getSearch1() {
+		return search1;
+	}
+
+
+
+	public void setSearch1(String search1) {
+		this.search1 = search1;
+	}
+
+
+
 	public String getCheck1() {
 		return check1;
 	}

@@ -37,9 +37,9 @@ public class WorkOrderService {
 		return workOrderDAO.getWorkOrderList(pageDTO);
 	}// 작업지시 목록
 	
-	public int getWorkOrderCount() {
+	public int getWorkOrderCount(PageDTO pageDTO) {
 		System.out.println("WorkOrderService getWorkOrderCount()");
-		return workOrderDAO.getWorkOrderCount();
+		return workOrderDAO.getWorkOrderCount(pageDTO);
 	}
 	
 		

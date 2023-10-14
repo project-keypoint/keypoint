@@ -69,7 +69,19 @@
 		from production a
 		left join workOrder b on a.woCode = b.woCode
 		left join product c on b.productCode = c.productCode
-		where a.woStatus != '삭제'
+		<where>
+		a.woStatus != '삭제'
+		 
+		<if test="search1 != null and search1 != ''">
+			and (a.productCode = #{search1})
+		</if>    	
+    	<if test="search3 != null and search3 != ''">
+			and (a.poDate &gt;= #{search3}) 
+    	</if>
+    	<if test="search4 != null and search4 != ''">
+			and (a.poDate &lt;= #{search4}) 
+    	</if>
+		</where>		
 		order by a.poDate desc
 		limit #{startRow}, #{pageSize}
 		</select>
@@ -79,7 +91,20 @@
 		select COUNT(*)
 		from production a
 		left join workOrder b on a.woCode = b.woCode
-		where b.woStatus != '삭제'
+		<where>
+		b.woStatus != '삭제'
+		
+		<if test="search1 != null and search1 != ''">
+			and (a.productCode = #{search1})
+		</if>    	
+    	<if test="search3 != null and search3 != ''">
+			and (a.poDate &gt;= #{search3}) 
+    	</if>
+    	<if test="search4 != null and search4 != ''">
+			and (a.poDate &lt;= #{search4}) 
+    	</if>
+		</where>
+		
 	</select>
 	
 	

@@ -14,27 +14,16 @@
 <!--     <link -->
 <!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
 <!--         rel="stylesheet"> -->
-<link
-	href="${pageContext.request.contextPath}/resources/css/workOrder.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/workOrder.css" rel="stylesheet">
 <!-- Custom styles for this template-->
 <link
 	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
 	rel="stylesheet">
 
-<style type="text/css">
-.lineCode {
-	width: 180px;
-}
-
-.search-select {
-	width: 480px;
-}
-</style>
 </head>
 <body>
-	<%@include file="../inc/top-bar.jsp"%>
-	<%@include file="../inc/side-bar.jsp"%>
+<%@include file="../inc/top-bar.jsp"%>
+<%@include file="../inc/side-bar.jsp"%>
 
 
 	<!--  contents start -->
@@ -42,84 +31,71 @@
 
 	<div class="main">
 		<div class="card shadow">
-			<!-- 그림자아니야 영역 -->
 			<div class="page-title">작업지시 목록</div>
 			<div class="contents2">
-				<div class="search-bar">
-					<div class="search-b">
-
-						<div class="form-group-workOrder">
-							<p>
-								라인 <select id="LineCode" name="LineCode"
-									class="custom-select form-control lineCode">
-									<!-- 						<option value="" selected>전체</option> -->
-									<!-- 						<option value="라인1">라인1</option> -->
-									<!--   						<option value="라인2">라인2</option> -->
-									<!--  						<option value="라인3">라인3</option> -->
-									<!--   						<option value="라인4">라인4</option> -->
-									<!--  						<option value="라인5">라인5</option> -->
-									<!--  						<option value="라인6">라인6</option> -->
-									<c:forEach var="LineDTO" items="${lineList}">
-										<option value="${LineDTO.lineCode}">${LineDTO.lineCode}</option>
-									</c:forEach>
-								</select>
-							</p>
+			<form action="${pageContext.request.contextPath}/workOrder/workOrderList" method="get">			
+					<div class="search-b" style="margin-bottom: -15px;">
+						<div class="status-check" style="background: #E5E5E5; border: none;">
+						<div class="search-date3">
+						<a style="font-weight: bold;"> 진행<input type="checkbox" id="select1" name="check1" class="list-select" value="진행"
+						<c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
+						<a>완료<input type="checkbox" id="select2" name="check2" class="list-select" value="완료"
+						<c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
 						</div>
-
-						<!-- <div class="search-select"> -->
-						<!-- <p>업체명</p> <input type="text" id="cusCode" class="form-control search-input" placeholder="업체검색 "> -->
-						<!-- </div> -->
+						</div>
+						</div>
+						
+						<div class="search-bar">
+						<div class="search-b">
 						<div class="search-select">
-							<p>상품명</p>
-							<input type="text" id="productCode"
-								class="form-control search-input" placeholder="상품코드 "> <input
-								type="text" id="productName" class="form-control search-input"
-								placeholder="상품명 ">
+						<p>상품명</p> 
+						<input type="text" id="productCode" name="search1" class="form-control search-input readonly-color"
+      					 placeholder="${empty pageDTO.search1 ? '상품코드' : ''}" value="${pageDTO.search1}" readonly>
+						<input type="text" id="productName" name="search2" class="form-control search-input readonly-color"
+     					 placeholder="${empty pageDTO.search2 ? '상품명(클릭)' : ''}" value="${pageDTO.search2}" readonly>
 						</div>
-					</div>
-
-					<div class="search-b">
+						</div>
+						
+						
+						<div class="search-b">
 						<div class="search-date">
-							<p>지시일자</p>
-							<input type="text" id="roDate1" class="form-control search-input"
-								placeholder="지시일자"> ~<input type="text" id="roDate2"
-								class="form-control search-input" placeholder="지시일자">
+						<p>지시일자</p>
+						<input type="text" id="woDate1" name="search3" class="form-control search-input readonly-color" 
+      					 placeholder="${empty pageDTO.search3 ? '지시일자' : ''}" value="${pageDTO.search3}" readonly>
+						~<input type="text" id="woDate2" name="search4" class="form-control search-input readonly-color" 
+       					 placeholder="${empty pageDTO.search4 ? '지시일자' : ''}" value="${pageDTO.search4}" readonly>
 						</div>
-						<div class="search-date">
-							<p>지시상태</p>
-							<a>지시<input type="checkbox" id="select1" name="select1"
-								class="list-select" value="지시"></a> <a>진행<input
-								type="checkbox" id="select2" name="select2" class="list-select"
-								value="진행"></a> <a>마감<input type="checkbox" id="select3"
-								name="select3" class="list-select" value="마감"></a> <a>취소<input
-								type="checkbox" id="select4" name="select4" class="list-select"></a>
 						</div>
-
-					</div>
-					<div class="search-button">
-						<input type="button" value="검색" class="btn btn-primary mybutton1">
-						<input type="button" value="취소"
-							class="btn btn-secondary mybutton1">
-					</div>
+						
+						
+						<div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;">
+				<div class="search-button" style="margin-bottom: 5px;">
+				<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
 				</div>
+				<div class="search-button" style="display: flex; justify-content: space-between;">
+				<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/workOrder/workOrderList'" style="width: 48.6%;">
+				<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
+				</div>
+				</div>
+				</div><!-- search-bar -->
+				
+				</form>
+						
+						
+<!-- 						<div class="search-select"> -->
+<!-- 							<p> -->
+<!-- 								라인 <select id="LineCode" name="LineCode" -->
+<!-- 									class="custom-select form-control lineCode"> -->
+<%-- 									<c:forEach var="LineDTO" items="${lineList}"> --%>
+<%-- 										<option value="${LineDTO.lineCode}">${LineDTO.lineCode}</option> --%>
+<%-- 									</c:forEach> --%>
+<!-- 								</select> -->
+<!-- 							</p> -->
+<!-- 						</div> -->
+			
 				<!-- search-bar -->
 				<br>
 
-				<div class="select-status">
-					<a>지시<input type="checkbox" id="select1" name="select1"
-						class="list-select" checked></a> <a>진행<input
-						type="checkbox" id="select2" name="select2" class="list-select"
-						checked></a> <a>마감<input type="checkbox" id="select3"
-						name="select3" class="list-select" checked></a> <a>취소<input
-						type="checkbox" id="select4" name="select4" class="list-select"></a>
-
-
-					<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
-					<div>
-						<!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
-						<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
-					</div>
-				</div>
 
 				<div>
 					<table class="table-list">
@@ -192,12 +168,12 @@
       					  <a href="${pageContext.request.contextPath}/workOrder/workOrderList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
    						 </c:if>
 							</div>
+							</div>
 				</div>
 			</div>
+			</div>
 			<!-- contents -->
-		</div>
 		<!-- 그림자아니야 영역 -->
-	</div>
 	<!-- main -->
 
 	<!-- contents end -->
@@ -237,27 +213,12 @@
 												openPopup(url);
 											});
 						});
-		// //업체명(거래처) 검색 새창
-		// var searchCustomer = document.getElementById("search-customer");
-		// searchCustomer.addEventListener("click", function () {
-		// 	var url = '${pageContext.request.contextPath}/receive/empty';
-		// 	// ↑ 업체검색페이지 새로 입력하기
-		//     window.open(url, '_blank', 'width=400, height=400');
-		// });
-
-		// //상품명 검색 새창
-		// var searchProduct = document.getElementById("search-product");
-		// searchProduct.addEventListener("click", function () {
-		// 	var url = '${pageContext.request.contextPath}/receive/empty';
-		// 	// ↑ 상품검색페이지 새로 입력하기
-		//     window.open(url, '_blank', 'width=400, height=400');
-		// });
-		//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
+		
 		$(function() {
-			$("#roDate1").datepicker({
+			$("#woDate1").datepicker({
 				dateFormat : "yy-mm-dd"
 			});
-			$("#roDate2").datepicker({
+			$("#woDate2").datepicker({
 				dateFormat : "yy-mm-dd"
 			});
 			$("#shipSdate1").datepicker({
@@ -317,9 +278,32 @@
 					+ ', height=' + windowHeight + ', left=' + windowLeft
 					+ ', top=' + windowTop);
 		}
-	</script>
 
-	<br>
+		
+		//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+		function resetSearch() {
+			
+		    $("#productCode").val("");
+		    $("#productName").val("");		   
+		    $("#woDate1").val("");
+		    $("#woDate2").val("");
+
+		   
+		    $("#productCode").attr("placeholder", "상품코드");
+		    $("#productName").attr("placeholder", "상품명(클릭)");
+		    $("#woDate1").attr("placeholder", "지시일자");
+		    $("#woDate2").attr("placeholder", "지시일자");
+		   
+		    
+		    $('#select1').prop('checked', false);
+		    $('#select2').prop('checked', false);
+		   
+		}
+		
+		
+		
+		</script>
+
 
 
 

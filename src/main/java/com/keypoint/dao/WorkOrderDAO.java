@@ -27,9 +27,9 @@ public class WorkOrderDAO {
 		return sqlSession.selectList(namespace+".getWorkOrderList", pageDTO);
 	}
 	
-	public int getWorkOrderCount() {
+	public int getWorkOrderCount(PageDTO pageDTO) {
 		System.out.println("WorkOrderDAO getWorkOrderCount()");
-		return sqlSession.selectOne(namespace+".getWorkOrderCount");
+		return sqlSession.selectOne(namespace+".getWorkOrderCount", pageDTO);
 	}
 	
 	
