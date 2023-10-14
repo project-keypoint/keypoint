@@ -86,6 +86,35 @@
   	
   
   
+ 	<select id="getSearchList" resultType="com.keypoint.dto.NoticeDTO" parameterType="com.keypoint.dto.NoticeDTO">
+  		SELECT n.noticeNum, n.noticeCategory, n.noticeSubject, e.empName, n.noticeReadcount, n.noticeDate
+  		FROM notice n LEFT JOIN employees e
+  		ON n.empId = e.empId
+ 		<choose>
+ 		<when test="searchType != null and searchType.equals(all)">
+ 		AND all LIKE CONCAT('%', #{searchKeyword}, '%')
+ 		</when>
+ 		<when test="searchType != null and searchType.equals(sales)">
+ 		 AND sales LIKE CONCAT('%', #{searchKeyword}, '%')
+ 		</when>
+ 		<when test="searchType != null and searchType.equals(production)">
+ 		AND all LIKE CONCAT('%', #{searchKeyword}, '%')
+ 		</when>
+ 		<when test="searchType != null and searchType.equals(meterials)">
+ 		 AND sales LIKE CONCAT('%', #{searchKeyword}, '%')
+ 		</when>
+ 		<when test="searchType != null and searchType.equals(personnel)">
+ 		 AND sales LIKE CONCAT('%', #{searchKeyword}, '%')
+ 		</when>
+ 		</choose>
+		WHERE noticeStatus != '삭제'
+  		ORDER BY noticeNum DESC
+  		LIMIT #{startRow}, #{pageSize} 	
+ 	</select>
+  
+  
+  
+  
   
   
   

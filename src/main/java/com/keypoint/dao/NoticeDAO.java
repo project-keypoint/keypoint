@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.NoticeDTO;
@@ -102,6 +103,14 @@ public class NoticeDAO {
 		System.out.println("NoticeDAO getinserCount()");
 
 		return sqlSession.selectOne(nameSpace+".getinserCount");
+	}
+
+
+//	공지사항 검색
+	public List<Object> getSearchList(NoticeDTO noticeDTO) throws Exception{
+		System.out.println("NoticeDAO getSearchList()");
+
+		return sqlSession.selectList(nameSpace+".getSearchList", noticeDTO);
 	}
 
 

@@ -30,27 +30,28 @@
 <div class="contents2">
 
 <div class="search-bar">
-
+<form id="search-form" name="search-form" autocomplete="off">
 <div class="search-b">
 <div class="search-select">
 
-<select id="search_option" name="search_option" class="form-control search-input"> 
-	<option value="전체">전체</option>
-	<option value="영업">영업</option>
-	<option value="생산">생산</option>
-	<option value="자재">자재</option>
-	<option value="인사">인사</option>
+<select id=searchType name="searchType" class="form-control search-input"> 
+	<option value="all">전체</option>
+	<option value="sales">영업</option>
+	<option value="production">생산</option>
+	<option value="meterials">자재</option>
+	<option value="personnel">인사</option>
 </select>
 
-<input type="text" id="search" class="form-control search-input">
+<input type="text" id="searchKeyword" name="searchKeyword" class="form-control search-input">
 
 </div><!-- search-select -->
 </div><!-- search-b -->
 
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
+<input type="button" onclick="getSearchList()" value="검색" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
+</form>
 </div><!-- search-bar -->
 
 
@@ -137,54 +138,38 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-//팝업 창을 열어주는 함수
-function openPopup(url) {
-    var width = 500;
-    var height = 500;
-    var left = (screen.width - width) / 2;
-    var top = (screen.height - height) / 2;
-    var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
-    popupWindow.focus();
+
+
+//	검색 AJAX
+ function getSearchList() {
+	ajax({
+		type : 'GET',
+		url : '${pageContext.request.contextPath}/notice/noticeSearch',
+		date : $("form[search-form]").serialize(),
+		success : function(result) {
+			result.forEach(function(item) {
+				str='<tr>'
+				str+= "<td>"++"</td>";
+				str+= "<td>"+item.noticeNum+"</td>";
+				str+="<td>"+item.noticeCategory+"</td>"
+				str+="<td><a href=+"</td>"
+				
+			})
+			
+		}
+		
+		
+		
+	})
+	
+	
+	
 }
-$(document).ready(function() {
-    // 업체명 검색 팝업 열기
-    $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-        openPopup(url);
-    });
-    // 상품명 검색 팝업 열기
-    $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-        openPopup(url);
-    });
-});
 
 
 
-// 체크박스(삭제용) 전체선택
-var selectAllCheckbox = document.getElementById("delete-list-all");
-var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
-selectAllCheckbox.addEventListener("change", function () {
-    checkboxes.forEach(function (checkbox) {
-        checkbox.checked = selectAllCheckbox.checked;
-    });
-});
-checkboxes.forEach(function (checkbox) {
-    checkbox.addEventListener("change", function () {
-        if (!this.checked) {
-            selectAllCheckbox.checked = false;
-        } else {
-            // 모든 체크박스가 선택되었는지 확인
-            var allChecked = true;
-            checkboxes.forEach(function (c) {
-                if (!c.checked) {
-                    allChecked = false;
-                }
-            });
-            selectAllCheckbox.checked = allChecked;
-        }
-    });
-});
+
+
 
 
 

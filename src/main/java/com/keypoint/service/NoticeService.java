@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.keypoint.dao.NoticeDAO;
@@ -126,11 +127,20 @@ public class NoticeService {
 	}
 
 
+//	공지사항 검색
+	public List<Object> getSearchList(NoticeDTO noticeDTO) throws Exception{
+		System.out.println("NoticeService getSearchList()");
+
+		return noticeDAO.getSearchList(noticeDTO);
+	}
 
 
 
 
 
+
+
+	
 
 	
 	
