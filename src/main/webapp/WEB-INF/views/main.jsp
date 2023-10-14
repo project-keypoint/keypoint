@@ -32,14 +32,19 @@
 
 
 		<!-- Begin Page Content -->
-		
+
 		<div class="mainNotice">
-			<div id="news_notice">
+			<div id="news_notice" style="display: grid;">
 				<h3 class="recentNotice">Notice</h3>
 				<a class="nav-link"
-			href="${pageContext.request.contextPath}/notice/noticeList"> <span
-			style="border: none; background: none; float: right">더보기</span></a>
-				<table >
+					style="border: none; background: none; float: right; width: 80px; position: relative; left: 1560px;">더보기</a>
+				<table style="text-align: center;">
+					<tr>
+						<td>분류</td>
+						<td>제목</td>
+						<td>조회수</td>
+						<td>작성일</td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -79,9 +84,9 @@
 		<!-- End of Main Content -->
 	</div>
 	<!-- contents end -->
-	<script type="text/javascript" 
-        src="${pageContext.request.contextPath}/resources/script/jquery-3.7.0.js"></script>
- 
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/script/jquery-3.7.0.js"></script>
+
 	<script type="text/javascript">
 		// 차트1 pie
 		var today = new Date(); // 현재 날짜를 얻음
@@ -632,7 +637,7 @@
      
 		</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 $(document).ready(function(){
     // 페이지 로딩 시 자동으로 공지사항 목록을 출력합니다.
     $.ajax({
@@ -642,8 +647,29 @@ $(document).ready(function(){
             // json 배열 반복, 추가 출력
             $.each(result, function(index, item){
                 var date = new Date(item.noticeDate);
-                var d = date.getFullYear() + '.' + (date.getMonth() + 1) + '.' + date.getDate(); // 날짜 형식 수정
-                $('table').append('<tr><td class="contxt"><a href="${pageContext.request.contextPath}/notice/noticeContent?noticeNum=' + item.noticeNum + '">' + item.noticeNum + ' ' + item.noticeCategory + ' ' + item.noticeSubject + ' ' + item.noticeReadcount + ' '+ d +'</a></td></tr>'); // 문자열 연결 수정
+                var formattedDate = date.getFullYear() + '.' + (date.getMonth() + 1) + '.' + date.getDate(); // 날짜 형식 수정
+                
+                // 각 항목을 테이블로 나누어 표시
+                var row = $('<tr>', { class: 'contxt' }); // 테이블 행 생성
+                
+                var categoryCell = $('<td>').text(item.noticeCategory); // 카테고리 셀 생성
+                row.append(categoryCell); // 카테고리 셀을 행에 추가
+                
+                var subjectCell = $('<td>').text(item.noticeSubject); // 제목 셀 생성
+                row.append(subjectCell); // 제목 셀을 행에 추가
+                
+                var readcountCell = $('<td>').text(item.noticeReadcount); // 조회수 셀 생성
+                row.append(readcountCell); // 조회수 셀을 행에 추가
+                
+                var dateCell = $('<td>').text(formattedDate); // 날짜 셀 생성
+                row.append(dateCell); // 날짜 셀을 행에 추가
+                
+                // 행 전체에 링크 걸기
+                row.click(function() {
+                    window.location.href = '${pageContext.request.contextPath}/notice/noticeContent?noticeNum=' + item.noticeNum;
+                });
+                
+                $('table').append(row); // 행을 테이블에 추가
             });                                                                
         }
     });//ajax
