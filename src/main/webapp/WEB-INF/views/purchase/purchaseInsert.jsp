@@ -153,6 +153,7 @@ $(document).ready(function() {
 
 <!-- 발주수량 * 자재단가의 곱 -->
 <script>
+
 //poCount와 materialPrice 값을 곱하여 poPrice에 설정하는 함수
 function calculatePoPrice() {
     // poCount와 materialPrice 입력란의 값을 읽어옴

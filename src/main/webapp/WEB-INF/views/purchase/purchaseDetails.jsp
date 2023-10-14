@@ -44,7 +44,7 @@
 
 <div class="form-group-receive">
 <p>자재단가</p>
-<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="${purchaseDTO.materialPrice}" readonly>
+<input type="text" id="materialPrice" name="materialPrice" class="form-control search-input" placeholder="<fmt:formatNumber type='number' value='${purchaseDTO.materialPrice}' pattern='#,###'/>" readonly>
 </div>
 </div>
 
@@ -55,7 +55,7 @@
 
 <div class="form-group-receive">
 <p>발주금액</p>
-<input type="text" class="form-control search-input" id="poPrice" name="poPrice" placeholder="${purchaseDTO.poPrice}" readonly>
+<input type="text" class="form-control search-input" id="poPrice" name="poPrice" placeholder="<fmt:formatNumber type='number' value='${purchaseDTO.poPrice}' pattern='#,###'/>" readonly>
 </div>
 
 <div class="search-bar-popup">
@@ -119,7 +119,6 @@ function confirmDelete() {
     }
 }
 </script>
-
 
 
 

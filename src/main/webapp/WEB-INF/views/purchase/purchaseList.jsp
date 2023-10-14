@@ -299,7 +299,29 @@ function cancelSearch() {
 </script>
 
 
+<script>
+//천 단위 콤마 추가 함수
+function addCommas(input) {
+    return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
+// 발주금액, 자재단가 포맷팅
+$(document).ready(function() {
+    $('.table-body').each(function() {
+        var poPriceCell = $(this).find('td:eq(7)'); // 발주금액 셀
+        var materialPriceCell = $(this).find('td:eq(6)'); // 자재단가 셀
+
+        var poPrice = parseFloat(poPriceCell.text().replace('원', '').replace(/,/g, '')); // 천 단위 콤마 제거 후 숫자로 변환
+        var materialPrice = parseFloat(materialPriceCell.text().replace('원', '').replace(/,/g, '')); // 천 단위 콤마 제거 후 숫자로 변환
+
+        // 숫자 포맷팅 및 설정
+        poPriceCell.text(addCommas(poPrice) + '원');
+        materialPriceCell.text(addCommas(materialPrice) + '원');
+    });
+});
+
+
+</script>
 
 
 
