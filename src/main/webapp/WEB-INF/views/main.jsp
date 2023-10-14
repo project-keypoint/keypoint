@@ -37,8 +37,10 @@
 			<div id="news_notice" style="display: grid;">
 				<h3 class="recentNotice">Notice</h3>
 				<a class="nav-link"
-					style="border: none; background: none; float: right; width: 80px; position: relative; left: 1560px;">더보기</a>
+					style="border: none; background: none; float: right; width: 80px; height: 20px; position: relative; left: 1560px;">더보기</a>				
+				<div><hr></div>			
 				<table style="text-align: center;">
+
 					<tr>
 						<td>분류</td>
 						<td>제목</td>
