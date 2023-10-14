@@ -28,39 +28,45 @@
 <div class="page-title">사원목록(사원기본정보)</div>
 <div class="contents2">
 
-<div class="search-bar">
 
+<!-- 검색부분 -->
+<div class="search-bar">
 <div class="search-b">
 <div class="search-select">
 
-<select id="search_option" name="search_option" class="form-control search-input"> 
-	<option value=""> 선택하세요 </option>
-	<option value="이름">이름</option>
-	<option value="사원번호">사원번호</option>
-	<option value="내선번호">내선번호</option>
-	<option value="부서">부서</option>
-</select>
+<form name="search" method="get" action="${pageContext.request.contextPath}/employee/employeeList" id="selectBox" name="selectBox2" onsubmit="return fun1()">
+                       
+ <div style="float: left;">
+ <select id="search" name="search" class="form-control search-input">
+ <option value=""> 선택하세요 </option>
+ <option value="empName"> 이름 </option>
+ <option value="empId"> 사원번호 </option>
+<option value="empTel"> 내선번호 </option>
+<option value="departmentName"> 부서 </option>
+ </select>
 
-<input type="text" id="keyword" class="form-control search-input">
-
-</div><!-- search-select -->
-</div><!-- search-b -->
-
-<!-- <div class="search-b"> -->
-<!-- <div class="search-select"> -->
-<!-- <p>부서명</p>  -->
-<!-- <input type="text" id="departmentId" class="form-control search-input" placeholder="부서코드" style="width:110px;" readonly> -->
-<!-- <input type="text" id="departmentName" class="form-control search-input" placeholder="부서명(클릭)" readonly> -->
-<!-- </div> -->
-<!-- </div> -->
-
-<div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
 </div>
-</div><!-- search-bar -->
+ <div style="float: left;"><span id="text_search"><input class="form-control search-input" type="text" name="search2"></span></div>                     
+ <div style="float: left; magin-top: 3px;"><span id="icon_search">
+ </span></div>
+	                    
+ </form>
+  
+</div>
+</div>
+   
+            
+<div class="search-button">
+<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="fun1()">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
+</div>
+
+</div>
+<!-- 검색부분 -->
+
 
 <br>
+
 
 <div class="select-status" style="display: flex; justify-content: space-between;">
 <div style="display: flex; justify-content: flex-start;">
@@ -163,18 +169,6 @@ function openPopup(url) {
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
-// $(document).ready(function() {
-//     // 사원명 검색 팝업 열기
-//     $("#empId, #empName").click(function() {
-//         var url = '${pageContext.request.contextPath}/employee/employeeList';
-//         openPopup(url);
-//     });
-//     // 부서명 검색 팝업 열기
-//     $("#departmentId, #departmentName").click(function() {
-//         var url = '${pageContext.request.contextPath}/employee/employeeList';
-//         openPopup(url);
-//     });
-// });
 
 // 사원 상세내용 새창
 function openDetails(empId) {
@@ -197,6 +191,29 @@ function openInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+
+
+
+
+ //검색어
+function fun1() {
+	
+	if(document.search.search.value=="") {
+		alert("검색 조건을 선택하세요")
+		document.search.search.focus();
+		return false;
+	}
+	if(document.search.search2.value==0) {
+		alert("검색어를 입력하세요");
+		document.search.search2.focus();
+		return false;
+		}
+	
+		document.search.submit();
+}
+
+ 
+
 </script>
 
 
