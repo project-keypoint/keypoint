@@ -52,7 +52,7 @@
 				<div class="form-group-receive">
 					<p>지시수량</p>
 					<input type="number" id="woCount" name="woCount"
-						class="form-control search-input" placeholder="지시수량" min="0">
+						class="form-control search-input" placeholder="지시수량" min="0" readonly>
 				</div>
 				<div class="form-group-receive">
 					<p>라인코드</p>
@@ -67,7 +67,7 @@
 				<div class="form-group-receive">
 					<p>납품예정일</p>
 					<input type="text" id="shipSdate" name="shipSdate"
-						class="form-control search-input" value="납품예정일">
+						class="form-control search-input" value="납품예정일" readonly >
 				</div>
 				<div class="form-group-receive">
 					<p>상태</p>
@@ -130,20 +130,7 @@
 												var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
 												openPopup(url);
 											});
-							// 업체명 검색 팝업 열기
-							$("#cusCode, #cusCode")
-									.click(
-											function() {
-												var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-												openPopup(url);
-											});
-							// 상품명 검색 팝업 열기
-							$("#productCode, #productCode")
-									.click(
-											function() {
-												var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-												openPopup(url);
-											});
+													
 							// 라인명 검색 팝업 열기
 							$("#lineCode, #lineCode")
 									.click(
