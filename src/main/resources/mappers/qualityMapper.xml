@@ -186,6 +186,9 @@
 		left join material c on a.disItemCode = c.materialCode
 		left join employees d on a.disEmpId = d.empId
 		<where>
+		<if test="search != null and search != ''">
+			(a.disCode like CONCAT ('%', #{search}, '%'))
+        </if>
 		<choose>
         <when test="(check2 == null or check2 == '') and
                     (check3 == null or check3 == '') and
@@ -234,6 +237,9 @@
 		SELECT COUNT(*)
 		FROM disposedItems
 		<where>
+		<if test="search != null and search != ''">
+			(disCode like CONCAT ('%', #{search}, '%'))
+		</if>
 		<choose>
         <when test="(check2 == null or check2 == '') and
                     (check3 == null or check3 == '') and

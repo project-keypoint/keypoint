@@ -228,6 +228,7 @@
 		CONCAT('%', #{roCode}, '%') and
 		productCode like CONCAT('%', #{productCode},
 		'%')
+		and roStatus != '삭제'
 		order by roCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -239,6 +240,7 @@
 			where
 			roCode like CONCAT('%', #{roCode}, '%') and
 			productCode like CONCAT('%', #{productCode}, '%')
+			and roStatus != '삭제'
 		</if>
 	</select>
 	
@@ -308,6 +310,7 @@
 			woCode like CONCAT('%', #{woCode}, '%') 
 			and roCode like CONCAT('%', #{roCode}, '%')
 			and wo.woStatus != '삭제'
+			and wo.woStatus != '완료'
 		order by woCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -320,11 +323,16 @@
 			woCode like CONCAT('%', #{woCode}, '%') and
 			roCode like CONCAT('%', #{roCode}, '%')
 			and woStatus != '삭제'
+			and woStatus != '완료'
 		</if>
 	</select>
 
 	
-	
+	<update id="updateWorkOrderStatus">
+	UPDATE workOrder
+	SET woStatus = #{woStatus}
+	WHERE woCode = #{woCode}
+	</update>
 	
 	
 

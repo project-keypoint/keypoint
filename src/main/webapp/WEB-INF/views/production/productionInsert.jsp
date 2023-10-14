@@ -51,11 +51,11 @@
 
 <div class="form-group-receive">
 <p>양품</p>
-<input type="number" id="poGood" name="poGood" class="form-control search-input" value="양품">
+<input type="number" id="poGood" name="poGood" class="form-control search-input" placeholder="자동계산" readonly>
 </div>
 <div class="form-group-receive">
 <p>불량</p>
-<input type="number" id="poErr" name="poErr" class="form-control search-input" value="불량">
+<input type="number" id="poErr" name="poErr" class="form-control search-input" value="">
 </div>
 <div class="form-group-receive">
 <p>불량사유</p>
@@ -140,9 +140,8 @@ $(document).ready(function() {
         openPopup(url);
     });
 });
-
-
-
+	
+	
 
 
 // 지시일자 클릭시 현재날짜로 변경
@@ -165,7 +164,7 @@ poDateInput.addEventListener("click", function () {
 // 지시일자(현재날짜) 이후로 납품예정일 선택 설정
 // 지시일자 입력란의 값 가져오기
 var poDateInput = document.getElementById("poDate");
-var poDateValue = woDateInput.value;
+var poDateValue = poDateInput.value;
 
 // 지시일자를 현재 년월일로 설정 (YYYY-MM-DD 형식)
 var today = new Date();
@@ -186,31 +185,75 @@ $(function() {
 //유효성 검사
 function validateForm() {
     // 각 입력 필드 값
-    var cusCode = document.getElementById("cusCode").value;
-    var productCode = document.getElementById("productCode").value;
-    var roCode = document.getElementById("roCode").value;
-    var woCount = document.getElementById("woCount").value;
-    var lineCode = document.getElementById("lineCode").value;
-    var woDate = document.getElementById("woDate").value;
+    var poCode = document.getElementById("poCode").value;
     var poDate = document.getElementById("poDate").value;
+    var poGood = document.getElementById("poGood").value;
+    var poErr = document.getElementById("poErr").value;
+    var poCause = document.getElementById("poCause").value;
     var empId = document.getElementById("empId").value;
     
-    console.log("cusCode: " + cusCode);
+    console.log("poCode: " + poCode);
     // 빈 필드 검사
-    if (cusCode === "" || productCode === "" ||
-    		woCount === "" || lineCode === "" || woDate === "" ||
-    		poDate === "" || empId === "") {
+    if (poCode === "" || poDate === "" ||
+    		poGood === "" || poErr === "" || poCause === "" ||
+    		empId === "" ) {
         alert("모든 내용을 입력해주세요.");
         return false; // 제출 방지
     }
-//     // 추가 유효성 검사
-//     if (woCount == 0) {
-//         alert("몇개부터 가능하도록 할까");
-//         return false; // 제출 방지
-//     }
+    // 추가 유효성 검사
+    if (woCount == 0) {
+        alert("몇개부터 가능하도록 할까");
+        return false; // 제출 방지
+    }
     return true;
+    
 }
 
+var inputSelector = 'input[name="poCount"]';
+
+//숫자 제어 이벤트리스너 함수
+$('body').on('input', woCount, function() {
+
+  // 이벤트 발생 대상의 밸류값을 가져온다
+  var inputValue = parseInt($(this).val());
+  
+  // 숫자가 아니라면 강제로 0으로 설정한다
+  if (isNaN(inputValue)) {
+    inputValue = 0;
+  }
+  
+  // 0보다 적은 숫자라면 강제로 0으로 설정한다
+  if (inputValue < 0) {
+    inputValue = 0;
+  } 
+  // 밸류값을 업데이트한다
+  $(this).val(inputValue);
+});// end function
+
+
+
+//양품 계산
+$(document).on("input", "#poErr", function() {
+// 수주량을 가져온다
+var woCount = parseInt($("#woCount").val());
+console.log(woCount);
+// 단가를 가져온다
+var poErr = parseInt($(this).val());
+console.log(poErr);
+
+// 수주량과 단가를 계산한다
+var result  = woCount - poErr;
+console.log(result );
+
+// 밸류값을 최종가격으로 변경한다
+if (isNaN(result ) || result  == 0) {
+    $("#poGood").val("");
+} else {
+    $("#poGood").val(result );
+}
+
+
+}); // end function
 </script>
 </body>
 </html>
