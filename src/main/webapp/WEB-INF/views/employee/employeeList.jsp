@@ -223,14 +223,8 @@ function fun1() {
 
 }
 
-
 </script>
  
- 
- 
-
-
-
 
 
 <script>
@@ -270,21 +264,10 @@ $(document).ready(function() {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
- 
+
+
 
 </body>
 </html>

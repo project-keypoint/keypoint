@@ -105,6 +105,8 @@ public class EmployeeController {
 			pageNum = "1";
 		}
 				
+		// 다른 페이지 누를때 여백제거
+		pageNum = pageNum.trim();
 		// 페이지 번호 => 정수형 변경
 		int currentPage = Integer.parseInt(pageNum);
 				
