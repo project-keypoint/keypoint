@@ -363,6 +363,7 @@ public class EmployeeController {
 		// 비밀번호 초기화
 
 		@PostMapping("/resetPassword/{empId}")
+		@ResponseBody
 	    public void resetPassword(@PathVariable int empId) {
 			 System.out.println("Received empId: " + empId);
 			
