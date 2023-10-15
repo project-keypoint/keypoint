@@ -32,7 +32,7 @@
 <div class="search-b">
 <div class="search-select">
 <p>업체명</p> 
-<input type="text" id="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
+<input type="text" id="cusCode" name="search1" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
 <input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
 </div>
 </div>
@@ -40,7 +40,7 @@
 <div class="search-b">
 <div class="search-select">
 <p>상품명</p> 
-<input type="text" id="productCode" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
+<input type="text" id="productCode" name="search2" class="form-control search-input" placeholder="상품코드" style="width:110px;" readonly>
 <input type="text" id="productName" class="form-control search-input" placeholder="상품명(클릭)" readonly>
 </div>
 
@@ -48,16 +48,11 @@
 
 
 <div class="search-button">
-<input type="button" value="검색" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
 </div>
 </div><!-- search-bar -->
 <br>
-
-
-
-
-
 
 
 
@@ -75,6 +70,7 @@
 
 
 <!-- -------------------------------------------------------전체-------------------------------------------------------------------------------- -->
+
 <div id="hide1" class="tab-content">
     <table class="table-list">
         <tr class="table-head">
@@ -108,6 +104,8 @@
             </tr>
         </c:forEach>    
     </table>
+  
+    
 </div><!-- table -->
 
 <!-- -------------------------------------------------------거래중-------------------------------------------------------------------------------- -->
@@ -145,7 +143,18 @@
         </c:forEach>    
     </table>
     
+    
+    
+    
+    
+    
+    
 </div><!-- table -->
+
+
+
+
+
 
 <!-- -------------------------------------------------------거래중지-------------------------------------------------------------------------------- -->
 <div id="hide3" class="tab-content">
@@ -189,7 +198,6 @@
 
 
 
-
 <div class="content-bottom">
 <div>
 <input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
@@ -200,7 +208,7 @@
 <!-- ---------------------페이징---------------- -->
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+	<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
 </c:if>
 
 <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
@@ -220,7 +228,60 @@
 
 
 
-</div><!-- page-button -->
+
+
+<!-- 거래중인 거래처에 대한 페이징 -->
+<c:if test="${activeTab eq 'active'}">
+  <div class="page-buttons">
+    <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+      <a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO1.startPage - pageDTO1.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
+    </c:if>
+
+    <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+      <c:choose>
+        <c:when test="${i eq pageDTO.currentPage}">
+          <a href="#" class="page-button page-button-active">${i}</a>
+        </c:when>
+        <c:otherwise>
+          <a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
+        </c:otherwise>
+      </c:choose>
+    </c:forEach>
+
+    <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+      <a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
+    </c:if>
+  </div>
+</c:if>
+
+<!-- 거래중지인 거래처에 대한 페이징 -->
+<c:if test="${activeTab eq 'inactive'}">
+  <div class="page-buttons">
+    <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+      <a href="${pageContext.request.contextPath}/customer/inactiveCusList?pageNum=${pageDTO2.startPage - pageDTO2.pageBlock}&search=${pageDTO2.search}" class="page-button">&lt;</a>
+    </c:if>
+
+    <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+      <c:choose>
+        <c:when test="${i eq pageDTO.currentPage}">
+          <a href="#" class="page-button page-button-active">${i}</a>
+        </c:when>
+        <c:otherwise>
+          <a href="${pageContext.request.contextPath}/customer/inactiveCusList?pageNum=${i}&search=${pageDTO2.search}&search=${pageDTO2.search}" class="page-button">${i}</a>
+        </c:otherwise>
+      </c:choose>
+    </c:forEach>
+
+    <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+      <a href="${pageContext.request.contextPath}/customer/inactiveCusList?pageNum=${pageDTO2.startPage + pageDTO2.pageBlock}&search=${pageDTO2.search}" class="page-button">&gt;</a>
+    </c:if>
+  </div>
+</c:if>
+
+</div>
+
+
+<!-- ---------------------페이징---------------- -->
 
 </div>
 </div><!-- contents -->
@@ -228,7 +289,6 @@
 </div><!-- main -->
 
 <!-- contents end -->
-
 
 
 
@@ -265,6 +325,26 @@ $(document).ready(function() {
 });
 
 
+
+//검색하기
+function doSearch() {
+    if (confirm($("#cusCode").val())) {
+        var query = {"search1" : $("#cusCode").val(), "search2" : $("#productCode").val()};
+        $.ajax({
+            url : "${pageContext.request.contextPath}/customer/cusList",
+            type : "get",
+            data : query,
+            dataType : "text",
+            success : function(data){
+                if (query.search1 == "" && query.search2 == "") {
+                    location.href = "${pageContext.request.contextPath}/customer/cusList";
+                } else {
+                    location.href = "${pageContext.request.contextPath}/customer/cusList?search1=" + $("#cusCode").val() + "&search2=" + $("#productCode").val();
+                }
+            }
+        });
+    } 
+}
 
 
 // 체크박스(삭제용) 전체선택
@@ -373,7 +453,16 @@ function showTab(tabId) {
   
   
   
+  // 검색부분 - 취소버튼 누르면 초기화
+        function cancelSearch() {
+            // 업체명 입력 필드 초기화
+            document.getElementById("cusCode").value = "";
+            document.getElementById("cusName").value = "";
 
+            // 상품명 입력 필드 초기화
+            document.getElementById("productCode").value = "";
+            document.getElementById("productName").value = "";
+        }
   
   
 </script>

@@ -10,12 +10,18 @@
 
 
 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
-	  SELECT *
-	  FROM customer
-	  ORDER BY
+		SELECT *
+		FROM customer
+		<if test="search != null">
+		WHERE cusCode = #{search} 
+		</if>
+		<if test="search2 != null">
+		or materialCode = #{search2}
+		</if>
+	  	ORDER BY
 	    CASE WHEN cusStatus = '거래중지' THEN 1 ELSE 0 END, -- '거래중지' 레코드를 아래로 이동
 	    cusCode DESC
-	  LIMIT #{startRow}, #{pageSize}
+	  	LIMIT #{startRow}, #{pageSize}
 	</select>
 	
 
@@ -67,6 +73,12 @@
 	</select>
 
 
+	<select id="getDeleteCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM customer
+		WHERE cusStatus = '거래중지'		
+	</select>
+
 
 	<select id="getinsertCusList" resultType="com.keypoint.dto.CustomerDTO">
 		SELECT *
@@ -86,12 +98,6 @@
 	</select>
 
 
-
-	<select id="getDeleteCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM customer
-		WHERE cusStatus = '거래중지'		
-	</select>
 
 
 

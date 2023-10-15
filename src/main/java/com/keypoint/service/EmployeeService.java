@@ -1,5 +1,6 @@
 package com.keypoint.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -105,20 +106,12 @@ public class EmployeeService {
 	
 	
 	
-	// 비밀번호 초기화
-	  public EmployeeDTO resetPassword(int empId) {
-		  System.out.println("EmployeeService resetPassword()"); 
-	      String newPassword = String.valueOf(empId);
-	      employeeDAO.updatePassword(empId, newPassword);
-	      EmployeeDTO employeeDTO = new EmployeeDTO();
-	      
-		    employeeDTO.setEmpId(empId);
-		    employeeDTO.setEmpPass(newPassword);
-
-		    return employeeDTO;
-	  } // resetPassword
-
-	
+	 public void resetPassword(int empId) {
+	        Map<String, Object> parameterMap = new HashMap<>();
+	        parameterMap.put("empId", empId);
+	        parameterMap.put("empPass", empId);
+	        employeeDAO.resetPassword(parameterMap);
+    }
 
 	 
 

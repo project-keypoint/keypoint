@@ -107,21 +107,14 @@ public class EmployeeDAO {
 	
 	
 	
-	
-	
-	
-	
-	
-	// 비밀번호 초기화
-	  public void updatePassword(int empId, String newPassword) {
-		  System.out.println("EmployeeDAO updatePassword()");
-		  
-	      Map<String, Object> param = new HashMap<>();
-	      param.put("empId", empId);
-	      param.put("empPass", newPassword);
-	      sqlSession.update("EmployeeMapper.updatePassword", param);
-	  } // updatePassword
+	public void resetPassword(Map<String, Object> parameterMap) {
+	    System.out.println("Parameter Map: " + parameterMap);
+	    sqlSession.update(namespace + ".resetPassword", parameterMap);
+	}
 
+	
+	
+	
 
 	
 } // class

@@ -116,9 +116,9 @@
 
 
 <!-- 	비밀번호 초기화 -->
-    <update id="updatePassword" parameterType="java.util.Map">
+    <update id="resetPassword" parameterType="java.util.Map">
         UPDATE employees
-        SET empPass = #{empPass}
+        SET empPass = #{empId}
         WHERE empId = #{empId}
     </update>
 

@@ -1,6 +1,7 @@
 package com.keypoint.controller;
 
 import java.io.File;
+import java.net.CacheResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -359,27 +362,14 @@ public class EmployeeController {
 		
 		// 비밀번호 초기화
 
-		    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-		    public String resetPassword(HttpServletRequest request) {
-		    	System.out.println("EmployeeController resetPassword()");
-		    	
-		        int empId = Integer.parseInt(request.getParameter("empId"));
-		        EmployeeDTO employeeDTO = employeeService.resetPassword(empId);
-		        
-		        if(employeeDTO != null) {
-					return "employee/msgSuccess"; // 등록완료
-				} else {
-					return "employee/msgFailed"; // 등록실패
-				}
+		@PostMapping("/resetPassword/{empId}")
+	    public void resetPassword(@PathVariable int empId) {
+			 System.out.println("Received empId: " + empId);
 			
-		    } // resetPassword
-		
-		
-
-		     
+			employeeService.resetPassword(empId);
+	    }
 		
 
-		
 		
 		
 		
