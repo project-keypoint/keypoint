@@ -7,10 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.keypoint.dto.LineDTO;
 import com.keypoint.dto.PageDTO;
@@ -103,7 +107,7 @@ public class ProductionController {
 	public String productionInsert() {
 		System.out.println("ProductionController production/productionInsert");
 		return "production/productionInsert";
-	}// receiveUpdate [작업지시등록]
+	}// receiveUpdate [생산실적등록]
 	
 	@PostMapping("/productionInsertPro")
 	public String productionInsertPro(ProductionDTO productionDTO) {
@@ -122,7 +126,7 @@ public class ProductionController {
 		}else {
 			return "production/msgFailed"; // 등록실패
 		}
-	}// workOrderInsertPro [작업지시등록Pro]
+	}// workOrderInsertPro [생산실적등록Pro]
 	
 	
 	
@@ -132,7 +136,7 @@ public class ProductionController {
 		ProductionDTO productionDTO = productionService.getProductionDetails(poCode);
 		model.addAttribute("productionDTO", productionDTO);
 		return "production/productionDetails";
-	}// workOrderDetails [작업지시상세]
+	}// workOrderDetails [생산실적상세]
 	
 	
 	@GetMapping("/productionUpdate")
@@ -141,7 +145,7 @@ public class ProductionController {
 		ProductionDTO productionDTO = productionService.getProductionDetails(poCode);
 		model.addAttribute("productionDTO", productionDTO);
 		return "production/productionUpdate";
-	}// workOrderUpdate [작업지시수정]
+	}// workOrderUpdate [생산실적수정]
 	
 	
 	@PostMapping("/productionUpdatePro")
@@ -155,7 +159,7 @@ public class ProductionController {
 		}else {
 			return "production/msgFailed"; // 등록실패
 		}
-	}// workOrderUpdatePro [작업지시수정Pro]
+	}// workOrderUpdatePro [생산실적수정Pro]
 	
 	
 	@GetMapping("/productionDelete")
@@ -169,10 +173,47 @@ public class ProductionController {
 		}else {
 			return "production/msgFailed"; // 등록실패
 		}
-	}// workOrderDelete [작업지시삭제]
+	}// workOrderDelete [생산실적삭제]
 	
 	
 	
+	
+	 
+
+//    // "/productionList" URL에 대한 POST 요청 처리 (선택 삭제 등의 작업)
+//    @PostMapping("/productionList")
+//    @ResponseBody
+//    public String processProductionList(HttpServletRequest request, @RequestParam("postIds") String postIds) {
+//        // 여기에서 선택 삭제 또는 기타 작업을 수행하고 결과를 반환
+//        return "success"; // 삭제 성공시 "success" 반환
+//    }
+
+	  
+// // "/productionList" URL에 대한 POST 요청 처리 (선택 삭제 또는 기타 작업)
+//    @PostMapping("/productionList")
+//    @ResponseBody
+//    public String processProductionList(@RequestParam("postIds") String postIds) {
+//        try {
+//            // 여기에서 선택 삭제 또는 기타 작업을 수행
+//            // productionService.productionDelete(postIds); // 예를 들어, 선택 삭제 작업을 수행할 때
+//
+//            return "success"; // 삭제 성공시 "success" 반환
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "error"; // 에러 발생시 "error" 반환 또는 적절한 오류 처리
+//        }
+//    }
+	
+	 @PostMapping("/deleteSelected")
+	    public String deleteSelected(@RequestParam("postIds") String postIds) {
+		 System.out.println(postIds);
+		 
+	        String[] poCodes = postIds.split("\\|");
+	        for (String poCode : poCodes) {
+	            productionService.deleteSelected(poCode);
+	        }
+	        return "redirect:/production/productionList";
+	    }
 	
 	
 	

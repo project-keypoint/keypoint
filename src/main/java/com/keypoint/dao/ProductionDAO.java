@@ -5,16 +5,19 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ProductionDTO;
 import com.keypoint.dto.WorkOrderDTO;
+
 @Repository
 public class ProductionDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
+	
 	
 	private static final String namespace="com.itwillbs.mappers.productionMapper";
 	
@@ -57,6 +60,18 @@ public class ProductionDAO {
 		System.out.println(productionDTO);
 		sqlSession.update(namespace+".deleteProduction",productionDTO);
 	}// deleteProduction() [생산실적삭제]
+
+	
+	public void deleteProduction(String poCode) {
+
+		sqlSession.update(namespace+".deleteProduction", poCode);
+	}
+
+	public void deleteSelected(String poCode) {
+		sqlSession.update(namespace+".deleteSelected", poCode);
+	}
+
+	
 	
 	
 	

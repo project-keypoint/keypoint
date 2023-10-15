@@ -72,6 +72,17 @@ public class ProductionService {
 		System.out.println(productionDTO);
 		productionDAO.deleteProduction(productionDTO);
 	}// productionDelete() [작업지시삭제]
+
+	public void deleteSelected(String poCode) {
+		 productionDAO.deleteSelected(poCode);
+	}
+
+	
+	 
+
+	
+	
+	
 	
 	
 	
