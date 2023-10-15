@@ -82,7 +82,7 @@
 
 </div>
 <div class="details-buttons">
-<input type="submit" value="등록" class="btn btn-primary mybutton1">
+<input type="submit" id="productionSubmit" value="등록" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->
@@ -192,7 +192,7 @@ function validateForm() {
     var poCause = document.getElementById("poCause").value;
     var empId = document.getElementById("empId").value;
     
-    console.log("poCode: " + poCode);
+//     console.log("poCode: " + poCode);
     // 빈 필드 검사
     if (poCode === "" || poDate === "" ||
     		poGood === "" || poErr === "" || poCause === "" ||
@@ -237,13 +237,19 @@ $(document).on("input", "#poErr", function() {
 // 수주량을 가져온다
 var woCount = parseInt($("#woCount").val());
 console.log(woCount);
-// 단가를 가져온다
+// 불량 값을 입력한다
 var poErr = parseInt($(this).val());
 console.log(poErr);
 
-// 수주량과 단가를 계산한다
+// 수주량과 불량 계산한다
 var result  = woCount - poErr;
 console.log(result );
+
+//result가 음수인 경우 0으로 설정
+if (poErr > woCount){
+	result = '불량은 지시 수량보다 클 수 없습니다.';
+}
+
 
 // 밸류값을 최종가격으로 변경한다
 if (isNaN(result ) || result  == 0) {
