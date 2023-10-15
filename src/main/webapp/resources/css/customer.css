@@ -154,6 +154,28 @@ background: #D3D3D3;
 }
 
 
+/* 기본 버튼 스타일 (회색) */
+.btn.btn-secondary.mybutton2 {
+background-color: #858796;
+color: #fff;
+line-height: 0;
+height: 32px;
+}
+
+/* 클릭된 버튼 스타일 (파란색) */
+.btn.btn-secondary.mybutton2.clicked {
+background-color: #4e73df;
+}
+}
+
+
+
+
+
+
+
+#36b9cc
+
 .gray-background {
 background-color: #f0f0f0; /* 옅은 회색 배경색 */
 }
@@ -212,7 +234,7 @@ height: 30px;
 
 
 
-#cusCode.search-input, #cusNumber.search-input, #cusName.search-input, #cusResp.search-input,  
+#cusCode.search-input, #cusNumber.search-input, #cusName.search-input, #cusResp.search-input, #cusBusiness.search-input,
 #cusPhone.search-input, #cusEmail.search-input, #cusMemo.search-input, #cusHome.search-input,#cusAddress.search-input, 
 #cusRep.search-input,#cusTel.search-input, #cusType.search-input, #cusCategory.search-input, 
 #cusStatus.search-input, #cusFax.search-input,  #cusZonecode.search-input, #cusAddress_dtail.search-input {

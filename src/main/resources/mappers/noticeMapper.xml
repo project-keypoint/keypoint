@@ -62,7 +62,7 @@
 	    FROM notice
 	    <where>
 	    noticeStatus != '삭제'
-	    <if test="searchType != null and searchKeyword != null">
+	    <if test="searchType != null and searchKeyword != null" >
 		<choose>
 		<when test="searchType == 'all'">
 			AND noticeSubject LIKE CONCAT('%', #{searchKeyword}, '%')
@@ -83,8 +83,6 @@
 		</if>
 		</where>
 	</select>
-	  
-	
 	  
 	  
 	  
@@ -124,14 +122,24 @@
   
   
   
-  	<select id="getinserCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM notice
-		WHERE noticeStatus = '등록'
-  	</select>
-  	
+<!-- 	  <select id="getinserCount" resultType="java.lang.Integer"> -->
+<!-- 		  SELECT COUNT(*) -->
+<!-- 		  FROM notice -->
+<!-- 		  WHERE noticeStatus = '등록' -->
+<!-- 	  </select> -->
+	  
   
-
+	  
+	  <select id="getinserCount" resultType="java.lang.Integer">
+		  SELECT COUNT(*)
+		  FROM notice
+		  WHERE noticeStatus = '등록'
+	</select>
+	  
+	  
+	  
+  
+  
   
   
   

@@ -91,12 +91,12 @@
         <option value="흡음제">흡음제</option>
         <option value="플레이트">플레이트</option>
         <option value="PCB">PCB</option>
-        <option value="키보드A(적축)">키보드A(적축)</option>
-        <option value="키보드A(청축)">키보드A(청축)</option>
-        <option value="키보드A(갈축)">키보드A(갈축)</option>
-        <option value="키보드B(적축)">키보드B(적축)</option>
-        <option value="키보드B(청축)">키보드B(청축)</option>
-        <option value="키보드B(갈축)">키보드B(갈축)</option>
+        <option value="키포인트A87(적축)">키포인트A87(적축)</option>
+        <option value="키포인트A87(청축)">키포인트A87(청축)</option>
+        <option value="키포인트A87(갈축)">키포인트A87(갈축)</option>
+        <option value="키포인트B104(적축)">키포인트B104(적축)</option>
+        <option value="키포인트B104(청축)">키포인트B104(청축)</option>
+        <option value="키포인트B104(갈축)">키포인트B104(갈축)</option>
 </select>
 </div>
 

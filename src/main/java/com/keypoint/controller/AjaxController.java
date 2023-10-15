@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ import com.keypoint.dto.CustomerDTO;
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.NoticeDTO;
 import com.keypoint.dto.PageDTO;
+import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.CustomerService;
 import com.keypoint.service.EmployeeService;
 import com.keypoint.service.NoticeService;
@@ -112,6 +114,23 @@ public class AjaxController {
 		} // empCheck
 	
 	
+//		--------------------------------------------------------------------------
+//		공지사항 다중삭제
+		@PostMapping("/noticeDeleteChecked")
+		public ResponseEntity<String> noticeDeleteChecked(@RequestBody NoticeDTO noticeDTO) {
+		    try {
+		        noticeService.deleteNotice(noticeDTO);
+		        return ResponseEntity.ok("success");
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		    }
+		}
+		
+		
+		
+		
+		
 
 	
 		
