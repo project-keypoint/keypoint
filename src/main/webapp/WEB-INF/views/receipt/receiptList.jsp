@@ -52,7 +52,10 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">입고현황(입고전체목록)</div>
+<div class="page-title">입고현황(입고전체목록)
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="cancelSearch()">
+</div>
 
 <div class="contents2">
 <div class="search-bar">
@@ -71,7 +74,7 @@
 
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
-<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 </div>
 </div><!-- search-bar -->
 <br>
@@ -358,7 +361,16 @@ function cancelSearch() {
 </script>
 
 
+<script>
+//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+function resetSearch() {
+	$("#materialCode").val("");
+    $("#materialName").val("");
 
+    $("#materialCode").attr("placeholder", "자재코드");
+    $("#materialName").attr("placeholder", "자재명");
+}
+</script>
 
 
 

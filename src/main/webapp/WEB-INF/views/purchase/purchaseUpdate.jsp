@@ -53,7 +53,7 @@
 
 <div class="form-group-receive">
 <p>발주금액</p>
-<input type="text" class="form-control search-input" id="poPrice" name="poPrice" value="${purchaseDTO.poPrice}">
+<input type="text" class="form-control search-input" id="poPrice" name="poPrice" value="${purchaseDTO.poPrice}" readonly>
 </div>
 
 
