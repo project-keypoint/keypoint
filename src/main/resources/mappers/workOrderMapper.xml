@@ -336,111 +336,11 @@
 	
 	
 
-<!-- 	<select id="getWorkList" -->
-<!-- 		resultType="com.keypoint.dto.WorkOrderDTO"> -->
-<!-- 		select a.woCode, a.cusCode, b.cusName, a.productCode, -->
-<!-- 		c.productName, -->
-<!-- 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode, -->
-<!-- 		a.empId, -->
-<!-- 		e.empName -->
-<!-- 		from workOrder a -->
-<!-- 		left join customer b on a.cusCode = -->
-<!-- 		b.cusCode -->
-<!-- 		left join product c on a.productCode = c.productCode -->
-<!-- 		left join -->
-<!-- 		receivedOrder d on a.roCode = d.roCode -->
-<!-- 		left join employees e on a.empId -->
-<!-- 		= e.empId -->
-<!-- 		where a.woStatus != '삭제' -->
-<!-- 		<if test="search != null and search != ''"> -->
-<!-- 			and a.woCode = #{search} -->
-<!-- 		</if> -->
-<!-- 		<if test="search2 != null and search2 != ''"> -->
-<!-- 			and date_format(a.woDate, '%Y-%m-%d') <![CDATA[>=]]> -->
-<!-- 			date_format(#{search2}, '%Y-%m-%d') -->
-<!-- 		</if> -->
-<!-- 		<if test="search3 != null and search3 != ''"> -->
-<!-- 			and date_format(a.woDate, '%Y-%m-%d') <![CDATA[<=]]> -->
-<!-- 			date_format(#{search3}, '%Y-%m-%d') -->
-<!-- 		</if> -->
-<!-- 		<if test="search4 != null and search4 != ''"> -->
-<!-- 			and a.productCode = #{search4} -->
-<!-- 		</if> -->
-<!-- 		<if test="search5 == null"> -->
-<!-- 			and a.woStatus not in ('대기') -->
-<!-- 		</if> -->
-<!-- 		<if test="search6 == null"> -->
-<!-- 			and a.woStatus not in ('진행') -->
-<!-- 		</if> -->
-<!-- 		<if test="search7 == null"> -->
-<!-- 			and a.woStatus not in ('완료') -->
-<!-- 		</if> -->
-<!-- 		order by woCode desc -->
-<!-- 		limit #{startRow} , #{pageSize} -->
-<!-- 	</select> -->
-
-<!-- 	<select id="getWorkOrderCount" resultType="java.lang.Integer"> -->
-<!-- 		select count(*) -->
-<!-- 		from (a.woCode, a.cusCode, b.cusName, a.productCode, -->
-<!-- 		c.productName, -->
-<!-- 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode, -->
-<!-- 		a.empId, e.empName -->
-<!-- 		from workOrder a -->
-<!-- 		left join customer b on a.cusCode = -->
-<!-- 		b.cusCode -->
-<!-- 		left join product c on a.productCode = c.productCode -->
-<!-- 		left join -->
-<!-- 		receivedOrder d on a.roCode = d.roCode -->
-<!-- 		left join employees e on a.empId -->
-<!-- 		= e.empId -->
-<!-- 		where a.woStatus != '삭제' -->
-<!-- 		<if test="search != null and search != ''"> -->
-<!-- 			and a.woCode = #{search} -->
-<!-- 		</if> -->
-<!-- 		<if test="search2 != null and search2 != ''"> -->
-<!-- 			and date_format(a.woDate, '%Y-%m-%d') <![CDATA[>=]]> -->
-<!-- 			date_format(#{search2}, '%Y-%m-%d') -->
-<!-- 		</if> -->
-<!-- 		<if test="search3 != null and search3 != ''"> -->
-<!-- 			and date_format(a.woDate, '%Y-%m-%d') <![CDATA[<=]]> -->
-<!-- 			date_format(#{search3}, '%Y-%m-%d') -->
-<!-- 		</if> -->
-<!-- 		<if test="search4 != null and search4 != ''"> -->
-<!-- 			and a.productCode = #{search4} -->
-<!-- 		</if> -->
-<!-- 		<if test="search5 == null"> -->
-<!-- 			and a.woStatus not in ('대기') -->
-<!-- 		</if> -->
-<!-- 		<if test="search6 == null"> -->
-<!-- 			and a.woStatus not in ('진행') -->
-<!-- 		</if> -->
-<!-- 		<if test="search7 == null"> -->
-<!-- 			and a.woStatus not in ('완료') -->
-<!-- 		</if> -->
-<!-- 		) instlist -->
-<!-- 	</select> -->
-
-<!-- 	<select id="getWork" resultType="com.keypoint.dto.WorkOrderDTO"> -->
-<!-- 		select a.woCode, a.cusCode, -->
-<!-- 		b.cusName, a.productCode, -->
-<!-- 		c.productName, -->
-<!-- 		a.woCount, d.roCode, a.woDate, -->
-<!-- 		a.woStatus, a.lineCode, -->
-<!-- 		a.empId, -->
-<!-- 		e.empName -->
-<!-- 		from workOrder a -->
-<!-- 		left join -->
-<!-- 		customer b on a.cusCode = -->
-<!-- 		b.cusCode -->
-<!-- 		left join product c on a.productCode -->
-<!-- 		= c.productCode -->
-<!-- 		left join -->
-<!-- 		receivedOrder d on a.roCode = d.roCode -->
-<!-- 		left -->
-<!-- 		join employees e on a.empId -->
-<!-- 		= e.empId -->
-<!-- 		where a.woCode = #{woCode} -->
-<!-- 	</select> -->
+	<update id="deleteSelected">
+		UPDATE workOrder
+		SET woStatus = '삭제'
+		WHERE woCode = #{woCode}
+	</update>
 
 	
 	

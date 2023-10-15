@@ -513,7 +513,16 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 			
 		
 		
-		
+	 @PostMapping("/deleteSelected")
+	    public String deleteSelected(@RequestParam("postIds") String postIds) {
+		 System.out.println(postIds);
+		 
+	        String[] woCodes = postIds.split("\\|");
+	        for (String woCode : woCodes) {
+	            workOrderService.deleteSelected(woCode);
+	        }
+	        return "redirect:/workOrder/workOrderList";
+	    }
 		
 
 

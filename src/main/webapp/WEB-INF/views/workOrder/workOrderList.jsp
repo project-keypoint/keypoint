@@ -121,7 +121,7 @@
 							<tr class="table-body">
 								<td><input type="checkbox" id="delete-list"
 									name="delete-list" data-group="delete-list"></td>
-								<td>${workOrderDTO.woCode}</td>
+								<td name="woCode">${workOrderDTO.woCode}</td>
 								<td>${workOrderDTO.cusName}</td>
 								<td>${workOrderDTO.cusCode}</td>
 								<td>${workOrderDTO.roCode}</td>
@@ -148,7 +148,7 @@
 						<input type="button" value="작업지시등록"
 							class="btn btn-primary mybutton1" onclick="openInsert()">
 						<input type="button" value="삭제"
-							class="btn btn-secondary mybutton1">
+							class="btn btn-secondary mybutton1" onclick="selectedDel()" >
 					</div>
 					<div id="page_control" class="page-buttons">
   					  <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -299,6 +299,81 @@
 		    $('#select2').prop('checked', false);
 		   
 		}
+		
+		
+		
+		 $(document).ready(function() {
+		        // 전체선택 체크박스 클릭 시
+		        $("#delete-list-all").on("click", function() {
+		            $("input:checkbox[name=delete-list]").prop("checked", this.checked);
+		        });
+
+		        // 개별 체크박스 클릭 시
+		        $(document).on("click", "input:checkbox[name=delete-list]", function(e) {
+		            var chks = document.getElementsByName("delete-list");
+		            var chksChecked = 0;
+
+		            for (var i = 0; i < chks.length; i++) {
+		                var cbox = chks[i];
+
+		                if (cbox.checked) {
+		                    chksChecked++;
+		                }
+		            }
+		            if (chks.length == chksChecked) {
+		                $("#delete-list-all").prop("checked", true);
+		            } else {
+		                $("#delete-list-all").prop("checked", false);
+		            }
+		        });
+
+		        // 전체선택 체크박스 상태 변경 시
+		        $(document).on("change", "#delete-list-all", function() {
+		            // 상황에 맞게 처리
+		        });
+		    });
+
+		    // 선택삭제
+		    function selectedDel() {
+		        var postIds = [];
+		        var selectedRows = [];
+
+		        // 선택된 체크박스와 해당 행을 찾아서 배열에 추가
+				$("[name='delete-list']:checked").each(function() {
+					postIds.push($(this).closest("tr").find("[name=woCode]").text())
+					console.log("value:" + $(this).closest("tr").find("[name=woCode]").text())
+				});
+
+
+		        if (postIds.length === 0) {
+		            alert("삭재할 글을 선택하세요.");
+		            return;
+		        }
+
+		        // 사용자에게 삭제 여부를 확인하는 대화 상자 표시
+		        var confirmMessage = "선택한 글 을 삭제하시겠습니까?";
+		        
+		        console.log(postIds);
+		        if(confirm(confirmMessage)) {
+		        	$.ajax({
+		        		type: "POST",
+		        		url: "/Keypoint/workOrder/deleteSelected?" + $.param({"postIds": postIds.join("|")}),
+//		                data: {
+//		                    postIds: postIds.join("|")
+//		                },
+		        		success: function(result) {
+		        			location.reload();
+		        		},
+		                error: function(xhr, status, error) {
+		                    alert(error);
+		                }
+		        	})
+		        }
+		
+
+		    }
+		
+		
 		
 		
 		

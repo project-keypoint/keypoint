@@ -141,7 +141,11 @@
 	</update>
 	
 	
-
+	<update id="deleteSelected">
+		UPDATE production
+		SET woStatus = '삭제'
+		WHERE poCode = #{poCode}
+	</update>
 	
 	
 	

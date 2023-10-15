@@ -197,7 +197,9 @@ public class WorkOrderDAO {
 	
 	
 	
-	
+	public void deleteSelected(String woCode) {
+		sqlSession.update(namespace+".deleteSelected", woCode);
+	}
 	
 	
 	

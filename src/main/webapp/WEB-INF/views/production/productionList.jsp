@@ -115,7 +115,7 @@
 							<tr class="table-body">
 								<td><input type="checkbox" id="delete-list"
 									name="delete-list" data-group="delete-list"></td>
-								<td>${productionDTO.poCode}</td>
+								<td name="poCode">${productionDTO.poCode}</td>
 								<td>${productionDTO.woCode}</td>
 								<td><c:out
 										value="${fn:substring(productionDTO.poDate, 0, 10)}" /></td>
@@ -145,8 +145,8 @@
 				<div>
 						<input type="button" value="생산실적등록"
 							class="btn btn-primary mybutton1" onclick="openInsert()">
-						<input type="button" value="삭제"
-							class="btn btn-secondary mybutton1">
+						<input type="button" value="삭제" 
+							class="btn btn-secondary mybutton1" onclick="selectedDel()" >
 					</div>
 					<div id="page_control" class="page-buttons">
   					  <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -237,7 +237,7 @@
 				}
 			});
 		});
-		// 작업지시상세내용 새창
+		// 생산실적상세내용 새창
 		function openDetails(poCode) {
 		    var url = '${pageContext.request.contextPath}/production/productionDetails?poCode=' + poCode;
 		    var windowWidth = 560;
@@ -246,11 +246,11 @@
 		    var windowTop = (screen.height - windowHeight) / 2;
 		    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 		}
-		//작업지시등록 새창
+		//생산실적등록 새창
 		function openInsert() {
 		    var url = '${pageContext.request.contextPath}/production/productionInsert';
-		    var windowWidth = 550;
-		    var windowHeight = 710;
+		    var windowWidth = 580;
+		    var windowHeight = 750;
 		    var windowLeft = (screen.width - windowWidth) / 2;
 		    var windowTop = (screen.height - windowHeight) / 2;
 		    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
@@ -274,6 +274,105 @@
 		    
 		   
 		}
+		
+		
+		
+		 $(document).ready(function() {
+		        // 전체선택 체크박스 클릭 시
+		        $("#delete-list-all").on("click", function() {
+		            $("input:checkbox[name=delete-list]").prop("checked", this.checked);
+		        });
+
+		        // 개별 체크박스 클릭 시
+		        $(document).on("click", "input:checkbox[name=delete-list]", function(e) {
+		            var chks = document.getElementsByName("delete-list");
+		            var chksChecked = 0;
+
+		            for (var i = 0; i < chks.length; i++) {
+		                var cbox = chks[i];
+
+		                if (cbox.checked) {
+		                    chksChecked++;
+		                }
+		            }
+		            if (chks.length == chksChecked) {
+		                $("#delete-list-all").prop("checked", true);
+		            } else {
+		                $("#delete-list-all").prop("checked", false);
+		            }
+		        });
+
+		        // 전체선택 체크박스 상태 변경 시
+		        $(document).on("change", "#delete-list-all", function() {
+		            // 상황에 맞게 처리
+		        });
+		    });
+
+		    // 선택삭제
+		    function selectedDel() {
+		        var postIds = [];
+		        var selectedRows = [];
+
+		        // 선택된 체크박스와 해당 행을 찾아서 배열에 추가
+				$("[name='delete-list']:checked").each(function() {
+					postIds.push($(this).closest("tr").find("[name=poCode]").text())
+					console.log("value:" + $(this).closest("tr").find("[name=poCode]").text())
+				});
+
+
+		        if (postIds.length === 0) {
+		            alert("삭재할 글을 선택하세요.");
+		            return;
+		        }
+
+		        // 사용자에게 삭제 여부를 확인하는 대화 상자 표시
+		        var confirmMessage = "선택한 글 을 삭제하시겠습니까?";
+		        
+		        console.log(postIds);
+		        if(confirm(confirmMessage)) {
+		        	$.ajax({
+		        		type: "POST",
+		        		url: "/Keypoint/production/deleteSelected?" + $.param({"postIds": postIds.join("|")}),
+// 		                data: {
+//		                    postIds: postIds.join("|")
+//		                },
+		        		success: function(result) {
+		        			location.reload();
+		        		},
+		                error: function(xhr, status, error) {
+		                    alert(error);
+		                }
+		        	})
+		        }
+		        
+// 		        if (confirm(confirmMessage)) {
+// 		            $.ajax({
+// 		                type: "POST",
+// 		                url: "<c:url value='/production/productionList' />", // 스프링 URL 태그 사용
+// 		                data: {
+// 		                    postIds: postIds.join("|")
+// 		                },
+// 		                success: function(result) {
+// 		                    console.log(result);
+
+// 		                    // 삭제가 성공한 경우 선택된 행을 화면에서 제거
+// 		                    if (result.trim() === "success") {
+// 		                        for (var i = 0; i < selectedRows.length; i++) {
+// 		                            selectedRows[i].remove();
+// 		                        }
+// 		                        location.reload();
+// 		                    } else {
+// 		                        alert("삭제 실패");
+// 		                    }
+// 		                },
+// 		                error: function(xhr, status, error) {
+// 		                    alert(error);
+// 		                }
+// 		            });
+// 		        }
+		    }
+		
+		
 		
 		
 		</script>

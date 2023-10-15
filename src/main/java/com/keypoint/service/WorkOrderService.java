@@ -152,6 +152,9 @@ public class WorkOrderService {
 	}
 	
 	
+	public void deleteSelected(String woCode) {
+		 workOrderDAO.deleteSelected(woCode);
+	}
 	
 	
 	
