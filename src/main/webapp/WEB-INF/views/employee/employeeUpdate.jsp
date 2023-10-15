@@ -86,11 +86,11 @@
 
 <div class="form-group-column">
 <p>연락처</p>
-<input type="text" id="empPhone" name="empPhone" class="form-control search-input" value="${employeeDTO.empPhone}" onblur="checkDuplicate('phone')">
+<input type="text" id="empPhone" name="empPhone" class="form-control search-input" value="${employeeDTO.empPhone}" onblur="checkDuplicate('phone')" oninput="addHyphen(this)">
 </div>
 <div class="form-group-column">
 <p>내선번호</p>
-<input type="text" id="empTel" name="empTel" class="form-control search-input" value="${employeeDTO.empTel}" onblur="checkDuplicate('tel')">
+<input type="text" id="empTel" name="empTel" class="form-control search-input" value="${employeeDTO.empTel}" onblur="checkDuplicate('tel')" oninput="addHyphen(this)">
 </div>
 </div>
 
@@ -287,6 +287,27 @@ function checkDuplicate(type) {
             } 
         }
     });
+}
+
+//하이픈 자동 생성(연락처, 내선번호)
+function addHyphen(input) {
+    // 사용자가 입력한 숫자를 가져옴
+    let value = input.value;
+
+    // 숫자만 포함된 새로운 문자열을 생성
+    let newValue = value.replace(/\D/g, '');
+
+    // 숫자의 길이에 따라 적절한 형식으로 하이픈을 추가
+    if (newValue.length === 11) {
+        newValue = newValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    } else if (newValue.length === 10) {
+        newValue = newValue.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+    } else {
+        // 10자리 미만 또는 11자리 초과인 경우, 하이픈 x
+    }
+
+    // 입력 필드에 새로운 값을 설정
+    input.value = newValue;
 }
 
 // 주소 검색 API

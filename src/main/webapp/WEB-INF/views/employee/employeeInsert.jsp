@@ -66,10 +66,9 @@
 <!-- 주소 -->
 <div class="form-group-customer">
 <p>주소</p>
-<input type="text" id="zonecode" name="zonecode" class="form-control search-input" placeholder="우편번호">
-<input type="button" onclick="sample6_execDaumPostcode()"id="dubSubmit" value="우편번호" class="btn btn-primary mybutton2">
+<input type="text" id="zonecode" name="zonecode" class="form-control search-input" placeholder="우편번호" onclick="sample6_execDaumPostcode()">
 </div>
-
+ 
 <div class="form-group-customer">
 <p></p>
 <input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="기본주소">
@@ -83,15 +82,15 @@
 
 
 <div class="form-group-customer">
-    <p>연락처</p>
-    <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate('phone')">
+    <p>연락처</p> 
+    <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate('phone')" oninput="addHyphen(this)">
 </div>
     <div class="divdup"></div>
 
 
 <div class="form-group-customer">
 <p>내선번호</p>
-<input type="tel" id="empTel" name="empTel" class="form-control search-input" onblur="checkDuplicate('tel')">
+<input type="tel" id="empTel" name="empTel" class="form-control search-input" onblur="checkDuplicate('tel')" oninput="addHyphen(this)">
 </div>
 
 <div class="form-group-customer">
@@ -148,6 +147,8 @@
         <option value="3">3</option>
 </select>
 </div>
+</div>
+
 
 <p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 
@@ -242,7 +243,7 @@ function sample6_execDaumPostcode() {
 	      document.getElementById('empAddress').value = fullAddress; // 기본주소
 
 	      // 상세주소 입력란으로 포커스 이동
-	      document.getElementById('cusAddress_dtail').focus();
+	      document.getElementById('empAddress_dtail').focus();
 	    }
 	  }).open();
 	}
@@ -342,8 +343,48 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// 하이픈 자동 생성(연락처, 내선번호)
+function addHyphen(input) {
+    // 사용자가 입력한 숫자를 가져옴
+    let value = input.value;
 
+    // 숫자만 포함된 새로운 문자열을 생성
+    let newValue = value.replace(/\D/g, '');
 
+    // 숫자의 길이에 따라 적절한 형식으로 하이픈을 추가
+    if (newValue.length === 11) {
+        newValue = newValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    } else if (newValue.length === 10) {
+        newValue = newValue.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+    } else {
+        // 10자리 미만 또는 11자리 초과인 경우, 하이픈 x
+    }
+
+    // 입력 필드에 새로운 값을 설정
+    input.value = newValue;
+}
+
+// 이메일 형식 유효성 검사
+function validateEmail(email) {
+    // 이메일 형식을 검사하기 위한 정규 표현식
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // 입력한 이메일을 정규 표현식과 비교하여 유효성을 검사
+    return emailPattern.test(email);
+}
+
+function checkEmailInput() {
+    var emailInput = document.getElementById("empEmail");
+    var email = emailInput.value;
+
+    if (!validateEmail(email)) {
+        alert("올바른 이메일 형식이 아닙니다. 올바른 이메일을 입력해주세요.");
+        emailInput.value = "";
+        return false;
+    }
+
+    return true;
+}
 
 
 
