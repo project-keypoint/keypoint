@@ -184,8 +184,10 @@ resetPasswordButton.addEventListener("click", function() {
             }
         });
 
-        // 확인을 누르면 창을 닫음
-        window.close();
+        // 확인 누르면 창을 닫음
+//         window.close();
+        // 확인 누르면 새로고침
+         location.reload();
     }
 });
 
