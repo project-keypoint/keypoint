@@ -154,14 +154,17 @@
 
 
 <script>
-// 삭제 확인메세지
-function confirmDelete() {
-    if (confirm("정말로 삭제하시겠습니까?")) {
-        location.href = '${pageContext.request.contextPath}/employee/employeeDelete?empId=${employeeDTO.empId}';
-    } else {
+// 삭제 확인메세지(필요없음)
+// function confirmDelete() {
+//     if (confirm("정말로 삭제하시겠습니까?")) {
+//         location.href = '${pageContext.request.contextPath}/employee/employeeDelete?empId=${employeeDTO.empId}';
+//     } else {
     	
-    }
-}
+//     }
+// }
+
+
+
 
 // 비밀번호 초기화
 function resetPassword() {
@@ -173,6 +176,9 @@ function resetPassword() {
     // 이 예제에서는 화면에만 표시합니다.
     document.getElementById('empPass').value = empPass; // empPass 값을 화면에 표시
 }
+
+
+
 
 
 </script>

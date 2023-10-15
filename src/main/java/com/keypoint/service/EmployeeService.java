@@ -98,7 +98,29 @@ public class EmployeeService {
 	} // empPhoneCheck
 
 	
+	
+	
+	
+	
+	
+	
+	
+	// 비밀번호 초기화
+	  public EmployeeDTO resetPassword(int empId) {
+		  System.out.println("EmployeeService resetPassword()"); 
+	      String newPassword = String.valueOf(empId);
+	      employeeDAO.updatePassword(empId, newPassword);
+	      EmployeeDTO employeeDTO = new EmployeeDTO();
+	      
+		    employeeDTO.setEmpId(empId);
+		    employeeDTO.setEmpPass(newPassword);
 
+		    return employeeDTO;
+	  } // resetPassword
+
+	
+
+	 
 
 
 

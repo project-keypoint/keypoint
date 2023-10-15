@@ -1,5 +1,6 @@
 package com.keypoint.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -101,6 +102,25 @@ public class EmployeeDAO {
 		return null;
 		}
 	} // empPhoneCheck
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 비밀번호 초기화
+	  public void updatePassword(int empId, String newPassword) {
+		  System.out.println("EmployeeDAO updatePassword()");
+		  
+	      Map<String, Object> param = new HashMap<>();
+	      param.put("empId", empId);
+	      param.put("empPass", newPassword);
+	      sqlSession.update("EmployeeMapper.updatePassword", param);
+	  } // updatePassword
 
 
 	
