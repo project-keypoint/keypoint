@@ -78,6 +78,25 @@
 </div><!-- search-bar -->
 <br>
 
+<!-- 체크박스 부분 -->
+    <div class="select-status" style="display: flex; justify-content: space-between;">
+     <div style="display: flex; justify-content: flex-start;">
+      <a>발주대기<input type="checkbox" id="select1" name="status" class="list-select" value="발주대기"></a>
+      <a>발주완료<input type="checkbox" id="select2" name="status" class="list-select" value="발주완료"></a>
+
+     </div>
+      <a style="text-align: right;">총 발주수 : ${purchaseCount}개</a>
+    </div>
+<!-- // 체크박스 부분 -->
+
+
+
+
+
+
+
+
+
 <div>
 <table class="table-list">
 <tr class="table-head">
@@ -97,7 +116,7 @@
 </tr>
 
 <c:forEach var="purchaseDTO" items="${purchaseList}">
-<tr class="table-body">
+<tr class="table-body" data-status="${purchaseDTO.poStatus}">
 <!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
     <td>${purchaseDTO.poCode}</td>
     <td>${purchaseDTO.materialCode}</td>
@@ -324,6 +343,51 @@ function resetSearch() {
     $("#materialName").attr("placeholder", "자재명");
 }
 </script>
+
+
+
+<script>
+
+// 체크박스부분
+
+$(document).ready(function() {
+  // 페이지 로딩 시 초기 설정
+  $("tr.table-body").show();
+
+  $("input[name='status']").change(function() {
+    // 'status' 그룹 내의 모든 체크박스를 선택 해제
+    $("input[name='status']").prop("checked", false);
+
+    // 선택한 체크박스만 체크되게 변경
+    $(this).prop("checked", true);
+
+    filterTableByStatus($(this).val());
+  });
+  
+  // 체크박스 누르면 해당하는 리스트 나오게
+  function filterTableByStatus(status) {
+    if (status === '발주대기') {
+      $("tr.table-body[data-status='발주대기']").show();
+      $("tr.table-body[data-status!='발주대기']").hide();
+    } else if (status === '발주완료') {
+      $("tr.table-body[data-status='발주완료']").show();
+      $("tr.table-body[data-status!='발주완료']").hide();
+    }
+  }
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

@@ -104,6 +104,10 @@ public class ReceiptController {
 		
 		// 전체 글개수 가져오기
 		int count = receiptService.getReceiptCount();
+		
+		// 전체 사원 수 employeeCount에 담기
+		model.addAttribute("receiptCount", count);
+		
 		// 한화면에 보여줄 페이지 개수 설정
 		int pageBlock = 10;
 		// 시작하는 페이지 번호
