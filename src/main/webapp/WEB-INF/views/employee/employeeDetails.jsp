@@ -168,37 +168,26 @@
 
 // 비밀번호 초기화
 
-
-document.addEventListener("DOMContentLoaded", function() {
-    var resetPasswordButton = document.getElementById("resetPasswordButton");
+resetPasswordButton.addEventListener("click", function() {
     var empId = document.getElementById("empId").value; // empId 값을 가져오기
 
-    resetPasswordButton.addEventListener("click", function() {
-        // empId 값을 콘솔에 출력
-        console.log("empId: " + empId);
+    // empId 값을 콘솔에 출력
+    console.log("empId: " + empId);
 
+    // 확인 메시지 창 표시
+    if (confirm("비밀번호를 초기화하시겠습니까?")) {
         // 서버에 비밀번호 초기화 요청을 보냄
         fetch(`${pageContext.request.contextPath}/employee/resetPassword/${employeeDTO.empId}`, {
             method: "POST", // POST 요청 사용
             headers: {
                 "Content-Type": "application/json"
             }
-        })
-        .then(response => {
-            if(response.ok) {
-                console.log("비밀번호 초기화 성공");
-                alert("비밀번호가 초기화되었습니다");
-                // 비밀번호 초기화 성공 시 페이지를 새로고침
-            } else {
-                console.error("비밀번호 초기화 실패");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
         });
-    });
-});
 
+        // 확인을 누르면 창을 닫음
+        window.close();
+    }
+});
 
 
 
