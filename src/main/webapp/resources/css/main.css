@@ -1,0 +1,112 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'Noto';
+    src: url('../fonts/NotoSansKR-Regular.otf') format('opentype');
+}
+@media screen and (max-width: 768px) {
+  .main {
+  position:relative;
+  margin-left: 6.5rem;
+  margin-right: 1.5rem;
+  width: calc(100%-7rem);
+  height: 100%;
+  overflow: hidden; 
+  }
+}
+@media (min-width: 768px) {
+ .main {
+  position:relative;
+  margin-left: 14rem;
+  margin-right: 1.5rem;
+  width: calc(100%-15.5rem);
+  overflow: hidden; 
+  }
+}
+
+@media (min-width: 1024px) {
+  .in-card, .main-chart-all {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  }
+  .in-card-1, .in-card-2, .main-chart1, .main-chart2, .main-chart3{
+  width: 50%;
+  }
+  .in-card-1, .main-chart1 {
+  margin-right: 10px;
+  }
+}
+@media (max-width: 1024px) {
+  .in-card-1, .in-card-2, .main-chart1, .main-chart2, .main-chart3{
+  width: 100%;
+  }
+  .in-card-2 {
+  margin-top: 20px;
+  }
+}
+.main {
+font-family: 'Noto', sans-serif !important;
+color: black;
+padding-left: 30px;
+overflow-y: hidden;
+height: calc(100%-4.375rem);
+}
+h3, h4, h5, h6 {
+font-weight: bold;
+}
+.in-card {
+position: relative;
+padding: 10px;
+}
+.right {
+height: inherit;
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+}
+.left {
+height: inherit;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+.more-notice {
+cursor: pointer;
+}
+table {
+text-align: center;
+}
+table th {
+padding: 3px;
+border: 1px solid #ddd;
+background: #E5E5E5;
+}
+table td{
+padding: 3px;
+border: 1px solid #ddd;
+background: #FFF;
+}
+table tr:hover td{
+background: #d3d3d3;
+}
+.row-1 {
+width: 10%;
+}
+.row-2 {
+width: 50%;
+}
+.row-3 {
+width: 10%;
+}
+.row-4 {
+width: 10%;
+}
+.main-chart-all {
+position: relative;
+width: 100%;
+}
+
+.nav-link {
+display: flex;
+justify-content: flex-end;
+}
