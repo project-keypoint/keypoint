@@ -147,7 +147,7 @@
 <input type="button" value="수정" class="btn btn-primary mybutton1" 
 	   onclick="location.href='${pageContext.request.contextPath}/employee/employeeUpdate?empId=${employeeDTO.empId}'">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
-<input type="button" value="비밀번호 초기화" class="btn btn-secondary mybutton1" onclick="resetPassword()">
+<input type="button" value="비밀번호 초기화" class="btn btn-secondary mybutton1" id="resetPasswordButton">
 </div>
 
 
@@ -167,15 +167,37 @@
 
 
 // 비밀번호 초기화
-function resetPassword() {
-    // 여기에서 empId 값을 가져와서 empPass 값을 업데이트할 수 있습니다.
-    var empId = document.getElementById('empId').value; // empId 값을 가져오는 예제
-    var empPass = empId; // empId를 empPass에 할당 (동일하게 만듦)
 
-    // empPass 값을 업데이트하여 서버로 보낼 수도 있습니다.
-    // 이 예제에서는 화면에만 표시합니다.
-    document.getElementById('empPass').value = empPass; // empPass 값을 화면에 표시
-}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var resetPasswordButton = document.getElementById("resetPasswordButton");
+    var empId = document.getElementById("empId").value; // empId 값을 가져오기
+
+    resetPasswordButton.addEventListener("click", function() {
+        // empId 값을 콘솔에 출력
+        console.log("empId: " + empId);
+
+        // 서버에 비밀번호 초기화 요청을 보냄
+        fetch(`${pageContext.request.contextPath}/employee/resetPassword/${employeeDTO.empId}`, {
+            method: "POST", // POST 요청 사용
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            if(response.ok) {
+                console.log("비밀번호 초기화 성공");
+                alert("비밀번호가 초기화되었습니다");
+                // 비밀번호 초기화 성공 시 페이지를 새로고침
+            } else {
+                console.error("비밀번호 초기화 실패");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
+});
 
 
 
