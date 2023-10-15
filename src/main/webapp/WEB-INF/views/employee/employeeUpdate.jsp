@@ -73,7 +73,7 @@
 
 <div class="form-group-column">
 <p>이메일</p>
-<input type="text" id="empEmail" name="empEmail" class="form-control search-input" value="${employeeDTO.empEmail}">
+<input type="text" id="empEmail" name="empEmail" class="form-control search-input" value="${employeeDTO.empEmail}" onblur="checkDuplicate('email')">
 </div>
 <div class="form-group-column">
 <p>생년월일</p>
@@ -86,11 +86,11 @@
 
 <div class="form-group-column">
 <p>연락처</p>
-<input type="text" id="empPhone" name="empPhone" class="form-control search-input" value="${employeeDTO.empPhone}">
+<input type="text" id="empPhone" name="empPhone" class="form-control search-input" value="${employeeDTO.empPhone}" onblur="checkDuplicate('phone')">
 </div>
 <div class="form-group-column">
 <p>내선번호</p>
-<input type="text" id="empTel" name="empTel" class="form-control search-input" value="${employeeDTO.empTel}">
+<input type="text" id="empTel" name="empTel" class="form-control search-input" value="${employeeDTO.empTel}" onblur="checkDuplicate('tel')">
 </div>
 </div>
 
@@ -254,6 +254,39 @@ function setThumbnail(event) {
     img.src = e.target.result;
   }
   reader.readAsDataURL(file);
+}
+
+
+//중복확인(연락처, 내선번호, 이메일)
+function checkDuplicate(type) {
+    var empPhone = document.getElementById("empPhone").value;
+    var empTel = document.getElementById("empTel").value;
+    var empEmail = document.getElementById("empEmail").value;
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/employee/empCheck',
+        data: {
+            empPhone: empPhone,
+            empTel: empTel,
+            empEmail: empEmail,
+            type:type           
+            
+        },
+        success: function (result) {
+            if (result == 'iddup') {
+                alert("중복");
+                if(type=="phone"){
+                document.getElementById("empPhone").value = "";
+                }
+                if(type=="tel"){
+                    document.getElementById("empTel").value = "";
+                    }
+                if(type=="email"){
+                    document.getElementById("empEmail").value = "";
+                    }
+            } 
+        }
+    });
 }
 
 // 주소 검색 API
