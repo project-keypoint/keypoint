@@ -15,7 +15,9 @@
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/customer.css" rel="stylesheet">
+    
+
 </head>
 <body>
 <%@include file="../inc/top-bar.jsp" %>
@@ -53,54 +55,139 @@
 <br>
 
 
+
+
+
+
+
+
 <div class="select-status" style="display: flex; justify-content: space-between;">
-  <div style="display: flex; justify-content: flex-start;">
-<a>전체<input type="checkbox" id="select1" name="select1" class="list-select" checked></a>
-<a>거래중<input type="checkbox" id="select2" name="select2" class="list-select" ></a>
-<a>거래중지<input type="checkbox" id="select3" name="select3" class="list-select" ></a>
-  </div>
-  <a style="text-align: right;">총 ${insertCount}건</a>
+<div style="display: flex; justify-content: flex-start;">
+<div>
+      <input type="button" class="btn btn-secondary mybutton2" value="전체" data-tab="hide1" onclick="updateTotalCount('hide1')">
+      <input type="button" class="btn btn-secondary mybutton2 clicked"" value="거래중" data-tab="hide2" onclick="updateTotalCount('hide2')">
+      <input type="button" class="btn btn-secondary mybutton2" value="거래중지" data-tab="hide3" onclick="updateTotalCount('hide3')">
+</div>
+</div>
+ <a id="totalCount" style="text-align: right;">총 ${insertCount}건</a>
+
 </div>
 
 
-
-
-<div>
-<table class="table-list">
-<tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th onclick="openDetails('${customerDTO.cusCode}')">거래처코드</th>
-    <th>구분</th>
-    <th>거래처명</th>
-    <th>대표자명</th>
-    <th>대표전화</th>
-    <th>업태</th>
-    <th>종목</th>
-    <th>담당자명</th>
-    <th>담당자이메일</th>
-    <th>상태</th>
-    <th>상세</th>
-</tr>
-
-
-<c:forEach var="customerDTO" items="${cusList}">
-<tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-    <td>${customerDTO.cusCode}</td>
-    <td>${customerDTO.cusCategory}</td>
-    <td>${customerDTO.cusName}</td>
-    <td>${customerDTO.cusRep}</td>
-    <td>${customerDTO.cusTel}</td>
-    <td>${customerDTO.cusBusiness}</td>
-    <td>${customerDTO.cusType}</td>
-    <td>${customerDTO.cusResp}</td>
-    <td>${customerDTO.cusEmail}</td>
-    <td>${customerDTO.cusStatus}</td>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${customerDTO.cusCode}')"></td>
-</tr>
-</c:forEach>    
-</table>
+<!-- -------------------------------------------------------전체-------------------------------------------------------------------------------- -->
+<div id="hide1" class="tab-content">
+    <table class="table-list">
+        <tr class="table-head">
+            <th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+            <th onclick="openDetails('${customerDTO.cusCode}')">거래처코드</th>
+            <th>구분</th>
+            <th>　거래처명　</th>
+            <th>　대표자명</th>
+            <th>대표전화</th>
+            <th>업태</th>
+            <th>종목</th>
+            <th>담당자명</th>
+            <th>　　　담당자이메일　　</th>
+            <th>　상태　</th>
+            <th>상세</th>
+        </tr>
+        <c:forEach var="customerDTO" items="${cusList}">
+            <tr class="table-body" data-status="${customerDTO.cusStatus}">
+                <td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+                <td>${customerDTO.cusCode}</td>
+                <td>${customerDTO.cusCategory}</td>
+                <td>${customerDTO.cusName}</td>
+                <td>${customerDTO.cusRep}</td>
+                <td>${customerDTO.cusTel}</td>
+                <td>${customerDTO.cusBusiness}</td>
+                <td>${customerDTO.cusType}</td>
+                <td>${customerDTO.cusResp}</td>
+                <td>${customerDTO.cusEmail}</td>
+                <td>${customerDTO.cusStatus}</td>
+                <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${customerDTO.cusCode}')"></td>
+            </tr>
+        </c:forEach>    
+    </table>
 </div><!-- table -->
+
+<!-- -------------------------------------------------------거래중-------------------------------------------------------------------------------- -->
+<div id="hide2" class="tab-content" active-tab>
+    <table class="table-list">
+        <tr class="table-head">
+            <th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+            <th onclick="openDetails('${customerDTO.cusCode}')">거래처코드</th>
+            <th>구분</th>
+            <th>　거래처명　</th>
+            <th>　대표자명</th>
+            <th>대표전화</th>
+            <th>업태</th>
+            <th>종목</th>
+            <th>담당자명</th>
+            <th>　　　담당자이메일　　</th>
+            <th>　상태　</th>
+            <th>상세</th>
+        </tr>
+        <c:forEach var="customerDTO" items="${insertcusList}">
+            <tr class="table-body" data-status="${customerDTO.cusStatus}">
+                <td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+                <td>${customerDTO.cusCode}</td>
+                <td>${customerDTO.cusCategory}</td>
+                <td>${customerDTO.cusName}</td>
+                <td>${customerDTO.cusRep}</td>
+                <td>${customerDTO.cusTel}</td>
+                <td>${customerDTO.cusBusiness}</td>
+                <td>${customerDTO.cusType}</td>
+                <td>${customerDTO.cusResp}</td>
+                <td>${customerDTO.cusEmail}</td>
+                <td>${customerDTO.cusStatus}</td>
+                <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${customerDTO.cusCode}')"></td>
+            </tr>
+        </c:forEach>    
+    </table>
+    
+</div><!-- table -->
+
+<!-- -------------------------------------------------------거래중지-------------------------------------------------------------------------------- -->
+<div id="hide3" class="tab-content">
+    <table class="table-list">
+        <tr class="table-head">
+            <th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+            <th onclick="openDetails('${customerDTO.cusCode}')">거래처코드</th>
+            <th>구분</th>
+            <th>　거래처명　</th>
+            <th>　대표자명</th>
+            <th>대표전화</th>
+            <th>업태</th>
+            <th>종목</th>
+            <th>담당자명</th>
+            <th>　　　담당자이메일　　</th>
+            <th>　상태　</th>
+            <th>상세</th>
+        </tr>
+        <c:forEach var="customerDTO" items="${deletecusList}">
+            <tr class="table-body" data-status="${customerDTO.cusStatus}">
+                <td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+                <td>${customerDTO.cusCode}</td>
+                <td>${customerDTO.cusCategory}</td>
+                <td>${customerDTO.cusName}</td>
+                <td>${customerDTO.cusRep}</td>
+                <td>${customerDTO.cusTel}</td>
+                <td>${customerDTO.cusBusiness}</td>
+                <td>${customerDTO.cusType}</td>
+                <td>${customerDTO.cusResp}</td>
+                <td>${customerDTO.cusEmail}</td>
+                <td>${customerDTO.cusStatus}</td>
+                <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${customerDTO.cusCode}')"></td>
+            </tr>
+        </c:forEach>    
+    </table>
+</div><!-- table -->
+
+
+
+
+
+
 
 
 <div class="content-bottom">
@@ -227,12 +314,68 @@ function openInsert() {
 
 
 
+//	탭으로 이동하기
+function showTab(tabId) {
+    const tabs = document.querySelectorAll(".tab-content");
+    tabs.forEach(tab => {
+      tab.style.display = "none";
+    });
+    
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+      selectedTab.style.display = "block";
+    }
+  }
 
+  // 초기로드 시 첫 번째 탭 표시
+  showTab("hide2");
 
+  // 버튼 클릭 이벤트 처리
+  const buttons = document.querySelectorAll(".mybutton2");
+  buttons.forEach(button => {
+    button.addEventListener("click", function() {
+      const tabId = this.getAttribute("data-tab");
+      showTab(tabId);
+    });
+  });
 
+  
+  
+//	탭에 따른 총 건수
+  function updateTotalCount(selectedTab) {
+    const totalCount = document.getElementById("totalCount");
 
+    if (selectedTab === "hide1") {
+      totalCount.textContent = `총 ${cusCount}건`;
+    } else if (selectedTab === "hide2") {
+      totalCount.textContent = `총 ${insertCount}건`;
+    } else if (selectedTab === "hide3") {
+      totalCount.textContent = `총 ${deletetCount}건`;
+    }
+  }
+  
+  
+  
+  
+//버튼 클릭 이벤트를 처리하는 JavaScript
+  document.querySelectorAll('.btn.btn-secondary.mybutton2').forEach(function(button) {
+      button.addEventListener('click', function() {
+          // 모든 버튼의 'clicked' 클래스를 제거
+          document.querySelectorAll('.btn.btn-secondary.mybutton2').forEach(function(btn) {
+              btn.classList.remove('clicked');
+          });
 
+          // 클릭된 버튼에 'clicked' 클래스 추가
+          this.classList.add('clicked');
+      });
+  });
+  
+  
+  
+  
 
+  
+  
 </script>
 
 </body>

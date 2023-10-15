@@ -40,8 +40,6 @@ public class CustomerController {
 //		검색어 가져오기
 		String search = request.getParameter("search");
 
-//		'거래중'인 글 개수만 가져오기
-		int insertCount = customerService.getInsertCount();
 		
 //		한 화면에 보여줄 글 개수 설정
 		int pageSize = 10;
@@ -67,11 +65,18 @@ public class CustomerController {
 		
 		pageDTO.setCusStatus(request.getParameter("cusStatus"));
 		
+//		전체 글 리스트
 		List<CustomerDTO> cusList = customerService.getCusList(pageDTO);
+		List<CustomerDTO> insertcusList = customerService.getinsertCusList(pageDTO);
+		List<CustomerDTO> deletecusList = customerService.getdeleteCusList(pageDTO);
 		
 		
 //		거래처 전체 등록 개수 가져오기
 		int count = customerService.getCusCount();
+//		'거래중'/'거래중지'인 글 개수만 가져오기
+		int insertCount = customerService.getInsertCount();
+		int deletetCount = customerService.getDeleteCount();
+		
 		
 //		한 화면에 보여줄 페이지 개수 설정
 		int pageBlock = 10;
@@ -100,8 +105,13 @@ public class CustomerController {
 		
 		
 		model.addAttribute("cusList", cusList);
+		model.addAttribute("insertcusList", insertcusList);
+		model.addAttribute("deletecusList", deletecusList);
+		
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("insertCount", insertCount);
+		model.addAttribute("deletetCount", deletetCount);
+		model.addAttribute("cusCount", count);
 		
 		return "customer/cusList";
 	}

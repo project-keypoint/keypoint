@@ -12,9 +12,6 @@
 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
 	  SELECT *
 	  FROM customer
-	  <if test="search != null">
-	    WHERE cusName LIKE CONCAT('%', #{search}, '%')
-	  </if>
 	  ORDER BY
 	    CASE WHEN cusStatus = '거래중지' THEN 1 ELSE 0 END, -- '거래중지' 레코드를 아래로 이동
 	    cusCode DESC
@@ -60,9 +57,6 @@
 	<select id="getCusCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM customer
-		<if test="search != null">
-			WHERE cusName like CONCAT('%', #{search}, '%')
-		</if>
 	</select>
 
 
@@ -71,6 +65,38 @@
 		FROM customer
 		WHERE cusStatus = '거래중'		
 	</select>
+
+
+
+	<select id="getinsertCusList" resultType="com.keypoint.dto.CustomerDTO">
+		SELECT *
+		FROM customer
+		WHERE cusStatus = '거래중'
+		ORDER BY cusCode DESC
+	 	LIMIT #{startRow}, #{pageSize}
+	</select>
+
+
+	<select id="getdeleteCusList" resultType="com.keypoint.dto.CustomerDTO">
+		SELECT *
+		FROM customer
+		WHERE cusStatus = '거래중지'
+		ORDER BY cusCode DESC
+	 	LIMIT #{startRow}, #{pageSize}
+	</select>
+
+
+
+	<select id="getDeleteCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM customer
+		WHERE cusStatus = '거래중지'		
+	</select>
+
+
+
+
+
 
 
 
