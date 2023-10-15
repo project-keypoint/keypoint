@@ -184,7 +184,7 @@ checkboxes.forEach(function (checkbox) {
 //다중삭제
 function deleteNotice() {
   // 선택된 체크박스 요소들을 가져옵니다.
-  var checkboxes = $('input[name="delete-list-receive"]:checked');
+  var checkboxes = $('input[name="delete-list-all"]:checked');
   // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
   if (checkboxes.length === 0) {
     alert("삭제할 항목을 선택해주세요.");
@@ -201,7 +201,7 @@ function deleteNotice() {
 //Ajax 요청
   $.ajax({
     type: "POST",
-    url: '${pageContext.request.contextPath}/notice/noticeDeletePro?noticeNum=${noticeDTO.noticeNum}',
+    url: '${pageContext.request.contextPath}/notice/noticeDeleteChecked',
     contentType: "application/json",
     data: JSON.stringify({ noticeNum: noticeNum }), // 배열을 보냅니다
     success: function(result) {
@@ -214,13 +214,6 @@ function deleteNotice() {
       alert('오류: ' + xhr.responseText);
     }
   });
-
-
-
-
-
-
-
 
 
 

@@ -38,7 +38,8 @@ public class CustomerController {
 		System.out.println("CustomerController cusList()");
 		
 //		검색어 가져오기
-		String search = request.getParameter("search");
+		String search1 = request.getParameter("search1");
+		String search2 = request.getParameter("search2");
 
 		
 //		한 화면에 보여줄 글 개수 설정
@@ -61,7 +62,8 @@ public class CustomerController {
 		pageDTO.setCurrentPage(currentPage);
 		
 //		검색어 저장
-		pageDTO.setSearch(search);
+		pageDTO.setSearch1(search1);
+		pageDTO.setSearch2(search2);
 		
 		pageDTO.setCusStatus(request.getParameter("cusStatus"));
 		
