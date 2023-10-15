@@ -41,7 +41,7 @@
 </span>   
 </label>
 <input type="hidden" name="oldfile" value="${employeeDTO.empPhoto}">
-${employeeDTO.empPhoto}
+
 
 <div class="imgbtn">
 <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
@@ -49,7 +49,10 @@ ${employeeDTO.empPhoto}
 <!-- </div> -->
 <!-- -------------------- // 사진첨부 -------------------- -->
 
-
+<div class="form-group-column">
+<p>비밀번호</p>
+<input type="text" id="empPass" name="empPass" class="form-control search-input" value="${employeeDTO.empPass}" >
+</div>
 
 
 
