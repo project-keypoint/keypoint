@@ -17,6 +17,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -349,7 +350,39 @@ public class EmployeeController {
 		
 		} // photoUpdatePro
 
-// -------------------------------- 첨부파일 관련 			
+// -------------------------------- 첨부파일 관련 	
 		
-//		
+		
+		
+		
+		
+		
+		// 비밀번호 초기화
+
+		    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+		    public String resetPassword(HttpServletRequest request) {
+		    	System.out.println("EmployeeController resetPassword()");
+		    	
+		        int empId = Integer.parseInt(request.getParameter("empId"));
+		        EmployeeDTO employeeDTO = employeeService.resetPassword(empId);
+		        
+		        if(employeeDTO != null) {
+					return "employee/msgSuccess"; // 등록완료
+				} else {
+					return "employee/msgFailed"; // 등록실패
+				}
+			
+		    } // resetPassword
+		
+		
+
+		     
+		
+
+		
+		
+		
+		
+		
+		
 } // class

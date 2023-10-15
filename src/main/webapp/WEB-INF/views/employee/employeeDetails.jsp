@@ -146,22 +146,40 @@
 <div class="details-buttons">
 <input type="button" value="수정" class="btn btn-primary mybutton1" 
 	   onclick="location.href='${pageContext.request.contextPath}/employee/employeeUpdate?empId=${employeeDTO.empId}'">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
-<input type="button" value="비밀번호 초기화" class="btn btn-secondary mybutton1" onclick="#">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
+<input type="button" value="비밀번호 초기화" class="btn btn-secondary mybutton1" onclick="resetPassword()">
 </div>
 
 
 
 
 <script>
-// 삭제 확인메세지
-function confirmDelete() {
-    if (confirm("정말로 삭제하시겠습니까?")) {
-        location.href = '${pageContext.request.contextPath}/employee/employeeDelete?empId=${employeeDTO.empId}';
-    } else {
+// 삭제 확인메세지(필요없음)
+// function confirmDelete() {
+//     if (confirm("정말로 삭제하시겠습니까?")) {
+//         location.href = '${pageContext.request.contextPath}/employee/employeeDelete?empId=${employeeDTO.empId}';
+//     } else {
     	
-    }
+//     }
+// }
+
+
+
+
+// 비밀번호 초기화
+function resetPassword() {
+    // 여기에서 empId 값을 가져와서 empPass 값을 업데이트할 수 있습니다.
+    var empId = document.getElementById('empId').value; // empId 값을 가져오는 예제
+    var empPass = empId; // empId를 empPass에 할당 (동일하게 만듦)
+
+    // empPass 값을 업데이트하여 서버로 보낼 수도 있습니다.
+    // 이 예제에서는 화면에만 표시합니다.
+    document.getElementById('empPass').value = empPass; // empPass 값을 화면에 표시
 }
+
+
+
+
 
 </script>
 </body>

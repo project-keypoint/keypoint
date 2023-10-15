@@ -54,18 +54,14 @@
 </div><!--  search-bar -->
 </form>
 
-
-
-
-
-
-
-
-
-
 <br>
+
 <div class="select-status" style="text-align: right;">
-  <a style="text-align: right;">총 ${insertCount}건</a>
+  <a style="text-align: right;">총
+    <c:if test="${insertCount != null}">
+      ${insertCount}
+    </c:if>
+    건</a>
 </div>
 
 
@@ -102,7 +98,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="글쓰기" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteNotice()">
 </div>
 
 
@@ -154,31 +150,77 @@
 <script type="text/javascript">
 
 
-// //	검색 AJAX
-//  function getSearchList() {
-// 	ajax({
-// 		type : 'GET',
-// 		url : '${pageContext.request.contextPath}/notice/noticeSearch',
-// 		date : $("form[search-form]").serialize(),
-// 		success : function(result) {
-// 			result.forEach(function(item) {
-// 				str='<tr>'
-// 				str+= "<td>"++"</td>";
-// 				str+= "<td>"+item.noticeNum+"</td>";
-// 				str+="<td>"+item.noticeCategory+"</td>"
-// 				str+="<td><a href=+"</td>"
-				
-// 			})
-			
-// 		}
-		
-		
-		
-// 	})
-	
-	
-	
-// }
+
+//체크박스(삭제용) 전체선택
+var selectAllCheckbox = document.getElementById("delete-list-all");
+var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
+selectAllCheckbox.addEventListener("change", function () {
+ checkboxes.forEach(function (checkbox) {
+     checkbox.checked = selectAllCheckbox.checked;
+ });
+});
+checkboxes.forEach(function (checkbox) {
+ checkbox.addEventListener("change", function () {
+     if (!this.checked) {
+         selectAllCheckbox.checked = false;
+     } else {
+         // 모든 체크박스가 선택되었는지 확인
+         var allChecked = true;
+         checkboxes.forEach(function (c) {
+             if (!c.checked) {
+                 allChecked = false;
+             }
+         });
+         selectAllCheckbox.checked = allChecked;
+     }
+ });
+});
+
+
+
+
+
+
+//다중삭제
+function deleteNotice() {
+  // 선택된 체크박스 요소들을 가져옵니다.
+  var checkboxes = $('input[name="delete-list-receive"]:checked');
+  // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
+  if (checkboxes.length === 0) {
+    alert("삭제할 항목을 선택해주세요.");
+    return;
+  }
+  // 선택된 체크박스의 ${receiveDTO.roCode} 값을 배열에 저장합니다.
+  var noticeNum = [];
+  checkboxes.each(function() {
+    var row = $(this).closest('.table-body');
+    var num = row.find('td:nth-child(2)').text(); // 두 번째 열에 해당하는 값
+    noticeNum.push(num);
+  });
+
+//Ajax 요청
+  $.ajax({
+    type: "POST",
+    url: '${pageContext.request.contextPath}/notice/noticeDeletePro?noticeNum=${noticeDTO.noticeNum}',
+    contentType: "application/json",
+    data: JSON.stringify({ noticeNum: noticeNum }), // 배열을 보냅니다
+    success: function(result) {
+      console.log(result);
+      alert("성공");
+      location.reload();
+    },
+    error: function(xhr, status, error) {
+      console.error('오류:', xhr.responseText);
+      alert('오류: ' + xhr.responseText);
+    }
+  });
+
+
+
+
+
+
+
 
 
 

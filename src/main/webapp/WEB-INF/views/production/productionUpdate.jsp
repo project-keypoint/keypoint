@@ -65,7 +65,7 @@
 			</div>
 			<div class="form-group-receive">
 				<p>지시수량</p>
-				<input type="number" id="poCount" name="poCount"
+				<input type="number" id="woCount" name="poCount"
 					class="form-control search-input"
 					value="${productionDTO.poCount}" min="0" readonly>
 			</div>
@@ -73,7 +73,7 @@
 				<p>양품</p>
 				<input type="text" id="poGood" name="poGood"
 					class="form-control search-input"
-					value="${productionDTO.poGood}" >
+					value="${productionDTO.poGood}" readonly>
 			</div>
 			<div class="form-group-receive">
 				<p>불량</p>
@@ -212,6 +212,53 @@
 			}
 			return true;
 		}
+		
+		var inputSelector = 'input[name="poCount"]';
+
+		//숫자 제어 이벤트리스너 함수
+		$('body').on('input', woCount, function() {
+
+		  // 이벤트 발생 대상의 밸류값을 가져온다
+		  var inputValue = parseInt($(this).val());
+		  
+		  // 숫자가 아니라면 강제로 0으로 설정한다
+		  if (isNaN(inputValue)) {
+		    inputValue = 0;
+		  }
+		  
+		  // 0보다 적은 숫자라면 강제로 0으로 설정한다
+		  if (inputValue < 0) {
+		    inputValue = 0;
+		  } 
+		  // 밸류값을 업데이트한다
+		  $(this).val(inputValue);
+		});// end function
+
+
+
+		//양품 계산
+		$(document).on("input", "#poErr", function() {
+		// 수주량을 가져온다
+		var woCount = parseInt($("#woCount").val());
+		console.log(woCount);
+		// 단가를 가져온다
+		var poErr = parseInt($(this).val());
+		console.log(poErr);
+
+		// 수주량과 단가를 계산한다
+		var result  = woCount - poErr;
+		console.log(result );
+
+		// 밸류값을 최종가격으로 변경한다
+		if (isNaN(result ) || result  == 0) {
+		    $("#poGood").val("");
+		} else {
+		    $("#poGood").val(result );
+		}
+
+
+		}); // end function
+		
 	</script>
 </body>
 </html>

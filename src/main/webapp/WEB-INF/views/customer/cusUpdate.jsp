@@ -86,12 +86,12 @@
 	 <option value="흡음제" ${customerDTO.cusType eq '흡음제' ? 'selected' : ''}>흡음제</option>
 	 <option value="플레이트" ${customerDTO.cusType eq '플레이트' ? 'selected' : ''}>플레이트</option>
 	 <option value="PCB" ${customerDTO.cusType eq 'PCB' ? 'selected' : ''}>PCB</option>
-	 <option value="키보드A(적축)" ${customerDTO.cusType eq '키보드A(적축)' ? 'selected' : ''}>키보드A(적축)</option>
-	 <option value="키보드A(청축)" ${customerDTO.cusType eq '키보드A(청축)' ? 'selected' : ''}>키보드A(청축)</option>
-	 <option value="키보드A(갈축)" ${customerDTO.cusType eq '키보드A(갈축)' ? 'selected' : ''}>키보드A(갈축)</option>
-	 <option value="키보드B(적축)" ${customerDTO.cusType eq '키보드B(적축)' ? 'selected' : ''}>키보드B(적축)</option>
-	 <option value="키보드B(청축)" ${customerDTO.cusType eq '키보드B(청축)' ? 'selected' : ''}>키보드B(청축)</option>
-	 <option value="키보드B(갈축)" ${customerDTO.cusType eq '키보드B(갈축)' ? 'selected' : ''}>키보드B(갈축)</option>
+	 <option value="키포인트A87(적축)" ${customerDTO.cusType eq '키포인트A87(적축)' ? 'selected' : ''}>키포인트A87(적축)</option>
+	 <option value="키포인트A87(청축)" ${customerDTO.cusType eq '키포인트A87(청축)' ? 'selected' : ''}>키포인트A87(청축)</option>
+	 <option value="키포인트A87(갈축)" ${customerDTO.cusType eq '키포인트A87(갈축)' ? 'selected' : ''}>키포인트A87(갈축)</option>
+	 <option value="키포인트B104(적축)" ${customerDTO.cusType eq '키포인트B104(적축)' ? 'selected' : ''}>키포인트B104(적축)</option>
+	 <option value="키포인트B104(청축)" ${customerDTO.cusType eq '키포인트B104(청축)' ? 'selected' : ''}>키포인트B104(청축)</option>
+	 <option value="키포인트B104(갈축)" ${customerDTO.cusType eq '키포인트B104(갈축)' ? 'selected' : ''}>키포인트B104(갈축)</option>
 </select>
 </div>
 

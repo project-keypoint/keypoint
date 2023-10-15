@@ -54,8 +54,8 @@
 
 
 <div class="form-group-customer">
-<p>비밀번호(수정필요)</p>
-<input type="text" id="empPass" name="empPass" class="form-control search-input" >
+<p>비밀번호(숨길까?)</p>
+<input type="text" id="empPass" name="empPass" class="form-control search-input" readonly>
 </div>
 
 <div class="form-group-customer">

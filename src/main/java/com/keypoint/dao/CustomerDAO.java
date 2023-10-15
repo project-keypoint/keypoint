@@ -72,11 +72,35 @@ public class CustomerDAO {
 	}
 
 
-//	'등록'인 거래처 개수 	
+//	'거래중'인 거래처 개수 	
 	public int getInsertCount() {
 		System.out.println("CustomerDAO getInsertCount()");
 
 		return sqlSession.selectOne(namespace+".getInsertCount");
+	}
+
+	
+//	'거래중'인 거래처 목록
+	public List<CustomerDTO> getinsertCusList(PageDTO pageDTO) {
+		System.out.println("CustomerDAO getinsertCusList()");
+
+		return sqlSession.selectList(namespace+".getinsertCusList", pageDTO);
+	}
+
+
+//	'거래중지' 거래처 목록
+	public List<CustomerDTO> getdeleteCusList(PageDTO pageDTO) {
+		System.out.println("CustomerDAO getdeleteCusList()");
+		
+		return sqlSession.selectList(namespace+".getdeleteCusList", pageDTO);
+	}
+
+
+//	'거래중지' 거래처 수
+	public int getDeleteCount() {
+		System.out.println("CustomerDAO getDeleteCount()");
+		
+		return sqlSession.selectOne(namespace+".getDeleteCount");
 	}
 
 

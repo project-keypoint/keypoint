@@ -213,11 +213,11 @@
 				alert("모든 내용을 입력해주세요.");
 				return false; // 제출 방지
 			}
-			//     // 추가 유효성 검사
-			//     if (woCount == 0) {
-			//         alert("몇개부터 가능하도록 할까");
-			//         return false; // 제출 방지
-			//     }
+			    // 추가 유효성 검사
+			    if (woCount == 0) {
+			        alert("몇개부터 가능하도록 할까");
+			        return false; // 제출 방지
+			    }
 			return true;
 		}
 	</script>

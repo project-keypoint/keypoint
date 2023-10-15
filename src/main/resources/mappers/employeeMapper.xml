@@ -44,27 +44,27 @@
 </select>
 	
 
-<select id="getEmployeeCount" resultType="java.lang.Integer">
-select count(*) 
-from employees
-<where>
-<if test="search != null and search2 != null">
-<choose>
-<when test="search == 'empName'"> and empName like CONCAT('%', #{search2}, '%') </when>
-<when test="search == 'empId'"> and empId like CONCAT('%', #{search2}, '%') </when>
-<when test="search == 'empTel'"> and empTel like CONCAT('%', #{search2}, '%') </when>
-<when test="search == 'departmentName'"> and departmentName like CONCAT('%', #{search2}, '%') </when>
-</choose>
-</if>
-</where>
-</select>
+	<select id="getEmployeeCount" resultType="java.lang.Integer">
+		select count(*) 
+		from employees
+		<where>
+			<if test="search != null and search2 != null">
+				<choose>
+					<when test="search == 'empName'"> and empName like CONCAT('%', #{search2}, '%') </when>
+					<when test="search == 'empId'"> and empId like CONCAT('%', #{search2}, '%') </when>
+					<when test="search == 'empTel'"> and empTel like CONCAT('%', #{search2}, '%') </when>
+					<when test="search == 'departmentName'"> and departmentName like CONCAT('%', #{search2}, '%') </when>
+				</choose>
+			</if>
+		</where>
+	</select>
 
 <!-- 사원등록 -->
 	<insert id="insertEmployee">
 		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
-		                                   empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
+		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
 		values (#{empPass}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
-			       #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
+			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
 	</insert>
 	
 <!-- 사원-상세정보 -->
@@ -78,7 +78,7 @@ from employees
 <!-- 사원-상세정보수정 -->
 	<update id="updateEmployee">
 		update employees
-		set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
+		set empPass = #{empPass}, empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
 		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
 		empPosition = #{empPosition},   empRole = #{empRole} 
 <!-- 		값들이 비어있어도 넘어가게!!!! -->
@@ -98,15 +98,31 @@ from employees
 <!-- 사원 등록 - 중복체크(연락처, 내선번호, 이메일) -->
 	<select id="empPhoneCheck" resultType="com.keypoint.dto.EmployeeDTO"> 
 		select * from employees 
-		where empPhone = #{empPhone} LIMIT 1 </select>
+		where empPhone = #{empPhone} LIMIT 1 
+	</select>
 	<select id="empTelCheck" resultType="com.keypoint.dto.EmployeeDTO"> 
 		select * from employees 
-		where empTel = #{empTel} LIMIT 1 </select>
+		where empTel = #{empTel} LIMIT 1 
+	</select>
 	<select id="empEmailCheck" resultType="com.keypoint.dto.EmployeeDTO"> 
 		select * from employees 
-		where empEmail = #{empEmail} LIMIT 1 </select>
+		where empEmail = #{empEmail} LIMIT 1 
+	</select>
 	
 	
+
+
+
+
+
+<!-- 	비밀번호 초기화 -->
+    <update id="updatePassword" parameterType="java.util.Map">
+        UPDATE employees
+        SET empPass = #{empPass}
+        WHERE empId = #{empId}
+    </update>
+
+
 	
 </mapper>
 
