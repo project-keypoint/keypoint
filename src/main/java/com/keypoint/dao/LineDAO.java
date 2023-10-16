@@ -55,7 +55,10 @@ public class LineDAO {
 
 
 	
-	
+	public void lineDelete(String lineCode) {
+        System.out.println("LineDAO lineDelete()");
+        sqlSession.delete(namespace + ".lineDelete", lineCode);
+    }
 	
 	
 	

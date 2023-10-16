@@ -34,7 +34,10 @@
 	<!--  contents start -->
 	<div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">라인현황</div>
+<div class="page-title">라인현황
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;">
+</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
@@ -75,7 +78,6 @@
 <!--     <th>작업코드</th> -->
     <th>작업명</th>
     <th>담당자</th>
-    <th>작업상태</th>
     <th>상세내역</th>
 </tr>
 <c:forEach var="LineDTO" items="${lineList}">
@@ -86,7 +88,7 @@
 <%--     <td>${LineDTO.woCode}</td> --%>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.empName}</td>
-    <td><button class = "status">대기중</button></td>
+    
    
 <%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
 <%--     <td>${receiveDTO.shipSdate}</td> --%>
@@ -107,7 +109,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="라인등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="lineDelete()">
 </div>
 
 
@@ -141,19 +143,6 @@
 
 <script type="text/javascript">
 
-//작업상태 변환 버튼
-$(document).ready(function() {
-    $('.status').click(function() {
-        var currentStatus = $(this).text();
-        if (currentStatus === '대기중') {
-            $(this).text('작업중');
-        } else if (currentStatus === '작업중') {
-            $(this).text('완료');
-        } else {
-            $(this).text('대기중');
-        }
-    });
-});
 
 function openPopup(url) {
     var width = 500;
@@ -247,6 +236,54 @@ function resetSearch() {
  	// empName 입력 필드의 값을 빈 문자열로 설정하여 초기화합니다.
     $("#empName").val("");
 }
+
+function lineDelete() {
+    var checkedLineCodes = []; // 체크된 항목의 lineCode를 저장할 배열
+
+    // 모든 체크박스 선택 상태 확인
+    var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
+    checkboxes.forEach(function (checkbox) {
+        if (checkbox.checked) {
+            // 체크된 체크박스의 lineCode 값을 배열에 추가
+            checkedLineCodes.push(checkbox.parentNode.nextElementSibling.textContent);
+        }
+    });
+
+    // checkedLineCodes 배열에는 체크된 항목의 lineCode가 저장됨
+    console.log(checkedLineCodes);
+
+    // Ajax 요청을 통해 checkedLineCodes를 서버로 전송하고 삭제 요청을 보냄
+    $.ajax({
+        type: 'POST', // 또는 'GET', 서버로 전송할 HTTP 메서드 선택
+        url: '${pageContext.request.contextPath}/line/lineDelete', // 서버의 삭제 엔드포인트 주소
+        data: { lineCodes: checkedLineCodes }, // 서버로 보낼 데이터
+        success: function(response) {
+            // 성공적으로 삭제되면 서버에서 받은 응답(response)을 처리
+            console.log('라인이 성공적으로 삭제되었습니다.');
+            // 페이지 새로고침 또는 다른 동작 수행
+        },
+        error: function(error) {
+            // 삭제 중 오류가 발생하면 에러 처리
+            console.error('라인 삭제 중 오류가 발생했습니다:', error);
+        }
+    });
+}
+$(document).ready(function() {
+//초기화 버튼 클릭 시
+$("#resetFilters").click(function() {
+  // 모든 체크박스 해제
+  $("input[name='status']").prop("checked", false);
+  $("tr.table-body").show();
+
+  // 검색 필드 초기화
+  $("#search").val("");
+  $("#search2").val("");
+  
+  // 페이지 다시 로드
+  location.reload();
+  
+});
+})
 </script>
 </body>
 

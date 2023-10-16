@@ -5,12 +5,17 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.keypoint.dto.LineDTO;
 
@@ -125,7 +130,7 @@ public class LineController {
 		System.out.println("LineDTO"+lineDTO);
 		model.addAttribute("lineDTO", lineDTO);
 		return "line/lineDetails";
-	}// receiveDetails [수주상세]
+	}// receiveDetails [라인상세]
 	
 	@GetMapping("/lineUpdate")
 	public String lineUpdate(Model model, @RequestParam("lineCode") String lineCode) {
@@ -133,7 +138,7 @@ public class LineController {
 		LineDTO lineDTO = lineService.getlineDetails(lineCode);
 		model.addAttribute("lineDTO", lineDTO);
 		return "line/lineUpdate";
-	}// receiveUpdate [수주수정]
+	}// receiveUpdate [라인수정]
 	
 	
 	@PostMapping("/lineUpdatePro")
@@ -150,7 +155,14 @@ public class LineController {
 	}// receiveUpdatePro [수주수정Pro]
 	
 	
-	
-	
-	
+	@PostMapping("/lineDelete")
+    public ResponseEntity<String> deleteLines(@RequestBody List<String> lineCodes) {
+        try {
+            lineService.lineDelete(lineCodes);
+            return ResponseEntity.ok("라인이 성공적으로 삭제되었습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("라인 삭제 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
 }
