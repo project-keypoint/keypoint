@@ -30,7 +30,7 @@
         style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;">
     </div>
     <div class="contents2">
- 
+
 
 
 
@@ -41,7 +41,9 @@
 
        <form name="search_form" method="get" action="${pageContext.request.contextPath}/employee/employeeList" 
              id="selectBox" name="selectBox2" onsubmit="return fun1()">
-                       
+           
+           
+         <div>              
         <div style="float: left;">
          <select id="search" name="search" class="form-control search-input">
           <option value=""> 선택하세요 </option>
@@ -52,12 +54,13 @@
          </select>
         </div>
         
-         <div style="float: left;">
+         <div style="float:right;">
  	      <span id="text_search"><input class="form-control search-input" type="text" name="search2"></span>
          </div>                     
          <div style="float: left; magin-top: 3px;">
           <span id="icon_search"></span>
          </div>
+	     </div>
 	                    
        </form>
   
@@ -66,8 +69,8 @@
    
             
       <div class="search-button">
-       <input type="button" value="검색" class="btn btn-primary mybutton1" onclick="fun1()">
-       <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
+       <input type="button" value="검색" class="btn btn-primary mybutton1" onclick="fun1()" style="margin-top: -30px;">
+       <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()" style="margin-top: -30px;">
       </div>
 
     </div>
@@ -80,7 +83,7 @@
 
 
 <!-- 버튼부분 -->
- <div class="select-status" style="display: flex; justify-content: space-between;">
+ <div class="dis-select-buttons" style="display: flex; justify-content: space-between;     align-items: flex-end; margin-bottom: 5px;">
  <div style="display: flex; justify-content: flex-start;">
   
 <form action="${pageContext.request.contextPath}/employee/employeeList" method="get">
@@ -140,17 +143,16 @@
     <div>
      <table class="table-list">
       <tr class="table-head">
-<!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
 	   <th style="width: 8%;">사원번호</th> 
-       <th>이름</th> 
-	   <th>부서</th> 
-	   <th>직급</th> 
-	   <th>내선번호</th> 
-	   <th>이메일</th> 
-	   <th>입사일</th>
-	   <th>재직여부</th>
-	   <th style="width: 8%;">상세내역</th>
-	   
+       <th style="width: 8%;">이름</th> 
+	   <th style="width: 8%;">부서</th> 
+	   <th style="width: 8%;">직급</th> 
+	   <th style="width: 13%;">내선번호</th>
+	   <th style="width: 15%;">연락처</th> 
+	   <th style="width: 15%;">이메일</th> 
+	   <th style="width: 9%;">입사일</th>
+	   <th style="width: 6%;">재직여부</th>
+	   <th style="width: 9%;">상세내역</th>
       </tr>
 
        <c:forEach var="employeeDTO" items="${employeeList}">
@@ -161,6 +163,7 @@
          <td>${employeeDTO.departmentName}</td>
          <td>${employeeDTO.empPosition}</td>
          <td>${employeeDTO.empTel}</td>
+         <td>${employeeDTO.empPhone}</td>
          <td>${employeeDTO.empEmail}</td>
          <td>${employeeDTO.empHiredate}</td>
          <td>${employeeDTO.empStatus}</td>

@@ -5,18 +5,28 @@
 <mapper namespace="com.itwillbs.mappers.employeeMapper">
 
 
+<!-- 강수빈 -->
 
-<!-- 로그인-강수빈 -->
+<!-- 로그인 -->
 	<select id="userCheck"  resultType="com.keypoint.dto.EmployeeDTO">
 		select * from employees
 		where empId = #{empId} and empPass = #{empPass}
 	</select>
 		
-<!-- 강수빈 - 비밀번호 값 가져오기 -->
+<!-- 비밀번호 값 가져오기 -->
 	<select id="getInitialPass" resultType="java.lang.Integer">
 		select (max(empId) + 1)
 		from employees
 	</select>
+	
+<!-- 	비밀번호 초기화 -->
+    <update id="resetPassword" parameterType="java.util.Map">
+        UPDATE employees
+        SET empPass = #{empId}
+        WHERE empId = #{empId}
+    </update>
+    
+ <!-- =========== -->   
 	
 	
 <!-- 	사원목록(+검색) -->
@@ -46,7 +56,7 @@
     LIMIT #{startRow}, #{pageSize}
 </select>
 	
-
+<!-- 페이징관련 -->
 	<select id="getEmployeeCount" resultType="java.lang.Integer">
 		select count(*) 
 		from employees
@@ -121,34 +131,6 @@
 		where empEmail = #{empEmail} LIMIT 1 
 	</select>
 	
-	
-
-
-
-
-
-<!-- 	비밀번호 초기화 -->
-    <update id="resetPassword" parameterType="java.util.Map">
-        UPDATE employees
-        SET empPass = #{empId}
-        WHERE empId = #{empId}
-    </update>
-
 
 	
 </mapper>
-
-<!-- 	<select id="getEmployeeCount" resultType="java.lang.Integer"> -->
-<!-- 		select count(*)  -->
-<!-- 		from employees -->
-<!-- 		<where> -->
-<!-- 			<if test="search != null and search2 != null"> -->
-<!-- 				<choose> -->
-<!-- 					<when test="search == 'empName'"> and empName like CONCAT('%', #{search2}, '%') </when> -->
-<!-- 					<when test="search == 'empId'"> and empId like CONCAT('%', #{search2}, '%') </when> -->
-<!-- 					<when test="search == 'empTel'"> and empTel like CONCAT('%', #{search2}, '%') </when> -->
-<!-- 					<when test="search == 'departmentName'"> and departmentName like CONCAT('%', #{search2}, '%') </when> -->
-<!-- 				</choose> -->
-<!-- 			</if> -->
-<!-- 		</where> -->
-<!-- 	</select> -->
