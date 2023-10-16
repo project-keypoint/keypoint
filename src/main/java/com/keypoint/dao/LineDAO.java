@@ -69,5 +69,12 @@ public class LineDAO {
     }
 	
 	
+	public String getMaxLineCode() {
+		return sqlSession.selectOne(namespace+".getMaxLineCode");
+	}
+	
+	public String getMaxLineName() {
+		return sqlSession.selectOne(namespace+".getMaxLineName");
+	}
 	
 }

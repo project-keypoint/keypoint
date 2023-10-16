@@ -72,5 +72,17 @@ public class LineService {
 	            throw new RuntimeException("라인 삭제 중 오류 발생: " + e.getMessage());
 	        }
 	    }
+
+	 public String getLineCode() {
+		    
+		return lineDAO.getMaxLineCode(); // lineDAO는 MyBatis 또는 JDBC로 구현된 DAO 객체입니다.
+		}
+
+	public String getLineName() {
+		
+		return lineDAO.getMaxLineName();
+	}
+
+
 	
 }

@@ -36,8 +36,10 @@
 	<div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
 <div class="page-title">라인현황
-<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
-        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;">
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" 
+     style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;"
+     onclick="window.location.href='${pageContext.request.contextPath}/line/lineList';">
+
 </div>
 <div class="contents2">
 <div class="search-bar">

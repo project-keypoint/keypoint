@@ -98,13 +98,7 @@ public class EmployeeService {
 		return employeeDAO.empCheck(type,Emp);
 	} // empPhoneCheck
 
-	
-	
-	
-	
-	
-	
-	
+
 	
 	 public void resetPassword(int empId) {
 	        Map<String, Object> parameterMap = new HashMap<>();

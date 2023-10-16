@@ -63,5 +63,21 @@
     </foreach>
 </delete>
 
+	<select id="getMaxLineCode" resultType="java.lang.String">
+       SELECT CONCAT('LINE', CAST(CAST(SUBSTRING(lineCode, 5) AS UNSIGNED) + 1 AS CHAR(255)))
+FROM line
+ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED) DESC
+LIMIT 1;
+
+    </select>
+
+	 <select id="getMaxLineName" resultType="java.lang.String">
+        SELECT CONCAT('라인', CHAR(ASCII(RIGHT(lineName, 1)) + 1)) AS newLineName
+FROM line
+ORDER BY RIGHT(lineName, 1) DESC
+LIMIT 1;
+
+    </select>
+
 
 </mapper>

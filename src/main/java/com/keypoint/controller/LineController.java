@@ -1,6 +1,8 @@
 package com.keypoint.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -167,4 +169,23 @@ public class LineController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("라인 삭제 실패: " + e.getMessage());
         }
     }
+
+	@GetMapping("/getLineInfo")
+	@ResponseBody
+	public Map<String, String> getLineInfo() {
+	    Map<String, String> lineInfo = new HashMap<>();
+	    // 여기에서 lineCode와 lineName을 데이터베이스나 다른 소스로부터 가져오는 로직을 수행하세요
+	    // 예를 들어, LineService 클래스를 통해 lineCode와 lineName을 가져오는 것으로 가정합니다.
+	    lineInfo.put("lineCode", lineService.getLineCode()); // lineCode 값을 가져오는 메서드 호출
+	    lineInfo.put("lineName", lineService.getLineName()); // lineName 값을 가져오는 메서드 호출
+	    return lineInfo;
+	}
+
+
+
+
+
+
+
+
 }
