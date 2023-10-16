@@ -36,6 +36,9 @@
             </when>
             <when test="search == 'departmentName'">
                 AND departmentName LIKE CONCAT('%', #{search2}, '%')
+            </when >
+            <when test="search3 != null and search3 != ''">
+           AND empStatus like CONCAT ('%', #{search3}, '%')
             </when>
         </choose>
     </where>
@@ -47,16 +50,25 @@
 	<select id="getEmployeeCount" resultType="java.lang.Integer">
 		select count(*) 
 		from employees
-		<where>
-			<if test="search != null and search2 != null">
-				<choose>
-					<when test="search == 'empName'"> and empName like CONCAT('%', #{search2}, '%') </when>
-					<when test="search == 'empId'"> and empId like CONCAT('%', #{search2}, '%') </when>
-					<when test="search == 'empTel'"> and empTel like CONCAT('%', #{search2}, '%') </when>
-					<when test="search == 'departmentName'"> and departmentName like CONCAT('%', #{search2}, '%') </when>
-				</choose>
-			</if>
-		</where>
+	   <where>
+        <choose>
+            <when test="search == 'empName'">
+                AND empName LIKE CONCAT('%', #{search2}, '%')
+            </when>
+            <when test="search == 'empId'">
+                AND empId LIKE CONCAT('%', #{search2}, '%')
+            </when>
+            <when test="search == 'empTel'">
+                AND empTel LIKE CONCAT('%', #{search2}, '%')
+            </when>
+            <when test="search == 'departmentName'">
+                AND departmentName LIKE CONCAT('%', #{search2}, '%')
+            </when >
+            <when test="search3 != null and search3 != ''">
+           		AND empStatus like CONCAT ('%', #{search3}, '%')
+            </when>
+        </choose>
+    </where>
 	</select>
 
 <!-- 사원등록 -->
@@ -126,3 +138,17 @@
 	
 </mapper>
 
+<!-- 	<select id="getEmployeeCount" resultType="java.lang.Integer"> -->
+<!-- 		select count(*)  -->
+<!-- 		from employees -->
+<!-- 		<where> -->
+<!-- 			<if test="search != null and search2 != null"> -->
+<!-- 				<choose> -->
+<!-- 					<when test="search == 'empName'"> and empName like CONCAT('%', #{search2}, '%') </when> -->
+<!-- 					<when test="search == 'empId'"> and empId like CONCAT('%', #{search2}, '%') </when> -->
+<!-- 					<when test="search == 'empTel'"> and empTel like CONCAT('%', #{search2}, '%') </when> -->
+<!-- 					<when test="search == 'departmentName'"> and departmentName like CONCAT('%', #{search2}, '%') </when> -->
+<!-- 				</choose> -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+<!-- 	</select> -->
