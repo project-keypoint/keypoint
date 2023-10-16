@@ -155,14 +155,16 @@ public class LineController {
 	}// receiveUpdatePro [수주수정Pro]
 	
 	
-	@PostMapping("/lineDelete")
+	@PostMapping("/deleteLines")
+	@ResponseBody
     public ResponseEntity<String> deleteLines(@RequestBody List<String> lineCodes) {
         try {
-            lineService.lineDelete(lineCodes);
-            return ResponseEntity.ok("라인이 성공적으로 삭제되었습니다.");
+        	System.out.println("LIneController deleteLines()");
+            lineService.deleteLines(lineCodes);
+            return ResponseEntity.ok("라인 삭제 성공");
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("라인 삭제 중 오류가 발생했습니다: " + e.getMessage());
+            // 삭제 중 에러가 발생한 경우 에러 응답을 반환합니다.
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("라인 삭제 실패: " + e.getMessage());
         }
     }
 }

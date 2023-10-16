@@ -55,11 +55,13 @@
 		WHERE lineCode = #{lineCode}
 	</update>
 
-	<delete id="lineDelete" parameterType="String">
-        DELETE FROM line
-        WHERE lineCode = #{lineCode}
-    </delete>
-
+	<delete id="deleteLines" parameterType="java.util.List">
+       DELETE FROM line
+    WHERE lineCode IN
+    <foreach collection="list" item="lineCode" open="(" separator="," close=")">
+        #{lineCode}
+    </foreach>
+</delete>
 
 
 </mapper>

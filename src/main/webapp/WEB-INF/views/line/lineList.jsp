@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -237,37 +238,8 @@ function resetSearch() {
     $("#empName").val("");
 }
 
-function lineDelete() {
-    var checkedLineCodes = []; // 체크된 항목의 lineCode를 저장할 배열
 
-    // 모든 체크박스 선택 상태 확인
-    var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
-    checkboxes.forEach(function (checkbox) {
-        if (checkbox.checked) {
-            // 체크된 체크박스의 lineCode 값을 배열에 추가
-            checkedLineCodes.push(checkbox.parentNode.nextElementSibling.textContent);
-        }
-    });
 
-    // checkedLineCodes 배열에는 체크된 항목의 lineCode가 저장됨
-    console.log(checkedLineCodes);
-
-    // Ajax 요청을 통해 checkedLineCodes를 서버로 전송하고 삭제 요청을 보냄
-    $.ajax({
-        type: 'POST', // 또는 'GET', 서버로 전송할 HTTP 메서드 선택
-        url: '${pageContext.request.contextPath}/line/lineDelete', // 서버의 삭제 엔드포인트 주소
-        data: { lineCodes: checkedLineCodes }, // 서버로 보낼 데이터
-        success: function(response) {
-            // 성공적으로 삭제되면 서버에서 받은 응답(response)을 처리
-            console.log('라인이 성공적으로 삭제되었습니다.');
-            // 페이지 새로고침 또는 다른 동작 수행
-        },
-        error: function(error) {
-            // 삭제 중 오류가 발생하면 에러 처리
-            console.error('라인 삭제 중 오류가 발생했습니다:', error);
-        }
-    });
-}
 $(document).ready(function() {
 //초기화 버튼 클릭 시
 $("#resetFilters").click(function() {
@@ -284,7 +256,39 @@ $("#resetFilters").click(function() {
   
 });
 })
+
+function lineDelete() {
+    var selectedLineCodes = [];
+    $("input[name='delete-list']:checked").each(function() {
+        selectedLineCodes.push($(this).closest("tr").find("td:eq(1)").text());
+    });
+
+    // 선택된 라인이 없다면 알림을 표시하고 함수 종료
+    if (selectedLineCodes.length === 0) {
+        alert("선택된 라인이 없습니다.");
+        return;
+    }
+
+    // AJAX를 사용하여 서버로 선택된 라인 코드들을 전송하고, 요청이 성공하면 즉시 페이지를 새로고침합니다.
+    $.ajax({
+        url: "${pageContext.request.contextPath}/line/deleteLines",
+        type: "POST",
+        data: JSON.stringify(selectedLineCodes),
+        contentType: "application/json",
+        dataType: "json"
+    });
+	alert("라인이 삭제되었습니다");
+    // 요청 후 즉시 페이지를 새로고침
+    location.reload();
+}
+
+
+
+
+
+
 </script>
+
 </body>
 
 </html>

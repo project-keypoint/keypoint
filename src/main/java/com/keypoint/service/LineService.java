@@ -62,12 +62,15 @@ public class LineService {
 		lineDAO.lineUpdate(lineDTO);
 	}// receiveUpdatePro() [수주수정Pro]
 
-	public void lineDelete(List<String> lineCodes) {
-        System.out.println("LineService lineDelete()");
-        for (String lineCode : lineCodes) {
-            lineDAO.lineDelete(lineCode);
-        }
-    }
-	
+	 public void deleteLines(List<String> lineCodes) {
+	        try {
+	            // 선택된 라인 코드들을 사용하여 데이터베이스에서 라인을 삭제합니다.
+	            // 아래 코드는 LineRepository를 사용한 예시입니다. 실제 데이터베이스에 맞게 구현하세요.
+	            lineDAO.deleteLines(lineCodes);
+	        } catch (Exception e) {
+	            // 삭제 중 에러가 발생한 경우 예외를 던지거나 로깅하여 필요한 처리를 수행할 수 있습니다.
+	            throw new RuntimeException("라인 삭제 중 오류 발생: " + e.getMessage());
+	        }
+	    }
 	
 }
