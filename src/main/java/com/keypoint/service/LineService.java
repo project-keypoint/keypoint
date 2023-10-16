@@ -62,7 +62,12 @@ public class LineService {
 		lineDAO.lineUpdate(lineDTO);
 	}// receiveUpdatePro() [수주수정Pro]
 
-
+	public void lineDelete(List<String> lineCodes) {
+        System.out.println("LineService lineDelete()");
+        for (String lineCode : lineCodes) {
+            lineDAO.lineDelete(lineCode);
+        }
+    }
 	
-
+	
 }

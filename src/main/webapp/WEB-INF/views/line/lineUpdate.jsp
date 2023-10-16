@@ -25,11 +25,11 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" value="${lineDTO.lineCode }"  >
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" value="${lineDTO.lineCode }" readonly >
 </div>
 <div class="form-group-receive">
 <p>라인명</p>
-<input type="text" id="lineName" name="lineName" class="form-control search-input inputcode" value="${lineDTO.lineName }"  >
+<input type="text" id="lineName" name="lineName" class="form-control search-input inputcode" value="${lineDTO.lineName }" readonly >
 </div>
 <div class="form-group-receive">
 <p>작업명</p>
@@ -38,6 +38,10 @@
 <div class="form-group-receive">
 <p>담당자</p>
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="${lineDTO.empName }"  >
+</div>
+<div class="form-group-receive" style="display:none;">
+<p>담당자</p>
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="담당자코드" >
 </div>
 </div> 
 <!-- search-bar-popup end -->
@@ -65,60 +69,13 @@ function openPopup(url) {
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
-// $(document).ready(function() {
-//     // 라인명 검색 팝업 열기
-//     $("#lineCode, #lineName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workLineList';
-//         openPopup(url);
-//     });
-//     // 상품명 검색 팝업 열기
-//     $("#productCode, #productName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-//         openPopup(url);
-//     });
-//  	// 사원 검색 팝업 열기
-//     $("#empId, #empName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-//         openPopup(url);
-//     });
-// });
-// // 수주일자 클릭시 현재날짜로 변경
-// document.addEventListener('DOMContentLoaded', function () {
-//     var roDateInput = document.getElementById("roDate");
-// roDateInput.addEventListener("click", function () {
-// 	var today = new Date();
-// 	var yyyy = today.getFullYear();
-// 	var mm = String(today.getMonth() + 1).padStart(2, '0');
-// 	var dd = String(today.getDate()).padStart(2, '0');
-// 	var hh = String(today.getHours()).padStart(2, '0');
-// 	var mi = String(today.getMinutes()).padStart(2, '0');
-// 	var ss = String(today.getSeconds()).padStart(2, '0');
-// 	var formattedDate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + mi + ":" + ss;
-// 	roDateInput.value = formattedDate;
-// 	roDateInput.readOnly = true;
-// 	roDateInput.placeholder = "";
-//     });
-// });
-// // 수주일자(현재날짜) 이후로 납품예정일 선택 설정
-// // 수주일자 입력란의 값 가져오기
-// var roDateInput = document.getElementById("roDate");
-// var roDateValue = roDateInput.value;
-
-// // 수주일자를 현재 년월일로 설정 (YYYY-MM-DD 형식)
-// var today = new Date();
-// var dd = String(today.getDate()).padStart(2, '0');
-// var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-// var yyyy = today.getFullYear();
-// var currentDateString = yyyy + '-' + mm + '-' + dd;
-// // 납품예정일 입력란
-// var shipSdateInput = document.getElementById("shipSdate");
-// // 수주일자(오늘) 이후의 날짜만 선택할 수 있도록 Datepicker 설정
-// $(function() {
-//     $("#shipSdate").datepicker({
-//         minDate: currentDateString, // 현재 날짜 이후로 설정
-//         dateFormat: "yy-mm-dd", // MySQL DATE 형식으로 출력
-//     });
-// });
+$(document).ready(function() {
+    // 담당자 검색 팝업 열기
+    $("#empName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        openPopup(url);
+    });
+});
 
 // 유효성 검사
 function validateForm() {
