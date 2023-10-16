@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사원등록</title>
-<br>
-<p><a style="color: red; font-size: 17px;">사진, 권한빼고 다 입력해야함</a></p>
+
 
 <!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,19 +19,20 @@
 
 
 <body>
+<div class="page-title-popup">사원 등록</div>
 <div class="main-details">
 <%-- <form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()"> --%>
 <form action="${pageContext.request.contextPath }/employee/photoPro" id="join" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <div class="forms-group-customer">
-<div class="page-title-popup">사원 등록</div>
 
+<p><a style="color: red; font-size: 17px;">사진, 권한빼고 다 입력해야함</a></p>
+
+<!-- <div class="form-group-customer">  -->
 <!-- -------------------- 사진첨부 -------------------- -->
-<div class="form-group-customer"> 
-
-<div class="form-group-customer">
+<div class="form-group-customer" style="display: flex; flex-direction: column; align-items: center;">
         <img src="${pageContext.request.contextPath }/resources/img/test.png" id="preview" width="200" height="230" style="border-radius: 3px">
-</div>
+<!-- </div> -->
 
 <div class="imgbtn">
 <label for="file">
@@ -41,9 +41,11 @@
 </span>
 </label>
 <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
-<!-- accept="image/*": 이 속성은 업로드할 수 있는 파일 형식을 제한 함. "image/*"로 설정된 경우, 사용자는 이미지 파일만 선택할 수 있음. -->
-<!-- -------------------- // 사진첨부 -------------------- -->
 
+<!-- -------------------- // 사진첨부 -------------------- -->
+  </div>
+
+</div>
 
 
 <div class="form-group-customer">
@@ -140,12 +142,13 @@
         <option value="3">3</option>
 </select>
 </div>
+
+<p><a style="color: red; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 </div>
 
 
-<p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 
-</div>
+<!-- </div> -->
 
 <div class="details-buttons">
 <input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
