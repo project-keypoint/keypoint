@@ -17,18 +17,28 @@
     JOIN employees e ON gr.grOwner = e.empid
     JOIN purchaseOrder po ON gr.poCode = po.poCode
     WHERE gr.grStatus != '삭제됨'
-    <if test="search != null">
+    <if test="search != null and search != ''">
 		and po.materialCode = #{search} 
+	</if>
+	<if test="search2 != null and search2 != ''">
+			and gr.grStatus = #{search2} 
 	</if>
     ORDER BY gr.grCode DESC
     LIMIT #{startRow}, #{pageSize}
 </select>
 
-
 	<select id="getReceiptCount" resultType="java.lang.Integer">
-		select count(*) from goodsReceipt 
-		WHERE grStatus != '삭제됨'
-	</select>
+    select count(*) from goodsReceipt gr
+    JOIN purchaseOrder po ON gr.poCode = po.poCode
+    WHERE gr.grStatus != '삭제됨'
+    <if test="search != null and search != ''">
+        and po.materialCode = #{search}
+    </if>
+    <if test="search2 != null and search2 != ''">
+        and gr.grStatus = #{search2}
+    </if>
+</select>
+
 
 	<select id="getReceiptDetails" resultType="com.keypoint.dto.ReceiptDTO">
     

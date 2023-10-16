@@ -78,22 +78,45 @@
 </div><!-- search-bar -->
 <br>
 
-<!-- 체크박스 부분 -->
-    <div class="select-status" style="display: flex; justify-content: space-between;">
-     <div style="display: flex; justify-content: flex-start;">
-      <a>발주대기<input type="checkbox" id="select1" name="status" class="list-select" value="발주대기"></a>
-      <a>발주완료<input type="checkbox" id="select2" name="status" class="list-select" value="발주완료"></a>
+<div class="dis-select-buttons">
 
-     </div>
-      <a style="text-align: right;">총 발주수 : ${purchaseCount}개</a>
-    </div>
-<!-- // 체크박스 부분 -->
-
-
-
-
-
-
+<div style="display: flex;">
+<form action="${pageContext.request.contextPath}/purchase/purchaseList" method="get">
+<input type="hidden" name="search2" value="">
+<c:choose>
+<c:when test="${pageDTO.search2 eq '' or empty pageDTO.search2}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/purchase/purchaseList" method="get">
+<input type="hidden" name="search2" value="발주대기">
+<c:choose>
+<c:when test="${'발주대기' eq pageDTO.search2}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="발주대기" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="발주대기" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<form action="${pageContext.request.contextPath}/purchase/purchaseList" method="get">
+<input type="hidden" name="search2" value="발주완료">
+<c:choose>
+<c:when test="${'발주완료' eq pageDTO.search2}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="발주완료" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="발주완료" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+</div>
+<a style="text-align: right;">총 발주수 : ${purchaseCount}개</a>
+</div>
 
 
 
@@ -154,15 +177,19 @@
 <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
     <c:choose>
         <c:when test="${i eq pageDTO.pageNum}">
-            <a href="${pageContext.request.contextPath}/purchase/purchaseList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+            <a href="${pageContext.request.contextPath}/purchase/purchaseList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button page-button-active">${i}</a>
         </c:when>
         <c:otherwise>
-            <a href="${pageContext.request.contextPath}/purchase/purchaseList?pageNum=${i}" class="page-button">${i}</a>
+            <a href="${pageContext.request.contextPath}/purchase/purchaseList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">${i}</a>
         </c:otherwise>
     </c:choose>
 </c:forEach>
 
 </div><!-- page-button -->
+
+
+
+
 
 
 

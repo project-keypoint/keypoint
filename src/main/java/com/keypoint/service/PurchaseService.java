@@ -50,10 +50,10 @@ public class PurchaseService {
 		return purchaseDAO.getPurchaseList(pageDTO);
 	}// getPurchaseList [발주목록]
 	
-	public int getPurchaseCount() {
+	public int getPurchaseCount(PageDTO pageDTO) {
 		System.out.println("PurchaseService getPurchaseCount()");
 		
-		return purchaseDAO.getPurchaseCount();
+		return purchaseDAO.getPurchaseCount(pageDTO);
 	} // getPurchaseCount
 	
 	

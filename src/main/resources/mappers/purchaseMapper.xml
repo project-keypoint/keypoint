@@ -15,17 +15,25 @@
 		FROM purchaseOrder po
 		JOIN employees e ON po.poOwner = e.empid
 		WHERE po.poStatus != '삭제됨'
-		<if test="search != null">
+		<if test="search != null and search != ''">
 			and po.materialCode = #{search} 
+		</if>
+		<if test="search2 != null and search2 != ''">
+			and po.poStatus = #{search2} 
 		</if>
 		ORDER BY po.poCode DESC
 		LIMIT #{startRow}, #{pageSize}
-
 	</select>
   	
   	<select id="getPurchaseCount" resultType="java.lang.Integer">
 		select count(*) from purchaseOrder 
 		WHERE poStatus != '삭제됨'
+		<if test="search != null and search != ''">
+			and materialCode = #{search} 
+		</if>
+		<if test="search2 != null and search2 != ''">
+			and poStatus = #{search2} 
+		</if>
 	</select>
   	
  

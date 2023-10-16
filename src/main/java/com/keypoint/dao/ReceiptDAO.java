@@ -33,10 +33,10 @@ public class ReceiptDAO {
 		return sqlSession.selectList(namespace+".getReceiptList", pageDTO);
 	} // getReceiptList
 	
-	public int getReceiptCount() {
+	public int getReceiptCount(PageDTO pageDTO) {
 		System.out.println("ReceiptDAO getReceiptCount()");
 		
-		return sqlSession.selectOne(namespace+".getReceiptCount");
+		return sqlSession.selectOne(namespace+".getReceiptCount", pageDTO);
 	} // getReceiptCount
 	
 	public ReceiptDTO getReceiptDetails(String grCode) {
