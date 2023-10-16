@@ -28,7 +28,7 @@ public class LineDAO {
 	}// 라인목록조회
 
 
-	public int getLineCount() {
+	public int getLineCount(PageDTO pageDTO) {
 		System.out.println("LineDAO getLineCount()");
 
 		return sqlSession.selectOne(namespace+".getLineCount");

@@ -69,7 +69,7 @@ public class LineController {
 		
 //		페이징
 //		게시판 전체 글 개수 가져오기
-		int count = lineService.getLineCount();
+		int count = lineService.getLineCount(pageDTO);
 		
 //		한 화면에 보여줄 페이지 개수 설정
 		int pageBlock = 10;

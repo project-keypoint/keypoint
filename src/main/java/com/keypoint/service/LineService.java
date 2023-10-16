@@ -36,10 +36,10 @@ public class LineService {
 		return lineDAO.getLineList(pageDTO);
 	}// getLineList
 
-	public int getLineCount() {
+	public int getLineCount(PageDTO pageDTO) {
 		System.out.println("LineService getLineCount()");
 
-		return lineDAO.getLineCount();
+		return lineDAO.getLineCount(pageDTO);
 	}
 
 	public void lineInsertPro(LineDTO lineDTO) {

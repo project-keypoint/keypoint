@@ -62,15 +62,7 @@
 </div>
 </div><!-- search-bar -->
 <br>
-<!-- <div class="select-status"> -->
-<!-- <a>대기<input type="checkbox" id="select1" name="select1" class="list-select" checked></a> -->
-<!-- <a>진행<input type="checkbox" id="select2" name="select2" class="list-select" checked></a> -->
-<!-- <a>완료<input type="checkbox" id="select3" name="select3" class="list-select" checked></a> -->
-<!-- <a>취소<input type="checkbox" id="select4" name="select4" class="list-select"></a> -->
-<!-- <a>( 체크박스 사용여부 보류중 )</a> -->
-<!-- <div> -->
-<!-- </div> -->
-<!-- </div> -->
+
 
 <div>
 <table class="table-list">
