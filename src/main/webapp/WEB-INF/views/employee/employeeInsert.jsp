@@ -22,7 +22,7 @@
 <body>
 <div class="main-details">
 <%-- <form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()"> --%>
-<form action="${pageContext.request.contextPath }/employee/photoPro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath }/employee/photoPro" id="join" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
@@ -365,30 +365,44 @@ function addHyphen(input) {
 }
 
 // 이메일 형식 유효성 검사
-function validateEmail(email) {
-    // 이메일 형식을 검사하기 위한 정규 표현식
-    var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+// function validateEmail(email) {
+//     // 이메일 형식을 검사하기 위한 정규 표현식
+//     var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    // 입력한 이메일을 정규 표현식과 비교하여 유효성을 검사
-    return emailPattern.test(email);
-}
+//     // 입력한 이메일을 정규 표현식과 비교하여 유효성을 검사
+//     return emailPattern.test(email);
+// }
 
-function checkEmailInput() {
-    var emailInput = document.getElementById("empEmail");
-    var email = emailInput.value;
+// function checkEmailInput() {
+//     var emailInput = document.getElementById("empEmail");
+//     var email = emailInput.value;
 
-    if (!validateEmail(email)) {
-        alert("올바른 이메일 형식이 아닙니다. 올바른 이메일을 입력해주세요.");
-        emailInput.value = "";
-        return false;
-    }
+//     if (!validateEmail(email)) {
+//         alert("올바른 이메일 형식이 아닙니다. 올바른 이메일을 입력해주세요.");
+//         emailInput.value = "";
+//         return false;
+//     }
 
-    return true;
-}
-
-
+//     return true;
+// }
 
 
+// 조건 맞게 입력해도 계속 "이메일 형식 아님" 메세지 뜸.
+// $(document).ready(function(){
+//   $('#join').submit(function(){
+//     // 이메일 형식 유효성 검사
+   
+//     var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9_\.\-]+\.[A-Za-z0-9_\.\-]/);
+//     var empEmail = document.getElementById("empEmail").value;
+    
+//     if(!emailCheck.test($('.empEmail').val())){
+//       alert("이메일 형식 아님");
+//       document.getElementById("empEmail").value = "";
+//       $('.empEmail').focus();
+//       return false;
+//     }
+//   });
+// });
 
 </script>
 </body>

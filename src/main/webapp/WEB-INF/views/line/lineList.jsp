@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,12 @@
 	<!--  contents start -->
 	<div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">라인현황</div>
+<div class="page-title">라인현황
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" 
+     style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;"
+     onclick="window.location.href='${pageContext.request.contextPath}/line/lineList';">
+
+</div>
 <div class="contents2">
 <div class="search-bar">
 <div class="search-b">
@@ -75,7 +81,6 @@
 <!--     <th>작업코드</th> -->
     <th>작업명</th>
     <th>담당자</th>
-    <th>작업상태</th>
     <th>상세내역</th>
 </tr>
 <c:forEach var="LineDTO" items="${lineList}">
@@ -86,7 +91,7 @@
 <%--     <td>${LineDTO.woCode}</td> --%>
     <td>${LineDTO.lineMemo}</td>
     <td>${LineDTO.empName}</td>
-    <td><button class = "status">대기중</button></td>
+    
    
 <%--     <td><c:out value="${fn:substring(receiveDTO.roDate, 0, 10)}" /></td> --%>
 <%--     <td>${receiveDTO.shipSdate}</td> --%>
@@ -107,7 +112,7 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="라인등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="lineDelete()">
 </div>
 
 
@@ -141,19 +146,6 @@
 
 <script type="text/javascript">
 
-//작업상태 변환 버튼
-$(document).ready(function() {
-    $('.status').click(function() {
-        var currentStatus = $(this).text();
-        if (currentStatus === '대기중') {
-            $(this).text('작업중');
-        } else if (currentStatus === '작업중') {
-            $(this).text('완료');
-        } else {
-            $(this).text('대기중');
-        }
-    });
-});
 
 function openPopup(url) {
     var width = 500;
@@ -247,7 +239,58 @@ function resetSearch() {
  	// empName 입력 필드의 값을 빈 문자열로 설정하여 초기화합니다.
     $("#empName").val("");
 }
+
+
+
+$(document).ready(function() {
+//초기화 버튼 클릭 시
+$("#resetFilters").click(function() {
+  // 모든 체크박스 해제
+  $("input[name='status']").prop("checked", false);
+  $("tr.table-body").show();
+
+  // 검색 필드 초기화
+  $("#search").val("");
+  $("#search2").val("");
+  
+  // 페이지 다시 로드
+  location.reload();
+  
+});
+})
+
+function lineDelete() {
+    var selectedLineCodes = [];
+    $("input[name='delete-list']:checked").each(function() {
+        selectedLineCodes.push($(this).closest("tr").find("td:eq(1)").text());
+    });
+
+    // 선택된 라인이 없다면 알림을 표시하고 함수 종료
+    if (selectedLineCodes.length === 0) {
+        alert("선택된 라인이 없습니다.");
+        return;
+    }
+
+    // AJAX를 사용하여 서버로 선택된 라인 코드들을 전송하고, 요청이 성공하면 즉시 페이지를 새로고침합니다.
+    $.ajax({
+        url: "${pageContext.request.contextPath}/line/deleteLines",
+        type: "POST",
+        data: JSON.stringify(selectedLineCodes),
+        contentType: "application/json",
+        dataType: "json"
+    });
+	alert("라인이 삭제되었습니다");
+    // 요청 후 즉시 페이지를 새로고침
+    location.reload();
+}
+
+
+
+
+
+
 </script>
+
 </body>
 
 </html>
