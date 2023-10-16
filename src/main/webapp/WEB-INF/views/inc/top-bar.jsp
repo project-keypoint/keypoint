@@ -104,7 +104,7 @@ String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resou
 					class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 					aria-labelledby="userDropdown">
 					<a class="dropdown-item"
-						onclick="openDetails('${sessionScope.empId}')"> <i
+						onclick="openProfile('${sessionScope.empId}')"> <i
 						class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
 					</a>
 					<div class="dropdown-divider"></div>
@@ -139,7 +139,7 @@ String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resou
 
 	<script type="text/javascript">
 		//사원 상세내용 새창
-		function openDetails(empId) {
+		function openProfile(empId) {
 			// 연결되는지 보기위해
 			//     var url = '${pageContext.request.contextPath}/employee/employeeDetails';
 			var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='
