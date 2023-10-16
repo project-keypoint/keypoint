@@ -61,19 +61,19 @@
 <!-- 주소 -->
 <div class="form-group-customer">
 <p>주소</p>
-<input type="text" id="zonecode" name="zonecode" class="form-control search-input" placeholder="우편번호" onclick="sample6_execDaumPostcode()">
+<input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="클릭하여 주소를 입력하세요">
 </div>
  
 <div class="form-group-customer">
 <p></p>
-<input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="기본주소">
-</div>
-
-<div class="form-group-customer">
-<p></p>
 <input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소">
 </div>
-<!-- // 주소 -->
+
+<!-- <div class="form-group-customer"> -->
+<!-- <p></p> -->
+<!-- <input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소"> -->
+<!-- </div> -->
+<!-- <!-- // 주소 --> 
 
 
 <div class="form-group-customer">
@@ -218,31 +218,44 @@ $(function() {
 
 
 // 주소 검색 API
-function sample6_execDaumPostcode() {
-	new daum.Postcode({
-	    oncomplete: function(data) {
-	      var fullAddress = data.address; // 선택한 주소 변수에 저장
-	      var extraAddress = ''; // 조합형 주소 변수 초기화
 
-	      if (data.addressType === 'R') {
-	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-	          extraAddress += data.bname;
-	        }
-	        if (data.buildingName !== '' && data.apartment === 'Y') {
-	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
-	        }
-	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
-	      }
+window.onload = function(){
+    document.getElementById("empAddress").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("empAddress").value = data.address; // 주소 넣기
+                document.querySelector("input[name=empAddress_dtail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
 
-	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
-	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
-	      document.getElementById('empAddress').value = fullAddress; // 기본주소
+// function sample6_execDaumPostcode() {
+// 	new daum.Postcode({
+// 	    oncomplete: function(data) {
+// 	      var fullAddress = data.address; // 선택한 주소 변수에 저장
+// 	      var extraAddress = ''; // 조합형 주소 변수 초기화
 
-	      // 상세주소 입력란으로 포커스 이동
-	      document.getElementById('empAddress_dtail').focus();
-	    }
-	  }).open();
-	}
+// 	      if (data.addressType === 'R') {
+// 	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+// 	          extraAddress += data.bname;
+// 	        }
+// 	        if (data.buildingName !== '' && data.apartment === 'Y') {
+// 	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
+// 	        }
+// 	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
+// 	      }
+
+// 	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
+// 	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
+// 	      document.getElementById('empAddress').value = fullAddress; // 기본주소
+
+// 	      // 상세주소 입력란으로 포커스 이동
+// 	      document.getElementById('empAddress_dtail').focus();
+// 	    }
+// 	  }).open();
+// 	}
 	
 
 // 중복확인(연락처, 내선번호, 이메일)
