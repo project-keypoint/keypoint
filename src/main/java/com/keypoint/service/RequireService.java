@@ -52,7 +52,12 @@ public class RequireService {
 	public int getRequireCount(PageDTO pageDTO) {
 		System.out.println("RequireService getBoardCount()");
 		return requireDAO.getRequireCount(pageDTO);
-	}
+	}// getRequireCount
+
+	public void requireDeleteChecked(List<String> requireCodes) {
+		System.out.println("RequireService requireDeleteChecked()");
+		requireDAO.requireDeleteChecked(requireCodes);
+	}// requireDeleteChecked
 
 
 

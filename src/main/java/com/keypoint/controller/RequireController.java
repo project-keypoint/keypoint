@@ -6,15 +6,19 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.keypoint.dto.PageDTO;
+import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.RequireDTO;
 import com.keypoint.service.RequireService;
 
@@ -136,16 +140,23 @@ public class RequireController {
 		}
 	}// requireUpdatePro [소요량수정]
 	
+	////다중삭제 테스트
+	@PostMapping("/requireDeleteChecked")
+	public ResponseEntity<String> requireDeleteChecked(@RequestBody List<String> requireCodes) {
+		System.out.println("RequireController requireDeleteChecked()");
+		System.out.println(requireCodes);
+		try {
+			requireService.requireDeleteChecked(requireCodes);
+			return ResponseEntity.ok("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
 	
 	
-	@GetMapping("/requireDelete")
-	public String requireDelete(RequireDTO requireDTO) {
-		System.out.println("RequireController requireDelete()");
-		System.out.println(requireDTO);
-		requireService.deleteRequire(requireDTO);
-		
-		return "require/requireList";
-	}// requireDelete [완제품삭제]
+
+
 	
 	
 	
