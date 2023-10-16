@@ -35,10 +35,10 @@ public class PurchaseDAO {
 		return sqlSession.selectList(namespace+".getPurchaseList", pageDTO);
 	} // getPurchaseList
 	
-	public int getPurchaseCount() {
+	public int getPurchaseCount(PageDTO pageDTO) {
 		System.out.println("PurchaseDAO getPurchaseCount()");
 		
-		return sqlSession.selectOne(namespace+".getPurchaseCount");
+		return sqlSession.selectOne(namespace+".getPurchaseCount", pageDTO);
 	} // getPurchaseCount
 	
 	public PurchaseDTO getPurchaseDetails(String poCode) {

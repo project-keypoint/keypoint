@@ -67,6 +67,9 @@ public class PurchaseController {
 		//---------------------------
 		String search = request.getParameter("search");
 		//---------------------------
+		//---------------------------
+		String search2 = request.getParameter("search2");
+		//---------------------------
 		
 		//한 화면에 보여줄 글개수 설정
 		int pageSize = 10;
@@ -90,12 +93,15 @@ public class PurchaseController {
 		// 검색어 저장
 		pageDTO.setSearch(search);
 		//--------------------
-		
+		//--------------------
+		// 검색어 저장
+		pageDTO.setSearch2(search2);
+		//--------------------
 		
 		List<PurchaseDTO> purchaseList = purchaseService.getPurchaseList(pageDTO);
 		
 		// 전체 글개수 가져오기
-		int count = purchaseService.getPurchaseCount();
+		int count = purchaseService.getPurchaseCount(pageDTO);
 		
 		// 전체 사원 수 employeeCount에 담기
 		model.addAttribute("purchaseCount", count);

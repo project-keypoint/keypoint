@@ -49,10 +49,10 @@ public class ReceiptService {
 		return receiptDAO.getReceiptList(pageDTO);
 	}// getReceiptList [입고목록]
 	
-	public int getReceiptCount() {
+	public int getReceiptCount(PageDTO pageDTO) {
 		System.out.println("ReceiptService getReceiptCount()");
 		
-		return receiptDAO.getReceiptCount();
+		return receiptDAO.getReceiptCount(pageDTO);
 	} // getReceiptCount
 	
 	public ReceiptDTO getReceiptDetails(String grCode) {

@@ -72,6 +72,10 @@ public class ReceiptController {
 		//---------------------------
 			String search = request.getParameter("search");
 		//---------------------------
+			
+		//---------------------------
+		String search2 = request.getParameter("search2");
+		//---------------------------
 		
 		
 		
@@ -97,13 +101,18 @@ public class ReceiptController {
 		pageDTO.setSearch(search);
 		//--------------------
 		
+		//--------------------
+		// 검색어 저장
+		pageDTO.setSearch2(search2);
+		//--------------------
+		
 		
 		
 		
 		List<ReceiptDTO> receiptList = receiptService.getReceiptList(pageDTO);
 		
 		// 전체 글개수 가져오기
-		int count = receiptService.getReceiptCount();
+		int count = receiptService.getReceiptCount(pageDTO);
 		
 		// 전체 사원 수 employeeCount에 담기
 		model.addAttribute("receiptCount", count);
