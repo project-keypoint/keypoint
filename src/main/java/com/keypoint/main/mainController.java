@@ -21,7 +21,14 @@ public class mainController {
 		return "main";
 	}//
 
+//	가상주소 http://localhost:8080/FunWeb/member/main
+	@GetMapping("/main_test")
+	public String main_test() {
 
+		// /main.jsp
+		// WEB-INF/views/main.jsp
+		return "main_test";
+	}//
 	
 
 	// -------------------------------------------------
