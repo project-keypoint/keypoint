@@ -204,6 +204,14 @@ public class WorkOrderDAO {
 	
 	
 	
+	public void updateMaterialCount(WorkOrderDTO workOrderDTO) {
+		
+		sqlSession.update(namespace+".updateMaterialCount", workOrderDTO);
+	}
+	
+	
+	
+	
 	
 	
 	

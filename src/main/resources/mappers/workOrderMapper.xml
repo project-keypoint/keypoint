@@ -344,9 +344,37 @@
 
 	
 	
+		 <update id="updateMaterialCount">
+        UPDATE material m
+        SET m.materialCount = m.materialCount - (
+            SELECT (req.reqCount * wo.woCount)
+            FROM requirement req
+            JOIN workOrder wo ON req.productCode = wo.productCode
+            WHERE wo.woCode = #{woCode}
+        )
+        WHERE m.materialCode = (
+            SELECT req.materialCode
+            FROM requirement req
+            JOIN workOrder wo ON req.productCode = wo.productCode
+            WHERE wo.woCode = #{woCode}
+        )
+    </update>
 	
-	
-	
+<!-- 	<update id="updateMaterialCount"> -->
+<!-- 	UPDATE material m -->
+<!--         SET m.materialCount = m.materialCount - ( -->
+<!--             SELECT (wo.woCount * req.reqCount)  -->
+<!--             FROM workOrder wo -->
+<!--             JOIN requirement req ON wo.productCode = req.productCode -->
+<!--             WHERE wo.woCode = #{woCode} -->
+<!--         ) -->
+<!--         WHERE m.materialCode IN ( -->
+<!--             SELECT req.materialCode -->
+<!--             FROM workOrder wo -->
+<!--             JOIN requirement req ON wo.productCode = req.productCode -->
+<!--             WHERE wo.woCode = #{woCode} -->
+<!--         ) -->
+<!-- 	</update> -->
 </mapper>
 
 
