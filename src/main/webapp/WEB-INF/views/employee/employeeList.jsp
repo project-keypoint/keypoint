@@ -13,7 +13,7 @@
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 사원 CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/employee.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/employee2.css" rel="stylesheet">
 
 </head>
 
@@ -144,16 +144,16 @@
      <table class="table-list">
       <tr class="table-head">
 	   <th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>     
-	   <th style="width: 8%;">사원번호</th> 
-       <th style="width: 8%;">이름</th> 
-	   <th style="width: 8%;">부서</th> 
-	   <th style="width: 8%;">직급</th> 
-	   <th style="width: 13%;">내선번호</th>
-	   <th style="width: 15%;">연락처</th> 
-	   <th style="width: 15%;">이메일</th> 
-	   <th style="width: 9%;">입사일</th>
-	   <th style="width: 6%;">재직여부</th>
-	   <th style="width: 9%;">상세내역</th>
+	   <th>사원번호</th> 
+       <th>이름</th> 
+	   <th>부서</th> 
+	   <th>직급</th> 
+	   <th>내선번호</th>
+	   <th>연락처</th> 
+	   <th>이메일</th> 
+	   <th>입사일</th>
+	   <th>재직여부</th>
+	   <th>상세내역</th>
       </tr>
 
        <c:forEach var="employeeDTO" items="${employeeList}">

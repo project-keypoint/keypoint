@@ -15,7 +15,7 @@
 <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- employee CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/employee.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/employeeInsert.css" rel="stylesheet">
 </head>
 
 
@@ -26,13 +26,6 @@
 
 <div class="forms-group-customer">
 <div class="page-title-popup">사원 등록</div>
-<!-- </div> -->
-
-<!-- <div class="form-group-customer"> -->
-<!-- <p>사원ID</p> -->
-<!-- <input type="text" id="empId" name="empId" class="form-control search-input" readonly> -->
-<!-- </div> -->
-
 
 <!-- -------------------- 사진첨부 -------------------- -->
 <div class="form-group-customer"> 
