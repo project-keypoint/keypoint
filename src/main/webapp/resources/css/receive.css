@@ -422,3 +422,6 @@ margin-bottom: 5px;
 width: 175px;
 height: 30px;
 }
+#excelWorkOrder {
+    float: right;
+}
