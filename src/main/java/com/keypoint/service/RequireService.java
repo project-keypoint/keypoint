@@ -54,9 +54,9 @@ public class RequireService {
 		return requireDAO.getRequireCount(pageDTO);
 	}// getRequireCount
 
-	public void requireDeleteChecked(List<String> requireCodes) {
+	public void requireDeleteChecked(RequireDTO requireDTO) {
 		System.out.println("RequireService requireDeleteChecked()");
-		requireDAO.requireDeleteChecked(requireCodes);
+		requireDAO.requireDeleteChecked(requireDTO);
 	}// requireDeleteChecked
 
 

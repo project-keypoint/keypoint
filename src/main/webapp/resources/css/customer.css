@@ -154,12 +154,14 @@ background: #D3D3D3;
 }
 
 
-/* 기본 버튼 스타일 (회색) */
+/* 기본 버튼 스타일*/
 .btn.btn-secondary.mybutton2 {
-background-color: #858796;
+background-color: #36b9cc;
 color: #fff;
 line-height: 0;
 height: 32px;
+border: none;
+outline: none;
 }
 
 /* 클릭된 버튼 스타일 (파란색) */
@@ -239,6 +241,7 @@ height: 30px;
 #cusRep.search-input,#cusTel.search-input, #cusType.search-input, #cusCategory.search-input, 
 #cusStatus.search-input, #cusFax.search-input,  #cusZonecode.search-input, #cusAddress_dtail.search-input {
 width: 280px;
+height: 35px;	
 }
 
 

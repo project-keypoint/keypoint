@@ -5,10 +5,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,12 +41,13 @@ public class CustomerController {
 		System.out.println("CustomerController cusList()");
 		
 //		검색어 가져오기
-		String search1 = request.getParameter("search1");
+		String search = request.getParameter("search");
 		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
 
 		
 //		한 화면에 보여줄 글 개수 설정
-		int pageSize = 10;
+		int pageSize = 5;
 		
 //		현재의 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
@@ -62,22 +66,18 @@ public class CustomerController {
 		pageDTO.setCurrentPage(currentPage);
 		
 //		검색어 저장
-		pageDTO.setSearch1(search1);
+		pageDTO.setSearch(search);
 		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
 		
 		pageDTO.setCusStatus(request.getParameter("cusStatus"));
 		
 //		전체 글 리스트
 		List<CustomerDTO> cusList = customerService.getCusList(pageDTO);
-		List<CustomerDTO> insertcusList = customerService.getinsertCusList(pageDTO);
-		List<CustomerDTO> deletecusList = customerService.getdeleteCusList(pageDTO);
 		
 		
 //		거래처 전체 등록 개수 가져오기
-		int count = customerService.getCusCount();
-//		'거래중'/'거래중지'인 글 개수만 가져오기
-		int insertCount = customerService.getInsertCount();
-		int deletetCount = customerService.getDeleteCount();
+		int count = customerService.getCusCount(pageDTO);
 		
 		
 //		한 화면에 보여줄 페이지 개수 설정
@@ -107,12 +107,7 @@ public class CustomerController {
 		
 		
 		model.addAttribute("cusList", cusList);
-		model.addAttribute("insertcusList", insertcusList);
-		model.addAttribute("deletecusList", deletecusList);
-		
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("insertCount", insertCount);
-		model.addAttribute("deletetCount", deletetCount);
 		model.addAttribute("cusCount", count);
 		
 		return "customer/cusList";
@@ -195,7 +190,6 @@ public class CustomerController {
 	}
 	
 
-	
 	
 	
 	
