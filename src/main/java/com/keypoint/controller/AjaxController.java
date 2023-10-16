@@ -114,29 +114,13 @@ public class AjaxController {
 		} // empCheck
 	
 	
-//		--------------------------------------------------------------------------
-//		공지사항 다중삭제
-		@PostMapping("/noticeDeleteChecked")
-		public ResponseEntity<String> noticeDeleteChecked(@RequestBody NoticeDTO noticeDTO) {
-		    try {
-		        noticeService.deleteNotice(noticeDTO);
-		        return ResponseEntity.ok("success");
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		    }
-		}
 		
 		
-		
-		
-		
-
 	
-		
-		//	가상주소 http://localhost:8080/FunWeb/notice/recentNotice
-//		@RequestMapping(value = "/notice/recentNotice", method = RequestMethod.GET)
-		@GetMapping("/notice/recentNotice")
+//	--------------------------------------------------------------------------
+//	가상주소 http://localhost:8080/FunWeb/notice/recentNotice
+//	@RequestMapping(value = "/notice/recentNotice", method = RequestMethod.GET)
+	@GetMapping("/notice/recentNotice")
 		public ResponseEntity<List<NoticeDTO>> recentNotice() {
 			//ResponseEntity : 응답출력결과 저장하는 파일 제공
 			System.out.println("AjaxController recentNotice()");
@@ -146,14 +130,14 @@ public class AjaxController {
 			pageDTO.setPageNum("1");
 			pageDTO.setCurrentPage(1);
 			
-	List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);
+			List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);
 			// List<BoardDTO> boardList 
 //	           => json변경하는 프로그램설치(jackson-databind 설치)
 //	           => 자동으로 json 으로 변경
 			
 			//출력 => 결과 가지고 join.jsp 이동(되돌아감)
-	ResponseEntity<List<NoticeDTO>> entity = new 
-	ResponseEntity<List<NoticeDTO>>(noticeList, HttpStatus.OK);
+		ResponseEntity<List<NoticeDTO>> entity = new 
+		ResponseEntity<List<NoticeDTO>>(noticeList, HttpStatus.OK);
 			
 			return entity;
 		}//

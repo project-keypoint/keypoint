@@ -136,7 +136,7 @@
 </div>
 <div class="details-buttons">
 <input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/customer/cusUpdate?cusCode=${customerDTO.cusCode}'">
-<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
+<input type="button" value="확인" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </div><!-- main-details -->
 
