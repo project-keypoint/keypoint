@@ -23,7 +23,11 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">품질검사목록</div>
+<div class="page-title">품질검사목록
+<!-- 초기화 이미지 -->
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="cancelSearch()">
+ </div>
 <div class="contents2">
 
 <form action="${pageContext.request.contextPath}/qc/qcList" method="get">
@@ -82,20 +86,20 @@
         placeholder="${empty pageDTO.search6 ? '납품예정일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
-<!-- <div class="search-button"> -->
-<!-- <div style="margin-bottom: 15px;"></div> -->
-<!-- <input type="submit" value="검색" class="btn btn-primary mybutton1"> -->
-<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()"> -->
+<div class="search-button">
+<div style="margin-bottom: 15px;"></div>
+<input type="submit" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
+</div>
+<!-- <div style="display: flex; flex-direction: column; width: 145px; margin-top: -14px;"> -->
+<!-- <div class="search-button" style="margin-bottom: 5px;"> -->
+<!-- <input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;"> -->
 <!-- </div> -->
-<div style="display: flex; flex-direction: column; width: 145px; margin-top: -14px;">
-<div class="search-button" style="margin-bottom: 5px;">
-<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
-</div>
-<div class="search-button" style="display: flex; justify-content: space-between;">
-<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/qc/qcList'" style="width: 48.6%;">
-<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
-</div>
-</div>
+<!-- <div class="search-button" style="display: flex; justify-content: space-between;"> -->
+<%-- <input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/qc/qcList'" style="width: 48.6%;"> --%>
+<!-- <input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;"> -->
+<!-- </div> -->
+<!-- </div> -->
 </div><!-- search-bar -->
 </form>
 <br>
@@ -465,11 +469,17 @@ $("#excelWorkOrder").click(function(){
 		);
 	
 });// end function
-
-
-
-
 </script>
+
+<script>
+//초기화 아이콘 누르면 초기화
+function cancelSearch() {
+ location.href = "${pageContext.request.contextPath}/qc/qcList";
+}
+</script>
+
+
+
 
 </body>
 </html>
