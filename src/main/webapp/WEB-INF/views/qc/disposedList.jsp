@@ -26,7 +26,7 @@
 <div class="page-title">폐기목록
 <!-- 초기화 이미지 -->
 <img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
-        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="cancelSearch()">
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="reset()">
  </div>
 <div class="contents2">
 
@@ -343,7 +343,7 @@ function resetSearch() {
 
 <script>
 // 초기화 아이콘 누르면 초기화
-function cancelSearch() {
+function reset() {
     location.href = "${pageContext.request.contextPath}/qc/disposedList";
 }
 </script>

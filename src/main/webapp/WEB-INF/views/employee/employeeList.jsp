@@ -26,8 +26,9 @@
 <div class="main">
   <div class="card shadow"><!-- 그림자아니야 영역 -->
     <div class="page-title">사원목록(사원기본정보)
+<!--    초기화 이미지 -->
       <img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
-        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;">
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="reset()">
     </div>
     <div class="contents2">
 
@@ -138,7 +139,6 @@
      </div>
       <a style="text-align: right;">총 사원수 : ${employeeCount}명</a>
     </div>
-<!-- // 체크박스 부분 -->
 
     <div>
      <table class="table-list">
@@ -302,20 +302,21 @@ function fun1() {
 //   });
 
   // 초기화 버튼 클릭 시
-  $("#resetFilters").click(function() {
-    // 모든 체크박스 해제
-    $("input[name='status']").prop("checked", false);
-    $("tr.table-body").show();
+//   $("#resetFilters").click(function() {
+//     // 모든 체크박스 해제
+//     $("input[name='status']").prop("checked", false);
+//     $("tr.table-body").show();
 
-    // 검색 필드 초기화
-    $("#search").val("");
-    $("#search2").val("");
-//     $("#search3").val("");
+//     // 검색 필드 초기화
+//     $("#search").val("");
+//     $("#search2").val("");
+// //     $("#search3").val("");
     
-    // 페이지 새로고침
-        location.href = "${pageContext.request.contextPath}/employee/employeeList";
-  });
+//     // 페이지 새로고침
+//         location.href = "${pageContext.request.contextPath}/employee/employeeList";
+//   });
 
+  
 //   // 체크박스 누르면 해당하는 리스트 나오게
 //   function filterTableByStatus(status) {
 //     if (status === '재직') {
@@ -335,12 +336,13 @@ function fun1() {
 
 </script>
 
-<!--   초기화 버튼 처리 -->
-<!--   $("#resetFilters").click(function() { -->
-<!--     // 아무 체크박스도 선택되지 않고 모든 행을 보이게 설정 -->
-<!--     $("input[name='status']").prop("checked", false); -->
-<!--     $("tr.table-body").show(); -->
-<!--   }); -->
+<script>
+// 초기화 아이콘 누르면 실행
+function reset() {
+    location.href = "${pageContext.request.contextPath}/employee/employeeList";
+}
+</script>
+
 
 
 

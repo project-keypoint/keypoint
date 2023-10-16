@@ -27,8 +27,14 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">완제품목록(재고현황)</div>
+<div class="page-title">완제품목록(재고현황)
+
+<!-- 초기화 이미지 -->
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="reset()">
+ </div>
 <div class="contents2">
+
 <input type="button" value="엑셀파일다운" id="excelWorkOrder"> <br><br>
 					
 <div class="search-bar">
@@ -295,13 +301,20 @@ $("#excelWorkOrder").click(function(){
 		);
 	
 });// end function	    
-
-
-
-
-
-
 </script>
+
+
+<script>
+//초기화 아이콘 누르면 초기화
+function reset() {
+location.href = "${pageContext.request.contextPath}/product/productList";
+}
+</script>
+
+
+
+
+
 
 </body>
 </html>
