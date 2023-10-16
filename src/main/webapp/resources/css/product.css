@@ -234,3 +234,6 @@ margin-right: 5px;
 .status{
 padding: 0 0 0 10px;
 }
+#excelWorkOrder {
+    float: right;
+}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,15 +23,6 @@
 	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
 	rel="stylesheet">
 
-<style type="text/css">
-.lineCode {
-	width: 180px;
-}
-
-.search-select {
-	width: 480px;
-}
-</style>
 </head>
 <body>
 	<%@include file="../inc/top-bar.jsp"%>
@@ -45,54 +37,73 @@
 			<!-- 그림자아니야 영역 -->
 			<div class="page-title">실적관리</div>
 			<div class="contents2">
-			<form action="${pageContext.request.contextPath}/production/productionList" method="get">	
-			
-			
-			
-			
-				<div class="search-bar">
-					<div class="search-b">
-						<div class="search-select">				 		
-							<p>상품명</p> 
-						<input type="text" id="productCode" name="search1" class="form-control search-input readonly-color"
-      					 placeholder="${empty pageDTO.search1 ? '상품코드' : ''}" value="${pageDTO.search1}" readonly>
-						<input type="text" id="productName" name="search2" class="form-control search-input readonly-color"
-     					 placeholder="${empty pageDTO.search2 ? '상품명(클릭)' : ''}" value="${pageDTO.search2}" readonly>
-						</div>
-						</div>
-						
-						
+				<form
+					action="${pageContext.request.contextPath}/production/productionList"
+					method="get">
+
+					<input type="button" value="엑셀파일다운" id="excelProduction"> <br>
+					<br>
+
+
+					<div class="search-bar">
 						<div class="search-b">
-						<div class="search-date">
-						<p>실적일자</p>
-						<input type="text" id="poDate1" name="search3" class="form-control search-input readonly-color" 
-      					 placeholder="${empty pageDTO.search3 ? '실적일자' : ''}" value="${pageDTO.search3}" readonly>
-						~<input type="text" id="poDate2" name="search4" class="form-control search-input readonly-color" 
-       					 placeholder="${empty pageDTO.search4 ? '실적일자' : ''}" value="${pageDTO.search4}" readonly>
+							<div class="search-select">
+								<p>상품명</p>
+								<input type="text" id="productCode" name="search1"
+									class="form-control search-input readonly-color"
+									placeholder="${empty pageDTO.search1 ? '상품코드' : ''}"
+									value="${pageDTO.search1}" readonly> <input type="text"
+									id="productName" name="search2"
+									class="form-control search-input readonly-color"
+									placeholder="${empty pageDTO.search2 ? '상품명(클릭)' : ''}"
+									value="${pageDTO.search2}" readonly>
+							</div>
 						</div>
+
+
+						<div class="search-b">
+							<div class="search-date">
+								<p>실적일자</p>
+								<input type="text" id="poDate1" name="search3"
+									class="form-control search-input readonly-color"
+									placeholder="${empty pageDTO.search3 ? '실적일자' : ''}"
+									value="${pageDTO.search3}" readonly> ~<input
+									type="text" id="poDate2" name="search4"
+									class="form-control search-input readonly-color"
+									placeholder="${empty pageDTO.search4 ? '실적일자' : ''}"
+									value="${pageDTO.search4}" readonly>
+							</div>
 						</div>
-						
-						
-						<div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;">
-				<div class="search-button" style="margin-bottom: 5px;">
-				<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
-				</div>
-				<div class="search-button" style="display: flex; justify-content: space-between;">
-				<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/production/productionList'" style="width: 48.6%;">
-				<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
-				</div>
-				</div>
-				</div><!-- search-bar -->
-				
+
+
+						<div
+							style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;">
+							<div class="search-button" style="margin-bottom: 5px;">
+								<input type="submit" value="검색하기"
+									class="btn btn-primary mybutton1" style="width: 100%;">
+							</div>
+							<div class="search-button"
+								style="display: flex; justify-content: space-between;">
+								<input type="button" value="초기화"
+									class="btn btn-secondary mybutton1"
+									onclick="window.location.href = '${pageContext.request.contextPath}/production/productionList'"
+									style="width: 48.6%;"> <input type="button" value="지우기"
+									class="btn btn-secondary mybutton1" onclick="resetSearch()"
+									style="width: 48.6%;">
+							</div>
+						</div>
+					</div>
+					<!-- search-bar -->
+
 				</form>
-						<!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
-						<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
+				<!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
+				<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 
 				<div class="page-title">생산실적등록</div>
 
 
 				<div>
-					<table class="table-list">
+					<table class="table-list" id="datatablesSimple">
 						<tr class="table-head">
 							<th><input type="checkbox" id="delete-list-all"
 								name="delete-list" data-group="delete-list"></th>
@@ -118,7 +129,7 @@
 								<td name="poCode">${productionDTO.poCode}</td>
 								<td>${productionDTO.woCode}</td>
 								<td><c:out
-										value="${fn:substring(productionDTO.poDate, 0, 10)}" /></td>
+										value="${fn:substring(productionDTO.poDate, 0, 16)}" /></td>
 								<td>${productionDTO.lineCode}</td>
 								<td>${productionDTO.productCode}</td>
 								<td>${productionDTO.productName}</td>
@@ -140,44 +151,70 @@
 						</c:forEach>
 					</table>
 				</div>
+				<br>
+
 				<!-- table -->
 				<div class="content-bottom">
-				<div>
+					<div>
 						<input type="button" value="생산실적등록"
 							class="btn btn-primary mybutton1" onclick="openInsert()">
-						<input type="button" value="삭제" 
-							class="btn btn-secondary mybutton1" onclick="selectedDel()" >
+						<input type="button" value="삭제"
+							class="btn btn-secondary mybutton1" onclick="selectedDel()">
 					</div>
 					<div id="page_control" class="page-buttons">
-  					  <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-      					  <a href="${pageContext.request.contextPath}/production/productionList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&lt;</a>
-   					 </c:if>
-   					 <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-     				   <c:choose>
-           			 <c:when test="${i eq pageDTO.pageNum}">
-              			  <a href="${pageContext.request.contextPath}/production/productionList?pageNum=${i}&search=${pageDTO.search}" class="page-button page-button-active">${i}</a>
-          			  </c:when>
-         			   <c:otherwise>
-             			   <a href="${pageContext.request.contextPath}/production/productionList?pageNum=${i}&search=${pageDTO.search}" class="page-button">${i}</a>
-         			   </c:otherwise>
-        				</c:choose>
-   					 </c:forEach>
-  					  <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-      					  <a href="${pageContext.request.contextPath}/production/productionList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-button">&gt;</a>
-   						 </c:if>
-							</div>
-</div>
-</div><!-- contents -->
-</div><!-- 그림자아니야 영역 -->
-</div><!-- main -->
+						<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+							<a
+								href="${pageContext.request.contextPath}/production/productionList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}"
+								class="page-button">&lt;</a>
+						</c:if>
+						<c:forEach var="i" begin="${pageDTO.startPage}"
+							end="${pageDTO.endPage}" step="1">
+							<c:choose>
+								<c:when test="${i eq pageDTO.pageNum}">
+									<a
+										href="${pageContext.request.contextPath}/production/productionList?pageNum=${i}&search=${pageDTO.search}"
+										class="page-button page-button-active">${i}</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="${pageContext.request.contextPath}/production/productionList?pageNum=${i}&search=${pageDTO.search}"
+										class="page-button">${i}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+							<a
+								href="${pageContext.request.contextPath}/production/productionList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}"
+								class="page-button">&gt;</a>
+						</c:if>
+					</div>
+				</div>
+			</div>
+			<!-- contents -->
+		</div>
+		<!-- 그림자아니야 영역 -->
+	</div>
+	<!-- main -->
 
 	<!-- contents end -->
+
+
+
+
+
+
+
 
 	<!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
 	<link rel="stylesheet"
 		href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<!-- 엑셀파일 저장을 위한 스크립트 호출 -->
+	<script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+	<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
 
 	<script type="text/javascript">
 		//팝업 창을 열어주는 함수
@@ -190,9 +227,7 @@
 					+ ", height=" + height + ", left=" + left + ", top=" + top);
 			popupWindow.focus();
 		}
-		$(document)
-				.ready(
-						function() {							
+		$(document).ready( function() {							
 							// 상품명 검색 팝업 열기
 							$("#productCode, #productName")
 									.click(
@@ -321,7 +356,7 @@
 
 
 		        if (postIds.length === 0) {
-		            alert("삭재할 목록을 선택하세요.");
+		            alert("삭제할 목록을 선택하세요.");
 		            return;
 		        }
 
@@ -345,38 +380,118 @@
 		        	})
 		        }
 		        
-// 		        if (confirm(confirmMessage)) {
-// 		            $.ajax({
-// 		                type: "POST",
-// 		                url: "<c:url value='/production/productionList' />", // 스프링 URL 태그 사용
-// 		                data: {
-// 		                    postIds: postIds.join("|")
-// 		                },
-// 		                success: function(result) {
-// 		                    console.log(result);
-
-// 		                    // 삭제가 성공한 경우 선택된 행을 화면에서 제거
-// 		                    if (result.trim() === "success") {
-// 		                        for (var i = 0; i < selectedRows.length; i++) {
-// 		                            selectedRows[i].remove();
-// 		                        }
-// 		                        location.reload();
-// 		                    } else {
-// 		                        alert("삭제 실패");
-// 		                    }
-// 		                },
-// 		                error: function(xhr, status, error) {
-// 		                    alert(error);
-// 		                }
-// 		            });
-// 		        }
 		    }
-		
-		
+		        
+// 				  //추가, 수정 을 구분하기위한 전역변수선언
+// 				  var status = "";
+
+// 				    //Table 초기화를 위한 전역변수 선언
+// 				    var simpleDataTableInstance;
+
+// 				    // 테이블 초기화 함수
+// 				    function simpleDataTable() {
+// 				    	// 테이블의 선택자를 찾는다
+// 				    	const datatablesSimple = document.getElementById('datatablesSimple');
+				    		
+// 				    		// 테이블 객체를 생성하고 전역변수에 저장한다
+// 				         	simpleDataTableInstance = new simpleDatatables.DataTable(datatablesSimple, {
+				            
+// 				          		// 페이지 표시 버튼 삭제
+// 				          		perPageSelect : false,
+// 				          		// 검색창 삭제
+// 				          		searchable : false,
+// 				          		// 페이지당 목록 10개
+// 				          		perPage : 10,
+				          
+// 				          		//라벨 수정
+// 				          		labels: {
+// 				          		placeholder: "검색",
+// 				          		noResults : "검색 결과가 없습니다",
+// 				          		noRows : "데이터가 없습니다",
+// 				          		info : ""
+// 				          		}
+// 				          }); // end 초기화
+				        
+// 				    }//end function
+				    
+// 				 // 돔이 로드될떄 테이블 초기화
+// 				    window.addEventListener('DOMContentLoaded', event => {
+// 				    	simpleDataTable();
+// 				    });
+		        
+		   			
+// 				 // thead의 체크박스를 클릭했을때 전체체크가되게끔 이벤트를 발생시킨다
+// 					$('input[name="delete-list"]').click(function() {
+// 					    // 모든 selectedProId 체크박스의 상태를 delete-list-all와 동일하게 설정한다
+// 					    // $this로 AllProId의 상태를 가져온다
+// 					    $('input[name="delete-list"]').prop('checked', $(this).prop('checked'));
+// 					});// end function
+				    
+				    
+				    
+				  //엑셀 버튼 누를 시 실행되는 함수
+					$("#excelProduction").click(function(){
+// 						체크박스가 체크된 여부를 확인하기위한 변수선언
+						var selectedCheckbox = $("input[name='delete-list']:checked");
+						if(selectedCheckbox.length === 0){
+							alert("엑셀파일로 다운로드할 행을 선택해주세요")
+							return false;
+						} 
+
+						// 엑셀에 데이터를 삽입하기위한 배열 변수선언
+						var excelData = [];
+						
+						// 엑셀의 헤더가 되는 값을 삽입하기위한 변수선언
+						var headers = [];
+						
+							// table의 th태그만큼 반복문을 실행하되 첫번째 체크박스행은 제외한다
+							$("#datatablesSimple th:not(:first)").each(function(){
+								// 헤더에 텍스트값(th) 삽입
+								headers.push($(this).text());
+							});
+							// 엑셀 데이터 변수에 헤더값을 삽입한다
+							excelData.push(headers);
+						
+							// 체크박스가 체크된 행 만큼 엑셀 행삽입 반복문을 시행한다
+							selectedCheckbox.each(function () {
+							
+								// 엑셀의 행값을 담기위한 배열 변수선언
+						    	var row = [];
+								// tr태그를 찾아서 반복문을 실행하되 첫번째 td태그(체크박스)는 제외한다
+						    	$(this).closest("tr").find("td:not(:first-child)").each(function () {
+						    		// 행 변수에 테이블 행(td)태그의 텍스트 값을 삽입한다
+						        	row.push($(this).text());
+						    	});
+								// 엑셀 데이터 변수에 행값을 삽입한다
+						   		excelData.push(row);
+							});
+							
+							// 워크북을 생성한다
+							var workbook = XLSX.utils.book_new();
+							// 엑셀 데이터(헤더, 행)값을 시트로 변환한다
+							var worksheet = XLSX.utils.aoa_to_sheet(excelData);
+							// 데이터와 워크북 시트를 워크북에 추가한다
+							XLSX.utils.book_append_sheet(workbook, worksheet, "생산실적 리스트");
+							
+							// 워크북을 blob형태로 변환하고 xlsx 파일로 저장한다
+							var workbookOutput = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+							saveAs(
+								new Blob([workbookOutput], { type: "application/octet-stream" }),
+								"생산실적 리스트.xlsx"
+							);
+						
+					});// end function	    
+				    
+		    
+		    
+		    
+		    
+		    
+		   
 		
 		
 		</script>
-	
+
 
 
 

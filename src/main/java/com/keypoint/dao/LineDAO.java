@@ -28,7 +28,7 @@ public class LineDAO {
 	}// 라인목록조회
 
 
-	public int getLineCount() {
+	public int getLineCount(PageDTO pageDTO) {
 		System.out.println("LineDAO getLineCount()");
 
 		return sqlSession.selectOne(namespace+".getLineCount");
@@ -53,11 +53,28 @@ public class LineDAO {
 	}// 라인수정
 
 
+//	public void deleteByLineCodes(String[] lineCodes) {
+//        sqlSession.delete(namespace + ".deleteSelectedLines", lineCodes);
+//    }
 
+
+	public void deleteLines(List<String> lineCodes) {
+        try {
+        	System.out.println("LineDAO deleteLines()");
+            sqlSession.delete(namespace+".deleteLines", lineCodes);
+        } catch (Exception e) {
+            // 예외가 발생하면 필요한 예외 처리를 수행하세요.
+            throw new RuntimeException("라인 삭제 중 오류 발생: " + e.getMessage());
+        }
+    }
 	
 	
+	public String getMaxLineCode() {
+		return sqlSession.selectOne(namespace+".getMaxLineCode");
+	}
 	
-	
-	
+	public String getMaxLineName() {
+		return sqlSession.selectOne(namespace+".getMaxLineName");
+	}
 	
 }

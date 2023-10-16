@@ -23,10 +23,15 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">품질검사목록</div>
+<div class="page-title">품질검사목록
+<!-- 초기화 이미지 -->
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="cancelSearch()">
+ </div>
 <div class="contents2">
 
 <form action="${pageContext.request.contextPath}/qc/qcList" method="get">
+<input type="button" value="엑셀파일다운" id="excelWorkOrder"> <br><br>
 <div class="search-b" style="margin-bottom: -25px;">
 <div class="status-check" style="background: #E5E5E5; border: none;">
 <div class="search-date3">
@@ -81,20 +86,20 @@
         placeholder="${empty pageDTO.search6 ? '납품예정일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
-<!-- <div class="search-button"> -->
-<!-- <div style="margin-bottom: 15px;"></div> -->
-<!-- <input type="submit" value="검색" class="btn btn-primary mybutton1"> -->
-<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()"> -->
+<div class="search-button">
+<div style="margin-bottom: 15px;"></div>
+<input type="submit" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
+</div>
+<!-- <div style="display: flex; flex-direction: column; width: 145px; margin-top: -14px;"> -->
+<!-- <div class="search-button" style="margin-bottom: 5px;"> -->
+<!-- <input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;"> -->
 <!-- </div> -->
-<div style="display: flex; flex-direction: column; width: 145px; margin-top: -14px;">
-<div class="search-button" style="margin-bottom: 5px;">
-<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
-</div>
-<div class="search-button" style="display: flex; justify-content: space-between;">
-<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/qc/qcList'" style="width: 48.6%;">
-<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
-</div>
-</div>
+<!-- <div class="search-button" style="display: flex; justify-content: space-between;"> -->
+<%-- <input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/qc/qcList'" style="width: 48.6%;"> --%>
+<!-- <input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;"> -->
+<!-- </div> -->
+<!-- </div> -->
 </div><!-- search-bar -->
 </form>
 <br>
@@ -411,7 +416,70 @@ function resetSearch() {
     $('#select3').prop('checked', false);
 }
 
+
+//엑셀 버튼 누를 시 실행되는 함수
+$("#excelWorkOrder").click(function(){
+//		체크박스가 체크된 여부를 확인하기위한 변수선언
+	var selectedCheckbox = $("input[name='delete-list-qc']:checked");
+	if(selectedCheckbox.length === 0){
+		alert("엑셀파일로 다운로드할 행을 선택해주세요")
+		return false;
+	} 
+
+	// 엑셀에 데이터를 삽입하기위한 배열 변수선언
+	var excelData = [];
+	
+	// 엑셀의 헤더가 되는 값을 삽입하기위한 변수선언
+	var headers = [];
+	
+		// table의 th태그만큼 반복문을 실행하되 첫번째 체크박스행은 제외한다
+		$("#datatablesSimple th:not(:first)").each(function(){
+			// 헤더에 텍스트값(th) 삽입
+			headers.push($(this).text());
+		});
+		// 엑셀 데이터 변수에 헤더값을 삽입한다
+		excelData.push(headers);
+	
+		// 체크박스가 체크된 행 만큼 엑셀 행삽입 반복문을 시행한다
+		selectedCheckbox.each(function () {
+		
+			// 엑셀의 행값을 담기위한 배열 변수선언
+	    	var row = [];
+			// tr태그를 찾아서 반복문을 실행하되 첫번째 td태그(체크박스)는 제외한다
+	    	$(this).closest("tr").find("td:not(:first-child)").each(function () {
+	    		// 행 변수에 테이블 행(td)태그의 텍스트 값을 삽입한다
+	        	row.push($(this).text());
+	    	});
+			// 엑셀 데이터 변수에 행값을 삽입한다
+	   		excelData.push(row);
+		});
+		
+		// 워크북을 생성한다
+		var workbook = XLSX.utils.book_new();
+		// 엑셀 데이터(헤더, 행)값을 시트로 변환한다
+		var worksheet = XLSX.utils.aoa_to_sheet(excelData);
+		// 데이터와 워크북 시트를 워크북에 추가한다
+		XLSX.utils.book_append_sheet(workbook, worksheet, "품질검사 리스트");
+		
+		// 워크북을 blob형태로 변환하고 xlsx 파일로 저장한다
+		var workbookOutput = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+		saveAs(
+			new Blob([workbookOutput], { type: "application/octet-stream" }),
+			"품질검사 리스트.xlsx"
+		);
+	
+});// end function
 </script>
+
+<script>
+//초기화 아이콘 누르면 초기화
+function cancelSearch() {
+ location.href = "${pageContext.request.contextPath}/qc/qcList";
+}
+</script>
+
+
+
 
 </body>
 </html>

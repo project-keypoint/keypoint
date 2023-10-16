@@ -60,6 +60,14 @@
 		and materialCode = #{materialCode}
 	</update>	
 
+	<delete id="receiveDeleteChecked">
+		DELETE from requirement
+		<foreach collection="requireCodes" item="requireCode">
+		WHERE productCode = SUBSTRING('#{requireCode}', 1, 5)
+		and materialCode = SUBSTRING('#{requireCode}', 7);
+		</foreach>
+
+	</delete>
 
 </mapper>
 

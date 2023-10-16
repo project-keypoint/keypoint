@@ -30,7 +30,7 @@
         style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;">
     </div>
     <div class="contents2">
- 
+
 
 
 
@@ -41,7 +41,9 @@
 
        <form name="search_form" method="get" action="${pageContext.request.contextPath}/employee/employeeList" 
              id="selectBox" name="selectBox2" onsubmit="return fun1()">
-                       
+           
+           
+         <div>              
         <div style="float: left;">
          <select id="search" name="search" class="form-control search-input">
           <option value=""> 선택하세요 </option>
@@ -52,12 +54,13 @@
          </select>
         </div>
         
-         <div style="float: left;">
+         <div style="float:right;">
  	      <span id="text_search"><input class="form-control search-input" type="text" name="search2"></span>
          </div>                     
          <div style="float: left; magin-top: 3px;">
           <span id="icon_search"></span>
          </div>
+	     </div>
 	                    
        </form>
   
@@ -66,8 +69,8 @@
    
             
       <div class="search-button">
-       <input type="button" value="검색" class="btn btn-primary mybutton1" onclick="fun1()">
-       <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
+       <input type="button" value="검색" class="btn btn-primary mybutton1" onclick="fun1()" style="margin-top: -30px;">
+       <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()" style="margin-top: -30px;">
       </div>
 
     </div>
@@ -76,13 +79,61 @@
 
 <br>
 
-<!-- 체크박스 부분 -->
-    <div class="select-status" style="display: flex; justify-content: space-between;">
-     <div style="display: flex; justify-content: flex-start;">
-      <a>재직<input type="checkbox" id="select1" name="status" class="list-select" value="재직"></a>
-      <a>휴직<input type="checkbox" id="select2" name="status" class="list-select" value="휴직"></a>
-      <a>퇴직<input type="checkbox" id="select3" name="status" class="list-select" value="퇴직"></a>
-	   <!-- 초기화 이미지 추가 -->
+
+
+
+<!-- 버튼부분 -->
+ <div class="dis-select-buttons" style="display: flex; justify-content: space-between;     align-items: flex-end; margin-bottom: 5px;">
+ <div style="display: flex; justify-content: flex-start;">
+  
+<form action="${pageContext.request.contextPath}/employee/employeeList" method="get">
+<input type="hidden" name="search3" value="">
+<c:choose>
+<c:when test="${pageDTO.search3 eq '' or empty pageDTO.search3}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+
+<form action="${pageContext.request.contextPath}/employee/employeeList" method="get">
+<input type="hidden" name="search3" value="재직">
+<c:choose>
+<c:when test="${'재직' eq pageDTO.search3}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="재직" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="재직" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+
+<form action="${pageContext.request.contextPath}/employee/employeeList" method="get">
+<input type="hidden" name="search3" value="휴직">
+<c:choose>
+<c:when test="${'휴직' eq pageDTO.search3}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="휴직" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="휴직" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+
+<form action="${pageContext.request.contextPath}/employee/employeeList" method="get">
+<input type="hidden" name="search3" value="퇴직">
+<c:choose>
+<c:when test="${'퇴직' eq pageDTO.search3}">
+<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="퇴직" style="margin-right: 4px;">
+</c:when>
+<c:otherwise>
+<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="퇴직" style="margin-right: 4px;">
+</c:otherwise>
+</c:choose>
+</form>
+<!-- 버튼부분 -->
 
      </div>
       <a style="text-align: right;">총 사원수 : ${employeeCount}명</a>
@@ -92,16 +143,16 @@
     <div>
      <table class="table-list">
       <tr class="table-head">
-<!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
-	   <th>사원번호</th> 
-       <th>이름</th> 
-	   <th>부서</th> 
-	   <th>직급</th> 
-	   <th>내선번호</th> 
-	   <th>이메일</th> 
-	   <th>입사일</th>
-	   <th>재직여부</th>
-	   <th>상세내역</th>
+	   <th style="width: 8%;">사원번호</th> 
+       <th style="width: 8%;">이름</th> 
+	   <th style="width: 8%;">부서</th> 
+	   <th style="width: 8%;">직급</th> 
+	   <th style="width: 13%;">내선번호</th>
+	   <th style="width: 15%;">연락처</th> 
+	   <th style="width: 15%;">이메일</th> 
+	   <th style="width: 9%;">입사일</th>
+	   <th style="width: 6%;">재직여부</th>
+	   <th style="width: 9%;">상세내역</th>
       </tr>
 
        <c:forEach var="employeeDTO" items="${employeeList}">
@@ -112,6 +163,7 @@
          <td>${employeeDTO.departmentName}</td>
          <td>${employeeDTO.empPosition}</td>
          <td>${employeeDTO.empTel}</td>
+         <td>${employeeDTO.empPhone}</td>
          <td>${employeeDTO.empEmail}</td>
          <td>${employeeDTO.empHiredate}</td>
          <td>${employeeDTO.empStatus}</td>
@@ -132,7 +184,7 @@
 
        <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
         <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=
-	             ${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">&lt;</a>
+	             ${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}" class="page-button">&lt;</a>
        </c:if>
 
        <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
@@ -142,14 +194,14 @@
 		 </c:when>
           <c:otherwise>
            <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=
-			        ${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">${i}</a>
+			        ${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}" class="page-button">${i}</a>
           </c:otherwise>
 	    </c:choose>
        </c:forEach>
 
        <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
         <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=
-	             ${pageDTO.startPage + pageDTO.pageBlock}&search2=${pageDTO.search2}" class="page-button">&gt;</a>
+	             ${pageDTO.startPage + pageDTO.pageBlock}&search2=${pageDTO.search2}&search3=${pageDTO.search3}" class="page-button">&gt;</a>
        </c:if>
 
       </div><!-- page-button -->
@@ -235,20 +287,19 @@ function fun1() {
 <script>
 
 // 체크박스부분
+// $(document).ready(function() {
+//   // 페이지 로딩 시 초기 설정
+//   $("tr.table-body").show();
 
-$(document).ready(function() {
-  // 페이지 로딩 시 초기 설정
-  $("tr.table-body").show();
+//   $("input[name='status']").change(function() {
+//     // 'status' 그룹 내의 모든 체크박스를 선택 해제
+//     $("input[name='status']").prop("checked", false);
 
-  $("input[name='status']").change(function() {
-    // 'status' 그룹 내의 모든 체크박스를 선택 해제
-    $("input[name='status']").prop("checked", false);
+//     // 선택한 체크박스만 체크되게 변경
+//     $(this).prop("checked", true);
 
-    // 선택한 체크박스만 체크되게 변경
-    $(this).prop("checked", true);
-
-    filterTableByStatus($(this).val());
-  });
+//     filterTableByStatus($(this).val());
+//   });
 
   // 초기화 버튼 클릭 시
   $("#resetFilters").click(function() {
@@ -259,26 +310,26 @@ $(document).ready(function() {
     // 검색 필드 초기화
     $("#search").val("");
     $("#search2").val("");
+//     $("#search3").val("");
     
-    // 페이지 다시 로드
-    document.search_form.submit();
-    
+    // 페이지 새로고침
+        location.href = "${pageContext.request.contextPath}/employee/employeeList";
   });
 
-  // 체크박스 누르면 해당하는 리스트 나오게
-  function filterTableByStatus(status) {
-    if (status === '재직') {
-      $("tr.table-body[data-status='재직']").show();
-      $("tr.table-body[data-status!='재직']").hide();
-    } else if (status === '휴직') {
-      $("tr.table-body[data-status='휴직']").show();
-      $("tr.table-body[data-status!='휴직']").hide();
-    } else if (status === '퇴직') {
-      $("tr.table-body[data-status='퇴직']").show();
-      $("tr.table-body[data-status!='퇴직']").hide();
-    }
-  }
-});
+//   // 체크박스 누르면 해당하는 리스트 나오게
+//   function filterTableByStatus(status) {
+//     if (status === '재직') {
+//       $("tr.table-body[data-status='재직']").show();
+//       $("tr.table-body[data-status!='재직']").hide();
+//     } else if (status === '휴직') {
+//       $("tr.table-body[data-status='휴직']").show();
+//       $("tr.table-body[data-status!='휴직']").hide();
+//     } else if (status === '퇴직') {
+//       $("tr.table-body[data-status='퇴직']").show();
+//       $("tr.table-body[data-status!='퇴직']").hide();
+//     }
+//   }
+// });
 
 
 

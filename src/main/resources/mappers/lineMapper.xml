@@ -5,55 +5,93 @@
 <mapper namespace="com.itwillbs.mappers.lineMapper">
 
 
-<!-- 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO"> -->
-<!-- 	SELECT distinct l.*,  w.woCode  -->
-<!-- 	from line l -->
-<!--     join workOrder w ON l.lineCode = w.lineCode -->
-<!--     ORDER BY l.lineCode DESC; -->
-<!-- 	</select> -->
-	
+	<!-- <select id="getLineList" resultType="com.keypoint.dto.LineDTO"> -->
+	<!-- SELECT distinct l.*, w.woCode -->
+	<!-- from line l -->
+	<!-- join workOrder w ON l.lineCode = w.lineCode -->
+	<!-- ORDER BY l.lineCode DESC; -->
+	<!-- </select> -->
+
 	<select id="getLineList" resultType="com.keypoint.dto.LineDTO">
-	SELECT lineCode, lineName, lineMemo, empName
-	from line 
-    <if test="search != null">
-			where lineCode = #{search} 
+		SELECT lineCode, lineName, lineMemo, empName
+		from line
+		<if test="search != null or search2 != null">
+			where
+			<if test="search != null">
+				lineCode LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="search != null and search2 != null">
+				AND
+			</if>
+			<if test="search2 != null">
+				empName LIKE CONCAT('%', #{search2}, '%')
+			</if>
 		</if>
-		<if test="search2 != null">
-			or empName = #{search2}
-		</if>
-    
-    ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED)
-    LIMIT #{startRow}, #{pageSize};
+
+
+		ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED)
+		LIMIT #{startRow},
+		#{pageSize};
 	</select>
 
 	<select id="getLineCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM line
-	</select> 
+	</select>
 
-	<insert id="lineInsert" >
-		insert into line (lineCode, lineName, lineMemo, empName)
-		values( #{lineCode}, #{lineName}, #{lineMemo}, #{empName})
-	
+	<insert id="lineInsert">
+		insert into line (lineCode, lineName,
+		lineMemo,
+		empName)
+		values( #{lineCode}, #{lineName}, #{lineMemo},
+		#{empName})
+
 	</insert>
 
-	<select id="getLineDetails" resultType="com.keypoint.dto.LineDTO">
+	<select id="getLineDetails"
+		resultType="com.keypoint.dto.LineDTO">
 		select lineCode, lineName, lineMemo, empName
-		from line 
-		where lineCode = #{lineCode}
+		from line
+		where
+		lineCode = #{lineCode}
 	</select>
-	
+
 	<update id="lineUpdate">
 		UPDATE line
-		SET lineCode = #{lineCode},  
-        	lineName = #{lineName},
-        	lineMemo = #{lineMemo},
-        	empName = #{empName} 	
-		WHERE lineCode = #{lineCode}
+		SET lineCode = #{lineCode},
+		lineName =
+		#{lineName},
+		lineMemo = #{lineMemo},
+		empName = #{empName}
+		WHERE lineCode
+		= #{lineCode}
 	</update>
 
+	<delete id="deleteLines" parameterType="java.util.List">
+		DELETE FROM line
+		WHERE lineCode IN
+		<foreach collection="list" item="lineCode" open="("
+			separator="," close=")">
+			#{lineCode}
+		</foreach>
+	</delete>
+
+	<select id="getMaxLineCode" resultType="java.lang.String">
+		SELECT CONCAT('LINE', CAST(CAST(SUBSTRING(lineCode, 5) AS UNSIGNED) + 1 AS
+		CHAR(255)))
+		FROM line
+		ORDER BY CAST(SUBSTRING(lineCode, 5) AS UNSIGNED) DESC
+		LIMIT 1;
+
+	</select>
+
+	<select id="getMaxLineName" resultType="java.lang.String">
+		SELECT CONCAT('라인', CHAR(ASCII(RIGHT(lineName, 1)) + 1)) AS newLineName
+		FROM line
+		ORDER BY RIGHT(lineName, 1) DESC
+		LIMIT 1;
+
+	</select>
+
+
 </mapper>
-
-
-
-

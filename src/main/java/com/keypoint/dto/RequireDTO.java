@@ -8,14 +8,13 @@ public class RequireDTO {
 	private String materialName;
 	private int reqCount;
 	private String materialUnit;
-	
+	private String requireCode;
 	@Override
 	public String toString() {
 		return "RequireDTO [productCode=" + productCode + ", productName=" + productName + ", materialCode="
 				+ materialCode + ", materialName=" + materialName + ", reqCount=" + reqCount + ", materialUnit="
-				+ materialUnit + "]";
+				+ materialUnit + ", requireCode=" + requireCode + "]";
 	}
-	
 	public String getProductCode() {
 		return productCode;
 	}
@@ -52,5 +51,12 @@ public class RequireDTO {
 	public void setMaterialUnit(String materialUnit) {
 		this.materialUnit = materialUnit;
 	}
+	public String getRequireCode() {
+		return requireCode;
+	}
+	public void setRequireCode(String requireCode) {
+		this.requireCode = requireCode;
+	}
+	
 
 }// class

@@ -25,11 +25,11 @@
 <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>라인코드</p>
-<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" placeholder="LINE1">
+<input type="text" id="lineCode" name="lineCode" class="form-control search-input inputcode" readonly>
 </div>
 <div class="form-group-receive">
 <p>라인명</p>
-<input type="text" id="lineName" name="lineName" class="form-control search-input inputcode" placeholder="라인A" >
+<input type="text" id="lineName" name="lineName" class="form-control search-input inputcode" readonly>
 </div>
 <div class="form-group-receive">
 <p>작업명</p>
@@ -38,6 +38,10 @@
 <div class="form-group-receive">
 <p>담당자</p>
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" placeholder="담당자" >
+</div>
+<div class="form-group-receive" style="display:none;">
+<p>담당자</p>
+<input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="담당자코드" >
 </div>
 </div> 
 <!-- search-bar-popup end -->
@@ -95,6 +99,23 @@ function validateForm() {
 //     }
     return true;
 }
+document.addEventListener("DOMContentLoaded", function() {
+    // Ajax 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "${pageContext.request.contextPath}/line/getLineInfo", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var lineCodeField = document.getElementById("lineCode");
+            var lineNameField = document.getElementById("lineName");
+            
+            // lineCodeField와 lineNameField의 value 속성에 가져온 값 설정
+            lineCodeField.value = response.lineCode;
+            lineNameField.value = response.lineName;
+        }
+    };
+    xhr.send();
+});
 
 
 </script>

@@ -98,10 +98,11 @@ public class EmployeeController {
 		// 검색어 가져오기
 		String search = request.getParameter("search");
 		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
 		
 		
 		// 한 화면에 보여줄 사원 수 설정
-		int pageSize = 10;
+		int pageSize = 3;
 		// 현 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
 		// 페이지 번호가 없을 경우 => "1"로 설정
@@ -122,6 +123,7 @@ public class EmployeeController {
 		// 검색어 저장
 		pageDTO.setSearch(search);
 		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
 		
 		List<EmployeeDTO> employeeList = employeeService.getEmployeeList(pageDTO);
 		
