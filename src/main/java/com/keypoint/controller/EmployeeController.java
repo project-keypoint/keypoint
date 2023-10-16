@@ -60,6 +60,9 @@ public class EmployeeController {
 			session.setAttribute("empId", employeeDTO.getEmpId());
 			session.setAttribute("empName", employeeDTO.getEmpName());
 			session.setAttribute("empPhoto",employeeDTO.getEmpPhoto());
+			session.setAttribute("departmentName",employeeDTO.getDepartmentName());
+			session.setAttribute("empPosition",employeeDTO.getEmpPosition());
+			
 			// 주소변경하면서 이동 /main/main
 			return "redirect:/main/main";
 		}else {

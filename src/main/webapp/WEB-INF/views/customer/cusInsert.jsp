@@ -155,7 +155,7 @@
 <p><a style="color: red;">*</a>상태</p>
 <select id="cusStatus" name="cusStatus" class="form-control search-input">
         <option value="거래중" selected>거래중</option>
-        <option value="거래중지">거래중지</option>
+        <option value="거래정지">거래정지</option>
 </select>
 </div>
 </div>

@@ -30,6 +30,15 @@ public class CustomerDAO {
 	}
 
 
+//	전체 거래처 수
+	public int getCusCount(PageDTO pageDTO) {
+		System.out.println("CustomerDAO getCusCount()");
+
+		return sqlSession.selectOne(namespace+".getCusCount", pageDTO);
+	}
+
+	
+	
 //	거래처등록
 	public void insertCustomer(CustomerDTO customerDTO) {
 		System.out.println("CustomerDAO insertCustomer()");
@@ -63,45 +72,9 @@ public class CustomerDAO {
 		return sqlSession.selectOne(namespace+".cusNumberCheck", cusNumber);
 	}
 
-
-//	전체 거래처 수
-	public int getCusCount() {
-		System.out.println("CustomerDAO getCusCount()");
-
-		return sqlSession.selectOne(namespace+".getCusCount");
-	}
-
-
-//	'거래중'인 거래처 개수 	
-	public int getInsertCount() {
-		System.out.println("CustomerDAO getInsertCount()");
-
-		return sqlSession.selectOne(namespace+".getInsertCount");
-	}
-
 	
-//	'거래중'인 거래처 목록
-	public List<CustomerDTO> getinsertCusList(PageDTO pageDTO) {
-		System.out.println("CustomerDAO getinsertCusList()");
-
-		return sqlSession.selectList(namespace+".getinsertCusList", pageDTO);
-	}
 
 
-//	'거래중지' 거래처 목록
-	public List<CustomerDTO> getdeleteCusList(PageDTO pageDTO) {
-		System.out.println("CustomerDAO getdeleteCusList()");
-		
-		return sqlSession.selectList(namespace+".getdeleteCusList", pageDTO);
-	}
-
-
-//	'거래중지' 거래처 수
-	public int getDeleteCount() {
-		System.out.println("CustomerDAO getDeleteCount()");
-		
-		return sqlSession.selectOne(namespace+".getDeleteCount");
-	}
 
 
 

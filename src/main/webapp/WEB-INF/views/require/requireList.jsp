@@ -63,7 +63,9 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list">
+		<input type="hidden" name="requireCode" id="requireCode" class="form-control search-input" value="">
+	</th>
     <th>완제품코드</th>
     <th>완제품명</th>
     <th>자재코드</th>
@@ -75,7 +77,11 @@
 
 <c:forEach var="requireDTO" items="${requireList}">
 <tr class="table-body">
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+	<td>
+		<input type="checkbox" id="delete-list-require" name="delete-list-require" data-group="delete-list">
+		<input type="hidden" name="reproductCode" id="reproductCode" class="form-control search-input" value="${requireDTO.productCode}">
+		<input type="hidden" name="rematerialCode" id="rematerialCode" class="form-control search-input" value="${requireDTO.materialCode}">
+	</td>
     <td>${requireDTO.productCode}</td>
     <td>${requireDTO.productName}</td>
     <td>${requireDTO.materialCode}</td>
@@ -92,16 +98,23 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
 </div>
+
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 	<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
 </c:if>
 
-<c:forEach var="i" begin="${pageDTO.startPage}" 
-                   end="${pageDTO.endPage}" step="1">
-<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}&search=${pageDTO.search}">${i}</a> 
+<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+    <c:choose>
+        <c:when test="${i eq pageDTO.pageNum}">
+            <a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}" class="page-button">${i}</a>
+        </c:otherwise>
+    </c:choose>
 </c:forEach>
 <!-- 끝페이지번호  전체페이지수 비교 => 전체페이지수 크면 => Next보임 -->
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
@@ -178,6 +191,57 @@ $(function() {
     	dateFormat: "yy-mm-dd"
     });
 });
+
+//다중삭제
+function deleteRequire() {
+  // 선택된 체크박스 요소들을 가져옵니다.
+  var checkboxes = $('input[name="delete-list-require"]:checked');
+  // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
+  if (checkboxes.length === 0) {
+    alert("삭제할 항목을 선택해주세요.");
+    return;
+  }
+  
+//   var userInput = prompt("소요량 목록을 삭제합니다. 삭제하려면 '삭제'라고 입력하세요.");
+  
+//   if (userInput !== "삭제") {
+//     return;
+//   }
+  
+  // 선택된 체크박스의 requireCode 값을 배열에 저장합니다.
+  var requireCodes = [];
+  
+  checkboxes.each(function() {
+	var row = $(this).closest('.table-body');
+	var requireCode = row.find('input[name="reproductCode"]').val() + '|' + row.find('input[name="rematerialCode"]').val();
+	requireCodes.push(requireCode);  
+  });
+	
+  // requireCodes 배열을 JSON 문자열로 변환합니다.
+  var requireCodesJson = JSON.stringify({ requireCodes: requireCodes });
+  
+  alert(requireCodesJson);
+  
+  //확인용 로그 출력
+  console.log("전송 데이터:", requireCodesJson);
+  
+   // Ajax 요청을 보냅니다.
+   $.ajax({
+     type: "POST",
+     url: '${pageContext.request.contextPath}/require/requireDeleteChecked',
+     contentType: "application/json",
+     data: requireCodesJson,
+     success: function(result) {
+       console.log(result);
+       alert("성공");
+       location.reload();
+     },
+     error: function(xhr, status, error) {
+    	   console.error('Error:', xhr.responseText);
+    	   alert('Error: ' + xhr.responseText);
+    	}
+   });
+}
 
 // 체크박스(삭제용) 전체선택
 var selectAllCheckbox = document.getElementById("delete-list-all");
