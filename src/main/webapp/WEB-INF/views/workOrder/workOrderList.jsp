@@ -16,12 +16,10 @@
 <!--     <link -->
 <!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
 <!--         rel="stylesheet"> -->
-<link href="${pageContext.request.contextPath}/resources/css/workOrder.css" rel="stylesheet">
 <!-- Custom styles for this template-->
-<link
-	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
-	rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- 수주 CSS 적용-->
+  <link href="${pageContext.request.contextPath}/resources/css/workOrder2.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="../inc/top-bar.jsp"%>
@@ -33,16 +31,21 @@
 
 	<div class="main">
 		<div class="card shadow">
-			<div class="page-title">작업지시 목록</div>
-			<div class="contents2">
+			<div class="page-title">작업지시 목록
+			<!--    초기화 이미지 -->
+     		 <img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+       		    style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="reset()">
+    		 </div>
+    		<div class="contents2">
+    
 			<form action="${pageContext.request.contextPath}/workOrder/workOrderList" method="get">	
 				
 				<input type="button" value="엑셀파일다운" id="excelWorkOrder"> <br><br>
 					
 					
-					<div class="search-b" style="margin-bottom: -15px;">
+					<div class="search-b" style="margin-bottom: -25px;">
 						<div class="status-check" style="background: #E5E5E5; border: none;">
-						<div class="search-date3">
+						<div class="search-date3" style="margin-left: 14px;">
 						<a style="font-weight: bold;"> 진행<input type="checkbox" id="select1" name="check1" class="list-select" value="진행"
 						<c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
 						<a>완료<input type="checkbox" id="select2" name="check2" class="list-select" value="완료"
@@ -51,8 +54,10 @@
 						</div>
 						</div>
 						
-						<div class="search-bar">
+						<div class="search-bar" style="align-items: normal;">
+						
 						<div class="search-b">
+						<div style="margin-bottom: 8px;"></div>
 						<div class="search-select">
 						<p>상품명</p> 
 						<input type="text" id="productCode" name="search1" class="form-control search-input readonly-color"
@@ -64,8 +69,9 @@
 						
 						
 						<div class="search-b">
+						<div style="margin-bottom: 8px;"></div>
 						<div class="search-date">
-						<p>지시일자</p>
+						<p style="white-space: nowrap; margin-right: 8px;">지시일자</p>
 						<input type="text" id="woDate1" name="search3" class="form-control search-input readonly-color" 
       					 placeholder="${empty pageDTO.search3 ? '지시일자' : ''}" value="${pageDTO.search3}" readonly>
 						~<input type="text" id="woDate2" name="search4" class="form-control search-input readonly-color" 
@@ -73,19 +79,27 @@
 						</div>
 						</div>
 						
+						<div class="search-button">
+						<div style="margin-bottom: 15px;"></div>
+						<input type="submit" value="검색" class="btn btn-primary mybutton1" >
+						<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
+						</div>
 						
-						<div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;">
-				<div class="search-button" style="margin-bottom: 5px;">
-				<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
-				</div>
-				<div class="search-button" style="display: flex; justify-content: space-between;">
-				<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/workOrder/workOrderList'" style="width: 48.6%;">
-				<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
-				</div>
-				</div>
+						
+<!-- 						<div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;"> -->
+<!-- 				<div class="search-button" style="margin-bottom: 5px;"> -->
+<!-- 				<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;"> -->
+<!-- 				</div> -->
+<!-- 				<div class="search-button" style="display: flex; justify-content: space-between;"> -->
+<%-- 				<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/workOrder/workOrderList'" style="width: 48.6%;"> --%>
+<!-- 				<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;"> -->
+<!-- 				</div> -->
+<!-- 				</div> -->
+
 				</div><!-- search-bar -->
 				
 				</form>
+					<br>
 						
 						
 <!-- 						<div class="search-select"> -->
@@ -100,8 +114,7 @@
 <!-- 						</div> -->
 			
 				<!-- search-bar -->
-				<br>
-
+			
 
 				<div>
 					<table class="table-list">
@@ -442,7 +455,12 @@
 		
 		</script>
 
-
+<script>
+// 초기화 아이콘 누르면 실행
+function reset() {
+    location.href = "${pageContext.request.contextPath}/workOrder/workOrderList";
+}
+</script>
 
 
 </body>
