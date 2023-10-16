@@ -321,12 +321,12 @@
 
 
 		        if (postIds.length === 0) {
-		            alert("삭재할 글을 선택하세요.");
+		            alert("삭재할 목록을 선택하세요.");
 		            return;
 		        }
 
 		        // 사용자에게 삭제 여부를 확인하는 대화 상자 표시
-		        var confirmMessage = "선택한 글 을 삭제하시겠습니까?";
+		        var confirmMessage = "선택한 목록을 삭제하시겠습니까?";
 		        
 		        console.log(postIds);
 		        if(confirm(confirmMessage)) {
