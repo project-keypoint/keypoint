@@ -143,6 +143,7 @@
     <div>
      <table class="table-list">
       <tr class="table-head">
+	   <th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>     
 	   <th style="width: 8%;">사원번호</th> 
        <th style="width: 8%;">이름</th> 
 	   <th style="width: 8%;">부서</th> 
@@ -157,7 +158,7 @@
 
        <c:forEach var="employeeDTO" items="${employeeList}">
         <tr class="table-body" data-status="${employeeDTO.empStatus}">
-<!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
+		<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
          <td>${employeeDTO.empId}</td>
          <td>${employeeDTO.empName}</td>
          <td>${employeeDTO.departmentName}</td>
@@ -281,6 +282,35 @@ function fun1() {
 	
 		document.search_form.submit();
 }
+ 
+ 
+ 
+//체크박스 전체선택
+var selectAllCheckbox = document.getElementById("delete-list-all");
+var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
+selectAllCheckbox.addEventListener("change", function () {
+    checkboxes.forEach(function (checkbox) {
+        checkbox.checked = selectAllCheckbox.checked;
+    });
+});
+checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        if (!this.checked) {
+            selectAllCheckbox.checked = false;
+        } else {
+            // 모든 체크박스가 선택되었는지 확인
+            var allChecked = true;
+            checkboxes.forEach(function (c) {
+                if (!c.checked) {
+                    allChecked = false;
+                }
+            });
+            selectAllCheckbox.checked = allChecked;
+        }
+    });
+});
+ 
+ 
 </script>
 
 
