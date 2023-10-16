@@ -15,6 +15,7 @@ import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.WorkOrderDTO;
 import com.keypoint.dto.WorkRoDTO;
 import com.keypoint.dto.PageUtil;
+import com.keypoint.dto.ReceiptDTO;
 
 @Service
 public class WorkOrderService {
@@ -157,39 +158,16 @@ public class WorkOrderService {
 	}
 	
 	
+		//작업지시 등록 => 자재 수량 빼기
+		public void updateMaterialCount(WorkOrderDTO workOrderDTO) {
+		    workOrderDAO.updateMaterialCount(workOrderDTO);
+		}
 	
 	
 	
 	
 	
 	
-	
-	
-//	public List<WorkOrderDTO> getWorkList(PageDTO pageDTO) {
-//		System.out.println("WorkOrderService getWorkList()");
-//
-//		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
-//		int endRow = startRow+pageDTO.getPageSize()-1;
-//
-//		pageDTO.setStartRow(startRow);
-//		pageDTO.setEndRow(endRow);
-//		return workOrderDAO.getWorkList(pageDTO);
-//	}
-//
-//	public int getWorkOrderCount(PageDTO pageDTO) {
-//		System.out.println("WorkOrderService getWorkOrderCount()");
-//
-//		return workOrderDAO.getWorkOrderCount(pageDTO);
-//
-//
-//	}
-//	
-//	
-//	public WorkOrderDTO getWork(String woCode) {
-//		System.out.println("WorkOrderService getWork()");
-//
-//		return workOrderDAO.getWork(woCode);
-//		
-//	}
+
 }
 

@@ -241,6 +241,7 @@ height: 30px;
 #cusRep.search-input,#cusTel.search-input, #cusType.search-input, #cusCategory.search-input, 
 #cusStatus.search-input, #cusFax.search-input,  #cusZonecode.search-input, #cusAddress_dtail.search-input {
 width: 280px;
+height: 35px;	
 }
 
 

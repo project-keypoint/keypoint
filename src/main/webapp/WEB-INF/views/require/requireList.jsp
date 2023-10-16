@@ -208,14 +208,15 @@ function deleteRequire() {
 //     return;
 //   }
   
-  // 선택된 체크박스의 requireCode 값을 배열에 저장합니다.
-  var requireCodes = [];
-  
-  checkboxes.each(function() {
-	var row = $(this).closest('.table-body');
-	var requireCode = row.find('input[name="reproductCode"]').val() + '|' + row.find('input[name="rematerialCode"]').val();
-	requireCodes.push(requireCode);  
-  });
+// 선택된 체크박스의 requireCode 값을 배열에 저장합니다.
+var requireCodes = [];
+
+checkboxes.each(function() {
+  var row = $(this).closest('.table-body');
+  var requireCode = String(row.find('input[name="reproductCode"]').val() + '|' + row.find('input[name="rematerialCode"]').val());
+  requireCodes.push(requireCode);
+
+});
 	
   // requireCodes 배열을 JSON 문자열로 변환합니다.
   var requireCodesJson = JSON.stringify({ requireCodes: requireCodes });

@@ -284,7 +284,6 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 
 //	초기화 버튼 이미지 클릭 시,
 	$("#resetFilters").click(function() {
-//		페이지 새로고침
 		location.href = "${pageContext.request.contextPath}/customer/cusList";
 	});
   
