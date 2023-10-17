@@ -45,8 +45,26 @@
   }
 }
 
-.main-chart9 {
-height: 200px;
+.my-row {
+	display: flex;
+/* 	justify-content: space-between; */
+}
+
+.my-row-all {
+	display: flex;
+    flex-direction: column;
+/*     justify-content: space-between; */
+}
+.btn-more {
+	height: 25px;
+text-align: center;
+vertical-align: middle;
+line-height: 1.1;
+margin: 4px;
+}
+.row50 {
+	height: 50%;
+	margin-bottom: 10px;
 }
 
 .main {
@@ -94,17 +112,21 @@ background: #FFF;
 table tr:hover td{
 background: #d3d3d3;
 }
+
+table {
+	width: 100%;
+}
 .row-1 {
-width: 10%;
+/* width: 10%; */
 }
 .row-2 {
-width: 50%;
+/* width: 50%; */
 }
 .row-3 {
-width: 10%;
+/* width: 30%; */
 }
 .row-4 {
-width: 10%;
+/* width: 10%; */
 }
 .main-chart-all {
 position: relative;
