@@ -58,6 +58,8 @@
 </div>
 
 <div class="contents2">
+
+
 <div class="search-bar">
 
 <div class="search-b">
@@ -126,7 +128,8 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-<!-- 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th> -->
+<th><input type="checkbox" id="delete-list-all"
+								name="delete-list" data-group="delete-list"></th>
 	<th>입고코드</th>
     <th>발주코드</th>
     <th>자재명</th>
@@ -142,7 +145,8 @@
 
 <c:forEach var="receiptDTO" items="${receiptList}">
 <tr class="table-body" data-status="${receiptDTO.grStatus}">
-<!-- 	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td> -->
+<td><input type="checkbox" id="delete-list"
+									name="delete-list" data-group="delete-list"></td>
     <td>${receiptDTO.grCode}</td>
     <td>${receiptDTO.poCode}</td>
     <td>${receiptDTO.materialName}</td>
@@ -203,6 +207,8 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="입고등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+ <img src="${pageContext.request.contextPath}/resources/img/excel.png" id="excelReceiptOrder" 
+        style="height: 3rem; width: 3rem; cursor: pointer; margin-right: 10px;">
 <!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
 
@@ -233,6 +239,10 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- 엑셀파일 저장을 위한 스크립트 호출 -->
+<script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
 <script type="text/javascript">
 
@@ -450,8 +460,61 @@ $(document).ready(function() {
   }
 });
 
+</script>
 
+<script>
+//엑셀 버튼 누를 시 실행되는 함수
+$("#excelReceiptOrder").click(function(){
+//		체크박스가 체크된 여부를 확인하기위한 변수선언
+	var selectedCheckbox = $("input[name='delete-list']:checked");
+	if(selectedCheckbox.length === 0){
+		alert("엑셀파일로 다운로드할 행을 선택해주세요")
+		return false;
+	} 
 
+	// 엑셀에 데이터를 삽입하기위한 배열 변수선언
+	var excelData = [];
+	
+	// 엑셀의 헤더가 되는 값을 삽입하기위한 변수선언
+	var headers = [];
+	
+		// table의 th태그만큼 반복문을 실행하되 첫번째 체크박스행은 제외한다
+		$("#datatablesSimple th:not(:first)").each(function(){
+			// 헤더에 텍스트값(th) 삽입
+			headers.push($(this).text());
+		});
+		// 엑셀 데이터 변수에 헤더값을 삽입한다
+		excelData.push(headers);
+	
+		// 체크박스가 체크된 행 만큼 엑셀 행삽입 반복문을 시행한다
+		selectedCheckbox.each(function () {
+		
+			// 엑셀의 행값을 담기위한 배열 변수선언
+	    	var row = [];
+			// tr태그를 찾아서 반복문을 실행하되 첫번째 td태그(체크박스)는 제외한다
+	    	$(this).closest("tr").find("td:not(:first-child)").each(function () {
+	    		// 행 변수에 테이블 행(td)태그의 텍스트 값을 삽입한다
+	        	row.push($(this).text());
+	    	});
+			// 엑셀 데이터 변수에 행값을 삽입한다
+	   		excelData.push(row);
+		});
+		
+		// 워크북을 생성한다
+		var workbook = XLSX.utils.book_new();
+		// 엑셀 데이터(헤더, 행)값을 시트로 변환한다
+		var worksheet = XLSX.utils.aoa_to_sheet(excelData);
+		// 데이터와 워크북 시트를 워크북에 추가한다
+		XLSX.utils.book_append_sheet(workbook, worksheet, "입고리스트");
+		
+		// 워크북을 blob형태로 변환하고 xlsx 파일로 저장한다
+		var workbookOutput = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+		saveAs(
+			new Blob([workbookOutput], { type: "application/octet-stream" }),
+			"입고리스트.xlsx"
+		);
+	
+});// end function
 </script>
 
 </body>
