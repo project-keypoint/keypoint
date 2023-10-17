@@ -187,7 +187,21 @@
     <c:when test="${receiptDTO.grStatus eq '입고대기'}">
         <td>
             <input type="button" value="상세내역" class="btn btn-info mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
+            
+            <c:choose>    
+			    <c:when test = "${employeeDTO.empRole >= 2}">
+			
             <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete('${receiptDTO.grCode}')">
+			    
+			    </c:when>
+			    <c:otherwise>
+            <input type="button" value="권한없음" class="btn btn-secondary mybutton1">
+			    </c:otherwise>
+			</c:choose>
+            
+            
+            
+            
         </td>
     </c:when>
     <c:otherwise>
@@ -206,7 +220,20 @@
 
 <div class="content-bottom">
 <div>
+
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+
 <input type="button" value="입고등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+    
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
+
+
+
+
  <img src="${pageContext.request.contextPath}/resources/img/excel.png" id="excelReceiptOrder" 
         style="height: 3rem; width: 3rem; cursor: pointer; margin-right: 10px;">
 <!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->

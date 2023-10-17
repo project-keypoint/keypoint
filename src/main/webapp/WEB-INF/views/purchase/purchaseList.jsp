@@ -174,10 +174,20 @@
 
 <div class="content-bottom">
 <div>
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+
 <input type="button" value="발주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+    
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
+
  <img src="${pageContext.request.contextPath}/resources/img/excel.png" id="excelPurchaseOrder" 
         style="height: 3rem; width: 3rem; cursor: pointer; margin-right: 10px;">
 <!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
+
 </div>
 
 
