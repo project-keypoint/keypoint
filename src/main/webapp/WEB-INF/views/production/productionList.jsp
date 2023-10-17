@@ -161,8 +161,15 @@
 					<div>
 						<input type="button" value="생산실적등록"
 							class="btn btn-primary mybutton1" onclick="openInsert()">
+							<c:choose>    
+   								 <c:when test = "${employeeDTO.empRole >= 2}">
 						<input type="button" value="삭제"
 							class="btn btn-secondary mybutton1" onclick="selectedDel()">
+							 	</c:when>
+							  <c:otherwise>
+  						 <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()">
+  							  </c:otherwise>
+							</c:choose>
 						<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelProduction"> <br>
 					</div>
 					<div id="page_control" class="page-buttons">
@@ -492,7 +499,10 @@
 					}	    
 		    
 		    
-		    
+					//권한없는 버튼
+					function accessDenied() {
+					    alert("권한이 없습니다.");
+					}
 		    
 		   
 		

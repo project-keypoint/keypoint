@@ -22,6 +22,9 @@ import com.keypoint.dto.WorkOrderDTO;
 import com.keypoint.dto.WorkRoDTO;
 import com.keypoint.service.LineService;
 import com.keypoint.service.WorkOrderService;
+import javax.servlet.http.HttpSession;
+import com.keypoint.dto.EmployeeDTO;
+import com.keypoint.service.EmployeeService;
 
 @Controller
 @RequestMapping("/workOrder/*")
@@ -30,12 +33,16 @@ public class WorkOrderController {
 	@Inject
 	private WorkOrderService workOrderService;
 	
-	@Inject
-	private LineService lineService;
+	//employeeService 객체생성
+		@Inject
+		private EmployeeService employeeService;
 	
 	@GetMapping("/workOrderList")
-	public String workOrderList(HttpServletRequest request, Model model) {
+	public String workOrderList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("WorkOrderController workOrder/workOrderList");
+		
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
 		
 		String search1 = request.getParameter("search1");
 		String search2 = request.getParameter("search2");
@@ -93,6 +100,12 @@ public class WorkOrderController {
 //		model.addAttribute("lineList", lineList);
 		model.addAttribute("workOrderList", workOrderList);
 		model.addAttribute("pageDTO", pageDTO);
+		
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		
 		return "workOrder/workOrderList";
 	}// workOrder [작업지시]

@@ -168,8 +168,15 @@
 					<div>
 						<input type="button" value="작업지시등록"
 							class="btn btn-primary mybutton1" onclick="openInsert()">
-						<input type="button" value="삭제"
+					<c:choose>    
+   						 <c:when test = "${employeeDTO.empRole >= 2}">
+							<input type="button" value="삭제"
 							class="btn btn-secondary mybutton1" onclick="selectedDel()" >
+						 </c:when>
+   							<c:otherwise>
+   							 <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()" style="margin-right: 3px;">
+   							</c:otherwise>
+					</c:choose>  
 					</div>
 					<div id="page_control" class="page-buttons">
   					  <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -452,6 +459,12 @@
 			});// end function
 		
 		
+			//권한없는 버튼
+			function accessDenied() {
+			    alert("권한이 없습니다.");
+			}
+			
+			
 		
 		</script>
 

@@ -25,6 +25,10 @@ import com.keypoint.service.LineService;
 import com.keypoint.service.ProductionService;
 import com.keypoint.service.WorkOrderService;
 
+import com.keypoint.dto.EmployeeDTO;
+import com.keypoint.service.EmployeeService;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/production/*")
 public class ProductionController {
@@ -36,14 +40,18 @@ public class ProductionController {
 	@Inject
 	private WorkOrderService workOrderService;
 	
+	//employeeService 객체생성
 	@Inject
-	private LineService lineService;
+	private EmployeeService employeeService;
 	
 	
 	
 	@GetMapping("/productionList")
-	public String productionList(HttpServletRequest request, Model model) {
+	public String productionList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("ProductionController production/productionList");
+		
+		// 세션에서 empId 가져오기
+			int empId = (int) session.getAttribute("empId");
 		
 		String search1 = request.getParameter("search1");
 		String search2 = request.getParameter("search2");
@@ -98,6 +106,12 @@ public class ProductionController {
 		model.addAttribute("productionList", productionList);
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println(productionList);
+		
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		
 		return "production/productionList";
 	}// productionList [생산실적]
