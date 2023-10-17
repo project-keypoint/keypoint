@@ -193,24 +193,72 @@
 			});
 		});
 
-function validateForm() {
-  var roCode = document.getElementById('roCode').value;
-  var cusCode = document.getElementById('cusCode').value;
-  var productCode = document.getElementById('productCode').value;
-  var woCount = document.getElementById('woCount').value;
-  var lineCode = document.getElementById('lineCode').value;
-  var woDate = document.getElementById('woDate').value;
-  var shipSdate = document.getElementById('shipSdate').value;
-  var woStatus = document.getElementById('woStatus').value;
-  var empId = document.getElementById('empId').value;
+// 		//유효성 검사
+// 		function validateForm() {
+// 			// 각 입력 필드 값
+// 			var cusCode = document.getElementById("cusCode").value;
+// 			var productCode = document.getElementById("productCode").value;
+// 			var woStatus = document.getElementById("woStatus").value;
+// 			var empName = document.getElementById("empName").value;
+// 			var roCode = document.getElementById("roCode").value;
+// 			var woCount = document.getElementById("woCount").value;
+// 			var lineCode = document.getElementById("lineCode").value;
+// 			var woDate = document.getElementById("woDate").value;
+// 			var shipSdate = document.getElementById("shipSdate").value;
+// 			var empId = document.getElementById("empId").value;
 
-  if (roCode === '수주번호' || cusCode === '업체검색' || productCode === '상품검색' || woCount === '' || lineCode === '라인코드' || woDate === '지시일자' || shipSdate === '납품예정일' || woStatus === '' || empId === '사원검색') {
-    // 필수 입력 필드 중 하나라도 값을 가지고 있지 않은 경우
-    alert("모든 칸에 값을 입력해주세요.");
-    return false; // 폼 제출을 막기 위해 false를 반환합니다.
-  }
+// 			console.log("cusCode: " + cusCode);
+// 			// 빈 필드 검사
+// 			if (cusCode === "" || productCode === "" || roCode === "" ||woCount === ""
+// 				||  woStatus === "" || lineCode === "" || woDate === "" || shipSdate === "" ||
+// 				empName === "" || empId === "" ) {
+// 				alert("모든 내용을 입력해주세요.");
+// 				return false; // 제출 방지
+// 			}
+// 			    // 추가 유효성 검사
+// 			    if (woCount == 0) {
+// 			        alert("몇개부터 가능하도록 할까");
+// 			        return false; // 제출 방지
+// 			    }
+// 			return true;
+// 		}
 
-  return true; // 유효성 검사 통과 시 폼을 제출합니다.
+
+function confirmAndValidateForm() {
+    // 모든 필드에 대한 값을 가져옵니다.
+    var roCode = document.getElementById("roCode").value;
+    var cusCode = document.getElementById("cusCode").value;
+    var productCode = document.getElementById("productCode").value;
+    var woCount = document.getElementById("woCount").value;
+    var lineCode = document.getElementById("lineCode").value;
+    var woDate = document.getElementById("woDate").value;
+    var shipSdate = document.getElementById("shipSdate").value;
+    var empName = document.getElementById("empName").value;
+    var woStatus = document.getElementById("woStatus").value;
+    var empId = document.getElementById("empId").value;
+
+    // 모든 필드가 값이 비어있는지 확인합니다.
+    if (roCode === "" || empName === "" ||cusCode === "" || productCode === "" || woCount === "" || lineCode === "" || woDate === "" || shipSdate === "" || woStatus === "" || empId === "") {
+        // 사용자에게 확인 메시지를 표시합니다.
+        var confirmMessage = "모든 필드를 채워주세요. 제출하시겠습니까?";
+        if (window.confirm(confirmMessage)) {
+            return false; // 제출을 막습니다.
+        } else {
+            return true; // 사용자가 취소하면 폼 제출을 계속합니다.
+        }
+    }
+
+    // 모든 필드에 값이 있는 경우 폼을 제출합니다.
+    return true;
+}
+
+//     // 추가 유효성 검사
+//     if (parseInt(woCount) <= 0) {
+//         alert("지시수량은 0보다 커야 합니다.");
+//         return false; // 제출 방지
+//     }
+
+    return true;
 }
 
 	</script>

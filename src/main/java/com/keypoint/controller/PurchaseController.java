@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
 import com.keypoint.dto.WorkOrderDTO;
+import com.keypoint.service.EmployeeService;
 import com.keypoint.service.MaterialService;
 import com.keypoint.service.PurchaseService;
 
@@ -31,6 +34,9 @@ public class PurchaseController {
 	//productService 객체생성
 	@Inject
 	private PurchaseService purchaseService;
+	
+	@Inject
+	private EmployeeService employeeService;
 	
 	// ------------------------------------------------------------------------------------
 
@@ -61,8 +67,12 @@ public class PurchaseController {
 	//----------------------------------------------------------------------------------------------
 	
 	@GetMapping("/purchaseList")
-	public String purchaseList(HttpServletRequest request, Model model) {
+	public String purchaseList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("PurchaseController purchase/purchaseList");
+		
+		//---------------------------
+		int empId = (int) session.getAttribute("empId");
+		//---------------------------
 		
 		//---------------------------
 		String search = request.getParameter("search");
@@ -130,6 +140,11 @@ public class PurchaseController {
 		model.addAttribute("purchaseList", purchaseList);
 		model.addAttribute("pageDTO", pageDTO);
 		
+		// ------------------------------
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		// ------------------------------
+		
 		
 		return "purchase/purchaseList";
 	}// receiveTest [수주목록] // 페이징은 나중에		
@@ -137,11 +152,26 @@ public class PurchaseController {
 	// ------------------------------------------------------------------------------------
 	
 	@GetMapping("/purchaseDetails")
-	public String purchaseDetails(Model model, @RequestParam("poCode") String poCode) {
+	public String purchaseDetails(Model model, @RequestParam("poCode") String poCode, HttpSession session) {
 		System.out.println("purchaseController purchase/purchaseDetails");
+		
+		
+
+		//---------------------------
+		int empId = (int) session.getAttribute("empId");
+		//---------------------------
+		
+		
 		
 		PurchaseDTO purchaseDTO = purchaseService.getPurchaseDetails(poCode);
 		model.addAttribute("purchaseDTO", purchaseDTO);
+		
+		// ------------------------------
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		// ------------------------------
+		
+		
 		return "purchase/purchaseDetails";
 	}// purchaseDetails [발주상세]
 	

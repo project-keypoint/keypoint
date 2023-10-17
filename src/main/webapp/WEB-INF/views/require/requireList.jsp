@@ -58,6 +58,8 @@
 
 <br>
 
+
+
 <div>
 <table class="table-list">
 <tr class="table-head">
@@ -86,15 +88,8 @@
     <td>${requireDTO.materialName}</td>
     <td>${requireDTO.reqCount}</td>
     <td>${requireDTO.materialUnit}</td>
-<c:choose>    
-    <c:when test = "${employeeDTO.empRole >= 2}">
     <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${requireDTO.productCode}', '${requireDTO.materialCode}')">
     	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
-    </c:when>
-    <c:otherwise>
-    <td></td>
-    </c:otherwise>
-</c:choose>
 </tr>
 </c:forEach>    
 
@@ -102,14 +97,8 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<c:choose>    
-    <c:when test = "${employeeDTO.empRole >= 2}">
-		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-		<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
-    </c:when>
-    <c:otherwise>
-    </c:otherwise>
-</c:choose>
+<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
 </div>
 
 <div class="page-buttons">
@@ -172,6 +161,36 @@ $(document).ready(function() {
         openPopup(url);
     });
 });
+// //업체명(거래처) 검색 새창
+// var searchCustomer = document.getElementById("search-customer");
+// searchCustomer.addEventListener("click", function () {
+// 	var url = '${pageContext.request.contextPath}/receive/empty';
+// 	// ↑ 업체검색페이지 새로 입력하기
+//     window.open(url, '_blank', 'width=400, height=400');
+// });
+
+// //상품명 검색 새창
+// var searchProduct = document.getElementById("search-product");
+// searchProduct.addEventListener("click", function () {
+// 	var url = '${pageContext.request.contextPath}/receive/empty';
+// 	// ↑ 상품검색페이지 새로 입력하기
+//     window.open(url, '_blank', 'width=400, height=400');
+// });
+//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
+$(function() {
+    $("#roDate1").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#roDate2").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#shipSdate1").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+    $("#shipSdate2").datepicker({
+    	dateFormat: "yy-mm-dd"
+    });
+});
 
 //다중삭제
 function deleteRequire() {
@@ -182,6 +201,7 @@ function deleteRequire() {
     alert("삭제할 항목을 선택해주세요.");
     return;
   }
+  
 //   var userInput = prompt("소요량 목록을 삭제합니다. 삭제하려면 '삭제'라고 입력하세요.");
   
 //   if (userInput !== "삭제") {
@@ -214,7 +234,7 @@ checkboxes.each(function() {
      data: requireCodesJson,
      success: function(result) {
        console.log(result);
-       alert("삭제가 완료되었습니다.");
+       alert("성공");
        location.reload();
      },
      error: function(xhr, status, error) {
@@ -267,7 +287,7 @@ function openUpdate(productCode,materialCode) {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-// 열 바로 삭제 버튼(ajax로 처리)
+//삭제 확인메세지
 function confirmDelete(productCode,materialCode) {
     if (confirm("정말로 삭제하시겠습니까?")) {
     	var query = {"productCode" : productCode, "materialCode" : materialCode};
@@ -277,32 +297,12 @@ function confirmDelete(productCode,materialCode) {
     		data : query,
     		dataType : "text",
     		success : function(data){
-    			alert("삭제가 완료되었습니다.");
     			location.reload();
     		}
     	});
     } 
 }
 
-//초기화 아이콘 누르면 초기화
-function reset() {
- location.href = "${pageContext.request.contextPath}/require/requireList";
-}
-
-//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
-function resetSearch() {
-	$("#productCode").val("");
-    $("#productName").val("");
-
-    $("#productCode").attr("placeholder", "완제품코드");
-    $("#productName").attr("placeholder", "완제품명(클릭)");
-    
-	$("#materialCode").val("");
-    $("#materialName").val("");
-
-    $("#materialCode").attr("placeholder", "자재코드");
-    $("#materialName").attr("placeholder", "자재명(클릭)");
-}
 
 //검색하기
 function doSearch() {
@@ -376,7 +376,29 @@ $("#excelWorkOrder").click(function(){
 	
 });// end function
 
+//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+function resetSearch() {
+	$("#productCode").val("");
+    $("#productName").val("");
 
+    $("#productCode").attr("placeholder", "완제품코드");
+    $("#productName").attr("placeholder", "완제품명");
+    
+	$("#materialCode").val("");
+    $("#materialName").val("");
+
+    $("#materialCode").attr("placeholder", "자재코드");
+    $("#materialName").attr("placeholder", "자재명");
+}
+
+
+</script>
+
+<script>
+//초기화 아이콘 누르면 초기화
+function reset() {
+ location.href = "${pageContext.request.contextPath}/require/requireList";
+}
 </script>
 
 </body>

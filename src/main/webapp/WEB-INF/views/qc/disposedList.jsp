@@ -152,6 +152,8 @@
 <div style="width: 74%;">
 <table class="table-list">
 <tr class="table-head">
+<th><input type="checkbox" id="delete-list-all"
+	name="delete-list" data-group="delete-list"></th>
 	<th>폐기코드</th>
 	<th>상품코드</th>
     <th>　　　상품명　　　</th>
@@ -163,6 +165,8 @@
 </tr>
 <c:forEach var="qualityDTO" items="${disposedList}">
 <tr class="table-body">
+<td><input type="checkbox" id="delete-list"
+	name="delete-list" data-group="delete-list"></td>
 	<td>${qualityDTO.disCode}</td>
 	<td>${qualityDTO.disItemCode}</td>
 	<td>
@@ -185,8 +189,9 @@
 </table><!-- table1 -->
 <div class="content-bottom">
 <div>
-<input type="button" value="추가(상품)" class="btn btn-primary mybutton1" onclick="changeButtonColor(this, 'mybutton1')">
-<input type="button" value="추가(자재)" class="btn btn-primary mybutton1" onclick="changeButtonColor(this, 'mybutton1')">
+<input type="button" value="추가(상품)" class="btn btn-primary mybutton1" onclick="openDisPInsert()">
+<input type="button" value="추가(자재)" class="btn btn-primary mybutton1" onclick="openDisMInsert()">
+<input type="button" value="엑셀파일다운" id="excelWorkOrder">
 </div>
 <div id="page_control" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -257,6 +262,10 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- 엑셀파일 저장을 위한 스크립트 호출 -->
+	<script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+	<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
 <script type="text/javascript">
 //팝업 창을 열어주는 함수
@@ -338,6 +347,94 @@ function resetSearch() {
     $('#select3').prop('checked', false);
     $('#select4').prop('checked', false);
 }
+
+$(document).ready(function() {
+    // 전체선택 체크박스 클릭 시
+    $("#delete-list-all").on("click", function() {
+        $("input:checkbox[name=delete-list]").prop("checked", this.checked);
+    });
+
+    // 개별 체크박스 클릭 시
+    $(document).on("click", "input:checkbox[name=delete-list]", function(e) {
+        var chks = document.getElementsByName("delete-list");
+        var chksChecked = 0;
+
+        for (var i = 0; i < chks.length; i++) {
+            var cbox = chks[i];
+
+            if (cbox.checked) {
+                chksChecked++;
+            }
+        }
+        if (chks.length == chksChecked) {
+            $("#delete-list-all").prop("checked", true);
+        } else {
+            $("#delete-list-all").prop("checked", false);
+        }
+    });
+
+    // 전체선택 체크박스 상태 변경 시
+    $(document).on("change", "#delete-list-all", function() {
+        // 상황에 맞게 처리
+    });
+});
+
+
+
+//엑셀 버튼 누를 시 실행되는 함수
+$("#excelWorkOrder").click(function(){
+//		체크박스가 체크된 여부를 확인하기위한 변수선언
+	var selectedCheckbox = $("input[name='delete-list']:checked");
+	if(selectedCheckbox.length === 0){
+		alert("엑셀파일로 다운로드할 행을 선택해주세요")
+		return false;
+	} 
+
+	// 엑셀에 데이터를 삽입하기위한 배열 변수선언
+	var excelData = [];
+	
+	// 엑셀의 헤더가 되는 값을 삽입하기위한 변수선언
+	var headers = [];
+	
+		// table의 th태그만큼 반복문을 실행하되 첫번째 체크박스행은 제외한다
+		$("#datatablesSimple th:not(:first)").each(function(){
+			// 헤더에 텍스트값(th) 삽입
+			headers.push($(this).text());
+		});
+		// 엑셀 데이터 변수에 헤더값을 삽입한다
+		excelData.push(headers);
+	
+		// 체크박스가 체크된 행 만큼 엑셀 행삽입 반복문을 시행한다
+		selectedCheckbox.each(function () {
+		
+			// 엑셀의 행값을 담기위한 배열 변수선언
+	    	var row = [];
+			// tr태그를 찾아서 반복문을 실행하되 첫번째 td태그(체크박스)는 제외한다
+	    	$(this).closest("tr").find("td:not(:first-child)").each(function () {
+	    		// 행 변수에 테이블 행(td)태그의 텍스트 값을 삽입한다
+	        	row.push($(this).text());
+	    	});
+			// 엑셀 데이터 변수에 행값을 삽입한다
+	   		excelData.push(row);
+		});
+		
+		// 워크북을 생성한다
+		var workbook = XLSX.utils.book_new();
+		// 엑셀 데이터(헤더, 행)값을 시트로 변환한다
+		var worksheet = XLSX.utils.aoa_to_sheet(excelData);
+		// 데이터와 워크북 시트를 워크북에 추가한다
+		XLSX.utils.book_append_sheet(workbook, worksheet, "작업지시 리스트");
+		
+		// 워크북을 blob형태로 변환하고 xlsx 파일로 저장한다
+		var workbookOutput = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+		saveAs(
+			new Blob([workbookOutput], { type: "application/octet-stream" }),
+			"작업지시 리스트.xlsx"
+		);
+	
+});// end function
+
+
 </script>
 
 

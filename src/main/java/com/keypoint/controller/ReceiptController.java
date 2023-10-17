@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
 import com.keypoint.dto.ReceiptDTO;
+import com.keypoint.service.EmployeeService;
 import com.keypoint.service.PurchaseService;
 import com.keypoint.service.ReceiptService;
 
@@ -29,6 +32,11 @@ public class ReceiptController {
 	
 	@Inject
 	private PurchaseService purchaseService;
+	
+	//--------------------------
+	@Inject
+	private EmployeeService employeeService;
+	//--------------------------
 	
 	// --------------------------------------------------------------------------------
 	
@@ -66,8 +74,14 @@ public class ReceiptController {
 	//----------------------------------------------------------------------------------------------
 	
 	@GetMapping("/receiptList")
-	public String receiptList(HttpServletRequest request, Model model) {
+	public String receiptList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("ReceiptController receipt/receiptList");
+		
+		
+		//---------------------------
+				int empId = (int) session.getAttribute("empId");
+				//---------------------------
+		
 		
 		//---------------------------
 			String search = request.getParameter("search");
@@ -141,17 +155,36 @@ public class ReceiptController {
 		model.addAttribute("receiptList", receiptList);
 		model.addAttribute("pageDTO", pageDTO);
 		
+		// ------------------------------
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		// ------------------------------
+		
 		return "receipt/receiptList";
 	}// receiveTest [수주목록] // 페이징은 나중에		
 	
 	// ----------------------------------------------------------------------------------------------------------
 	
 	@GetMapping("/receiptDetails")
-	public String receiptDetails(Model model, @RequestParam("grCode") String grCode) {
+	public String receiptDetails(Model model, @RequestParam("grCode") String grCode,HttpSession session) {
 		System.out.println("receiptController receipt/receiptDetails");
+		
+		
+		
+		//---------------------------
+				int empId = (int) session.getAttribute("empId");
+				//---------------------------
+		
 		
 		ReceiptDTO receiptDTO = receiptService.getReceiptDetails(grCode);
 		model.addAttribute("receiptDTO", receiptDTO);
+		
+		// ------------------------------
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		// ------------------------------
+		
+		
 		return "receipt/receiptDetails";
 	}// receiptDetails [입고상세]
 	

@@ -157,7 +157,7 @@
 								<td>${workOrderDTO.empName}</td>
 
 								<td><input type="button" value="상세내역"
-									class="btn btn-secondary mybutton1"
+									class="btn btn-info mybutton1"
 									onclick="openDetails('${workOrderDTO.woCode}')"></td>
 							</tr>
 						</c:forEach>
