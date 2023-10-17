@@ -55,7 +55,7 @@
 </div>
 <div class="form-group-receive">
 <p>불량</p>
-<input type="number" id="poErr" name="poErr" class="form-control search-input" value="">
+<input type="number" id="poErr" name="poErr" class="form-control search-input" value="0" min="0">
 </div>
 <div class="form-group-receive">
 <p>불량사유</p>
@@ -182,32 +182,6 @@ $(function() {
     });
 });
 
-//유효성 검사
-function validateForm() {
-    // 각 입력 필드 값
-    var poCode = document.getElementById("poCode").value;
-    var poDate = document.getElementById("poDate").value;
-    var poGood = document.getElementById("poGood").value;
-    var poErr = document.getElementById("poErr").value;
-    var poCause = document.getElementById("poCause").value;
-    var empId = document.getElementById("empId").value;
-    
-//     console.log("poCode: " + poCode);
-    // 빈 필드 검사
-    if (poCode === "" || poDate === "" ||
-    		poGood === "" || poErr === "" || poCause === "" ||
-    		empId === "" ) {
-        alert("모든 내용을 입력해주세요.");
-        return false; // 제출 방지
-    }
-    // 추가 유효성 검사
-    if (woCount == 0) {
-        alert("몇개부터 가능하도록 할까");
-        return false; // 제출 방지
-    }
-    return true;
-    
-}
 
 var inputSelector = 'input[name="poCount"]';
 
@@ -260,6 +234,33 @@ if (isNaN(result ) || result  == 0) {
 
 
 }); // end function
+
+// 유효성 검사
+function validateForm() {
+  var woCode = document.getElementById('woCode').value;
+  var poDate = document.getElementById('poDate').value;
+  var lineCode = document.getElementById('lineCode').value;
+  var productCode = document.getElementById('productCode').value;
+  var productName = document.getElementById('productName').value;
+  var woCount = document.getElementById('woCount').value;
+  var poErr = document.getElementById('poErr');
+  var poCause = document.getElementById('poCause').value;
+  var roCode = document.getElementById('roCode').value;
+  var cusCode = document.getElementById('cusCode').value;
+  var empId = document.getElementById('empId').value;
+  var poGood = document.getElementById('poGood').value;
+
+  if (woCode === '작업지시번호' || poDate === '실적일자' || lineCode === '라인코드' ||
+      productCode === '상품검색' || productName === '상품코드' || woCount === '' ||
+      roCode === '수주번호' || cusCode === '거래처코드' || empId === '사원검색' ||
+      poGood === '') {
+    // 필수 입력 필드 중 하나라도 값을 가지고 있지 않은 경우
+    alert("모든 칸에 값을 입력해주세요.");
+    return false; // 폼 제출을 막기 위해 false를 반환합니다.
+}
+
+return true; // 유효성 검사 통과 시 폼을 제출합니다.
+}
 </script>
 </body>
 </html>
