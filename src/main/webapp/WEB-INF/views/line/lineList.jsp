@@ -67,13 +67,13 @@
 <div>
 <table class="table-list">
 <tr class="table-head">
-	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-	<th>라인코드</th>
-    <th>라인명</th>
+	<th style="width: 10%;"><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
+	<th style="width: 15%;">라인코드</th>
+    <th style="width: 15%;">라인명</th>
 <!--     <th>작업코드</th> -->
-    <th>작업명</th>
-    <th>담당자</th>
-    <th>상세내역</th>
+    <th style="width: 15%;">작업명</th>
+    <th style="width: 10%;">담당자</th>
+    <th style="width: 62%;">상세내역</th>
 </tr>
 <c:forEach var="LineDTO" items="${lineList}">
 <tr class="table-body">

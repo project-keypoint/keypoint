@@ -87,7 +87,7 @@
 <input type="hidden" name="search2" value="">
 <c:choose>
 <c:when test="${pageDTO.search2 eq '' or empty pageDTO.search2}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
@@ -98,7 +98,7 @@
 <input type="hidden" name="search2" value="입고대기">
 <c:choose>
 <c:when test="${'입고대기' eq pageDTO.search2}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="입고대기" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="입고대기" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="입고대기" style="margin-right: 4px;">
@@ -109,7 +109,7 @@
 <input type="hidden" name="search2" value="입고완료">
 <c:choose>
 <c:when test="${'입고완료' eq pageDTO.search2}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="입고완료" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="입고완료" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="입고완료" style="margin-right: 4px;">
@@ -186,13 +186,13 @@
     <c:choose>
     <c:when test="${receiptDTO.grStatus eq '입고대기'}">
         <td>
-            <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
+            <input type="button" value="상세내역" class="btn btn-info mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
             <input type="button" value="입고처리" class="btn btn-secondary mybutton1" onclick="openComplete('${receiptDTO.grCode}')">
         </td>
     </c:when>
     <c:otherwise>
         <td>
-            <input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
+            <input type="button" value="상세내역" class="btn btn-info mybutton1" onclick="openDetails('${receiptDTO.grCode}')">
             <input type="button" value="입고완료" class="btn btn-danger mybutton1">
         </td>
     </c:otherwise>

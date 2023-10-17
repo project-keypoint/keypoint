@@ -88,7 +88,7 @@
 <input type="hidden" name="search2" value="">
 <c:choose>
 <c:when test="${pageDTO.search2 eq '' or empty pageDTO.search2}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
@@ -99,7 +99,7 @@
 <input type="hidden" name="search2" value="발주대기">
 <c:choose>
 <c:when test="${'발주대기' eq pageDTO.search2}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="발주대기" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="발주대기" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="발주대기" style="margin-right: 4px;">
@@ -110,7 +110,7 @@
 <input type="hidden" name="search2" value="발주완료">
 <c:choose>
 <c:when test="${'발주완료' eq pageDTO.search2}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="발주완료" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="발주완료" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="발주완료" style="margin-right: 4px;">
@@ -165,7 +165,7 @@
                 <c:otherwise>${purchaseDTO.poStatus}</c:otherwise>
             </c:choose>
     </td>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${purchaseDTO.poCode}')"></td>
+    <td><input type="button" value="상세내역" class="btn btn-info mybutton1" onclick="openDetails('${purchaseDTO.poCode}')"></td>
 	<!-- + openDetails(가져갈값넣기) -->
 </tr>
 </c:forEach>
