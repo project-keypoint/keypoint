@@ -96,7 +96,7 @@
 <%--             </c:otherwise> --%>
 <%--         </c:choose></td><!-- 납품일 null 대신 '-' --> --%>
 <%--     <td>${receiveDTO.roStatus}</td> --%>
-    <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${LineDTO.lineCode}')"></td>
+    <td><input type="button" value="상세내역" class="btn btn-info mybutton1" onclick="openDetails('${LineDTO.lineCode}')"></td>
 </tr> 
 </c:forEach>    
 </table>
