@@ -9,14 +9,17 @@
 	SELECT DATE_FORMAT(shipDate, '%Y-%m') AS label , SUM(shipCount) AS data
 	FROM receivedOrder
 	WHERE shipCount IS NOT NULL
-	GROUP BY DATE_FORMAT(shipDate, '%Y-%m');
+	GROUP BY DATE_FORMAT(shipDate, '%Y-%m')
+	ORDER BY shipDate ASC
+	LIMIT 6
 </select>
 
 <select id="getProductShipRate" resultType="com.keypoint.dto.ChartDTO">
-	SELECT productCode AS label, sum(roCount) AS data
-	FROM receivedOrder
-	GROUP BY productCode
-	ORDER BY productCode;
+	SELECT b.productName AS label, sum(a.roCount) AS data
+	FROM receivedOrder a
+	JOIN product b ON a.productCode = b. productCode
+	GROUP BY b.productName
+	ORDER BY b.productName
 </select>
 
 </mapper>
