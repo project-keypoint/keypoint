@@ -4,10 +4,19 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwillbs.mappers.chartMapper">
+
 <select id="getMonthlyShip" resultType="com.keypoint.dto.ChartDTO">
 	SELECT DATE_FORMAT(shipDate, '%Y-%m') AS label , SUM(shipCount) AS data
 	FROM receivedOrder
 	WHERE shipCount IS NOT NULL
 	GROUP BY DATE_FORMAT(shipDate, '%Y-%m');
 </select>
+
+<select id="getProductShipRate" resultType="com.keypoint.dto.ChartDTO">
+	SELECT productCode AS label, sum(roCount) AS data
+	FROM receivedOrder
+	GROUP BY productCode
+	ORDER BY productCode;
+</select>
+
 </mapper>

@@ -42,11 +42,12 @@
 			</div>
 
 
-			<div class="row">
+			<div class="row" style="">
 				<!-- in row -->
 				<!-- total score start -->
+				
 				<!-- 1 -->
-				<div class="my-row-all col-xl-4 col-lg-4"
+				<div class="my-row-all col-xl-4 col-lg-4 h-100"
 					style="margin-bottom: 10px;">
 					<!-- oya -->
 					<div class="my-row row50">
@@ -131,7 +132,7 @@
 						<div class="right">
 							<a href="${pageContext.request.contextPath}/notice/noticeList"
 								class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm btn-more">더보기</a>
-							<table>
+							<table class="h-100">
 								<tr>
 									<th class="row-1">분류</th>
 									<th class="row-2">제목</th>
@@ -208,8 +209,7 @@
 						<!--  Card Body -->
 						<div class="card-body">
 							<div class="chart-pie pt-4 pb-2">
-								<canvas id="myChart2" class="main-chart"></canvas>
-								<!-- 								<canvas id="myChart3" class="main-chart"></canvas> -->
+								<canvas id="productShipRate" class="main-chart"></canvas>
 							</div>
 							<div class="mt-4 text-center small">
 								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>
@@ -277,9 +277,11 @@ $(document).ready(function(){
 });
 </script>
 
-	<script type="text/javascript">
+
+
+<script type="text/javascript">
 //차트 생성 함수 
-function createChart(data) {
+function monthlyShipChart(data) {
 
   var context = document.getElementById('monthlyShip').getContext('2d');
 
@@ -322,10 +324,65 @@ $.ajax({
   url: '${pageContext.request.contextPath}/main/monthlyShip',
   type: 'GET',
 }).done(function(data){
-	createChart(data);
+	monthlyShipChart(data);
 }).fail(function(xhr, status, error){
 	console.error('데이터를 가져오지 못했습니다.', error);
 });
+
+
+//차트 생성 함수
+function productShipRateChart(data) {
+  var context = document.getElementById('productShipRate').getContext('2d');
+
+  if (data && data.length > 0) {
+    var labels = data.map(function(item) { return item.label; });
+    var data   = data.map(function(item) { return item.data; });
+
+    var productShipRate = new Chart(context, {
+      type: 'pie', // 파이 차트로 변경
+      data: {
+        labels: labels,
+        datasets: [{
+          label:'',
+          data:data,
+          backgroundColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe','#4e73df'],
+          borderColor:'#fff',
+          borderWidth : 1
+        }]
+      },
+      options:{
+         maintainAspectRatio:false,
+         scales:{
+            yAxes:[{
+               ticks:{
+                  beginAtZero:true
+               }
+            }]
+         }
+       }
+     });
+   } else {
+     console.error('데이터가 없습니다.');
+   }
+}
+
+// AJAX 요청을 통해 서버에서 데이터 가져오기 및 차트 생성 시작하기
+$.ajax({
+  url: '${pageContext.request.contextPath}/main/productShipRate',
+  type: 'GET',
+}).done(function(data){
+	productShipRateChart(data);
+}).fail(function(xhr, status, error){
+	console.error('데이터를 가져오지 못했습니다.', error);
+});
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>

@@ -21,4 +21,8 @@ public class ChartDAO {
 		return sqlSession.selectList(namespace+"getMonthlyShip");
 	}
 
+	public List<ChartDTO> getProductShipRate() {
+		return sqlSession.selectList(namespace+"getProductShipRate");
+	}
+
 }

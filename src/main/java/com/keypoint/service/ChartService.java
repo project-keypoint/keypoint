@@ -17,7 +17,12 @@ public class ChartService {
 	private ChartDAO chartDAO;
 
 	public List<ChartDTO> getMonthlyShip() {
-		System.out.println("서비스 차트");
+		System.out.println("서비스 차트1");
         return chartDAO.getMonthlyShip();
     }
+
+	public List<ChartDTO> getProductShipRate() {
+		System.out.println("서비스 차트2");
+		return chartDAO.getProductShipRate();
+	}
 }

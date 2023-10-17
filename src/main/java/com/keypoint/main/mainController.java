@@ -29,10 +29,20 @@ public class mainController {
 	
 	@GetMapping("/monthlyShip")
 	@ResponseBody
-	public List<ChartDTO> chart_test(Model model) {
+	public List<ChartDTO> monthlyShip(Model model) {
 		System.out.println("컨트롤러 chart_test");
 
         List<ChartDTO> fetchedData = chartService.getMonthlyShip();
+        System.out.println(model);
+        return fetchedData;
+	}
+	
+	@GetMapping("/productShipRate")
+	@ResponseBody
+	public List<ChartDTO> productShipRate(Model model) {
+		System.out.println("컨트롤러 chart_test");
+
+        List<ChartDTO> fetchedData = chartService.getProductShipRate();
         System.out.println(model);
         return fetchedData;
 	}
