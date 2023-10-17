@@ -148,7 +148,7 @@
 								<%-- 								<td>${productionDTO.empName}</td> --%>
 
 								<td><input type="button" value="상세내역" 
-									class="btn btn-secondary mybutton2"
+									class="btn btn-info mybutton2"
 									onclick="openDetails('${productionDTO.poCode}')"></td>
 							</tr>
 						</c:forEach>
