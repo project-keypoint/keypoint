@@ -10,9 +10,9 @@
 <!-- 로그인 -->
 	<select id="userCheck" parameterType="com.keypoint.dto.EmployeeDTO" resultType="com.keypoint.dto.EmployeeDTO">
     SELECT * FROM employees
-    WHERE empId = #{empId} AND empPass = #{empPass}
+    WHERE empId = #{empId} AND empPass = SHA2(#{empPass}, 256)
 </select>
-<!--  SHA2(#{empPass}, 256) -->
+
 		
 <!-- 비밀번호 값 가져오기 -->
 	<select id="getInitialPass" resultType="java.lang.Integer">
