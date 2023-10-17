@@ -33,6 +33,7 @@ public class RequireController {
 	@Inject
 	private RequireService requireService;
 	
+	//employeeService 객체생성
 	@Inject
 	private EmployeeService employeeService;
 	
@@ -46,6 +47,7 @@ public class RequireController {
 	@GetMapping("/requireList")
 	public String requireList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("RequireController requireList()");
+		// 세션에서 empId 가져오기
 		int empId = (int) session.getAttribute("empId");
 		
 		// 검색어 가져오기
@@ -98,6 +100,7 @@ public class RequireController {
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println(pageDTO);
 		
+		// empId로 사원정보 가져오기
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
 		model.addAttribute("employeeDTO", employeeDTO);
 		System.out.println(employeeDTO);
