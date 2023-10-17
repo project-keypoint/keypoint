@@ -231,7 +231,6 @@ function confirmDelete(materialCode) {
 
 //검색하기
 function doSearch() {
-    if (confirm($("#materialCode").val())) {
         var query = {"search" : $("#materialCode").val()};
         $.ajax({
             url : "${pageContext.request.contextPath}/material/materialList",
@@ -246,7 +245,6 @@ function doSearch() {
                 }
             }
         });
-    } 
 }
 
 

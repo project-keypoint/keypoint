@@ -306,7 +306,6 @@ function confirmDelete(productCode,materialCode) {
 
 //검색하기
 function doSearch() {
-    if (confirm($("#productCode").val())) {
         var query = {"search" : $("#productCode").val(), "search2" : $("#materialCode").val()};
         $.ajax({
             url : "${pageContext.request.contextPath}/require/requireList",
@@ -321,7 +320,6 @@ function doSearch() {
                 }
             }
         });
-    } 
 }
 
 
