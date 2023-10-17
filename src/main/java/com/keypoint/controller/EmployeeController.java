@@ -56,7 +56,7 @@ public class EmployeeController {
 	        // 사용자의 empRoll 값을 확인하고 로그인 처리
 	        if (employeeDTO.getEmpRole() == 0) {
 	            // empRoll 값이 0인 경우 로그인 불가능
-//	            model.addAttribute("error", "로그인에 실패했습니다. 관리자에게 문의하세요.");
+//	            model.addAttribute("error", "로그인에 권한이 없습니다. 관리자에게 문의하세요.");
 	            return "member/msg2";
 	        } else {
 	            // empRoll 값이 0이 아닌 경우 로그인 성공
@@ -64,7 +64,7 @@ public class EmployeeController {
 	            session.setAttribute("empName", employeeDTO.getEmpName());
 	            session.setAttribute("empPhoto", employeeDTO.getEmpPhoto());
 	            session.setAttribute("departmentName", employeeDTO.getDepartmentName());
-	            session.setAttribute("empPosition", employeeDTO.getEmpPosition());
+	            session.setAttribute("empRole", employeeDTO.getEmpRole());
 	            // 주소 변경하면서 이동 /main/main
 	            return "redirect:/main/main";
 	        }
