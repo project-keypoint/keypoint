@@ -71,7 +71,7 @@ public class AccessFilter implements Filter {
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/main/")
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/employee/employeeDetails")
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/notice/")
-							|| requestURI.startsWith(httpRequest.getContextPath() + "/workorder/")
+							|| requestURI.startsWith(httpRequest.getContextPath() + "/workOrder/")
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/line/")
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/production/")
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/qc/")) {
