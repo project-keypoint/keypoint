@@ -69,7 +69,7 @@ public class RequireController {
 		// 전체 글개수 가져오기
 		int count = requireService.getRequireCount(pageDTO);
 		// 한 화면에 보여줄 페이지 개수 설정
-		int pageBlock = 10;
+		int pageBlock = 5;
 		// 시작하는 페이지 번호
 		int startPage = (currentPage-1)/pageBlock*pageBlock+1;
 		// 끝나는 페이지 번호
@@ -89,6 +89,7 @@ public class RequireController {
 		
 		model.addAttribute("requireList", requireList);
 		model.addAttribute("pageDTO", pageDTO);
+		System.out.println(pageDTO);
 		
 		// WEB-INF/views/require/requireList.jsp
 		return "require/requireList";
