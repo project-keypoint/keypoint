@@ -144,8 +144,8 @@
 </form>
 </div>
 <div>
-<input type="button" class="btn btn-secondary mybutton1" value="상품" onclick="toggleTable('hide1', 'hide2')">
-<input type="button" class="btn btn-secondary mybutton1" value="자재" onclick="toggleTable('hide2', 'hide1')">
+<input type="button" class="btn btn-primary mybutton9" value="상품" onclick="toggleTable('hide1', 'hide2')" >
+<input type="button" class="btn btn-primary mybutton9" value="자재" onclick="toggleTable('hide2', 'hide1')">
 </div>
 </div>
 <div style="display: flex; justify-content: space-between;">
@@ -185,8 +185,8 @@
 </table><!-- table1 -->
 <div class="content-bottom">
 <div>
-<input type="button" value="추가(상품)" class="btn btn-primary mybutton1" onclick="openDisPInsert()">
-<input type="button" value="추가(자재)" class="btn btn-primary mybutton1" onclick="openDisMInsert()">
+<input type="button" value="추가(상품)" class="btn btn-primary mybutton1" onclick="changeButtonColor(this, 'mybutton1')">
+<input type="button" value="추가(자재)" class="btn btn-primary mybutton1" onclick="changeButtonColor(this, 'mybutton1')">
 </div>
 <div id="page_control" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -346,6 +346,21 @@ function resetSearch() {
 function reset() {
     location.href = "${pageContext.request.contextPath}/qc/disposedList";
 }
+
+
+// 상품, 자재 버튼 색상 변화할 수 있게..
+function changeButtonColor(button, buttonClass) {
+    var buttons = document.querySelectorAll('.' + buttonClass);
+    
+    // 모든 버튼의 클래스 초기화
+    buttons.forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+    
+    // 클릭한 버튼에 클래스 추가
+    button.classList.add('active');
+}
+
 </script>
 
 </body>

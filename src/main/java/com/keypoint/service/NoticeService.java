@@ -119,11 +119,16 @@ public class NoticeService {
 
 
 
-//	'등록' 글 수 가져오기
-	public int getinserCount() {
-		System.out.println("NoticeService deleteNotice()");
 
-		return noticeDAO.getinserCount();
+
+
+//	다중삭제
+	public void noticeDeleteChecked(NoticeDTO noticeDTO) {
+		System.out.println("NoticeService noticeDeleteChecked()");
+
+		for (String noticeNum : noticeDTO.getNoticeCodes()) {
+			noticeDAO.noticeDeleteChecked(noticeNum);
+		}
 	}
 
 

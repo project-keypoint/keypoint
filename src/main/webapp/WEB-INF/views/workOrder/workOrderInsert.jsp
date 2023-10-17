@@ -193,33 +193,26 @@
 			});
 		});
 
-		//유효성 검사
-		function validateForm() {
-			// 각 입력 필드 값
-			var cusCode = document.getElementById("cusCode").value;
-			var productCode = document.getElementById("productCode").value;
-			var roCode = document.getElementById("roCode").value;
-			var woCount = document.getElementById("woCount").value;
-			var lineCode = document.getElementById("lineCode").value;
-			var woDate = document.getElementById("woDate").value;
-			var shipSdate = document.getElementById("shipSdate").value;
-			var empId = document.getElementById("empId").value;
+function validateForm() {
+  var roCode = document.getElementById('roCode').value;
+  var cusCode = document.getElementById('cusCode').value;
+  var productCode = document.getElementById('productCode').value;
+  var woCount = document.getElementById('woCount').value;
+  var lineCode = document.getElementById('lineCode').value;
+  var woDate = document.getElementById('woDate').value;
+  var shipSdate = document.getElementById('shipSdate').value;
+  var woStatus = document.getElementById('woStatus').value;
+  var empId = document.getElementById('empId').value;
 
-			console.log("cusCode: " + cusCode);
-			// 빈 필드 검사
-			if (cusCode === "" || productCode === "" || woCount === ""
-					|| lineCode === "" || woDate === "" || shipSdate === ""
-					|| empId === "") {
-				alert("모든 내용을 입력해주세요.");
-				return false; // 제출 방지
-			}
-			    // 추가 유효성 검사
-			    if (woCount == 0) {
-			        alert("몇개부터 가능하도록 할까");
-			        return false; // 제출 방지
-			    }
-			return true;
-		}
+  if (roCode === '수주번호' || cusCode === '업체검색' || productCode === '상품검색' || woCount === '' || lineCode === '라인코드' || woDate === '지시일자' || shipSdate === '납품예정일' || woStatus === '' || empId === '사원검색') {
+    // 필수 입력 필드 중 하나라도 값을 가지고 있지 않은 경우
+    alert("모든 칸에 값을 입력해주세요.");
+    return false; // 폼 제출을 막기 위해 false를 반환합니다.
+  }
+
+  return true; // 유효성 검사 통과 시 폼을 제출합니다.
+}
+
 	</script>
 </body>
 </html>
