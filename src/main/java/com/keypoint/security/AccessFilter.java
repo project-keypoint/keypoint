@@ -30,6 +30,7 @@ public class AccessFilter implements Filter {
 				|| requestURI.startsWith(httpRequest.getContextPath() + "/main/productShipRate")
 				|| requestURI.startsWith(httpRequest.getContextPath() + "/main/monthlyShip")
 				|| requestURI.startsWith(httpRequest.getContextPath() + "/notice/recentNotice")
+				|| requestURI.startsWith(httpRequest.getContextPath() + "/line/getLineInfo")
 				|| requestURI.startsWith(httpRequest.getContextPath() + "/resources/")) {
 			// 로그인 페이지 및 로그인 처리 페이지로의 요청은 항상 허용
 			chain.doFilter(request, response);

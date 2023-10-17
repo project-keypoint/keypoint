@@ -252,29 +252,39 @@ $("#resetFilters").click(function() {
 })
 
 function lineDelete() {
-    var selectedLineCodes = [];
-    $("input[name='delete-list']:checked").each(function() {
-        selectedLineCodes.push($(this).closest("tr").find("td:eq(1)").text());
-    });
+    // 세션에서 empRole 값을 가져옵니다.
+    var empRole = ${sessionScope.empRole}; // 이 부분은 JSP 코드로 대체되어야 합니다.
 
-    // 선택된 라인이 없다면 알림을 표시하고 함수 종료
-    if (selectedLineCodes.length === 0) {
-        alert("선택된 라인이 없습니다.");
-        return;
+    // empRole 값이 2보다 크거나 같은 경우에만 함수를 실행합니다.
+    if (empRole >= 2) {
+        var selectedLineCodes = [];
+        $("input[name='delete-list']:checked").each(function() {
+            selectedLineCodes.push($(this).closest("tr").find("td:eq(1)").text());
+        });
+
+        // 선택된 라인이 없다면 알림을 표시하고 함수 종료
+        if (selectedLineCodes.length === 0) {
+            alert("선택된 라인이 없습니다.");
+            return;
+        }
+
+        // AJAX를 사용하여 서버로 선택된 라인 코드들을 전송하고, 요청이 성공하면 즉시 페이지를 새로고침합니다.
+        $.ajax({
+            url: "${pageContext.request.contextPath}/line/deleteLines",
+            type: "POST",
+            data: JSON.stringify(selectedLineCodes),
+            contentType: "application/json",
+            dataType: "json"
+        });
+        alert("라인이 삭제되었습니다");
+        // 요청 후 즉시 페이지를 새로고침
+        location.reload();
+    } else {
+        // empRole 값이 2보다 작은 경우에는 알림을 표시합니다.
+        alert("권한이 부족하여 작업을 수행할 수 없습니다.");
     }
-
-    // AJAX를 사용하여 서버로 선택된 라인 코드들을 전송하고, 요청이 성공하면 즉시 페이지를 새로고침합니다.
-    $.ajax({
-        url: "${pageContext.request.contextPath}/line/deleteLines",
-        type: "POST",
-        data: JSON.stringify(selectedLineCodes),
-        contentType: "application/json",
-        dataType: "json"
-    });
-	alert("라인이 삭제되었습니다");
-    // 요청 후 즉시 페이지를 새로고침
-    location.reload();
 }
+
 
 
 
