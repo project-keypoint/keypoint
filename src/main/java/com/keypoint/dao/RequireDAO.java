@@ -49,9 +49,9 @@ public class RequireDAO {
 		return sqlSession.selectOne(namespace+".getRequireCount", pageDTO);
 	}
 
-	public void requireDeleteChecked(RequireDTO requireDTO) {
+	public void requireDeleteChecked(String requireCode) {
 		System.out.println("RequireDAO requireDeleteChecked()");
-		sqlSession.delete(namespace+".requireDeleteChecked", requireDTO);
+		sqlSession.delete(namespace+".requireDeleteChecked", requireCode);
 	}// requireDeleteChecked
 
 	

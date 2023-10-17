@@ -64,7 +64,7 @@
 <table class="table-list">
 <tr class="table-head">
 	<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list">
-		<input type="hidden" name="requireCode" id="requireCode" class="form-control search-input" value="">
+<!-- 		<input type="hidden" name="requireCode" id="requireCode" class="form-control search-input" value=""> -->
 	</th>
     <th>완제품코드</th>
     <th>완제품명</th>
@@ -79,8 +79,8 @@
 <tr class="table-body">
 	<td>
 		<input type="checkbox" id="delete-list-require" name="delete-list-require" data-group="delete-list">
-		<input type="hidden" name="reproductCode" id="reproductCode" class="form-control search-input" value="${requireDTO.productCode}">
-		<input type="hidden" name="rematerialCode" id="rematerialCode" class="form-control search-input" value="${requireDTO.materialCode}">
+		<input type="hidden" name="requireCode" id="requireCode" value="${requireDTO.productCode}|${requireDTO.materialCode}">
+<%-- 		<input type="hidden" name="rematerialCode" id="rematerialCode" class="form-control search-input" value="${requireDTO.materialCode}"> --%>
 	</td>
     <td>${requireDTO.productCode}</td>
     <td>${requireDTO.productName}</td>
@@ -213,7 +213,7 @@ var requireCodes = [];
 
 checkboxes.each(function() {
   var row = $(this).closest('.table-body');
-  var requireCode = String(row.find('input[name="reproductCode"]').val() + '|' + row.find('input[name="rematerialCode"]').val());
+  var requireCode = String(row.find('input[name="requireCode"]').val());
   requireCodes.push(requireCode);
 
 });
