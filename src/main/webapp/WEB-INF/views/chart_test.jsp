@@ -119,7 +119,7 @@ function monthlyShipChart(data) {
           fill:false,
           data:data,
           backgroundColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe'],
-          borderColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe'],
+          borderColor:'#224abe',
           borderWidth : 4
         }]
       },

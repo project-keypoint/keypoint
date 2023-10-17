@@ -236,7 +236,6 @@ function confirmDelete(productCode) {
 
 //검색하기
 function doSearch() {
-    if (confirm($("#productCode").val())) {
         var query = {"search" : $("#productCode").val()};
         $.ajax({
             url : "${pageContext.request.contextPath}/product/productList",
@@ -251,7 +250,6 @@ function doSearch() {
                 }
             }
         });
-    } 
 }
 
 

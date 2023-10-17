@@ -204,9 +204,13 @@ public class WorkOrderDAO {
 	
 	
 	
-	public void updateMaterialCount(WorkOrderDTO workOrderDTO) {
+	public void updateMaterialCount(Map<String, Object> param) {
 		
-		sqlSession.update(namespace+".updateMaterialCount", workOrderDTO);
+		sqlSession.update(namespace+".updateMaterialCount", param);
+	}
+
+	public List<Map<String, Object>> selectWorkSum(WorkOrderDTO workOrderDTO) {
+		return sqlSession.selectList(namespace+".selectWorkSum", workOrderDTO);
 	}
 	
 	

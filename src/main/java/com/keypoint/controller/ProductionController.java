@@ -1,6 +1,7 @@
 package com.keypoint.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -112,14 +113,32 @@ public class ProductionController {
 	@PostMapping("/productionInsertPro")
 	public String productionInsertPro(ProductionDTO productionDTO) {
 		System.out.println("ProductionController workOrder/workOrderInsertPro");
+		System.out.println("productionDTO");
 		System.out.println(productionDTO);
 		
 		WorkOrderDTO workOrderDTO = new WorkOrderDTO();
 		workOrderDTO.setWoCode(productionDTO.getWoCode());
 		workOrderDTO.setWoStatus("완료");
-		workOrderService.updateWorkOrderStatus(workOrderDTO);
+		
+		System.out.println(workOrderDTO);
 		
 		productionService.productionInsertPro(productionDTO);
+		workOrderService.updateWorkOrderStatus(workOrderDTO);
+		
+		
+		List<Map<String, Object>> workSumList = workOrderService.selectWorkSum(workOrderDTO);
+		
+		System.out.println(workSumList);
+		
+		for(Map<String, Object> param: workSumList) {
+			
+			workOrderService.updateMaterialCount(param);
+		}
+		
+		
+		
+		
+		
 		
 		if(productionDTO != null) {
 			return "production/msgSuccess"; // 등록완료

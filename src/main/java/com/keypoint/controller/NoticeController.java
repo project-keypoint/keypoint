@@ -9,17 +9,21 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.NoticeDTO;
 import com.keypoint.dto.PageDTO;
+import com.keypoint.dto.RequireDTO;
 import com.keypoint.service.NoticeService;
 
 
@@ -106,8 +110,6 @@ public class NoticeController {
 		
 		List<NoticeDTO> noticeList = noticeService.getNoticeList(pageDTO);
 		
-//		'등록' 글 수만 가져오기
-		int insertCount = noticeService.getinserCount();
 		
 		
 //		페이징
@@ -142,7 +144,6 @@ public class NoticeController {
 		model.addAttribute("noticeCount", count);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("insertCount", insertCount);
 
 	return "notice/noticeList";
 	}
@@ -204,7 +205,7 @@ public class NoticeController {
 	
 	
 	
-//	글 삭제--임시
+//	글 삭제-->'noticeStatus = '삭제'
 	@GetMapping("/noticeDeletePro")
 	public String noticeDeletePro(NoticeDTO noticeDTO) {
 		System.out.println("NoticeController noticeDeletePro()");
@@ -216,6 +217,21 @@ public class NoticeController {
 	}
 	
 	
+	
+//	다중삭제
+	@PostMapping("/noticeDeleteChecked")
+	public ResponseEntity<String> noticeDeleteChecked(@RequestBody NoticeDTO noticeDTO) {
+	  System.out.println("NoticeController requireDeleteChecked()");
+	  System.out.println(noticeDTO);
+	  
+	  try {
+	    noticeService.noticeDeleteChecked(noticeDTO);
+	    return ResponseEntity.ok("success");
+	  } catch (Exception e) {
+	    e.printStackTrace();
+	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	  }
+	}	
 	
 	
 	

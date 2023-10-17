@@ -171,10 +171,10 @@
 	
 	<update id="shipCompleteUpdate">
 		UPDATE receivedOrder
-		SET shipDate = now(), shipCount = #{shipCount}, shipMemo = #{shipMemo}, 
+		SET shipDate = now(), shipCount = #{shipCount}, shipMemo = #{shipMemo}, shipEmpId = #{shipEmpId}, 
 		    shipPrice = #{shipCount}*(SELECT productPrice 
-		                              FROM product
-		                              WHERE productCode = #{productCode}) 
+		                                          FROM product
+		                                          WHERE productCode = #{productCode}) 
 		WHERE roCode = #{roCode}
 	</update>
 	
