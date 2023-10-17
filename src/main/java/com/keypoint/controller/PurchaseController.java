@@ -130,6 +130,7 @@ public class PurchaseController {
 		model.addAttribute("purchaseList", purchaseList);
 		model.addAttribute("pageDTO", pageDTO);
 		
+		
 		return "purchase/purchaseList";
 	}// receiveTest [수주목록] // 페이징은 나중에		
 	
