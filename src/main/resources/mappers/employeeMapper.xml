@@ -86,7 +86,7 @@
 	<insert id="insertEmployee">
 		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
 		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
-		values (SHA2('#{empPass}', 256), #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
+		values (SHA2(#{empPass}, 256), #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
 			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
 	</insert>
 	
