@@ -1,6 +1,7 @@
 package com.keypoint.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,8 +21,7 @@ public class NoticeDTO {
 	private String empName;				//	작성자
 	private String noticeStatus;		//	글상태
 	
-	
-
+	private List<String> noticeCodes;
 
 
 
@@ -32,12 +32,8 @@ public class NoticeDTO {
 		return "NoticeDTO [noticeNum=" + noticeNum + ", empId=" + empId + ", noticeCategory=" + noticeCategory
 				+ ", noticeSubject=" + noticeSubject + ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate
 				+ ", noticeReadcount=" + noticeReadcount + ", noticeFile=" + noticeFile + ", empName=" + empName
-				+ ", noticeStatus=" + noticeStatus + "]";
+				+ ", noticeStatus=" + noticeStatus + ", noticeCodes=" + noticeCodes + "]";
 	}
-	
-	
-	
-	
 	
 	
 	public int getNoticeNum() {
@@ -100,7 +96,12 @@ public class NoticeDTO {
 	public void setNoticeStatus(String noticeStatus) {
 		this.noticeStatus = noticeStatus;
 	}
-
+	public List<String> getNoticeCodes() {
+		return noticeCodes;
+	}
+	public void setNoticeCodes(List<String> noticeCodes) {
+		this.noticeCodes = noticeCodes;
+	}
 	
 	
 	

@@ -120,14 +120,11 @@
   	</delete>
   
   
-  
-  
-	  
-	<select id="getinserCount" resultType="java.lang.Integer">
-		  SELECT COUNT(*)
-		  FROM notice
-		  WHERE noticeStatus = '등록'
-	</select>
+	<update id="noticeDeleteChecked">
+		UPDATE notice
+		SET noticeStatus = '삭제'
+		WHERE noticeNum = #{noticeNum}
+	</update>
 	  
 	  
 	  

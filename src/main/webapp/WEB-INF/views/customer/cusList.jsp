@@ -213,7 +213,6 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 
 //	검색하기
 	function doSearch() {
-		if (confirm($("#cusCode").val())) {
 		var query = {"search" : $("#cusCode").val(), "search2" : $("#productCode").val()};
 		$.ajax({
 			url : "${pageContext.request.contextPath}/customer/cusList",
@@ -228,7 +227,6 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 				}
 			}
 		});
-		} 
 	}
 
 
