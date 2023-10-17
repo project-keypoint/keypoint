@@ -28,6 +28,7 @@ public class ReceiveDTO {
 	private int shipCount;
 	private int shipPrice;
 	private String shipMemo;
+	private int shipEmpId;
 	
 	private List<String> roCodes;
 	public List<String> getRoCodes() {
@@ -44,9 +45,16 @@ public class ReceiveDTO {
 				+ ", productCode=" + productCode + ", productName=" + productName + ", productCount=" + productCount
 				+ ", roEmpId=" + roEmpId + ", roEmpName=" + roEmpName + ", roCount=" + roCount + ", roPrice=" + roPrice
 				+ ", roDate=" + roDate + ", shipSdate=" + shipSdate + ", shipDate=" + shipDate + ", roStatus="
-				+ roStatus + ", shipCount=" + shipCount + ", shipMemo=" + shipMemo + "]";
+				+ roStatus + ", shipCount=" + shipCount + ", shipPrice=" + shipPrice + ", shipMemo=" + shipMemo
+				+ ", shipEmpId=" + shipEmpId + ", roCodes=" + roCodes + "]";
 	}
 	
+	public int getShipEmpId() {
+		return shipEmpId;
+	}
+	public void setShipEmpId(int shipEmpId) {
+		this.shipEmpId = shipEmpId;
+	}
 	public int getShipPrice() {
 		return shipPrice;
 	}

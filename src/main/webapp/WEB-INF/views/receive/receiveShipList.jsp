@@ -181,8 +181,8 @@
 	<th colspan="11" class="text-right">
 	<div class="shipment-div">
 	　사원명 :
-	<input type="text" id="shipEmpId" name="shipEmpId" class="form-control search-input inputcode readonly-color ei" placeholder="사원코드(클릭)" readonly>
-	<input type="text" id="shipEmpName" class="form-control search-input inputname readonly-color en" placeholder="사원명(클릭)" readonly>
+	<input type="text" id="empId" name="shipEmpId" class="form-control search-input inputcode readonly-color ei" placeholder="사원코드(클릭)" readonly>
+	<input type="text" id="empName" class="form-control search-input inputname readonly-color en" placeholder="사원명(클릭)" readonly>
 	　납품 :
 	<input type="number" id="shipCount" class="form-control search-input inputname input-middle shipCount-input" name="shipCount" value="${receiveDTO.roCount}" min="0" max="${receiveDTO.productCount}">
 	　납품메모 :
@@ -365,9 +365,15 @@ function deleteReceive() {
 // 납품 ajax처리
 function confirmShipment(roCode, productCode, button) {
     var row = button.parentNode.parentNode;
-    var shipCount = row.querySelector('#shipCount').value;
-    var shipMemo = row.querySelector('#shipMemo').value;
+	var shipCountInput = row.querySelector('#shipCount');
+    var shipMemoInput = row.querySelector('#shipMemo');
+    var empIdInput = row.querySelector('#empId');
+    var shipCount = shipCountInput.value;
+    var shipMemo = shipMemoInput.value;
+    var shipEmpId = empIdInput.value;
 
+    
+    if (shipCount !== "" && shipEmpId !== "") { 
     var userInput = prompt('진행하려면 "납품"라고 입력하세요.');
 
     if (userInput === '납품') {
@@ -378,7 +384,8 @@ function confirmShipment(roCode, productCode, button) {
                 "roCode": roCode,
                 "productCode": productCode,
                 "shipCount": shipCount,
-                "shipMemo": shipMemo
+                "shipMemo": shipMemo,
+                "shipEmpId": shipEmpId
             },
             success: function(result) {
                 const data = $.trim(result);
@@ -393,6 +400,9 @@ function confirmShipment(roCode, productCode, button) {
     } else {
         alert('잘못된 입력입니다.');
     }
+} else {
+	alert('값을 입력해주세요.');
+	}
 }
 
 // 숨겨진 행 나타내는 코드(납품수량)
@@ -438,6 +448,11 @@ $(document).ready(function() {
     // 상품명 검색 팝업 열기
     $("#productCode, #productName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        openPopup(url);
+    });
+    // 상품명 검색 팝업 열기
+    $("#empId, #empName").click(function() {
+        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
         openPopup(url);
     });
 });
