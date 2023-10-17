@@ -15,15 +15,11 @@
 <!--     <link -->
 <!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
 <!--         rel="stylesheet"> -->
-<link
-	href="${pageContext.request.contextPath}/resources/css/workOrder.css"
-	rel="stylesheet">
-<!-- Custom styles for this template-->
-<link
-	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
-	rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- 수주 CSS 적용-->
+  <link href="${pageContext.request.contextPath}/resources/css/workOrder2.css" rel="stylesheet">
 </head>
+<body>
 <body>
 	<%@include file="../inc/top-bar.jsp"%>
 	<%@include file="../inc/side-bar.jsp"%>
@@ -35,11 +31,14 @@
 	<div class="main">
 		<div class="card shadow">
 			<!-- 그림자아니야 영역 -->
-			<div class="page-title">실적관리</div>
-			<div class="contents2">
-				<form
-					action="${pageContext.request.contextPath}/production/productionList"
-					method="get">
+			<div class="page-title">생산실적관리
+			<!--    초기화 이미지 -->
+     		 <img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+       		    style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="reset()">
+    		 </div>
+    		<div class="contents2">	
+    					
+    		<form action="${pageContext.request.contextPath}/production/productionList" method="get">
 
 					<input type="button" value="엑셀파일다운" id="excelProduction"> <br>
 					<br>
@@ -75,31 +74,35 @@
 							</div>
 						</div>
 
-
-						<div
-							style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;">
-							<div class="search-button" style="margin-bottom: 5px;">
-								<input type="submit" value="검색하기"
-									class="btn btn-primary mybutton1" style="width: 100%;">
-							</div>
-							<div class="search-button"
-								style="display: flex; justify-content: space-between;">
-								<input type="button" value="초기화"
-									class="btn btn-secondary mybutton1"
-									onclick="window.location.href = '${pageContext.request.contextPath}/production/productionList'"
-									style="width: 48.6%;"> <input type="button" value="지우기"
-									class="btn btn-secondary mybutton1" onclick="resetSearch()"
-									style="width: 48.6%;">
-							</div>
+						<div class="search-button">
+						<div style="margin-bottom: 15px;"></div>
+						<input type="submit" value="검색" class="btn btn-primary mybutton1" >
+						<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 						</div>
-					</div>
-					<!-- search-bar -->
+						
+<!-- 						<div -->
+<!-- 							style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;"> -->
+<!-- 							<div class="search-button" style="margin-bottom: 5px;"> -->
+<!-- 								<input type="submit" value="검색하기" -->
+<!-- 									class="btn btn-primary mybutton1" style="width: 100%;"> -->
+<!-- 							</div> -->
+<!-- 							<div class="search-button" -->
+<!-- 								style="display: flex; justify-content: space-between;"> -->
+<!-- 								<input type="button" value="초기화" -->
+<!-- 									class="btn btn-secondary mybutton1" -->
+<%-- 									onclick="window.location.href = '${pageContext.request.contextPath}/production/productionList'" --%>
+<!-- 									style="width: 48.6%;"> <input type="button" value="지우기" -->
+<!-- 									class="btn btn-secondary mybutton1" onclick="resetSearch()" -->
+<!-- 									style="width: 48.6%;"> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+					</div><!-- search-bar -->
 
 				</form>
 				<!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
 				<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
-
-				<div class="page-title">생산실적등록</div>
+				<br>
+			
 
 
 				<div>

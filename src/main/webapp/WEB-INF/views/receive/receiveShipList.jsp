@@ -31,20 +31,7 @@
 <div class="contents2">
 
 <form action="${pageContext.request.contextPath}/receive/receiveShipList" method="get">
-<div class="search-b" style="margin-bottom: -15px;">
-<div class="status-check" style="background: #E5E5E5; border: none;">
-<div class="search-date3">
-<a style="font-weight: bold;">　대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기"
-<c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
-<a>진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
-<c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
-<a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
-<c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
-<a>취소<input type="checkbox" id="select4" name="check4" class="list-select" value="취소"
-<c:if test="${not empty pageDTO.check4}">checked</c:if>></a>
-</div>
-</div>
-</div>
+
 <div class="search-bar">
 <!-- <div class="search-b"> -->
 <!-- <div style="margin-bottom: -15px;"></div> -->
@@ -113,6 +100,25 @@
 <!-- </div> -->
 <!-- </div> -->
 </div><!-- search-bar -->
+
+<div class="search-b" style="margin-bottom: -15px;">
+<div class="status-check" style="background: #E5E5E5; border: none;">
+<div class="search-date3">
+<a style="font-weight: bold;">　대기<input type="checkbox" id="select1" name="check1" class="list-select" value="대기"
+<c:if test="${not empty pageDTO.check1}">checked</c:if>></a>
+<a>진행<input type="checkbox" id="select2" name="check2" class="list-select" value="진행"
+<c:if test="${not empty pageDTO.check2}">checked</c:if>></a>
+<a>완료<input type="checkbox" id="select3" name="check3" class="list-select" value="완료"
+<c:if test="${not empty pageDTO.check3}">checked</c:if>></a>
+<a>취소<input type="checkbox" id="select4" name="check4" class="list-select" value="취소"
+<c:if test="${not empty pageDTO.check4}">checked</c:if>></a>
+</div>
+</div>
+</div>
+
+
+
+
 </form>
 
 <br>
