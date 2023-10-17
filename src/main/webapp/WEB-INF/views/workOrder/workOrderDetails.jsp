@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,9 +103,20 @@
 
 		</div>
 		<div class="details-buttons">
+		
+			
 			<input type="button" value="수정" class="btn btn-primary mybutton1"
 				onclick="location.href='${pageContext.request.contextPath}/workOrder/workOrderUpdate?woCode=${workOrderDTO.woCode}'">
+			
+			<c:choose>    
+			    <c:when test = "${employeeDTO.empRole >= 2}">
 			<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
+		 	 </c:when>
+    		<c:otherwise>
+    		 <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()" style="margin-right: 3px;">
+   			 </c:otherwise>
+			</c:choose>
+    	
 		</div>
 	</div>
 	<!-- main-details -->
@@ -118,6 +130,14 @@ function confirmDelete() {
     	
     }
 }
+
+//권한없는 버튼
+function accessDenied() {
+    alert("권한이 없습니다.");
+}
+
+
+
 </script>
 </body>
 </html>

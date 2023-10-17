@@ -133,10 +133,17 @@ public class WorkOrderController {
 	}// workOrderInsertPro [작업지시등록Pro]
 	
 	@GetMapping("/workOrderDetails")
-	public String workOrderDetails(Model model, @RequestParam("woCode") String woCode) {
+	public String workOrderDetails(Model model, @RequestParam("woCode") String woCode, HttpSession session) {
 		System.out.println("WorkOrderController workOrder/workOrderDetails");
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
 		WorkOrderDTO workOrderDTO = workOrderService.getWorkOrderDetails(woCode);
 		model.addAttribute("workOrderDTO", workOrderDTO);
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		return "workOrder/workOrderDetails";
 	}// workOrderDetails [작업지시상세]
 	

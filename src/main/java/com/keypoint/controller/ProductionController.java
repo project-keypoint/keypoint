@@ -164,10 +164,17 @@ public class ProductionController {
 	
 	
 	@GetMapping("/productionDetails")
-	public String productionDetails(Model model, @RequestParam("poCode") String poCode) {
+	public String productionDetails(Model model, @RequestParam("poCode") String poCode, HttpSession session) {
 		System.out.println("ProductionController production/productionDetails");
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
 		ProductionDTO productionDTO = productionService.getProductionDetails(poCode);
 		model.addAttribute("productionDTO", productionDTO);
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		return "production/productionDetails";
 	}// workOrderDetails [생산실적상세]
 	
