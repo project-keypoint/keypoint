@@ -23,7 +23,7 @@
 <!-- 	비밀번호 초기화 -->
     <update id="resetPassword" parameterType="java.util.Map">
         UPDATE employees
-        SET empPass = #{empId}
+        SET empPass = SHA2(#{empId}, 256)
         WHERE empId = #{empId}
     </update>
     
