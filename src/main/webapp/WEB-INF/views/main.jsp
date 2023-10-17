@@ -352,7 +352,7 @@ function productShipRateChart(data) {
         datasets: [{
           label:'',
           data:data,
-          backgroundColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe','#4e73df'],
+          backgroundColor:['#F2D388','#E97777','#87A8D0','#F7E1AE','#D35D6E','#9AD0EC'],
           borderColor:'#fff',
           borderWidth : 1
         }]

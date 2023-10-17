@@ -144,8 +144,8 @@
 </form>
 </div>
 <div>
-<input type="button" class="btn btn-primary mybutton9" value="상품" onclick="toggleTable('hide1', 'hide2')" >
-<input type="button" class="btn btn-primary mybutton9" value="자재" onclick="toggleTable('hide2', 'hide1')">
+<input type="button" class="btn btn-info mybutton1" value="상품" onclick="toggleTable('hide1', 'hide2')" >
+<input type="button" class="btn btn-info mybutton1" value="자재" onclick="toggleTable('hide2', 'hide1')">
 </div>
 </div>
 <div style="display: flex; justify-content: space-between;">

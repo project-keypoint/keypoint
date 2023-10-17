@@ -47,13 +47,6 @@ public class mainController {
         return fetchedData;
 	}
 	
-	
-//  model.addAttribute("chartData", fetchedData);
-	
-	
-	
-	
-	
 	@GetMapping("/main")
 	public String main() {
 
