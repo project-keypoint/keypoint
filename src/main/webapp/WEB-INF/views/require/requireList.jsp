@@ -37,7 +37,7 @@
 <div class="search-select">
 <p style="width:65px;">완제품명</p> 
 <input type="text" name="search" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="완제품명" readonly>
+<input type="text" id="productName" class="form-control search-input" placeholder="완제품명(클릭)" readonly>
 </div>
 </div>
 
@@ -45,14 +45,14 @@
 <div class="search-select">
 <p style="width:50px;">자재명</p> 
 <input type="text" name="search2" id="materialCode" class="form-control search-input" placeholder="자재코드" style="width:110px;" readonly>
-<input type="text" id="materialName" class="form-control search-input" placeholder="자재명" readonly>
+<input type="text" id="materialName" class="form-control search-input" placeholder="자재명(클릭)" readonly>
 </div>
 </div>
 
 
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 </div>
 </div><!-- search-bar -->
 
@@ -378,7 +378,20 @@ $("#excelWorkOrder").click(function(){
 	
 });// end function
 
+//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+function resetSearch() {
+	$("#productCode").val("");
+    $("#productName").val("");
 
+    $("#productCode").attr("placeholder", "완제품코드");
+    $("#productName").attr("placeholder", "완제품명");
+    
+	$("#materialCode").val("");
+    $("#materialName").val("");
+
+    $("#materialCode").attr("placeholder", "자재코드");
+    $("#materialName").attr("placeholder", "자재명");
+}
 
 
 </script>
