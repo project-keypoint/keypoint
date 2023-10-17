@@ -101,10 +101,22 @@
 
 </div>
 <div class="details-buttons">
+
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+
 	<c:if test="${purchaseDTO.poStatus eq '발주대기'}">
         <input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/purchase/purchaseUpdate?poCode=${purchaseDTO.poCode}'">
         <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
     </c:if>
+    
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
+
+
+
 </div>
 
 </div><!-- main-details -->

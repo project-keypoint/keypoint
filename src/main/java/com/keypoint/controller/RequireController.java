@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.dto.RequireDTO;
-import com.keypoint.service.EmployeeService;
 import com.keypoint.service.RequireService;
 
 @Controller
@@ -33,9 +30,6 @@ public class RequireController {
 	@Inject
 	private RequireService requireService;
 	
-	@Inject
-	private EmployeeService employeeService;
-	
 //	가상주소 http://localhost:8080/keypoint/require/requireList
 	@GetMapping("/test")
 	public String test() {
@@ -44,9 +38,8 @@ public class RequireController {
 
 	//	가상주소 http://localhost:8080/keypoint/require/requireList
 	@GetMapping("/requireList")
-	public String requireList(HttpServletRequest request, Model model, HttpSession session) {
+	public String requireList(HttpServletRequest request, Model model) {
 		System.out.println("RequireController requireList()");
-		int empId = (int) session.getAttribute("empId");
 		
 		// 검색어 가져오기
 		String search = request.getParameter("search");
@@ -97,10 +90,6 @@ public class RequireController {
 		model.addAttribute("requireList", requireList);
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println(pageDTO);
-		
-		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
-		model.addAttribute("employeeDTO", employeeDTO);
-		System.out.println(employeeDTO);
 		
 		// WEB-INF/views/require/requireList.jsp
 		return "require/requireList";
