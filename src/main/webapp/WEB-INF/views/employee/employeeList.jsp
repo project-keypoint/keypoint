@@ -413,7 +413,7 @@ $("#excelEmployee").click(function(){
 
 
 
-// 초기화 아이콘 누르면 실행
+// 초기화 이미지 누르면 실행
 function reset() {
     location.href = "${pageContext.request.contextPath}/employee/employeeList";
 }
