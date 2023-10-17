@@ -102,7 +102,7 @@
 <input type="hidden" name="search" value="">
 <c:choose>
 <c:when test="${pageDTO.search eq '' or empty pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
@@ -113,7 +113,7 @@
 <input type="hidden" name="search" value="DISQ">
 <c:choose>
 <c:when test="${'DISQ' eq pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="품질" style="margin-right: 4px;">
@@ -124,7 +124,7 @@
 <input type="hidden" name="search" value="DISP">
 <c:choose>
 <c:when test="${'DISP' eq pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="상품" style="margin-right: 4px;">
@@ -135,7 +135,7 @@
 <input type="hidden" name="search" value="DISM">
 <c:choose>
 <c:when test="${'DISM' eq pageDTO.search}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="자재">
+<input type="submit" class="btn btn-primary mybutton1 dis-btn" value="자재">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="자재">

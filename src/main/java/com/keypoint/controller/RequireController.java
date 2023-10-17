@@ -141,20 +141,16 @@ public class RequireController {
 		}
 	}// requireUpdatePro [소요량수정]
 	
-//	// 다중삭제 테스트
-//	@PostMapping("/requireDeleteChecked")
-//	public ResponseEntity<String> requireDeleteChecked(@RequestBody List<String> requireCodesJson) {
-//	  System.out.println("RequireController requireDeleteChecked()");
-//	  System.out.println(requireCodesJson);
-//	  try {
-//	    requireService.requireDeleteChecked(requireCodesJson);
-//	    return ResponseEntity.ok("success");
-//	  } catch (Exception e) {
-//	    e.printStackTrace();
-//	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//	  }
-//	}
-	// 다중삭제 테스트
+	@GetMapping("/requireDelete")
+	public String requireDelete(RequireDTO requireDTO) {
+		System.out.println("RequireController requireDelete()");
+		System.out.println(requireDTO);
+		requireService.deleteRequire(requireDTO);
+
+		return "require/requireList";
+	}// requireDelete [소요량삭제]
+	
+	// 다중삭제
 	@PostMapping("/requireDeleteChecked")
 	public ResponseEntity<String> requireDeleteChecked(@RequestBody RequireDTO requireDTO) {
 	  System.out.println("RequireController requireDeleteChecked()");
@@ -171,20 +167,6 @@ public class RequireController {
 
 	
 
-//	////다중삭제 테스트
-//	@PostMapping("/requireDeleteChecked")
-//	public ResponseEntity<String> requireDeleteChecked(@RequestBody List<String> requireCodes) {
-//		System.out.println("RequireController requireDeleteChecked()");
-//		System.out.println(requireCodes);
-//		try {
-//			requireService.requireDeleteChecked(requireCodes);
-//			return ResponseEntity.ok("success");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//		}
-//	}
-	
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.keypoint.dto;
 
+import java.util.List;
+
 public class RequireDTO {
 
 	private String productCode;
@@ -9,11 +11,12 @@ public class RequireDTO {
 	private int reqCount;
 	private String materialUnit;
 	private String requireCode;
+	private List<String> requireCodes;
 	@Override
 	public String toString() {
 		return "RequireDTO [productCode=" + productCode + ", productName=" + productName + ", materialCode="
 				+ materialCode + ", materialName=" + materialName + ", reqCount=" + reqCount + ", materialUnit="
-				+ materialUnit + ", requireCode=" + requireCode + "]";
+				+ materialUnit + ", requireCode=" + requireCode + ", requireCodes=" + requireCodes + "]";
 	}
 	public String getProductCode() {
 		return productCode;
@@ -56,6 +59,12 @@ public class RequireDTO {
 	}
 	public void setRequireCode(String requireCode) {
 		this.requireCode = requireCode;
+	}
+	public List<String> getRequireCodes() {
+		return requireCodes;
+	}
+	public void setRequireCodes(List<String> requireCodes) {
+		this.requireCodes = requireCodes;
 	}
 	
 

@@ -21,9 +21,9 @@
 	rel="stylesheet">
 
 <%-- 	<script src="${pageContext.request.contextPath }/resources/js/chart.js"></script> --%>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <%@include file="../views/inc/top-bar.jsp"%>
@@ -33,13 +33,13 @@
 		<div class="container-fluid">
 			<!-- Begin Page Content -->
 			<!-- Page Heading -->
-			<div
-				class="d-sm-flex align-items-center justify-content-between mb-4">
-				<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-				<a href="#"
-					class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-					class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-			</div>
+<!-- 			<div -->
+<!-- 				class="d-sm-flex align-items-center justify-content-between mb-4"> -->
+<!-- 				<h1 class="h3 mb-0 text-gray-800">Dashboard</h1> -->
+<!-- 				<a href="#" -->
+<!-- 					class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i -->
+<!-- 					class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+<!-- 			</div> -->
 
 
 			<div class="row" style="">
@@ -130,8 +130,11 @@
 				<div class="col-xl-8 col-lg-8" style="margin-bottom: 10px;">
 					<div class="card shadow mb-4">
 						<div class="right">
+						<div class="sbtw">
+						<a style="margin: 5px; font-weight: bold;">[ 공지사항 ]</a>
 							<a href="${pageContext.request.contextPath}/notice/noticeList"
 								class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm btn-more">더보기</a>
+						</div>		
 							<table class="h-100">
 								<tr>
 									<th class="row-1">분류</th>
@@ -157,20 +160,20 @@
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-primary">월별 출고량</h6>
 							<div class="dropdown no-arrow">
-								<a class="dropdown-toggle" href="#" role="button"
-									id="dropdownMenuLink" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> <i
-									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-								</a>
-								<div
-									class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-									aria-labelledby="dropdownMenuLink">
-									<div class="dropdown-header">Dropdown Header:</div>
-									<a class="dropdown-item" href="#">Action</a> <a
-										class="dropdown-item" href="#">Another action</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</div>
+<!-- 								<a class="dropdown-toggle" href="#" role="button" -->
+<!-- 									id="dropdownMenuLink" data-toggle="dropdown" -->
+<!-- 									aria-haspopup="true" aria-expanded="false"> <i -->
+<!-- 									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
+<!-- 								</a> -->
+<!-- 								<div -->
+<!-- 									class="dropdown-menu dropdown-menu-right shadow animated--fade-in" -->
+<!-- 									aria-labelledby="dropdownMenuLink"> -->
+<!-- 									<div class="dropdown-header">Dropdown Header:</div> -->
+<!-- 									<a class="dropdown-item" href="#">Action</a> <a -->
+<!-- 										class="dropdown-item" href="#">Another action</a> -->
+<!-- 									<div class="dropdown-divider"></div> -->
+<!-- 									<a class="dropdown-item" href="#">Something else here</a> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 						<!-- Card Body -->
@@ -190,36 +193,37 @@
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-primary">상품별 출고 비율</h6>
 							<div class="dropdown no-arrow">
-								<a class="dropdown-toggle" href="#" role="button"
-									id="dropdownMenuLink" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> <i
-									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-								</a>
-								<div
-									class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-									aria-labelledby="dropdownMenuLink">
-									<div class="dropdown-header">Dropdown Header:</div>
-									<a class="dropdown-item" href="#">Action</a> <a
-										class="dropdown-item" href="#">Another action</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</div>
+<!-- 								<a class="dropdown-toggle" href="#" role="button" -->
+<!-- 									id="dropdownMenuLink" data-toggle="dropdown" -->
+<!-- 									aria-haspopup="true" aria-expanded="false"> <i -->
+<!-- 									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
+<!-- 								</a> -->
+<!-- 								<div -->
+<!-- 									class="dropdown-menu dropdown-menu-right shadow animated--fade-in" -->
+<!-- 									aria-labelledby="dropdownMenuLink"> -->
+<!-- 									<div class="dropdown-header">Dropdown Header:</div> -->
+<!-- 									<a class="dropdown-item" href="#">Action</a> <a -->
+<!-- 										class="dropdown-item" href="#">Another action</a> -->
+<!-- 									<div class="dropdown-divider"></div> -->
+<!-- 									<a class="dropdown-item" href="#">Something else here</a> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 						<!--  Card Body -->
 						<div class="card-body">
-							<div class="chart-pie pt-4 pb-2">
+							<div class="chart-area">
 								<canvas id="productShipRate" class="main-chart"></canvas>
 							</div>
-							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>
-									Direct
-								</span> <span class="mr-2"> <i
-									class="fas fa-circle text-success"></i> Social
-								</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-									Referral
-								</span>
-							</div>
+<!-- 							<div class="mt-4 text-center small"> -->
+<!-- 								<span class="mr-2">  -->
+<!-- 								<i class="fas fa-circle text-primary"></i> -->
+<!-- 									여기 -->
+<!-- 								</span> <span class="mr-2"> <i -->
+<!-- 									class="fas fa-circle text-success"></i> 상품명 -->
+<!-- 								</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i> -->
+<!-- 									넣으려고 -->
+<!-- 								</span> -->
+<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
@@ -298,13 +302,16 @@ function monthlyShipChart(data) {
           label:'',
           fill:false,
           data:data,
-          backgroundColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe'],
-          borderColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe'],
+          backgroundColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe','#4e73df'],
+          borderColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe','#4e73df'],
           borderWidth : 4
         }]
       },
       options:{
          maintainAspectRatio:false,
+         legend: {
+             display: false // label 제거
+          },
          scales:{
             yAxes:[{
                ticks:{
@@ -352,13 +359,13 @@ function productShipRateChart(data) {
       },
       options:{
          maintainAspectRatio:false,
-         scales:{
-            yAxes:[{
-               ticks:{
-                  beginAtZero:true
-               }
-            }]
-         }
+         legend: {
+             display: true,
+             position: 'right',
+             labels: {
+            	  usePointStyle: true // 범례 아이콘을 점 모양으로 변경
+             }
+          }
        }
      });
    } else {

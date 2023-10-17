@@ -12,9 +12,9 @@
 <!-- 	검색어 포함 -->
 	<select id="getRequireList" resultType="com.keypoint.dto.RequireDTO">
 		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit
-		from requirement r left join product p
+		from requirement r inner join product p
 		on r.productCode = p.productCode
-		left join material m
+		inner join material m
 		on r.materialCode = m.materialCode
 		<if test="search != null and search != ''">
 			where r.productCode = #{search} 
@@ -28,11 +28,12 @@
 
 <!-- 	검색어 포함 -->
 	<select id="getRequireCount" resultType="java.lang.Integer">
-		select count(productCode) from requirement
+		select count(*) from requirement
+		where reqCount != 0
 		<if test="search != null and search != ''">
-			where productCode = #{search} 
+			and productCode = #{search} 
 		</if>
-		<if test="search2 != null and search != ''">
+		<if test="search2 != null and search2 != ''">
 			and materialCode = #{search2}
 		</if>
 	</select>	
@@ -60,13 +61,10 @@
 		and materialCode = #{materialCode}
 	</update>	
 
-	<delete id="receiveDeleteChecked">
-		DELETE from requirement
-		<foreach collection="requireCodes" item="requireCode">
-		WHERE productCode = SUBSTRING('#{requireCode}', 1, 5)
-		and materialCode = SUBSTRING('#{requireCode}', 7);
-		</foreach>
-
+	<delete id="requireDeleteChecked">
+		DELETE FROM requirement
+		WHERE productCode = SUBSTRING(#{requireCode}, 1, 5)
+		AND materialCode = SUBSTRING(#{requireCode}, 7)
 	</delete>
 
 </mapper>

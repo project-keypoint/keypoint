@@ -31,7 +31,6 @@
 <div class="contents2">
 
 <form action="${pageContext.request.contextPath}/qc/qcList" method="get">
-<input type="button" value="엑셀파일다운" id="excelWorkOrder"> <br><br>
 <div class="search-b" style="margin-bottom: -25px;">
 <div class="status-check" style="background: #E5E5E5; border: none;">
 <div class="search-date3">
@@ -215,7 +214,8 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteQc()">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteQc()" style="margin-right: 3px;">
+<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder">
 </div>
 
 <div id="page_control" class="page-buttons">
