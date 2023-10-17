@@ -159,8 +159,13 @@ public class WorkOrderService {
 	
 	
 		//작업지시 등록 => 자재 수량 빼기
-		public void updateMaterialCount(WorkOrderDTO workOrderDTO) {
-		    workOrderDAO.updateMaterialCount(workOrderDTO);
+		public void updateMaterialCount(Map<String, Object> param) {
+		    workOrderDAO.updateMaterialCount(param);
+		}
+
+		public List<Map<String, Object>> selectWorkSum(WorkOrderDTO workOrderDTO) {
+			
+			return workOrderDAO.selectWorkSum(workOrderDTO);
 		}
 	
 	

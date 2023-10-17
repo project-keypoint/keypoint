@@ -107,10 +107,15 @@ public class WorkOrderController {
 	@PostMapping("/workOrderInsertPro")
 	public String workOrderInsertPro(WorkOrderDTO workOrderDTO) {
 		System.out.println("ReceiveController workOrder/workOrderInsertPro");
-		System.out.println(workOrderDTO);
+		System.out.println("workOrderInsertPro : "+workOrderDTO);
 		workOrderService.workOrderInsertPro(workOrderDTO);
 		
-		workOrderService.updateMaterialCount(workOrderDTO);
+		List<Map<String, Object>> workSumList = workOrderService.selectWorkSum(workOrderDTO);
+		
+		System.out.println(workSumList);
+		
+//		workOrderService.updateMaterialCount(workOrderDTO);
+		
 		
 		if(workOrderDTO != null) {
 			return "workOrder/msgSuccess"; // 등록완료
