@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사원등록</title>
-<br>
-<p><a style="color: red; font-size: 17px;">사진, 권한빼고 다 입력해야함</a></p>
+
 
 <!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -15,31 +14,25 @@
 <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- employee CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/employee.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/employeeInsert.css" rel="stylesheet">
 </head>
 
 
 <body>
+<div class="page-title-popup">사원 등록</div>
 <div class="main-details">
 <%-- <form action="${pageContext.request.contextPath}/employee/employeeInsertPro" method="post" onsubmit="return validateForm()"> --%>
 <form action="${pageContext.request.contextPath }/employee/photoPro" id="join" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <div class="forms-group-customer">
-<div class="page-title-popup">사원 등록</div>
-<!-- </div> -->
 
-<!-- <div class="form-group-customer"> -->
-<!-- <p>사원ID</p> -->
-<!-- <input type="text" id="empId" name="empId" class="form-control search-input" readonly> -->
-<!-- </div> -->
+<p><a style="color: red; font-size: 17px;">사진, 권한빼고 다 입력해야함</a></p>
 
-
+<!-- <div class="form-group-customer">  -->
 <!-- -------------------- 사진첨부 -------------------- -->
-<div class="form-group-customer"> 
-
-<div class="form-group-customer">
+<div class="form-group-customer" style="display: flex; flex-direction: column; align-items: center;">
         <img src="${pageContext.request.contextPath }/resources/img/test.png" id="preview" width="200" height="230" style="border-radius: 3px">
-</div>
+<!-- </div> -->
 
 <div class="imgbtn">
 <label for="file">
@@ -48,9 +41,11 @@
 </span>
 </label>
 <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
-<!-- accept="image/*": 이 속성은 업로드할 수 있는 파일 형식을 제한 함. "image/*"로 설정된 경우, 사용자는 이미지 파일만 선택할 수 있음. -->
-<!-- -------------------- // 사진첨부 -------------------- -->
 
+<!-- -------------------- // 사진첨부 -------------------- -->
+  </div>
+
+</div>
 
 
 <div class="form-group-customer">
@@ -66,19 +61,19 @@
 <!-- 주소 -->
 <div class="form-group-customer">
 <p>주소</p>
-<input type="text" id="zonecode" name="zonecode" class="form-control search-input" placeholder="우편번호" onclick="sample6_execDaumPostcode()">
+<input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="클릭하여 주소를 입력하세요">
 </div>
  
 <div class="form-group-customer">
 <p></p>
-<input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="기본주소">
-</div>
-
-<div class="form-group-customer">
-<p></p>
 <input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소">
 </div>
-<!-- // 주소 -->
+
+<!-- <div class="form-group-customer"> -->
+<!-- <p></p> -->
+<!-- <input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소"> -->
+<!-- </div> -->
+<!-- <!-- // 주소 --> 
 
 
 <div class="form-group-customer">
@@ -147,12 +142,13 @@
         <option value="3">3</option>
 </select>
 </div>
+
+<p><a style="color: red; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 </div>
 
 
-<p><a style="color: gray; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
 
-</div>
+<!-- </div> -->
 
 <div class="details-buttons">
 <input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
@@ -222,31 +218,44 @@ $(function() {
 
 
 // 주소 검색 API
-function sample6_execDaumPostcode() {
-	new daum.Postcode({
-	    oncomplete: function(data) {
-	      var fullAddress = data.address; // 선택한 주소 변수에 저장
-	      var extraAddress = ''; // 조합형 주소 변수 초기화
 
-	      if (data.addressType === 'R') {
-	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-	          extraAddress += data.bname;
-	        }
-	        if (data.buildingName !== '' && data.apartment === 'Y') {
-	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
-	        }
-	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
-	      }
+window.onload = function(){
+    document.getElementById("empAddress").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("empAddress").value = data.address; // 주소 넣기
+                document.querySelector("input[name=empAddress_dtail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
 
-	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
-	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
-	      document.getElementById('empAddress').value = fullAddress; // 기본주소
+// function sample6_execDaumPostcode() {
+// 	new daum.Postcode({
+// 	    oncomplete: function(data) {
+// 	      var fullAddress = data.address; // 선택한 주소 변수에 저장
+// 	      var extraAddress = ''; // 조합형 주소 변수 초기화
 
-	      // 상세주소 입력란으로 포커스 이동
-	      document.getElementById('empAddress_dtail').focus();
-	    }
-	  }).open();
-	}
+// 	      if (data.addressType === 'R') {
+// 	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+// 	          extraAddress += data.bname;
+// 	        }
+// 	        if (data.buildingName !== '' && data.apartment === 'Y') {
+// 	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
+// 	        }
+// 	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
+// 	      }
+
+// 	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
+// 	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
+// 	      document.getElementById('empAddress').value = fullAddress; // 기본주소
+
+// 	      // 상세주소 입력란으로 포커스 이동
+// 	      document.getElementById('empAddress_dtail').focus();
+// 	    }
+// 	  }).open();
+// 	}
 	
 
 // 중복확인(연락처, 내선번호, 이메일)

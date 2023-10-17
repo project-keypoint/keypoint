@@ -48,28 +48,31 @@ public class EmployeeController {
 	
 	// 로그인-강수빈
 	@PostMapping("/loginPro")
-	public String loginPro(EmployeeDTO employeeDTO,HttpSession session) {
-		System.out.println("EmployeeController loginPro()");
-		//로그인 처리
-		System.out.println(employeeDTO);
-			
-		employeeDTO = employeeService.userCheck(employeeDTO);
-			
-		if(employeeDTO != null) {
-			//아이디 비밀번호 일치 => 세션값 생성 => /member/main이동
-			session.setAttribute("empId", employeeDTO.getEmpId());
-			session.setAttribute("empName", employeeDTO.getEmpName());
-			session.setAttribute("empPhoto",employeeDTO.getEmpPhoto());
-			session.setAttribute("departmentName",employeeDTO.getDepartmentName());
-			session.setAttribute("empPosition",employeeDTO.getEmpPosition());
-			
-			// 주소변경하면서 이동 /main/main
-			return "redirect:/main/main";
-		}else {
-			//아이디 비밀번호 틀림 => member/msg.jsp 이동
-			return "member/msg";
-		}
-	}//	
+	public String loginPro(EmployeeDTO employeeDTO, HttpSession session, Model model) {
+	    // 로그인 처리
+	    employeeDTO = employeeService.userCheck(employeeDTO);
+	    
+	    if (employeeDTO != null) {
+	        // 사용자의 empRoll 값을 확인하고 로그인 처리
+	        if (employeeDTO.getEmpRole() == 0) {
+	            // empRoll 값이 0인 경우 로그인 불가능
+//	            model.addAttribute("error", "로그인에 실패했습니다. 관리자에게 문의하세요.");
+	            return "member/msg2";
+	        } else {
+	            // empRoll 값이 0이 아닌 경우 로그인 성공
+	            session.setAttribute("empId", employeeDTO.getEmpId());
+	            session.setAttribute("empName", employeeDTO.getEmpName());
+	            session.setAttribute("empPhoto", employeeDTO.getEmpPhoto());
+	            session.setAttribute("departmentName", employeeDTO.getDepartmentName());
+	            session.setAttribute("empPosition", employeeDTO.getEmpPosition());
+	            // 주소 변경하면서 이동 /main/main
+	            return "redirect:/main/main";
+	        }
+	    } else {
+	        // 아이디 비밀번호 틀림 => member/msg.jsp 이동
+	        return "member/msg";
+	    }
+	}
 	
 	// 로그아웃-강수빈
 	@GetMapping("/logout")

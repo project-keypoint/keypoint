@@ -110,6 +110,8 @@ public class WorkOrderController {
 		System.out.println(workOrderDTO);
 		workOrderService.workOrderInsertPro(workOrderDTO);
 		
+		workOrderService.updateMaterialCount(workOrderDTO);
+		
 		if(workOrderDTO != null) {
 			return "workOrder/msgSuccess"; // 등록완료
 		}else {
@@ -140,6 +142,8 @@ public class WorkOrderController {
 		System.out.println("WorkOrderController workOrder/workOrderUpdatePro");
 		System.out.println(workOrderDTO);
 		workOrderService.workOrderUpdatePro(workOrderDTO);
+		
+		
 		
 		if(workOrderDTO != null) {
 			return "workOrder/msgSuccess"; // 등록완료
@@ -524,6 +528,9 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 	        return "redirect:/workOrder/workOrderList";
 	    }
 		
+	 
+	 
+	 
 
 
 }

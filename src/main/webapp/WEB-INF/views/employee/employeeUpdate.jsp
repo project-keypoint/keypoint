@@ -124,7 +124,6 @@
     <option value="사원" ${employeeDTO.empPosition eq '사원' ? 'selected' : ''}>사원</option>
     <option value="대리" ${employeeDTO.empPosition eq '대리' ? 'selected' : ''}>대리</option>
     <option value="부장" ${employeeDTO.empPosition eq '부장' ? 'selected' : ''}>부장</option>
-    <option value="이사" ${employeeDTO.empPosition eq '이사' ? 'selected' : ''}>이사</option>
     <option value="대표" ${employeeDTO.empPosition eq '대표' ? 'selected' : ''}>대표</option>
 </select>    
 </div>

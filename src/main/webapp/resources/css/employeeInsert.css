@@ -23,7 +23,7 @@
 }
 .main {
 font-family: 'Noto', sans-serif !important;
-color: black;
+/* color: black; */
 padding-left: 30px;
 overflow-y: hidden;
 /* height: 860px; */
@@ -65,7 +65,7 @@ margin-right: 100px;
 margin: 5px 20px 5px 0;
 }
 .search-select p{
-width: 60px;
+width: 50px;
 justify-content: center;
 align-items: center;
 margin-bottom: 0;
@@ -120,7 +120,7 @@ justify-content: space-between;
 margin-top: 15px;
 }
 .page-buttons {
-/* margin-top: 15px; */
+margin-top: 15px;
 margin-bottom: 50px;
 display: flex;
 justify-content: flex-end;
@@ -152,6 +152,37 @@ background: #D3D3D3;
     line-height: 0;
     height: 32px;
 }
+
+
+/* 기본 버튼 스타일 (회색) */
+.btn.btn-secondary.mybutton2 {
+background-color: #858796;
+color: #fff;
+line-height: 0;
+height: 32px;
+}
+
+/* 클릭된 버튼 스타일 (파란색) */
+.btn.btn-secondary.mybutton2.clicked {
+background-color: #4e73df;
+}
+}
+
+
+
+
+
+
+
+#36b9cc
+
+.gray-background {
+background-color: #f0f0f0; /* 옅은 회색 배경색 */
+}
+
+
+
+
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 상세내용 */
 .page-title-popup {
 width: 100%;
@@ -159,77 +190,87 @@ font-size: 26px;
 font-weight: bold;
 margin-top: 30px;
 margin-bottom: 30px;
-}
-.main-details {
-width: 100%;
-font-family: 'Noto', sans-serif !important;
-color: black;
-display: flex;
-flex-direction: column;
-align-items: center;
-/* margin: 0 0 0 10px; */
-}
-.search-bar-popup {
-width: 100%;
-padding: 15px 20px 0 0;
-border-radius: 3px;
-/* display: flex; */
-/* justify-content: flex-start; */
-/* align-items: center; */
-background: #E5E5E5;
-/* align-items: baseline; */
-/* justify-content: space-between; */
-margin-bottom: 20px;
-margin-top: 5px;
-}
-.forms-group-receive {
 text-align: center;
 }
-.form-group-receive {
+/* .main-details { */
+/* width: 100%; */
+/* font-family: 'Noto', sans-serif !important; */
+/* color: black; */
+/* display: flex; */
+/* flex-direction: column; */
+/* align-items: center; */
+/* /* margin: 0 0 0 10px; */ 
+/* } */
+
+/* 새로운코드임 */
+/* .main-details { */
+/*     max-width: 400px; */
+/*     margin: 0 auto; */
+/*     background-color: #fff; */
+/*     padding: 20px; */
+/*     border: 1px solid #ddd; */
+/*     border-radius: 5px; */
+/*     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+/* } */
+
+/* 테두리생기는코드 */
+.main-details {
+  width: 100%;
+  font-family: 'Noto', sans-serif !important;
+  color: black;
+/*   display: flex; */
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd; /* 테두리 추가 */
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.form-group-customer {
+text-align: center;
+}
+.form-group-customer {
 display: flex;
 justify-content: flex-start;
 }
-.form-group-receive p {
-width: 75px;
+.form-group-customer p {
+width: 120px;
 height: 30px;
 text-align: right;
 margin-right: 10px;
 }
-.form-group-receive input {
+.form-group-customer a {
+font-size: 15px;
+color: red;
+}
+.form-group-customer input {
 width: 175px;
 height: 30px;	
 }
-input[placeholder="업체코드"], input[placeholder="상품코드"], input[placeholder="사원명"],
-input[placeholder="업체검색"], input[placeholder="상품검색"] {
-width: 110px;
+
+/* select 시, 폰트.... 아니 왜 폰트크기가 자동으로 알아서 안맞춰지냐고요,, */
+/* .form-group-customer select { */
+/* width: 175px; */
+/* height: 40px;	 */
+/* } */
+
+
+
+
+#empPass.search-input, #empName.search-input,#empBirth.search-input,
+#empPhone.search-input, #empTel.search-input, #empEmail.search-input, #empAddress.search-input,#empStatus.search-input, 
+#departmentName.search-input,#empPosition.search-input, #empHiredate.search-input, #empRole.search-input, 
+#zonecode.search-input, #empAddress_dtail.search-input, #empPhoto.search-input {
+width: 280px;
 }
-input[placeholder="업체명"], input[placeholder="상품명"] {
-width: 190px;
-}
-input[placeholder="수주번호"]{
-width: 310px;
-}
-#cusCode.search-input, #productCode.search-input {
-    width: 110px;
-}
-#empId.search-input, #qcEmpId.search-input,
-#prodEmpId.search-input, #roEmpId.search-input {
-    width: 150px;
-}
-#empName.search-input, #qcEmpName.search-input,
-#prodEmpName.search-input, #roEmpName.search-input {
-    width: 150px;
-}
-#cusName.search-input, #productName.search-input {
-    width: 190px;
-}
-#roCode.search-input {
-	width: 310px;
-}
-.form-group-receive select {
-width: 175px;
-height: 30px;	
-}
+
+
 .details-buttons {
 display: flex;
 justify-content: center;
@@ -240,6 +281,8 @@ margin-bottom: 30px;
 margin-left: 5px;
 margin-right: 5px;
 }
+
+
 /**/
 .status{
 padding: 0 0 0 10px;
@@ -252,26 +295,11 @@ justify-content: center;
 .qcdetail-left {
 	margin-right: 30px;
 }
-.search-bar-popup-qc {
-width: 100%;
-padding: 15px 20px 0 0;
-border-radius: 3px;
-/* display: flex; */
-/* justify-content: flex-start; */
-/* align-items: center; */
-background: #E5E5E5;
-/* align-items: baseline; */
-/* justify-content: space-between; */
-margin-bottom: 20px;
-margin-top: 5px;
-}
+
 .forms-group-qc-receive {
 text-align: center;
 }
-.form-group-qc-receive {
-display: flex;
-justify-content: flex-start;
-}
+
 .form-group-qc-receive p {
 width: 105px;
 height: 30px;
@@ -283,9 +311,7 @@ margin-right: 10px;
 width: 200px;
 height: 30px;	
 }
-#qcCode.search-input,#woCode.search-input, #prodCode.search-input  {
-	width: 315px;
-}
+
 .form-group-qc-receive select {
 width: 85px;
 height: 28px;	
@@ -301,8 +327,8 @@ height: 28px;
 }
 #qcDefectRate.search-input, #qcStatus.search-input,
 #qcTest1.search-input, #qcTest2.search-input, #qcTest3.search-input   {
-width: 85px;
-height: 28px;
+width: 280px;
+/* height: 28px; */
 }
 .input-center {
 margin: 0 auto; /* 입력 칸을 수평으로 가운데 정렬합니다. */
@@ -316,33 +342,6 @@ text-align: center;
 color: black;
 }
 
-
-/* ---------------- 사원등록 ---------------- */
-
-
-.input[type="file" i] {
-    appearance: none;
-    background-color: initial;
-    cursor: default;
-    align-items: baseline;
-    color: inherit;
-    text-overflow: ellipsis;
-    white-space-collapse: preserve;
-    text-wrap: nowrap;
-    text-align: start !important;
-    padding: initial;
-    border: initial;
-    overflow: hidden !important;
+body {
+background-color: #f5f5f5
 }
-
-
-/* ---------------- 사원등록 - 사진부분 ---------------- */
-
-
-/* .emp_img { */
-/*     border-radius: 3px; */
-/*     width: 200px; */
-/*     height: 230px; */
-/*     background-image: url(resouces/img/test.png); */
-/*     background-size: cover; */
-/* } */
