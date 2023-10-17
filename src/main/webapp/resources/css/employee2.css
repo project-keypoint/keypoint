@@ -425,3 +425,13 @@ height: 30px;
 #excelWorkOrder {
     float: right;
 }
+
+/* 사원목록 상세내역 버튼 */
+.btn.btn-secondary.mybutton2 {
+    background-color: #36b9cc;
+    color: #fff;
+    line-height: 0;
+    height: 32px;
+    border: none;
+    outline: none;
+}

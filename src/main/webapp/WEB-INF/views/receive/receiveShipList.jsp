@@ -23,9 +23,13 @@
 <div class="main">
 <!-- 수주영역 [시작] =================================================== -->
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">수주현황(전체수주목록)</div>
+<div class="page-title">수주현황(전체수주목록)
+<!--    초기화 이미지 -->
+      <img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+        style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;" onclick="reset()">
+    </div>
 <div class="contents2">
-<input type="button" value="엑셀파일다운" id="excelWorkOrder"> <br><br>
+
 <form action="${pageContext.request.contextPath}/receive/receiveShipList" method="get">
 <div class="search-b" style="margin-bottom: -15px;">
 <div class="status-check" style="background: #E5E5E5; border: none;">
@@ -94,19 +98,20 @@
         placeholder="${empty pageDTO.search6 ? '납품예정일' : ''}" value="${pageDTO.search6}" readonly>
 </div>
 </div>
-<!-- <div class="search-button"> -->
-<!-- <input type="submit" value="검색" class="btn btn-primary mybutton1"> -->
-<!-- <input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()"> -->
+<div class="search-button" style="margin-bottom: 7px;">
+<input type="submit" value="검색" class="btn btn-primary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
+</div>
+
+<!-- <div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;"> -->
+<!-- <div class="search-button" style="margin-bottom: 5px;"> -->
+<!-- <input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;"> -->
 <!-- </div> -->
-<div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;">
-<div class="search-button" style="margin-bottom: 5px;">
-<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;">
-</div>
-<div class="search-button" style="display: flex; justify-content: space-between;">
-<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/receive/receiveShipList'" style="width: 48.6%;">
-<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;">
-</div>
-</div>
+<!-- <div class="search-button" style="display: flex; justify-content: space-between;"> -->
+<%-- <input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/receive/receiveShipList'" style="width: 48.6%;"> --%>
+<!-- <input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;"> -->
+<!-- </div> -->
+<!-- </div> -->
 </div><!-- search-bar -->
 </form>
 
@@ -188,7 +193,8 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="수주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteReceive()">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteReceive()" style="margin-right: 3px;">
+<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder">
 </div>
 
 <div id="page_control_receive" class="page-buttons">
@@ -558,6 +564,12 @@ $("#excelWorkOrder").click(function(){
 		);
 	
 });// end function
+
+// 초기화 이미지 누르면 실행
+function reset() {
+    location.href = "${pageContext.request.contextPath}/receive/receiveShipList";
+}
+
 
 </script>
 
