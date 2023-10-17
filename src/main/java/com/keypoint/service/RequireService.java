@@ -56,7 +56,9 @@ public class RequireService {
 
 	public void requireDeleteChecked(RequireDTO requireDTO) {
 		System.out.println("RequireService requireDeleteChecked()");
-		requireDAO.requireDeleteChecked(requireDTO);
+		for (String requireCode : requireDTO.getRequireCodes()) {
+			requireDAO.requireDeleteChecked(requireCode);
+		}
 	}// requireDeleteChecked
 
 
