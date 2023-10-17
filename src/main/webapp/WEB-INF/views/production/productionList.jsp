@@ -40,7 +40,7 @@
     					
     		<form action="${pageContext.request.contextPath}/production/productionList" method="get">
 
-					<input type="button" value="엑셀파일다운" id="excelProduction"> <br>
+				
 					<br>
 
 
@@ -163,6 +163,7 @@
 							class="btn btn-primary mybutton1" onclick="openInsert()">
 						<input type="button" value="삭제"
 							class="btn btn-secondary mybutton1" onclick="selectedDel()">
+						<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelProduction"> <br>
 					</div>
 					<div id="page_control" class="page-buttons">
 						<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -485,7 +486,10 @@
 						
 					});// end function	    
 				    
-		    
+					// 초기화 아이콘 누르면 실행
+					function reset() {
+					    location.href = "${pageContext.request.contextPath}/production/productionList";
+					}	    
 		    
 		    
 		    
