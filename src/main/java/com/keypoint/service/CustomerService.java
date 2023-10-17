@@ -44,6 +44,17 @@ public class CustomerService {
 	}
 
 
+//	모든 거래처 수
+	public int getCusCount(PageDTO pageDTO) {
+		System.out.println("CustomerService getCusCount()");
+		
+		return customerDAO.getCusCount(pageDTO);
+	}
+	
+	
+	
+	
+	
 
 //	거래처등록
 	public void insertCustomer(CustomerDTO customerDTO) {
@@ -79,44 +90,9 @@ public class CustomerService {
 	}
 
 
-//	모든 거래처 수
-	public int getCusCount() {
-		System.out.println("CustomerService getCusCount()");
-		
-		return customerDAO.getCusCount();
-	}
 
 
-//	'거래중'인 거래처 수
-	public int getInsertCount() {
-		System.out.println("CustomerService getInsertCount()");
 
-		return customerDAO.getInsertCount();
-	}
-
-
-//	'거래중'인 거래처 목록
-	public List<CustomerDTO> getinsertCusList(PageDTO pageDTO) {
-		System.out.println("CustomerService getinsertCusList()");
-
-		return customerDAO.getinsertCusList(pageDTO);
-	}
-
-
-//	'거래중지'인 거래처 목록
-	public List<CustomerDTO> getdeleteCusList(PageDTO pageDTO) {
-		System.out.println("CustomerService getdeleteCusList()");
-
-		return customerDAO.getdeleteCusList(pageDTO);
-	}
-
-
-//	'거래중지'인 거래처 수
-	public int getDeleteCount() {
-		System.out.println("CustomerService getDeleteCount()");
-		
-		return customerDAO.getDeleteCount();
-	}
 
 
 

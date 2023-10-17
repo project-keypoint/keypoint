@@ -13,7 +13,7 @@
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 사원 CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/employee.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/employee2.css" rel="stylesheet">
 
 </head>
 
@@ -84,14 +84,14 @@
 
 
 <!-- 버튼부분 -->
- <div class="dis-select-buttons" style="display: flex; justify-content: space-between;     align-items: flex-end; margin-bottom: 5px;">
+ <div class="dis-select-buttons" style="display: flex; justify-content: space-between;  align-items: flex-end; margin-bottom: 5px;">
  <div style="display: flex; justify-content: flex-start;">
   
 <form action="${pageContext.request.contextPath}/employee/employeeList" method="get">
 <input type="hidden" name="search3" value="">
 <c:choose>
 <c:when test="${pageDTO.search3 eq '' or empty pageDTO.search3}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1" value="전체" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="전체" style="margin-right: 4px;">
@@ -103,7 +103,7 @@
 <input type="hidden" name="search3" value="재직">
 <c:choose>
 <c:when test="${'재직' eq pageDTO.search3}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="재직" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1" value="재직" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="재직" style="margin-right: 4px;">
@@ -115,7 +115,7 @@
 <input type="hidden" name="search3" value="휴직">
 <c:choose>
 <c:when test="${'휴직' eq pageDTO.search3}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="휴직" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1" value="휴직" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="휴직" style="margin-right: 4px;">
@@ -127,7 +127,7 @@
 <input type="hidden" name="search3" value="퇴직">
 <c:choose>
 <c:when test="${'퇴직' eq pageDTO.search3}">
-<input type="submit" class="btn btn-dark mybutton1 dis-btn" value="퇴직" style="margin-right: 4px;">
+<input type="submit" class="btn btn-primary mybutton1" value="퇴직" style="margin-right: 4px;">
 </c:when>
 <c:otherwise>
 <input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="퇴직" style="margin-right: 4px;">
@@ -144,16 +144,16 @@
      <table class="table-list">
       <tr class="table-head">
 	   <th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>     
-	   <th style="width: 8%;">사원번호</th> 
-       <th style="width: 8%;">이름</th> 
-	   <th style="width: 8%;">부서</th> 
-	   <th style="width: 8%;">직급</th> 
-	   <th style="width: 13%;">내선번호</th>
-	   <th style="width: 15%;">연락처</th> 
-	   <th style="width: 15%;">이메일</th> 
-	   <th style="width: 9%;">입사일</th>
-	   <th style="width: 6%;">재직여부</th>
-	   <th style="width: 9%;">상세내역</th>
+	   <th>사원번호</th> 
+       <th>이름</th> 
+	   <th>부서</th> 
+	   <th>직급</th> 
+	   <th>내선번호</th>
+	   <th>연락처</th> 
+	   <th>이메일</th> 
+	   <th>입사일</th>
+	   <th>재직여부</th>
+	   <th>상세내역</th>
       </tr>
 
        <c:forEach var="employeeDTO" items="${employeeList}">
@@ -168,16 +168,16 @@
          <td>${employeeDTO.empEmail}</td>
          <td>${employeeDTO.empHiredate}</td>
          <td>${employeeDTO.empStatus}</td>
-         <td><input type="button" value="상세내역" class="btn btn-secondary mybutton1" onclick="openDetails('${employeeDTO.empId}')"></td>
+         <td><input type="button" value="상세내역" class="btn btn-secondary mybutton2" onclick="openDetails('${employeeDTO.empId}')"></td>
         </tr>
-       </c:forEach>    
+       </c:forEach>   
      </table>
     </div>
     
     <div class="content-bottom">
      <div>
       <input type="button" value="사원등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
+	  <input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelEmployee">
      </div>
 
 <!-- -------------- 페이징처리 -------------- -->
@@ -222,9 +222,13 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.7.0.js"></script>
+<!-- 엑셀파일다운 관련 -->
+<script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
 <script type="text/javascript">
+
 //팝업 창을 열어주는 함수
 function openPopup(url) {
     var width = 500;
@@ -237,8 +241,6 @@ function openPopup(url) {
 
 // 사원 상세내용 새창
 function openDetails(empId) {
-	// 연결되는지 보기위해
-//     var url = '${pageContext.request.contextPath}/employee/employeeDetails';
  	var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='+empId;
     var windowWidth = 500;
     var windowHeight = 850;
@@ -257,10 +259,7 @@ function openInsert() {
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
 
-
-
-
- // 검색부분 - 취소버튼 누르면 초기화되게(화면 바뀌지x)
+ // 검색부분 - 취소버튼 누르면 검색어 초기화되게(화면 바뀌지x)
 function cancelSearch() {
   // 검색 폼 초기화
   document.search_form.search.value = '';
@@ -279,11 +278,8 @@ function fun1() {
 		document.search_form.search2.focus();
 		return false;
 		}
-	
 		document.search_form.submit();
 }
- 
- 
  
 //체크박스 전체선택
 var selectAllCheckbox = document.getElementById("delete-list-all");
@@ -310,11 +306,61 @@ checkboxes.forEach(function (checkbox) {
     });
 });
  
- 
-</script>
+// 엑셀 버튼 누를 시 실행되는 함수
+$("#excelEmployee").click(function(){
+//	체크박스가 체크된 여부를 확인하기위한 변수선언
+	var selectedCheckbox = $("input[name='delete-list']:checked");
+	if(selectedCheckbox.length === 0){
+		alert("엑셀파일로 다운로드할 행을 선택해주세요")
+		return false;
+	} 
+
+//	엑셀에 데이터를 삽입하기위한 배열 변수선언
+	var excelData = [];
+//	엑셀의 헤더가 되는 값을 삽입하기위한 변수선언
+	var headers = [];
+			
+//	table의 th태그만큼 반복문을 실행하되 첫번째 체크박스행은 제외한다
+	$("#datatablesSimple th:not(:first)").each(function(){
+//		헤더에 텍스트값(th) 삽입
+		headers.push($(this).text());
+	});
+
+//	엑셀 데이터 변수에 헤더값을 삽입한다
+	excelData.push(headers);
+			
+//		체크박스가 체크된 행 만큼 엑셀 행삽입 반복문을 시행한다
+	selectedCheckbox.each(function () {
+				
+//			엑셀의 행값을 담기위한 배열 변수선언
+		var row = [];
+//			tr태그를 찾아서 반복문을 실행하되 첫번째 td태그(체크박스)는 제외한다
+		$(this).closest("tr").find("td:not(:first-child)").each(function () {
+//				행 변수에 테이블 행(td)태그의 텍스트 값을 삽입한다
+			row.push($(this).text());
+		});
+//		엑셀 데이터 변수에 행값을 삽입한다
+	excelData.push(row);
+	});
+				
+//		워크북을 생성한다
+	var workbook = XLSX.utils.book_new();
+//		엑셀 데이터(헤더, 행)값을 시트로 변환한다
+	var worksheet = XLSX.utils.aoa_to_sheet(excelData);
+//		데이터와 워크북 시트를 워크북에 추가한다
+	XLSX.utils.book_append_sheet(workbook, worksheet, "거래처 리스트");
+				
+//	워크북을 blob형태로 변환하고 xlsx 파일로 저장한다
+	var workbookOutput = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+	saveAs(
+		new Blob([workbookOutput], { type: "application/octet-stream" }),
+		"사원 리스트.xlsx"
+	);
+			
+});
 
 
-<script>
+
 
 // 체크박스부분
 // $(document).ready(function() {
@@ -364,9 +410,9 @@ checkboxes.forEach(function (checkbox) {
 
 
 
-</script>
 
-<script>
+
+
 // 초기화 아이콘 누르면 실행
 function reset() {
     location.href = "${pageContext.request.contextPath}/employee/employeeList";

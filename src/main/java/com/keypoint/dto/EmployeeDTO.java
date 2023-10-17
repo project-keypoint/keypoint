@@ -4,7 +4,7 @@ public class EmployeeDTO {
 	
 	private int empId; // 사원ID
 	private String empPass; // 비밀번호
-	private String empSalt; // 암호화
+	private String empSalt; // 암호화(보류)
 	private String empName; // 이름
 	private String empPhoto; // 사진
 	private String empBirth; // 생년월일
@@ -13,11 +13,11 @@ public class EmployeeDTO {
 	private String empEmail; // 이메일
 	private String empAddress; // 주소
 	private String empStatus; // 재직여부('재직','휴직','퇴직')
-	private String departmentId; // 부서ID(보류)
+//	private String departmentId; // 부서ID(삭제할거임)
 	private String departmentName; // 부서('영업','자재','생산','인사')
 	private String empPosition; // 직급('사원','대리','부장','이사','대표')
 	private String empHiredate; // 입사일
-	private int empRole; // 권한(1=관리자 / 2=사원 / 3=퇴사자(로그인x)) =>  수정필요
+	private int empRole; // 권한(0=퇴사자(로그인x) / 1=사원 / 2=관리자(권한+부서) / 4=대표(총관리자)
 	private String empLeavedate; // 휴직일
 	private String empRetiredate; // 퇴직일
 	
@@ -26,7 +26,7 @@ public class EmployeeDTO {
 		return "EmployeeDTO [empId="+empId+", empPass="+empPass+ ", empSalt="+empSalt+", empName="+empName
 				+", empPhoto="+empPhoto+", empBirth="+empBirth+", empPhone="+empPhone+", empTel="+empTel
 				+", empEmail="+empEmail+", empAddress="+empAddress+", empStatus="+empStatus
-				+", departmentId="+departmentId+", departmentName="+departmentName
+				+", departmentName="+departmentName
 				+", empPosition="+empPosition+", empHiredate="+empHiredate+", empRole="+empRole
 				+", empLeavedate="+empLeavedate+", empRetiredate="+empRetiredate+"]";
 	}
@@ -97,12 +97,6 @@ public class EmployeeDTO {
 	}
 	public void setEmpStatus(String empStatus) {
 		this.empStatus = empStatus;
-	}
-	public String getDepartmentId() {
-		return departmentId;
-	}
-	public void setDepartmentId(String departmentId) {
-		this.departmentId = departmentId;
 	}
 	public String getDepartmentName() {
 		return departmentName;

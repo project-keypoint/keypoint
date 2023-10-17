@@ -26,15 +26,18 @@
 <!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 <div class="main">
 <div class="card shadow" > <!-- 그림자아니야 영역 -->
-<div class="page-title">공지사항</div>
+<div class="page-title">공지사항
+<img src="${pageContext.request.contextPath}/resources/img/icon_reload.png" id="resetFilters" 
+style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right: 10px; bottom: 3px; margin-left: 10px;">
+</div>
 <div class="contents2">
 
-<form action="${pageContext.request.contextPath}/notice/noticeList" method="get" name="search">
+<form action="${pageContext.request.contextPath}/notice/noticeList" method="get">
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
 
-<select id="searchType" name="searchType" class="form-control search-input"> 
+<select id="search" name="search" class="form-control search-input"> 
 	<option value="all">전체</option>
 	<option value="sales">영업</option>
 	<option value="production">생산</option>
@@ -42,14 +45,14 @@
 	<option value="personnel">인사</option>
 </select>
 
-<input type="text" id="searchKeyword" name="searchKeyword" class="form-control search-input">
+<input type="text" id="search2" name="search2" class="form-control search-input">
 
 </div> <!--  search-select  -->
 </div> <!-- search-b -->
 
 <div class="search-button">
 <input type="submit" value="검색" class="btn btn-primary mybutton1">
-<input type="submit" value="취소" class="btn btn-secondary mybutton1" onclick="${pageContext.request.contextPath}/notice/noticeList">
+<input type="submit" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
 </div>
 </div><!--  search-bar -->
 </form>
@@ -57,11 +60,12 @@
 <br>
 
 <div class="select-status" style="text-align: right;">
-  <a style="text-align: right;">총
-    <c:if test="${insertCount != null}">
-      ${insertCount}
-    </c:if>
-    건</a>
+<a style="text-align: right;">총 ${noticeCount}건</a>
+<!--   <a style="text-align: right;">총 -->
+<%--     <c:if test="${insertCount != null}"> --%>
+<%--       ${insertCount} --%>
+<%--     </c:if> --%>
+<!--     건</a> -->
 </div>
 
 
@@ -104,33 +108,18 @@
 
 <!-- ---------------------페이징---------------- -->
 <div class="page-buttons">
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-    <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&searchType=${pageDTO.searchType}&searchKeyword=${pageDTO.searchKeyword}" class="page-button">&lt;</a>
-</c:if>
-
 <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
     <c:choose>
-        <c:when test="${i eq pageDTO.currentPage}">
-            <a href="#" class="page-button page-button-active">${i}</a>
+        <c:when test="${i eq pageDTO.pageNum}">
+            <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button page-button-active">${i}</a>
         </c:when>
         <c:otherwise>
-            <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&searchType=${pageDTO.searchType}&searchKeyword=${pageDTO.searchKeyword}" class="page-button">${i}</a>
+            <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">${i}</a>
         </c:otherwise>
     </c:choose>
 </c:forEach>
-
-<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-    <a href="${pageContext.request.contextPath}/notice/noticeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&searchType=${pageDTO.searchType}&searchKeyword=${pageDTO.searchKeyword}" class="page-button">&gt;</a>
-</c:if>
-
-
-
-
-
-
-
-
-</div><!-- page-button -->
+</div>
+<!-- ---------------------페이징---------------- -->
 </div>
 </div><!-- contents -->
 </div><!-- 그림자아니야 영역 -->
@@ -179,52 +168,6 @@ checkboxes.forEach(function (checkbox) {
 
 
 
-
-
-//다중삭제
-function deleteNotice() {
-  // 선택된 체크박스 요소들을 가져옵니다.
-  var checkboxes = $('input[name="delete-list-all"]:checked');
-  // 선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
-  if (checkboxes.length === 0) {
-    alert("삭제할 항목을 선택해주세요.");
-    return;
-  }
-  // 선택된 체크박스의 ${receiveDTO.roCode} 값을 배열에 저장합니다.
-  var noticeNum = [];
-  checkboxes.each(function() {
-    var row = $(this).closest('.table-body');
-    var num = row.find('td:nth-child(2)').text(); // 두 번째 열에 해당하는 값
-    noticeNum.push(num);
-  });
-
-//Ajax 요청
-  $.ajax({
-    type: "POST",
-    url: '${pageContext.request.contextPath}/notice/noticeDeleteChecked',
-    contentType: "application/json",
-    data: JSON.stringify({ noticeNum: noticeNum }), // 배열을 보냅니다
-    success: function(result) {
-      console.log(result);
-      alert("성공");
-      location.reload();
-    },
-    error: function(xhr, status, error) {
-      console.error('오류:', xhr.responseText);
-      alert('오류: ' + xhr.responseText);
-    }
-  });
-
-
-
-
-
-
-
-
-
-
-
 //	공지사항등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/notice/noticeWrite';
@@ -234,6 +177,26 @@ function openInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
+
+
+
+//초기화 버튼 이미지 클릭 시,
+$("#resetFilters").click(function() {
+	location.href = "${pageContext.request.contextPath}/notice/noticeList";
+});
+
+
+//검색의 [취소] 버튼 누르면 입력 된 값 초기화
+function cancelSearch() {
+//	검색어 입력 초기화
+	document.getElementById("search").value = "";
+	document.getElementById("search2").value = "";
+}
+
+
+
+
+
 </script>
 
 </body>

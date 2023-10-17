@@ -32,10 +32,7 @@ public class PageDTO {
 	private String check4;
 	
 	
-	private String searchType;			// 검색 타입
-	private String searchKeyword;		// 검색 키워드
-	
-	
+
 	
 
 
@@ -48,7 +45,7 @@ public class PageDTO {
 				+ ", search1=" + search1 + ", search2=" + search2 + ", search3=" + search3 + ", search4=" + search4
 				+ ", search5=" + search5 + ", search6=" + search6 + ", search7=" + search7 + ", search8=" + search8
 				+ ", cusStatus=" + cusStatus + ", check1=" + check1 + ", check2=" + check2 + ", check3=" + check3
-				+ ", check4=" + check4 + ", searchType=" + searchType + ", searchKeyword=" + searchKeyword + "]";
+				+ ", check4=" + check4 + "]";
 	}
 
 
@@ -221,20 +218,7 @@ public class PageDTO {
 	public void setSearch8(String search8) {
 		this.search8 = search8;
 	}
-	public String getSearchType() {
-		return searchType;
-	}
-	public void setSearchType(String searchType) {
-		this.searchType = searchType;
-	}
-	public String getSearchKeyword() {
-		return searchKeyword;
-	}
-	public void setSearchKeyword(String searchKeyword) {
-		this.searchKeyword = searchKeyword;
-	}
 
-	
 	
 	
 	

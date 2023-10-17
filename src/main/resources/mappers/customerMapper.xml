@@ -12,16 +12,30 @@
 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
 		SELECT *
 		FROM customer
-		<if test="search != null">
-		WHERE cusCode = #{search} 
+		<where>
+		<if test="search != null and search != ''">
+			cusCode = #{search} 
 		</if>
-		<if test="search2 != null">
-		or materialCode = #{search2}
-		</if>
-	  	ORDER BY
-	    CASE WHEN cusStatus = '거래중지' THEN 1 ELSE 0 END, -- '거래중지' 레코드를 아래로 이동
-	    cusCode DESC
+		<if test="search2 != null and search2 != ''">
+			OR cusStatus like CONCAT ('%', #{search2}, '%')
+        </if>
+        </where>
+	  	ORDER BY cusCode DESC
 	  	LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	
+	<select id="getCusCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM customer
+		<where>
+		<if test="search != null and search != ''">
+			cusCode = #{search} 
+		</if>
+		<if test="search2 != null and search2 != ''">
+			OR cusStatus like CONCAT ('%', #{search2}, '%')
+        </if>
+        </where>	
 	</select>
 	
 
@@ -59,45 +73,6 @@
 		WHERE cusNumber = #{cusNumber}
 	</select>
 	
-	
-	<select id="getCusCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM customer
-	</select>
-
-
-	<select id="getInsertCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM customer
-		WHERE cusStatus = '거래중'		
-	</select>
-
-
-	<select id="getDeleteCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM customer
-		WHERE cusStatus = '거래중지'		
-	</select>
-
-
-	<select id="getinsertCusList" resultType="com.keypoint.dto.CustomerDTO">
-		SELECT *
-		FROM customer
-		WHERE cusStatus = '거래중'
-		ORDER BY cusCode DESC
-	 	LIMIT #{startRow}, #{pageSize}
-	</select>
-
-
-	<select id="getdeleteCusList" resultType="com.keypoint.dto.CustomerDTO">
-		SELECT *
-		FROM customer
-		WHERE cusStatus = '거래중지'
-		ORDER BY cusCode DESC
-	 	LIMIT #{startRow}, #{pageSize}
-	</select>
-
-
 
 
 
