@@ -16,11 +16,11 @@
 		on r.productCode = p.productCode
 		left join material m
 		on r.materialCode = m.materialCode
-		<if test="search != null">
+		<if test="search != null and search != ''">
 			where r.productCode = #{search} 
 		</if>
-		<if test="search2 != null">
-			or r.materialCode = #{search2}
+		<if test="search2 != null and search2 != ''">
+			and r.materialCode = #{search2}
 		</if>
 		order by r.productCode desc
 		limit #{startRow},#{pageSize}
@@ -29,11 +29,11 @@
 <!-- 	검색어 포함 -->
 	<select id="getRequireCount" resultType="java.lang.Integer">
 		select count(productCode) from requirement
-		<if test="search != null">
+		<if test="search != null and search != ''">
 			where productCode = #{search} 
 		</if>
-		<if test="search2 != null">
-			or materialCode = #{search2}
+		<if test="search2 != null and search != ''">
+			and materialCode = #{search2}
 		</if>
 	</select>	
 	

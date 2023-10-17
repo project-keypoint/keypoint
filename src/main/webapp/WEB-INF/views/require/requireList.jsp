@@ -103,22 +103,22 @@
 
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
+	<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">&lt;</a>
 </c:if>
 
 <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
     <c:choose>
         <c:when test="${i eq pageDTO.pageNum}">
-            <a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}" class="page-button page-button-active">${i}</a>
+            <a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button page-button-active">${i}</a>
         </c:when>
         <c:otherwise>
-            <a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}" class="page-button">${i}</a>
+            <a href="${pageContext.request.contextPath}/require/requireList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">${i}</a>
         </c:otherwise>
     </c:choose>
 </c:forEach>
 <!-- 끝페이지번호  전체페이지수 비교 => 전체페이지수 크면 => Next보임 -->
 <c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
+	<a href="${pageContext.request.contextPath}/require/requireList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">&gt;</a>
 </c:if>
 </div><!-- page-button -->
 </div>
