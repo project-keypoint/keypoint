@@ -123,7 +123,15 @@
         <input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/receive/receiveUpdate?roCode=${receiveDTO.roCode}'">
     </c:otherwise>
 </c:choose> 
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
+
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
+    </c:when>
+    <c:otherwise>
+    <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()">
+    </c:otherwise>
+</c:choose> 
 </div>
 </form>
 </div><!-- main-details -->
@@ -136,6 +144,10 @@ function confirmDelete() {
     } else {
     	
     }
+}
+//권한없는 버튼
+function accessDenied() {
+    alert("권한이 없습니다.");
 }
 </script>
 </body>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.QualityDTO;
+import com.keypoint.service.EmployeeService;
 import com.keypoint.service.MaterialService;
 import com.keypoint.service.QualityService;
 
@@ -34,9 +37,16 @@ public class QualityController {
 	@Inject
 	private MaterialService materialService;
 	
+	//employeeService 객체생성
+	@Inject
+	private EmployeeService employeeService;
+	
 	@GetMapping("/qcList")
-	public String qcList(HttpServletRequest request,Model model) {
+	public String qcList(HttpServletRequest request,Model model, HttpSession session) {
 		System.out.println("QualityController qc/qcList");
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
+		
 		String search3 = request.getParameter("search3");
 		String search4 = request.getParameter("search4");
 		String search5 = request.getParameter("search5");
@@ -97,6 +107,12 @@ public class QualityController {
 
 		model.addAttribute("qcList", qcList);
 		model.addAttribute("pageDTO", pageDTO);
+		
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+				
 		return "qc/qcList";
 	}// qcList [품질검사목록(+생산목록)]
 	

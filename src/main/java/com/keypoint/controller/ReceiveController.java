@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ReceiveDTO;
+import com.keypoint.service.EmployeeService;
 import com.keypoint.service.ReceiveService;
 
 @Controller
@@ -26,9 +29,15 @@ public class ReceiveController {
 	@Inject
 	private ReceiveService receiveService;
 	
+	//employeeService 객체생성
+	@Inject
+	private EmployeeService employeeService;
+	
 	@GetMapping("/receiveShipList")
-	public String shipmentTest(HttpServletRequest request,Model model) {
+	public String shipmentTest(HttpServletRequest request,Model model,HttpSession session) {
 		System.out.println("ReceiveController receive/shipmentTest");
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
 		
 		String search = request.getParameter("search");
 		String search2 = request.getParameter("search2");
@@ -122,6 +131,12 @@ public class ReceiveController {
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("shipmentList", shipmentList);
 		model.addAttribute("pageDTO1", pageDTO1);
+		
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		return "receive/receiveShipList";
 	}// receiveShipList [수주&출하 목록]
 	
@@ -145,10 +160,18 @@ public class ReceiveController {
 	}// receiveInsertPro [수주등록Pro]
 	
 	@GetMapping("/receiveDetails")
-	public String receiveDetails(Model model, @RequestParam("roCode") String roCode) {
+	public String receiveDetails(Model model, @RequestParam("roCode") String roCode,HttpSession session) {
 		System.out.println("ReceiveController receive/receiveDetails");
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
+		
 		ReceiveDTO receiveDTO = receiveService.getReceiveDetails(roCode);
 		model.addAttribute("receiveDTO", receiveDTO);
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		return "receive/receiveDetails";
 	}// receiveDetails [수주상세]
 	

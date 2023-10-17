@@ -199,7 +199,14 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="수주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteReceive()" style="margin-right: 3px;">
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteReceive()" style="margin-right: 3px;">
+    </c:when>
+    <c:otherwise>
+    <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()" style="margin-right: 3px;">
+    </c:otherwise>
+</c:choose>  
 <input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder">
 </div>
 
@@ -269,7 +276,14 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+	<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+    </c:when>
+    <c:otherwise>
+    <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()">
+    </c:otherwise>
+</c:choose> 
 <input type="button" value="엑셀파일다운" id="excelWorkOrder1"> <br><br>
 <!-- 엑셀파일 저장을 위한 스크립트 호출 -->
 	<script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
@@ -644,7 +658,10 @@ $("#excelWorkOrder1").click(function(){
 	
 });// end function
 
-
+//권한없는 버튼
+function accessDenied() {
+    alert("권한이 없습니다.");
+}
 
 
 // 초기화 이미지 누르면 실행

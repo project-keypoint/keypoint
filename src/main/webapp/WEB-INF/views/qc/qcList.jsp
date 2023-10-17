@@ -214,7 +214,14 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteQc()" style="margin-right: 3px;">
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteQc()" style="margin-right: 3px;">
+    </c:when>
+    <c:otherwise>
+    <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()" style="margin-right: 3px;">
+    </c:otherwise>
+</c:choose>  
 <input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder">
 </div>
 
@@ -469,6 +476,11 @@ $("#excelWorkOrder").click(function(){
 		);
 	
 });// end function
+
+//권한없는 버튼
+function accessDenied() {
+    alert("권한이 없습니다.");
+}
 </script>
 
 <script>
