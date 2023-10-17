@@ -98,12 +98,18 @@ public class NoticeDAO {
 	}
 
 	
-//	'등록' 글 수 가져오기
-	public int getinserCount() {
-		System.out.println("NoticeDAO getinserCount()");
 
-		return sqlSession.selectOne(nameSpace+".getinserCount");
+	
+	
+//	다중삭제
+	public void noticeDeleteChecked(String noticeNum) {
+		System.out.println("NoticeDAO noticeDeleteChecked()");
+		
+		sqlSession.update(nameSpace+".noticeDeleteChecked", noticeNum);
 	}
+
+
+
 
 
 

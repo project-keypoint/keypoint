@@ -61,11 +61,6 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 
 <div class="select-status" style="text-align: right;">
 <a style="text-align: right;">총 ${noticeCount}건</a>
-<!--   <a style="text-align: right;">총 -->
-<%--     <c:if test="${insertCount != null}"> --%>
-<%--       ${insertCount} --%>
-<%--     </c:if> --%>
-<!--     건</a> -->
 </div>
 
 
@@ -85,7 +80,8 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 </tr>
 <c:forEach var="noticeDTO" items="${noticeList}">
 <tr class="table-body" >
-	<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
+	<td><input type="checkbox" id="delete-list-require" name="delete-list-require" data-group="delete-list">
+		<input type="hidden" id="noticeNum" name="noticeNum" value="${noticeDTO.noticeNum}"></td>
     <td>${noticeDTO.noticeNum}</td>
     <td>${noticeDTO.noticeCategory}</td>
     <td onclick="location.href='${pageContext.request.contextPath}/notice/noticeContent?noticeNum=${noticeDTO.noticeNum}'" style="text-align: left;">ㅤㅤ${noticeDTO.noticeSubject}</td>
@@ -102,7 +98,7 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 <div class="content-bottom">
 <div>
 <input type="button" value="글쓰기" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteNotice()">
+<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
 </div>
 
 
@@ -139,59 +135,156 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 <script type="text/javascript">
 
 
-
 //체크박스(삭제용) 전체선택
-var selectAllCheckbox = document.getElementById("delete-list-all");
-var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
-selectAllCheckbox.addEventListener("change", function () {
- checkboxes.forEach(function (checkbox) {
-     checkbox.checked = selectAllCheckbox.checked;
- });
-});
-checkboxes.forEach(function (checkbox) {
- checkbox.addEventListener("change", function () {
-     if (!this.checked) {
-         selectAllCheckbox.checked = false;
-     } else {
-         // 모든 체크박스가 선택되었는지 확인
-         var allChecked = true;
-         checkboxes.forEach(function (c) {
-             if (!c.checked) {
-                 allChecked = false;
-             }
-         });
+	var selectAllCheckbox = document.getElementById("delete-list-all");
+	var checkboxes = document.querySelectorAll('[data-group="delete-list"]');
+	selectAllCheckbox.addEventListener("change", function () {
+ 		checkboxes.forEach(function (checkbox) {
+    		checkbox.checked = selectAllCheckbox.checked;
+ 		});
+	});
+	checkboxes.forEach(function (checkbox) {
+ 		checkbox.addEventListener("change", function () {
+   		  if (!this.checked) {
+        	 selectAllCheckbox.checked = false;
+     	} else {
+//			모든 체크박스가 선택되었는지 확인
+         	var allChecked = true;
+        	 checkboxes.forEach(function (c) {
+				if (!c.checked) {
+					allChecked = false;
+             	}
+         	});
          selectAllCheckbox.checked = allChecked;
-     }
- });
-});
+     	}
+		});
+	});
 
 
+// //	체크박스로 다중삭제
+// 	function deleteRequire() {
+// //		선택된 체크박스 요소들을 가져옵니다.
+// 		var checkboxes = $('input[name="delete-list-require"]:checked');
+// //		선택된 체크박스가 없는 경우, 경고 메시지를 표시하고 함수를 종료합니다.
+// 		if (checkboxes.length === 0) {
+// 			alert("삭제할 항목을 선택해주세요.");
+// 			return;
+// 		}
+	  
+// //		선택된 체크박스의 noticeCodes 값을 배열에 저장합니다.
+// 		var noticeCodes = [];
 
+// 		checkboxes.each(function() {
+// 		  var row = $(this).closest('.table-body');
+// 		  var noticeNum = String(row.find('input[name="noticeNum"]').val());
+// 		  noticeCodes.push(noticeNum);
+// 		});
+		
+// //		noticeCodes 배열을 JSON 문자열로 변환합니다.
+// 		var noticeCodesJson = JSON.stringify({ noticeCodes: noticeCodes });
+// // 		alert(noticeCodesJson);
+	  
+// //		확인용 로그 출력
+// 		console.log("전송 데이터:", noticeCodesJson);
+	  
+// //		Ajax 요청을 보냅니다.
+// 		$.ajax({
+// 			type: "POST",
+// 			url: '${pageContext.request.contextPath}/notice/noticeDeleteChecked',
+// 			contentType: "application/json",
+// 			data: noticeCodesJson,
+// 			success: function(result) {
+// 				console.log(result);
+// 	       		alert("삭제되었습니다");
+// 				location.reload();
+// 			},
+// 			error: function(xhr, status, error) {
+// 				console.error('Error:', xhr.responseText);
+// 				alert('Error: ' + xhr.responseText);
+// 	    	}
+// 	   });
+// 	}
+	
+	
+	
+	function deleteRequire() {
+	    var checkboxes = $('input[name="delete-list-require"]:checked');
 
+	    if (checkboxes.length === 0) {
+	        alert("삭제할 항목을 선택해주세요.");
+	        return;
+	    }
+
+	    // 알림 창 표시
+	    var confirmation = confirm("정말로 삭제하시겠습니까?");
+	    
+	    if (confirmation) {
+	        var noticeCodes = [];
+
+	        checkboxes.each(function() {
+	            var row = $(this).closest('.table-body');
+	            var noticeNum = String(row.find('input[name="noticeNum"]').val());
+	            noticeCodes.push(noticeNum);
+	        });
+
+	        var noticeCodesJson = JSON.stringify({ noticeCodes: noticeCodes });
+
+	        console.log("전송 데이터:", noticeCodesJson);
+
+	        $.ajax({
+	            type: "POST",
+	            url: '${pageContext.request.contextPath}/notice/noticeDeleteChecked',
+	            contentType: "application/json",
+	            data: noticeCodesJson,
+	            success: function(result) {
+	                console.log(result);
+	                alert("삭제되었습니다");
+	                location.reload();
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('Error:', xhr.responseText);
+	                alert('Error: ' + xhr.responseText);
+	            }
+	        });
+	    }
+	}
+
+	
+	
+	
+	
+	
+	
 //	공지사항등록 새창
-function openInsert() {
-    var url = '${pageContext.request.contextPath}/notice/noticeWrite';
-    var windowWidth = 900;
-    var windowHeight = 675;
-    var windowLeft = (screen.width - windowWidth) / 2;
-    var windowTop = (screen.height - windowHeight) / 2;
-    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
-}
+	function openInsert() {
+	    var url = '${pageContext.request.contextPath}/notice/noticeWrite';
+	    var windowWidth = 900;
+	    var windowHeight = 675;
+	    var windowLeft = (screen.width - windowWidth) / 2;
+	    var windowTop = (screen.height - windowHeight) / 2;
+	    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+	}
 
 
+//	초기화 버튼 이미지 클릭 시,
+	$("#resetFilters").click(function() {
+		location.href = "${pageContext.request.contextPath}/notice/noticeList";
+	});
 
-//초기화 버튼 이미지 클릭 시,
-$("#resetFilters").click(function() {
-	location.href = "${pageContext.request.contextPath}/notice/noticeList";
-});
 
-
-//검색의 [취소] 버튼 누르면 입력 된 값 초기화
-function cancelSearch() {
+//	검색의 [취소] 버튼 누르면 입력 된 값 초기화
+	function cancelSearch() {
 //	검색어 입력 초기화
-	document.getElementById("search").value = "";
-	document.getElementById("search2").value = "";
-}
+		document.getElementById("search").value = "";
+		document.getElementById("search2").value = "";
+	}
+
+
+
+	
+
+
+
 
 
 
