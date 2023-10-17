@@ -74,7 +74,6 @@
 </tr>
 
 <c:forEach var="requireDTO" items="${requireList}">
-<%-- <c:set var = "empRole" value = "${employeeDTO.empRole}"/> --%>
 <tr class="table-body">
 	<td>
 		<input type="checkbox" id="delete-list-require" name="delete-list-require" data-group="delete-list">
@@ -93,6 +92,7 @@
     	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
     </c:when>
     <c:otherwise>
+    <td></td>
     </c:otherwise>
 </c:choose>
 </tr>
@@ -102,8 +102,14 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+		<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
 </div>
 
 <div class="page-buttons">
