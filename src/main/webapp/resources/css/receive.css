@@ -425,3 +425,22 @@ height: 30px;
 #excelWorkOrder {
     float: right;
 }
+
+
+.mybutton9 {
+    border-color: #858796;
+    background-color: #858796; /* 원하는 색상 코드를 입력하세요 */
+    color: white; /* 버튼 텍스트 색상 */
+    height: 32px;
+    line-height: 10px; /* 텍스트 높이를 버튼의 높이와 일치시킵니다 */
+}
+
+  
+/* .mybutton9.active { */
+/* 	border-color: red; */
+/*     background-color: #4e73df; 활성 버튼의 색상을 여기에 입력하세요 */
+/*   } */
+
+
+
+

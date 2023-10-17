@@ -46,7 +46,7 @@
            
          <div>              
         <div style="float: left;">
-         <select id="search" name="search" class="form-control search-input">
+         <select id="search" name="search" class="form-control search-input" style="width: 150px; padding: 5px;">
           <option value=""> 선택하세요 </option>
           <option value="empName"> 이름 </option>
           <option value="empId"> 사원번호 </option>
