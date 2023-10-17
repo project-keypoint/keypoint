@@ -35,10 +35,7 @@ public class AccessFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			if (httpRequest.getSession().getAttribute("empId") != null) {
-				if (httpRequest.getSession().getAttribute("empRole").equals(3)) {
-					chain.doFilter(request, response);
-				}
-				else if (httpRequest.getSession().getAttribute("departmentName").equals("인사부")) {
+				 if (httpRequest.getSession().getAttribute("departmentName").equals("인사부")) {
 					if (requestURI.startsWith(httpRequest.getContextPath() + "/employee/")
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/main/")
 							|| requestURI.startsWith(httpRequest.getContextPath() + "/employee/employeeDetails")
