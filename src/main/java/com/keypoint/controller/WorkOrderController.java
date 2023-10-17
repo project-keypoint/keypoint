@@ -109,12 +109,7 @@ public class WorkOrderController {
 		System.out.println("ReceiveController workOrder/workOrderInsertPro");
 		System.out.println("workOrderInsertPro : "+workOrderDTO);
 		workOrderService.workOrderInsertPro(workOrderDTO);
-		
-		List<Map<String, Object>> workSumList = workOrderService.selectWorkSum(workOrderDTO);
-		
-		System.out.println(workSumList);
-		
-//		workOrderService.updateMaterialCount(workOrderDTO);
+	
 		
 		
 		if(workOrderDTO != null) {
