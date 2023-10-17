@@ -8,10 +8,11 @@
 <!-- 강수빈 -->
 
 <!-- 로그인 -->
-	<select id="userCheck"  resultType="com.keypoint.dto.EmployeeDTO">
-		select * from employees
-		where empId = #{empId} and empPass = #{empPass}
-	</select>
+	<select id="userCheck" parameterType="com.keypoint.dto.EmployeeDTO" resultType="com.keypoint.dto.EmployeeDTO">
+    SELECT * FROM employees
+    WHERE empId = #{empId} AND empPass = SHA2(#{empPass}, 256)
+</select>
+
 		
 <!-- 비밀번호 값 가져오기 -->
 	<select id="getInitialPass" resultType="java.lang.Integer">
@@ -85,7 +86,7 @@
 	<insert id="insertEmployee">
 		insert into employees (empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
 		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
-		values (#{empPass}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
+		values (SHA2('#{empPass}', 256), #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
 			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
 	</insert>
 	
@@ -99,22 +100,24 @@
 
 <!-- 사원-상세정보수정 -->
 	<update id="updateEmployee">
-		update employees
-		set empPass = #{empPass}, empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
-		empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
-		empPosition = #{empPosition},   empRole = #{empRole} 
-<!-- 		값들이 비어있어도 넘어가게!!!! -->
-		<if test="empLeavedate != null and empLeavedate != ''">
-    	, empLeavedate = #{empLeavedate}
-		</if>
-		<if test ="empRetiredate != null and empRetiredate != ''">
-		, empRetiredate= #{empRetiredate}
-		</if>
-		<if test ="empHiredate != null and empHiredate != ''">
-		, empHiredate= #{empHiredate}
-		</if>
-		where empId = #{empId}
-	</update> 
+    update employees
+    set empPass = SHA2(#{empPass}, 256),
+        empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
+        empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
+        empPosition = #{empPosition}, empRole = #{empRole} 
+    <!-- 값들이 비어있어도 넘어가게!!!! -->
+    <if test="empLeavedate != null and empLeavedate != ''">
+        , empLeavedate = #{empLeavedate}
+    </if>
+    <if test="empRetiredate != null and empRetiredate != ''">
+        , empRetiredate= #{empRetiredate}
+    </if>
+    <if test="empHiredate != null and empHiredate != ''">
+        , empHiredate= #{empHiredate}
+    </if>
+    where empId = #{empId}
+</update>
+
 
 
 <!-- 사원 등록 - 중복체크(연락처, 내선번호, 이메일) -->
