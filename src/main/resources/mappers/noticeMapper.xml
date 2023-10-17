@@ -64,15 +64,19 @@
 			AND noticeSubject LIKE CONCAT('%', #{search2}, '%')
 		</when>
 		<when test="search == 'sales'"> 
+			AND noticeCategory = '영업'
 			AND noticeSubject LIKE CONCAT('%', #{search2}, '%')
 		</when>
 		<when test="search == 'production'">
+			AND noticeCategory = '생산'
 			AND noticeSubject LIKE CONCAT('%', #{search2}, '%')
 		</when>
 		<when test="search == 'materials'"> 
+			AND noticeCategory = '자재'
 			AND noticeSubject LIKE CONCAT('%', #{search2}, '%')
 		</when>
 		<when test="search == 'personnel'"> 
+			AND noticeCategory = '인사'
 			AND noticeSubject LIKE CONCAT('%', #{search2}, '%')
 		</when>
 		</choose>
