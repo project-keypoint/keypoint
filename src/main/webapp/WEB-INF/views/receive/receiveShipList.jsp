@@ -284,7 +284,7 @@
     <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()">
     </c:otherwise>
 </c:choose> 
-<input type="button" value="엑셀파일다운" id="excelWorkOrder1"> <br><br>
+<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder1">
 <!-- 엑셀파일 저장을 위한 스크립트 호출 -->
 	<script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
 	<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
