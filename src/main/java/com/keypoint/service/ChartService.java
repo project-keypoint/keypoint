@@ -25,4 +25,9 @@ public class ChartService {
 		System.out.println("서비스 차트2");
 		return chartDAO.getProductShipRate();
 	}
+
+	public ChartDTO getScores() {
+		System.out.println("메인 서비스");
+		return chartDAO.getScores();
+	}
 }

@@ -48,8 +48,9 @@ public class mainController {
 	}
 	
 	@GetMapping("/main")
-	public String main() {
-
+	public String main(Model model) {
+		ChartDTO chartDTO = chartService.getScores();
+		model.addAttribute("chartDTO", chartDTO);
 		return "main";
 	}
 

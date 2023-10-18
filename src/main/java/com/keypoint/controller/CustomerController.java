@@ -160,8 +160,19 @@ public class CustomerController {
 
 //	거래처상세
 	@GetMapping("/cusDetails")
-	public String cusDetails(Model model, @RequestParam("cusCode") String cusCode) {
+	public String cusDetails(Model model, @RequestParam("cusCode") String cusCode, HttpSession session) {
 		System.out.println("CustomerController cusDetails()");
+		
+		
+//		세션에서 empId 가져오기
+		int empId = (int)session.getAttribute("empId");
+		
+//		empId 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		
+		
+		
 		
 		CustomerDTO customerDTO = customerService.getCusDetails(cusCode);
 		
