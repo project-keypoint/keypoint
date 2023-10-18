@@ -25,4 +25,9 @@ public class ChartDAO {
 		return sqlSession.selectList(namespace+"getProductShipRate");
 	}
 
+	public ChartDTO getScores() {
+		System.out.println("메인DAO");
+		return sqlSession.selectOne(namespace+"getScores");
+	}
+
 }

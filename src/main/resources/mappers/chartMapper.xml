@@ -22,4 +22,13 @@
 	ORDER BY b.productName
 </select>
 
+<select id="getScores" resultType="com.keypoint.dto.ChartDTO">
+SELECT
+(SELECT SUM(shipPrice) FROM receivedOrder) AS totalShipPrice,
+(SELECT SUM(shipCount) FROM receivedOrder) AS totalProductRate,
+(SELECT SUM(shipPrice) FROM receivedOrder
+ WHERE MONTH(shipDate) = MONTH(CURDATE()) AND YEAR(shipDate) = YEAR(CURDATE())) AS monthlyShipPrice,
+(SELECT sum(shipCount) FROM receivedOrder WHERE MONTH(shipDate)
+ = MONTH(CURDATE()) AND YEAR(shipDate) = YEAR(CURDATE())) AS MonthlyProductRate
+</select>
 </mapper>
