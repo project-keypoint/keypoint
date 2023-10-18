@@ -169,9 +169,19 @@ public class NoticeController {
 	
 //	글 내용보기
 	@GetMapping("/noticeContent")
-	public String noticeContent(NoticeDTO noticeDTO, Model model) {
+	public String noticeContent(NoticeDTO noticeDTO, Model model, HttpSession session) {
 		System.out.println("NoticeController noticeContent()");
 
+		
+//		세션에서 empId 가져오기
+		int empId = (int)session.getAttribute("empId");
+		
+//		empId 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		
+		
+		
 		
 //		공지사항 글 가져오기
 		noticeDTO = noticeService.getNoticeContent(noticeDTO.getNoticeNum());
