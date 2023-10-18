@@ -233,9 +233,7 @@
 
 
 
-
- <img src="${pageContext.request.contextPath}/resources/img/excel.png" id="excelReceiptOrder" 
-        style="height: 3rem; width: 3rem; cursor: pointer; margin-right: 10px;">
+<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelReceiptOrder">
 <!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 </div>
 
