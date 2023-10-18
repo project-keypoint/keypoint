@@ -31,11 +31,6 @@ public class ProductController {
 	@Inject
 	private EmployeeService employeeService;
 	
-	@GetMapping("/addUnit")
-	public String addUnit() {
-		return "product/addUnit";
-	}// addUnit [단위추가]
-
 //	가상주소 http://localhost:8080/keypoint/product/productList
 	@GetMapping("/productList")
 	public String productList(HttpServletRequest request, Model model, HttpSession session) {
