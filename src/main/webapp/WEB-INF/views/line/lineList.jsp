@@ -46,13 +46,13 @@
 <div class="search-b">
 <div class="search-select">
 <p>라인</p> 
-<input type="text" name="search" id="lineCode" class="form-control search-input" placeholder="라인코드" style="width:150px;" readonly>
+<input type="text" name="search" id="lineCode" class="form-control search-input readonly-color" placeholder="라인코드" style="width:150px;" readonly>
 
 </div>
 <div class="search-select">
 <p>담당자</p> 
-<input type="text" id="empId" class="form-control search-input" placeholder="담당자코드" style="width:110px;" readonly>
-<input type="text" name="search2" id="empName" class="form-control search-input" placeholder="담당자이름" readonly>
+<input type="text" id="empId" class="form-control search-input readonly-color" placeholder="담당자코드" style="width:110px;" readonly>
+<input type="text" name="search2" id="empName" class="form-control search-input readonly-color" placeholder="담당자이름" readonly>
 </div>
 </div>
 

@@ -137,6 +137,7 @@
 
 						<c:forEach var="workOrderDTO" items="${workOrderList}">
 							<tr class="table-body">
+							
 								<td><input type="checkbox" id="delete-list"
 									name="delete-list" data-group="delete-list"></td>
 								<td name="woCode">${workOrderDTO.woCode}</td>
@@ -147,7 +148,18 @@
 								</td>
 								
 								<%--     <td><c:out value="${fn:substring(workOrderDTO.woDate, 0, 10)}" /></td> --%>
-								<td>${workOrderDTO.woStatus}</td>
+								
+								<!-- 지시상태가 완료면 색상변하게 -->
+								 <td>
+    								<c:choose>
+                						<c:when test="${workOrderDTO.woStatus eq '완료'}">
+                    						<span style="color: skyblue;">${workOrderDTO.woStatus}</span>
+                						</c:when>
+               							 <c:otherwise>${workOrderDTO.woStatus}</c:otherwise>
+            						</c:choose>
+    							   </td>
+    							   
+<%-- 								<td>${workOrderDTO.woStatus}</td> --%>
 								<td>${workOrderDTO.productCode}</td>
 								<td>${workOrderDTO.productName}</td>
 								<td>${workOrderDTO.lineCode}</td>
