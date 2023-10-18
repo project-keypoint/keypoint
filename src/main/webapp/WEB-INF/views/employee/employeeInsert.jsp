@@ -49,7 +49,7 @@
 
 
 <div class="form-group-customer">
-<p>비밀번호(숨길까?)</p>
+<p>사원번호</p>
 <input type="text" id="empPass" name="empPass" class="form-control search-input" readonly>
 </div>
 
@@ -134,7 +134,7 @@
 
 <!-- 기본권한이 1이므로 화면에서는 안 보이게 하고 싶음 -->
 <div class="form-group-customer">
-<p>권한(보류)</p>
+<p>권한</p>
 <select id="empRole" name="empRole" class="form-control search-input">
         <option value="0">0</option>
         <option value="1" selected>1</option>
@@ -143,9 +143,7 @@
 </select>
 </div>
 
-<p><a style="color: red; font-size: 10px;">(보류)권한: 0->퇴직자, 1->일반사원, 2->관리자(부서+권한), 3->마스터(모든권한)</a></p>
-</div>
-
+<!-- </div> -->
 
 
 <!-- </div> -->

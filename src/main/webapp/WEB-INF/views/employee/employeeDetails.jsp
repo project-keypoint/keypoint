@@ -84,11 +84,18 @@
 
 </div>
 
+
+
 <div class="form-group-column">
-<!-- <div class="form-group-receive"> -->
 <p>주소</p>
 <input type="text" id="empAddress" class="form-control search-input" placeholder="${employeeDTO.empAddress}" readonly>
 </div>
+<div class="form-group-column">
+<p>상세주소</p>
+<input type="text" id="empAddress_dtail" class="form-control search-input" placeholder="${employeeDTO.empAddress_dtail}" readonly>
+</div>
+
+
 </div><!-- main-details1 -->
 </div><!-- form-group-receive -->
 
@@ -191,7 +198,8 @@ resetPasswordButton.addEventListener("click", function() {
     }
 });
 
-
+// 상세주소(cusAddress_dtail) 가져오기
+var empAddress_dtail = document.getElementById("empAddress_dtail").value;
 
 
 

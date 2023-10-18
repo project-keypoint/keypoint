@@ -98,6 +98,10 @@
 <p>주소</p>
 <input type="text" id="empAddress" name="empAddress" class="form-control search-input" value="${employeeDTO.empAddress}" readonly>
 </div>
+<div class="form-group-column">
+<p>상세주소</p>
+<input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" value="${employeeDTO.empAddress_dtail}" readonly>
+</div>
 
 </div><!-- form-group-receive -->
 </div><!-- main-details1 -->

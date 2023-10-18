@@ -58,7 +58,7 @@ public class EmployeeDAO {
 	// 사원등록
 	public void insertEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO insertEmployee()");
-		
+		System.out.println(employeeDTO.getEmpAddress_dtail());
 		sqlSession.insert(namespace+".insertEmployee", employeeDTO);
 	}// insertEmployee
 
