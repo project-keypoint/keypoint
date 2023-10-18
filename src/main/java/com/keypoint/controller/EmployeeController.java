@@ -307,7 +307,7 @@ public class EmployeeController {
 		employeeDTO.setEmpStatus(request.getParameter("empStatus"));
 		
 		// 권한
-//		employeeDTO.setEmpRole(Integer.parseInt(request.getParameter("empRole")));
+		employeeDTO.setEmpRole(Integer.parseInt(request.getParameter("empRole")));
 		
 		employeeService.insertEmployee(employeeDTO);
 		
