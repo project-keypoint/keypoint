@@ -36,7 +36,9 @@ public class EmployeeService {
         return employeeDAO.getInitialPass();
     }
 	
-	
+	public String getEmpSalt(int empId) {
+		return employeeDAO.getEmpSalt(empId);
+	}
 	
 	// -------------------------------------------------------------------
 	
@@ -69,7 +71,7 @@ public class EmployeeService {
 	// 사원등록
 	public void insertEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService insertEmployee()");
-		System.out.println(employeeDTO.getEmpAddress_dtail());
+		
 		employeeDAO.insertEmployee(employeeDTO);
 	}// insertEmployee
 

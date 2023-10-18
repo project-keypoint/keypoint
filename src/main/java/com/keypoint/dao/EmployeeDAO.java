@@ -1,3 +1,4 @@
+
 package com.keypoint.dao;
 
 import java.util.HashMap;
@@ -34,8 +35,11 @@ public class EmployeeDAO {
 	 public int getInitialPass() {
 	        return sqlSession.selectOne(namespace+".getInitialPass");
 	    }
-	 
-	 
+	 // 강수빈 - 솔트 값 가져오기
+	 public String getEmpSalt(int empId) {
+		    return sqlSession.selectOne(namespace + ".getEmpSalt", empId);
+		}
+
 	 
 	// ---------------------------------------------------------------------------
 	 
@@ -58,7 +62,7 @@ public class EmployeeDAO {
 	// 사원등록
 	public void insertEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO insertEmployee()");
-		System.out.println(employeeDTO.getEmpAddress_dtail());
+		
 		sqlSession.insert(namespace+".insertEmployee", employeeDTO);
 	}// insertEmployee
 

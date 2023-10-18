@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.keypoint.dto.PageDTO;
+import com.keypoint.security.SaltGenerator;
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.service.EmployeeService;
-import com.mysql.cj.Session;
 
 @Controller
 @RequestMapping("/employee/*")
@@ -99,10 +101,8 @@ public class EmployeeController {
 	
 	// 사원목록(+검색, 페이징)
 	@GetMapping("/employeeList")
-	public String employeeList(HttpServletRequest request, Model model, HttpSession session) {
+	public String employeeList(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController employeelist()");
-		// 세션에서 empId 가져오기
-		int empId = (int) session.getAttribute("empId");
 		
 		// 검색어 가져오기
 		String search = request.getParameter("search");
@@ -169,11 +169,6 @@ public class EmployeeController {
 		model.addAttribute("employeeList", employeeList);
 		model.addAttribute("pageDTO", pageDTO);
 
-		// empId로 사원정보 가져오기
-		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
-		model.addAttribute("employeeDTO", employeeDTO);
-		System.out.println(employeeDTO);
-		
 		return "employee/employeeList";		
 	} // employeeList
 	
@@ -210,8 +205,6 @@ public class EmployeeController {
 		System.out.println("EmployeeController employeeDetails()");
 		
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
-		
-		System.out.println(employeeDTO);
 		model.addAttribute("employeeDTO", employeeDTO);
 		
 		return "employee/employeeDetails";
@@ -249,7 +242,7 @@ public class EmployeeController {
 	
 	
 // -------------------------------- 첨부파일 관련 		
-	// 사원등록 - 사진첨부하기
+	// 사원등록 - 사진첨부하기가 포함된 사원등록
 	@PostMapping("/photoPro")
 	// 첨부파일은 boardDTO에 못 담음
 	public String photoPro(HttpServletRequest request, MultipartFile empPhoto) throws Exception{
@@ -257,7 +250,10 @@ public class EmployeeController {
 		// name = "file" => MultipartFile file 이름 동일하게 해야 함
 		
 		EmployeeDTO employeeDTO = new EmployeeDTO();
+		
+		String empSalt = SaltGenerator.getSalt();
 
+		System.out.println("empSalt: " + empSalt);
 		if (empPhoto.isEmpty()) {
 			employeeDTO.setEmpPhoto("test.png");
 		} else {
@@ -280,12 +276,11 @@ public class EmployeeController {
 		
 		// 목록이 다 넘어갈 수 있게
 		// 비밀번호
-		employeeDTO.setEmpPass(request.getParameter("empPass"));
-		// 이름, 주소, 상세주소, 연락처, 내선번호, 이메일
+		employeeDTO.setEmpPass(request.getParameter("empPass") + empSalt);
+		employeeDTO.setEmpSalt(empSalt);
+		// 이름, 주소, 연락처, 내선번호, 이메일
 		employeeDTO.setEmpName(request.getParameter("empName"));
 		employeeDTO.setEmpAddress(request.getParameter("empAddress"));
-		employeeDTO.setEmpAddress_dtail(request.getParameter("empAddress_dtail"));
-		System.out.println(employeeDTO.getEmpAddress_dtail());
 		employeeDTO.setEmpPhone(request.getParameter("empPhone"));
 		employeeDTO.setEmpTel(request.getParameter("empTel"));
 		employeeDTO.setEmpEmail(request.getParameter("empEmail"));
@@ -320,15 +315,18 @@ public class EmployeeController {
 			
 			// 수정 할 값 넘어오게
 			EmployeeDTO employeeDTO = new EmployeeDTO();
+			int empId = Integer.parseInt(request.getParameter("empId"));
 			
-			// 사번, 이름 , 생일, 주소, 상세주소
+			String empSalt = employeeService.getEmpSalt(empId);
+			System.out.println(empSalt);
+			// 사번, 이름 , 생일empName empBirth empAddress
 			employeeDTO.setEmpId(Integer.parseInt(request.getParameter("empId")));
 			employeeDTO.setEmpName(request.getParameter("empName"));
 			employeeDTO.setEmpBirth(request.getParameter("empBirth"));
 			employeeDTO.setEmpAddress(request.getParameter("empAddress"));
-			employeeDTO.setEmpAddress_dtail(request.getParameter("empAddress_dtail"));
 			// 비밀번호,이메일,연락처,내선번호
-			employeeDTO.setEmpPass(request.getParameter("empPass"));
+			employeeDTO.setEmpPass(request.getParameter("empPass") + empSalt);
+			
 			employeeDTO.setEmpEmail(request.getParameter("empEmail"));
 			employeeDTO.setEmpPhone(request.getParameter("empPhone"));
 			employeeDTO.setEmpTel(request.getParameter("empTel"));
