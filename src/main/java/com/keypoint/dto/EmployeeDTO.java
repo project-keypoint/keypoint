@@ -12,7 +12,7 @@ public class EmployeeDTO {
 	private String empTel; // 내선번호
 	private String empEmail; // 이메일
 	private String empAddress; // 주소
-	private String empAddress_dtail; // 주소
+	private String empAddress_dtail; // 상세주소
 	private String empStatus; // 재직여부('재직','휴직','퇴직')
 	private String departmentName; // 부서('영업','자재','생산','인사')
 	private String empPosition; // 직급('사원','대리','부장','이사','대표')

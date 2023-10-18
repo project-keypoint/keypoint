@@ -32,6 +32,7 @@ import com.keypoint.security.SaltGenerator;
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.service.EmployeeService;
 
+
 @Controller
 @RequestMapping("/employee/*")
 public class EmployeeController {
@@ -101,8 +102,10 @@ public class EmployeeController {
 	
 	// 사원목록(+검색, 페이징)
 	@GetMapping("/employeeList")
-	public String employeeList(HttpServletRequest request, Model model) {
+	public String employeeList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("EmployeeController employeelist()");
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
 		
 		// 검색어 가져오기
 		String search = request.getParameter("search");
@@ -169,6 +172,11 @@ public class EmployeeController {
 		model.addAttribute("employeeList", employeeList);
 		model.addAttribute("pageDTO", pageDTO);
 
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		return "employee/employeeList";		
 	} // employeeList
 	
@@ -205,6 +213,8 @@ public class EmployeeController {
 		System.out.println("EmployeeController employeeDetails()");
 		
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		
+		System.out.println(employeeDTO);
 		model.addAttribute("employeeDTO", employeeDTO);
 		
 		return "employee/employeeDetails";
@@ -278,9 +288,11 @@ public class EmployeeController {
 		// 비밀번호
 		employeeDTO.setEmpPass(request.getParameter("empPass") + empSalt);
 		employeeDTO.setEmpSalt(empSalt);
+		
 		// 이름, 주소, 연락처, 내선번호, 이메일
 		employeeDTO.setEmpName(request.getParameter("empName"));
 		employeeDTO.setEmpAddress(request.getParameter("empAddress"));
+		employeeDTO.setEmpAddress_dtail(request.getParameter("empAddress_dtail"));
 		employeeDTO.setEmpPhone(request.getParameter("empPhone"));
 		employeeDTO.setEmpTel(request.getParameter("empTel"));
 		employeeDTO.setEmpEmail(request.getParameter("empEmail"));
@@ -319,14 +331,16 @@ public class EmployeeController {
 			
 			String empSalt = employeeService.getEmpSalt(empId);
 			System.out.println(empSalt);
-			// 사번, 이름 , 생일empName empBirth empAddress
+			
+			// 사번, 이름 , 생일, 주소 , 상세주소
 			employeeDTO.setEmpId(Integer.parseInt(request.getParameter("empId")));
 			employeeDTO.setEmpName(request.getParameter("empName"));
 			employeeDTO.setEmpBirth(request.getParameter("empBirth"));
 			employeeDTO.setEmpAddress(request.getParameter("empAddress"));
+			employeeDTO.setEmpAddress_dtail(request.getParameter("empAddress_dtail"));
+			
 			// 비밀번호,이메일,연락처,내선번호
 			employeeDTO.setEmpPass(request.getParameter("empPass") + empSalt);
-			
 			employeeDTO.setEmpEmail(request.getParameter("empEmail"));
 			employeeDTO.setEmpPhone(request.getParameter("empPhone"));
 			employeeDTO.setEmpTel(request.getParameter("empTel"));

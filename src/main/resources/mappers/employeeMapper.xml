@@ -42,7 +42,9 @@
 	
 <!-- 	사원목록(+검색) -->
 	<select id="getEmployeeList" resultType="com.keypoint.dto.EmployeeDTO">
-    SELECT *
+    SELECT empId, empPass, empSalt, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
+    empAddress, empStatus, departmentName, empPosition, empHiredate, empRole as listEmpRole, 
+    empLeavedate, empRetiredate
     FROM employees
     <where>
         <choose>
@@ -95,15 +97,14 @@
 <!-- 사원등록 -->
 	<insert id="insertEmployee">
 		insert into employees (empPass, empSalt, empName, empPhoto, empBirth, empPhone, empTel, empEmail, 
-		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole)
+		                       empAddress, departmentName, empPosition, empHiredate, empStatus, empRole, empAddress_dtail)
 		values (SHA2(#{empPass}, 256), #{empSalt}, #{empName}, #{empPhoto}, #{empBirth}, #{empPhone}, #{empTel}, #{empEmail},
-			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole})
+			    #{empAddress}, #{departmentName}, #{empPosition}, #{empHiredate}, #{empStatus}, #{empRole}, #{empAddress_dtail})
 	</insert>
 	
 <!-- 사원-상세정보 -->
 	<select id="getEmployeeDetails" resultType="com.keypoint.dto.EmployeeDTO">
-		select empId, empPass, empName, empPhoto, empBirth, empPhone, empTel, empEmail, empAddress,
-		empStatus, departmentName, empPosition, empHiredate, empLeavedate, empRetiredate, empRole
+		select *
 		from employees
 		where empId = #{empId}
 	</select>	
