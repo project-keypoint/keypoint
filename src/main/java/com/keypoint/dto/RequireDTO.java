@@ -10,13 +10,16 @@ public class RequireDTO {
 	private String materialName;
 	private int reqCount;
 	private String materialUnit;
+	private String reqDate;
+	private String reqUpdate;
 	private String requireCode;
 	private List<String> requireCodes;
 	@Override
 	public String toString() {
 		return "RequireDTO [productCode=" + productCode + ", productName=" + productName + ", materialCode="
 				+ materialCode + ", materialName=" + materialName + ", reqCount=" + reqCount + ", materialUnit="
-				+ materialUnit + ", requireCode=" + requireCode + ", requireCodes=" + requireCodes + "]";
+				+ materialUnit + ", reqDate=" + reqDate + ", reqUpdate=" + reqUpdate + ", requireCode=" + requireCode
+				+ ", requireCodes=" + requireCodes + "]";
 	}
 	public String getProductCode() {
 		return productCode;
@@ -54,6 +57,18 @@ public class RequireDTO {
 	public void setMaterialUnit(String materialUnit) {
 		this.materialUnit = materialUnit;
 	}
+	public String getReqDate() {
+		return reqDate;
+	}
+	public void setReqDate(String reqDate) {
+		this.reqDate = reqDate;
+	}
+	public String getReqUpdate() {
+		return reqUpdate;
+	}
+	public void setReqUpdate(String reqUpdate) {
+		this.reqUpdate = reqUpdate;
+	}
 	public String getRequireCode() {
 		return requireCode;
 	}
@@ -66,6 +81,5 @@ public class RequireDTO {
 	public void setRequireCodes(List<String> requireCodes) {
 		this.requireCodes = requireCodes;
 	}
-	
 
 }// class

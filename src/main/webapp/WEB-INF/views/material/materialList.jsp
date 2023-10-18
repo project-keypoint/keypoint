@@ -36,13 +36,13 @@
 <div class="search-select">
 <p style="width:50px;">자재명</p> 
 <input type="text" name="search" id="materialCode" class="form-control search-input" placeholder="자재코드" style="width:110px;" readonly>
-<input type="text" id="materialName" class="form-control search-input" placeholder="자재명" readonly>
+<input type="text" id="materialName" class="form-control search-input" placeholder="자재명(클릭)" readonly>
 </div>
 </div>
 
 <div class="search-button">
 <input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
-<input type="button" value="취소" class="btn btn-secondary mybutton1">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 </div>
 </div><!-- search-bar -->
 <br>
@@ -73,8 +73,15 @@
     <td>${materialDTO.materialCount}</td>
     <td>${materialDTO.materialUnit}</td>
     <td>${materialDTO.materialMemo}</td>
-    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${materialDTO.materialCode}')">
-    	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${materialDTO.materialCode}')"></td>
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+	<td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${materialDTO.materialCode}')">
+	    <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${materialDTO.materialCode}')"></td>
+    </c:when>
+    <c:otherwise>
+    <td></td>
+    </c:otherwise>
+</c:choose>    
 </tr>
 </c:forEach>      
 
@@ -82,8 +89,14 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
+		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+		<input type="button" value="삭제" class="btn btn-secondary mybutton1">
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
 </div>
 <div class="page-buttons">
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -139,36 +152,6 @@ $(document).ready(function() {
         openPopup(url);
     });
 });
-// //업체명(거래처) 검색 새창
-// var searchCustomer = document.getElementById("search-customer");
-// searchCustomer.addEventListener("click", function () {
-// 	var url = '${pageContext.request.contextPath}/receive/empty';
-// 	// ↑ 업체검색페이지 새로 입력하기
-//     window.open(url, '_blank', 'width=400, height=400');
-// });
-
-// //상품명 검색 새창
-// var searchProduct = document.getElementById("search-product");
-// searchProduct.addEventListener("click", function () {
-// 	var url = '${pageContext.request.contextPath}/receive/empty';
-// 	// ↑ 상품검색페이지 새로 입력하기
-//     window.open(url, '_blank', 'width=400, height=400');
-// });
-//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
-$(function() {
-    $("#roDate1").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#roDate2").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#shipSdate1").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-    $("#shipSdate2").datepicker({
-    	dateFormat: "yy-mm-dd"
-    });
-});
 
 // 체크박스(삭제용) 전체선택
 var selectAllCheckbox = document.getElementById("delete-list-all");
@@ -213,7 +196,7 @@ function openInsert() {
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
 }
-//삭제 확인메세지
+//열 바로 삭제 버튼(ajax로 처리)
 function confirmDelete(materialCode) {
     if (confirm("정말로 삭제하시겠습니까?")) {
     	var query = {"materialCode" : materialCode};
@@ -227,6 +210,20 @@ function confirmDelete(materialCode) {
     		}
     	});
     } 
+}
+
+//초기화 아이콘 누르면 초기화
+function reset() {
+location.href = "${pageContext.request.contextPath}/material/materialList";
+}
+
+//검색취소버튼 입력칸 초기화 및 placeholder값 재지정
+function resetSearch() {
+	$("#materialCode").val("");
+    $("#materialName").val("");
+
+    $("#materialCode").attr("placeholder", "자재코드");
+    $("#materialName").attr("placeholder", "자재명(클릭)");
 }
 
 //검색하기
@@ -301,15 +298,6 @@ $("#excelWorkOrder").click(function(){
 	
 });// end function
 
-
-</script>
-
-
-<script>
-// 초기화 아이콘 누르면 초기화
-function reset() {
- location.href = "${pageContext.request.contextPath}/material/materialList";
-}
 </script>
 
 </body>

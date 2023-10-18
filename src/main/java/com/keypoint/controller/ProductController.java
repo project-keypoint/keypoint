@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ProductDTO;
-import com.keypoint.dto.ReceiveDTO;
-import com.keypoint.dto.RequireDTO;
+import com.keypoint.service.EmployeeService;
 import com.keypoint.service.ProductService;
 
 @Controller
@@ -27,6 +27,10 @@ public class ProductController {
 	@Inject
 	private ProductService productService;
 	
+	//employeeService 객체생성
+	@Inject
+	private EmployeeService employeeService;
+	
 	@GetMapping("/addUnit")
 	public String addUnit() {
 		return "product/addUnit";
@@ -34,8 +38,10 @@ public class ProductController {
 
 //	가상주소 http://localhost:8080/keypoint/product/productList
 	@GetMapping("/productList")
-	public String productList(HttpServletRequest request, Model model) {
+	public String productList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("ProductController productList()");
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
 		
 		// 검색어 가져오기
 		String search = request.getParameter("search");
@@ -83,6 +89,12 @@ public class ProductController {
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("pageDTO", pageDTO);
+		
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		// WEB-INF/views/product/productList.jsp
 		return "product/productList";
 	}// productList [완제품목록]

@@ -5,13 +5,13 @@
 <mapper namespace="com.itwillbs.mappers.requireMapper">
 
 	<insert id="insertRequire">
-		insert into requirement(productCode,materialCode,reqCount)
-		values(#{productCode},#{materialCode},#{reqCount})
+		insert into requirement(productCode,materialCode,reqCount,reqDate)
+		values(#{productCode},#{materialCode},#{reqCount},DATE(NOW()))
 	</insert>
 
 <!-- 	검색어 포함 -->
 	<select id="getRequireList" resultType="com.keypoint.dto.RequireDTO">
-		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit
+		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit, r.reqDate, r.reqUpdate
 		from requirement r inner join product p
 		on r.productCode = p.productCode
 		inner join material m
@@ -39,7 +39,7 @@
 	</select>	
 	
 	<select id="getRequire" resultType="com.keypoint.dto.RequireDTO">
-		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit
+		select r.productCode,p.productName,r.materialCode,m.materialName, r.reqCount, m.materialUnit, r.reqDate, r.reqUpdate
 		from requirement r left join product p
 		on r.productCode = p.productCode
 		left join material m
@@ -56,7 +56,7 @@
 	
 	<update id="updateRequire">
 		UPDATE requirement
-		SET reqCount=#{reqCount}
+		SET reqCount=#{reqCount}, reqUpdate=DATE(NOW())
 		WHERE productCode = #{productCode}
 		and materialCode = #{materialCode}
 	</update>	

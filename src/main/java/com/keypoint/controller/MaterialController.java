@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
-import com.keypoint.dto.ProductDTO;
+import com.keypoint.service.EmployeeService;
 import com.keypoint.service.MaterialService;
 
 @Controller
@@ -28,12 +30,16 @@ public class MaterialController {
 	@Inject
 	private MaterialService materialService;
 
-	
+	//employeeService 객체생성
+	@Inject
+	private EmployeeService employeeService;
 	
 	
 //	가상주소 http://localhost:8080/keypoint/material/materialList
 	@GetMapping("/materialList")
-	public String materialList(HttpServletRequest request, Model model) {
+	public String materialList(HttpServletRequest request, Model model, HttpSession session) {
+		// 세션에서 empId 가져오기
+		int empId = (int) session.getAttribute("empId");
 		
 		// 검색어 가져오기
 		String search = request.getParameter("search");
@@ -81,6 +87,12 @@ public class MaterialController {
 		
 		model.addAttribute("materialList", materialList);
 		model.addAttribute("pageDTO", pageDTO);
+		
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		System.out.println(employeeDTO);
+		
 		// WEB-INF/views/material/materialList.jsp
 		return "material/materialList";
 	}// materialList [자재목록]
