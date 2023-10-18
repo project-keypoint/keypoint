@@ -64,13 +64,13 @@
 
 <div class="search-b">
 <div class="search-select">
-<p>코드</p> <input type="text" id="materialCode" name="materialCode" class="form-control search-input" placeholder="자재코드" readonly>
+<p>코드</p> <input type="text" id="materialCode" name="materialCode" class="form-control search-input readonly-color" placeholder="자재코드" readonly>
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-select">
-<p>자재명</p> <input type="text" id="materialName" name="materialName" class="form-control search-input" placeholder="자재명 " readonly>
+<p>자재명</p> <input type="text" id="materialName" name="materialName" class="form-control search-input readonly-color" placeholder="자재명 " readonly>
 </div>
 </div>
 

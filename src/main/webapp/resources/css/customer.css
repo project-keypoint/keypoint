@@ -318,5 +318,7 @@ border: none; /* 테두리를 없애기 */
 text-align: center;
 color: black;
 }
-
+.readonly-color[readonly] {
+    background-color: #ffffff;
+}
 

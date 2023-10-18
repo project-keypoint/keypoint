@@ -60,7 +60,7 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자명</p>
+<p>담당자명</p>
 <%-- <input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="${purchaseDTO.poOwner}" readonly> --%>
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" placeholder="${purchaseDTO.poOwner}" readonly>
 </div>

@@ -36,16 +36,16 @@
 <div class="search-b">
 <div class="search-select">
 <p style="width:65px;">완제품명</p> 
-<input type="text" name="search" id="productCode" class="form-control search-input" placeholder="완제품코드" style="width:110px;" readonly>
-<input type="text" id="productName" class="form-control search-input" placeholder="완제품명(클릭)" readonly>
+<input type="text" name="search" id="productCode" class="form-control search-input  readonly-color" placeholder="완제품코드" style="width:110px;" readonly>
+<input type="text" id="productName" class="form-control search-input  readonly-color" placeholder="완제품명(클릭)" readonly>
 </div>
 </div>
 
 <div class="search-b">
 <div class="search-select">
 <p style="width:50px;">자재명</p> 
-<input type="text" name="search2" id="materialCode" class="form-control search-input" placeholder="자재코드" style="width:110px;" readonly>
-<input type="text" id="materialName" class="form-control search-input" placeholder="자재명(클릭)" readonly>
+<input type="text" name="search2" id="materialCode" class="form-control search-input  readonly-color" placeholder="자재코드" style="width:110px;" readonly>
+<input type="text" id="materialName" class="form-control search-input  readonly-color" placeholder="자재명(클릭)" readonly>
 </div>
 </div>
 

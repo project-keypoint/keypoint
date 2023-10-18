@@ -34,8 +34,8 @@
 		<div class="search-b">
 		<div class="search-select">
 		<p>업체명</p> 
-		<input type="text" id="cusCode" name="cusCode" class="form-control search-input" placeholder="업체코드" style="width:110px;" readonly>
-		<input type="text" id="cusName" class="form-control search-input" placeholder="업체명(클릭)" readonly>
+		<input type="text" id="cusCode" name="cusCode" class="form-control search-input readonly-color" placeholder="업체코드" style="width:110px;" readonly>
+		<input type="text" id="cusName" class="form-control search-input readonly-color" placeholder="업체명(클릭)" readonly>
 		</div>
 		</div>
 		<div class="search-button">

@@ -73,7 +73,7 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자</p>
+<p>담당자</p>
 <input type="text" id="empId" name="empId" class="form-control search-input inputcode" value="사원검색">
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" value="사원명" readonly>
 </div>

@@ -26,9 +26,10 @@
 
 <div class="forms-group-customer">
 
-<p><a style="color: red; font-size: 17px;">사진, 권한빼고 다 입력해야함</a></p>
+
 
 <!-- <div class="form-group-customer">  -->
+<p><a style="color: red; font-size: 17px;">* 사진은 필수입력사항이 아닙니다.</a></p>
 <!-- -------------------- 사진첨부 -------------------- -->
 <div class="form-group-customer" style="display: flex; flex-direction: column; align-items: center;">
         <img src="${pageContext.request.contextPath }/resources/img/test.png" id="preview" width="200" height="230" style="border-radius: 3px">

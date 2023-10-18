@@ -53,8 +53,8 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담코드</p>
-<input type="text" id="empId" name="grOwner" class="form-control search-input inputcode" placeholder="당담코드" readonly>
+<p>담당코드</p>
+<input type="text" id="empId" name="grOwner" class="form-control search-input inputcode" placeholder="담당코드" readonly>
 </div>
 
 <div class="form-group-receive">

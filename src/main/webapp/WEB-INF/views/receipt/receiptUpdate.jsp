@@ -48,7 +48,7 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive">
-<p>당담자</p>
+<p>담당자</p>
 <input type="text" id="empName" name="grOwner" class="form-control search-input inputcode" value="${receiptDTO.grOwner}" readonly>
 <input type="text" id="empId" name="empId" class="form-control search-input inputcode" placeholder="담당자명" readonly hidden>
 </div>

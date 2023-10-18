@@ -142,7 +142,7 @@
 </div>
 
 <div class="form-group-column">
-<p>권한(보류)</p>
+<p>권한</p>
 <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly>
 </div>
 </div><!-- form-group-receive -->
