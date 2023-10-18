@@ -140,8 +140,8 @@
 
 
 function openPopup(url) {
-    var width = 500;
-    var height = 500;
+    var width = 590;
+    var height = 470;
     var left = (screen.width - width) / 2;
     var top = (screen.height - height) / 2;
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
