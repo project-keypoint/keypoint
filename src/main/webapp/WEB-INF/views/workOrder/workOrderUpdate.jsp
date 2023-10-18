@@ -102,11 +102,6 @@ function openPopup(url, width, height) {
 }
 $(document).ready(function() {
 	
-	    // 수주코드 검색 팝업 열기
-	    $("#roCode, #roCode").click(function() {
-	        var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
-	        openPopup(url);
-	    });
 	 	// 라인명 검색 팝업 열기
 	    $("#lineCode, #lineCode").click(function() {
 	        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
