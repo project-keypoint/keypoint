@@ -229,8 +229,8 @@
 	<script type="text/javascript">
 		//팝업 창을 열어주는 함수
 		function openPopup(url) {
-			var width = 500;
-			var height = 500;
+			var width = 590;
+			var height = 470;
 			var left = (screen.width - width) / 2;
 			var top = (screen.height - height) / 2;
 			var popupWindow = window.open(url, '_blank', "width=" + width
@@ -238,14 +238,12 @@
 			popupWindow.focus();
 		}
 		$(document).ready( function() {							
-							// 상품명 검색 팝업 열기
-							$("#productCode, #productName")
-									.click(
-											function() {
-												var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-												openPopup(url);
-											});
-						});
+			// 상품명 검색 팝업 열기
+			$("#productCode, #productName").click(function() {
+			var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+			openPopup(url);
+				});
+		});
 		
 
 		$(function() {
@@ -392,53 +390,7 @@
 		        
 		    }
 		        
-// 				  //추가, 수정 을 구분하기위한 전역변수선언
-// 				  var status = "";
 
-// 				    //Table 초기화를 위한 전역변수 선언
-// 				    var simpleDataTableInstance;
-
-// 				    // 테이블 초기화 함수
-// 				    function simpleDataTable() {
-// 				    	// 테이블의 선택자를 찾는다
-// 				    	const datatablesSimple = document.getElementById('datatablesSimple');
-				    		
-// 				    		// 테이블 객체를 생성하고 전역변수에 저장한다
-// 				         	simpleDataTableInstance = new simpleDatatables.DataTable(datatablesSimple, {
-				            
-// 				          		// 페이지 표시 버튼 삭제
-// 				          		perPageSelect : false,
-// 				          		// 검색창 삭제
-// 				          		searchable : false,
-// 				          		// 페이지당 목록 10개
-// 				          		perPage : 10,
-				          
-// 				          		//라벨 수정
-// 				          		labels: {
-// 				          		placeholder: "검색",
-// 				          		noResults : "검색 결과가 없습니다",
-// 				          		noRows : "데이터가 없습니다",
-// 				          		info : ""
-// 				          		}
-// 				          }); // end 초기화
-				        
-// 				    }//end function
-				    
-// 				 // 돔이 로드될떄 테이블 초기화
-// 				    window.addEventListener('DOMContentLoaded', event => {
-// 				    	simpleDataTable();
-// 				    });
-		        
-		   			
-// 				 // thead의 체크박스를 클릭했을때 전체체크가되게끔 이벤트를 발생시킨다
-// 					$('input[name="delete-list"]').click(function() {
-// 					    // 모든 selectedProId 체크박스의 상태를 delete-list-all와 동일하게 설정한다
-// 					    // $this로 AllProId의 상태를 가져온다
-// 					    $('input[name="delete-list"]').prop('checked', $(this).prop('checked'));
-// 					});// end function
-				    
-				    
-				    
 				  //엑셀 버튼 누를 시 실행되는 함수
 					$("#excelProduction").click(function(){
 // 						체크박스가 체크된 여부를 확인하기위한 변수선언

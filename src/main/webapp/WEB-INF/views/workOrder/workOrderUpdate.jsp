@@ -87,10 +87,14 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+var defaultWidth = 500;
+var defaultHeight = 500;
 //팝업 창을 열어주는 함수
-function openPopup(url) {
-    var width = 500;
-    var height = 500;
+function openPopup(url, width, height) {
+    
+	width = width || defaultWidth;
+    height = height || defaultHeight;
+    
     var left = (screen.width - width) / 2;
     var top = (screen.height - height) / 2;
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
@@ -108,20 +112,11 @@ $(document).ready(function() {
 	        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
 	        openPopup(url);
 	    });
-    // 업체명 검색 팝업 열기
-//     $("#cusCode, #cusName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-//         openPopup(url);
-//     });
-    // 상품명 검색 팝업 열기
-//     $("#productCode, #productName").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-//         openPopup(url);
-//     });
+    
  	// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-        openPopup(url);
+        openPopup(url,550,480);
     });
 });
 //수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
