@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,19 +34,19 @@
 		<div class="container-fluid">
 			<!-- Begin Page Content -->
 			<!-- Page Heading -->
-<!-- 			<div -->
-<!-- 				class="d-sm-flex align-items-center justify-content-between mb-4"> -->
-<!-- 				<h1 class="h3 mb-0 text-gray-800">Dashboard</h1> -->
-<!-- 				<a href="#" -->
-<!-- 					class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i -->
-<!-- 					class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-<!-- 			</div> -->
+			<!-- 			<div -->
+			<!-- 				class="d-sm-flex align-items-center justify-content-between mb-4"> -->
+			<!-- 				<h1 class="h3 mb-0 text-gray-800">Dashboard</h1> -->
+			<!-- 				<a href="#" -->
+			<!-- 					class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i -->
+			<!-- 					class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+			<!-- 			</div> -->
 
 
 			<div class="row" style="">
 				<!-- in row -->
 				<!-- total score start -->
-				
+
 				<!-- 1 -->
 				<div class="my-row-all col-xl-4 col-lg-4 h-100"
 					style="margin-bottom: 10px;">
@@ -56,10 +57,33 @@
 							<div class="card-body">
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
-										<div
-											class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-											내용1</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+										<div class="font-weight-bold text-primary text-uppercase mb-1">
+											전체 납품액</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+<c:set var="totalShipPrice" value="${chartDTO.totalShipPrice}" />
+
+<c:choose>
+  <c:when test="${totalShipPrice >= 100000000}">
+    <c:set var="unit">억</c:set>
+    <c:set var="divisor">100000000</c:set>
+    <fmt:formatNumber value="${totalShipPrice / divisor}" pattern="#,##0 억" var="formattedTotalShipPrice" />
+    ${formattedTotalShipPrice}
+    <c:set var="totalShipPrice" value="${totalShipPrice % divisor}" />
+  </c:when>
+</c:choose>
+
+<c:choose>
+  <c:when test="${totalShipPrice >= 10000}">
+    <c:set var="unit">원</c:set>
+    <fmt:formatNumber value="${totalShipPrice / 10000}" pattern="#,##0 만" var="formattedRemainingAmount"/>
+    ${formattedRemainingAmount}
+    <c:set var="totalShipPrice" value="${totalShipPrice % 10000}" />
+   </c:when>
+</c:choose>
+
+<fmt:formatNumber value="${totalShipPrice}" pattern="#,##0 원" var="formattedRemainingAmount"/>
+${formattedRemainingAmount}
+										</div>
 									</div>
 									<div class="col-auto">
 										<!-- 									<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
@@ -73,10 +97,9 @@
 							<div class="card-body">
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
-										<div
-											class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-											내용2</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+										<div class="font-weight-bold text-primary text-uppercase mb-1">
+											전체 납품량</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">${chartDTO.totalProductRate}</div>
 									</div>
 									<div class="col-auto">
 										<!-- 									<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
@@ -93,8 +116,8 @@
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="font-weight-bold text-primary text-uppercase mb-1">
-											내용3</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+											이번달 납품액</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">${chartDTO.monthlyShipPrice}</div>
 									</div>
 									<div class="col-auto">
 										<!-- 									<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
@@ -108,10 +131,9 @@
 							<div class="card-body">
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
-										<div
-											class="text-s font-weight-bold text-primary text-uppercase mb-1">
-											내용4</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+										<div class="font-weight-bold text-primary text-uppercase mb-1">
+											이번달 납품량</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">${chartDTO.monthlyProductRate}</div>
 									</div>
 									<div class="col-auto">
 										<!-- 									<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
@@ -130,11 +152,11 @@
 				<div class="col-xl-8 col-lg-8" style="margin-bottom: 10px;">
 					<div class="card shadow mb-4">
 						<div class="right">
-						<div class="sbtw">
-						<a style="margin: 5px; font-weight: bold;">[ 공지사항 ]</a>
-							<a href="${pageContext.request.contextPath}/notice/noticeList"
-								class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm btn-more">더보기</a>
-						</div>		
+							<div class="sbtw">
+								<a style="margin: 5px; font-weight: bold;">[ 공지사항 ]</a> <a
+									href="${pageContext.request.contextPath}/notice/noticeList"
+									class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm btn-more">더보기</a>
+							</div>
 							<table class="h-100">
 								<tr>
 									<th class="row-1">분류</th>
@@ -160,20 +182,20 @@
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-primary">월별 출고량</h6>
 							<div class="dropdown no-arrow">
-<!-- 								<a class="dropdown-toggle" href="#" role="button" -->
-<!-- 									id="dropdownMenuLink" data-toggle="dropdown" -->
-<!-- 									aria-haspopup="true" aria-expanded="false"> <i -->
-<!-- 									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
-<!-- 								</a> -->
-<!-- 								<div -->
-<!-- 									class="dropdown-menu dropdown-menu-right shadow animated--fade-in" -->
-<!-- 									aria-labelledby="dropdownMenuLink"> -->
-<!-- 									<div class="dropdown-header">Dropdown Header:</div> -->
-<!-- 									<a class="dropdown-item" href="#">Action</a> <a -->
-<!-- 										class="dropdown-item" href="#">Another action</a> -->
-<!-- 									<div class="dropdown-divider"></div> -->
-<!-- 									<a class="dropdown-item" href="#">Something else here</a> -->
-<!-- 								</div> -->
+								<!-- 								<a class="dropdown-toggle" href="#" role="button" -->
+								<!-- 									id="dropdownMenuLink" data-toggle="dropdown" -->
+								<!-- 									aria-haspopup="true" aria-expanded="false"> <i -->
+								<!-- 									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
+								<!-- 								</a> -->
+								<!-- 								<div -->
+								<!-- 									class="dropdown-menu dropdown-menu-right shadow animated--fade-in" -->
+								<!-- 									aria-labelledby="dropdownMenuLink"> -->
+								<!-- 									<div class="dropdown-header">Dropdown Header:</div> -->
+								<!-- 									<a class="dropdown-item" href="#">Action</a> <a -->
+								<!-- 										class="dropdown-item" href="#">Another action</a> -->
+								<!-- 									<div class="dropdown-divider"></div> -->
+								<!-- 									<a class="dropdown-item" href="#">Something else here</a> -->
+								<!-- 								</div> -->
 							</div>
 						</div>
 						<!-- Card Body -->
@@ -193,20 +215,20 @@
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-primary">상품별 출고 비율</h6>
 							<div class="dropdown no-arrow">
-<!-- 								<a class="dropdown-toggle" href="#" role="button" -->
-<!-- 									id="dropdownMenuLink" data-toggle="dropdown" -->
-<!-- 									aria-haspopup="true" aria-expanded="false"> <i -->
-<!-- 									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
-<!-- 								</a> -->
-<!-- 								<div -->
-<!-- 									class="dropdown-menu dropdown-menu-right shadow animated--fade-in" -->
-<!-- 									aria-labelledby="dropdownMenuLink"> -->
-<!-- 									<div class="dropdown-header">Dropdown Header:</div> -->
-<!-- 									<a class="dropdown-item" href="#">Action</a> <a -->
-<!-- 										class="dropdown-item" href="#">Another action</a> -->
-<!-- 									<div class="dropdown-divider"></div> -->
-<!-- 									<a class="dropdown-item" href="#">Something else here</a> -->
-<!-- 								</div> -->
+								<!-- 								<a class="dropdown-toggle" href="#" role="button" -->
+								<!-- 									id="dropdownMenuLink" data-toggle="dropdown" -->
+								<!-- 									aria-haspopup="true" aria-expanded="false"> <i -->
+								<!-- 									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
+								<!-- 								</a> -->
+								<!-- 								<div -->
+								<!-- 									class="dropdown-menu dropdown-menu-right shadow animated--fade-in" -->
+								<!-- 									aria-labelledby="dropdownMenuLink"> -->
+								<!-- 									<div class="dropdown-header">Dropdown Header:</div> -->
+								<!-- 									<a class="dropdown-item" href="#">Action</a> <a -->
+								<!-- 										class="dropdown-item" href="#">Another action</a> -->
+								<!-- 									<div class="dropdown-divider"></div> -->
+								<!-- 									<a class="dropdown-item" href="#">Something else here</a> -->
+								<!-- 								</div> -->
 							</div>
 						</div>
 						<!--  Card Body -->
@@ -214,16 +236,16 @@
 							<div class="chart-area">
 								<canvas id="productShipRate" class="main-chart"></canvas>
 							</div>
-<!-- 							<div class="mt-4 text-center small"> -->
-<!-- 								<span class="mr-2">  -->
-<!-- 								<i class="fas fa-circle text-primary"></i> -->
-<!-- 									여기 -->
-<!-- 								</span> <span class="mr-2"> <i -->
-<!-- 									class="fas fa-circle text-success"></i> 상품명 -->
-<!-- 								</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i> -->
-<!-- 									넣으려고 -->
-<!-- 								</span> -->
-<!-- 							</div> -->
+							<!-- 							<div class="mt-4 text-center small"> -->
+							<!-- 								<span class="mr-2">  -->
+							<!-- 								<i class="fas fa-circle text-primary"></i> -->
+							<!-- 									여기 -->
+							<!-- 								</span> <span class="mr-2"> <i -->
+							<!-- 									class="fas fa-circle text-success"></i> 상품명 -->
+							<!-- 								</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i> -->
+							<!-- 									넣으려고 -->
+							<!-- 								</span> -->
+							<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
@@ -283,7 +305,7 @@ $(document).ready(function(){
 
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 //차트 생성 함수 
 function monthlyShipChart(data) {
 
