@@ -31,7 +31,7 @@
 <div class="contents2">
 
 
-<input type="button" value="엑셀파일다운" id="excelWorkOrder"> <br><br>
+
 <div class="search-bar">
 <div class="search-b">
 <div class="search-select">
@@ -110,6 +110,7 @@
     <c:when test = "${employeeDTO.empRole >= 2}">
 		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 		<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
+		<input type="button" value="엑셀파일다운" id="excelWorkOrder" style="margin-left: 3px;" class="btn btn-secondary mybutton1 dis-btn">
     </c:when>
     <c:otherwise>
     </c:otherwise>

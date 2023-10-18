@@ -191,7 +191,7 @@
 <div>
 <input type="button" value="추가(상품)" class="btn btn-primary mybutton1" onclick="openDisPInsert()">
 <input type="button" value="추가(자재)" class="btn btn-primary mybutton1" onclick="openDisMInsert()">
-<input type="button" value="엑셀파일다운" id="excelWorkOrder">
+<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder" style="margin-left: 3px;">
 </div>
 <div id="page_control" class="page-buttons">
     <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">

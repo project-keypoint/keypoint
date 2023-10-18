@@ -40,7 +40,7 @@
     
 			<form action="${pageContext.request.contextPath}/workOrder/workOrderList" method="get">	
 				
-				<input type="button" value="엑셀파일다운" id="excelWorkOrder"> <br><br>
+				
 					
 					
 					<div class="search-b" style="margin-bottom: -25px;">
@@ -177,6 +177,7 @@
    							 <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="accessDenied()" style="margin-right: 3px;">
    							</c:otherwise>
 					</c:choose>  
+					<input type="button" value="엑셀파일다운" id="excelWorkOrder" class="btn btn-secondary mybutton1 dis-btn" id="excelProduction" style="margin-left: 3px;" >
 					</div>
 					<div id="page_control" class="page-buttons">
   					  <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">

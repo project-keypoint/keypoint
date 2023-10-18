@@ -154,7 +154,6 @@
 						</c:forEach>
 					</table>
 				</div>
-				<br>
 
 				<!-- table -->
 				<div class="content-bottom">
