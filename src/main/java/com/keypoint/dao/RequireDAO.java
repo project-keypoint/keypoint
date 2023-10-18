@@ -1,5 +1,6 @@
 package com.keypoint.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +20,19 @@ public class RequireDAO {
 
 	private static final String namespace="com.itwillbs.mappers.requireMapper";
 
-	public void insertRequire(RequireDTO requireDTO) {
+	public void insertRequire(String productCode, String materialCode, int reqCount) {
 		System.out.println("RequireDAO insertRequire()");
-		sqlSession.insert(namespace+".insertRequire", requireDTO);
+		Map<String, Object> param = new HashMap<>();
+		param.put("productCode", productCode);
+		param.put("materialCode", materialCode);
+		param.put("reqCount", reqCount);
+		sqlSession.insert(namespace+".insertRequire", param);
 	}// insertRequire
+	
+//	public void insertRequire(RequireDTO requireDTO) {
+////		System.out.println("RequireDAO insertRequire()");
+//		sqlSession.insert(namespace+".insertRequire", requireDTO);
+//	}// insertRequire
 
 	public List<RequireDTO> getRequireList(PageDTO pageDTO) {
 		System.out.println("RequireDAO getRequireList()");
@@ -53,6 +63,8 @@ public class RequireDAO {
 		System.out.println("RequireDAO requireDeleteChecked()");
 		sqlSession.delete(namespace+".requireDeleteChecked", requireCode);
 	}// requireDeleteChecked
+
+
 
 	
 	

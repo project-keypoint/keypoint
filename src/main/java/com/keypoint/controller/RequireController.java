@@ -35,11 +35,20 @@ public class RequireController {
 	@Inject
 	private EmployeeService employeeService;
 	
-//	가상주소 http://localhost:8080/keypoint/require/requireList
-	@GetMapping("/test")
-	public String test() {
-		return "require/test";
-	}// requireList [소요량목록]
+	@GetMapping("/msgSuccess")
+	public String msgSuccess() {
+		return "require/msgSuccess";
+	}// msgSuccess [성공메세지]
+	
+	@GetMapping("/msgFailed")
+	public String msgFailed() {
+		return "require/msgFailed";
+	}// msgFailed [실패메세지]
+	
+	@GetMapping("/msgDuplicated")
+	public String msgDuplicated() {
+		return "require/msgDuplicated";
+	}// msgDuplicated [소요량 중복메세지]
 
 	//	가상주소 http://localhost:8080/keypoint/require/requireList
 	@GetMapping("/requireList")
@@ -113,21 +122,17 @@ public class RequireController {
 	}// requireInsert [소요량등록]	
 	
 	@PostMapping("/requireInsertPro")
-	public String requireInsertPro(RequireDTO requireDTO) {
-		System.out.println("RequireController requireInsertPro()");
-		//회원가입 처리
-		System.out.println(requireDTO);
-		try {
-			requireService.insertRequire(requireDTO);
-		} catch (Exception e) {
-			return "require/msgDuplicated"; // 등록실패
-		}
-		
-		if(requireDTO != null) {
-			return "require/msgSuccess"; // 등록완료
-		}else {
-			return "require/msgFailed"; // 등록실패
-		}
+	public ResponseEntity<String> requireInsertPro(@RequestBody RequireDTO requireDTO) {
+	  System.out.println("RequireController requireInsertPro()");
+	  System.out.println(requireDTO);
+	  
+	  try {
+	    requireService.insertRequire(requireDTO);
+	    return ResponseEntity.ok("success");
+	  } catch (Exception e) {
+	    e.printStackTrace();
+	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	  }
 	}// requireInsertPro [소요량등록]
 	
 	@GetMapping("/requireUpdate")

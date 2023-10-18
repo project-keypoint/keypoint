@@ -17,9 +17,23 @@ public class RequireService {
 	@Inject
 	private RequireDAO requireDAO;
 
+//	public void insertRequire(RequireDTO requireDTO) {
+//		System.out.println("RequireService insertRequire()");
+//		for (String mateiralCode : requireDTO.getMaterialCodes()) {
+//			requireDAO.insertRequire(mateiralCode);
+//		}
+//	}// insertRequire
+	
 	public void insertRequire(RequireDTO requireDTO) {
 		System.out.println("RequireService insertRequire()");
-		requireDAO.insertRequire(requireDTO);
+		for (int i = 0; i < requireDTO.getMaterialCodes().size(); i++) {
+			String productCode = requireDTO.getProductCode();
+			String materialCode = requireDTO.getMaterialCodes().get(i);
+			int reqCount = Integer.parseInt(requireDTO.getReqCounts().get(i));
+			System.out.println(reqCount);
+			
+			requireDAO.insertRequire(productCode, materialCode, reqCount);
+		}
 	}// insertRequire
 
 	public List<RequireDTO> getRequireList(PageDTO pageDTO) {

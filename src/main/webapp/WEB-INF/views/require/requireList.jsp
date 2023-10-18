@@ -212,11 +212,10 @@ checkboxes.each(function() {
   // requireCodes 배열을 JSON 문자열로 변환합니다.
   var requireCodesJson = JSON.stringify({ requireCodes: requireCodes });
   
-  alert(requireCodesJson);
-  
   //확인용 로그 출력
   console.log("전송 데이터:", requireCodesJson);
   
+  if (confirm("정말로 삭제하시겠습니까?")) {
    // Ajax 요청을 보냅니다.
    $.ajax({
      type: "POST",
@@ -233,7 +232,8 @@ checkboxes.each(function() {
     	   alert('Error: ' + xhr.responseText);
     	}
    });
-}
+  }
+}// deleteRequire
 
 // 체크박스(삭제용) 전체선택
 var selectAllCheckbox = document.getElementById("delete-list-all");
