@@ -37,9 +37,9 @@
 </div>
 
 
-<div class="form-group-column">
+<div class="form-group-column" style="display:none;">
 <p>비밀번호</p>
-<input type="text" id="empPass" name="empPass" class="form-control search-input" value="${employeeDTO.empPass}" readonly>
+<input type="text" id="empPass" name="empPass" class="form-control search-input" value="${employeeDTO.empPass}" readonly >
 </div>
 
 
