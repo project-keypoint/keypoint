@@ -28,10 +28,16 @@ margin-bottom: 10px;
 }
 table {
 	margin: 0px auto;
-	width: 450px;
+	width: 550px;
 	border-collapse: collapse;
 	border-radius: 3px;
 	overflow: hidden;
+}
+.line-table {
+	width: 350px;
+}
+.emp-table{
+	width: 505px;
 }
 td, th {
 	padding: 10px;

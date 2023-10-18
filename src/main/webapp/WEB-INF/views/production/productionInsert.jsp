@@ -111,28 +111,8 @@ $(document).ready(function() {
 	
 	$("#woCode, #woCode").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workList';
-        openPopup(url, 650, 750);
+        openPopup(url, 1045, 470);
     });
-//     // 수주코드 검색 팝업 열기
-//     $("#roCode, #roCode").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
-//         openPopup(url);
-//     });
-//     // 업체명 검색 팝업 열기
-//     $("#cusCode, #cusCode").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-//         openPopup(url);
-//     });
-//  // 상품명 검색 팝업 열기
-//     $("#productCode, #productCode").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-//         openPopup(url);
-//     });
-//  // 라인명 검색 팝업 열기
-//     $("#lineCode, #lineCode").click(function() {
-//         var url = '${pageContext.request.contextPath}/workOrder/workLineList';
-//         openPopup(url);
-//     });
     
  	// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {

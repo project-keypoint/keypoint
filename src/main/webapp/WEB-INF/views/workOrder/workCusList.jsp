@@ -9,106 +9,30 @@
 
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="32x32" href="/resources/image/favicon-32x32.png">
-
-<style type="text/css">
-
-@import
-	url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css)
-	;
-	
-	
-body{
-	font-family: 'NanumSquare', sans-serif;
-}
-
-
-
-/* 페이징 */
-
-
-#pagination {
-  display: inline-block;
-}
-
-#pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-}
-
-
-
-#pagination a.active {
-	background-color: #b9b9b9;
-  color: white;
-  border: 1px solid #b9b9b9;
-}
-
-#pagination a:hover:not(.active,.none) {background-color: #ddd;}
-
-.center {
-  text-align: center;
-}
-
-
-table {
-	margin : 0px auto;
-	border: 1px #a39485 solid;
-	font-size: .9em;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
-	width: 425px;
-	border-collapse: collapse;
-	border-radius: 5px;
-	overflow: hidden;
-	
-}
-
-th {
-	text-align: center;
-	background: #b9b9b9;
-	font-weight: 700;
-}
-
-
-td, th {
-	padding: 1em .5em;
-	
-	vertical-align: middle;
-}
-
-td {
-	border-bottom: 1px solid rgba(0, 0, 0, .1);
-	background: #fff;
-	text-align: center;
-}
-h2{
-	text-align: center;
-}
-
-#con:hover{
-	background-color : #e1e1e1;
-	cursor:pointer;
-}
-
-</style>
+<!-- Custom fonts for this template-->
+<link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<!-- Custom styles for this template-->
+<link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- 검색목록 CSS 적용-->
+<link href="${pageContext.request.contextPath}/resources/css/searchList.css" rel="stylesheet">
 </head>
 <body>
-<h2>
-업체코드 조회
-</h2>
-<br>
+<h4>업체 조회</h4>
 <form>
-<table>
-<tr>
-	<td>업체코드</td><td><input type="text" name="cusCode" style="width:100px;"></td>
-	<td>업체명</td><td><input type="text" name="cusName" style="width:100px;"></td>
-	<td><input type="submit" value="조회"></td></tr>
-</table>
-</form>
-<table>
+<div class="search-top">
+<div>
+<a>업체코드</a>
+<input type="text" name="cusCode" id="cusCode" style="width: 80px;">
+</div><div>
+<a>업체명</a>
+<input type="text" name="cusName" id="cusName" style="width: 150px;">
+</div>
+<div>
+<input type="submit" class="btn btn-primary mybutton1" value="조회">
+</div>
+</div>
+	</form>
+	<table>
 <tr><th>업체코드</th><th>업체명</th></tr>
 <c:forEach var="workCusList" items="${workCusList}">
 <tr onclick="selectWork('${workCusList.cusCode }','${workCusList.cusName }')"> <!-- ,'${itemList.itemId}' -->

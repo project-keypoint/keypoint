@@ -18,7 +18,6 @@
 <!--         rel="stylesheet"> -->
 <!-- Custom styles for this template-->
 <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-<!-- 수주 CSS 적용-->
   <link href="${pageContext.request.contextPath}/resources/css/workOrder2.css" rel="stylesheet">
 </head>
 <body>
