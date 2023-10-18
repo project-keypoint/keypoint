@@ -15,10 +15,9 @@
 			empId, 
 			poCount, 
 			poDate, 
-			qcDefectRate, 
 			woStatus, 
 			productName,
-			woCount, 
+<!-- 			woCount,  -->
 			poGood, 
 			poErr, 
 			poCause,
@@ -31,15 +30,11 @@
 		#{productCode},
 		#{lineCode},
 		#{empId},
-		<if test="poCount == null">NULL</if>
-		<if test="poCount != null">#{poCount}</if>,
-		#{poDate},
-		<if test="qcDefectRate == null">NULL</if>
-		<if test="qcDefectRate != null">#{qcDefectRate}</if>,	
-		<if test="woStatus == null">NULL</if>
-		<if test="woStatus != null">#{woStatus}</if>,
+		#{poCount},
+		#{poDate},	
+		#{woStatus},
 			#{productName},
-			#{woCount},
+<!-- 			#{woCount}, -->
 			#{poGood},
 			#{poErr},
 			#{poCause},

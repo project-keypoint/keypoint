@@ -11,16 +11,12 @@
 				roCode,
 				empId,
 				lineCode,
-				mfgCode,
 				productCode,
-				materialCode,
 				woCount,
 				woStatus,
 				woDate,
-				productName,
 				cusCode,
 				empName,
-				cusName,
 				shipSdate
 			)
 		values(
@@ -28,18 +24,12 @@
 			#{roCode},
 			#{empId},
 			#{lineCode},
-			<if test = "mfgCode == null">NULL</if>
-			<if test = "mfgCode != null">#{mfgCode}</if>,
 			#{productCode},
-			<if test = "materialCode == null">NULL</if>
-			<if test = "materialCode != null">#{materialCode}</if>,
 			#{woCount},
 			#{woStatus},
 			#{woDate},
-			#{productName},
 			#{cusCode},
 			#{empName},
-			#{cusName},
 			#{shipSdate}
 		)
 	</insert>
