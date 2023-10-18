@@ -12,26 +12,38 @@ public class EmployeeDTO {
 	private String empTel; // 내선번호
 	private String empEmail; // 이메일
 	private String empAddress; // 주소
+	private String empAddress_dtail; // 주소
 	private String empStatus; // 재직여부('재직','휴직','퇴직')
-//	private String departmentId; // 부서ID(삭제할거임)
 	private String departmentName; // 부서('영업','자재','생산','인사')
 	private String empPosition; // 직급('사원','대리','부장','이사','대표')
 	private String empHiredate; // 입사일
 	private int empRole; // 권한(0=퇴사자(로그인x) / 1=사원 / 2=관리자(권한+부서) / 4=대표(총관리자)
 	private String empLeavedate; // 휴직일
 	private String empRetiredate; // 퇴직일
+	private int listEmpRole;
 	
 	@Override
 	public String toString() {
 		return "EmployeeDTO [empId="+empId+", empPass="+empPass+ ", empSalt="+empSalt+", empName="+empName
 				+", empPhoto="+empPhoto+", empBirth="+empBirth+", empPhone="+empPhone+", empTel="+empTel
-				+", empEmail="+empEmail+", empAddress="+empAddress+", empStatus="+empStatus
+				+", empEmail="+empEmail+", empAddress="+empAddress+", empAddress_dtail="+empAddress_dtail+",  empStatus="+empStatus
 				+", departmentName="+departmentName
 				+", empPosition="+empPosition+", empHiredate="+empHiredate+", empRole="+empRole
 				+", empLeavedate="+empLeavedate+", empRetiredate="+empRetiredate+"]";
 	}
 	
-	
+	public String getEmpAddress_dtail() {
+		return empAddress_dtail;
+	}
+	public void setEmpAddress_dtail(String empAddress_dtail) {
+		this.empAddress_dtail = empAddress_dtail;
+	}
+	public int getListEmpRole() {
+		return listEmpRole;
+	}
+	public void setListEmpRole(int listEmpRole) {
+		this.listEmpRole = listEmpRole;
+	}
 	public int getEmpId() {
 		return empId;
 	}

@@ -156,29 +156,43 @@
 	   <th>상세내역</th>
       </tr>
 
-       <c:forEach var="employeeDTO" items="${employeeList}">
-        <tr class="table-body" data-status="${employeeDTO.empStatus}">
+       <c:forEach var="employeeDTO1" items="${employeeList}">
+        <tr class="table-body" data-status="${employeeDTO1.empStatus}">
 		<td><input type="checkbox" id="delete-list" name="delete-list" data-group="delete-list"></td>
-         <td>${employeeDTO.empId}</td>
-         <td>${employeeDTO.empName}</td>
-         <td>${employeeDTO.departmentName}</td>
-         <td>${employeeDTO.empPosition}</td>
-         <td>${employeeDTO.empTel}</td>
-         <td>${employeeDTO.empPhone}</td>
-         <td>${employeeDTO.empEmail}</td>
-         <td>${employeeDTO.empHiredate}</td>
-         <td>${employeeDTO.empStatus}</td>
-         <td><input type="button" value="상세내역" class="btn btn-secondary mybutton2" onclick="openDetails('${employeeDTO.empId}')"></td>
+         <td>${employeeDTO1.empId}</td>
+         <td>${employeeDTO1.empName}</td>
+         <td>${employeeDTO1.departmentName}</td>
+         <td>${employeeDTO1.empPosition}</td>
+         <td>${employeeDTO1.empTel}</td>
+         <td>${employeeDTO1.empPhone}</td>
+         <td>${employeeDTO1.empEmail}</td>
+         <td>${employeeDTO1.empHiredate}</td>
+         <td>${employeeDTO1.empStatus}</td>
+<c:choose>     
+	<c:when test = "${(employeeDTO.empRole >= 1 && employeeDTO.departmentName eq '인사부') || employeeDTO.empRole == 3}">
+	<td><input type="button" value="상세내역" class="btn btn-secondary mybutton2" onclick="openDetails('${employeeDTO1.empId}')"></td>
+        </c:when>
+            <c:otherwise>
+    <td></td>
+			</c:otherwise>
+</c:choose>
         </tr>
        </c:forEach>   
+       
      </table>
-    </div>
+    </div><!-- table -->
     
     <div class="content-bottom">
      <div>
-      <input type="button" value="사원등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-	  <input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelEmployee">
-     </div>
+<c:choose>     
+	<c:when test = "${(employeeDTO.empRole >= 1 && employeeDTO.departmentName eq '인사부') || employeeDTO.empRole == 3}">
+		<input type="button" value="사원등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+		<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelEmployee">
+	</c:when>
+ <c:otherwise>
+ </c:otherwise>
+	</c:choose>
+	</div>
 
 <!-- -------------- 페이징처리 -------------- -->
       <div class="page-buttons">
