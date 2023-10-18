@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.NoticeDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.RequireDTO;
+import com.keypoint.service.EmployeeService;
 import com.keypoint.service.NoticeService;
 
 
@@ -40,6 +42,11 @@ public class NoticeController {
 //	upload 폴더 파일경로 객체생성
 	@Resource(name="uploadPath")
 	private String uploadPath;
+	
+//	EmployeeService 객체생성
+	@Inject
+	private EmployeeService employeeService;
+	
 	
 	
 	
@@ -75,13 +82,22 @@ public class NoticeController {
 	
 //	공지사항 리스트
 	@GetMapping("/noticeList")
-	public String noticeList(Model model, HttpServletRequest request) {
+	public String noticeList(Model model, HttpServletRequest request, HttpSession session) {
 		System.out.println("NoticeController noticeList()");
 		
 		
 //		검색어 가져오기
 		String search = request.getParameter("search");
 		String search2 = request.getParameter("search2");
+		
+		
+		
+//		세션에서 empId 가져오기
+		int empId = (int)session.getAttribute("empId");
+		
+//		empId 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
 		
 		
 //		한 화면에 보여줄 글 개수 설정

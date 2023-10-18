@@ -138,6 +138,9 @@
 		<input type="button" value="거래처 등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 		<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder">
 		</c:when>
+		<c:otherwise>
+		<input type="button" value="엑셀파일다운" class="btn btn-secondary mybutton1 dis-btn" id="excelWorkOrder">
+    	</c:otherwise>
 		</c:choose>
 		</div>
 		
