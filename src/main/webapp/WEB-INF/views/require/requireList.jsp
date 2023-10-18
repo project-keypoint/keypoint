@@ -95,6 +95,9 @@
     <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${requireDTO.productCode}', '${requireDTO.materialCode}')">
     	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
     </c:when>
+    <c:when test="${employeeDTO.empRole == 1}">
+    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
+    </c:when>
     <c:otherwise>
     <td></td>
     </c:otherwise>
@@ -106,11 +109,14 @@
 </div><!-- table -->
 <div class="content-bottom">
 <div>
-<c:choose>    
-    <c:when test = "${employeeDTO.empRole >= 2}">
-		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-		<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
-		<input type="button" value="엑셀파일다운" id="excelWorkOrder" style="margin-left: 3px;" class="btn btn-secondary mybutton1 dis-btn">
+<c:choose>
+    <c:when test="${employeeDTO.empRole >= 2}">
+        <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
+        <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
+        <input type="button" value="엑셀파일다운" id="excelWorkOrder" style="margin-left: 3px;" class="btn btn-secondary mybutton1 dis-btn">
+    </c:when>
+    <c:when test="${employeeDTO.empRole == 1}">
+        <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
     </c:when>
     <c:otherwise>
     </c:otherwise>
@@ -331,7 +337,7 @@ function doSearch() {
 //엑셀 버튼 누를 시 실행되는 함수
 $("#excelWorkOrder").click(function(){
 //		체크박스가 체크된 여부를 확인하기위한 변수선언
-	var selectedCheckbox = $("input[name='delete-list']:checked");
+	var selectedCheckbox = $("input[name='delete-list-require']:checked");
 	if(selectedCheckbox.length === 0){
 		alert("엑셀파일로 다운로드할 행을 선택해주세요")
 		return false;

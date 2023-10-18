@@ -78,6 +78,9 @@
 	<td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${materialDTO.materialCode}')">
 	    <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${materialDTO.materialCode}')"></td>
     </c:when>
+    <c:when test="${employeeDTO.empRole == 1}">
+	<td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${materialDTO.materialCode}')"></td>
+    </c:when>
     <c:otherwise>
     <td></td>
     </c:otherwise>
@@ -94,6 +97,9 @@
 		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
 		<input type="button" value="삭제" class="btn btn-secondary mybutton1">
 		<input type="button" value="엑셀파일다운" id="excelWorkOrder"  class="btn btn-secondary mybutton1 dis-btn" style="margin-left: 3px;">
+    </c:when>
+    <c:when test="${employeeDTO.empRole == 1}">
+		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
     </c:when>
     <c:otherwise>
     </c:otherwise>
