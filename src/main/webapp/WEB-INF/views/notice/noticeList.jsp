@@ -97,8 +97,14 @@ style="height: 1.5rem; width: 1.5rem; cursor: pointer; position: relative; right
 
 <div class="content-bottom">
 <div>
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
 <input type="button" value="글쓰기" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
 </div>
 
 

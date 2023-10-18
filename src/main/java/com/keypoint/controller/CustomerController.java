@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.QualityDTO;
 import com.keypoint.dto.ReceiveDTO;
 import com.keypoint.service.CustomerService;
+import com.keypoint.service.EmployeeService;
 
 @Controller
 @RequestMapping("/customer/*")
@@ -31,13 +33,17 @@ public class CustomerController {
 	@Inject	
 	private CustomerService customerService;
 	
+//	EmployeeService 객체생성
+	@Inject
+	private EmployeeService employeeService;
+	
 	
 	
 	
 //	---------------------------------------------------------------------
 //	거래처리스트
 	@GetMapping("/cusList")
-	public String cusList(HttpServletRequest request, Model model) {
+	public String cusList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("CustomerController cusList()");
 		
 //		검색어 가져오기
@@ -45,6 +51,14 @@ public class CustomerController {
 		String search2 = request.getParameter("search2");
 		String search3 = request.getParameter("search3");
 
+		
+//		세션에서 empId 가져오기
+		int empId = (int)session.getAttribute("empId");
+		
+//		empId 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		
 		
 //		한 화면에 보여줄 글 개수 설정
 		int pageSize = 5;

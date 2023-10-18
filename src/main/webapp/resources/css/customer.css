@@ -112,7 +112,10 @@ width: 16px;
 height: 16px;
 }
 .select-status {
-margin: 0 0 5px 10px;
+/* margin: 0 0 5px 10px; */
+display: flex;
+justify-content: space-between;
+margin-bottom: 5px;
 }
 .content-bottom {
 display: flex;

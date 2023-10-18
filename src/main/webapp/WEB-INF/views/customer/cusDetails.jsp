@@ -135,7 +135,13 @@
 
 </div>
 <div class="details-buttons">
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
 <input type="button" value="수정" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/customer/cusUpdate?cusCode=${customerDTO.cusCode}'">
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
 <input type="button" value="확인" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </div><!-- main-details -->

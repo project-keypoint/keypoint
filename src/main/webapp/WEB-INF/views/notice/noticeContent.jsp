@@ -60,8 +60,14 @@
 <div class="content-bottom">
 <div>
 <input type="button" value="글목록" class="btn btn-primary mybutton1" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList'">
+<c:choose>    
+    <c:when test = "${employeeDTO.empRole >= 2}">
 <input type="button" value="글수정" class="btn btn-primary mybutton1" onclick="openInsert()">
 <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete()">
+    </c:when>
+    <c:otherwise>
+    </c:otherwise>
+</c:choose>
 <br>
 </div>
 
