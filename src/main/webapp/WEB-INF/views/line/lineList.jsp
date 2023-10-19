@@ -50,9 +50,9 @@
 
 </div>
 <div class="search-select">
-<p>담당자</p> 
-<input type="text" id="empId" class="form-control search-input readonly-color" placeholder="담당자코드" style="width:110px;" readonly>
-<input type="text" name="search2" id="empName" class="form-control search-input readonly-color" placeholder="담당자이름" readonly>
+<p>관리자</p> 
+<input type="text" id="empId" class="form-control search-input readonly-color" placeholder="관리자코드" style="width:110px;" readonly>
+<input type="text" name="search2" id="empName" class="form-control search-input readonly-color" placeholder="관리자이름" readonly>
 </div>
 </div>
 
@@ -72,7 +72,7 @@
     <th style="width: 15%;">라인명</th>
 <!--     <th>작업코드</th> -->
     <th style="width: 15%;">작업명</th>
-    <th style="width: 10%;">담당자</th>
+    <th style="width: 10%;">관리자</th>
     <th style="width: 62%;">상세내역</th>
 </tr>
 <c:forEach var="LineDTO" items="${lineList}">
@@ -154,7 +154,7 @@ $(document).ready(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workLineList';
         openPopup(url);
     });
-    // 담당자 검색 팝업 열기
+    // 관리자 검색 팝업 열기
     $("#empId, #empName").click(function() {
         var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
         openPopup(url);

@@ -339,8 +339,7 @@ public class EmployeeController {
 			employeeDTO.setEmpAddress(request.getParameter("empAddress"));
 			employeeDTO.setEmpAddress_dtail(request.getParameter("empAddress_dtail"));
 			
-			// 비밀번호,이메일,연락처,내선번호
-			employeeDTO.setEmpPass(request.getParameter("empPass") + empSalt);
+			// 이메일,연락처,내선번호 / 비밀번호는 따로
 			employeeDTO.setEmpEmail(request.getParameter("empEmail"));
 			employeeDTO.setEmpPhone(request.getParameter("empPhone"));
 			employeeDTO.setEmpTel(request.getParameter("empTel"));
