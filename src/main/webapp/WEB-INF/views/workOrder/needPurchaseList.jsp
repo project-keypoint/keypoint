@@ -48,7 +48,7 @@
 			<th>수주번호</th>
 			<th>거래처코드</th>
 			<th>거래처명</th>
-			<th>버튼</th>
+			<th>소요량</th>
 		</tr>
 		<c:forEach var="workList" items="${workList}">
 			<tr>
@@ -60,7 +60,7 @@
 				<td>${workList.roCode}</td>
 				<td>${workList.cusCode}</td>
 				<td>${workList.cusName}</td>
-				<td><input type="button" value="버튼" class="btn btn-info mybutton1" onclick="openRequire('${workList.woCode}','${workList.productCode}')"></td>
+				<td><input type="button" value="소요량" class="btn btn-info mybutton1" onclick="openRequire('${workList.woCode}','${workList.productCode}')"></td>
 			</tr>
 			<script type="text/javascript">
 			function openRequire(woCode, productCode) {

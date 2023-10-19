@@ -181,8 +181,8 @@
 	<th colspan="11" class="text-right">
 	<div class="shipment-div">
 	　사원명 :
-	<input type="text" id="empId" name="shipEmpId" class="form-control search-input inputcode readonly-color ei" placeholder="사원코드(클릭)" readonly>
-	<input type="text" id="empName" class="form-control search-input inputname readonly-color en" placeholder="사원명(클릭)" readonly>
+	<input type="text" id="empId" name="shipEmpId" class="form-control search-input inputcode readonly-color ei" placeholder="사원코드(클릭)">
+	<input type="text" id="empName" class="form-control search-input inputname readonly-color en" placeholder="사원명(클릭)">
 	　납품 :
 	<input type="number" id="shipCount" class="form-control search-input inputname input-middle shipCount-input" name="shipCount" value="${receiveDTO.roCount}" min="0" max="${receiveDTO.productCount}">
 	　납품메모 :
