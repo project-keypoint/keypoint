@@ -60,29 +60,7 @@
 										<div class="font-weight-bold text-primary text-uppercase mb-1">
 											전체 납품액</div>
 										<div class="h5 mb-0 font-weight-bold text-gray-800">
-<c:set var="totalShipPrice" value="${chartDTO.totalShipPrice}" />
-
-<c:choose>
-  <c:when test="${totalShipPrice >= 100000000}">
-    <c:set var="unit">억</c:set>
-    <c:set var="divisor">100000000</c:set>
-    <fmt:formatNumber value="${totalShipPrice / divisor}" pattern="#,##0 억" var="formattedTotalShipPrice" />
-    ${formattedTotalShipPrice}
-    <c:set var="totalShipPrice" value="${totalShipPrice % divisor}" />
-  </c:when>
-</c:choose>
-
-<c:choose>
-  <c:when test="${totalShipPrice >= 10000}">
-    <c:set var="unit">원</c:set>
-    <fmt:formatNumber value="${totalShipPrice / 10000}" pattern="#,##0 만" var="formattedRemainingAmount"/>
-    ${formattedRemainingAmount}
-    <c:set var="totalShipPrice" value="${totalShipPrice % 10000}" />
-   </c:when>
-</c:choose>
-
-<fmt:formatNumber value="${totalShipPrice}" pattern="#,##0 원" var="formattedRemainingAmount"/>
-${formattedRemainingAmount}
+<fmt:formatNumber value="${chartDTO.totalShipPrice}" groupingUsed="true"/>원
 										</div>
 									</div>
 									<div class="col-auto">
@@ -99,7 +77,9 @@ ${formattedRemainingAmount}
 									<div class="col mr-2">
 										<div class="font-weight-bold text-primary text-uppercase mb-1">
 											전체 납품량</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">${chartDTO.totalProductRate}</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+										${chartDTO.totalProductRate}개
+										</div>
 									</div>
 									<div class="col-auto">
 										<!-- 									<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
@@ -117,7 +97,9 @@ ${formattedRemainingAmount}
 									<div class="col mr-2">
 										<div class="font-weight-bold text-primary text-uppercase mb-1">
 											이번달 납품액</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">${chartDTO.monthlyShipPrice}</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+										<fmt:formatNumber value="${chartDTO.monthlyShipPrice}" groupingUsed="true"/>원
+										</div>
 									</div>
 									<div class="col-auto">
 										<!-- 									<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
@@ -133,7 +115,9 @@ ${formattedRemainingAmount}
 									<div class="col mr-2">
 										<div class="font-weight-bold text-primary text-uppercase mb-1">
 											이번달 납품량</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">${chartDTO.monthlyProductRate}</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+										${chartDTO.monthlyProductRate}개
+										</div>
 									</div>
 									<div class="col-auto">
 										<!-- 									<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
@@ -314,7 +298,8 @@ function monthlyShipChart(data) {
   if (data && data.length > 0) { 
 
     var labels = data.map(function(item) { return item.label; });
-    var data   = data.map(function(item) { return item.data; });
+    var reversedData = data.map(function(item) { return item.data; }).reverse();
+//     var data   = data.map(function(item) { return item.data; });
 
     var monthlyShip = new Chart(context, {
       type: 'line',
@@ -323,7 +308,7 @@ function monthlyShipChart(data) {
         datasets: [{
           label:'',
           fill:false,
-          data:data,
+          data:reversedData,
           backgroundColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe','#4e73df'],
           borderColor:['#224abe','#4e73df','#224abe','#4e73df','#224abe','#4e73df'],
           borderWidth : 4

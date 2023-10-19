@@ -218,7 +218,7 @@
 		CONCAT('%', #{roCode}, '%') and
 		productCode like CONCAT('%', #{productCode},
 		'%')
-		and roStatus != '삭제'
+		and roStatus = '진행'
 		order by roCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -230,7 +230,7 @@
 			where
 			roCode like CONCAT('%', #{roCode}, '%') and
 			productCode like CONCAT('%', #{productCode}, '%')
-			and roStatus != '삭제'
+			and roStatus = '진행'
 		</if>
 	</select>
 	
