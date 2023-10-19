@@ -95,7 +95,6 @@
 <c:choose>    
     <c:when test = "${employeeDTO.empRole >= 2}">
 		<input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
-		<input type="button" value="삭제" class="btn btn-secondary mybutton1">
 		<input type="button" value="엑셀파일다운" id="excelWorkOrder"  class="btn btn-secondary mybutton1 dis-btn" style="margin-left: 3px;">
     </c:when>
     <c:when test="${employeeDTO.empRole == 1}">
