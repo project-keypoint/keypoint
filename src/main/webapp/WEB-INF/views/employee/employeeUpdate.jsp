@@ -159,7 +159,7 @@
 </div>
 
 <div class="form-group-column">
-<p>권한(보류)</p>
+<p>권한</p>
 <select id="empRole" name="empRole" class="form-control search-input status">
     <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
     <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
