@@ -142,7 +142,7 @@ $(document).ready(function() {
     });
  	// 사원 검색 팝업 열기
     $("#empId, #empName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        var url = '${pageContext.request.contextPath}/workOrder/productEmpList';
         openPopup(url);
     });
 });
