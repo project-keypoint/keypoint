@@ -16,7 +16,7 @@
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- 수주 CSS 적용-->
-    <link href="${pageContext.request.contextPath}/resources/css/receive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/line.css" rel="stylesheet">
 </head>
 <body>
 <div class="main-details">
@@ -38,7 +38,7 @@
 <input type="text" id="lineMemo" name="lineMemo" class="form-control search-input inputcode" placeholder="${lineDTO.lineMemo }" readonly >
 </div>
 <div class="form-group-receive">
-<p>담당자</p>
+<p>관리자</p>
 <input type="text" id="empName" name="empName" class="form-control search-input inputcode" placeholder="${lineDTO.empName }" readonly >
 </div>
 </div> 

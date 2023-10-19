@@ -145,7 +145,7 @@ String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resou
 			var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='
 					+ empId;
 			var windowWidth = 500;
-			var windowHeight = 850;
+			var windowHeight = 1250;
 			var windowLeft = (screen.width - windowWidth) / 2;
 			var windowTop = (screen.height - windowHeight) / 2;
 			var newWindow = window.open(url, '_blank', 'width=' + windowWidth
