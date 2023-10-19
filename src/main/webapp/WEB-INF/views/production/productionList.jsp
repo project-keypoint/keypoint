@@ -120,7 +120,7 @@
 							<th>양품</th>
 							<th>불량</th>
 							<th>불량사유</th>
-							<th>수주번호</th>
+<!-- 							<th>수주번호</th> -->
 							<th>거래처</th>
 							<th>상세내역</th>
 						</tr>
@@ -143,8 +143,8 @@
 								<%-- 									<td><c:out value="${fn:substring(productionDTO.woDate, 0, 10)}" /></td> --%>
 								<%-- 								<td>${productionDTO.woStatus}</td> --%>
 								<%-- 								<td>${productionDTO.productCode}</td> --%>
-								<td>${productionDTO.roCode}</td>
-								<td>${productionDTO.cusCode}</td>
+<%-- 								<td>${productionDTO.roCode}</td> --%>
+								<td>${productionDTO.cusName}</td>
 								<%-- 								<td>${productionDTO.empName}</td> --%>
 
 								<td><input type="button" value="상세내역" 

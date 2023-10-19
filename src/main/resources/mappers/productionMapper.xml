@@ -60,10 +60,12 @@
 		a.poErr, 
 		a.poCause,
 		b.roCode, 
-		b.cusCode
+		b.cusCode,
+		d.cusName
 		from production a
 		left join workOrder b on a.woCode = b.woCode
 		left join product c on b.productCode = c.productCode
+		left join customer d on b.cusCode = d.cusCode
 		<where>
 		a.woStatus != '삭제'
 		 
