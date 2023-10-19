@@ -45,12 +45,12 @@
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item active">
 		<a class="nav-link" href="${pageContext.request.contextPath}/notice/noticeList">
-			<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항(작업중)</span>
+			<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항</span>
 		</a></li>
 
 		<li class="nav-item active"><a class="nav-link"
 			href="${pageContext.request.contextPath}/employee/employeeList">
-			 <i class="fas fa-fw fa-cog"></i>	<span>사원관리(작업중)</span>
+			 <i class="fas fa-fw fa-cog"></i>	<span>사원관리</span>
 		</a></li>
 
 		<!-- Heading -->
