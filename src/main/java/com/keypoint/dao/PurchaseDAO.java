@@ -12,6 +12,7 @@ import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
 import com.keypoint.dto.ReceiveDTO;
+import com.keypoint.dto.RequireDTO;
 
 @Repository
 public class PurchaseDAO {
@@ -97,6 +98,10 @@ public class PurchaseDAO {
 	public void updatePurchaseOrderStatus(PurchaseDTO purchaseDTO) {
 	    sqlSession.update(namespace + ".updatePurchaseOrderStatus", purchaseDTO);
 	} // updatePurchaseOrderStatus
+
+	public List<RequireDTO> getRequireList(String woCode) {
+		return sqlSession.selectList(namespace+".getRequireList", woCode);
+	}// getRequireList
 
 	
 	
