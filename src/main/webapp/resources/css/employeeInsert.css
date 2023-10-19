@@ -204,7 +204,7 @@ text-align: center;
 
 /* 테두리생기는코드 */
 .main-details {
-  width: 80%;
+  width: 85%;
   font-family: 'Noto', sans-serif !important;
   color: black;
 /*   display: flex; */
@@ -212,7 +212,7 @@ text-align: center;
   align-items: center;
   border: 1px solid #ddd; /* 테두리 추가 */
   border-radius: 5px;
-  max-width: 400px;
+  max-width: 500px;
   margin: 10px auto;
   background-color: #fff;
   padding: 15px;

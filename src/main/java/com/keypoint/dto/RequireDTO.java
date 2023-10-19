@@ -16,13 +16,31 @@ public class RequireDTO {
 	private List<String> requireCodes;
 	private List<String> materialCodes;
 	private List<String> reqCounts;
+	
+	private int totalReqCount;
+	private String woCode;
+	private int materialCount;
+	
 	@Override
 	public String toString() {
 		return "RequireDTO [productCode=" + productCode + ", productName=" + productName + ", materialCode="
-				+ materialCode + ", materialName=" + materialName + ", reqCount=" + reqCount + ", materialUnit="
-				+ materialUnit + ", reqDate=" + reqDate + ", reqUpdate=" + reqUpdate + ", requireCode=" + requireCode
-				+ ", requireCodes=" + requireCodes + ", materialCodes=" + materialCodes + ", reqCounts=" + reqCounts
-				+ "]";
+				+ materialCode + ", materialName=" + materialName + ", reqCount=" + reqCount + ", totalReqCount="
+				+ totalReqCount + ", materialUnit=" + materialUnit + ", reqDate=" + reqDate + ", reqUpdate=" + reqUpdate
+				+ ", requireCode=" + requireCode + ", requireCodes=" + requireCodes + ", materialCodes=" + materialCodes
+				+ ", reqCounts=" + reqCounts + "]";
+	}
+	
+	public String getWoCode() {
+		return woCode;
+	}
+	public void setWoCode(String woCode) {
+		this.woCode = woCode;
+	}
+	public int getMaterialCount() {
+		return materialCount;
+	}
+	public void setMaterialCount(int materialCount) {
+		this.materialCount = materialCount;
 	}
 	public String getProductCode() {
 		return productCode;
@@ -53,6 +71,12 @@ public class RequireDTO {
 	}
 	public void setReqCount(int reqCount) {
 		this.reqCount = reqCount;
+	}
+	public int getTotalReqCount() {
+		return totalReqCount;
+	}
+	public void setTotalReqCount(int totalReqCount) {
+		this.totalReqCount = totalReqCount;
 	}
 	public String getMaterialUnit() {
 		return materialUnit;

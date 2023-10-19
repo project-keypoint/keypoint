@@ -151,8 +151,9 @@
 <div class="details-buttons">
 <input type="button" value="수정" class="btn btn-primary mybutton1" 
 	   onclick="location.href='${pageContext.request.contextPath}/employee/employeeUpdate?empId=${employeeDTO.empId}'">
-<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 <input type="button" value="비밀번호 초기화" class="btn btn-primary mybutton1" id="resetPasswordButton">
+<input type="button" value="확인" class="btn btn-secondary mybutton1" onClick="window.close()">
+
 </div>
 
 
@@ -186,6 +187,16 @@ resetPasswordButton.addEventListener("click", function() {
 
 // 상세주소(cusAddress_dtail) 가져오기
 var empAddress_dtail = document.getElementById("empAddress_dtail").value;
+
+// 사원 수정하기 새창
+function openUpdate(empId) {
+ 	var url = '${pageContext.request.contextPath}/employee/employeeUpdate?empId='+empId;
+    var windowWidth = 500;
+    var windowHeight = 1500;
+    var windowLeft = (screen.width - windowWidth) / 2;
+    var windowTop = (screen.height - windowHeight) / 2;
+    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+}
 
 
 
