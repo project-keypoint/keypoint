@@ -45,12 +45,12 @@
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item active">
 		<a class="nav-link" href="${pageContext.request.contextPath}/notice/noticeList">
-			<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항(작업중)</span>
+			<i class="fas fa-fw fa-tachometer-alt"></i> <span>공지사항</span>
 		</a></li>
 
 		<li class="nav-item active"><a class="nav-link"
 			href="${pageContext.request.contextPath}/employee/employeeList">
-			 <i class="fas fa-fw fa-cog"></i>	<span>사원관리(작업중)</span>
+			 <i class="fas fa-fw fa-cog"></i>	<span>사원관리</span>
 		</a></li>
 
 		<!-- Heading -->
@@ -65,9 +65,9 @@
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/receive/receiveShipList">수주＆출하목록(작업중)</a>
+						href="${pageContext.request.contextPath}/receive/receiveShipList">수주＆출하목록</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/customer/cusList">거래처관리(작업중)</a>
+						href="${pageContext.request.contextPath}/customer/cusList">거래처관리</a>
 				</div>
 			</div></li>
 
@@ -81,15 +81,15 @@
 				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/purchase/purchaseList/">발주목록(작업중)</a>
+						href="${pageContext.request.contextPath}/purchase/purchaseList/">발주목록</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/receipt/receiptList/">입고목록(작업중)</a>
+						href="${pageContext.request.contextPath}/receipt/receiptList/">입고목록</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/require/requireList">소요량목록(작업중)</a>
+						href="${pageContext.request.contextPath}/require/requireList">소요량목록</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/product/productList">완제품목록(작업중)</a>
+						href="${pageContext.request.contextPath}/product/productList">완제품목록</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/material/materialList">자재목록(작업중)</a>
+						href="${pageContext.request.contextPath}/material/materialList">자재목록</a>
 				</div>
 			</div></li>
 
@@ -107,11 +107,11 @@
 				aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록(작업중)</a>
+						href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/production/productionList">실적관리(작업중)</a>
+						href="${pageContext.request.contextPath}/production/productionList">실적관리</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/line/lineList">라인관리(작업중)</a>
+						href="${pageContext.request.contextPath}/line/lineList">라인관리</a>
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
@@ -125,8 +125,8 @@
 				data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/qc/qcList">품질검사목록(작업중)</a>
-					<a class="collapse-item" href="${pageContext.request.contextPath}/qc/disposedList">폐기관리(작업중)</a>
+						href="${pageContext.request.contextPath}/qc/qcList">품질검사목록</a>
+					<a class="collapse-item" href="${pageContext.request.contextPath}/qc/disposedList">폐기관리</a>
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>

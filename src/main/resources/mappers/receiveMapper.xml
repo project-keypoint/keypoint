@@ -144,12 +144,13 @@
 	<select id="getReceiveDetails" resultType="com.keypoint.dto.ReceiveDTO">
 		select a.roCode, a.cusCode, b.cusName, a.productCode, c.productName,
 	   		   a.roCount, a.roPrice, a.roDate, a.shipSdate, a.shipDate, a.roStatus,
-	   		   a.shipCount, a.shipPrice, a.shipMemo,
+	   		   a.shipCount, a.shipPrice, a.shipMemo, a.shipEmpId, e.empName as shipEmpName,
 	   		   a.roEmpId, d.EmpName as roEmpName
 		from receivedOrder a
 		left join customer b on a.cusCode = b.cusCode
 		left join product c on a.productCode = c.productCode
 		left join employees d on a.roEmpId = d.empId
+		left join employees e on a.shipEmpId = e.empId
 		where roCode = #{roCode}
 	</select>
 	

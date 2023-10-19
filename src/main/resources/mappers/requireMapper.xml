@@ -22,7 +22,7 @@
 		<if test="search2 != null and search2 != ''">
 			and r.materialCode = #{search2}
 		</if>
-		order by r.productCode desc
+		order by r.productCode desc, r.materialCode desc
 		limit #{startRow},#{pageSize}
 	</select>
 

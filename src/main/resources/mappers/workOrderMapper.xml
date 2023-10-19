@@ -204,21 +204,17 @@
 	</select>
 
 
-	<select id="workRoCodeList"
-		resultType="com.keypoint.dto.WorkRoDTO">
-		select 
-			roCode, 
-			cusCode, 
-			productCode, 
-			roCount, 
-			shipSdate
-		from receivedOrder 
+	<select id="workRoCodeList" resultType="com.keypoint.dto.WorkRoDTO">
+		select a.roCode, a.cusCode, a.productCode, a.roCount, a.shipSdate
+		from receivedOrder a join product b 
+		on a.productCode = b.productCode 
+		left join workOrder c 
+		on a.roCode = c.roCode
 		where 
-		roCode like
-		CONCAT('%', #{roCode}, '%') and
-		productCode like CONCAT('%', #{productCode},
-		'%')
-		and roStatus != '삭제'
+		a.roCode like CONCAT('%', #{roCode}, '%') 
+		and a.productCode like CONCAT('%', #{productCode}, '%')
+		and a.roStatus != '삭제' and a.roCount >= b.productCount
+		and c.woCode is null
 		order by roCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -230,7 +226,7 @@
 			where
 			roCode like CONCAT('%', #{roCode}, '%') and
 			productCode like CONCAT('%', #{productCode}, '%')
-			and roStatus != '삭제'
+			and roStatus = '진행'
 		</if>
 	</select>
 	

@@ -29,6 +29,7 @@ public class ReceiveDTO {
 	private int shipPrice;
 	private String shipMemo;
 	private int shipEmpId;
+	private String shipEmpName;
 	
 	private List<String> roCodes;
 	public List<String> getRoCodes() {
@@ -49,6 +50,13 @@ public class ReceiveDTO {
 				+ ", shipEmpId=" + shipEmpId + ", roCodes=" + roCodes + "]";
 	}
 	
+	
+	public String getShipEmpName() {
+		return shipEmpName;
+	}
+	public void setShipEmpName(String shipEmpName) {
+		this.shipEmpName = shipEmpName;
+	}
 	public int getShipEmpId() {
 		return shipEmpId;
 	}

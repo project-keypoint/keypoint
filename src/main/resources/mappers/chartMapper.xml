@@ -10,7 +10,7 @@
 	FROM receivedOrder
 	WHERE shipCount IS NOT NULL
 	GROUP BY DATE_FORMAT(shipDate, '%Y-%m')
-	ORDER BY shipDate ASC
+	ORDER BY shipDate DESC
 	LIMIT 6
 </select>
 

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,8 +108,24 @@
 </div>
 <div class="form-group-receive">
 <p>납품자</p>
-<input type="text" id="shipEmpId" name="shipEmpId" class="form-control search-input inputcode" value="새컬럼필요" style="width: 150px;" readonly>
-<input type="text" id="shipEmpName" name="shipEmpName" class="form-control search-input inputcode" value="새컬럼필요" readonly>
+<c:choose>
+	<c:when test="${0 eq receiveDTO.shipEmpId}">
+	<input type="text" class="form-control search-input inputcode" value="-" style="width: 150px;" readonly>
+	</c:when>
+	<c:otherwise>
+	<input type="text" id="shipEmpId" class="form-control search-input inputcode" value="${receiveDTO.shipEmpId}" style="width: 150px;" readonly>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${empty receiveDTO.shipEmpName}">
+	<input type="text" class="form-control search-input inputcode" value="-" readonly>
+	</c:when>
+	<c:otherwise>
+	<input type="text" id="shipEmpName"  class="form-control search-input inputcode" value="${receiveDTO.shipEmpName}" readonly>
+	</c:otherwise>
+</c:choose>
+<%-- <input type="text" id="shipEmpId"  class="form-control search-input inputcode" value="${receiveDTO.shipEmpId}" style="width: 150px;" readonly> --%>
+<%-- <input type="text" id="shipEmpName"  class="form-control search-input inputcode" value="${receiveDTO.shipEmpName}" readonly> --%>
 </div>
 </div>
 </div>
