@@ -21,7 +21,7 @@
 <form action="${pageContext.request.contextPath}/employee/photoUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <!-- <div class="page-title-popup">사원상세정보수정</div> -->
-<div class="page-title" style="margin-left: 160px;">사원상세정보수정</div>
+<div class="page-title" >사원상세정보수정</div>
 
 
 <div class="main-details">
@@ -47,13 +47,6 @@
 <%-- <input type="text" id="empPhoto" name="empPhoto" class="form-control search-input" value="${employeeDTO.empPhoto}"> --%>
 <!-- </div> -->
 <!-- -------------------- // 사진첨부 -------------------- -->
-
-<div class="form-group-column">
-<p>비밀번호</p>
-<input type="text" id="empPass" name="empPass" class="form-control search-input" value="${employeeDTO.empPass}" >
-</div>
-
-
 
 <div class="form-group-row">
 
@@ -172,6 +165,7 @@
 <div class="details-buttons">
 <input type="submit" value="완료" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
+<input type="button" value="비밀번호변경" class="btn btn-outline-primary btn-icon-text" style="height:34px;">
 </div>
 
 </form><!-- form 끝 -->

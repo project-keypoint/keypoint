@@ -21,7 +21,7 @@
 
 <body>
 
-<div class="page-title" style="margin-left: 200px;">사원상세정보</div>
+<div class="page-title" >사원상세정보</div>
 
 <div class="main-details">
 
