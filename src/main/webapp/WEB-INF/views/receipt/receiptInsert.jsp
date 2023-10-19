@@ -103,8 +103,8 @@
 <!-- 자재코드,담당자 검색기능 -->
 <script type="text/javascript">
 function openPopup(url) {
-    var width = 500;
-    var height = 500;
+    var width = 580;
+    var height = 550;
     var left = (screen.width - width) / 2;
     var top = (screen.height - height) / 2;
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);

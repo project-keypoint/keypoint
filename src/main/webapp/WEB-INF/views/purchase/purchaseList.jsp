@@ -240,8 +240,8 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#materialCode").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
+	            var width = 500;
+	            var height = 500;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
@@ -264,8 +264,8 @@ $(document).ready(function() {
         $(document).ready(function() {
 	        $("#materialName").click(function() {
 	            // 팝업 창 크기 및 위치 설정
-	            var width = 400;
-	            var height = 400;
+	            var width = 500;
+	            var height = 500;
 	            var left = (screen.width - width) / 2;
 	            var top = (screen.height - height) / 2;
 	            // 팝업 창 열기
