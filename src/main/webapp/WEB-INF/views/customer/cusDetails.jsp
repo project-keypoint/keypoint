@@ -37,6 +37,17 @@
 <input type="text" id="cusCategory" name="cusCategory" class="form-control search-input" placeholder="${customerDTO.cusCategory}" readonly="readonly">
 </div>
 
+<div class="form-group-customer">
+<p>업태</p>
+<input type="text" id="cusBusiness" name="cusBusiness" class="form-control search-input" placeholder="${customerDTO.cusBusiness}" readonly="readonly">
+</div>
+
+
+<div class="form-group-customer">
+<p>종목</p>
+<input type="text" id="cusType" name="cusType" class="form-control search-input" placeholder="${customerDTO.cusType}" readonly="readonly">
+</div>
+
 
 <div class="form-group-customer">
 <p>사업자번호</p>
@@ -60,18 +71,6 @@
 <div class="form-group-customer">
 <p>대표전화</p>
 <input type="text" id="cusTel" name="cusTel" class="form-control search-input" placeholder="${customerDTO.cusTel}" readonly="readonly">
-</div>
-
-
-<div class="form-group-customer">
-<p>업태</p>
-<input type="text" id="cusBusiness" name="cusBusiness" class="form-control search-input" placeholder="${customerDTO.cusBusiness}" readonly="readonly">
-</div>
-
-
-<div class="form-group-customer">
-<p>종목</p>
-<input type="text" id="cusType" name="cusType" class="form-control search-input" placeholder="${customerDTO.cusType}" readonly="readonly">
 </div>
 
 

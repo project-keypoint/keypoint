@@ -41,6 +41,21 @@
 	</select>
 	</div>
 	
+		<div class="form-group-customer">
+	<p><a style="color: red;">*</a>업태</p>
+	<select id="cusBusiness" name="cusBusiness" class="form-control search-input">
+	        <option value="제조업">제조업</option>
+	        <option value="도매 및 소매업">도매 및 소매업</option>
+	</select>
+	</div>
+	
+	<div class="form-group-customer">
+	<p><a style="color: red;">*</a>종목</p>
+	<select id="cusType" name="cusType" class="form-control search-input">
+	</select>
+	</div>
+	
+	
 	<div class="form-group-customer">
 	<p><a style="color: red;">*</a>사업자번호</p>
 	<input type="text" id="cusNumber" name="cusNumber" class="form-control search-input" placeholder="-없이 10자리 입력하세요" onblur="checkDuplicate()">
@@ -62,34 +77,6 @@
 	<input type="text" id="cusTel" name="cusTel" class="form-control search-input" placeholder="-없이 10자리 입력하세요">
 	</div>
 	
-	<div class="form-group-customer">
-	<p><a style="color: red;">*</a>업태</p>
-	<select id="cusBusiness" name="cusBusiness" class="form-control search-input">
-	        <option value="도매 및 소매업">도매 및 소매업</option>
-	        <option value="제조업">제조업</option>
-	</select>
-	</div>
-	
-	<div class="form-group-customer">
-	<p><a style="color: red;">*</a>종목</p>
-	<select id="cusType" name="cusType" class="form-control search-input">
-	        <option value="키캡">키캡</option>
-	        <option value="스위치(적축)">스위치(적축)</option>
-	        <option value="스위치(청축)">스위치(청축)</option>
-	        <option value="스위치(갈축)">스위치(갈축)</option>
-	        <option value="프레임(상부)">프레임(상부)</option>
-	        <option value="프레임(하부)">프레임(하부)</option>
-	        <option value="흡음제">흡음제</option>
-	        <option value="플레이트">플레이트</option>
-	        <option value="PCB">PCB</option>
-	        <option value="키포인트A87(적축)">키포인트A87(적축)</option>
-	        <option value="키포인트A87(청축)">키포인트A87(청축)</option>
-	        <option value="키포인트A87(갈축)">키포인트A87(갈축)</option>
-	        <option value="키포인트B104(적축)">키포인트B104(적축)</option>
-	        <option value="키포인트B104(청축)">키포인트B104(청축)</option>
-	        <option value="키포인트B104(갈축)">키포인트B104(갈축)</option>
-	</select>
-	</div>
 	
 	<div class="form-group-customer">
 	<p><a style="color: red;">*</a>주소</p>
@@ -320,6 +307,56 @@
 
     	return true;
 	}
+	
+	
+	
+//	구분 선택에 따라 업태 자동입력, 업태에 따른 종목 목록 다르게 불러오	ㅏ
+	document.getElementById("cusCategory").addEventListener("change", function() {
+	    var cusCategory = this.value;
+	    var cusBusinessSelect = document.getElementById("cusBusiness");
+	    var cusTypeSelect = document.getElementById("cusType");
+
+	    // 초기화
+	    cusBusinessSelect.selectedIndex = 0;
+	    cusTypeSelect.innerHTML = ''; // 종목 선택 내용 초기화
+
+	    if (cusCategory === "납입처") {
+	        // 납입처를 선택한 경우
+	        cusBusinessSelect.value = "제조업";
+	        cusBusinessSelect.disabled = true;
+	        // 원하는 옵션만 추가
+	        var allowedOptions = ["키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB"];
+	        for (var i = 0; i < allowedOptions.length; i++) {
+	            var option = document.createElement("option");
+	            option.value = allowedOptions[i];
+	            option.text = allowedOptions[i];
+	            cusTypeSelect.appendChild(option);
+	        }
+	    } else {
+	        // 납품처를 선택한 경우
+	        cusBusinessSelect.value = "도매 및 소매업";
+	        cusBusinessSelect.disabled = true;
+	        // 모든 옵션을 추가
+	        var allOptions = ["키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
+	        for (var i = 0; i < allOptions.length; i++) {
+	            var option = document.createElement("option");
+	            option.value = allOptions[i];
+	            option.text = allOptions[i];
+	            cusTypeSelect.appendChild(option);
+	        }
+	    }
+	});
+
+	// 초기 설정
+	document.getElementById("cusCategory").dispatchEvent(new Event('change'));
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 </script>
