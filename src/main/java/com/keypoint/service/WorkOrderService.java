@@ -147,6 +147,16 @@ public class WorkOrderService {
 		System.out.println("WorkOrderService countWorkList()");
 		return workOrderDAO.countWorkList(search);
 	}
+	
+	public List<WorkOrderDTO> getNeedPurchaseList(Map<String, Object> search) {
+		System.out.println("WorkOrderService getNeedPurchaseList()");		
+		return workOrderDAO.getNeedPurchaseList(search);
+	}
+
+	public int countNeedPurchaseList(Map<String, Object> search) {
+		System.out.println("WorkOrderService countNeedPurchaseList()");
+		return workOrderDAO.countNeedPurchaseList(search);
+	}
 
 	public void updateWorkOrderStatus(WorkOrderDTO workOrderDTO) {
 		workOrderDAO.updateWorkOrderStatus(workOrderDTO);

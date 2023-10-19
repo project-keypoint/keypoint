@@ -275,8 +275,6 @@
 			empId like CONCAT('%', #{empId}, '%')
 		</if>
 	</select>
-
-	
 	
 	<select id="workList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
@@ -297,7 +295,7 @@
 		ORDER BY woCode DESC
 		LIMIT #{startRow}, #{pageSize}
 	</select>
-
+	
 	<select id="countWorkList" resultType="java.lang.Integer">
 		select count(*)
 		from workOrder
@@ -309,7 +307,38 @@
 			and woStatus != '완료'
 		</if>
 	</select>
-
+	
+	<select id="needPurchaseList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		SELECT DISTINCT wo.woCode, wo.roCode, wo.lineCode, wo.productCode, p.productName,
+      		   wo.woCount, wo.cusCode, c.cusName
+		FROM workOrder wo
+		LEFT JOIN product p ON wo.productCode = p.productCode
+		LEFT JOIN customer c ON wo.cusCode = c.cusCode
+		WHERE EXISTS (SELECT 1 
+    					  FROM requirement b 
+    					  JOIN material c ON b.materialcode = c.materialcode 
+    					  WHERE (b.reqcount * wo.woCount) > c.materialcount 
+      					  AND wo.productcode = b.productcode)
+		AND   wo.woStatus != '삭제' 
+		AND   wo.woStatus != '완료'
+		AND woCode like CONCAT('%', #{woCode}, '%') 
+		AND roCode like CONCAT('%', #{roCode}, '%')
+		ORDER BY woCode DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="countNeedPurchaseList" resultType="java.lang.Integer">
+		select count(*)
+		from workOrder
+		<if test="woCode!=null and roCode!=null">
+			where
+			woCode like CONCAT('%', #{woCode}, '%') and
+			roCode like CONCAT('%', #{roCode}, '%')
+			and woStatus != '삭제'
+			and woStatus != '완료'
+		</if>
+	</select>
 	
 	<update id="updateWorkOrderStatus">
 	UPDATE workOrder

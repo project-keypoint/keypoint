@@ -189,6 +189,24 @@ public class WorkOrderDAO {
 		System.out.println("WorkOrderDAO countWorkList()");
 		return sqlSession.selectOne(namespace+".countWorkList", search);
 	}
+	
+	public List<WorkOrderDTO> getNeedPurchaseList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO getWorkList()");
+		
+		if(search.get("woCode")==null) {
+			search.put("woCode", "");
+		}
+		if(search.get("roCode")==null) {
+			search.put("roCode", "");
+		}
+		return sqlSession.selectList(namespace+".needPurchaseList", search);
+	}
+
+
+	public int countNeedPurchaseList(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countWorkList()");
+		return sqlSession.selectOne(namespace+".countNeedPurchaseList", search);
+	}
 
 	public void updateWorkOrderStatus(WorkOrderDTO workOrderDTO) {
 		System.out.println("WorkOrderDAO updateWorkOrderStatus()");
