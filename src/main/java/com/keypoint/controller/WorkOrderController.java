@@ -447,6 +447,7 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 		search.put("empName", empName);
 		search.put("startRow", pageDTO.getStartRow());
 		search.put("pageSize", pageDTO.getPageSize());
+		search.put("empRole", 0); 
 
 		List<WorkOrderDTO> workEmpList = workOrderService.getWorkEmpList(search);
 			

@@ -253,18 +253,16 @@
 		</if>
 	</select>
 
-	<select id="workEmpList"
-		resultType="com.keypoint.dto.WorkOrderDTO">
-		select empId, empName
-		from employees
-		where
-		empId like
-		CONCAT('%', #{empId}, '%') and
-		empName like CONCAT('%', #{empName},
-		'%')
-		order by empId desc
-		limit #{startRow}, #{pageSize}
-	</select>
+	<select id="workEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
+    select empId, empName
+    from employees
+    where empId like CONCAT('%', #{empId}, '%')
+    and empName like CONCAT('%', #{empName}, '%')
+    and empRole != 0  <!-- empRole이 0이 아닌 경우만 필터링 -->
+    order by empId desc
+    limit #{startRow}, #{pageSize}
+</select>
+
 
 	<select id="countEmpList" resultType="java.lang.Integer">
 		select count(*)
