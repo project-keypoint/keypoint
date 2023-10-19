@@ -197,15 +197,12 @@ body {
 }
 
 .mybutton1 {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+    line-height: 0;
+    height: 32px;
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #4e73df;
     color: #fff;
 }
 
