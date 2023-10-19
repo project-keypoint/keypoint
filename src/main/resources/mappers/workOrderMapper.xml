@@ -280,25 +280,22 @@
 	
 	<select id="workList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
-		select 
-			wo.woCode, 
-			wo.roCode, 
-			wo.lineCode, 
-			wo.productCode, 
-			p.productName, 
-			wo.woCount, 
-			wo.cusCode, 
-			c.cusName
-		from workOrder wo
-		left join product p on wo.productCode = p.productCode
-		left join customer c on wo.cusCode = c.cusCode
-		where
-			woCode like CONCAT('%', #{woCode}, '%') 
-			and roCode like CONCAT('%', #{roCode}, '%')
-			and wo.woStatus != '삭제'
-			and wo.woStatus != '완료'
-		order by woCode desc
-		limit #{startRow}, #{pageSize}
+		SELECT DISTINCT wo.woCode, wo.roCode, wo.lineCode, wo.productCode, p.productName,
+      		   wo.woCount, wo.cusCode, c.cusName
+		FROM workOrder wo
+		LEFT JOIN product p ON wo.productCode = p.productCode
+		LEFT JOIN customer c ON wo.cusCode = c.cusCode
+		WHERE NOT EXISTS (SELECT 1 
+    					  FROM requirement b 
+    					  JOIN material c ON b.materialcode = c.materialcode 
+    					  WHERE (b.reqcount * wo.woCount) > c.materialcount 
+      					  AND wo.productcode = b.productcode)
+		AND   wo.woStatus != '삭제' 
+		AND   wo.woStatus != '완료'
+		AND woCode like CONCAT('%', #{woCode}, '%') 
+		AND roCode like CONCAT('%', #{roCode}, '%')
+		ORDER BY woCode DESC
+		LIMIT #{startRow}, #{pageSize}
 	</select>
 
 	<select id="countWorkList" resultType="java.lang.Integer">

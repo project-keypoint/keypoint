@@ -297,14 +297,15 @@ function monthlyShipChart(data) {
 
   if (data && data.length > 0) { 
 
-    var labels = data.map(function(item) { return item.label; });
-    var reversedData = data.map(function(item) { return item.data; }).reverse();
+//     var labels = data.map(function(item) { return item.label; });
 //     var data   = data.map(function(item) { return item.data; });
+    var reversedLabels = data.map(function(item) { return item.label; }).reverse();
+    var reversedData = data.map(function(item) { return item.data; }).reverse();
 
     var monthlyShip = new Chart(context, {
       type: 'line',
       data: {
-        labels: labels,
+        labels: reversedLabels,
         datasets: [{
           label:'',
           fill:false,

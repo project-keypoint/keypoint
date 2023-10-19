@@ -20,8 +20,8 @@ public class WorkOrderDTO {
 	private String cusName; // 거래처 명
 	private String empName; // 사원 명
 	private String shipSdate; // 납품예정일
-
 	
+	private String stockCheck;
 
 	@Override
 	public String toString() {
@@ -34,34 +34,33 @@ public class WorkOrderDTO {
 
 	
 	
+	public String getStockCheck() {
+		return stockCheck;
+	}
+	public void setStockCheck(String stockCheck) {
+		this.stockCheck = stockCheck;
+	}
 	public String getWoCode() {
 		return woCode;
 	}
-
 	public void setWoCode(String woCode) {
 		this.woCode = woCode;
 	}
-
 	public String getRoCode() {
 		return roCode;
 	}
-
 	public void setRoCode(String roCode) {
 		this.roCode = roCode;
 	}
-
 	public int getEmpId() {
 		return empId;
 	}
-
 	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
-
 	public String getLineCode() {
 		return lineCode;
 	}
-
 	public void setLineCode(String lineCode) {
 		this.lineCode = lineCode;
 	}
