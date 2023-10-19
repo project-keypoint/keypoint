@@ -470,7 +470,7 @@ $(document).ready(function() {
     });
     // 상품명 검색 팝업 열기
     $("#empId, #empName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
+        var url = '${pageContext.request.contextPath}/workOrder/receiveEmpList';
         openPopup(url);
     });
 });

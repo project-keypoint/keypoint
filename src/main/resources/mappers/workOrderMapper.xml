@@ -259,11 +259,35 @@
     where empId like CONCAT('%', #{empId}, '%')
     and empName like CONCAT('%', #{empName}, '%')
     and empStatus NOT IN ('퇴직', '휴직')  
+    and departmentName IN ('생산부')
+    and empName NOT IN ('관리자')
     order by empId desc
     limit #{startRow}, #{pageSize}
 </select>
 
+<select id="receiveEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
+    select empId, empName
+    from employees
+    where empId like CONCAT('%', #{empId}, '%')
+    and empName like CONCAT('%', #{empName}, '%')
+    and empStatus NOT IN ('퇴직', '휴직')  
+    and departmentName IN ('영업부')
+      and empName NOT IN ('관리자')
+    order by empId desc
+    limit #{startRow}, #{pageSize}
+</select>
 
+<select id="productEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
+    select empId, empName
+    from employees
+    where empId like CONCAT('%', #{empId}, '%')
+    and empName like CONCAT('%', #{empName}, '%')
+    and empStatus NOT IN ('퇴직', '휴직')  
+    and departmentName IN ('자재부')
+      and empName NOT IN ('관리자')
+    order by empId desc
+    limit #{startRow}, #{pageSize}
+</select>
 
 
 	<select id="countEmpList" resultType="java.lang.Integer">
