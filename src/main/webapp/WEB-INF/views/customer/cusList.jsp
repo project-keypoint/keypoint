@@ -34,10 +34,26 @@
 		<div class="search-b">
 		<div class="search-select">
 		<p>업체명</p> 
-		<input type="text" id="cusCode" name="cusCode" class="form-control search-input readonly-color" placeholder="업체코드" style="width:110px;" readonly>
-		<input type="text" id="cusName" class="form-control search-input readonly-color" placeholder="업체명(클릭)" readonly>
+		<input type="hidden" id="cusCode" name="cusCode" class="form-control search-input readonly-color" placeholder="업체코드" style="width:110px;" readonly>
+		<input type="text" id="cusName" name="cusName" class="form-control search-input readonly-color" placeholder="업체명(클릭)" readonly>
 		</div>
 		</div>
+		<div class="search-b">
+		<div class="search-select">
+		<p style="width:50px;">자재명</p> 
+		<input type="text" name="search" id="materialCode" class="form-control search-input  readonly-color" placeholder="자재코드" style="width:110px;" readonly>
+		<input type="text" id="materialName" class="form-control search-input  readonly-color" placeholder="자재명(클릭)" readonly>
+		</div>
+		</div>
+		<div class="search-b">
+		<div class="search-select">
+		<p style="width:50px;">자재명</p> 
+		<input type="text" name="search" id="materialCode" class="form-control search-input  readonly-color" placeholder="자재코드" style="width:110px;" readonly>
+		<input type="text" id="materialName" class="form-control search-input  readonly-color" placeholder="자재명(클릭)" readonly>
+		</div>
+		</div>
+		
+		
 		<div class="search-button">
 		<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
 		<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
@@ -63,25 +79,25 @@
 		</form>
 		
 		<form action="${pageContext.request.contextPath}/customer/cusList" method="get">
-		<input type="hidden" name="search2" value="거래중">
+		<input type="hidden" name="search2" value="납입처">
 		<c:choose>
-		<c:when test="${'거래중' eq pageDTO.search2}">
-		<input type="submit" class="btn btn-primary mybutton1" value="거래중" style="margin-right: 4px;">
+		<c:when test="${'납입처' eq pageDTO.search2}">
+		<input type="submit" class="btn btn-primary mybutton1" value="납입처" style="margin-right: 4px;">
 		</c:when>
 		<c:otherwise>
-		<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="거래중" style="margin-right: 4px;">
+		<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="납입처" style="margin-right: 4px;">
 		</c:otherwise>
 		</c:choose>
 		</form>
 		
 		<form action="${pageContext.request.contextPath}/customer/cusList" method="get">
-		<input type="hidden" name="search2" value="거래정지">
+		<input type="hidden" name="search2" value="납품처">
 		<c:choose>
-		<c:when test="${'거래정지' eq pageDTO.search2}">
-		<input type="submit" class="btn btn-primary mybutton1" value="거래정지" style="margin-right: 4px;">
+		<c:when test="${'납품처' eq pageDTO.search2}">
+		<input type="submit" class="btn btn-primary mybutton1" value="납품처" style="margin-right: 4px;">
 		</c:when>
 		<c:otherwise>
-		<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="거래정지" style="margin-right: 4px;">
+		<input type="submit" class="btn btn-secondary mybutton1 dis-btn" value="납품처" style="margin-right: 4px;">
 		</c:otherwise>
 		</c:choose>
 		</form>
@@ -200,6 +216,11 @@
 //		상품명 검색 팝업 열기
 	    $("#productCode, #productName").click(function() {
 	        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+	        openPopup(url);
+	    });
+	    // 자재명 검색 팝업 열기
+	    $("#materialCode, #materialName").click(function() {
+	        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
 	        openPopup(url);
 	    });
 	});
