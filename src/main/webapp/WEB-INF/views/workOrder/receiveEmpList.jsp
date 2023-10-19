@@ -78,7 +78,7 @@
 			<c:forEach var="i" begin="${pageDTO.startPage }"
 				end="${pageDTO.endPage }" step="1">
 				<a
-					href="${pageContext.request.contextPath }/workOrder/receiveEmpListempId=${search.empId}&empName=${search.empName}&pageNum=${i}"
+					href="${pageContext.request.contextPath }/workOrder/receiveEmpList?empId=${search.empId}&empName=${search.empName}&pageNum=${i}"
 					<c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a>
 			</c:forEach>
 
