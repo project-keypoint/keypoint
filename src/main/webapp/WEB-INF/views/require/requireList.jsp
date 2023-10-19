@@ -95,9 +95,6 @@
     <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${requireDTO.productCode}', '${requireDTO.materialCode}')">
     	<input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="confirmDelete('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
     </c:when>
-    <c:when test="${employeeDTO.empRole == 1}">
-    <td><input type="button" value="수정" class="btn btn-primary mybutton1" onclick="openUpdate('${requireDTO.productCode}', '${requireDTO.materialCode}')"></td>
-    </c:when>
     <c:otherwise>
     <td></td>
     </c:otherwise>
@@ -114,9 +111,6 @@
         <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
         <input type="button" value="삭제" class="btn btn-secondary mybutton1" onclick="deleteRequire()">
         <input type="button" value="엑셀파일다운" id="excelWorkOrder" style="margin-left: 3px;" class="btn btn-secondary mybutton1 dis-btn">
-    </c:when>
-    <c:when test="${employeeDTO.empRole == 1}">
-        <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()">
     </c:when>
     <c:otherwise>
     </c:otherwise>
@@ -172,7 +166,7 @@ function openPopup(url) {
 $(document).ready(function() {
     // 상품명 검색 팝업 열기
     $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        var url = '${pageContext.request.contextPath}/product/workProdList';
         openPopup(url);
     });
 });

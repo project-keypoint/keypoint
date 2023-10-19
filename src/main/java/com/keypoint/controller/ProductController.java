@@ -1,6 +1,8 @@
 package com.keypoint.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.ProductDTO;
+import com.keypoint.dto.WorkOrderDTO;
 import com.keypoint.service.EmployeeService;
 import com.keypoint.service.ProductService;
+import com.keypoint.service.WorkOrderService;
 
 @Controller
 @RequestMapping("/product/*")
@@ -30,6 +35,127 @@ public class ProductController {
 	//employeeService 객체생성
 	@Inject
 	private EmployeeService employeeService;
+	
+	//workOrderService 객체생성(자재부 사원/대리를 위해 완제품목록 팝업띄우기위해)
+	@Inject
+	private WorkOrderService workOrderService;
+	
+	// 완제품목록 팝업(자재부 사원/대리를 위해)
+	@GetMapping("/workProdList")
+	public String workProdList(Model model, HttpServletRequest request) {
+		String productCode = request.getParameter("productCode");
+		String productName = request.getParameter("productName");
+		
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize = 5; // sql문에 들어가는 항목
+		
+		// 현페이지 번호 가져오기
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		
+		PageDTO pageDTO = new PageDTO();
+		
+		// 페이지번호를 정수형 변경
+		int currentPage=Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1; // sql문에 들어가는 항목
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		
+		pageDTO.setStartRow(startRow-1); // limit startRow (0이 1열이기 때문 1을 뺌)
+		pageDTO.setEndRow(endRow);
+
+		Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
+		search.put("productCode", productCode);
+		search.put("productName", productName);
+		search.put("startRow", pageDTO.getStartRow());
+		search.put("pageSize", pageDTO.getPageSize());
+ 
+		List<WorkOrderDTO> workProdList = workOrderService.getWorkProdList(search);
+			
+		//페이징 처리
+		int count = workOrderService.countProdList(search);
+
+		int pageBlock = 10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+		 	endPage = pageCount;
+		 }
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+				
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("search", search);
+		model.addAttribute("workProdList", workProdList);
+		return "product/workProdList";
+	}//	workProdList
+	
+	// 거래처목록 팝업(자재부 사원/대리를 위해)
+	@GetMapping("/workCusList")
+	public String workCusList(Model model, HttpServletRequest request, PageDTO pageDTO) { 
+		String cusCode = request.getParameter("cusCode");
+		String cusName = request.getParameter("cusName");
+		
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize = 5; // sql문에 들어가는 항목
+		
+		// 현페이지 번호 가져오기
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		// 페이지번호를 정수형 변경
+		int currentPage=Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1; // sql문에 들어가는 항목
+		int endRow = startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setStartRow(startRow-1); // limit startRow (0이 1열이기 때문 1을 뺌)
+		pageDTO.setEndRow(endRow);
+
+		Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
+		search.put("cusCode", cusCode);
+		search.put("cusName", cusName);
+		search.put("startRow", pageDTO.getStartRow());
+		search.put("pageSize", pageDTO.getPageSize());
+
+		List<WorkOrderDTO> workCusList = workOrderService.getWorkCusList(search);
+			
+		//페이징 처리
+		int count = workOrderService.countCusList(search);
+
+		int pageBlock = 10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+		 	endPage = pageCount;
+		 }
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+				
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("search", search);
+		model.addAttribute("workCusList", workCusList);
+		return "product/workCusList";
+	}// workCusList
+//	------------------------------여기까지 완제품, 거래처 팝업리스트---------------------------------------
 	
 //	가상주소 http://localhost:8080/keypoint/product/productList
 	@GetMapping("/productList")

@@ -160,7 +160,7 @@ function openPopup(url) {
 $(document).ready(function() {
     // 상품명 검색 팝업 열기
     $("#productCode, #productName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
+        var url = '${pageContext.request.contextPath}/product/workProdList';
         openPopup(url);
     });
 });
