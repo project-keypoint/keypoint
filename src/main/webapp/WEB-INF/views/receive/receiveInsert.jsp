@@ -68,7 +68,7 @@
 
 <div class="search-bar-popup">
 <div class="form-group-receive-insert">
-<p>당담자</p>
+<p>담당자</p>
 <input type="text" id="empId" name="roEmpId" class="form-control search-input inputcode readonly-color" style="width: 150px;" placeholder="사원검색" readonly>
 <input type="text" id="empName" name="roEmpName" class="form-control search-input inputcode readonly-color" placeholder="사원명" readonly>
 </div>

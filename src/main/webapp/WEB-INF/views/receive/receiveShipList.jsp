@@ -85,7 +85,7 @@
 <div class="search-b">
 <div class="search-date">
 <p>수주일자</p>
-<input type="text" id="roDateStart" name="search3" class="form-control search-input readonly-color" 
+<input type="text" id="roDate1" name="search3" class="form-control search-input readonly-color" 
        placeholder="${empty pageDTO.search3 ? '수주일자' : ''}" value="${pageDTO.search3}" readonly>
 ~<input type="text" id="roDate2" name="search4" class="form-control search-input readonly-color" 
         placeholder="${empty pageDTO.search4 ? '수주일자' : ''}" value="${pageDTO.search4}" readonly>
@@ -304,7 +304,7 @@
         </c:choose>
     </c:forEach>
 	<c:if test="${pageDTO1.endPage < pageDTO1.pageCount}">
-        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${currentPage}&pageNum1=${pageDTO1.startPage + pageDTO1.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&gt;</a> 
+        <a href="${pageContext.request.contextPath}/receive/receiveShipList?pageNum=${pageDTO.pageNum}&pageNum1=${pageDTO1.startPage + pageDTO1.pageBlock}&check1=${pageDTO.check1}&check2=${pageDTO.check2}&check3=${pageDTO.check3}&check4=${pageDTO.check4}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}&search8=${pageDTO.search8}" class="page-button">&gt;</a> 
     </c:if> 
 </div>
 </div>
@@ -330,7 +330,7 @@
 <script type="text/javascript">
 //수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
 $(function() {
-    $("#roDateStart").datepicker({
+    $("#roDate1").datepicker({
     	dateFormat: "yy-mm-dd"
     });
     $("#roDate2").datepicker({
