@@ -42,9 +42,9 @@ margin-right: 50px;
 width: 100%;
 font-size: 26px;
 font-weight: bold;
-margin-left: 30px;
-margin-top: 30px;
-margin-bottom: 30px;
+margin-left: 187px;
+margin-top: 0.5rem;
+margin-bottom: -0.5rem;
 }
 .search-bar {
 width: 100%;
@@ -82,7 +82,7 @@ display: flex;
 flex-direction: column;
 }
 .search-input {
-margin-left: 5px;
+margin-left: 0px;
 margin-right: 5px;
 width: 200px;
 }
@@ -168,15 +168,15 @@ body {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
-    margin: 20px auto;
+    padding:15px;
+    margin: 10px auto;
     width: 80%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-group-receive {
-    margin-bottom: 20px;
-}
+/* .form-group-receive { */
+/*     margin-bottom: 20px; */
+/* } */
 
 .form-group-receive p {
     font-weight: bold;
@@ -187,7 +187,8 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    background-color: #f9f9f9;
+    background-color: #f9f9f9;\
+    margin-left : -1px
 }
 
 .details-buttons {
@@ -230,3 +231,15 @@ body {
 	width: 100px;
 }
 
+.btn.btn-icon-text:active {
+  background-color: gray; /* 원하는 색상으로 변경하세요. */
+}
+
+/* 마우스 커서가 버튼 위로 올라갔을 때 배경 색상 변경 */
+.btn.btn-icon-text:hover {
+  background-color: gray; /* 원하는 색상으로 변경하세요. */
+}
+
+p{
+   margin-bottom: 0.2rem;
+}

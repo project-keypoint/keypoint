@@ -266,8 +266,8 @@ function openDetails(empId) {
 // 사원등록 새창
 function openInsert() {
     var url = '${pageContext.request.contextPath}/employee/employeeInsert';
-    var windowWidth = 650;
-    var windowHeight = 900;
+    var windowWidth = 500;
+    var windowHeight = 950;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
@@ -372,58 +372,6 @@ $("#excelEmployee").click(function(){
 	);
 			
 });
-
-
-
-
-// 체크박스부분
-// $(document).ready(function() {
-//   // 페이지 로딩 시 초기 설정
-//   $("tr.table-body").show();
-
-//   $("input[name='status']").change(function() {
-//     // 'status' 그룹 내의 모든 체크박스를 선택 해제
-//     $("input[name='status']").prop("checked", false);
-
-//     // 선택한 체크박스만 체크되게 변경
-//     $(this).prop("checked", true);
-
-//     filterTableByStatus($(this).val());
-//   });
-
-  // 초기화 버튼 클릭 시
-//   $("#resetFilters").click(function() {
-//     // 모든 체크박스 해제
-//     $("input[name='status']").prop("checked", false);
-//     $("tr.table-body").show();
-
-//     // 검색 필드 초기화
-//     $("#search").val("");
-//     $("#search2").val("");
-// //     $("#search3").val("");
-    
-//     // 페이지 새로고침
-//         location.href = "${pageContext.request.contextPath}/employee/employeeList";
-//   });
-
-  
-//   // 체크박스 누르면 해당하는 리스트 나오게
-//   function filterTableByStatus(status) {
-//     if (status === '재직') {
-//       $("tr.table-body[data-status='재직']").show();
-//       $("tr.table-body[data-status!='재직']").hide();
-//     } else if (status === '휴직') {
-//       $("tr.table-body[data-status='휴직']").show();
-//       $("tr.table-body[data-status!='휴직']").hide();
-//     } else if (status === '퇴직') {
-//       $("tr.table-body[data-status='퇴직']").show();
-//       $("tr.table-body[data-status!='퇴직']").hide();
-//     }
-//   }
-// });
-
-
-
 
 
 

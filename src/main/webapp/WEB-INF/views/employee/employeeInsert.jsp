@@ -36,18 +36,20 @@
 <!-- </div> -->
 
 <div class="imgbtn">
-<label for="file">
-<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;"> 
-<i class="ti-upload btn-icon-prepend"></i>사진 업로드하기
-</span>
-</label>
-<input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>
+  <label for="file" style="display: flex; justify-content: center; margin-top: -20px;">
+    <span class="btn btn-outline-primary btn-icon-text" style="width: 180px;"> 
+      <i class="ti-upload btn-icon-prepend"></i>사진 업로드하기
+    </span>
+  </label>
+  <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;">
+</div>
+
+
 
 <!-- -------------------- // 사진첨부 -------------------- -->
   </div>
 
 </div>
-
 
 <div class="form-group-customer">
 <p>사원번호</p>
@@ -96,7 +98,7 @@
 
 <div class="form-group-customer">
 <p>부서</p>
-<select id="departmentName" name="departmentName" class="form-control search-input">
+<select id="departmentName" name="departmentName" class="form-control search-input" style="width: 350px;">
         <option value="영업부">영업</option>
         <option value="생산부">생산</option>
         <option value="자재부">자재</option>
@@ -106,7 +108,7 @@
 
 <div class="form-group-customer">
 <p>직급</p>
-<select id="empPosition" name="empPosition" class="form-control search-input">
+<select id="empPosition" name="empPosition" class="form-control search-input" style="width: 350px;">
         <option value="사원">사원</option>
         <option value="대리">대리</option>
         <option value="부장">부장</option>
@@ -136,7 +138,7 @@
 <!-- 기본권한이 1이므로 화면에서는 안 보이게 하고 싶음 -->
 <div class="form-group-customer">
 <p>권한</p>
-<select id="empRole" name="empRole" class="form-control search-input">
+<select id="empRole" name="empRole" class="form-control search-input" style="width: 350px;">
         <option value="0">0</option>
         <option value="1" selected>1</option>
         <option value="2">2</option>

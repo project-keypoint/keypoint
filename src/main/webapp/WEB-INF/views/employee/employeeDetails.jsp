@@ -21,8 +21,7 @@
 
 <body>
 
-<!-- <div class="page-title-popup">상세정보</div> -->
-<div class="page-title">상세정보</div>
+<div class="page-title" style="margin-left: 200px;">사원상세정보</div>
 
 <div class="main-details">
 
@@ -32,10 +31,9 @@
 
 <!-- 사진부분 -->
 <div class="form-group-column">
-        <img src="${pageContext.request.contextPath }/resources/upload/${employeeDTO.empPhoto}" 
-         width="200" height="200">
+  <img src="${pageContext.request.contextPath}/resources/upload/${employeeDTO.empPhoto}" 
+       width="200" height="200" style="display: block; margin: 0 auto;">
 </div>
-
 
 <div class="form-group-column" style="display:none;">
 <p>비밀번호</p>
@@ -161,20 +159,8 @@
 
 
 <script>
-// 삭제 확인메세지(필요없음)
-// function confirmDelete() {
-//     if (confirm("정말로 삭제하시겠습니까?")) {
-//         location.href = '${pageContext.request.contextPath}/employee/employeeDelete?empId=${employeeDTO.empId}';
-//     } else {
-    	
-//     }
-// }
-
-
-
 
 // 비밀번호 초기화
-
 resetPasswordButton.addEventListener("click", function() {
     // 확인 메시지 창 표시
     if (confirm("비밀번호를 초기화하시겠습니까?")) {

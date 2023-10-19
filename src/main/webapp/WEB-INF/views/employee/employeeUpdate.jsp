@@ -21,7 +21,8 @@
 <form action="${pageContext.request.contextPath}/employee/photoUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <!-- <div class="page-title-popup">사원상세정보수정</div> -->
-<div class="page-title">사원상세정보수정</div>
+<div class="page-title" style="margin-left: 160px;">사원상세정보수정</div>
+
 
 <div class="main-details">
 
@@ -29,19 +30,17 @@
 
 <!-- -------------------- 사진첨부 -------------------- -->
 <div class="form-group-column">
-<!-- <p>사진</p> -->
-<!-- <img id="preview" width="200" height="230" style="border-radius: 3px"> -->
+<!-- 사진 부분-->
 <img id="preview" src="${pageContext.request.contextPath }/resources/upload/${employeeDTO.empPhoto}" 
-     width="200" height="200">
+     width="200" height="200"  style="display: block; margin: 0 auto;">
 </div>   
 
-<label for="file">
-<span class="btn btn-outline-danger btn-icon-text" style="width: 200px;">
-<i class="ti-upload btn-icon-prepend"></i>사진수정하기 
-</span>   
+<label for="file" style="display: flex; justify-content: center;">
+  <span class="btn btn-outline-primary btn-icon-text" style="width: 180px;">
+    <i class="ti-upload btn-icon-prepend"></i>사진 수정하기
+  </span>
 </label>
 <input type="hidden" name="oldfile" value="${employeeDTO.empPhoto}">
-
 
 <div class="imgbtn">
 <input type="file" name="empPhoto" id="file" accept="image/*" onchange="setThumbnail(event);" style="display: none;"></div>

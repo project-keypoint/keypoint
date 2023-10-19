@@ -83,7 +83,7 @@ flex-direction: column;
 }
 .search-input {
 margin-left: 5px;
-margin-right: 5px;
+margin-right: 30px;
 width: 200px;
 }
 .table-list {
@@ -188,34 +188,23 @@ background-color: #f0f0f0; /* 옅은 회색 배경색 */
 width: 100%;
 font-size: 26px;
 font-weight: bold;
-margin-top: 30px;
-margin-bottom: 30px;
+margin-top: 0.5rem;
+margin-bottom: 0.5rem;
 text-align: center;
 }
-/* .main-details { */
-/* width: 100%; */
-/* font-family: 'Noto', sans-serif !important; */
-/* color: black; */
-/* display: flex; */
-/* flex-direction: column; */
-/* align-items: center; */
-/* /* margin: 0 0 0 10px; */ 
-/* } */
 
-/* 새로운코드임 */
-/* .main-details { */
-/*     max-width: 400px; */
-/*     margin: 0 auto; */
-/*     background-color: #fff; */
-/*     padding: 20px; */
-/*     border: 1px solid #ddd; */
-/*     border-radius: 5px; */
-/*     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+/* .page-title { */
+/* width: 100%; */
+/* font-size: 26px; */
+/* font-weight: bold; */
+/* margin-left: 187px; */
+/* margin-top: 0.5rem; */
+/* margin-bottom: -0.5rem; */
 /* } */
 
 /* 테두리생기는코드 */
 .main-details {
-  width: 100%;
+  width: 80%;
   font-family: 'Noto', sans-serif !important;
   color: black;
 /*   display: flex; */
@@ -224,9 +213,9 @@ text-align: center;
   border: 1px solid #ddd; /* 테두리 추가 */
   border-radius: 5px;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 10px auto;
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -268,6 +257,7 @@ height: 30px;
 #departmentName.search-input,#empPosition.search-input, #empHiredate.search-input, #empRole.search-input, 
 #zonecode.search-input, #empAddress_dtail.search-input, #empPhoto.search-input {
 width: 280px;
+height: 35px;
 }
 
 
