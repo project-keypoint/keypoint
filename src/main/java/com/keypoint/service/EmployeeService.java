@@ -31,6 +31,14 @@ public class EmployeeService {
 		return employeeDAO.userCheck(employeeDTO);
 	}
 	
+	// 강수빈 - 비밀번호 수정 
+	public void modifyPass(int empId, String empPass) {
+	    Map<String, Object> parameterMap = new HashMap<>();
+	    parameterMap.put("empId", empId);
+	    parameterMap.put("empPass", empPass);
+	    employeeDAO.modifyPass(parameterMap);
+	}
+	
 	// 강수빈 - 비밀번호 값 가져오기
 	public int getInitialPass() {
         return employeeDAO.getInitialPass();
@@ -39,6 +47,15 @@ public class EmployeeService {
 	public String getEmpSalt(int empId) {
 		return employeeDAO.getEmpSalt(empId);
 	}
+	
+	// 비밀번호 초기화
+		 public void resetPassword(int empId) {
+		        Map<String, Object> parameterMap = new HashMap<>();
+		        parameterMap.put("empId", empId);
+		        parameterMap.put("empPass", empId);
+		        employeeDAO.resetPassword(parameterMap);
+	    }
+
 	
 	// -------------------------------------------------------------------
 	
@@ -102,13 +119,6 @@ public class EmployeeService {
 
 
 	
-	 public void resetPassword(int empId) {
-	        Map<String, Object> parameterMap = new HashMap<>();
-	        parameterMap.put("empId", empId);
-	        parameterMap.put("empPass", empId);
-	        employeeDAO.resetPassword(parameterMap);
-    }
-
 	 
 
 

@@ -165,7 +165,7 @@
 <div class="details-buttons">
 <input type="submit" value="완료" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
-<input type="button" value="비밀번호변경" class="btn btn-outline-primary btn-icon-text" style="height:34px;">
+<input type="button" value="비밀번호변경" class="btn btn-primary mybutton1" id="modifyPass">
 </div>
 
 </form><!-- form 끝 -->
@@ -333,6 +333,38 @@ function addHyphen(input) {
 // 	  }).open();
 // 	}
 	
+// 비밓번호 수정 	
+modifyPass.addEventListener("click", function() {
+    var empPass = prompt("새로운 비밀번호를 입력하세요:");
+    
+    if (empPass === null || empPass.trim() === "") {
+        return alert("비밀번호를 입력하세요");
+    }
+
+    if (confirm("비밀번호를 변경하시겠습니까?")) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", `${pageContext.request.contextPath}/employee/modifyPass/${employeeDTO.empId}`, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        // empPass 값을 JSON 객체로 만들어 서버로 보냅니다.
+        var data = {
+            empPass: empPass
+        };
+
+        // 객체를 JSON 문자열로 변환하여 전송합니다.
+        xhr.send(JSON.stringify(data));
+
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                console.log("비밀번호 변경 성공");
+                alert("비밀번호가 변경되었습니다.");
+                location.reload();
+            } else {
+                console.error("비밀번호 변경 실패");
+            }
+        };
+    }
+});
 
 
 </script>

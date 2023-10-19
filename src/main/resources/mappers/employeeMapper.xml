@@ -17,20 +17,29 @@
 <!--  수정방안 1 empPass = sha2 ((concat(#empPass), empSalt ) , 256 )  -->
 <!--  수정방안 2 empPass = SHA2((CONCAT( #{empPass}, empSalt)), 256) -->
  
-<!-- 비밀번호 값 가져오기 -->
+<!-- 강수빈 비밀번호 값 가져오기 --> 
 	<select id="getInitialPass" resultType="java.lang.Integer">
 		select (max(empId) + 1)
 		from employees
 	</select>
 	
-<!-- 	비밀번호 초기화 -->
+	
+	<!-- 강수빈	비밀번호 수정  --> 
+    <update id="modifyPass" parameterType="java.util.Map">
+        UPDATE employees
+        SET empPass = SHA2((CONCAT( #{empPass}, empSalt)), 256)
+        WHERE empId = #{empId}
+    </update>
+    	
+	
+<!--  강수빈	비밀번호 초기화 -->
     <update id="resetPassword" parameterType="java.util.Map">
         UPDATE employees
         SET empPass = SHA2((CONCAT( #{empId}, empSalt)), 256)
         WHERE empId = #{empId}
     </update>
     
-<!--    솔트 값 가져오기 -->
+<!--  강수빈   솔트 값 가져오기 -->
     <select id="getEmpSalt" resultType="String">
 		select empSalt
 		from employees
@@ -112,8 +121,7 @@
 <!-- 사원-상세정보수정 -->
 	<update id="updateEmployee">
     update employees
-    set empPass = SHA2(#{empPass}, 256),
-        empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
+    set empPhoto = #{empPhoto}, empPhone = #{empPhone}, empTel = #{empTel}, 
         empEmail = #{empEmail}, empStatus = #{empStatus}, departmentName = #{departmentName},
         empPosition = #{empPosition}, empRole = #{empRole} 
     <!-- 값들이 비어있어도 넘어가게!!!! -->

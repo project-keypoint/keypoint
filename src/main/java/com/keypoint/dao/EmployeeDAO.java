@@ -31,6 +31,12 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".userCheck", employeeDTO);
 	}
 	
+	// 강수빈 - 비밀번호 변경
+			public void modifyPass(Map<String, Object> parameterMap) {
+			    System.out.println("Parameter Map: " + parameterMap);
+			    sqlSession.update(namespace + ".modifyPass", parameterMap);
+			}
+	
 	 // 강수빈 - 비밀번호 값 가져오기
 	 public int getInitialPass() {
 	        return sqlSession.selectOne(namespace+".getInitialPass");
@@ -40,6 +46,13 @@ public class EmployeeDAO {
 		    return sqlSession.selectOne(namespace + ".getEmpSalt", empId);
 		}
 
+	 // 강수빈 - 비밀번호 초기화
+		public void resetPassword(Map<String, Object> parameterMap) {
+		    System.out.println("Parameter Map: " + parameterMap);
+		    sqlSession.update(namespace + ".resetPassword", parameterMap);
+		}
+
+	 
 	 
 	// ---------------------------------------------------------------------------
 	 
@@ -110,11 +123,6 @@ public class EmployeeDAO {
 	
 	
 	
-	
-	public void resetPassword(Map<String, Object> parameterMap) {
-	    System.out.println("Parameter Map: " + parameterMap);
-	    sqlSession.update(namespace + ".resetPassword", parameterMap);
-	}
 
 	
 	
