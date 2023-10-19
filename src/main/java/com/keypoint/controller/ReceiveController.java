@@ -97,7 +97,7 @@ public class ReceiveController {
 		// =======================================
 		
 		String search1 = request.getParameter("search1");
-		int pageSize1 = 2; //한 화면에 보여줄 글개수 설정
+		int pageSize1 = 10; //한 화면에 보여줄 글개수 설정
 		String pageNum1=request.getParameter("pageNum1");
 		if(pageNum1 == null) {
 			pageNum1 = "1";

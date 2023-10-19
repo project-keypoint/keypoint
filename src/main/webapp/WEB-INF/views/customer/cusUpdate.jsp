@@ -38,13 +38,41 @@
 </select>
 </div>
 
+<div class="form-group-customer">
+<p>업태</p>
+<select id="cusBusiness" name="cusBusiness" class="form-control search-input">
+    <option value="제조업" ${customerDTO.cusBusiness eq '제조업' ? 'selected' : ''}>제조업</option>
+    <option value="도매 및 소매업" ${customerDTO.cusBusiness eq '도매 및 소매업' ? 'selected' : ''}>도매 및 소매업</option>
+</select>
+</div>
+
+
+<div class="form-group-customer">
+<p>종목</p>
+<select id="cusType" name="cusType" class="form-control search-input">
+	 <option value="스위치(적축)" ${customerDTO.cusType eq '스위치(적축)' ? 'selected' : ''}>스위치(적축)</option>
+	 <option value="스위치(청축)" ${customerDTO.cusType eq '스위치(청축)' ? 'selected' : ''}>스위치(청축)</option>
+	 <option value="스위치(갈축)" ${customerDTO.cusType eq '스위치(갈축)' ? 'selected' : ''}>스위치(갈축)</option>
+	 <option value="프레임(상부)" ${customerDTO.cusType eq '프레임(상부)' ? 'selected' : ''}>프레임(상부)</option>
+	 <option value="프레임(하부)" ${customerDTO.cusType eq '프레임(하부)' ? 'selected' : ''}>프레임(하부)</option>
+	 <option value="키캡" ${customerDTO.cusType eq '키캡' ? 'selected' : ''}>키캡</option>
+	 <option value="흡음제" ${customerDTO.cusType eq '흡음제' ? 'selected' : ''}>흡음제</option>
+	 <option value="플레이트" ${customerDTO.cusType eq '플레이트' ? 'selected' : ''}>플레이트</option>
+	 <option value="PCB" ${customerDTO.cusType eq 'PCB' ? 'selected' : ''}>PCB</option>
+	 <option value="키포인트A87(적축)" ${customerDTO.cusType eq '키포인트A87(적축)' ? 'selected' : ''}>키포인트A87(적축)</option>
+	 <option value="키포인트A87(청축)" ${customerDTO.cusType eq '키포인트A87(청축)' ? 'selected' : ''}>키포인트A87(청축)</option>
+	 <option value="키포인트A87(갈축)" ${customerDTO.cusType eq '키포인트A87(갈축)' ? 'selected' : ''}>키포인트A87(갈축)</option>
+	 <option value="키포인트B104(적축)" ${customerDTO.cusType eq '키포인트B104(적축)' ? 'selected' : ''}>키포인트B104(적축)</option>
+	 <option value="키포인트B104(청축)" ${customerDTO.cusType eq '키포인트B104(청축)' ? 'selected' : ''}>키포인트B104(청축)</option>
+	 <option value="키포인트B104(갈축)" ${customerDTO.cusType eq '키포인트B104(갈축)' ? 'selected' : ''}>키포인트B104(갈축)</option>
+</select>
+</div>
+
 
 <div class="form-group-customer">
     <p>사업자번호</p>
     <input type="text" id="cusNumber" name="cusNumber" class="form-control search-input" onfocus="clearInput(this)" onblur="performActions(this)" value="${customerDTO.cusNumber}">
 </div>
-
-
 
 
 <div class="form-group-customer">
@@ -62,37 +90,6 @@
 <div class="form-group-customer">
 <p>대표전화</p>
 <input type="text" id="cusTel" name="cusTel" class="form-control search-input" value="${customerDTO.cusTel}" onfocus="clearInput(this)" onblur="restoreInput(this)">
-</div>
-
-
-<div class="form-group-customer">
-<p>업태</p>
-<select id="cusBusiness" name="cusBusiness" class="form-control search-input">
-    <option value="도매 및 소매업" ${customerDTO.cusBusiness eq '도매 및 소매업' ? 'selected' : ''}>도매 및 소매업</option>
-    <option value="제조업" ${customerDTO.cusBusiness eq '제조업' ? 'selected' : ''}>제조업</option>
-</select>
-</div>
-
-
-<div class="form-group-customer">
-<p>종목</p>
-<select id="cusType" name="cusType" class="form-control search-input">
-	 <option value="키캡" ${customerDTO.cusType eq '키캡' ? 'selected' : ''}>키캡</option>
-	 <option value="스위치(적축)" ${customerDTO.cusType eq '스위치(적축)' ? 'selected' : ''}>스위치(적축)</option>
-	 <option value="스위치(청축)" ${customerDTO.cusType eq '스위치(청축)' ? 'selected' : ''}>스위치(청축)</option>
-	 <option value="스위치(갈축)" ${customerDTO.cusType eq '스위치(갈축)' ? 'selected' : ''}>스위치(갈축)</option>
-	 <option value="프레임(상부)" ${customerDTO.cusType eq '프레임(상부)' ? 'selected' : ''}>프레임(상부)</option>
-	 <option value="프레임(하부)" ${customerDTO.cusType eq '프레임(하부)' ? 'selected' : ''}>프레임(하부)</option>
-	 <option value="흡음제" ${customerDTO.cusType eq '흡음제' ? 'selected' : ''}>흡음제</option>
-	 <option value="플레이트" ${customerDTO.cusType eq '플레이트' ? 'selected' : ''}>플레이트</option>
-	 <option value="PCB" ${customerDTO.cusType eq 'PCB' ? 'selected' : ''}>PCB</option>
-	 <option value="키포인트A87(적축)" ${customerDTO.cusType eq '키포인트A87(적축)' ? 'selected' : ''}>키포인트A87(적축)</option>
-	 <option value="키포인트A87(청축)" ${customerDTO.cusType eq '키포인트A87(청축)' ? 'selected' : ''}>키포인트A87(청축)</option>
-	 <option value="키포인트A87(갈축)" ${customerDTO.cusType eq '키포인트A87(갈축)' ? 'selected' : ''}>키포인트A87(갈축)</option>
-	 <option value="키포인트B104(적축)" ${customerDTO.cusType eq '키포인트B104(적축)' ? 'selected' : ''}>키포인트B104(적축)</option>
-	 <option value="키포인트B104(청축)" ${customerDTO.cusType eq '키포인트B104(청축)' ? 'selected' : ''}>키포인트B104(청축)</option>
-	 <option value="키포인트B104(갈축)" ${customerDTO.cusType eq '키포인트B104(갈축)' ? 'selected' : ''}>키포인트B104(갈축)</option>
-</select>
 </div>
 
 
@@ -324,6 +321,47 @@ function performActions(inputElement) {
 }
 
 
+
+
+//구분 선택에 따라 업태 자동입력, 업태에 따른 종목 목록 다르게 불러오	ㅏ
+document.getElementById("cusCategory").addEventListener("change", function() {
+    var cusCategory = this.value;
+    var cusBusinessSelect = document.getElementById("cusBusiness");
+    var cusTypeSelect = document.getElementById("cusType");
+
+    // 초기화
+    cusBusinessSelect.selectedIndex = 0;
+    cusTypeSelect.innerHTML = ''; // 종목 선택 내용 초기화
+
+    if (cusCategory === "납입처") {
+        // 납입처를 선택한 경우
+        cusBusinessSelect.value = "제조업";
+        cusBusinessSelect.disabled = true;
+        // 원하는 옵션만 추가
+        var allowedOptions = ["키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB"];
+        for (var i = 0; i < allowedOptions.length; i++) {
+            var option = document.createElement("option");
+            option.value = allowedOptions[i];
+            option.text = allowedOptions[i];
+            cusTypeSelect.appendChild(option);
+        }
+    } else {
+        // 납품처를 선택한 경우
+        cusBusinessSelect.value = "도매 및 소매업";
+        cusBusinessSelect.disabled = true;
+        // 모든 옵션을 추가
+        var allOptions = ["키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
+        for (var i = 0; i < allOptions.length; i++) {
+            var option = document.createElement("option");
+            option.value = allOptions[i];
+            option.text = allOptions[i];
+            cusTypeSelect.appendChild(option);
+        }
+    }
+});
+
+// 초기 설정
+document.getElementById("cusCategory").dispatchEvent(new Event('change'));
 
 
 

@@ -206,15 +206,14 @@
 
 	<select id="workRoCodeList" resultType="com.keypoint.dto.WorkRoDTO">
 		select a.roCode, a.cusCode, a.productCode, a.roCount, a.shipSdate
-		from receivedOrder a join product b 
-		on a.productCode = b.productCode 
-		left join workOrder c 
-		on a.roCode = c.roCode
+		from receivedOrder a
+		join product b on a.productCode = b.productCode 
+		left join workOrder c on a.roCode = c.roCode
 		where 
 		a.roCode like CONCAT('%', #{roCode}, '%') 
 		and a.productCode like CONCAT('%', #{productCode}, '%')
 		and a.roStatus != '삭제' and a.roCount >= b.productCount
-		and c.woCode is null
+		and a.shipDate is null
 		order by roCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
