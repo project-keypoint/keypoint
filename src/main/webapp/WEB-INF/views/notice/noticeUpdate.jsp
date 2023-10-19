@@ -39,9 +39,26 @@
 </div>
 
 <div class="form-group-customer">
-<p>구분</p>
-<input type="text" id="noticeCategory" name="noticeCategory" class="form-control search-input" value="${noticeDTO.noticeCategory}" readonly="readonly">
+<p>작성자</p>
+<input type="hidden" id="empId" name="empId" class="form-control search-input" value="${empId}">
+<input type="text" id="empName" name="empName" class="form-control search-input" value="${empName}" readonly="readonly">
 </div>
+
+
+<div class="form-group-customer">
+<p>구분</p>
+<select id="noticeCategory" name="noticeCategory" class="form-control search-input" >
+    <option value="전체" ${noticeDTO.noticeCategory eq '전체' ? 'selected' : ''}>전체</option>
+	<option value="영업" ${noticeDTO.noticeCategory eq '영업' ? 'selected' : ''}>영업</option>
+	<option value="생산" ${noticeDTO.noticeCategory eq '생산' ? 'selected' : ''}>생산</option>
+	<option value="자재" ${noticeDTO.noticeCategory eq '자재' ? 'selected' : ''}>자재</option>
+	<option value="인사" ${noticeDTO.noticeCategory eq '인사' ? 'selected' : ''}>인사</option>
+</select>
+</div>
+
+
+
+
 
 <div class="form-group-customer">
 <p>내용</p>
