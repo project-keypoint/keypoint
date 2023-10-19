@@ -257,7 +257,7 @@ function openPopup(url) {
 function openDetails(empId) {
  	var url = '${pageContext.request.contextPath}/employee/employeeDetails?empId='+empId;
     var windowWidth = 500;
-    var windowHeight = 1250;
+    var windowHeight = 880;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
@@ -267,7 +267,7 @@ function openDetails(empId) {
 function openInsert() {
     var url = '${pageContext.request.contextPath}/employee/employeeInsert';
     var windowWidth = 500;
-    var windowHeight = 1250;
+    var windowHeight = 930;
     var windowLeft = (screen.width - windowWidth) / 2;
     var windowTop = (screen.height - windowHeight) / 2;
     var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

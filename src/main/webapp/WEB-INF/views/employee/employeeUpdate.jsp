@@ -17,7 +17,6 @@
     <link href="${pageContext.request.contextPath}/resources/css/employeeDetails.css" rel="stylesheet">
 </head>
 <body>
-<%-- <form action="${pageContext.request.contextPath}/employee/employeeUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()"> --%>
 <form action="${pageContext.request.contextPath}/employee/photoUpdatePro" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 <!-- <div class="page-title-popup">사원상세정보수정</div> -->
@@ -64,9 +63,11 @@
 <div class="form-group-row">
 
 <div class="form-group-column">
-<p>이메일</p>
-<input type="text" id="empEmail" name="empEmail" class="form-control search-input" value="${employeeDTO.empEmail}" onblur="checkDuplicate('email')">
+    <p>이메일</p>
+    <input type="text" id="empEmail" name="empEmail" class="form-control search-input" value="${employeeDTO.empEmail}" onblur="validateEmail()">
+    <span id="emailError" style="color: red; font-size: 12px; position: relative; top: -2px; left: 1px;"></span>
 </div>
+
 <div class="form-group-column">
 <p>생년월일</p>
 <input type="text" id="empBirth" name="empBirth" class="form-control search-input" value="${employeeDTO.empBirth}" readonly>
@@ -78,11 +79,11 @@
 
 <div class="form-group-column">
 <p>연락처</p>
-<input type="text" id="empPhone" name="empPhone" class="form-control search-input" value="${employeeDTO.empPhone}" onblur="checkDuplicate('phone')" oninput="addHyphen(this)">
+<input type="text" id="empPhone" name="empPhone" class="form-control search-input" value="${employeeDTO.empPhone}" oninput="addHyphen(this)">
 </div>
 <div class="form-group-column">
 <p>내선번호</p>
-<input type="text" id="empTel" name="empTel" class="form-control search-input" value="${employeeDTO.empTel}" onblur="checkDuplicate('tel')" oninput="addHyphen(this)">
+<input type="text" id="empTel" name="empTel" class="form-control search-input" value="${employeeDTO.empTel}" oninput="addHyphen(this)">
 </div>
 </div>
 
@@ -163,9 +164,10 @@
 </div><!-- main-details2 -->
 
 <div class="details-buttons">
-<input type="submit" value="완료" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
+<input type="submit" value="수정완료" class="btn btn-primary mybutton1">
 <input type="button" value="비밀번호변경" class="btn btn-primary mybutton1" id="modifyPass">
+<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
+
 </div>
 
 </form><!-- form 끝 -->
@@ -252,39 +254,6 @@ function setThumbnail(event) {
   reader.readAsDataURL(file);
 }
 
-
-//중복확인(연락처, 내선번호, 이메일)
-function checkDuplicate(type) {
-    var empPhone = document.getElementById("empPhone").value;
-    var empTel = document.getElementById("empTel").value;
-    var empEmail = document.getElementById("empEmail").value;
-
-    $.ajax({
-        url: '${pageContext.request.contextPath}/employee/empCheck',
-        data: {
-            empPhone: empPhone,
-            empTel: empTel,
-            empEmail: empEmail,
-            type:type           
-            
-        },
-        success: function (result) {
-            if (result == 'iddup') {
-                alert("중복");
-                if(type=="phone"){
-                document.getElementById("empPhone").value = "";
-                }
-                if(type=="tel"){
-                    document.getElementById("empTel").value = "";
-                    }
-                if(type=="email"){
-                    document.getElementById("empEmail").value = "";
-                    }
-            } 
-        }
-    });
-}
-
 //하이픈 자동 생성(연락처, 내선번호)
 function addHyphen(input) {
     // 사용자가 입력한 숫자를 가져옴
@@ -305,35 +274,8 @@ function addHyphen(input) {
     // 입력 필드에 새로운 값을 설정
     input.value = newValue;
 }
-
-// 주소 검색 API
-// function sample6_execDaumPostcode() {
-// 	new daum.Postcode({
-// 	    oncomplete: function(data) {
-// 	      var fullAddress = data.address; // 선택한 주소 변수에 저장
-// 	      var extraAddress = ''; // 조합형 주소 변수 초기화
-
-// 	      if (data.addressType === 'R') {
-// 	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-// 	          extraAddress += data.bname;
-// 	        }
-// 	        if (data.buildingName !== '' && data.apartment === 'Y') {
-// 	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
-// 	        }
-// 	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
-// 	      }
-
-// 	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
-// 	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
-// 	      document.getElementById('empAddress').value = fullAddress; // 기본주소
-
-// 	      // 상세주소 입력란으로 포커스 이동
-// 	      document.getElementById('cusAddress_dtail').focus();
-// 	    }
-// 	  }).open();
-// 	}
 	
-// 비밓번호 수정 	
+// 비밀번호 수정 	
 modifyPass.addEventListener("click", function() {
     var empPass = prompt("새로운 비밀번호를 입력하세요:");
     
@@ -366,6 +308,24 @@ modifyPass.addEventListener("click", function() {
     }
 });
 
+//이메일 유효성 검사(밑에 메세지 나오게) 
+function validateEmail() {
+    var emailField = document.getElementById("empEmail");
+    var emailError = document.getElementById("emailError");
+    
+    // 이메일 주소 정규식
+    var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    
+    if (emailField.value.match(emailRegex)) {
+        // 올바른 이메일 형식
+        emailError.innerHTML = "";
+    } else {
+        // 잘못된 이메일 형식
+        emailError.innerHTML = "올바른 이메일 주소를 입력하세요.";
+        emailField.focus(); // 포커스를 이메일 입력 필드로 이동
+        emailField.value = ""; // 입력 필드를 비우기 (초기화)
+    }
+}
 
 </script>
 </body>

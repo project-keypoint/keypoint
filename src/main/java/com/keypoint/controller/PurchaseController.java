@@ -21,6 +21,8 @@ import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
+import com.keypoint.dto.QualityDTO;
+import com.keypoint.dto.RequireDTO;
 import com.keypoint.dto.WorkOrderDTO;
 import com.keypoint.service.EmployeeService;
 import com.keypoint.service.MaterialService;
@@ -294,7 +296,16 @@ public class PurchaseController {
 	
 	//------------------------------------------------------------------------------------------
 	
+	@GetMapping("/requireList")
+	public String requireList(Model model, @RequestParam("woCode") String woCode, @RequestParam("productCode") String productCode) {
+	    List<RequireDTO> requireList = purchaseService.getRequireList(woCode);
 
+	    model.addAttribute("woCodeTitle", woCode);
+	    model.addAttribute("productCodeTitle", productCode);
+	    model.addAttribute("requireList", requireList);
+	    
+	    return "purchase/requireList";
+	}// requireList
 	
 	
 	

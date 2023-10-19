@@ -25,12 +25,13 @@
 </head>
 <body>
 
-	<h4>작업지시 조회</h4>
+	<h4>발주 필요 현황</h4>
 	<form>
 		<div class="search-top">
 			<div>
 				<a>작업지시코드</a> <input type="text" name="woCode" style="width: 80px;">
-				<a>수주번호</a><input type="text" name="productCode" style="width:150px;">
+				<a>수주번호</a><input type="text" name="productCode"
+					style="width: 150px;">
 			</div>
 			<div>
 				<input type="submit" class="btn btn-primary mybutton1" value="조회">
@@ -47,33 +48,29 @@
 			<th>수주번호</th>
 			<th>거래처코드</th>
 			<th>거래처명</th>
+			<th>소요량</th>
 		</tr>
 		<c:forEach var="workList" items="${workList}">
-			<tr
-				onclick="selectWork('${workList.woCode}','${workList.lineCode}','${workList.productCode}'
-				,'${workList.productName}','${workList.woCount}','${workList.roCode}','${workList.cusCode}','${workList.cusName}')">
-				<td id="con">${workList.woCode}</td>
-				<td id="con">${workList.lineCode}</td>
-				<td id="con">${workList.productCode}</td>
-				<td id="con">${workList.productName}</td>
-				<td id="con">${workList.woCount}</td>
-				<td id="con">${workList.roCode}</td>
-				<td id="con">${workList.cusCode}</td>
-				<td id="con">${workList.cusName}</td>
+			<tr>
+				<td>${workList.woCode}</td>
+				<td>${workList.lineCode}</td>
+				<td>${workList.productCode}</td>
+				<td>${workList.productName}</td>
+				<td>${workList.woCount}</td>
+				<td>${workList.roCode}</td>
+				<td>${workList.cusCode}</td>
+				<td>${workList.cusName}</td>
+				<td><input type="button" value="소요량" class="btn btn-info mybutton1" onclick="openRequire('${workList.woCode}','${workList.productCode}')"></td>
 			</tr>
 			<script type="text/javascript">
-				function selectWork(a, b, c, d, e, f, g, h) { // 부모창으로 값 넘기기
-
-					opener.document.getElementById("woCode").value = a
-					opener.document.getElementById("lineCode").value = b
-					opener.document.getElementById("productCode").value = c
-					opener.document.getElementById("productName").value = d
-					opener.document.getElementById("woCount").value = e
-					opener.document.getElementById("roCode").value = f
-					opener.document.getElementById("cusCode").value = g
-					opener.document.getElementById("cusName").value = h
-					window.close();
-				}
+			function openRequire(woCode, productCode) {
+			    var url = '${pageContext.request.contextPath}/purchase/requireList?woCode='+woCode+'&productCode='+productCode;
+			    var windowWidth = 660;
+			    var windowHeight = 520;
+			    var windowLeft = (screen.width - windowWidth) / 2;
+			    var windowTop = (screen.height - windowHeight) / 2;
+			    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
+			}	
 			</script>
 		</c:forEach>
 	</table>

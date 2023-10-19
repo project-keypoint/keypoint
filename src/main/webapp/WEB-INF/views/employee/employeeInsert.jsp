@@ -48,97 +48,84 @@
 
 <!-- -------------------- // 사진첨부 -------------------- -->
   </div>
-
 </div>
 
 <div class="form-group-customer">
-<p>사원번호</p>
-<input type="text" id="empPass" name="empPass" class="form-control search-input" readonly>
+	<p>사원번호</p>
+	<input type="text" id="empPass" name="empPass" class="form-control search-input" readonly>
 </div>
 
 <div class="form-group-customer">
-<p>이름</p>
-<input type="text" id="empName" name="empName" class="form-control search-input">
+	<p>이름</p>
+	<input type="text" id="empName" name="empName" class="form-control search-input">
 </div>
 
 <!-- 주소 -->
 <div class="form-group-customer">
-<p>주소</p>
-<input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="클릭하여 주소를 입력하세요">
+	<p>주소</p>
+	<input type="text" id="empAddress" name="empAddress" class="form-control search-input" placeholder="클릭하여 주소를 입력하세요">
 </div>
  
 <div class="form-group-customer">
-<p></p>
-<input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소">
+	<p></p>
+	<input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소">
 </div>
-
-<!-- <div class="form-group-customer"> -->
-<!-- <p></p> -->
-<!-- <input type="text" id="empAddress_dtail" name="empAddress_dtail" class="form-control search-input" placeholder="상세주소"> -->
-<!-- </div> -->
-<!-- <!-- // 주소 --> 
-
 
 <div class="form-group-customer">
     <p>연락처</p> 
     <input type="tel" id="empPhone" name="empPhone" class="form-control search-input" onblur="checkDuplicate('phone')" oninput="addHyphen(this)">
 </div>
-    <div class="divdup"></div>
-
+<div class="divdup"></div>
 
 <div class="form-group-customer">
-<p>내선번호</p>
-<input type="tel" id="empTel" name="empTel" class="form-control search-input" onblur="checkDuplicate('tel')" oninput="addHyphen(this)">
+	<p>내선번호</p>
+	<input type="tel" id="empTel" name="empTel" class="form-control search-input" oninput="addHyphen(this)">
 </div>
 
 <div class="form-group-customer">
-<p>이메일</p>
-<input type="text" id="empEmail" name="empEmail" class="form-control search-input" onblur="checkDuplicate('email')">
+    <p>이메일</p>
+    <input type="text" id="empEmail" name="empEmail" class="form-control search-input" onblur="validateCheck('email');">
+</div>
+<span id="emailError" style="color: red; font-size: 14px; position: relative; top: -10px; left: 130px;"></span>
+
+<div class="form-group-customer">
+	<p>부서</p>
+	<select id="departmentName" name="departmentName" class="form-control search-input" style="width: 280px;">
+        	<option value="영업부">영업</option>
+        	<option value="생산부">생산</option>
+        	<option value="자재부">자재</option>
+        	<option value="인사부">인사</option>
+	</select>
 </div>
 
 <div class="form-group-customer">
-<p>부서</p>
-<select id="departmentName" name="departmentName" class="form-control search-input" style="width: 350px;">
-        <option value="영업부">영업</option>
-        <option value="생산부">생산</option>
-        <option value="자재부">자재</option>
-        <option value="인사부">인사</option>
-</select>
+	<p>직급</p>
+		<select id="empPosition" name="empPosition" class="form-control search-input" style="width: 280px;">
+        	<option value="사원">사원</option>
+       	 	<option value="대리">대리</option>
+        	<option value="부장">부장</option>
+        	<option value="대표">대표</option>
+		</select>
 </div>
 
 <div class="form-group-customer">
-<p>직급</p>
-<select id="empPosition" name="empPosition" class="form-control search-input" style="width: 350px;">
-        <option value="사원">사원</option>
-        <option value="대리">대리</option>
-        <option value="부장">부장</option>
-        <option value="이사">이사</option>
-        <option value="대표">대표</option>
-</select>
+	<p>생년월일</p>
+	<input type="text" id="empBirth" name="empBirth" class="form-control search-input">
 </div>
 
 <div class="form-group-customer">
-<p>생년월일</p>
-<input type="text" id="empBirth" name="empBirth" class="form-control search-input">
-</div>
-
-<div class="form-group-customer">
-<p>입사일</p>
+	<p>입사일</p>
 <input type="text" id="empHiredate" name="empHiredate" class="form-control search-input">
 </div>
 
-
-
-<!-- 이게 맞나..? 나중에 수정에서 재직여부 수정가능한가?? -->
 <div class="form-group-customer" style="display: none;">
-<p>재직여부</p>
-<input type="hidden" id="empStatus" name="empStatus" class="form-control search-input" value="재직">
+	<p>재직여부</p>
+	<input type="hidden" id="empStatus" name="empStatus" class="form-control search-input" value="재직">
 </div>
 
-<!-- 기본권한이 1이므로 화면에서는 안 보이게 하고 싶음 -->
 <div class="form-group-customer">
 <p>권한</p>
-<select id="empRole" name="empRole" class="form-control search-input" style="width: 350px;">
+<select id="empRole" name="empRole" class="form-control search-input" style="width: 280px;">
         <option value="0">0</option>
         <option value="1" selected>1</option>
         <option value="2">2</option>
@@ -146,20 +133,14 @@
 </select>
 </div>
 
-<!-- </div> -->
-
-
-<!-- </div> -->
 
 <div class="details-buttons">
-<input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
-<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
+	<input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
+	<input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
-
 
 </form><!-- form 끝 -->
 </div><!-- main-details -->
-
 
 <!-- 데이트피커 : 날짜선택요소(달력형식) -->
 <!-- 데이트피커 타임피커를 사용하기위한 j쿼리 -->
@@ -219,7 +200,6 @@ $(function() {
 
 
 // 주소 검색 API
-
 window.onload = function(){
     document.getElementById("empAddress").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
@@ -232,68 +212,7 @@ window.onload = function(){
     });
 }
 
-// function sample6_execDaumPostcode() {
-// 	new daum.Postcode({
-// 	    oncomplete: function(data) {
-// 	      var fullAddress = data.address; // 선택한 주소 변수에 저장
-// 	      var extraAddress = ''; // 조합형 주소 변수 초기화
-
-// 	      if (data.addressType === 'R') {
-// 	        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-// 	          extraAddress += data.bname;
-// 	        }
-// 	        if (data.buildingName !== '' && data.apartment === 'Y') {
-// 	          extraAddress += (extraAddress !== '' ? ', ' + data.buildingName : data.buildingName);
-// 	        }
-// 	        fullAddress += (extraAddress !== '' ? ' (' + extraAddress + ')' : '');
-// 	      }
-
-// 	      // 우편번호와 주소 정보를 각각의 입력란에 넣기
-// 	      document.getElementById('zonecode').value = data.zonecode; // 우편번호
-// 	      document.getElementById('empAddress').value = fullAddress; // 기본주소
-
-// 	      // 상세주소 입력란으로 포커스 이동
-// 	      document.getElementById('empAddress_dtail').focus();
-// 	    }
-// 	  }).open();
-// 	}
-	
-
-// 중복확인(연락처, 내선번호, 이메일)
-function checkDuplicate(type) {
-    var empPhone = document.getElementById("empPhone").value;
-    var empTel = document.getElementById("empTel").value;
-    var empEmail = document.getElementById("empEmail").value;
-
-    $.ajax({
-        url: '${pageContext.request.contextPath}/employee/empCheck',
-        data: {
-            empPhone: empPhone,
-            empTel: empTel,
-            empEmail: empEmail,
-            type:type           
-            
-        },
-        success: function (result) {
-            if (result == 'iddup') {
-                alert("중복");
-                if(type=="phone"){
-                document.getElementById("empPhone").value = "";
-                }
-                if(type=="tel"){
-                    document.getElementById("empTel").value = "";
-                    }
-                if(type=="email"){
-                    document.getElementById("empEmail").value = "";
-                    }
-            } 
-        }
-    });
-}
-
-
-
-//유효성 검사
+// 유효성 검사
 function validateForm() {
 //	각 필수 입력 필드 값
     var empName = document.getElementById("empName").value;
@@ -305,9 +224,7 @@ function validateForm() {
     var empPosition = document.getElementById("empPosition").value;
     var empBirth = document.getElementById("empBirth").value;
     var empHiredate = document.getElementById("empHiredate").value;
-    
-    
-    
+      
 // 	빈 필드 검사
     if (empName === "" || empAddress === "" || empPhone === "" ||
     	empTel === "" || empEmail === "" || departmentName === "" || empPosition === "" ||
@@ -317,8 +234,6 @@ function validateForm() {
     }
     return true;
 }	
-
-
 
 // 첨부파일 미리보기
 function setThumbnail(event) {
@@ -336,7 +251,6 @@ function setThumbnail(event) {
   reader.readAsDataURL(file);
 }
 
-
 // 비밀번호값 불러오기
 document.addEventListener("DOMContentLoaded", function() {
     // Ajax 요청 보내기
@@ -351,7 +265,6 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     xhr.send();
 });
-
 
 // 하이픈 자동 생성(연락처, 내선번호)
 function addHyphen(input) {
@@ -369,50 +282,58 @@ function addHyphen(input) {
     } else {
         // 10자리 미만 또는 11자리 초과인 경우, 하이픈 x
     }
-
     // 입력 필드에 새로운 값을 설정
     input.value = newValue;
 }
 
-// 이메일 형식 유효성 검사
-// function validateEmail(email) {
-//     // 이메일 형식을 검사하기 위한 정규 표현식
-//     var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-//     // 입력한 이메일을 정규 표현식과 비교하여 유효성을 검사
-//     return emailPattern.test(email);
-// }
-
-// function checkEmailInput() {
-//     var emailInput = document.getElementById("empEmail");
-//     var email = emailInput.value;
-
-//     if (!validateEmail(email)) {
-//         alert("올바른 이메일 형식이 아닙니다. 올바른 이메일을 입력해주세요.");
-//         emailInput.value = "";
-//         return false;
-//     }
-
-//     return true;
-// }
-
-
-// 조건 맞게 입력해도 계속 "이메일 형식 아님" 메세지 뜸.
-// $(document).ready(function(){
-//   $('#join').submit(function(){
-//     // 이메일 형식 유효성 검사
-   
-//     var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9_\.\-]+\.[A-Za-z0-9_\.\-]/);
-//     var empEmail = document.getElementById("empEmail").value;
+// 이메일 유효성 검사(밑에 메세지 나오게) 
+function validateCheck(type) {
+    var emailField = document.getElementById("empEmail");
+    var emailError = document.getElementById("emailError");
+    // 이메일 주소 정규식
+    var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     
-//     if(!emailCheck.test($('.empEmail').val())){
-//       alert("이메일 형식 아님");
-//       document.getElementById("empEmail").value = "";
-//       $('.empEmail').focus();
-//       return false;
-//     }
-//   });
-// });
+    if (emailField.value.match(emailRegex)) {
+    	// 올바른 이메일 형식
+        emailError.innerHTML = "";
+        
+        // 이메일 유효성 검사 통과 시 중복 확인 실행
+        checkDuplicate(type);
+    } else {
+    	// 잘못된 이메일 형식
+        emailError.innerHTML = "올바른 이메일 주소를 입력하세요.";
+        emailField.focus(); // 포커스를 이메일 입력 필드로 이동
+        emailField.value = ""; // 입력 필드를 비우기 (초기화)
+    }
+}
+
+//중복확인(연락처, 이메일)
+function checkDuplicate(type) {
+    var empPhone = document.getElementById("empPhone").value;
+    var empEmail = document.getElementById("empEmail").value;
+
+    // 여기에서 중복 확인 및 처리를 수행
+    $.ajax({
+        url: '${pageContext.request.contextPath}/employee/empCheck',
+        data: {
+            empPhone: empPhone,
+            empEmail: empEmail,
+            type: type
+        },
+        success: function (result) {
+            if (result == 'iddup') {
+                alert("중복");
+                if (type == "phone") {
+                    document.getElementById("empPhone").value = "";
+                }
+                if (type == "email") {
+                    document.getElementById("empEmail").value = "";
+                }
+            }
+        }
+    });
+}
+
 
 </script>
 </body>

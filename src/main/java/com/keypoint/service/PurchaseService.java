@@ -14,6 +14,7 @@ import com.keypoint.dto.MaterialDTO;
 import com.keypoint.dto.PageDTO;
 import com.keypoint.dto.PurchaseDTO;
 import com.keypoint.dto.ReceiveDTO;
+import com.keypoint.dto.RequireDTO;
 import com.keypoint.dto.WorkOrderDTO;
 
 @Service
@@ -102,10 +103,12 @@ public class PurchaseService {
 	    purchaseDAO.updatePurchaseOrderStatus(purchaseDTO);
 	} // updatePurchaseOrderStatus
 
-	
 	// --------------------------------------------------------------------------------------------------
 	
-	
+	public List<RequireDTO> getRequireList(String woCode) {
+		return purchaseDAO.getRequireList(woCode);
+	}// getRequireList
+
 	
 	
 	

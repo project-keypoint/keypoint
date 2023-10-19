@@ -114,7 +114,7 @@ public class EmployeeController {
 		
 		
 		// 한 화면에 보여줄 사원 수 설정
-		int pageSize = 3;
+		int pageSize = 8;
 		// 현 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
 		// 페이지 번호가 없을 경우 => "1"로 설정

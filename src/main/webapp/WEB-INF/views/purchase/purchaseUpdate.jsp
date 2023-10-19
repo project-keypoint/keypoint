@@ -132,7 +132,7 @@ function openPopup(url) {
 $(document).ready(function() {
     // 업체명 검색 팝업 열기
     $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+        var url = '${pageContext.request.contextPath}/workOrder/workCusList2';
         openPopup(url);
     });
     // 상품명 검색 팝업 열기

@@ -93,15 +93,16 @@
 </update>
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  <select id="getRequireList" resultType="com.keypoint.dto.RequireDTO">
+	select a.woCode, b.productCode, c.productName, d.materialCode,
+	       e.materialName, e.materialCount,(d.reqCount*b.roCount) as totalReqCount
+	from workOrder a
+	join receivedOrder b on a.roCode = b.roCode
+	join product c on b.productCode = c.productCode
+	join requirement d on b.productCode = d.productCode
+	join material e on d.materialCode = e.materialCode
+	where a.woCode = #{woCode};
+  </select>
   
   
   
