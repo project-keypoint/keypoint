@@ -15,7 +15,7 @@ public class EmployeeDTO {
 	private String empAddress_dtail; // 상세주소
 	private String empStatus; // 재직여부('재직','휴직','퇴직')
 	private String departmentName; // 부서('영업','자재','생산','인사')
-	private String empPosition; // 직급('사원','대리','부장','이사','대표')
+	private String empPosition; // 직급('사원','대리','부장','대표')
 	private String empHiredate; // 입사일
 	private int empRole; // 권한(0=퇴사자(로그인x) / 1=사원 / 2=관리자(권한+부서) / 4=대표(총관리자)
 	private String empLeavedate; // 휴직일

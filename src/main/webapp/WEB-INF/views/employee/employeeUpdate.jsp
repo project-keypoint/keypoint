@@ -165,7 +165,7 @@
 
 <div class="details-buttons">
 <input type="submit" value="수정완료" class="btn btn-primary mybutton1">
-<input type="button" value="비밀번호변경" class="btn btn-primary mybutton1" id="modifyPass">
+<input type="button" value="비밀번호변경" class="btn btn-secondary mybutton1" id="modifyPass">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 
 </div>
@@ -254,7 +254,7 @@ function setThumbnail(event) {
   reader.readAsDataURL(file);
 }
 
-//하이픈 자동 생성(연락처, 내선번호)
+// 하이픈 자동 생성(연락처, 내선번호), 길이 제한
 function addHyphen(input) {
     // 사용자가 입력한 숫자를 가져옴
     let value = input.value;
@@ -262,19 +262,25 @@ function addHyphen(input) {
     // 숫자만 포함된 새로운 문자열을 생성
     let newValue = value.replace(/\D/g, '');
 
+    // 최대 길이를 제한
+    if (input.id === "empPhone" && newValue.length > 11) {
+        newValue = newValue.substring(0, 11);
+    } else if (input.id === "empTel" && newValue.length > 10) {
+        newValue = newValue.substring(0, 10);
+    }
+
     // 숫자의 길이에 따라 적절한 형식으로 하이픈을 추가
-    if (newValue.length === 11) {
+    if (input.id === "empPhone" && newValue.length === 11) {
         newValue = newValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-    } else if (newValue.length === 10) {
+    } else if (input.id === "empTel" && newValue.length === 10) {
         newValue = newValue.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
     } else {
-        // 10자리 미만 또는 11자리 초과인 경우, 하이픈 x
+        // 10자리 미만인 경우, 하이픈 x
     }
 
     // 입력 필드에 새로운 값을 설정
     input.value = newValue;
 }
-	
 // 비밀번호 수정 	
 modifyPass.addEventListener("click", function() {
     var empPass = prompt("새로운 비밀번호를 입력하세요:");

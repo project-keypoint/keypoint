@@ -229,12 +229,12 @@ body {
 }
 
 .btn.btn-icon-text:active {
-  background-color: gray; /* 원하는 색상으로 변경하세요. */
+  background-color: #4e73df; /* 원하는 색상으로 변경하세요. */
 }
 
 /* 마우스 커서가 버튼 위로 올라갔을 때 배경 색상 변경 */
 .btn.btn-icon-text:hover {
-  background-color: gray; /* 원하는 색상으로 변경하세요. */
+  background-color: #4e73df; /* 원하는 색상으로 변경하세요. */
 }
 
 p{
