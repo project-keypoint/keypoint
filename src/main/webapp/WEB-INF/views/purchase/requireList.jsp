@@ -25,14 +25,18 @@
 	rel="stylesheet">
 </head>
 <body>
-<a>${woCodeTitle}, ${productCodeTitle}</a>
-<table style="width: 550px !important">
+<br>
+<div>
+<p style="font-weight: bold;">작업지시코드 : [ ${woCodeTitle} ]</p>
+<p style="font-weight: bold;">상품코드 : [ ${productCodeTitle} ]</p>
+</div>
+<table style="width: 550px !important; margin-top: 20px;">
 		<tr>
 			<th>자재코드</th>
 			<th>자재명</th>
 			<th>재고수량(EA)</th>
 			<th>총소요량(EA)</th>
-			<th>발주수량(EA)</th>
+			<th>필요수량(EA)</th>
 		</tr>
 		<c:forEach var="requireDTO" items="${requireList}">
 			<tr>

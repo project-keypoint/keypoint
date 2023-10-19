@@ -66,7 +66,7 @@
 			function openRequire(woCode, productCode) {
 			    var url = '${pageContext.request.contextPath}/purchase/requireList?woCode='+woCode+'&productCode='+productCode;
 			    var windowWidth = 660;
-			    var windowHeight = 450;
+			    var windowHeight = 520;
 			    var windowLeft = (screen.width - windowWidth) / 2;
 			    var windowTop = (screen.height - windowHeight) / 2;
 			    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);
