@@ -124,8 +124,8 @@
 <script type="text/javascript">
 //팝업 창을 열어주는 함수
 function openPopup(url) {
-    var width = 500;
-    var height = 500;
+    var width = 580;
+    var height = 550;
     var left = (screen.width - width) / 2;
     var top = (screen.height - height) / 2;
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
@@ -134,7 +134,7 @@ function openPopup(url) {
 $(document).ready(function() {
     // 업체명 검색 팝업 열기
     $("#cusCode, #cusName").click(function() {
-        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
+        var url = '${pageContext.request.contextPath}/workOrder/workCusList2';
         openPopup(url);
     });
     // 상품명 검색 팝업 열기

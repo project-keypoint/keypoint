@@ -109,13 +109,29 @@ public class WorkOrderDAO {
 		return sqlSession.selectList(namespace+".workCusList", search);
 	
 	}
-
-
+	
+	public List<WorkOrderDTO> getWorkCusList2(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO getWorkCusList2()");
+		if(search.get("cusName")==null) {
+			search.put("cusName", "");
+		}
+		if(search.get("cusCode")==null) {
+			search.put("cusCode", "");
+		}
+		return sqlSession.selectList(namespace+".workCusList2", search);
+	}
+	
 	public Integer countCusList(Map<String, Object> search) { // 거래처 개수(for 페이징)
 		System.out.println("WorkOrderDAO countCusList()");
 		return sqlSession.selectOne(namespace+".countCusList", search);
 	}
 
+	public Integer countCusList2(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countCusList2()");
+		return sqlSession.selectOne(namespace+".countCusList2", search);
+	}
+
+	
 
 	public List<WorkRoDTO> getWorkRoCodeList(Map<String, Object> search) {
 		System.out.println("WorkOrderDAO getWorkRoCodeList()");
@@ -230,6 +246,9 @@ public class WorkOrderDAO {
 	public List<Map<String, Object>> selectWorkSum(WorkOrderDTO workOrderDTO) {
 		return sqlSession.selectList(namespace+".selectWorkSum", workOrderDTO);
 	}
+
+
+
 	
 	
 	

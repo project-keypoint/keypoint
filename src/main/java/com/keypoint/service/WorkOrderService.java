@@ -94,10 +94,19 @@ public class WorkOrderService {
 		return workOrderDAO.getWorkCusList(search);
 	}
 
+	public List<WorkOrderDTO> getWorkCusList2(Map<String, Object> search) {
+		System.out.println("WorkOrderService getWorkCusList2()");
+		return workOrderDAO.getWorkCusList2(search);
+	}
 
 	public int countCusList(Map<String, Object> search) {
 		System.out.println("WorkOrderService countCusList()");
 		return workOrderDAO.countCusList(search);
+	}
+	
+	public int countCusList2(Map<String, Object> search) {
+		System.out.println("WorkOrderService countCusList2()");
+		return workOrderDAO.countCusList2(search);
 	}
 
 
@@ -177,6 +186,10 @@ public class WorkOrderService {
 			
 			return workOrderDAO.selectWorkSum(workOrderDTO);
 		}
+
+
+
+
 	
 	
 	

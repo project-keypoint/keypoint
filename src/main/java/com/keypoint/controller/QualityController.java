@@ -58,7 +58,7 @@ public class QualityController {
 		String check4 = request.getParameter("check4");
 		
 		//한 화면에 보여줄 글개수 설정
-		int pageSize = 1;
+		int pageSize = 10;
 		// 현 페이지 번호 가져오기
 		String pageNum=request.getParameter("pageNum");
 		// 페이지 번호가 없을 경우 => "1"로 설정
@@ -201,7 +201,7 @@ public class QualityController {
 		String check3 = request.getParameter("check3");
 		String check4 = request.getParameter("check4");
 		
-		int pageSize = 2; //한 화면에 보여줄 글개수 설정
+		int pageSize = 10; //한 화면에 보여줄 글개수 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum == null) {
 			pageNum = "1";

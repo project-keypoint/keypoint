@@ -179,42 +179,83 @@
 		</if>
 	</select>
 
-	<select id="workCusList"
-		resultType="com.keypoint.dto.WorkOrderDTO">
-		select cusCode, cusName
-		from customer
-		where
-		cusCode like
-		CONCAT('%', #{cusCode}, '%') and
-		cusName like CONCAT('%', #{cusName},
-		'%')
-		order by cusCode desc
-		limit #{startRow}, #{pageSize}
+	
+	<select id="workCusList" resultType="com.keypoint.dto.WorkOrderDTO">
+	    select cusCode, cusName
+	    from customer
+	    where
+	    cusCode like CONCAT('%', #{cusCode}, '%') and
+	    cusName like CONCAT('%', #{cusName}, '%') and
+	    cusStatus != '거래정지' and
+	    cusCategory != '납입처'
+	    order by cusCode desc
+	    limit #{startRow}, #{pageSize}
 	</select>
 
+
 	<select id="countCusList" resultType="java.lang.Integer">
-		select count(*)
-		from customer
-		<if test="cusCode!=null and cusName!=null">
-			where
-			cusCode like CONCAT('%', #{cusCode}, '%') and
-			cusName
-			like CONCAT('%', #{cusName}, '%')
-		</if>
+	    select count(*)
+	    from customer
+	    <if test="cusCode != null or cusName != null">
+	    where
+	    <if test="cusCode != null">
+	    cusCode like CONCAT('%', #{cusCode}, '%')
+	    </if>
+	    <if test="cusName != null">
+	    <if test="cusCode != null">
+	    and
+	    </if>
+	    cusName like CONCAT('%', #{cusName}, '%')
+	    </if>
+	    and cusStatus != '거래정지'
+	    and cusCategory != '납입처'
+	    </if>
 	</select>
+
+	<select id="workCusList2" resultType="com.keypoint.dto.WorkOrderDTO">
+	    select cusCode, cusName
+	    from customer
+	    where
+	    cusCode like CONCAT('%', #{cusCode}, '%') and
+	    cusName like CONCAT('%', #{cusName}, '%') and
+	    cusStatus != '거래정지' and
+	    cusCategory != '납품처'
+	    order by cusCode desc
+	    limit #{startRow}, #{pageSize}
+	</select>
+
+
+	<select id="countCusList2" resultType="java.lang.Integer">
+	    select count(*)
+	    from customer
+	    <if test="cusCode != null or cusName != null">
+	    where
+	    <if test="cusCode != null">
+	    cusCode like CONCAT('%', #{cusCode}, '%')
+	    </if>
+	    <if test="cusName != null">
+	    <if test="cusCode != null">
+	    and
+	    </if>
+	    cusName like CONCAT('%', #{cusName}, '%')
+	    </if>
+	    and cusStatus != '거래정지'
+	    and cusCategory != '납품처'
+	    </if>
+	</select>
+
 
 
 	<select id="workRoCodeList" resultType="com.keypoint.dto.WorkRoDTO">
 		select a.roCode, a.cusCode, a.productCode, a.roCount, a.shipSdate
-		from receivedOrder a join product b 
-		on a.productCode = b.productCode 
-		left join workOrder c 
-		on a.roCode = c.roCode
+		from receivedOrder a
+		join product b on a.productCode = b.productCode 
+		left join workOrder c on a.roCode = c.roCode
 		where 
 		a.roCode like CONCAT('%', #{roCode}, '%') 
 		and a.productCode like CONCAT('%', #{productCode}, '%')
 		and a.roStatus != '삭제' and a.roCount >= b.productCount
-		and c.woCode is null
+		and a.shipDate is null
 		order by roCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
@@ -254,18 +295,18 @@
 		</if>
 	</select>
 
-	<select id="workEmpList"
-		resultType="com.keypoint.dto.WorkOrderDTO">
-		select empId, empName
-		from employees
-		where
-		empId like
-		CONCAT('%', #{empId}, '%') and
-		empName like CONCAT('%', #{empName},
-		'%')
-		order by empId desc
-		limit #{startRow}, #{pageSize}
-	</select>
+<select id="workEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
+    select empId, empName
+    from employees
+    where empId like CONCAT('%', #{empId}, '%')
+    and empName like CONCAT('%', #{empName}, '%')
+    and empStatus NOT IN ('퇴직', '휴직')  
+    order by empId desc
+    limit #{startRow}, #{pageSize}
+</select>
+
+
+
 
 	<select id="countEmpList" resultType="java.lang.Integer">
 		select count(*)
