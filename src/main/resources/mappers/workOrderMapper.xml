@@ -179,29 +179,71 @@
 		</if>
 	</select>
 
-	<select id="workCusList"
-		resultType="com.keypoint.dto.WorkOrderDTO">
-		select cusCode, cusName
-		from customer
-		where
-		cusCode like
-		CONCAT('%', #{cusCode}, '%') and
-		cusName like CONCAT('%', #{cusName},
-		'%')
-		order by cusCode desc
-		limit #{startRow}, #{pageSize}
+	
+	<select id="workCusList" resultType="com.keypoint.dto.WorkOrderDTO">
+	    select cusCode, cusName
+	    from customer
+	    where
+	    cusCode like CONCAT('%', #{cusCode}, '%') and
+	    cusName like CONCAT('%', #{cusName}, '%') and
+	    cusStatus != '거래정지' and
+	    cusCategory != '납입처'
+	    order by cusCode desc
+	    limit #{startRow}, #{pageSize}
 	</select>
 
+
 	<select id="countCusList" resultType="java.lang.Integer">
-		select count(*)
-		from customer
-		<if test="cusCode!=null and cusName!=null">
-			where
-			cusCode like CONCAT('%', #{cusCode}, '%') and
-			cusName
-			like CONCAT('%', #{cusName}, '%')
-		</if>
+	    select count(*)
+	    from customer
+	    <if test="cusCode != null or cusName != null">
+	    where
+	    <if test="cusCode != null">
+	    cusCode like CONCAT('%', #{cusCode}, '%')
+	    </if>
+	    <if test="cusName != null">
+	    <if test="cusCode != null">
+	    and
+	    </if>
+	    cusName like CONCAT('%', #{cusName}, '%')
+	    </if>
+	    and cusStatus != '거래정지'
+	    and cusCategory != '납입처'
+	    </if>
 	</select>
+
+	<select id="workCusList2" resultType="com.keypoint.dto.WorkOrderDTO">
+	    select cusCode, cusName
+	    from customer
+	    where
+	    cusCode like CONCAT('%', #{cusCode}, '%') and
+	    cusName like CONCAT('%', #{cusName}, '%') and
+	    cusStatus != '거래정지' and
+	    cusCategory != '납품처'
+	    order by cusCode desc
+	    limit #{startRow}, #{pageSize}
+	</select>
+
+
+	<select id="countCusList2" resultType="java.lang.Integer">
+	    select count(*)
+	    from customer
+	    <if test="cusCode != null or cusName != null">
+	    where
+	    <if test="cusCode != null">
+	    cusCode like CONCAT('%', #{cusCode}, '%')
+	    </if>
+	    <if test="cusName != null">
+	    <if test="cusCode != null">
+	    and
+	    </if>
+	    cusName like CONCAT('%', #{cusName}, '%')
+	    </if>
+	    and cusStatus != '거래정지'
+	    and cusCategory != '납품처'
+	    </if>
+	</select>
+
 
 
 	<select id="workRoCodeList" resultType="com.keypoint.dto.WorkRoDTO">
