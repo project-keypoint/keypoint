@@ -90,6 +90,23 @@
     <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
 
 <script type="text/javascript">
+
+//form 제출 이벤트를 가로채고 아이디가 비어 있는지 확인
+document.getElementById("join").onsubmit = function(event) {
+    // 아이디 입력 필드의 값을 가져옴
+    var empId = document.getElementById("InputempNum").value;
+    
+    // 아이디 값이 비어 있는지 확인
+    if (empId === "") {
+        // 아이디가 비어 있는 경우 알림 메시지를 띄움
+        alert("아이디를 입력하세요.");
+        // 폼 제출 중단
+        event.preventDefault();
+    }
+};
+
+
+
 // 아이디기억하기
 $(document).ready(function(){
   
@@ -145,10 +162,6 @@ function getCookie(cookieName) {
 }
 
 
-window.onload = function() {
-  // 페이지가 로드될 때 input 요소에 포커스를 설정합니다.
-  document.getElementById("InputempId").focus();
-};
 
 </script>
 
