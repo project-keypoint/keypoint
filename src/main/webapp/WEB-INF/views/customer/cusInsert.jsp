@@ -41,7 +41,7 @@
 	</select>
 	</div>
 	
-		<div class="form-group-customer">
+	<div class="form-group-customer">
 	<p><a style="color: red;">*</a>업태</p>
 	<select id="cusBusiness" name="cusBusiness" class="form-control search-input">
 	        <option value="제조업">제조업</option>

@@ -9,58 +9,96 @@
 
 
 
-<!-- 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO"> -->
-<!-- 		SELECT * -->
-<!-- 		FROM customer -->
-<!-- 		<where> -->
-<!-- 		<if test="search != null and search != ''"> -->
-<!-- 			cusCode = #{search}  -->
-<!-- 		</if> -->
-<!-- 		<if test="search2 != null and search2 != ''"> -->
-<!-- 			OR cusCategory like CONCAT ('%', #{search2}, '%') -->
-<!--         </if> -->
-<!--         </where> -->
-<!-- 	  	ORDER BY cusCode DESC -->
-<!-- 	  	LIMIT #{startRow}, #{pageSize} -->
-<!-- 	</select> -->
 	
 	<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO">
-  SELECT *
-  FROM customer
-  <where>
-    <if test="search != null and search != ''">
-      cusCode = #{search}
-    </if>
-    <if test="search2 != null and search2 != ''">
-      OR cusCategory like CONCAT('%', #{search2}, '%')
-    </if>
-    <if test="cusStatus != null and cusStatus != ''">
-      OR cusStatus = #{cusStatus}
-    </if>
-  </where>
-  ORDER BY
-    CASE
-      WHEN cusStatus = '거래정지' THEN 0
-      ELSE 1
-    END DESC, cusCode DESC
-  LIMIT #{startRow}, #{pageSize}
-</select>
-	
-	<select id="getCusCount" resultType="java.lang.Integer">
-  SELECT COUNT(*)
-  FROM customer
-  <where>
-    <if test="search != null and search != ''">
-      cusCode = #{search}
-    </if>
-    <if test="search2 != null and search2 != ''">
-      OR cusCategory like CONCAT('%', #{search2}, '%')
-    </if>
-    <if test="cusStatus != null and cusStatus != ''">
-      OR cusStatus = #{cusStatus}
-    </if>
-  </where>
-</select>
+		SELECT *
+		FROM customer
+		<where>
+		<if test="search != null and search != ''">
+		cusCode = #{search}
+		</if>
+		<if test="search2 != null and search2 != ''">
+		OR cusCategory like CONCAT('%', #{search2}, '%')
+		</if>
+		<if test="search3 != null and search3 != ''">
+		OR cusBusiness = #{search3}
+		</if>
+		<if test="search4 != null and search4 != ''">
+		OR cusType = #{search4}
+		</if>
+		<if test="cusStatus != null and cusStatus != ''">
+		OR cusStatus = #{cusStatus}
+		</if>
+		
+		</where>
+		ORDER BY
+		CASE
+		WHEN cusStatus = '거래정지' THEN 0
+		ELSE 1
+		END DESC, cusCode DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+
+
+
+
+
+<!-- 		<select id="getCusList" resultType="com.keypoint.dto.CustomerDTO"> -->
+<!--   SELECT * -->
+<!--   FROM customer -->
+<!--   <where> -->
+<!--     <if test="search != null and search != ''"> -->
+<!--       cusCode = #{search} -->
+<!--     </if> -->
+<!--     <if test="search2 != null and search2 != ''"> -->
+<!--       OR cusCategory like CONCAT('%', #{search2}, '%') -->
+<!--     </if> -->
+<!--     <if test="cusStatus != null and cusStatus != ''"> -->
+<!--       OR cusStatus = #{cusStatus} -->
+<!--     </if> -->
+<!--     <if test="search3 != null and search3 != ''"> -->
+<!--       AND cusBusiness = #{search3} -->
+<!--     </if> -->
+<!--     <if test="search4 != null and search4 != ''"> -->
+<!--       AND cusType = #{search4} -->
+<!--     </if> -->
+<!--     		<if test="search3 != null and search3 != ''"> -->
+<!-- 		OR cusBusiness = #{search3} -->
+<!-- 		</if> -->
+<!--   </where> -->
+<!--   ORDER BY -->
+<!--   CASE -->
+<!--     WHEN cusStatus = '거래정지' THEN 0 -->
+<!--     ELSE 1 -->
+<!--   END DESC, cusCode DESC -->
+<!--   LIMIT #{startRow}, #{pageSize} -->
+<!-- </select> -->
+		
+		
+		
+		
+		
+		<select id="getCusCount" resultType="java.lang.Integer">
+	  SELECT COUNT(*)
+	  FROM customer
+		<where>
+		<if test="search != null and search != ''">
+		cusCode = #{search}
+		</if>
+		<if test="search2 != null and search2 != ''">
+		OR cusCategory like CONCAT('%', #{search2}, '%')
+		</if>
+		<if test="search3 != null and search3 != ''">
+		OR cusBusiness = #{search3}
+		</if>
+		<if test="search4 != null and search4 != ''">
+		OR cusType = #{search4}
+		</if>
+		<if test="cusStatus != null and cusStatus != ''">
+		OR cusStatus = #{cusStatus}
+		</if>
+		</where>
+	</select>
 	
 	
 	

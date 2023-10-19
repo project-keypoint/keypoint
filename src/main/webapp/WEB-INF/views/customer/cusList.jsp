@@ -38,20 +38,31 @@
 		<input type="text" id="cusName" name="cusName" class="form-control search-input readonly-color" placeholder="업체명(클릭)" readonly>
 		</div>
 		</div>
+
+
 		<div class="search-b">
 		<div class="search-select">
-		<p style="width:50px;">자재명</p> 
-		<input type="text" name="search" id="materialCode" class="form-control search-input  readonly-color" placeholder="자재코드" style="width:110px;" readonly>
-		<input type="text" id="materialName" class="form-control search-input  readonly-color" placeholder="자재명(클릭)" readonly>
+		<p>업태</p> 
+		<select id="cusBusiness" name="cusBusiness" class="form-control search-input" onchange="updateCusTypeOptions()">
+		<option value="">선택하세요</option>
+		<option value="도매 및 소매업">도매 및 소매업</option>
+		<option value="제조업">제조업</option>
+		</select>
 		</div>
 		</div>
+		
 		<div class="search-b">
 		<div class="search-select">
-		<p style="width:50px;">자재명</p> 
-		<input type="text" name="search" id="materialCode" class="form-control search-input  readonly-color" placeholder="자재코드" style="width:110px;" readonly>
-		<input type="text" id="materialName" class="form-control search-input  readonly-color" placeholder="자재명(클릭)" readonly>
+		<p>종목</p> 
+		<select id="cusType" name="cusType" class="form-control search-input">
+		</select>
 		</div>
 		</div>
+		
+	
+		
+	
+		
 		
 		
 		<div class="search-button">
@@ -166,10 +177,10 @@
 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 		<c:choose>
 		<c:when test="${i eq pageDTO.pageNum}">
-		<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button page-button-active">${i}</a>
+		<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}" class="page-button page-button-active">${i}</a>
 		</c:when>
 		<c:otherwise>
-		<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-button">${i}</a>
+		<a href="${pageContext.request.contextPath}/customer/cusList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}" class="page-button">${i}</a>
 		</c:otherwise>
 		</c:choose>
 		</c:forEach>
@@ -213,33 +224,23 @@
 	        var url = '${pageContext.request.contextPath}/workOrder/workCusList';
 	        openPopup(url);
 	    });
-//		상품명 검색 팝업 열기
-	    $("#productCode, #productName").click(function() {
-	        var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-	        openPopup(url);
-	    });
-	    // 자재명 검색 팝업 열기
-	    $("#materialCode, #materialName").click(function() {
-	        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
-	        openPopup(url);
-	    });
 	});
 
 
 
 //	검색하기
 	function doSearch() {
-		var query = {"search" : $("#cusCode").val(), "search2" : $("#productCode").val()};
+		var query = {"search" : $("#cusCode").val(), "search2" : $("#cusCategory").val(), "search3" : $("#cusBusiness").val(), "search4" : $("#cusType").val()};
 		$.ajax({
 			url : "${pageContext.request.contextPath}/customer/cusList",
 			type : "get",
 			data : query,
 			dataType : "text",
 			success : function(data){
-				if (query.search == "" && query.search2 == "") {
+				if (query.search == "" && query.search3 == "" && query.search4 == "") {
 					location.href = "${pageContext.request.contextPath}/customer/cusList";
 				} else {
-					location.href = "${pageContext.request.contextPath}/customer/cusList?search=" + $("#cusCode").val();
+					location.href = "${pageContext.request.contextPath}/customer/cusList?search=" + $("#cusCode").val()+ "&search3=" + $("#cusBusiness").val() + "&search4=" + $("#cusType").val();
 				}
 			}
 		});
@@ -302,11 +303,18 @@
 //	검색의 [취소] 버튼 누르면 입력 된 값 초기화
 	function cancelSearch() {
 //		업체명 입력 필드 초기화
-		document.getElementById("cusCode").value = "";
-		document.getElementById("cusName").value = "";
-//		상품명 입력 필드 초기화
-		document.getElementById("productCode").value = "";
-		document.getElementById("productName").value = "";
+	    document.getElementById("cusCode").value = "";
+	    document.getElementById("cusName").value = "";
+//		업태/종목 입력 필드 초기화
+	    document.getElementById("cusBusiness").value = "";
+	    
+//		"선택하세요" 값을 "cusType" 선택 상자에 추가
+	    var cusTypeSelect = document.getElementById("cusType");
+	    cusTypeSelect.innerHTML = ''; // 종목 선택 내용 초기화
+	    var defaultOption = document.createElement("option");
+	    defaultOption.value = "";
+	    defaultOption.textContent = "선택하세요";
+	    cusTypeSelect.appendChild(defaultOption);
 	}
 
   
@@ -366,6 +374,44 @@
   
 
 
+
+
+  
+//	검색부분에서 업태에 따른 종목 목록 불러오기/전체 종목 목록 불러오기
+	function updateCusTypeOptions() {
+	    var cusBusinessSelect = document.getElementById("cusBusiness");
+	    var cusTypeSelect = document.getElementById("cusType");
+	
+	    // 초기화
+	    cusTypeSelect.innerHTML = '';
+	
+	    // 선택된 업태 값을 가져옴
+	    var selectedBusiness = cusBusinessSelect.value;
+	
+	    // 업태에 따라서 옵션을 추가
+	    if (selectedBusiness === "") {
+	        var options = ["선택하세요", "키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB", "키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
+	    } else if (selectedBusiness === "도매 및 소매업") {
+	        var options = ["완제품을 선택하세요", "키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
+	    } else if (selectedBusiness === "제조업") {
+	        var options = ["자재를 선택하세요", "키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB"];
+	    }
+	
+	    // 옵션을 추가
+	    options.forEach(function (optionText) {
+	        var option = document.createElement("option");
+	        option.value = optionText;
+	        option.textContent = optionText;
+	        cusTypeSelect.appendChild(option);
+	    });
+	}
+	
+	// 페이지 로드시 초기화
+	updateCusTypeOptions();
+
+  
+  
+  
   
   
 </script>

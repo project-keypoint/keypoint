@@ -47,9 +47,10 @@ public class CustomerController {
 		System.out.println("CustomerController cusList()");
 		
 //		검색어 가져오기
-		String search = request.getParameter("search");
-		String search2 = request.getParameter("search2");
-		String search3 = request.getParameter("search3");
+		String search = request.getParameter("search");		//	업체명 검색어
+		String search2 = request.getParameter("search2");	// 	납입처/납품처 검색어
+		String search3 = request.getParameter("search3");	//	업태
+		String search4 = request.getParameter("search4");	//	종목
 
 		
 //		세션에서 empId 가져오기
@@ -83,6 +84,7 @@ public class CustomerController {
 		pageDTO.setSearch(search);
 		pageDTO.setSearch2(search2);
 		pageDTO.setSearch3(search3);
+		pageDTO.setSearch4(search4);
 		
 		pageDTO.setCusStatus(request.getParameter("cusStatus"));
 		
