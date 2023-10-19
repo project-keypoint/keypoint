@@ -118,7 +118,7 @@
 
 <div class="form-group-customer">
 <p>적요</p>
-<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px;" placeholder="${customerDTO.cusMemo}" readonly="readonly"></textarea>
+<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px; resize: none;" placeholder="${customerDTO.cusMemo}" readonly="readonly"></textarea>
 </div>
 
 <br>

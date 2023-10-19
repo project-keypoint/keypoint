@@ -133,7 +133,7 @@
 	
 	<div class="form-group-customer">
 	<p>적요</p>
-	<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px;"></textarea>
+	<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px; resize: none;"></textarea>
 	</div>
 	<br>
 	

@@ -13,7 +13,7 @@
 
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- customer CSS 적용-->
+    <!-- notice CSS 적용-->
     <link href="${pageContext.request.contextPath}/resources/css/notice.css" rel="stylesheet">
 </head>
 
@@ -52,7 +52,7 @@
 
 <div class="form-group-customer">
     <p>내용</p>
-    <textarea id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px;" ></textarea>
+    <textarea id="noticeContent" name="noticeContent" class="form-control search-input" style="height: 300px; resize: none;" ></textarea>
 </div>
 
 <div class="form-group-customer" style="display: none;">
@@ -60,10 +60,7 @@
 <input type="text" id="noticeStatus" name="noticeStatus" class="form-control search-input" value="등록">
 </div>
 
-<!-- <div class="form-group-customer"> -->
-<!-- <p>첨부파일</p> -->
-<!-- <input type="file" id="noticeFile" name="noticeFile" class="form-control search-input" readonly="readonly"> -->
-<!-- </div> -->
+
 <br>
 </div>
 

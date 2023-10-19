@@ -139,7 +139,7 @@
 
 <div class="form-group-customer">
 <p>적요</p>
-<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px;">${customerDTO.cusMemo}</textarea>
+<textarea id="cusMemo" name="cusMemo" class="form-control search-input" style="height: 200px; resize: none;">${customerDTO.cusMemo}</textarea>
 </div>
 
 <br>
@@ -156,7 +156,7 @@
 
 
 <div class="details-buttons">
-<input type="submit" id="receiveSubmit" value="등록" class="btn btn-primary mybutton1">
+<input type="submit" id="receiveSubmit" value="수정완료" class="btn btn-primary mybutton1">
 <input type="button" value="취소" class="btn btn-secondary mybutton1" onClick="window.close()">
 </div>
 </form><!-- form 끝 -->

@@ -65,10 +65,7 @@
 <textarea id="noticeContent" name="noticeContent" class="form-control search-input"  style="height: 300px; resize: none;">${noticeDTO.noticeContent}</textarea>
 </div>
 
-<!-- <div class="form-group-customer"> -->
-<!-- <p>첨부파일</p> -->
-<!-- <input type="text" id="noticeFile" name="noticeFile" class="form-control search-input"> -->
-<!-- </div> -->
+
 <br>
 </div>
 

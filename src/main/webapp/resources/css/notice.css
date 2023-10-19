@@ -223,21 +223,11 @@ height: 400;
 
 
 
-  /* 파일 선택 버튼 숨김 */
-  input[type="file"]::-webkit-file-upload-button,
-  input[type="file"]::-webkit-file-upload-button::before {
-    content: none;
-    display: none;
-  }
-
-
-
-
 #noticeSubject.search-input, #noticeCategory.search-input, 
 #noticeContent.search-input, #noticeFile.search-input,
 #empName.search-input {
 width: 500px;
-height: 400;
+height: 400px;
 margin-bottom: 10px;
 }
 
