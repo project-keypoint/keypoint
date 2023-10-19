@@ -447,8 +447,8 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 		search.put("empName", empName);
 		search.put("startRow", pageDTO.getStartRow());
 		search.put("pageSize", pageDTO.getPageSize());
-		search.put("empRole", 0); 
-
+		search.put("empStatus", "휴직"); 
+		search.put("empStatus", "퇴직"); 
 		List<WorkOrderDTO> workEmpList = workOrderService.getWorkEmpList(search);
 			
 		//페이징 처리
