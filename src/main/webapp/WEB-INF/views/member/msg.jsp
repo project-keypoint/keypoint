@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("아이디 비밀번호 틀림");
+		alert("아이디, 비밀번호 틀림");
 		history.back();
 	</script>
 </body>
