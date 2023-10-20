@@ -211,10 +211,11 @@ public class EmployeeController {
 	@GetMapping("/employeeDetails")
 	public String employeeDetails(Model model, @RequestParam("empId") int empId) {
 		System.out.println("EmployeeController employeeDetails()");
-		
+	
+		// empId로 사원정보 가져오기
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
-		
 		System.out.println(employeeDTO);
+		
 		model.addAttribute("employeeDTO", employeeDTO);
 		
 		return "employee/employeeDetails";

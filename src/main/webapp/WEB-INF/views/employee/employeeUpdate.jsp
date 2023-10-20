@@ -160,6 +160,7 @@
     <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
 </select>    
 </div>
+
 </div><!-- form-group-receive -->
 </div><!-- main-details2 -->
 
@@ -332,6 +333,19 @@ function validateEmail() {
         emailField.value = ""; // 입력 필드를 비우기 (초기화)
     }
 }
+
+//"권한" 텍스트 안보이게 조건줌
+// document.addEventListener("DOMContentLoaded", function () {
+// 	  var empRole = ${employeeDTO.empRole}; // 서버에서 가져온 값으로 설정
+// 	  var departmentName = '인사부'; // 예제값으로 '인사부'를 사용합니다;
+// 	  var roleText = document.getElementById('roleText');
+// 	  var empRoleSelect = document.getElementById('empRole');
+
+// 	  if (empRole === 3 || (empRole === 2 && departmentName === '인사부')) {
+// 	    roleText.style.display = 'block'; // "권한" 텍스트 보이게 설정
+// 	    empRoleSelect.style.display = 'block'; // select 요소 보이게 설정
+// 	  }
+// 	});
 
 </script>
 </body>

@@ -139,10 +139,49 @@
 
 </div>
 
+
+
+
 <div class="form-group-column">
-<p>권한</p>
-<input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly>
-</div>
+
+<c:choose>
+  <c:when test="${employeeDTO.empRole == 1}">
+    <p>권한</p>
+    <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly>
+  </c:when>
+  <c:when test="${employeeDTO.empRole == 2}">
+    <p>권한</p>
+    <input type="text" id="empRole" class="form-control search-input" placeholder="ㅁㄴㅇㅇㅁㄴ" readonly>
+  </c:when>
+  <c:otherwise>
+    <!-- 다른 경우 처리 -->
+  </c:otherwise>
+</c:choose>
+
+
+
+
+<!--   <p>권한</p> -->
+<%--   <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" style="display: none;" readonly> --%>
+    </div>
+
+
+
+
+<!-- <div class="form-group-column"> -->
+<%--   <c:choose> --%>
+<%--     <c:when test="${(employeeDTO.empRole >= 2 && employeeDTO.departmentName eq '인사부') || employeeDTO.empRole == 3}"> --%>
+<!--       <p>권한</p> -->
+<%--       <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly> --%>
+<%--     </c:when> --%>
+<%--     <c:otherwise> --%>
+<!--       조건을 만족하지 않을 때의 처리를 추가 -->
+<%--     </c:otherwise> --%>
+<%--   </c:choose> --%>
+<!-- </div> -->
+
+
+
 
 </div><!-- form-group-receive -->
 </div><!-- main-details2 -->
@@ -198,6 +237,19 @@ function openUpdate(empId) {
 }
 
 
+// "권한" 텍스트 안보이게 조건줌
+// document.addEventListener("DOMContentLoaded", function () {
+//   var empRole = ${employeeDTO1.empRole}; // 서버에서 가져온 값으로 설정
+//   var empRole2 = ${employeeDTO.empRole};
+//   var departmentName = '인사부'; // 예제값으로 '인사부'를 사용합니다;
+//   var roleText = document.getElementById('roleText');
+//   var empRoleInput = document.getElementById('empRole');
+
+//   if (empRole2 === 3 || (empRole === 2 && departmentName === '인사부')) {
+//     roleText.style.display = 'block'; // "권한" 텍스트 보이게 설정
+//     empRoleInput.style.display = 'block'; // input 요소 보이게 설정
+//   }
+// });
 
 </script>
 </body>
