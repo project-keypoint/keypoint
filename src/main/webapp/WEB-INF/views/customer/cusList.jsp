@@ -112,7 +112,7 @@
 		<table class="table-list">
 		<tr class="table-head">
 		<th><input type="checkbox" id="delete-list-all" name="delete-list" data-group="delete-list"></th>
-		<th onclick="openDetails('${customerDTO.cusCode}')">거래처코드</th>
+		<th>거래처코드</th>
 		<th>구분</th>
 		<th>　거래처명　</th>
 		<th>　대표자명</th>
