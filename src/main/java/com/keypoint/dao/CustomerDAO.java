@@ -1,6 +1,7 @@
 package com.keypoint.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -70,6 +71,29 @@ public class CustomerDAO {
 		System.out.println("CustomerDAO cusNumberCheck()");
 
 		return sqlSession.selectOne(namespace+".cusNumberCheck", cusNumber);
+	}
+
+
+	
+//	전체 거래처목록 팝업창
+	public List<CustomerDTO> getallCusList(Map<String, Object> search) {
+		System.out.println("CustomerDAO getallCusList()");
+
+		if(search.get("cusName")==null) {
+			search.put("cusName", "");
+		}
+		if(search.get("cusCode")==null) {
+			search.put("cusCode", "");
+		}
+		return sqlSession.selectList(namespace+".getallCusList", search);
+	}
+
+	
+//	전체 거래처목록 개수 팝업창
+	public Integer getallCusListCount(Map<String, Object> search) {
+		System.out.println("CustomerDAO getallCusListCount()");
+
+		return sqlSession.selectOne(namespace+".getallCusListCount", search);
 	}
 
 	

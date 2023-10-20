@@ -1,6 +1,7 @@
 package com.keypoint.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -87,6 +88,23 @@ public class CustomerService {
 		System.out.println("CustomerService cusNumberCheck()");
 
 		return customerDAO.cusNumberCheck(cusNumber);
+	}
+
+
+	
+//	전체 거래처목록 팝업창	
+	public List<CustomerDTO> getallCusList(Map<String, Object> search) {
+		System.out.println("CustomerService getallCusList()");
+
+		return customerDAO.getallCusList(search);
+	}
+
+
+//	전체 거래처목록 개수 팝업창
+	public int getallCusListCount(Map<String, Object> search) {
+		System.out.println("CustomerService getallCusListCount()");
+
+		return customerDAO.getallCusListCount(search);
 	}
 
 

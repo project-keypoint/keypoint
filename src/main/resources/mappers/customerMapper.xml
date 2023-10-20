@@ -109,6 +109,36 @@
 	
 
 
+	<select id="getallCusList" resultType="com.keypoint.dto.CustomerDTO">
+		SELECT cusCode, cusName
+		FROM customer
+		WHERE cusCode like CONCAT('%', #{cusCode}, '%') 
+		AND cusName like CONCAT('%', #{cusName}, '%')
+		AND cusStatus != '거래정지'
+		ORDER BY cusCode DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+
+
+
+	<select id="getallCusListCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM customer
+		<if test="cusCode != null or cusName != null">
+		WHERE
+		<if test="cusCode != null">
+		cusCode LIKE CONCAT('%', #{cusCode}, '%')
+		</if>
+		<if test="cusName != null">
+		<if test="cusCode != null">
+		AND
+		</if>
+		cusName LIKE CONCAT('%', #{cusName}, '%')
+		</if>
+		AND cusStatus != '거래정지'
+		</if>
+	</select>
+
 
 
 
