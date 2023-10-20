@@ -31,6 +31,7 @@ import com.keypoint.dto.PageDTO;
 import com.keypoint.security.SaltGenerator;
 import com.keypoint.dto.EmployeeDTO;
 import com.keypoint.service.EmployeeService;
+import com.mysql.cj.Session;
 
 
 @Controller
@@ -189,24 +190,6 @@ public class EmployeeController {
 		return "employee/employeeInsert";  
 	} // employeeInsert	
 	
-	
-//	// 사원등록하기(이게 없어도..사원 등록 되는듯..?)
-//	@PostMapping("/employeeInsertPro")
-//	public String employeeInsertPro(EmployeeDTO employeeDTO) {
-//		System.out.println("EmployeeController employeeInsertPro()");
-//		System.out.println(employeeDTO);
-//		
-//		employeeService.insertEmployee(employeeDTO);
-//		
-//		if(employeeDTO != null) {
-//			return "employee/msgSuccess"; // 등록완료
-//		} else {
-//			return "employee/msgFailed"; // 등록실패
-//		}
-//	
-//	} // employeeInsertPro	
-	
-	
 	// 사원-상세정보
 	@GetMapping("/employeeDetails")
 	public String employeeDetails(Model model, @RequestParam("empId") int empId, HttpSession session) {
@@ -271,9 +254,11 @@ public class EmployeeController {
 	// 사원등록 - 사진첨부하기가 포함된 사원등록
 	@PostMapping("/photoPro")
 	// 첨부파일은 boardDTO에 못 담음
-	public String photoPro(HttpServletRequest request, MultipartFile empPhoto) throws Exception{
+	public String photoPro(HttpServletRequest request, MultipartFile empPhoto, HttpSession session ) throws Exception{
 		System.out.println("EmployeeController photoPro()");
 		// name = "file" => MultipartFile file 이름 동일하게 해야 함
+		String uploadPath = "/resources/upload";
+		String saveDir = session.getServletContext().getRealPath(uploadPath);
 		
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 		
@@ -293,7 +278,7 @@ public class EmployeeController {
 			// 첨부파일 복사(업로드)
 //			FileCopyUtils.copy(원본파일, upload폴더파일(경로, 파일이름));
 //			file.getBytes() 원본파일 => upload 첨부파일 복사(업로드)
-			FileCopyUtils.copy(empPhoto.getBytes(), new File(uploadPath, filename));
+			FileCopyUtils.copy(empPhoto.getBytes(), new File(saveDir, filename));
 			
 			// boardDTO에 첨부파일이름 저장
 			employeeDTO.setEmpPhoto(filename);

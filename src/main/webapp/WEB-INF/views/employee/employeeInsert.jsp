@@ -26,17 +26,12 @@
 
 <div class="forms-group-customer">
 
-
-
-<!-- <div class="form-group-customer">  -->
 <p><a style="color: red; font-size: 17px;">* 사진은 필수입력사항이 아닙니다.</a></p>
 <!-- -------------------- 사진첨부 -------------------- -->
 <div class="form-group-customer" style="display: flex; flex-direction: column; align-items: center;">
-        <img src="${pageContext.request.contextPath }/resources/img/test.png" id="preview" width="200" height="230" style="border-radius: 3px">
-<!-- </div> -->
-
+        <img src="${pageContext.request.contextPath }/resources/img/test.png" id="preview" width="200" height="200" style="border-radius: 3px">
 <div class="imgbtn">
-  <label for="file" style="display: flex; justify-content: center; margin-top: -20px; margin-left: -15px;">
+  <label for="file" style="display: flex; justify-content: center; margin-top: 7px; margin-left: 7px;">
     <span class="btn btn-outline-primary btn-icon-text" style="width: 180px;"> 
       <i class="ti-upload btn-icon-prepend"></i>사진 업로드하기
     </span>
@@ -341,6 +336,7 @@ function checkDuplicate(type) {
         }
     });
 }
+
 
 
 </script>
