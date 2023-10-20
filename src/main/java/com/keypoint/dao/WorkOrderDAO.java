@@ -48,6 +48,7 @@ public class WorkOrderDAO {
 		
 		
 		sqlSession.insert(namespace+".insertWorkOrder", workOrderDTO);
+		sqlSession.update(namespace+".updateStatusProcess", workOrderDTO);
 		
 	}
 	

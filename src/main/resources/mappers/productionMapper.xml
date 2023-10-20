@@ -44,6 +44,12 @@
 		)
 	</insert>
 	
+	<update id="updateStatusComplete">
+		UPDATE receivedOrder
+		SET roStatus = #{woStatus}
+		WHERE roCode = #{roCode}
+	</update>
+	
 
 	<select id="getProductionList"
 		resultType="com.keypoint.dto.ProductionDTO">

@@ -38,6 +38,7 @@ public class ProductionDAO {
 		System.out.println("poDate:" + productionDTO.getPoDate());
 		
 		sqlSession.insert(namespace+".insertProduction", productionDTO);
+		sqlSession.update(namespace+".updateStatusComplete", productionDTO);
 		
 	}
 	

@@ -33,6 +33,14 @@
 		#{shipSdate}
 		)
 	</insert>
+	
+	<update id="updateStatusProcess">
+	UPDATE receivedOrder
+	SET roStatus = #{woStatus}
+	<where>
+	roCode = #{roCode}
+	</where>
+	</update>
 
 	<select id="getWorkOrderList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
@@ -267,24 +275,17 @@
 
 	<select id="workRoCodeList"
 		resultType="com.keypoint.dto.WorkRoDTO">
-		select a.roCode, a.cusCode, a.productCode, a.roCount,
-		a.shipSdate
+		select distinct a.roCode, a.cusCode, a.productCode, a.roCount, a.shipSdate
 		from receivedOrder a
-		join product b on a.productCode =
-		b.productCode
+		join product b on a.productCode = b.productCode
 		left join workOrder c on a.roCode = c.roCode
-		where
-		a.roCode like CONCAT('%', #{roCode}, '%')
-		and a.productCode like
-		CONCAT('%', #{productCode}, '%')
-		and a.roStatus !=
-		'삭제' and a.roCount >=
-		b.productCount
+		where a.roCode like CONCAT('%', #{roCode}, '%')
+		and a.productCode like CONCAT('%', #{productCode}, '%')
+		and a.roStatus != '삭제' and a.roCount >= b.productCount
 		and a.shipDate is null
-		order by
-		roCode desc
-		limit
-		#{startRow}, #{pageSize}
+		and c.roCode is null
+		order by roCode desc
+		limit #{startRow}, #{pageSize}
 	</select>
 
 	<select id="countWorkRoCodeList" resultType="java.lang.Integer">
