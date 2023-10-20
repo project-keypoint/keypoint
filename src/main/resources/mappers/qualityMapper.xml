@@ -125,13 +125,13 @@
 		UPDATE qualityControl
 		SET qcTest1 = #{qcTest1}, qcTest2 = #{qcTest2}, qcTest3 = #{qcTest3},
 		    qcPass = #{qcPass}, qcDefect = #{qcDefect}, qcDefectRate = #{qcDefectRate},
-		    qcEmpId = #{qcEmpId}, qcEndDate = #{qcEndDate}, qcStatus = #{qcStatus}
+		    qcEmpId = #{qcEmpId}, qcEndDate = #{qcEndDate}, qcStatus = '진행'
 		WHERE poCode = #{poCode}                        
 	</update>
 	
 	<update id="qcTransferStatus">
 		UPDATE qualityControl
-		SET qcTransfer = '완료'
+		SET qcTransfer = '완료', qcStatus ='완료'
 		WHERE qcCode = #{qcCode} AND qcTransfer = '미완료'
 	</update>
 	
