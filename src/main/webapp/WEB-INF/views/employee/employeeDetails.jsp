@@ -143,42 +143,18 @@
 
 
 <div class="form-group-column">
-
 <c:choose>
-  <c:when test="${employeeDTO.empRole == 1}">
-    <p>권한</p>
-    <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly>
+  <c:when test="${employeeDTO.empRole eq '3'}">
+    <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly/>
   </c:when>
-  <c:when test="${employeeDTO.empRole == 2}">
-    <p>권한</p>
-    <input type="text" id="empRole" class="form-control search-input" placeholder="ㅁㄴㅇㅇㅁㄴ" readonly>
+  <c:when test="${employeeDTO.empRole eq '2' and employeeDTO.departmentName eq '인사부'}">
+    <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly/>
   </c:when>
   <c:otherwise>
-    <!-- 다른 경우 처리 -->
+    <!--     빈칸 -->
   </c:otherwise>
 </c:choose>
-
-
-
-
-<!--   <p>권한</p> -->
-<%--   <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" style="display: none;" readonly> --%>
-    </div>
-
-
-
-
-<!-- <div class="form-group-column"> -->
-<%--   <c:choose> --%>
-<%--     <c:when test="${(employeeDTO.empRole >= 2 && employeeDTO.departmentName eq '인사부') || employeeDTO.empRole == 3}"> --%>
-<!--       <p>권한</p> -->
-<%--       <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly> --%>
-<%--     </c:when> --%>
-<%--     <c:otherwise> --%>
-<!--       조건을 만족하지 않을 때의 처리를 추가 -->
-<%--     </c:otherwise> --%>
-<%--   </c:choose> --%>
-<!-- </div> -->
+</div>
 
 
 

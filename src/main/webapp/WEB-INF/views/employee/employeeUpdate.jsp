@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,13 +154,29 @@
 </div>
 
 <div class="form-group-column">
-<p>권한</p>
+<c:choose>
+  <c:when test="${employeeDTO.empRole eq '3'}">
+    <p>권한</p>
 <select id="empRole" name="empRole" class="form-control search-input status">
     <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
     <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
     <option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
     <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
-</select>    
+</select>
+  </c:when>
+  <c:when test="${employeeDTO.empRole eq '2' and employeeDTO.departmentName eq '인사부'}">
+    <p>권한</p>
+<select id="empRole" name="empRole" class="form-control search-input status">
+    <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
+    <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
+    <option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
+    <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
+</select>
+  </c:when>
+  <c:otherwise>
+<!--     빈칸 -->
+  </c:otherwise>
+</c:choose>
 </div>
 
 </div><!-- form-group-receive -->
