@@ -66,7 +66,7 @@ public class CustomerController {
 		
 		
 //		한 화면에 보여줄 글 개수 설정
-		int pageSize = 5;
+		int pageSize = 8;
 		
 //		현재의 페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
@@ -223,83 +223,68 @@ public class CustomerController {
 
 	
 //	전체 거래처목록 팝업창	
-	@GetMapping("/allCusList")
-	public String allCusList(Model model, HttpServletRequest request) {
-		System.out.println("CustomerController allCusList()");
-		
-//		검색한거 받아오기
+	@RequestMapping(value = "/allCusList", method = RequestMethod.GET)
+	public String allCusList(Model model, HttpServletRequest request, PageDTO pageDTO) { 
 		String cusCode = request.getParameter("cusCode");
 		String cusName = request.getParameter("cusName");
 		
-//		한 화면에 보여줄 글 개수 설정
-		int pageSize = 5;
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize = 5; // sql문에 들어가는 항목
 		
-//		현재의 페이지 번호 가져오기
+		// 현페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
-		
-//		페이지 번호 없을 경우 -> "1"로 설정
-		if (pageNum == null) {
-			pageNum = "1";
+		if(pageNum==null) {
+			pageNum="1";
 		}
-
-//		페이지 번호 -> 정수형으로
-		int currentPage = Integer.parseInt(pageNum);
-		
-		PageDTO pageDTO = new PageDTO();
+		// 페이지번호를 정수형 변경
+		int currentPage=Integer.parseInt(pageNum);
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1; // sql문에 들어가는 항목
+		int endRow = startRow+pageDTO.getPageSize()-1;
 		
-		pageDTO.setCusStatus(request.getParameter("cusStatus"));
-		
-		
+		pageDTO.setStartRow(startRow-1); // limit startRow (0이 1열이기 때문 1을 뺌)
+		pageDTO.setEndRow(endRow);
+
 		Map<String,Object> search = new HashMap<>(); // sql에 들어가야할 서치 항목 및 pageDTO 항목 map에 담기
 		search.put("cusCode", cusCode);
 		search.put("cusName", cusName);
 		search.put("startRow", pageDTO.getStartRow());
 		search.put("pageSize", pageDTO.getPageSize());
-		
-		
+
 //		전체 글 리스트
 		List<CustomerDTO> allCusList = customerService.getallCusList(search);
-		
-		
-//		거래처 전체 등록 개수 가져오기
+			
+//		거래처 전체 등록 개수 가져오기(페이징)
 		int count = customerService.getallCusListCount(search);
-		
-		
-//		한 화면에 보여줄 페이지 개수 설정
+
 		int pageBlock = 10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+		 	endPage = pageCount;
+		 }
 		
-//		시작하는 페이지 번호
-		int startPage = (currentPage -1)/pageBlock*pageBlock+1;
-		
-//		끝나는 페이지 번호
-		int endPage = startPage+pageBlock-1;
-		
-//		전체페이지 개수
-		int pageCount = count/pageSize + (count%pageSize==0?0:1);
-		
-//		끝나는 페이지 번호 / 전체페이지 개수 비교 
-//		ㄴ> 끝나는 페이지가 크면 전체 페이지 개수로 변경
-		if (endPage > pageCount) {
-			endPage = pageCount;
-		}
-		
-//		pageDTO에 담기
 		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		
-		
-		model.addAttribute("allCusList", allCusList);
+				
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("count", count);
+		model.addAttribute("search", search);
+		model.addAttribute("allCusList", allCusList);
 		
 		return "customer/allCusList";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

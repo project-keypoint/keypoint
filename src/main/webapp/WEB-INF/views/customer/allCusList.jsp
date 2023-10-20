@@ -17,14 +17,14 @@
 <link href="${pageContext.request.contextPath}/resources/css/searchList.css" rel="stylesheet">
 </head>
 <body>
-<h4>납품처 조회</h4>
+<h4>거래처조회</h4>
 <form>
 <div class="search-top">
 <div>
-<a>업체코드</a>
+<a>거래처코드</a>
 <input type="text" name="cusCode" id="cusCode" style="width: 80px;">
 </div><div>
-<a>업체명</a>
+<a>거래처명</a>
 <input type="text" name="cusName" id="cusName" style="width: 150px;">
 </div>
 <div>
@@ -33,7 +33,7 @@
 </div>
 	</form>
 	<table>
-<tr><th>업체코드</th><th>업체명</th></tr>
+<tr><th>거래처코드</th><th>거래처명</th></tr>
 <c:forEach var="allCusList" items="${allCusList}">
 <tr onclick="selectWork('${allCusList.cusCode }','${allCusList.cusName }')"> <!-- ,'${itemList.itemId}' -->
 	<td id="con">${allCusList.cusCode}</td>
@@ -46,7 +46,6 @@
 		  
           opener.document.getElementById("cusCode").value = a
           opener.document.getElementById("cusName").value = b
-//           opener.document.getElementById("pid").value = c
           window.close();
 
         }
@@ -61,26 +60,27 @@
 
     <!-- 1페이지 이전 -->
 	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage-1}"><</a>
+	<a href="${pageContext.request.contextPath}/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
 <!-- 10페이지 이전 -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/customer/allCusListcusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
+	<a href="${pageContext.request.contextPath}/customer/allCusListcusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage-pageDTO.pageBlock}"><<</a>
 	</c:if>
 	
-	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath }/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
+	<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage }" step="1">
+	<a href="${pageContext.request.contextPath}/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a>
+
 	</c:forEach>
 
 <!-- 1페이지 다음 -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage+1}">></a>
+	<a href="${pageContext.request.contextPath}/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
 <!-- 10페이지 다음 -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
+	<a href="${pageContext.request.contextPath}/customer/allCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>
 	
 </div>

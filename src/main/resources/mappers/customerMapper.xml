@@ -44,6 +44,7 @@
 		LIMIT #{startRow}, #{pageSize}
 	</select>
 
+
 		
 	<select id="getCusCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)

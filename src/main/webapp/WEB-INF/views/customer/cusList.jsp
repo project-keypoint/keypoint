@@ -33,13 +33,11 @@
 		<div class="search-bar">
 		<div class="search-b">
 		<div class="search-select">
-		<p>업체명</p> 
+		<p>거래처</p> 
 		<input type="hidden" id="cusCode" name="cusCode" class="form-control search-input readonly-color" placeholder="업체코드" style="width:110px;" readonly>
-		<input type="text" id="cusName" name="cusName" class="form-control search-input readonly-color" placeholder="업체명(클릭)" readonly>
+		<input type="text" id="cusName" name="cusName" class="form-control search-input readonly-color" placeholder="거래처명(클릭)" readonly>
 		</div>
 		</div>
-
-
 		<div class="search-b">
 		<div class="search-select">
 		<p>업태</p> 
@@ -50,7 +48,6 @@
 		</select>
 		</div>
 		</div>
-		
 		<div class="search-b">
 		<div class="search-select">
 		<p>종목</p> 
@@ -58,20 +55,12 @@
 		</select>
 		</div>
 		</div>
-		
-	
-		
-	
-		
-		
-		
 		<div class="search-button">
 		<input type="button" value="검색" class="btn btn-primary mybutton1" onclick="doSearch()">
 		<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="cancelSearch()">
 		</div>
 		</div><!-- search-bar -->
 		<br>
-		
 		
 <!-- -------------------------------------------------------목록버튼-------------------------------------------------------------------------------- -->		
 

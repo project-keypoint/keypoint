@@ -323,7 +323,7 @@
 	    if (cusCategory === "납입처") {
 	        // 납입처를 선택한 경우
 	        cusBusinessSelect.value = "제조업";
-	        cusBusinessSelect.disabled = true;
+// 	        cusBusinessSelect.disabled = true;
 	        // 원하는 옵션만 추가
 	        var allowedOptions = ["키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB"];
 	        for (var i = 0; i < allowedOptions.length; i++) {
@@ -335,7 +335,7 @@
 	    } else {
 	        // 납품처를 선택한 경우
 	        cusBusinessSelect.value = "도매 및 소매업";
-	        cusBusinessSelect.disabled = true;
+// 	        cusBusinessSelect.disabled = true;
 	        // 모든 옵션을 추가
 	        var allOptions = ["키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
 	        for (var i = 0; i < allOptions.length; i++) {
