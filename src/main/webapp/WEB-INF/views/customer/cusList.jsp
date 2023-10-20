@@ -230,6 +230,17 @@
 
 //	검색하기
 	function doSearch() {
+	    var cusBusiness = $("#cusBusiness").val();
+	    var cusType = $("#cusType").val();
+
+	    if (cusType === "자재를 선택하세요") {
+	        alert("종목을 선택해주세요.");
+	        return;
+	    } else if (cusType === "완제품을 선택하세요"){
+	    	 alert("종목을 선택해주세요.");
+		    return;
+	    }
+	    
 		var query = {"search" : $("#cusCode").val(), "search2" : $("#cusCategory").val(), "search3" : $("#cusBusiness").val(), "search4" : $("#cusType").val()};
 		$.ajax({
 			url : "${pageContext.request.contextPath}/customer/cusList",
@@ -245,6 +256,14 @@
 			}
 		});
 	}
+
+
+
+
+
+
+
+
 
 
 // 체크박스(삭제용) 전체선택
@@ -378,38 +397,42 @@
 
   
 //	검색부분에서 업태에 따른 종목 목록 불러오기/전체 종목 목록 불러오기
-	function updateCusTypeOptions() {
-	    var cusBusinessSelect = document.getElementById("cusBusiness");
-	    var cusTypeSelect = document.getElementById("cusType");
-	
-	    // 초기화
-	    cusTypeSelect.innerHTML = '';
-	
-	    // 선택된 업태 값을 가져옴
-	    var selectedBusiness = cusBusinessSelect.value;
-	
-	    // 업태에 따라서 옵션을 추가
-	    if (selectedBusiness === "") {
-	        var options = ["선택하세요", "키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB", "키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
-	    } else if (selectedBusiness === "도매 및 소매업") {
-	        var options = ["완제품을 선택하세요", "키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
-	    } else if (selectedBusiness === "제조업") {
-	        var options = ["자재를 선택하세요", "키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB"];
-	    }
-	
-	    // 옵션을 추가
-	    options.forEach(function (optionText) {
-	        var option = document.createElement("option");
-	        option.value = optionText;
-	        option.textContent = optionText;
-	        cusTypeSelect.appendChild(option);
-	    });
-	}
-	
-	// 페이지 로드시 초기화
-	updateCusTypeOptions();
+    function updateCusTypeOptions() {
+        var cusBusinessSelect = document.getElementById("cusBusiness");
+        var cusTypeSelect = document.getElementById("cusType");
 
-  
+        // 초기화
+        cusTypeSelect.innerHTML = '';
+
+        // 선택된 업태 값을 가져옴
+        var selectedBusiness = cusBusinessSelect.value;
+
+        // 업태가 선택되지 않았을 때 "선택하세요" 추가
+        if (selectedBusiness === "") {
+            var option = document.createElement("option");
+            option.value = "";
+            option.textContent = "업태 먼저 선택하세요";
+            cusTypeSelect.appendChild(option);
+        } else {
+            // 업태에 따라서 옵션을 추가
+            if (selectedBusiness === "도매 및 소매업") {
+                var options = ["완제품을 선택하세요", "키포인트A87(적축)", "키포인트A87(청축)", "키포인트A87(갈축)", "키포인트B104(적축)", "키포인트B104(청축)", "키포인트B104(갈축)"];
+            } else if (selectedBusiness === "제조업") {
+                var options = ["자재를 선택하세요", "키캡", "스위치(적축)", "스위치(청축)", "스위치(갈축)", "프레임(상부)", "프레임(하부)", "흡음제", "플레이트", "PCB"];
+            }
+
+            // 옵션을 추가
+            options.forEach(function (optionText) {
+                var option = document.createElement("option");
+                option.value = optionText;
+                option.textContent = optionText;
+                cusTypeSelect.appendChild(option);
+            });
+        }
+    }
+
+    // 페이지 로드시 초기화
+    updateCusTypeOptions();
   
   
   
