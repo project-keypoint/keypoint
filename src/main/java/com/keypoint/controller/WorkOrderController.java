@@ -399,8 +399,8 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 	int count = workOrderService.countWorkRoCodeList(search);
 
 	int pageBlock = 10;
-	int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-	int endPage=startPage+pageBlock-1;
+	int startPage=(((currentPage-1)/pageBlock)*pageBlock)+1;
+	int endPage=startPage + pageBlock - 1; //10
 	int pageCount=count/pageSize+(count%pageSize==0?0:1);
 	if(endPage > pageCount){
 	 	endPage = pageCount;
@@ -411,11 +411,14 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 	pageDTO.setStartPage(startPage);
 	pageDTO.setEndPage(endPage);
 	pageDTO.setPageCount(pageCount);
+	
+	System.out.println(pageDTO);
 			
 	model.addAttribute("pageDTO", pageDTO);
 	model.addAttribute("search", search);
 	model.addAttribute("workRoCodeList", workRoCodeList);
 	System.out.println(workRoCodeList);
+	
 	return "workOrder/workRoCodeList";
 }
 

@@ -290,18 +290,19 @@
 
 	<select id="countWorkRoCodeList" resultType="java.lang.Integer">
 		select count(*)
-		from receivedOrder
-		<if test="roCode!=null and productCode!=null">
-			where
-			roCode like CONCAT('%', #{roCode}, '%') and
-			productCode like CONCAT('%', #{productCode}, '%')
-			and roStatus = '진행'
+		from receivedOrder a
+		join product b on a.productCode = b.productCode
+		left join workOrder c on a.roCode = c.roCode
+		where a.roStatus != '삭제' 
+		and a.roCount >= b.productCount
+		and a.shipDate is null
+		<if test="roCode!=null">
+			and a.roCode like CONCAT('%', #{roCode}, '%')
+		</if>
+		<if test="productCode!=null">
+			and a.productCode like CONCAT('%', #{productCode}, '%')
 		</if>
 	</select>
-
-
-
-
 
 	<select id="workLineList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
