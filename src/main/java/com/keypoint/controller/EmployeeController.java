@@ -209,14 +209,22 @@ public class EmployeeController {
 	
 	// 사원-상세정보
 	@GetMapping("/employeeDetails")
-	public String employeeDetails(Model model, @RequestParam("empId") int empId) {
+	public String employeeDetails(Model model, @RequestParam("empId") int empId, HttpSession session) {
 		System.out.println("EmployeeController employeeDetails()");
-	
+		
+		// 세션에서 empId 가져오기
+		int empIdSession = (int) session.getAttribute("empId");
+		
 		// empId로 사원정보 가져오기
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
-		System.out.println(employeeDTO);
+		System.out.println("DTO"+employeeDTO);
 		
 		model.addAttribute("employeeDTO", employeeDTO);
+		
+		// empId로 사원정보 가져오기(세션)
+		EmployeeDTO employeeDTO1 = employeeService.getEmployeeDetails(empIdSession );
+		model.addAttribute("employeeDTO1", employeeDTO1);
+		System.out.println("DTO1"+employeeDTO1);
 		
 		return "employee/employeeDetails";
 	}// employeeDetails
@@ -224,11 +232,18 @@ public class EmployeeController {
 	
 	// 사원-상세정보 수정화면
 	@GetMapping("/employeeUpdate")
-	public String employeeUpdate(Model model, @RequestParam("empId") int empId) {
+	public String employeeUpdate(Model model, @RequestParam("empId") int empId, HttpSession session) {
 		System.out.println("EmployeeController employeeUpdate()");
-		
+		// 세션에서 empId 가져오기
+		int empIdSession = (int) session.getAttribute("empId");
+				
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
 		model.addAttribute("employeeDTO", employeeDTO);
+		
+		// empId로 사원정보 가져오기(세션)
+		EmployeeDTO employeeDTO1 = employeeService.getEmployeeDetails(empIdSession );
+		model.addAttribute("employeeDTO1", employeeDTO1);
+		System.out.println("DTO1"+employeeDTO1);
 		
 		return "employee/employeeUpdate";  
 	} // employeeUpdate
