@@ -145,9 +145,11 @@
 <div class="form-group-column">
 <c:choose>
   <c:when test="${employeeDTO1.empRole eq '3'}">
+  <p>권한</p>
     <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly/>
   </c:when>
   <c:when test="${employeeDTO1.empRole eq '2' and employeeDTO1.departmentName eq '인사부'}">
+  <p>권한</p>
     <input type="text" id="empRole" class="form-control search-input" placeholder="${employeeDTO.empRole}" readonly/>
   </c:when>
   <c:otherwise>
