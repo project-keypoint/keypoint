@@ -107,11 +107,11 @@
 				aria-labelledby="headingPages" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시목록</a>
+						href="${pageContext.request.contextPath}/workOrder/workOrderList">작업지시관리</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/production/productionList">실적관리</a>
+						href="${pageContext.request.contextPath}/production/productionList">생산실적관리</a>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/line/lineList">라인관리</a>
+						href="${pageContext.request.contextPath}/line/lineList">라인목록</a>
 					<div class="collapse-divider"></div>
 				</div>
 			</div></li>
