@@ -119,14 +119,23 @@ h2{
 
     <script type="text/javascript">
 
-        function selectWork(a,b){ // 부모창으로 값 넘기기
-		  
-          opener.document.getElementById("materialCode").value = a
-          opener.document.getElementById("materialName").value = b
-//           opener.document.getElementById("pid").value = c
-          window.close();
+function selectWork(a, b) { //부모창으로 값 넘기기
+//     alert("a: " + a + ", b: " + b);
+    let addhereIndex = new URL(window.location.href).searchParams.get("addhereIndex");
 
-        }
+    if (addhereIndex) {
+        // addhereIndex가 있으면
+        opener.document.querySelector("#materialCode_" + addhereIndex).value = a;
+        opener.document.querySelector("#materialName_" + addhereIndex).value = b;
+    } else {
+        // addhereIndex가 없으면
+        opener.document.getElementById("materialCode").value = a;
+        opener.document.getElementById("materialName").value = b;
+    }
+
+    window.close();
+}
+
 
    </script>
 

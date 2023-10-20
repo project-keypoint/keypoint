@@ -30,7 +30,8 @@
 <input type="text" name="productName" id="productName" class="form-control search-input productname" placeholder="완제품명(클릭)" readonly>
 </div>
 </div>
-<div class="search-bar-popup">
+
+<!-- <div class="search-bar-popup">
 <div class="form-group-receive">
 <p>자재코드</p>
 <input type="text" name="materialCode" id="materialCode" class="form-control search-input materialCode" style="width:110px;" placeholder="자재코드">
@@ -41,7 +42,7 @@
 <div class="form-group-receive">
 <p>자재소요량</p>
 <input type="number" name="reqCount" id="reqCount" class="form-control search-input" placeholder="자재소요량" min="0">
-</div>
+</div> -->
 
 <button type="button" id="addMaterial" class="btn btn-primary" onClick="addMaterialField()">+</button>
 
@@ -73,6 +74,7 @@ function openPopup(url) {
     var height = 550;
     var left = (screen.width - width) / 2;
     var top = (screen.height - height) / 2;
+
     var popupWindow = window.open(url, '_blank', "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
     popupWindow.focus();
 }
@@ -83,36 +85,42 @@ $(document).ready(function() {
         openPopup(url);
     });
 });
+
 $(document).ready(function() {
-    // 자재명 검색 팝업 열기
-    $("#materialCode, #materialName").click(function() {
-        var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2';
-        openPopup(url);
+    // + 버튼 클릭 시 칸 추가
+    $('#addMaterial').click(function() {
+        var addhereIndex = $('#addhere').children().length;
+        var materialCodeId = "materialCode_" + addhereIndex;
+        var materialNameId = "materialName_" + addhereIndex;
+
+        $('#addhere').append('<div class="search-bar-popup"><div class="form-group-receive"><p>자재코드</p><input type="text" name="' + materialCodeId + '" id="' + materialCodeId + '" class="form-control search-input materialCode" style="width:110px;" placeholder="자재코드"><input type="text" name="' + materialNameId + '" id="' + materialNameId + '" class="form-control search-input materianame" placeholder="자재명(클릭)" readonly></div></div><div class="form-group-receive"><p>자재소요량</p><input type="number" name="reqCount" id="reqCount" class="form-control search-input" placeholder="자재소요량" min="0"></div>');
+
+        // 이전에 등록된 click 이벤트 핸들러를 제거
+        $('#' + materialCodeId + ', #' + materialNameId).off('click');
+
+        // -버튼이 없을때만 -버튼 생성
+        if ($('#addbuttonhere').children().length == 0) {
+            $('#addbuttonhere').append('<input type="button" value="-" class="btn btn-secondary mybutton1" onClick="minusRequire()">');
+        }
+
+        // 해당 칸에 대한 팝업 열기 이벤트 핸들러 설정
+        $('#' + materialCodeId + ', #' + materialNameId).on('click', function() {
+            var url = '${pageContext.request.contextPath}/material/purchaseMaterialList2?addhereIndex=' + addhereIndex;
+            openPopup(url);
+        });
+
+//         alert(materialCodeId + "," + materialNameId);
     });
+
 });
 
-
-// 추가로 insert할 자재 정보를 넣을 칸을 생성
-$(document).ready(function(){
-//	id="addMaterial"버튼을 클릭했을 때 
-$('#addMaterial').click(function(){
-  var addhereIndex = $('#addhere').children().length;
-  $('#addhere').append('<div class="search-bar-popup"><div class="form-group-receive"><p>자재코드</p><input type="text" name="materialCode" id="materialCode" class="form-control search-input materialCode" style="width:110px;" placeholder="자재코드"><input type="text" name="materialName" id="materialName" class="form-control search-input materianame" placeholder="자재명(클릭)" readonly></div></div><div class="form-group-receive"><p>자재소요량</p><input type="number" name="reqCount" id="reqCount" class="form-control search-input" placeholder="자재소요량" min="0"></div>');
-  // -버튼이 없을때만 -버튼 생성
-  if($('#addbuttonhere').children().length == 0){
-	    $('#addbuttonhere').append('<input type="button" value="-" class="btn btn-secondary mybutton1" onClick="minusRequire(' + addhereIndex + ')">');
-	}	
-//   alert(addhereIndex);
-	});//click()
-});//ready(function)
-
-// -버튼을 클릭하면 추가한 태그 제거
-function minusRequire(index) {
+//-버튼을 클릭하면 추가한 태그 제거
+function minusRequire() {
   var addhereIndex = $('#addhere').children().length;
   // 마지막에 추가한 자재정보 태그들부터 삭제
   $('#addhere').children().slice(-2).remove();
   if(addhereIndex == 2){
-	  $('#addbuttonhere').children().slice(-1).remove();
+    $('#addbuttonhere').children().slice(-1).remove();
   }
 }
 
@@ -126,7 +134,7 @@ var reqCounts = [];
 
 // input태그에 name="materialCode"인 값을 inputMaterialElements에 담는다.
 // (document.querySelector('input[name="materialCode"]').value;는 첫번째 요소 하나만 가져오기 때문에 이 방식 사용)
-var inputMaterialElements = document.querySelectorAll('input[name="materialCode"]');
+var inputMaterialElements = document.querySelectorAll('input[id^="materialCode_"]');
 var inputCountElements = document.querySelectorAll('input[name="reqCount"]');
 
 // materialCodes배열에 각각의 materialCode를 담는다.
