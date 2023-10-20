@@ -511,7 +511,7 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 		List<WorkOrderDTO> receiveEmpList = workOrderService.receiveEmpList(search);
 			
 		//페이징 처리
-		int count = workOrderService.countEmpList(search);
+		int count = workOrderService.countEmpList2(search);
 
 		int pageBlock = 10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
@@ -627,7 +627,7 @@ public String workRoCodeList(Model model, HttpServletRequest request, PageDTO pa
 		List<WorkOrderDTO> workEmpList = workOrderService.getWorkEmpList(search);
 			
 		//페이징 처리
-		int count = workOrderService.countEmpList(search);
+		int count = workOrderService.countEmpList1(search);
 
 		int pageBlock = 10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;

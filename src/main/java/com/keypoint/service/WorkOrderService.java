@@ -153,8 +153,15 @@ public class WorkOrderService {
 		return workOrderDAO.countEmpList(search);
 	}
 
+	public int countEmpList1(Map<String, Object> search) {
+		System.out.println("WorkOrderService countEmpList()");
+		return workOrderDAO.countEmpList(search);
+	}
 	
-	
+	public int countEmpList2(Map<String, Object> search) {
+		System.out.println("WorkOrderService countEmpList()");
+		return workOrderDAO.countEmpList(search);
+	}
 	public List<WorkOrderDTO> getWorkList(Map<String, Object> search) {
 		System.out.println("WorkOrderService workList()");		
 		return workOrderDAO.getWorkList(search);

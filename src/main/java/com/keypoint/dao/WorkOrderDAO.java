@@ -209,6 +209,16 @@ public class WorkOrderDAO {
 		System.out.println("WorkOrderDAO countEmpList()");
 		return sqlSession.selectOne(namespace+".countEmpList", search);
 	}
+	
+	public int countEmpList1(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countEmpList()");
+		return sqlSession.selectOne(namespace+".countEmpList1", search);
+	}
+	
+	public int countEmpList2(Map<String, Object> search) {
+		System.out.println("WorkOrderDAO countEmpList()");
+		return sqlSession.selectOne(namespace+".countEmpList2", search);
+	}
 
 	
 	public List<WorkOrderDTO> getWorkList(Map<String, Object> search) {

@@ -339,6 +339,22 @@
 		limit #{startRow},
 		#{pageSize}
 	</select>
+	
+	
+<!-- 	work countlist -->
+	<select id="countEmpList1" resultType="java.lang.Integer">
+		select count(*)
+		from employees
+		<if test="empId!=null and empName!=null">
+			where
+			empId like CONCAT('%', #{empId}, '%')
+			and empName like
+			CONCAT('%', #{empName}, '%')
+			and empStatus NOT IN ('퇴직', '휴직')
+			and departmentName IN ('생산부')
+			and empName NOT IN ('관리자')
+		</if>
+	</select>
 
 	<select id="receiveEmpList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
@@ -356,7 +372,24 @@
 		limit #{startRow},
 		#{pageSize}
 	</select>
-
+	
+	
+<!-- 	receive -countList -->
+	<select id="countEmpList2" resultType="java.lang.Integer">
+		select count(*)
+		from employees
+		<if test="empId!=null and empName!=null">
+			where
+			empId like CONCAT('%', #{empId}, '%')
+			and empName like
+			CONCAT('%', #{empName}, '%')
+			and empStatus NOT IN ('퇴직', '휴직')
+			and departmentName IN ('영업부')
+			and empName NOT IN ('관리자')
+		</if>
+	</select>
+     
+     
 	<select id="productEmpList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
 		select empId, empName
@@ -374,7 +407,7 @@
 		#{pageSize}
 	</select>
 
-
+<!-- 	prodcut - countList -->
 	<select id="countEmpList" resultType="java.lang.Integer">
 		select count(*)
 		from employees
@@ -514,7 +547,5 @@
 
 
 </mapper>
-
-
 
 
