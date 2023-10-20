@@ -2,92 +2,98 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.itwillbs.mappers.receiptMapper">
 
 	<insert id="insertReceipt">
-		insert into goodsReceipt (grCode, poCode, grSdate, grCount, grDate, grEcount, grEdate, grOwner, grStatus)
+		insert into goodsReceipt (grCode, poCode, grSdate,
+		grCount, grDate, grEcount, grEdate, grOwner, grStatus)
 		values(#{grCode},#{poCode},#{grSdate},#{grCount},#{grDate},#{grEcount},#{grEdate},#{grOwner},#{grStatus})
 	</insert>
 
-	<select id="getReceiptList" resultType="com.keypoint.dto.ReceiptDTO">
-    SELECT gr.grCode, gr.poCode, gr.grCount, gr.grEcount, gr.grDate, gr.grStatus, gr.grEdate, e.empName AS grOwner,
-           po.poCode AS purchaseOrderCode, po.materialName, po.poCount
-    FROM goodsReceipt gr
-    JOIN employees e ON gr.grOwner = e.empid
-    JOIN purchaseOrder po ON gr.poCode = po.poCode
-    WHERE gr.grStatus != '삭제됨'
-    <if test="search != null and search != ''">
-		and po.materialCode = #{search} 
-	</if>
-	<if test="search2 != null and search2 != ''">
-			and gr.grStatus = #{search2} 
-	</if>
-    ORDER BY gr.grCode DESC
-    LIMIT #{startRow}, #{pageSize}
-</select>
+	<select id="getReceiptList"
+		resultType="com.keypoint.dto.ReceiptDTO">
+		SELECT gr.grCode, gr.poCode, gr.grCount, gr.grEcount, gr.grDate,
+		gr.grStatus, gr.grEdate, e.empName AS grOwner,
+		po.poCode AS purchaseOrderCode, po.materialName, po.poCount
+		FROM goodsReceipt gr
+		JOIN employees e ON gr.grOwner = e.empid
+		JOIN purchaseOrder po ON gr.poCode = po.poCode
+		WHERE gr.grStatus != '삭제됨'
+		<if test="search != null and search != ''">
+			and po.materialCode = #{search}
+		</if>
+		<if test="search2 != null and search2 != ''">
+			and gr.grStatus = #{search2}
+		</if>
+		ORDER BY gr.grCode DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
 
 	<select id="getReceiptCount" resultType="java.lang.Integer">
-    select count(*) from goodsReceipt gr
-    JOIN purchaseOrder po ON gr.poCode = po.poCode
-    WHERE gr.grStatus != '삭제됨'
-    <if test="search != null and search != ''">
-        and po.materialCode = #{search}
-    </if>
-    <if test="search2 != null and search2 != ''">
-        and gr.grStatus = #{search2}
-    </if>
-</select>
+		select count(*) from goodsReceipt gr
+		JOIN purchaseOrder po ON gr.poCode = po.poCode
+		WHERE gr.grStatus != '삭제됨'
+		<if test="search != null and search != ''">
+			and po.materialCode = #{search}
+		</if>
+		<if test="search2 != null and search2 != ''">
+			and gr.grStatus = #{search2}
+		</if>
+	</select>
 
 
-	<select id="getReceiptDetails" resultType="com.keypoint.dto.ReceiptDTO">
-    
-    SELECT gr.grCode, gr.poCode, po.poCount, gr.grCount, e.empName AS grOwner, gr.grSdate, gr.grDate, gr.grStatus
-	FROM goodsReceipt gr
-	JOIN employees e ON gr.grOwner = e.empid
-	JOIN purchaseOrder po ON gr.poCode = po.poCode
-	WHERE gr.grCode = #{grCode}
-    
+	<select id="getReceiptDetails"
+		resultType="com.keypoint.dto.ReceiptDTO">
+
+		SELECT gr.grCode, gr.poCode, po.poCount, gr.grCount, e.empName AS grOwner,
+		gr.grSdate, gr.grDate, gr.grStatus
+		FROM goodsReceipt gr
+		JOIN employees e ON gr.grOwner = e.empid
+		JOIN purchaseOrder po ON gr.poCode = po.poCode
+		WHERE gr.grCode = #{grCode}
+
 	</select>
 
 	<update id="updateReceipt">
-    UPDATE goodsReceipt
-    SET grCount = #{grCount},
-        grOwner = (SELECT empid FROM employees WHERE empName = #{grOwner}),
-        grDate = #{grDate},
-        grStatus = #{grStatus}
-    WHERE grCode = #{grCode}
+		UPDATE goodsReceipt
+		SET grCount = #{grCount},
+		grOwner = (SELECT empid FROM employees WHERE empName = #{grOwner}),
+		grDate = #{grDate},
+		grStatus = #{grStatus}
+		WHERE grCode = #{grCode}
 	</update>
-	
-	<select id="getReceiptDetails2" resultType="com.keypoint.dto.ReceiptDTO">
-	SELECT grCode, grCount, grEcount, grEdate, grStatus
-    FROM goodsReceipt
-    WHERE grCode = #{grCode}
+
+	<select id="getReceiptDetails2"
+		resultType="com.keypoint.dto.ReceiptDTO">
+		SELECT grCode, grCount, grEcount, grEdate, grStatus
+		FROM goodsReceipt
+		WHERE grCode = #{grCode}
 	</select>
 
 
 	<update id="updateReceipt2">
-    UPDATE goodsReceipt
-    SET grEcount = #{grEcount},
-        grEdate = #{grEdate},
-        grStatus = '입고완료'
-    WHERE grCode = #{grCode}
+		UPDATE goodsReceipt
+		SET grEcount = #{grEcount},
+		grEdate = #{grEdate},
+		grStatus = '입고완료'
+		WHERE grCode = #{grCode}
 	</update>
 
 
-<update id="updateMaterialCount">
-    UPDATE material m
-    SET m.materialCount = m.materialCount + 
-        (SELECT gr.grEcount 
-         FROM goodsReceipt gr 
-         JOIN purchaseOrder po ON gr.poCode = po.poCode
-         WHERE gr.grCode = #{grCode})
-    WHERE m.materialCode = 
-        (SELECT po.materialCode
-         FROM goodsReceipt gr 
-         JOIN purchaseOrder po ON gr.poCode = po.poCode
-         WHERE gr.grCode = #{grCode})
-</update>
+	<update id="updateMaterialCount">
+		UPDATE material m
+		SET m.materialCount = m.materialCount +
+		(SELECT gr.grEcount
+		FROM goodsReceipt gr
+		JOIN purchaseOrder po ON gr.poCode = po.poCode
+		WHERE gr.grCode = #{grCode})
+		WHERE m.materialCode =
+		(SELECT po.materialCode
+		FROM goodsReceipt gr
+		JOIN purchaseOrder po ON gr.poCode = po.poCode
+		WHERE gr.grCode = #{grCode})
+	</update>
 
 
 
@@ -104,26 +110,24 @@
 
 
 
-<update id="deleteGoodsReceipt">
-    UPDATE goodsReceipt
-    SET grStatus = '삭제됨'
-    WHERE grCode = #{grCode}
-</update>
+	<update id="deleteGoodsReceipt">
+		UPDATE goodsReceipt
+		SET grStatus = '삭제됨'
+		WHERE grCode = #{grCode}
+	</update>
 
-<select id="getRelatedPurchaseOrderCode" resultType="java.lang.String">
-    SELECT poCode
-    FROM purchaseOrder
-    WHERE poCode = (SELECT poCode FROM goodsReceipt WHERE grCode = #{grCode})
-</select>
+	<select id="getRelatedPurchaseOrderCode"
+		resultType="java.lang.String">
+		SELECT poCode
+		FROM purchaseOrder
+		WHERE poCode = (SELECT poCode FROM goodsReceipt WHERE grCode = #{grCode})
+	</select>
 
-<update id="deletePurchaseOrder">
-    UPDATE purchaseOrder
-    SET poStatus = '삭제됨'
-    WHERE poCode = #{poCode}
-</update>
-
-
-
+	<update id="deletePurchaseOrder">
+		UPDATE purchaseOrder
+		SET poStatus = '삭제됨'
+		WHERE poCode = #{poCode}
+	</update>
 
 
 
@@ -133,7 +137,10 @@
 
 
 
-  
+
+
+
+
 </mapper>
 
 

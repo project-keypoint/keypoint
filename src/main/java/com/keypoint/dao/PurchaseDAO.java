@@ -19,101 +19,83 @@ public class PurchaseDAO {
 
 	@Inject
 	private SqlSession sqlSession;
-	
-	private static final String namespace="com.itwillbs.mappers.purchaseMapper";
+
+	private static final String namespace = "com.itwillbs.mappers.purchaseMapper";
 
 	// ----------------------------------------------------------------------------------
-	
+
 	public void insertPurchase(PurchaseDTO purchaseDTO) {
-			System.out.println("PurchaseDAO insertPurchase()");
-		
-			sqlSession.insert(namespace+".insertPurchase", purchaseDTO);
+		System.out.println("PurchaseDAO insertPurchase()");
+
+		sqlSession.insert(namespace + ".insertPurchase", purchaseDTO);
 	} // insertPurchase
 
 	public List<PurchaseDTO> getPurchaseList(PageDTO pageDTO) {
 		System.out.println("PurchaseDAO getPurchaseList()");
-		
-		return sqlSession.selectList(namespace+".getPurchaseList", pageDTO);
+
+		return sqlSession.selectList(namespace + ".getPurchaseList", pageDTO);
 	} // getPurchaseList
-	
+
 	public int getPurchaseCount(PageDTO pageDTO) {
 		System.out.println("PurchaseDAO getPurchaseCount()");
-		
-		return sqlSession.selectOne(namespace+".getPurchaseCount", pageDTO);
+
+		return sqlSession.selectOne(namespace + ".getPurchaseCount", pageDTO);
 	} // getPurchaseCount
-	
+
 	public PurchaseDTO getPurchaseDetails(String poCode) {
 		System.out.println("PurchaseDAO getPurchaseDetails()");
-		
-		return sqlSession.selectOne(namespace+".getPurchaseDetails", poCode);
+
+		return sqlSession.selectOne(namespace + ".getPurchaseDetails", poCode);
 	}// getPurchaseDetails() [발주상세]
 
 	public void updatePurchase(PurchaseDTO purchaseDTO) {
 		System.out.println("PurchaseDAO updatePurchase()");
 		System.out.println(purchaseDTO);
-		
-		sqlSession.update(namespace+".updatePurchase",purchaseDTO);
+
+		sqlSession.update(namespace + ".updatePurchase", purchaseDTO);
 	}// updatePurchase() [발주수정]
 
 	public void deletePurchase(PurchaseDTO purchaseDTO) {
 		System.out.println("PurchaseDAO deletePurchase()");
 		System.out.println(purchaseDTO);
-		
-		sqlSession.update(namespace+".deletePurchase",purchaseDTO);
+
+		sqlSession.update(namespace + ".deletePurchase", purchaseDTO);
 	}// deletePurchase() [발주삭제]
-	
-	
-	// ---------------------------------홍렬 자재리스트 팝업 ---------------------------------------------------------------
-	
-	public List<PurchaseDTO> getPurchaseOrderList(Map<String,Object> search) { // 품목리스트 들고오기 (품번, 품명만..)
+
+
+	public List<PurchaseDTO> getPurchaseOrderList(Map<String, Object> search) { // 품목리스트 들고오기 (품번, 품명만..)
 		System.out.println("purchaseDAO getPurchaseOrderList()");
-		
-		System.out.println("poCode"+search.get("poCode"));
-		System.out.println("materialName"+search.get("materialName"));
-		System.out.println("startRow"+search.get("startRow"));
-		System.out.println("pageSize"+search.get("pageSize"));
-		
-		if(search.get("materialName")==null) {
+
+		System.out.println("poCode" + search.get("poCode"));
+		System.out.println("materialName" + search.get("materialName"));
+		System.out.println("startRow" + search.get("startRow"));
+		System.out.println("pageSize" + search.get("pageSize"));
+
+		if (search.get("materialName") == null) {
 			search.put("materialName", "");
 		}
-		if(search.get("poCode")==null) {
+		if (search.get("poCode") == null) {
 			search.put("poCode", "");
 		}
-		
-		return sqlSession.selectList(namespace+".getPurchaseOrderList", search);
-	} // getPurchaseOrderList
 
+		return sqlSession.selectList(namespace + ".getPurchaseOrderList", search);
+	} // getPurchaseOrderList
 
 	public Integer countPurchaseOrderList(Map<String, Object> search) { // 품목 개수(for 페이징)
 		System.out.println("purchaseDAO countPurchaseOrderList()");
-		
-		return sqlSession.selectOne(namespace+".countPurchaseOrderList", search);
-	
+
+		return sqlSession.selectOne(namespace + ".countPurchaseOrderList", search);
+
 	} // countPurchaseOrderList
-	
-	
+
 	// -------------------------------------------------------------------------------------
-	
-	
+
 	public void updatePurchaseOrderStatus(PurchaseDTO purchaseDTO) {
-	    sqlSession.update(namespace + ".updatePurchaseOrderStatus", purchaseDTO);
+		sqlSession.update(namespace + ".updatePurchaseOrderStatus", purchaseDTO);
 	} // updatePurchaseOrderStatus
 
 	public List<RequireDTO> getRequireList(String woCode) {
-		return sqlSession.selectList(namespace+".getRequireList", woCode);
+		return sqlSession.selectList(namespace + ".getRequireList", woCode);
 	}// getRequireList
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 } // class

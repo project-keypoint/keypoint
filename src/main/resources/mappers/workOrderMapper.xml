@@ -7,30 +7,30 @@
 
 	<insert id="insertWorkOrder">
 		insert into workOrder(
-				woCode,
-				roCode,
-				empId,
-				lineCode,
-				productCode,
-				woCount,
-				woStatus,
-				woDate,
-				cusCode,
-				empName,
-				shipSdate
-			)
+		woCode,
+		roCode,
+		empId,
+		lineCode,
+		productCode,
+		woCount,
+		woStatus,
+		woDate,
+		cusCode,
+		empName,
+		shipSdate
+		)
 		values(
-		 	CONCAT('WO', DATE_FORMAT(NOW(),'%y%m%d%H%i%s')),
-			#{roCode},
-			#{empId},
-			#{lineCode},
-			#{productCode},
-			#{woCount},
-			#{woStatus},
-			#{woDate},
-			#{cusCode},
-			#{empName},
-			#{shipSdate}
+		CONCAT('WO', DATE_FORMAT(NOW(),'%y%m%d%H%i%s')),
+		#{roCode},
+		#{empId},
+		#{lineCode},
+		#{productCode},
+		#{woCount},
+		#{woStatus},
+		#{woDate},
+		#{cusCode},
+		#{empName},
+		#{shipSdate}
 		)
 	</insert>
 
@@ -39,80 +39,86 @@
 		select a.woCode, a.cusCode, b.cusName, a.productCode,
 		c.productName,
 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
-		a.empId, e.empName, d.shipSdate, d.roCount
+		a.empId,
+		e.empName, d.shipSdate, d.roCount
 		from workOrder a
-		left join customer b on a.cusCode =
+		left join customer b
+		on a.cusCode =
 		b.cusCode
-		left join product c on a.productCode = c.productCode
+		left join product c on a.productCode =
+		c.productCode
 		left join
 		receivedOrder d on a.roCode = d.roCode
-		left join employees e on a.empId
+		left join
+		employees e on a.empId
 		= e.empId
 		<where>
-		a.woStatus != '삭제'
-		
-		<choose>
-        <when test="(check1 == null or check1 == '') and 
+			a.woStatus != '삭제'
+
+			<choose>
+				<when
+					test="(check1 == null or check1 == '') and 
                     (check2 == null or check2== '')">
-        </when>
-        <otherwise>
-            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
-                <if test="check1 != null and check1 != ''">
-                    OR (a.woStatus = #{check1})
-                </if>
-                <if test="check2 != null and check2 != ''">
-                    OR (a.woStatus = #{check2})
-                </if>               
-            </trim>    
-        </otherwise>    
-		</choose>  
-		<if test="search1 != null and search1 != ''">
-			and (a.productCode = #{search1})
-		</if>    	
-    	<if test="search3 != null and search3 != ''">
-			and (a.woDate &gt;= #{search3}) 
-    	</if>
-    	<if test="search4 != null and search4 != ''">
-			and (a.woDate &lt;= #{search4}) 
-    	</if>
+				</when>
+				<otherwise>
+					<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+						<if test="check1 != null and check1 != ''">
+							OR (a.woStatus = #{check1})
+						</if>
+						<if test="check2 != null and check2 != ''">
+							OR (a.woStatus = #{check2})
+						</if>
+					</trim>
+				</otherwise>
+			</choose>
+			<if test="search1 != null and search1 != ''">
+				and (a.productCode = #{search1})
+			</if>
+			<if test="search3 != null and search3 != ''">
+				and (a.woDate &gt;= #{search3})
+			</if>
+			<if test="search4 != null and search4 != ''">
+				and (a.woDate &lt;= #{search4})
+			</if>
 		</where>
 		order by a.woCode desc
 		limit #{startRow}, #{pageSize}
 	</select>
-	
+
 	<select id="getWorkOrderCount" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM workOrder
 		<where>
-		woStatus != '삭제'
-		<choose>
-        <when test="(check1 == null or check1 == '') and 
+			woStatus != '삭제'
+			<choose>
+				<when
+					test="(check1 == null or check1 == '') and 
                     (check2 == null or check2== '')">
-        </when>
-        <otherwise>
-            <trim prefix="AND (" suffix=")" prefixOverrides="OR">
-                <if test="check1 != null and check1 != ''">
-                    OR (woStatus = #{check1})
-                </if>
-                <if test="check2 != null and check2 != ''">
-                    OR (woStatus = #{check2})
-                </if>               
-            </trim>    
-        </otherwise>    
-		</choose>  
-		<if test="search1 != null and search1 != ''">
-			and (productCode = #{search1})
-		</if>    	
-    	<if test="search3 != null and search3 != ''">
-			and (woDate &gt;= #{search3}) 
-    	</if>
-    	<if test="search4 != null and search4 != ''">
-			and (woDate &lt;= #{search4}) 
-    	</if>
+				</when>
+				<otherwise>
+					<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+						<if test="check1 != null and check1 != ''">
+							OR (woStatus = #{check1})
+						</if>
+						<if test="check2 != null and check2 != ''">
+							OR (woStatus = #{check2})
+						</if>
+					</trim>
+				</otherwise>
+			</choose>
+			<if test="search1 != null and search1 != ''">
+				and (productCode = #{search1})
+			</if>
+			<if test="search3 != null and search3 != ''">
+				and (woDate &gt;= #{search3})
+			</if>
+			<if test="search4 != null and search4 != ''">
+				and (woDate &lt;= #{search4})
+			</if>
 		</where>
-		
+
 	</select>
-	
+
 
 	<select id="getWorkOrderDetails"
 		resultType="com.keypoint.dto.WorkOrderDTO">
@@ -121,12 +127,15 @@
 		a.woCount, d.roCode, a.woDate, a.woStatus, a.lineCode,
 		a.empId, e.empName, d.shipSdate
 		from workOrder a
-		left join customer b on a.cusCode =
+		left join customer b on
+		a.cusCode =
 		b.cusCode
-		left join product c on a.productCode = c.productCode
+		left join product c on a.productCode =
+		c.productCode
 		left join
 		receivedOrder d on a.roCode = d.roCode
-		left join employees e on a.empId
+		left join
+		employees e on a.empId
 		= e.empId
 		where woCode = #{woCode}
 	</select>
@@ -139,7 +148,8 @@
 		roCode = #{roCode},
 		woCount = #{woCount},
 		lineCode = #{lineCode},
-		woDate = #{woDate},
+		woDate
+		= #{woDate},
 		<!-- shipSdate = #{shipSdate}, -->
 		woStatus = #{woStatus},
 		empId = #{empId},
@@ -151,7 +161,8 @@
 	<update id="deleteWorkOrder">
 		UPDATE workOrder
 		SET woStatus = '삭제'
-		WHERE woCode = #{woCode}
+		WHERE woCode =
+		#{woCode}
 	</update>
 
 
@@ -179,85 +190,101 @@
 		</if>
 	</select>
 
-	
-	<select id="workCusList" resultType="com.keypoint.dto.WorkOrderDTO">
-	    select cusCode, cusName
-	    from customer
-	    where
-	    cusCode like CONCAT('%', #{cusCode}, '%') and
-	    cusName like CONCAT('%', #{cusName}, '%') and
-	    cusStatus != '거래정지' and
-	    cusCategory != '납입처'
-	    order by cusCode desc
-	    limit #{startRow}, #{pageSize}
+
+	<select id="workCusList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select cusCode, cusName
+		from customer
+		where
+		cusCode like
+		CONCAT('%', #{cusCode}, '%') and
+		cusName like CONCAT('%', #{cusName},
+		'%') and
+		cusStatus != '거래정지' and
+		cusCategory != '납입처'
+		order by cusCode
+		desc
+		limit #{startRow}, #{pageSize}
 	</select>
 
 
 	<select id="countCusList" resultType="java.lang.Integer">
-	    select count(*)
-	    from customer
-	    <if test="cusCode != null or cusName != null">
-	    where
-	    <if test="cusCode != null">
-	    cusCode like CONCAT('%', #{cusCode}, '%')
-	    </if>
-	    <if test="cusName != null">
-	    <if test="cusCode != null">
-	    and
-	    </if>
-	    cusName like CONCAT('%', #{cusName}, '%')
-	    </if>
-	    and cusStatus != '거래정지'
-	    and cusCategory != '납입처'
-	    </if>
+		select count(*)
+		from customer
+		<if test="cusCode != null or cusName != null">
+			where
+			<if test="cusCode != null">
+				cusCode like CONCAT('%', #{cusCode}, '%')
+			</if>
+			<if test="cusName != null">
+				<if test="cusCode != null">
+					and
+				</if>
+				cusName like CONCAT('%', #{cusName}, '%')
+			</if>
+			and cusStatus != '거래정지'
+			and cusCategory != '납입처'
+		</if>
 	</select>
 
-	<select id="workCusList2" resultType="com.keypoint.dto.WorkOrderDTO">
-	    select cusCode, cusName
-	    from customer
-	    where
-	    cusCode like CONCAT('%', #{cusCode}, '%') and
-	    cusName like CONCAT('%', #{cusName}, '%') and
-	    cusStatus != '거래정지' and
-	    cusCategory != '납품처'
-	    order by cusCode desc
-	    limit #{startRow}, #{pageSize}
+	<select id="workCusList2"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select cusCode, cusName
+		from customer
+		where
+		cusCode like
+		CONCAT('%', #{cusCode}, '%') and
+		cusName like CONCAT('%', #{cusName},
+		'%') and
+		cusStatus != '거래정지' and
+		cusCategory != '납품처'
+		order by cusCode
+		desc
+		limit #{startRow}, #{pageSize}
 	</select>
 
 
 	<select id="countCusList2" resultType="java.lang.Integer">
-	    select count(*)
-	    from customer
-	    <if test="cusCode != null or cusName != null">
-	    where
-	    <if test="cusCode != null">
-	    cusCode like CONCAT('%', #{cusCode}, '%')
-	    </if>
-	    <if test="cusName != null">
-	    <if test="cusCode != null">
-	    and
-	    </if>
-	    cusName like CONCAT('%', #{cusName}, '%')
-	    </if>
-	    and cusStatus != '거래정지'
-	    and cusCategory != '납품처'
-	    </if>
+		select count(*)
+		from customer
+		<if test="cusCode != null or cusName != null">
+			where
+			<if test="cusCode != null">
+				cusCode like CONCAT('%', #{cusCode}, '%')
+			</if>
+			<if test="cusName != null">
+				<if test="cusCode != null">
+					and
+				</if>
+				cusName like CONCAT('%', #{cusName}, '%')
+			</if>
+			and cusStatus != '거래정지'
+			and cusCategory != '납품처'
+		</if>
 	</select>
 
 
 
-	<select id="workRoCodeList" resultType="com.keypoint.dto.WorkRoDTO">
-		select a.roCode, a.cusCode, a.productCode, a.roCount, a.shipSdate
+	<select id="workRoCodeList"
+		resultType="com.keypoint.dto.WorkRoDTO">
+		select a.roCode, a.cusCode, a.productCode, a.roCount,
+		a.shipSdate
 		from receivedOrder a
-		join product b on a.productCode = b.productCode 
+		join product b on a.productCode =
+		b.productCode
 		left join workOrder c on a.roCode = c.roCode
-		where 
-		a.roCode like CONCAT('%', #{roCode}, '%') 
-		and a.productCode like CONCAT('%', #{productCode}, '%')
-		and a.roStatus != '삭제' and a.roCount >= b.productCount
+		where
+		a.roCode like CONCAT('%', #{roCode}, '%')
+		and a.productCode like
+		CONCAT('%', #{productCode}, '%')
+		and a.roStatus !=
+		'삭제' and a.roCount >=
+		b.productCount
 		and a.shipDate is null
-		order by roCode desc
-		limit #{startRow}, #{pageSize}
+		order by
+		roCode desc
+		limit
+		#{startRow}, #{pageSize}
 	</select>
 
 	<select id="countWorkRoCodeList" resultType="java.lang.Integer">
@@ -270,8 +297,8 @@
 			and roStatus = '진행'
 		</if>
 	</select>
-	
-	
+
+
 
 
 
@@ -295,41 +322,56 @@
 		</if>
 	</select>
 
-<select id="workEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
-    select empId, empName
-    from employees
-    where empId like CONCAT('%', #{empId}, '%')
-    and empName like CONCAT('%', #{empName}, '%')
-    and empStatus NOT IN ('퇴직', '휴직')  
-    and departmentName IN ('생산부')
-    and empName NOT IN ('관리자')
-    order by empId desc
-    limit #{startRow}, #{pageSize}
-</select>
+	<select id="workEmpList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select empId, empName
+		from employees
+		where empId like
+		CONCAT('%', #{empId}, '%')
+		and empName like CONCAT('%', #{empName},
+		'%')
+		and empStatus NOT IN ('퇴직', '휴직')
+		and departmentName IN ('생산부')
+		and
+		empName NOT IN ('관리자')
+		order by empId desc
+		limit #{startRow},
+		#{pageSize}
+	</select>
 
-<select id="receiveEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
-    select empId, empName
-    from employees
-    where empId like CONCAT('%', #{empId}, '%')
-    and empName like CONCAT('%', #{empName}, '%')
-    and empStatus NOT IN ('퇴직', '휴직')  
-    and departmentName IN ('영업부')
-      and empName NOT IN ('관리자')
-    order by empId desc
-    limit #{startRow}, #{pageSize}
-</select>
+	<select id="receiveEmpList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select empId, empName
+		from employees
+		where empId like
+		CONCAT('%', #{empId}, '%')
+		and empName like CONCAT('%', #{empName},
+		'%')
+		and empStatus NOT IN ('퇴직', '휴직')
+		and departmentName IN ('영업부')
+		and
+		empName NOT IN ('관리자')
+		order by empId desc
+		limit #{startRow},
+		#{pageSize}
+	</select>
 
-<select id="productEmpList" resultType="com.keypoint.dto.WorkOrderDTO">
-    select empId, empName
-    from employees
-    where empId like CONCAT('%', #{empId}, '%')
-    and empName like CONCAT('%', #{empName}, '%')
-    and empStatus NOT IN ('퇴직', '휴직')  
-    and departmentName IN ('자재부')
-      and empName NOT IN ('관리자')
-    order by empId desc
-    limit #{startRow}, #{pageSize}
-</select>
+	<select id="productEmpList"
+		resultType="com.keypoint.dto.WorkOrderDTO">
+		select empId, empName
+		from employees
+		where empId like
+		CONCAT('%', #{empId}, '%')
+		and empName like CONCAT('%', #{empName},
+		'%')
+		and empStatus NOT IN ('퇴직', '휴직')
+		and departmentName IN ('자재부')
+		and
+		empName NOT IN ('관리자')
+		order by empId desc
+		limit #{startRow},
+		#{pageSize}
+	</select>
 
 
 	<select id="countEmpList" resultType="java.lang.Integer">
@@ -338,104 +380,137 @@
 		<if test="empId!=null and empName!=null">
 			where
 			empId like CONCAT('%', #{empId}, '%')
+			and empName like
+			CONCAT('%', #{empName}, '%')
+			and empStatus NOT IN ('퇴직', '휴직')
+			and departmentName IN ('자재부')
+			and empName NOT IN ('관리자')
 		</if>
 	</select>
-	
-	<select id="workList"
-		resultType="com.keypoint.dto.WorkOrderDTO">
-		SELECT DISTINCT wo.woCode, wo.roCode, wo.lineCode, wo.productCode, p.productName,
-      		   wo.woCount, wo.cusCode, c.cusName
+
+	<select id="workList" resultType="com.keypoint.dto.WorkOrderDTO">
+		SELECT DISTINCT wo.woCode,
+		wo.roCode, wo.lineCode, wo.productCode, p.productName,
+		wo.woCount,
+		wo.cusCode, c.cusName
 		FROM workOrder wo
-		LEFT JOIN product p ON wo.productCode = p.productCode
-		LEFT JOIN customer c ON wo.cusCode = c.cusCode
-		WHERE NOT EXISTS (SELECT 1 
-    					  FROM requirement b 
-    					  JOIN material c ON b.materialcode = c.materialcode 
-    					  WHERE (b.reqcount * wo.woCount) > c.materialcount 
-      					  AND wo.productcode = b.productcode)
-		AND   wo.woStatus != '삭제' 
-		AND   wo.woStatus != '완료'
-		AND woCode like CONCAT('%', #{woCode}, '%') 
+		LEFT JOIN product p ON
+		wo.productCode = p.productCode
+		LEFT JOIN customer c ON wo.cusCode =
+		c.cusCode
+		WHERE NOT EXISTS (SELECT 1
+		FROM requirement b
+		JOIN material c
+		ON b.materialcode = c.materialcode
+		WHERE (b.reqcount * wo.woCount) >
+		c.materialcount
+		AND wo.productcode = b.productcode)
+		AND wo.woStatus !=
+		'삭제'
+		AND wo.woStatus != '완료'
+		AND woCode like CONCAT('%', #{woCode}, '%')
 		AND roCode like CONCAT('%', #{roCode}, '%')
 		ORDER BY woCode DESC
-		LIMIT #{startRow}, #{pageSize}
+		LIMIT
+		#{startRow}, #{pageSize}
 	</select>
-	
+
 	<select id="countWorkList" resultType="java.lang.Integer">
 		select count(*)
 		from workOrder
 		<if test="woCode!=null and roCode!=null">
 			where
 			woCode like CONCAT('%', #{woCode}, '%') and
-			roCode like CONCAT('%', #{roCode}, '%')
+			roCode
+			like CONCAT('%', #{roCode}, '%')
 			and woStatus != '삭제'
-			and woStatus != '완료'
+			and woStatus !=
+			'완료'
 		</if>
 	</select>
-	
+
 	<select id="needPurchaseList"
 		resultType="com.keypoint.dto.WorkOrderDTO">
-		SELECT DISTINCT wo.woCode, wo.roCode, wo.lineCode, wo.productCode, p.productName,
-      		   wo.woCount, wo.cusCode, c.cusName
-		FROM workOrder wo
-		LEFT JOIN product p ON wo.productCode = p.productCode
-		LEFT JOIN customer c ON wo.cusCode = c.cusCode
-		WHERE EXISTS (SELECT 1 
-    					  FROM requirement b 
-    					  JOIN material c ON b.materialcode = c.materialcode 
-    					  WHERE (b.reqcount * wo.woCount) > c.materialcount 
-      					  AND wo.productcode = b.productcode)
-		AND   wo.woStatus != '삭제' 
-		AND   wo.woStatus != '완료'
-		AND woCode like CONCAT('%', #{woCode}, '%') 
-		AND roCode like CONCAT('%', #{roCode}, '%')
+		SELECT DISTINCT wo.woCode, wo.roCode, wo.lineCode,
+		wo.productCode, p.productName,
+		wo.woCount, wo.cusCode, c.cusName
+		FROM
+		workOrder wo
+		LEFT JOIN product p ON
+		wo.productCode = p.productCode
+		LEFT
+		JOIN customer c ON wo.cusCode =
+		c.cusCode
+		WHERE EXISTS (SELECT 1
+		FROM
+		requirement b
+		JOIN material c ON b.materialcode = c.materialcode
+		WHERE
+		(b.reqcount * wo.woCount) > c.materialcount
+		AND wo.productcode =
+		b.productcode)
+		AND wo.woStatus != '삭제'
+		AND wo.woStatus != '완료'
+		AND woCode
+		like CONCAT('%', #{woCode}, '%')
+		AND roCode like CONCAT('%', #{roCode},
+		'%')
 		ORDER BY woCode DESC
-		LIMIT #{startRow}, #{pageSize}
+		LIMIT
+		#{startRow}, #{pageSize}
 	</select>
-	
-	<select id="countNeedPurchaseList" resultType="java.lang.Integer">
+
+	<select id="countNeedPurchaseList"
+		resultType="java.lang.Integer">
 		select count(*)
 		from workOrder
 		<if test="woCode!=null and roCode!=null">
 			where
 			woCode like CONCAT('%', #{woCode}, '%') and
-			roCode like CONCAT('%', #{roCode}, '%')
+			roCode
+			like CONCAT('%', #{roCode}, '%')
 			and woStatus != '삭제'
-			and woStatus != '완료'
+			and woStatus !=
+			'완료'
 		</if>
 	</select>
-	
+
 	<update id="updateWorkOrderStatus">
-	UPDATE workOrder
-	SET woStatus = #{woStatus}
-	WHERE woCode = #{woCode}
+		UPDATE workOrder
+		SET woStatus = #{woStatus}
+		WHERE
+		woCode = #{woCode}
 	</update>
-	
-	
+
+
 
 	<update id="deleteSelected">
 		UPDATE workOrder
 		SET woStatus = '삭제'
-		WHERE woCode = #{woCode}
+		WHERE woCode =
+		#{woCode}
 	</update>
 
-	
-	
-	
+
+
+
 	<update id="updateMaterialCount" parameterType="map">
-        UPDATE material m
-        SET m.materialCount = m.materialCount - #{sum}
-        WHERE m.materialCode = #{materialCode}
-    </update>
-	
-	<select id="selectWorkSum" resultType="map" >
-	 SELECT req.materialCode as materialCode,(req.reqCount * wo.woCount)as sum
-            FROM requirement req
-            JOIN workOrder wo ON req.productCode = wo.productCode
-            WHERE wo.woCode = #{woCode};
+		UPDATE material m
+		SET m.materialCount = m.materialCount - #{sum}
+		WHERE m.materialCode =
+		#{materialCode}
+	</update>
+
+	<select id="selectWorkSum" resultType="map">
+		SELECT req.materialCode as
+		materialCode,(req.reqCount * wo.woCount)as sum
+		FROM requirement req
+		JOIN workOrder wo ON req.productCode = wo.productCode
+		WHERE wo.woCode =
+		#{woCode};
 	</select>
-	
-	
+
+
 
 </mapper>
 

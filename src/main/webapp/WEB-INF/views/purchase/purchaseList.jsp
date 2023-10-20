@@ -174,10 +174,10 @@
 
 <div class="content-bottom">
 <div>
-<input type="button" value="발주필요목록" class="btn btn-info mybutton1" onclick="openNeedPurchaseList()">
 <c:choose>    
     <c:when test = "${employeeDTO.empRole >= 2}">
 
+<input type="button" value="발주필요목록" class="btn btn-info mybutton1" onclick="openNeedPurchaseList()">
 <input type="button" value="발주등록" class="btn btn-primary mybutton1" onclick="openInsert()">
     
     </c:when>

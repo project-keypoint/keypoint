@@ -29,236 +29,218 @@ public class ReceiptController {
 	// ReceiptService 객체생성
 	@Inject
 	private ReceiptService receiptService;
-	
+
 	@Inject
 	private PurchaseService purchaseService;
-	
-	//--------------------------
+
+	// --------------------------
 	@Inject
 	private EmployeeService employeeService;
-	//--------------------------
-	
+	// --------------------------
+
 	// --------------------------------------------------------------------------------
-	
+
 	@GetMapping("/receiptInsert")
 	public String receiptInsert() {
-		
-		
+
 		return "receipt/receiptInsert";
 	}//
-	
+
 	@PostMapping("/receiptInsertPro")
 	public String receiptInsertPro(ReceiptDTO receiptDTO) {
 		System.out.println("receiptDTO receiptInsertPro()");
-		
-		//등록 처리
+
+		// 등록 처리
 		System.out.println(receiptDTO);
-		
-		
+
 		// 입고등록시 발주완료 업데이트
 		PurchaseDTO purchaseDTO = new PurchaseDTO();
-	    purchaseDTO.setPoCode(receiptDTO.getPoCode());
-	    purchaseDTO.setPoStatus("발주완료");
-	    purchaseService.updatePurchaseOrderStatus(purchaseDTO);
-		
+		purchaseDTO.setPoCode(receiptDTO.getPoCode());
+		purchaseDTO.setPoStatus("발주완료");
+		purchaseService.updatePurchaseOrderStatus(purchaseDTO);
+
 		receiptService.insertReceipt(receiptDTO);
-		
-		if(receiptDTO != null) {
+
+		if (receiptDTO != null) {
 			return "receipt/msgSuccess"; // 등록완료
-		}else {
+		} else {
 			return "receipt/msgFailed"; // 등록실패
 		}
-		
+
 	}//
-	
-	//----------------------------------------------------------------------------------------------
-	
+
+	// ----------------------------------------------------------------------------------------------
+
 	@GetMapping("/receiptList")
 	public String receiptList(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("ReceiptController receipt/receiptList");
-		
-		
-		//---------------------------
-				int empId = (int) session.getAttribute("empId");
-				//---------------------------
-		
-		
-		//---------------------------
-			String search = request.getParameter("search");
-		//---------------------------
-			
-		//---------------------------
+
+		// ---------------------------
+		int empId = (int) session.getAttribute("empId");
+		// ---------------------------
+
+		// ---------------------------
+		String search = request.getParameter("search");
+		// ---------------------------
+
+		// ---------------------------
 		String search2 = request.getParameter("search2");
-		//---------------------------
-		
-		
-		
-		//한 화면에 보여줄 글개수 설정
+		// ---------------------------
+
+		// 한 화면에 보여줄 글개수 설정
 		int pageSize = 10;
 		// 현 페이지 번호 가져오기
-		String pageNum=request.getParameter("pageNum");
+		String pageNum = request.getParameter("pageNum");
 		// 페이지 번호가 없을 경우 => "1"로 설정
-		if(pageNum == null) {
+		if (pageNum == null) {
 			pageNum = "1";
 		}
-		
+
 		// 페이지 번호 => 정수형 변경
 		int currentPage = Integer.parseInt(pageNum);
-		
-		PageDTO pageDTO =new PageDTO();
+
+		PageDTO pageDTO = new PageDTO();
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
-		
-		//--------------------
+
+		// --------------------
 		// 검색어 저장
 		pageDTO.setSearch(search);
-		//--------------------
-		
-		//--------------------
+		// --------------------
+
+		// --------------------
 		// 검색어 저장
 		pageDTO.setSearch2(search2);
-		//--------------------
-		
-		
-		
-		
+		// --------------------
+
 		List<ReceiptDTO> receiptList = receiptService.getReceiptList(pageDTO);
-		
+
 		// 전체 글개수 가져오기
 		int count = receiptService.getReceiptCount(pageDTO);
-		
-		// 전체 사원 수 employeeCount에 담기
+
+		// 
 		model.addAttribute("receiptCount", count);
-		
+
 		// 한화면에 보여줄 페이지 개수 설정
 		int pageBlock = 10;
 		// 시작하는 페이지 번호
-		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 		// 끝나는 페이지 번호
-		int endPage = startPage + pageBlock -1;
+		int endPage = startPage + pageBlock - 1;
 		// 전체페이지 개수
-		int pageCount = count/pageSize+(count%pageSize==0?0:1);
-		// 끝나는 페이지 번호  전체페이지 개수 비교 
-		//=> 끝나는 페이지 번호가 크면 전체페이지 개수로 변경
-		if(endPage > pageCount) {
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝나는 페이지 번호 전체페이지 개수 비교
+		// => 끝나는 페이지 번호가 크면 전체페이지 개수로 변경
+		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
-		
+
 		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		
-		
+
 		model.addAttribute("receiptList", receiptList);
 		model.addAttribute("pageDTO", pageDTO);
-		
+
 		// ------------------------------
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
 		model.addAttribute("employeeDTO", employeeDTO);
 		// ------------------------------
-		
+
 		return "receipt/receiptList";
-	}// receiveTest [수주목록] // 페이징은 나중에		
-	
+	}//
+
 	// ----------------------------------------------------------------------------------------------------------
-	
+
 	@GetMapping("/receiptDetails")
-	public String receiptDetails(Model model, @RequestParam("grCode") String grCode,HttpSession session) {
+	public String receiptDetails(Model model, @RequestParam("grCode") String grCode, HttpSession session) {
 		System.out.println("receiptController receipt/receiptDetails");
-		
-		
-		
-		//---------------------------
-				int empId = (int) session.getAttribute("empId");
-				//---------------------------
-		
-		
+
+		// ---------------------------
+		int empId = (int) session.getAttribute("empId");
+		// ---------------------------
+
 		ReceiptDTO receiptDTO = receiptService.getReceiptDetails(grCode);
 		model.addAttribute("receiptDTO", receiptDTO);
-		
+
 		// ------------------------------
 		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
 		model.addAttribute("employeeDTO", employeeDTO);
 		// ------------------------------
-		
-		
+
 		return "receipt/receiptDetails";
 	}// receiptDetails [입고상세]
-	
+
 	// -------------------------------------------------------------------------------------------------
-	
+
 	@GetMapping("/receiptUpdate")
 	public String receiptUpdate(Model model, @RequestParam("grCode") String grCode) {
 		System.out.println("PurchaseController receipt/receiptUpdate");
-		
+
 		ReceiptDTO receiptDTO = receiptService.getReceiptDetails(grCode);
 		model.addAttribute("receiptDTO", receiptDTO);
 		return "receipt/receiptUpdate";
-	}// purchaseUpdate [발주수정]
-	
+	}// receiptUpdate [입고수정]
+
 	@PostMapping("/receiptUpdatePro")
 	public String receiptUpdatePro(ReceiptDTO receiptDTO) {
 		System.out.println("receiptController receipt/receiptUpdatePro");
 		System.out.println(receiptDTO);
 		receiptService.receiptUpdatePro(receiptDTO);
-		
-		if(receiptDTO != null) {
+
+		if (receiptDTO != null) {
 			return "receipt/msgSuccess"; // 등록완료
-		}else {
+		} else {
 			return "receipt/msgFailed"; // 등록실패
 		}
-		
-	}// receiptUpdatePro [발주수정Pro]
-	
-	//------------------------------------------------------------------------------------------
-	
-	
+
+	}// receiptUpdatePro [입고수정Pro]
+
+	// ------------------------------------------------------------------------------------------
+
 	@GetMapping("/receiptComplete")
 	public String receiptComplete(Model model, @RequestParam("grCode") String grCode) {
 		System.out.println("receiptController receipt/receiptComplete");
-		
+
 		ReceiptDTO receiptDTO = receiptService.getReceiptDetails2(grCode);
 		model.addAttribute("receiptDTO", receiptDTO);
 		return "receipt/receiptComplete";
-	}// purchaseUpdate [발주수정]
-	
+	}// receiptComplete [입고완료]
+
 	@PostMapping("/receiptCompletePro")
 	public String receiptCompletePro(ReceiptDTO receiptDTO) {
 		System.out.println("receiptController receipt/receiptCompletePro");
 		System.out.println(receiptDTO);
 		receiptService.receiptUpdatePro2(receiptDTO);
-		//----------------------
-		 // materialCount 업데이트
-	    receiptService.updateMaterialCount(receiptDTO);
-		//---------------------------
-		
-		if(receiptDTO != null) {
+		// ----------------------
+		// materialCount 업데이트
+		receiptService.updateMaterialCount(receiptDTO);
+		// ---------------------------
+
+		if (receiptDTO != null) {
 			return "receipt/msgSuccess"; // 등록완료
-		}else {
+		} else {
 			return "receipt/msgFailed"; // 등록실패
 		}
-		
-	}// receiptCompletePro [발주수정Pro]
-	
-	//------------------------------------------------------------------------------------------
-	
+
+	}// receiptCompletePro [입고완료Pro]
+
+	// ------------------------------------------------------------------------------------------
+
 	@GetMapping("/receiptDelete")
-    public String receiptDelete(ReceiptDTO receiptDTO,@RequestParam("grCode") String grCode) {
-        receiptService.deleteReceiptAndRelatedData(grCode);
-        
-        if(receiptDTO != null) {
+	public String receiptDelete(ReceiptDTO receiptDTO, @RequestParam("grCode") String grCode) {
+		receiptService.deleteReceiptAndRelatedData(grCode);
+
+		if (receiptDTO != null) {
 			return "receipt/msgSuccess"; // 등록완료
-		}else {
+		} else {
 			return "receipt/msgFailed"; // 등록실패
 		}
-    } // receiptDelete
-	
+	} // receiptDelete
+
 	// -----------------------------------------------------------------------------------------
-	
-	
-	
-	
+
 } // class

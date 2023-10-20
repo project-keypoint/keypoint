@@ -2,111 +2,125 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.itwillbs.mappers.purchaseMapper">
-	
+
 	<insert id="insertPurchase">
-		insert into purchaseOrder (poCode, materialCode, materialName, materialPrice, poCount, poPrice, poDate, payDate, cusName, poOwner, poStatus)
+		insert into purchaseOrder (poCode, materialCode,
+		materialName, materialPrice, poCount, poPrice, poDate, payDate,
+		cusName, poOwner, poStatus)
 		values(#{poCode},#{materialCode},#{materialName},#{materialPrice},#{poCount},#{poPrice},#{poDate},#{payDate},#{cusName},#{poOwner},#{poStatus})
 	</insert>
 
-  	<select id="getPurchaseList" resultType="com.keypoint.dto.PurchaseDTO">
-		SELECT po.poCode, po.materialCode, po.materialName, po.poCount, po.poDate, po.payDate, po.materialPrice, po.poPrice, e.empName AS poOwner, po.cusName, po.poStatus
+	<select id="getPurchaseList"
+		resultType="com.keypoint.dto.PurchaseDTO">
+		SELECT po.poCode, po.materialCode, po.materialName, po.poCount,
+		po.poDate, po.payDate, po.materialPrice, po.poPrice, e.empName AS
+		poOwner, po.cusName, po.poStatus
 		FROM purchaseOrder po
-		JOIN employees e ON po.poOwner = e.empid
+		JOIN employees e
+		ON po.poOwner = e.empid
 		WHERE po.poStatus != '삭제됨'
 		<if test="search != null and search != ''">
-			and po.materialCode = #{search} 
+			and po.materialCode = #{search}
 		</if>
 		<if test="search2 != null and search2 != ''">
-			and po.poStatus = #{search2} 
+			and po.poStatus = #{search2}
 		</if>
 		ORDER BY po.poCode DESC
 		LIMIT #{startRow}, #{pageSize}
 	</select>
-  	
-  	<select id="getPurchaseCount" resultType="java.lang.Integer">
-		select count(*) from purchaseOrder 
+
+	<select id="getPurchaseCount" resultType="java.lang.Integer">
+		select count(*) from purchaseOrder
 		WHERE poStatus != '삭제됨'
 		<if test="search != null and search != ''">
-			and materialCode = #{search} 
+			and materialCode = #{search}
 		</if>
 		<if test="search2 != null and search2 != ''">
-			and poStatus = #{search2} 
+			and poStatus = #{search2}
 		</if>
 	</select>
-  	
- 
-  	<select id="getPurchaseDetails" resultType="com.keypoint.dto.PurchaseDTO">
-		SELECT po.poCode, po.materialCode, po.materialName, po.poCount, po.poDate, po.payDate, po.materialPrice, po.poPrice, e.empName AS poOwner, po.cusName, po.poStatus
-	    FROM purchaseOrder po
-	    JOIN employees e ON po.poOwner = e.empid
-	    WHERE po.poCode = #{poCode}
+
+
+	<select id="getPurchaseDetails"
+		resultType="com.keypoint.dto.PurchaseDTO">
+		SELECT po.poCode, po.materialCode, po.materialName,
+		po.poCount, po.poDate, po.payDate, po.materialPrice, po.poPrice,
+		e.empName AS poOwner, po.cusName, po.poStatus
+		FROM purchaseOrder po
+		JOIN employees e ON po.poOwner = e.empid
+		WHERE po.poCode = #{poCode}
 	</select>
-	
+
 	<update id="updatePurchase">
-		 UPDATE purchaseOrder
-    SET poCount = #{poCount}, 
-        poPrice = #{poPrice}, 
-        poOwner = (SELECT empid FROM employees WHERE empName = #{poOwner}),
-        cusName = #{cusName}, 
-        payDate = #{payDate},
-        materialCode = #{materialCode}, 
-        materialName = #{materialName}, 
-        materialPrice = #{materialPrice}
-    WHERE poCode = #{poCode}
+		UPDATE purchaseOrder
+		SET poCount = #{poCount},
+		poPrice = #{poPrice},
+		poOwner = (SELECT empid FROM employees WHERE empName = #{poOwner}),
+		cusName = #{cusName},
+		payDate = #{payDate},
+		materialCode = #{materialCode},
+		materialName = #{materialName},
+		materialPrice = #{materialPrice}
+		WHERE poCode = #{poCode}
 	</update>
-	
+
 	<update id="deletePurchase">
 		UPDATE purchaseOrder
 		SET poStatus = '삭제됨'
+		WHERE poCode
+		= #{poCode}
+	</update>
+
+
+	<select id="getPurchaseOrderList"
+		resultType="com.keypoint.dto.PurchaseDTO">
+		select poCode, materialName, poCount
+		from purchaseOrder
+		where
+		poCode like CONCAT('%', #{poCode}, '%') and
+		materialName like CONCAT('%', #{materialName}, '%')
+		and poStatus = '발주대기'
+		order by poCode desc
+		limit #{startRow}, #{pageSize}
+	</select>
+
+	<select id="countPurchaseOrderList"
+		resultType="java.lang.Integer">
+		select count(*)
+		from purchaseOrder
+		<if test="poCode!=null and materialName!=null">
+			where
+			poCode like CONCAT('%', #{poCode}, '%') and
+			materialName like CONCAT('%', #{materialName}, '%')
+			and poStatus = '발주대기'
+		</if>
+	</select>
+
+	<update id="updatePurchaseOrderStatus">
+		UPDATE purchaseOrder
+		SET poStatus = #{poStatus}
 		WHERE poCode = #{poCode}
 	</update>
-  
 
-<select id="getPurchaseOrderList" resultType="com.keypoint.dto.PurchaseDTO">
-   select poCode, materialName, poCount
-   from purchaseOrder
-   where 
-   poCode like CONCAT('%', #{poCode}, '%') and 
-   materialName like CONCAT('%', #{materialName}, '%')
-   and poStatus = '발주대기'
-   order by poCode desc 
-   limit #{startRow}, #{pageSize}  
-</select>
 
-<select id="countPurchaseOrderList" resultType="java.lang.Integer">
-   select count(*)
-   from purchaseOrder
-   <if test="poCode!=null and materialName!=null">
-   where 
-   poCode like CONCAT('%', #{poCode}, '%') and
-   materialName like CONCAT('%', #{materialName}, '%') 
-   and poStatus = '발주대기'
-   </if>   
-</select>
-  
-  <update id="updatePurchaseOrderStatus">
-    UPDATE purchaseOrder
-    SET poStatus = #{poStatus}
-    WHERE poCode = #{poCode}
-</update>
-  
-  
-  <select id="getRequireList" resultType="com.keypoint.dto.RequireDTO">
-	select a.woCode, b.productCode, c.productName, d.materialCode,
-	       e.materialName, e.materialCount,(d.reqCount*b.roCount) as totalReqCount
-	from workOrder a
-	join receivedOrder b on a.roCode = b.roCode
-	join product c on b.productCode = c.productCode
-	join requirement d on b.productCode = d.productCode
-	join material e on d.materialCode = e.materialCode
-	where a.woCode = #{woCode};
-  </select>
-  
-  
-  
-  
+	<select id="getRequireList"
+		resultType="com.keypoint.dto.RequireDTO">
+		select a.woCode, b.productCode, c.productName, d.materialCode,
+		e.materialName, e.materialCount,(d.reqCount*b.roCount) as
+		totalReqCount
+		from workOrder a
+		join receivedOrder b on a.roCode = b.roCode
+		join product c on b.productCode = c.productCode
+		join requirement d on b.productCode = d.productCode
+		join material e on d.materialCode = e.materialCode
+		where a.woCode = #{woCode};
+	</select>
+
+
+
+
 </mapper>
 
 

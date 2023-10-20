@@ -24,46 +24,40 @@ public class PurchaseService {
 	private PurchaseDAO purchaseDAO;
 
 	// ------------------------------------------------------------------------------------
-	
+
 	public void insertPurchase(PurchaseDTO purchaseDTO) {
 		System.out.println("PurchaseService insertPurchase()");
-		
-		// purchaseDTO.setPoDate(new Timestamp(System.currentTimeMillis()));
-		
+
 		purchaseDAO.insertPurchase(purchaseDTO);
-		
+
 	} // insertPurchase
-	
-	
+
 	public List<PurchaseDTO> getPurchaseList(PageDTO pageDTO) {
 		System.out.println("PurchaseService getPurchaseList()");
-		
+
 		// 10개씩 가져올때 현페이지에 대한 시작하는 행번호 구하기
-		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize() + 1;
+		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
 		// 끝나는 행번호 구하기
 		int endRow = startRow + pageDTO.getPageSize() - 1;
-		
+
 		// 디비 startRow - 1
 		pageDTO.setStartRow(startRow - 1);
 		pageDTO.setEndRow(endRow);
-		
-		
+
 		return purchaseDAO.getPurchaseList(pageDTO);
 	}// getPurchaseList [발주목록]
-	
+
 	public int getPurchaseCount(PageDTO pageDTO) {
 		System.out.println("PurchaseService getPurchaseCount()");
-		
+
 		return purchaseDAO.getPurchaseCount(pageDTO);
 	} // getPurchaseCount
-	
-	
-	
+
 	public PurchaseDTO getPurchaseDetails(String poCode) {
 		System.out.println("PurchaseService getPurchaseDetails()");
-		
+
 		return purchaseDAO.getPurchaseDetails(poCode);
-	}// getReceiveDetails [발주상세]
+	}// getPurchaseDetails [발주상세]
 
 	public void purchaseUpdatePro(PurchaseDTO purchaseDTO) {
 		System.out.println("ReceiveService receiveUpdatePro()");
@@ -75,51 +69,34 @@ public class PurchaseService {
 	public void purchaseDelete(PurchaseDTO purchaseDTO) {
 		System.out.println("purchaseService purchaseDelete()");
 		System.out.println(purchaseDTO);
-		
+
 		purchaseDAO.deletePurchase(purchaseDTO);
 	}// purchaseDelete() [발주삭제]
 
-	
-	//-----------------------------------------------------------------------------
-	
+	// -----------------------------------------------------------------------------
+
 	public List<PurchaseDTO> getPurchaseOrderList(Map<String, Object> search) {
 		System.out.println("purchaseService getPurchaseOrderList()");
-		
-		
+
 		return purchaseDAO.getPurchaseOrderList(search);
 	} // getPurchaseOrderList
 
-
 	public Integer countPurchaseOrderList(Map<String, Object> search) { // 품목 개수
 		System.out.println("purchaseService countPurchaseOrderList()");
-		
-		
+
 		return purchaseDAO.countPurchaseOrderList(search);
-	} // countPurchaseList
-	
+	} // countPurchaseOrderList
+
 	// --------------------------------------------------------------------------------------------------
-	
+
 	public void updatePurchaseOrderStatus(PurchaseDTO purchaseDTO) {
-	    purchaseDAO.updatePurchaseOrderStatus(purchaseDTO);
+		purchaseDAO.updatePurchaseOrderStatus(purchaseDTO);
 	} // updatePurchaseOrderStatus
 
 	// --------------------------------------------------------------------------------------------------
-	
+
 	public List<RequireDTO> getRequireList(String woCode) {
 		return purchaseDAO.getRequireList(woCode);
 	}// getRequireList
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 } // class
