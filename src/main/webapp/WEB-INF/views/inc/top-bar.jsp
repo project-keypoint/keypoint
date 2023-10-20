@@ -28,8 +28,30 @@
 <!-- Custom styles for this template-->
 <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
 
+<style type="text/css">
+.modal {
+	top: 45px;
+	width: 120px;
+	left: 1537px;
+	height: auto;
+}
+</style>
+
 </head>
 <body>
+
+
+
+	<!-- 모달 창 -->
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close" style="margin-left: 100px; onclick="closeModal()">&times;</span>
+			<input type="text" id="newSessionValue" placeholder="세션 값 입력">
+			<button onclick="updateSessionValue()">변경</button>
+		</div>
+	</div>
+
+
 	<!-- Topbar -->
 	<nav
 		class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -44,7 +66,7 @@
 
 		<!-- Topbar Navbar -->
 		<ul class="navbar-nav ml-auto">
-			
+
 			<!-- Nav Item - Search Dropdown (Visible Only XS) -->
 			<li class="nav-item dropdown no-arrow d-sm-none"><a
 				class="nav-link dropdown-toggle" href="#" id="searchDropdown"
@@ -73,8 +95,14 @@
 					src="/js_std/kor/util/timeoutchk.js"></script> <span id="timer"
 				style="position: relative; top: 24px;"></span> &nbsp; <a
 				href="javascript:refreshTimer();"><img
-					src="${pageContext.request.contextPath}/resources/img/icon_reload.png" align="top"
-					style="position: relative;top: 21px;height: 1rem; width: 1rem;"></a> &nbsp;&nbsp;&nbsp;</td>
+					src="${pageContext.request.contextPath}/resources/img/icon_reload.png"
+					align="top"
+					style="position: relative; top: 21px; height: 1rem; width: 1rem;">
+					<!-- 세션 값을 수정할 버튼 추가 --> </a><img
+				src="${pageContext.request.contextPath}/resources/img/icon_gear.png"
+				align="top"
+				style="position: relative; top: 26px; left: 5px; height: 15px; width: 15px;"
+				onclick="openModal()"> &nbsp;&nbsp;&nbsp;</td>
 
 			<div class="topbar-divider d-none d-sm-block"></div>
 
@@ -84,21 +112,17 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <span
 					class="mr-2 d-none d-lg-inline text-gray-600 ">${sessionScope.empId}
-						/ ${sessionScope.empName} 님</span> 
-					
+						/ ${sessionScope.empName} 님</span> <!-- 프로필사진 가져오기 --> <%
+ String empPhoto = (String) session.getAttribute("empPhoto");
+ // 사진을 등록하지 않았을 경우 기본 이미지(test.png)로 보이게
+ String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resources/img/test.png";
+ %> <img class="img-profile rounded-circle"
+					src="${pageContext.request.contextPath }/resources/upload/${sessionScope.empPhoto}"
+					style="position: relative; top: -3px; border: solid 1px black;">
+					<!-- // 프로필사진 가져오기 -->
 
-<!-- 프로필사진 가져오기 -->
-<% 
-String empPhoto = (String) session.getAttribute("empPhoto"); 
-// 사진을 등록하지 않았을 경우 기본 이미지(test.png)로 보이게
-String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resources/img/test.png";
-%>
 
-<img class="img-profile rounded-circle" src="${pageContext.request.contextPath }/resources/upload/${sessionScope.empPhoto}"  style="position: relative; top: -3px; border: solid 1px black;">
-<!-- // 프로필사진 가져오기 -->
 
-  
-  
 			</a> <!-- Dropdown - User Information -->
 				<div
 					class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -137,7 +161,32 @@ String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resou
 	<script src="resources/js/demo/chart-area-demo.js"></script>
 	<script src="resources/js/demo/chart-pie-demo.js"></script>
 
+
+
+	<!-- 스크립트  -->
+
 	<script type="text/javascript">
+		// 모달 창 열기
+		function openModal() {
+			var modal = document.getElementById("myModal");
+			modal.style.display = "block";
+		}
+
+		// 모달 창 닫기
+		function closeModal() {
+			var modal = document.getElementById("myModal");
+			modal.style.display = "none";
+		}
+
+		// 세션 값 업데이트 함수
+		function updateSessionValue() {
+			var newSessionValue = document.getElementById("newSessionValue").value;
+			// AJAX를 사용하여 서버로 세션 값을 업데이트하는 요청을 보낼 수 있음
+			// 여기서는 예시로 alert 창을 띄우도록 함
+			alert("세션 값: " + newSessionValue);
+			closeModal(); // 모달 창 닫기
+		}
+
 		//사원 상세내용 새창
 		function openProfile(empId) {
 			// 연결되는지 보기위해
@@ -152,61 +201,58 @@ String imgSrc = empPhoto != null ? empPhoto : request.getContextPath() + "/resou
 					+ ', height=' + windowHeight + ', left=' + windowLeft
 					+ ', top=' + windowTop);
 		}
-		
-		
-		
+
 		//세션 타이머 및 로그아웃
 		var iSecond; // 초 단위로 환산
 		var timerchecker = null;
 
 		window.onload = function() {
-		    fncClearTime();
-		    initTimer();
+			fncClearTime();
+			initTimer();
 		}
 
 		function fncClearTime() {
-		    iSecond = 1800; // 세션 시간을 초 단위로 설정 (예: 3시간 60*180분 / 계산 60*n분)
+			iSecond = 1800; // 세션 시간을 초 단위로 설정 (예: 3시간 60*180분 / 계산 60*n분)
 		}
 
 		function initTimer() {
-		    var timer = document.getElementById("timer");
+			var timer = document.getElementById("timer");
 
-		    if (iSecond > 0) {
-		        timer.innerHTML = formatTime(iSecond);
-		        iSecond--;
-		        timerchecker = setTimeout(initTimer, 1000); // 1초 간격으로 함수를 호출
-		    } else {
-		    	window.alert("세션이 만료되었습니다. 로그아웃됩니다.");
-		    	window.location.href = '${pageContext.request.contextPath}/employee/logout';
-		    }
+			if (iSecond > 0) {
+				timer.innerHTML = formatTime(iSecond);
+				iSecond--;
+				timerchecker = setTimeout(initTimer, 1000); // 1초 간격으로 함수를 호출
+			} else {
+				window.alert("세션이 만료되었습니다. 로그아웃됩니다.");
+				window.location.href = '${pageContext.request.contextPath}/employee/logout';
+			}
 		}
 		function refreshTimer() {
-		    // 세션 시간을 초기화합니다.
-		    fncClearTime();
+			// 세션 시간을 초기화합니다.
+			fncClearTime();
 
-		    // 타이머를 재시작합니다.
-		    clearTimeout(timerchecker);
-		    initTimer();
+			// 타이머를 재시작합니다.
+			clearTimeout(timerchecker);
+			initTimer();
 		}
-		
+
 		function formatTime(seconds) {
-		    var hours = Math.floor(seconds / 3600);
-		    var minutes = Math.floor((seconds % 3600) / 60);
-		    var remainingSeconds = seconds % 60;
-		    return "&nbsp;"  + Lpad(minutes, 2) + "분 " + Lpad(remainingSeconds, 2) + "초 ";
+			var hours = Math.floor(seconds / 3600);
+			var minutes = Math.floor((seconds % 3600) / 60);
+			var remainingSeconds = seconds % 60;
+			return "&nbsp;" + Lpad(minutes, 2) + "분 "
+					+ Lpad(remainingSeconds, 2) + "초 ";
 			//        + Lpad(hours, 2) + "시간 " 붙여넣으면 시간나옴
 		}
-		
 
 		function Lpad(str, len) {
-		    str = str + "";
-		    while (str.length < len) {
-		        str = "0" + str;
-		    }
-		    return str;
+			str = str + "";
+			while (str.length < len) {
+				str = "0" + str;
+			}
+			return str;
 		}
-	// 프로필 사진 가져오기
-
+		// 프로필 사진 가져오기
 	</script>
 
 </body>
