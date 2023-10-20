@@ -284,7 +284,7 @@
 		function openDetails(poCode) {
 		    var url = '${pageContext.request.contextPath}/production/productionDetails?poCode=' + poCode;
 		    var windowWidth = 560;
-		    var windowHeight = 720;
+		    var windowHeight = 730;
 		    var windowLeft = (screen.width - windowWidth) / 2;
 		    var windowTop = (screen.height - windowHeight) / 2;
 		    var newWindow = window.open(url, '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + windowLeft + ', top=' + windowTop);

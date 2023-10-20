@@ -104,6 +104,15 @@
 					<input type="text" id="cusName" class="form-control search-input"
 					value="${productionDTO.cusName}" readonly>
 			</div>
+			
+			<div class="form-group-receive">
+				<p>담당자</p>
+				<input type="text" id="empId" class="form-control search-input"
+					value="${productionDTO.empId}" readonly>
+					<input type="text" id="empName" class="form-control search-input"
+					value="${productionDTO.empName}" readonly>
+			</div>
+			
 
 			</div>
 			<div class="details-buttons">
@@ -137,42 +146,13 @@
 				.ready(
 						function() {
 
-							// 수주코드 검색 팝업 열기
-// 							$("#roCode, #roCode")
-// 									.click(
-// 											function() {
-// 												var url = '${pageContext.request.contextPath}/workOrder/workRoCodeList';
-// 												openPopup(url);
-// 											});
-							// 라인명 검색 팝업 열기
-							$("#lineCode, #lineCode")
-									.click(
-											function() {
-												var url = '${pageContext.request.contextPath}/workOrder/workLineList';
-												openPopup(url);
-											});
-							// 업체명 검색 팝업 열기
-// 							$("#cusCode, #cusName")
-// 									.click(
-// 											function() {
-// 												var url = '${pageContext.request.contextPath}/workOrder/workCusList';
-// 												openPopup(url);
-// 											});
-							// 상품명 검색 팝업 열기
-// 							$("#productCode, #productName")
-// 									.click(
-// 											function() {
-// 												var url = '${pageContext.request.contextPath}/workOrder/workProdList';
-// 												openPopup(url);
-// 											});
-							// 사원 검색 팝업 열기
-							$("#empId, #empName")
-									.click(
-											function() {
-												var url = '${pageContext.request.contextPath}/workOrder/workEmpList';
-												openPopup(url);
-											});
-						});
+			// 라인명 검색 팝업 열기
+			$("#lineCode, #lineCode").click(function() {
+			var url = '${pageContext.request.contextPath}/workOrder/workLineList';
+			openPopup(url);
+			
+			});
+							
 		//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
 		$(function() {
 			$("#shipSdate").datepicker({

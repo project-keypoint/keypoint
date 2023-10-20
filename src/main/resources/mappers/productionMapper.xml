@@ -115,11 +115,12 @@
 		resultType="com.keypoint.dto.ProductionDTO">
 		select a.poCode, b.woCode, a.poDate, b.woStatus, b.lineCode,
 		b.productCode, c.productName, a.poCount, a.poGood, a.poErr, a.poCause,
-		b.roCode, b.cusCode, d.cusName
+		b.roCode, b.cusCode, d.cusName, a.empId, e.empName
 		from production a
 		left join workOrder b on a.woCode = b.woCode
 		left join product c on b.productCode = c.productCode
-		left join customer d on b.cusCode = d.cusCode 
+		left join customer d on b.cusCode = d.cusCode
+		left join employees e on a.empId = e.empId
 		where poCode = #{poCode}
 	</select>
 	

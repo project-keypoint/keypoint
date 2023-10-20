@@ -103,6 +103,13 @@
 					<input type="text" id="cusName" class="form-control search-input"
 					value="${productionDTO.cusName}" readonly>
 			</div>
+			<div class="form-group-receive">
+				<p>담당자</p>
+				<input type="text" id="empId" class="form-control search-input"
+					value="${productionDTO.empId}" readonly>
+					<input type="text" id="empName" class="form-control search-input"
+					value="${productionDTO.empName}" readonly>
+			</div>
 
 <!-- 			<div class="search-bar-popup"> -->
 <!-- 				<div class="form-group-receive"> -->
