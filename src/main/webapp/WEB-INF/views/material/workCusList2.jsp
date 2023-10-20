@@ -17,7 +17,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/searchList.css" rel="stylesheet">
 </head>
 <body>
-<h4>납품처 조회</h4>
+<h4>납입처 조회</h4>
 <form>
 <div class="search-top">
 <div>
@@ -34,10 +34,10 @@
 	</form>
 	<table>
 <tr><th>업체코드</th><th>업체명</th></tr>
-<c:forEach var="workCusList" items="${workCusList}">
-<tr onclick="selectWork('${workCusList.cusCode }','${workCusList.cusName }')"> <!-- ,'${itemList.itemId}' -->
-	<td id="con">${workCusList.cusCode}</td>
-	<td id="con">${workCusList.cusName}</td>
+<c:forEach var="workCusList2" items="${workCusList2}">
+<tr onclick="selectWork('${workCusList2.cusCode }','${workCusList2.cusName }')"> <!-- ,'${itemList.itemId}' -->
+	<td id="con">${workCusList2.cusCode}</td>
+	<td id="con">${workCusList2.cusName}</td>
 	</tr>
 
     <script type="text/javascript">
@@ -61,26 +61,26 @@
 
     <!-- 1페이지 이전 -->
 	<c:if test="${pageDTO.currentPage > 1}">
-	<a href="${pageContext.request.contextPath }/workOrder/workCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage-1}"><</a>
+	<a href="${pageContext.request.contextPath }/material/workCusList2?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage-1}"><</a>
 	</c:if>
 
 <!-- 10페이지 이전 -->
 	 <c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath }/workOrder/workCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
+	<a href="${pageContext.request.contextPath }/material/workCusList2?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage-PageDTO.pageBlock}"><<</a>
 	</c:if>
 	
 	<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-	<a href="${pageContext.request.contextPath }/workOrder/workCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
+	<a href="${pageContext.request.contextPath }/material/workCusList2?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${i}" <c:if test="${pageDTO.pageNum eq i}">class="active"</c:if>>${i}</a> 
 	</c:forEach>
 
 <!-- 1페이지 다음 -->	
 	<c:if test="${pageDTO.currentPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage+1}">></a>
+	<a href="${pageContext.request.contextPath }/material/workCusList2?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.currentPage+1}">></a>
 	</c:if>
 
 <!-- 10페이지 다음 -->
  	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-	<a href="${pageContext.request.contextPath }/workOrder/workCusList?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
+	<a href="${pageContext.request.contextPath }/material/workCusList2?cusCode=${search.cusCode}&cusName=${search.cusName}&pageNum=${pageDTO.startPage + pageDTO.pageBlock}">>></a>
 	</c:if>
 	
 </div>

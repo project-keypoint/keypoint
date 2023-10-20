@@ -17,7 +17,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/searchList.css" rel="stylesheet">
 </head>
 <body>
-<h4>업체 조회</h4>
+<h4>납입처 조회</h4>
 <form>
 <div class="search-top">
 <div>

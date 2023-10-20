@@ -77,7 +77,7 @@ function openPopup(url) {
 $(document).ready(function() {
     // 상품명 검색 팝업 열기
     $("#cusCode").click(function() {
-        var url = '${pageContext.request.contextPath}/product/workCusList';
+        var url = '${pageContext.request.contextPath}/material/workCusList2';
         openPopup(url);
     });
 });
