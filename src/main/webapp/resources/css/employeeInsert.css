@@ -328,9 +328,9 @@ body {
 background-color: #f5f5f5
 }
 
-.imgbtn {
-    position: absolute;
-    top: 100%; /* 이미지 아래로 이동하려면 100%로 설정합니다. */
-    left: 50%; /* 가운데 정렬을 유지합니다. */
-    transform: translateX(-50%); /* 수평 가운데 정렬을 유지합니다. */
-}
+/* .imgbtn { */
+/*     position: absolute; */
+/*     top: 100%; 이미지 아래로 이동하려면 100%로 설정합니다. */
+/*     left: 50%; 가운데 정렬을 유지합니다. */
+/*     transform: translateX(-50%); 수평 가운데 정렬을 유지합니다. */
+/* } */

@@ -257,6 +257,7 @@ public class EmployeeController {
 	public String photoPro(HttpServletRequest request, MultipartFile empPhoto, HttpSession session ) throws Exception{
 		System.out.println("EmployeeController photoPro()");
 		// name = "file" => MultipartFile file 이름 동일하게 해야 함
+		// 리눅스 서버에 올리기
 		String uploadPath = "/resources/upload";
 		String saveDir = session.getServletContext().getRealPath(uploadPath);
 		
@@ -323,8 +324,12 @@ public class EmployeeController {
 	// 사원수정 - 첨부파일 수정하기
 		@PostMapping("/photoUpdatePro")
 		// 첨부파일은 boardDTO에 못 담음
-		public String photoUpdatePro(HttpServletRequest request, MultipartFile empPhoto)throws Exception {
+		public String photoUpdatePro(HttpServletRequest request, MultipartFile empPhoto, HttpSession session)throws Exception {
 			System.out.println("EmployeeController photoUpdatePro()");
+			
+			// 리눅스 서버에 올리기
+			String uploadPath = "/resources/upload";
+			String saveDir = session.getServletContext().getRealPath(uploadPath);
 			
 			// 수정 할 값 넘어오게
 			EmployeeDTO employeeDTO = new EmployeeDTO();
@@ -370,7 +375,7 @@ public class EmployeeController {
 				UUID uuid = UUID.randomUUID();
 				String filename = uuid.toString()+"_"+empPhoto.getOriginalFilename();
 				// 원본파일 => upload폴더 복사
-				FileCopyUtils.copy(empPhoto.getBytes(), new File(uploadPath, filename));
+				FileCopyUtils.copy(empPhoto.getBytes(), new File(saveDir, filename));
 				// boardDTO 저장
 				employeeDTO.setEmpPhoto(filename);
 			}
