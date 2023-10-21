@@ -36,15 +36,17 @@
 	<!-- 	파일 업로드 폴더 지정 -->
 	<!-- 	본인 경로에 맞게 value값 수정 필요 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
+
+	</beans:bean>
+
+
+	
+</beans:beans>
 <!-- 		진유정 노트북 경로 -->
 <!-- 		<beans:constructor-arg value="E:\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg> -->
 <!-- 		진유정 학원 컴퓨터 경로 -->
 <!-- 		<beans:constructor-arg value="D:\\WEB\\workspace_sts\\keypoint\\src\\main\\webapp\\resources\\upload"></beans:constructor-arg> -->
 <!-- 		리눅스 서버 경로 -->
 <!-- 		 	<beans:constructor-arg value="/usr/local/tomcat/webapps/keypoint/resources/img"></beans:constructor-arg> -->
-	</beans:bean>
 <!-- 	우리 톰캣 서버 경로 -->
 <!-- /usr/local/tomcat/webapps/keypoint/resources/img/ -->
-
-	
-</beans:beans>

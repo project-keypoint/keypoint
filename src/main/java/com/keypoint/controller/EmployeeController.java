@@ -190,67 +190,7 @@ public class EmployeeController {
 		return "employee/employeeInsert";  
 	} // employeeInsert	
 	
-	// 사원-상세정보
-	@GetMapping("/employeeDetails")
-	public String employeeDetails(Model model, @RequestParam("empId") int empId, HttpSession session) {
-		System.out.println("EmployeeController employeeDetails()");
-		
-		// 세션에서 empId 가져오기
-		int empIdSession = (int) session.getAttribute("empId");
-		
-		// empId로 사원정보 가져오기
-		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
-		System.out.println("DTO"+employeeDTO);
-		
-		model.addAttribute("employeeDTO", employeeDTO);
-		
-		// empId로 사원정보 가져오기(세션)
-		EmployeeDTO employeeDTO1 = employeeService.getEmployeeDetails(empIdSession );
-		model.addAttribute("employeeDTO1", employeeDTO1);
-		System.out.println("DTO1"+employeeDTO1);
-		
-		return "employee/employeeDetails";
-	}// employeeDetails
 	
-	
-	// 사원-상세정보 수정화면
-	@GetMapping("/employeeUpdate")
-	public String employeeUpdate(Model model, @RequestParam("empId") int empId, HttpSession session) {
-		System.out.println("EmployeeController employeeUpdate()");
-		// 세션에서 empId 가져오기
-		int empIdSession = (int) session.getAttribute("empId");
-				
-		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
-		model.addAttribute("employeeDTO", employeeDTO);
-		
-		// empId로 사원정보 가져오기(세션)
-		EmployeeDTO employeeDTO1 = employeeService.getEmployeeDetails(empIdSession );
-		model.addAttribute("employeeDTO1", employeeDTO1);
-		System.out.println("DTO1"+employeeDTO1);
-		
-		return "employee/employeeUpdate";  
-	} // employeeUpdate
-	
-
-	// 사원-상세정보 수정하기
-	@PostMapping("/employeeUpdatePro")
-	public String employeeUpdatePro(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeController employeeUpdatePro()");
-		System.out.println(employeeDTO);
-		
-		employeeService.updateEmployee(employeeDTO);
-		
-		if(employeeDTO != null) {
-			return "employee/msgSuccess"; // 등록완료
-		} else {
-			return "employee/msgFailed"; // 등록실패
-		}
-	
-	} // employeeUpdatePro	
-	
-	
-	
-// -------------------------------- 첨부파일 관련 		
 	// 사원등록 - 사진첨부하기가 포함된 사원등록
 	@PostMapping("/photoPro")
 	// 첨부파일은 boardDTO에 못 담음
@@ -321,79 +261,128 @@ public class EmployeeController {
 	} // photoPro
 	
 	
-	// 사원수정 - 첨부파일 수정하기
-		@PostMapping("/photoUpdatePro")
-		// 첨부파일은 boardDTO에 못 담음
-		public String photoUpdatePro(HttpServletRequest request, MultipartFile empPhoto, HttpSession session)throws Exception {
-			System.out.println("EmployeeController photoUpdatePro()");
-			
-			// 리눅스 서버에 올리기
-			String uploadPath = "/resources/upload";
-			String saveDir = session.getServletContext().getRealPath(uploadPath);
-			
-			// 수정 할 값 넘어오게
-			EmployeeDTO employeeDTO = new EmployeeDTO();
-			int empId = Integer.parseInt(request.getParameter("empId"));
-			
-			String empSalt = employeeService.getEmpSalt(empId);
-			System.out.println(empSalt);
-			
-			// 사번, 이름 , 생일, 주소 , 상세주소
-			employeeDTO.setEmpId(Integer.parseInt(request.getParameter("empId")));
-			employeeDTO.setEmpName(request.getParameter("empName"));
-			employeeDTO.setEmpBirth(request.getParameter("empBirth"));
-			employeeDTO.setEmpAddress(request.getParameter("empAddress"));
-			employeeDTO.setEmpAddress_dtail(request.getParameter("empAddress_dtail"));
-			
-			// 이메일,연락처,내선번호 / 비밀번호는 따로
-			employeeDTO.setEmpEmail(request.getParameter("empEmail"));
-			employeeDTO.setEmpPhone(request.getParameter("empPhone"));
-			employeeDTO.setEmpTel(request.getParameter("empTel"));
-			
-			// 부서,직급,재직여부
-			employeeDTO.setDepartmentName(request.getParameter("departmentName"));
-			employeeDTO.setEmpPosition(request.getParameter("empPosition"));
-			employeeDTO.setEmpStatus(request.getParameter("empStatus"));
-			
-			// 입사일,휴직일,퇴직일
-			employeeDTO.setEmpHiredate(request.getParameter("empHiredate"));
-			employeeDTO.setEmpLeavedate(request.getParameter("empLeavedate"));
-			employeeDTO.setEmpRetiredate(request.getParameter("empRetiredate"));
-			
-			// 권한
-			employeeDTO.setEmpRole(Integer.parseInt(request.getParameter("empRole")));
+	// 사원-상세정보
+	@GetMapping("/employeeDetails")
+	public String employeeDetails(Model model, @RequestParam("empId") int empId, HttpSession session) {
+		System.out.println("EmployeeController employeeDetails()");
 		
-			// 업로드파일 있는지 없는지 파악
-			if(empPhoto.isEmpty()) {
-				System.out.println("oldfile");
-				// 첨부파일이 없는 경우 => oldfile 저장
-				employeeDTO.setEmpPhoto(request.getParameter("oldfile"));
-			} else {
-				System.out.println("newfile");
-				// 첨부파일이 있는 경우
-				// 업로드파일이름 랜덤문자_파일이름
-				UUID uuid = UUID.randomUUID();
-				String filename = uuid.toString()+"_"+empPhoto.getOriginalFilename();
-				// 원본파일 => upload폴더 복사
-				FileCopyUtils.copy(empPhoto.getBytes(), new File(saveDir, filename));
-				// boardDTO 저장
-				employeeDTO.setEmpPhoto(filename);
-			}
-			
-			// 수정
-			employeeService.updateEmployee(employeeDTO);
-			
-			if(employeeDTO != null) {
-				return "employee/msgSuccess"; // 등록완료
-			} else {
-				return "employee/msgFailed"; // 등록실패
-			}
+		// 세션에서 empId 가져오기
+		int empIdSession = (int) session.getAttribute("empId");
 		
-		} // photoUpdatePro
+		// empId로 사원정보 가져오기
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		System.out.println("DTO"+employeeDTO);
+		
+		model.addAttribute("employeeDTO", employeeDTO);
+		
+		// empId로 사원정보 가져오기(세션)
+		EmployeeDTO employeeDTO1 = employeeService.getEmployeeDetails(empIdSession );
+		model.addAttribute("employeeDTO1", employeeDTO1);
+		System.out.println("DTO1"+employeeDTO1);
+		
+		return "employee/employeeDetails";
+	}// employeeDetails
+	
+	
+	// 사원 - 상세정보 수정화면
+	@GetMapping("/employeeUpdate")
+	public String employeeUpdate(Model model, @RequestParam("empId") int empId, HttpSession session) {
+		System.out.println("EmployeeController employeeUpdate()");
+		// 세션에서 empId 가져오기
+		int empIdSession = (int) session.getAttribute("empId");
+				
+		EmployeeDTO employeeDTO = employeeService.getEmployeeDetails(empId);
+		model.addAttribute("employeeDTO", employeeDTO);
+		
+		// empId로 사원정보 가져오기(세션)
+		EmployeeDTO employeeDTO1 = employeeService.getEmployeeDetails(empIdSession );
+		model.addAttribute("employeeDTO1", employeeDTO1);
+		System.out.println("DTO1"+employeeDTO1);
+		
+		return "employee/employeeUpdate";  
+	} // employeeUpdate
+	
+	
+	// 사원수정 - 첨부파일이 포함된 사원정보수정하기
+			@PostMapping("/photoUpdatePro")
+			// 첨부파일은 boardDTO에 못 담음
+			public String photoUpdatePro(Model model, HttpServletRequest request, MultipartFile empPhoto, HttpSession session)throws Exception {
+				System.out.println("EmployeeController photoUpdatePro()");
+				
+				// 세션에서 empId 가져오기
+				int empIdSession = (int) session.getAttribute("empId");
+				
+				// empId로 사원정보 가져오기(세션)
+				EmployeeDTO employeeDTO1 = employeeService.getEmployeeDetails(empIdSession );
+				model.addAttribute("employeeDTO1", employeeDTO1);
+				System.out.println("DTO1"+employeeDTO1);	
+				
+				// 리눅스 서버에 올리기
+				String uploadPath = "/resources/upload";
+				String saveDir = session.getServletContext().getRealPath(uploadPath);
+				
+				// 수정 할 값 넘어오게
+				EmployeeDTO employeeDTO = new EmployeeDTO();
+				int empId = Integer.parseInt(request.getParameter("empId"));
+				
+				String empSalt = employeeService.getEmpSalt(empId);
+				System.out.println(empSalt);
+				
+				// 사번, 이름 , 생일, 주소 , 상세주소
+				employeeDTO.setEmpId(Integer.parseInt(request.getParameter("empId")));
+				employeeDTO.setEmpName(request.getParameter("empName"));
+				employeeDTO.setEmpBirth(request.getParameter("empBirth"));
+				employeeDTO.setEmpAddress(request.getParameter("empAddress"));
+				employeeDTO.setEmpAddress_dtail(request.getParameter("empAddress_dtail"));
+				
+				// 이메일,연락처,내선번호 / 비밀번호는 따로
+				employeeDTO.setEmpEmail(request.getParameter("empEmail"));
+				employeeDTO.setEmpPhone(request.getParameter("empPhone"));
+				employeeDTO.setEmpTel(request.getParameter("empTel"));
+				
+				// 부서,직급,재직여부
+				employeeDTO.setDepartmentName(request.getParameter("departmentName"));
+				employeeDTO.setEmpPosition(request.getParameter("empPosition"));
+				employeeDTO.setEmpStatus(request.getParameter("empStatus"));
+				
+				// 입사일,휴직일,퇴직일
+				employeeDTO.setEmpHiredate(request.getParameter("empHiredate"));
+				employeeDTO.setEmpLeavedate(request.getParameter("empLeavedate"));
+				employeeDTO.setEmpRetiredate(request.getParameter("empRetiredate"));
+				
+				// 권한
+				employeeDTO.setEmpRole(Integer.parseInt(request.getParameter("empRole")));
+			
+				// 업로드파일 있는지 없는지 파악
+				if(empPhoto.isEmpty()) {
+					System.out.println("oldfile");
+					// 첨부파일이 없는 경우 => oldfile 저장
+					employeeDTO.setEmpPhoto(request.getParameter("oldfile"));
+				} else {
+					System.out.println("newfile");
+					// 첨부파일이 있는 경우
+					// 업로드파일이름 랜덤문자_파일이름
+					UUID uuid = UUID.randomUUID();
+					String filename = uuid.toString()+"_"+empPhoto.getOriginalFilename();
+					// 원본파일 => upload폴더 복사
+					FileCopyUtils.copy(empPhoto.getBytes(), new File(saveDir, filename));
+					// boardDTO 저장
+					employeeDTO.setEmpPhoto(filename);
+				}
+				
+				// 수정
+				employeeService.updateEmployee(employeeDTO);
+				
+				if(employeeDTO != null) {
+					return "employee/msgSuccess"; // 등록완료
+				} else {
+					return "employee/msgFailed"; // 등록실패
+				}
+			
+			} // photoUpdatePro
+			
+			
 
-// -------------------------------- 첨부파일 관련 	
-		
-		
 		
 		@PostMapping("/modifyPass/{empId}")
 		@ResponseBody

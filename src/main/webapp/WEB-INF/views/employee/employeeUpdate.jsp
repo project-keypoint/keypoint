@@ -154,30 +154,69 @@
 </div>
 
 <div class="form-group-column">
+
+
 <c:choose>
   <c:when test="${employeeDTO1.empRole eq '3'}">
     <p>권한</p>
-<select id="empRole" name="empRole" class="form-control search-input status">
-    <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
-    <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
-    <option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
-    <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
-</select>
+	<select id="empRole" name="empRole" class="form-control search-input status">
+    	<option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
+    	<option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
+    	<option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
+    	<option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
+	</select>
   </c:when>
-  <c:when test="${employeeDTO1.empRole eq '1' and employeeDTO1.departmentName eq '인사부'}">
-    <p style="display: ${employeeDTO.empRole eq '1' ? 'none' : 'block'};">권한</p>
-<select id="empRole" name="empRole" class="form-control search-input status"
-style="display: ${employeeDTO.empRole eq '1' ? 'none' : 'block'};">
-    <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
-    <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
-    <option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
-    <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
-</select>
+  
+  <c:when test="${employeeDTO1.empRole eq '2' and employeeDTO1.departmentName eq '인사부'}">
+    <p>권한</p>
+	<select id="empRole" name="empRole" class="form-control search-input status">
+   		<option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
+    	<option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
+    	<option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
+    	<option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
+	</select>
   </c:when>
+
+
   <c:otherwise>
-<!--     빈칸 -->
+    <c:choose>
+      <c:when test="${employeeDTO1.empRole le 3}">
+        <p style="display: ${employeeDTO1.empRole le 3 ? 'none' : 'block'};">권한</p>
+        <select id="empRole" name="empRole" class="form-control search-input status"
+                style="display: ${employeeDTO1.empRole le 3  ? 'none' : 'block'};">
+          <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
+          <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
+          <option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>
+          <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
+        </select>
+      </c:when>
+    </c:choose>
   </c:otherwise>
+  
 </c:choose>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 </div><!-- form-group-receive -->
@@ -352,19 +391,6 @@ function validateEmail() {
         emailField.value = ""; // 입력 필드를 비우기 (초기화)
     }
 }
-
-//"권한" 텍스트 안보이게 조건줌
-// document.addEventListener("DOMContentLoaded", function () {
-// 	  var empRole = ${employeeDTO.empRole}; // 서버에서 가져온 값으로 설정
-// 	  var departmentName = '인사부'; // 예제값으로 '인사부'를 사용합니다;
-// 	  var roleText = document.getElementById('roleText');
-// 	  var empRoleSelect = document.getElementById('empRole');
-
-// 	  if (empRole === 3 || (empRole === 2 && departmentName === '인사부')) {
-// 	    roleText.style.display = 'block'; // "권한" 텍스트 보이게 설정
-// 	    empRoleSelect.style.display = 'block'; // select 요소 보이게 설정
-// 	  }
-// 	});
 
 </script>
 </body>
