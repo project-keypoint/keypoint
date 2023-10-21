@@ -164,9 +164,10 @@
     <option value="3" ${employeeDTO.empRole eq '3' ? 'selected' : ''}>3</option>
 </select>
   </c:when>
-  <c:when test="${employeeDTO1.empRole eq '2' and employeeDTO1.departmentName eq '인사부'}">
-    <p>권한</p>
-<select id="empRole" name="empRole" class="form-control search-input status">
+  <c:when test="${employeeDTO1.empRole eq '1' and employeeDTO1.departmentName eq '인사부'}">
+    <p style="display: ${employeeDTO.empRole eq '1' ? 'none' : 'block'};">권한</p>
+<select id="empRole" name="empRole" class="form-control search-input status"
+style="display: ${employeeDTO.empRole eq '1' ? 'none' : 'block'};">
     <option value="0" ${employeeDTO.empRole eq '0' ? 'selected' : ''}>0</option>
     <option value="1" ${employeeDTO.empRole eq '1' ? 'selected' : ''}>1</option>
     <option value="2" ${employeeDTO.empRole eq '2' ? 'selected' : ''}>2</option>

@@ -98,11 +98,7 @@
 					src="${pageContext.request.contextPath}/resources/img/icon_reload.png"
 					align="top"
 					style="position: relative; top: 21px; height: 1rem; width: 1rem;">
-					<!-- 세션 값을 수정할 버튼 추가 --> </a><img
-				src="${pageContext.request.contextPath}/resources/img/icon_gear.png"
-				align="top"
-				style="position: relative; top: 26px; left: 5px; height: 15px; width: 15px;"
-				onclick="openModal()"> &nbsp;&nbsp;&nbsp;</td>
+					</a>&nbsp;&nbsp;&nbsp;</td>
 
 			<div class="topbar-divider d-none d-sm-block"></div>
 
@@ -166,26 +162,7 @@
 	<!-- 스크립트  -->
 
 	<script type="text/javascript">
-		// 모달 창 열기
-		function openModal() {
-			var modal = document.getElementById("myModal");
-			modal.style.display = "block";
-		}
-
-		// 모달 창 닫기
-		function closeModal() {
-			var modal = document.getElementById("myModal");
-			modal.style.display = "none";
-		}
-
-		// 세션 값 업데이트 함수
-		function updateSessionValue() {
-			var newSessionValue = document.getElementById("newSessionValue").value;
-			// AJAX를 사용하여 서버로 세션 값을 업데이트하는 요청을 보낼 수 있음
-			// 여기서는 예시로 alert 창을 띄우도록 함
-			alert("세션 값: " + newSessionValue);
-			closeModal(); // 모달 창 닫기
-		}
+	
 
 		//사원 상세내용 새창
 		function openProfile(empId) {
@@ -212,7 +189,7 @@
 		}
 
 		function fncClearTime() {
-			iSecond = 1800; // 세션 시간을 초 단위로 설정 (예: 3시간 60*180분 / 계산 60*n분)
+			iSecond = 3600; // 세션 시간을 초 단위로 설정 (예: 3시간 60*180분 / 계산 60*n분)
 		}
 
 		function initTimer() {
@@ -240,7 +217,8 @@
 			var hours = Math.floor(seconds / 3600);
 			var minutes = Math.floor((seconds % 3600) / 60);
 			var remainingSeconds = seconds % 60;
-			return "&nbsp;" + Lpad(minutes, 2) + "분 "
+			return "&nbsp;" + Lpad(hours, 2) + "시간 " 
+					+ Lpad(minutes, 2) + "분 "
 					+ Lpad(remainingSeconds, 2) + "초 ";
 			//        + Lpad(hours, 2) + "시간 " 붙여넣으면 시간나옴
 		}

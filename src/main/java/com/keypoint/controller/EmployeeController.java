@@ -407,11 +407,9 @@ public class EmployeeController {
 		        // 비밀번호 변경 로직 호출
 		        employeeService.modifyPass(empId, empPass);
 		    } else {
-		        // 클라이언트로부터 전달된 비밀번호가 유효하지 않은 경우 에러 처리 로직을 수행합니다.
-		        // 예를 들어, 적절한 응답 상태 코드와 메시지를 클라이언트에게 전달할 수 있습니다.
-		        // 여기에서는 간단하게 콘솔에 에러 메시지를 출력하는 예시를 보여주었습니다.
+		       
 		        System.err.println("Invalid password received from client.");
-		        // 적절한 에러 응답을 보내는 코드를 추가하세요.
+		 
 		    }
 		}
 	
