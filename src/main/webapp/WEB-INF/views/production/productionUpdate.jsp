@@ -40,18 +40,13 @@
 					<input type="text" id="poDate" name="poDate"
 						class="form-control search-input inputcode"
 						value="${productionDTO.poDate}" readonly> 
-<!-- 						<input type="text" id="cusName" name="cusName" -->
-<!-- 						class="form-control search-input inputname" -->
-<%-- 						value="${workOrderDTO.cusName}" readonly> --%>
+
 				</div>
 				<div class="form-group-receive">
 					<p>라인코드</p>
 					<input type="text" id="lineCode" name="lineCode"
 						class="form-control search-input inputcode"
 						value="${productionDTO.lineCode}" > 
-<!-- 						<input type="text" id="productName" name="productName" -->
-<!-- 						class="form-control search-input inputname" -->
-<%-- 						value="${workOrderDTO.productName}" readonly> --%>
 				</div>
 			<div class="form-group-receive">
 				<p>상품명</p>
@@ -142,16 +137,15 @@
 					+ ", height=" + height + ", left=" + left + ", top=" + top);
 			popupWindow.focus();
 		}
-		$(document)
-				.ready(
-						function() {
+			
+		$(document).ready(function() {
 
 			// 라인명 검색 팝업 열기
-			$("#lineCode, #lineCode").click(function() {
-			var url = '${pageContext.request.contextPath}/workOrder/workLineList';
-			openPopup(url);
-			
-			});
+		    $("#lineCode, #lineCode").click(function() {
+		        var url = '${pageContext.request.contextPath}/workOrder/workLineList';
+		        openPopup(url);
+		    });
+		});
 							
 		//수주일, 납품예정일 검색 데이트피커(나중에 수정하기)
 		$(function() {
@@ -238,6 +232,7 @@
 
 
 		}); // end function
+		
 		
 	</script>
 </body>
