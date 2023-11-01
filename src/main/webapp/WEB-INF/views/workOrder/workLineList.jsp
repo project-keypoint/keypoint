@@ -32,7 +32,7 @@
 <table class="line-table">
 <tr><th>라인코드</th></tr>
 <c:forEach var="workLineList" items="${workLineList}">
-<tr onclick="selectWork('${workLineList.lineCode }')"> <!-- ,'${itemList.itemId}' -->
+<tr onclick="selectWork('${workLineList.lineCode }')"> 
 	<td id="con">${workLineList.lineCode}</td>
 	</tr>
 
@@ -41,7 +41,6 @@
         function selectWork(a){ // 부모창으로 값 넘기기
 		  
           opener.document.getElementById("lineCode").value = a
-//           opener.document.getElementById("lineCode").value = b
           window.close();
         }
 

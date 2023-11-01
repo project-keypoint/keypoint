@@ -35,7 +35,7 @@
 	<table>
 <tr><th>업체코드</th><th>업체명</th></tr>
 <c:forEach var="workCusList2" items="${workCusList2}">
-<tr onclick="selectWork('${workCusList2.cusCode }','${workCusList2.cusName }')"> <!-- ,'${itemList.itemId}' -->
+<tr onclick="selectWork('${workCusList2.cusCode }','${workCusList2.cusName }')">
 	<td id="con">${workCusList2.cusCode}</td>
 	<td id="con">${workCusList2.cusName}</td>
 	</tr>
@@ -46,7 +46,6 @@
 		  
           opener.document.getElementById("cusCode").value = a
           opener.document.getElementById("cusName").value = b
-//           opener.document.getElementById("pid").value = c
           window.close();
 
         }

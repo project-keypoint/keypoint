@@ -36,8 +36,6 @@ public class WorkOrderDAO {
 	
 	public void insertWorkOrder(WorkOrderDTO workOrderDTO) {
 		System.out.println("WorkOrderDAO insertWorkOrder()");
-//		System.out.println("woDate:" + workOrderDTO.getWoDate());
-//		System.out.println("empName:" + workOrderDTO.getEmpName());
 		System.out.println("mfgCode:" + workOrderDTO.getMfgCode());
 		System.out.println("materialCode:" + workOrderDTO.getMaterialCode());
 		System.out.println("productCode:" + workOrderDTO.getProductCode());
@@ -281,42 +279,6 @@ public class WorkOrderDAO {
 	}
 
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-//	public List<WorkOrderDTO> getWorkList(PageDTO pageDTO) {
-//		System.out.println("WorkOrderDAO getWorkList()");
-//		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-//		return sqlSession.selectList(namespace+".getWorkList", pageDTO);
-//	}
-//
-//
-//
-//	public int getWorkOrderCount(PageDTO pageDTO) {
-//		System.out.println("WorkOrderDAO getWorkOrderCount()");
-//		return sqlSession.selectOne(namespace+".getWorkOrderCount", pageDTO);
-//	}
-//
-//
-//
-//	public WorkOrderDTO getWork(String woCode) {
-//		System.out.println("WorkOrderDAO getWork()");
-//
-//		return sqlSession.selectOne(namespace+".getWork", woCode);
-//	}
-
-
-	
-	
-	
 	
 	
 }

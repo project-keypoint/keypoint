@@ -158,7 +158,6 @@
 		lineCode = #{lineCode},
 		woDate
 		= #{woDate},
-		<!-- shipSdate = #{shipSdate}, -->
 		woStatus = #{woStatus},
 		empId = #{empId},
 		empName = #{empName}
@@ -375,7 +374,6 @@
 	</select>
 	
 	
-<!-- 	receive -countList -->
 	<select id="countEmpList2" resultType="java.lang.Integer">
 		select count(*)
 		from employees
@@ -408,7 +406,6 @@
 		#{pageSize}
 	</select>
 
-<!-- 	prodcut - countList -->
 	<select id="countEmpList" resultType="java.lang.Integer">
 		select count(*)
 		from employees

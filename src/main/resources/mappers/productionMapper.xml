@@ -17,7 +17,6 @@
 			poDate, 
 			woStatus, 
 			productName,
-<!-- 			woCount,  -->
 			poGood, 
 			poErr, 
 			poCause,
@@ -34,7 +33,6 @@
 		#{poDate},	
 		#{woStatus},
 			#{productName},
-<!-- 			#{woCount}, -->
 			#{poGood},
 			#{poErr},
 			#{poCause},

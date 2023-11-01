@@ -82,11 +82,7 @@
 					class="form-control search-input"
 					value="${productionDTO.poCause}" >
 			</div>
-<!-- 			<div class="form-group-receive"> -->
-<!-- 				<p>상태</p> -->
-<!-- 				<input type="text" id="woStatus" class="form-control search-input" -->
-<%-- 					value="${productionDTO.woStatus}" readonly> --%>
-<!-- 			</div> -->
+
 			<div class="form-group-receive">
 				<p>수주번호</p>
 				<input type="text" id="roCode" class="form-control search-input"

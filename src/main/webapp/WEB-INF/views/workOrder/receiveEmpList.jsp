@@ -41,7 +41,6 @@
 		<c:forEach var="receiveEmpList" items="${receiveEmpList}">
 			<tr
 				onclick="selectWork('${receiveEmpList.empId}','${receiveEmpList.empName }')">
-				<%-- 				,'${itemList.itemId}' --%>
 				<td id="con">${receiveEmpList.empId}</td>
 				<td id="con">${receiveEmpList.empName}</td>
 			</tr>
@@ -51,7 +50,6 @@
 
 					opener.document.getElementById("empId").value = a
 					opener.document.getElementById("empName").value = b
-					//           opener.document.getElementById("pid").value = c
 					window.close();
 
 				}

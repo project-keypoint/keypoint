@@ -80,8 +80,6 @@ public class ProductionController {
 		
 		
 		List<ProductionDTO> productionList = productionService.getProductionList(pageDTO);
-//		List<LineDTO> lineList = lineService.getLineList(pageDTO);
-	//		System.out.println(productionList.get(0).getEmpName());
 		
 		int count = productionService.getProductionCount(pageDTO);	
 		
@@ -102,7 +100,6 @@ public class ProductionController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
-//		model.addAttribute("lineList", lineList);
 		model.addAttribute("productionList", productionList);
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println(productionList);
@@ -216,34 +213,6 @@ public class ProductionController {
 	}// workOrderDelete [생산실적삭제]
 	
 	
-	
-	
-	 
-
-//    // "/productionList" URL에 대한 POST 요청 처리 (선택 삭제 등의 작업)
-//    @PostMapping("/productionList")
-//    @ResponseBody
-//    public String processProductionList(HttpServletRequest request, @RequestParam("postIds") String postIds) {
-//        // 여기에서 선택 삭제 또는 기타 작업을 수행하고 결과를 반환
-//        return "success"; // 삭제 성공시 "success" 반환
-//    }
-
-	  
-// // "/productionList" URL에 대한 POST 요청 처리 (선택 삭제 또는 기타 작업)
-//    @PostMapping("/productionList")
-//    @ResponseBody
-//    public String processProductionList(@RequestParam("postIds") String postIds) {
-//        try {
-//            // 여기에서 선택 삭제 또는 기타 작업을 수행
-//            // productionService.productionDelete(postIds); // 예를 들어, 선택 삭제 작업을 수행할 때
-//
-//            return "success"; // 삭제 성공시 "success" 반환
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "error"; // 에러 발생시 "error" 반환 또는 적절한 오류 처리
-//        }
-//    }
-	
 	 @PostMapping("/deleteSelected")
 	    public String deleteSelected(@RequestParam("postIds") String postIds) {
 		 System.out.println(postIds);
@@ -254,7 +223,5 @@ public class ProductionController {
 	        }
 	        return "redirect:/production/productionList";
 	    }
-	
-	
 	
 }

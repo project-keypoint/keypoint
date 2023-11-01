@@ -74,9 +74,6 @@
 					<select id="woStatus" name="woStatus"
 						class="form-control search-input status">
 						<option value="진행">진행</option>
-<!-- 						<option value="진행">진행</option> -->
-<!-- 						<option value="완료">완료</option> -->
-<!-- 						<option value="취소">취소</option> -->
 					</select>
 				</div>
 
@@ -183,36 +180,6 @@
 		});
 
 // 		//유효성 검사
-// 		function validateForm() {
-// 			// 각 입력 필드 값
-// 			var cusCode = document.getElementById("cusCode").value;
-// 			var productCode = document.getElementById("productCode").value;
-// 			var woStatus = document.getElementById("woStatus").value;
-// 			var empName = document.getElementById("empName").value;
-// 			var roCode = document.getElementById("roCode").value;
-// 			var woCount = document.getElementById("woCount").value;
-// 			var lineCode = document.getElementById("lineCode").value;
-// 			var woDate = document.getElementById("woDate").value;
-// 			var shipSdate = document.getElementById("shipSdate").value;
-// 			var empId = document.getElementById("empId").value;
-
-// 			console.log("cusCode: " + cusCode);
-// 			// 빈 필드 검사
-// 			if (cusCode === "" || productCode === "" || roCode === "" ||woCount === ""
-// 				||  woStatus === "" || lineCode === "" || woDate === "" || shipSdate === "" ||
-// 				empName === "" || empId === "" ) {
-// 				alert("모든 내용을 입력해주세요.");
-// 				return false; // 제출 방지
-// 			}
-// 			    // 추가 유효성 검사
-// 			    if (woCount == 0) {
-// 			        alert("몇개부터 가능하도록 할까");
-// 			        return false; // 제출 방지
-// 			    }
-// 			return true;
-// 		}
-
-
 function validateForm() {
   var roCode = document.getElementById('roCode').value;
   var cusCode = document.getElementById('cusCode').value;

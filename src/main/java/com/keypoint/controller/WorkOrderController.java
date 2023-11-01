@@ -75,8 +75,6 @@ public class WorkOrderController {
 		
 		
 		List<WorkOrderDTO> workOrderList = workOrderService.getWorkOrderList(pageDTO);
-//		List<LineDTO> lineList = lineService.getLineList(pageDTO);
-//		System.out.println(workOrderList.get(0).getEmpName());
 		
 		int count = workOrderService.getWorkOrderCount(pageDTO);	
 		
@@ -97,7 +95,6 @@ public class WorkOrderController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
-//		model.addAttribute("lineList", lineList);
 		model.addAttribute("workOrderList", workOrderList);
 		model.addAttribute("pageDTO", pageDTO);
 		

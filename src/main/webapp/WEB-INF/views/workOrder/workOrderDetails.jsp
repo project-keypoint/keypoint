@@ -25,7 +25,6 @@
 </head>
 <body>
 	<div class="main-details">
-		<!-- <div class="page-title">작업지시상세</div> -->
 		<div class="forms-group-receive">
 			<div class="page-title-popup">작업지시상세</div>
 			<div class="form-group-receive">

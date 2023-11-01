@@ -12,9 +12,6 @@
 <link
 	href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
-<!--     <link -->
-<!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
-<!--         rel="stylesheet"> -->
 <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <!-- 수주 CSS 적용-->
   <link href="${pageContext.request.contextPath}/resources/css/workOrder2.css" rel="stylesheet">
@@ -26,7 +23,6 @@
 
 
 	<!--  contents start -->
-	<!-- <div class="contents" style="position:fixed; left: 15rem;"> -->
 
 	<div class="main">
 		<div class="card shadow">
@@ -80,27 +76,8 @@
 						<input type="button" value="취소" class="btn btn-secondary mybutton1" onclick="resetSearch()">
 						</div>
 						
-<!-- 						<div -->
-<!-- 							style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;"> -->
-<!-- 							<div class="search-button" style="margin-bottom: 5px;"> -->
-<!-- 								<input type="submit" value="검색하기" -->
-<!-- 									class="btn btn-primary mybutton1" style="width: 100%;"> -->
-<!-- 							</div> -->
-<!-- 							<div class="search-button" -->
-<!-- 								style="display: flex; justify-content: space-between;"> -->
-<!-- 								<input type="button" value="초기화" -->
-<!-- 									class="btn btn-secondary mybutton1" -->
-<%-- 									onclick="window.location.href = '${pageContext.request.contextPath}/production/productionList'" --%>
-<!-- 									style="width: 48.6%;"> <input type="button" value="지우기" -->
-<!-- 									class="btn btn-secondary mybutton1" onclick="resetSearch()" -->
-<!-- 									style="width: 48.6%;"> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 					</div><!-- search-bar -->
-
 				</form>
-				<!-- <input type="button" value="등록" class="btn btn-primary mybutton1" onclick="openInsert()"> -->
-				<!-- <input type="button" value="삭제" class="btn btn-secondary mybutton1"> -->
 				<br>
 			
 
@@ -120,7 +97,6 @@
 							<th>양품</th>
 							<th>불량</th>
 							<th>불량사유</th>
-<!-- 							<th>수주번호</th> -->
 							<th>거래처</th>
 							<th>상세내역</th>
 						</tr>
@@ -140,12 +116,7 @@
 								<td>${productionDTO.poGood}</td>
 								<td>${productionDTO.poErr}</td>
 								<td>${productionDTO.poCause}</td>
-								<%-- 									<td><c:out value="${fn:substring(productionDTO.woDate, 0, 10)}" /></td> --%>
-								<%-- 								<td>${productionDTO.woStatus}</td> --%>
-								<%-- 								<td>${productionDTO.productCode}</td> --%>
-<%-- 								<td>${productionDTO.roCode}</td> --%>
 								<td>${productionDTO.cusName}</td>
-								<%-- 								<td>${productionDTO.empName}</td> --%>
 
 								<td><input type="button" value="상세내역" 
 									class="btn btn-info mybutton2"

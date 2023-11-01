@@ -39,18 +39,12 @@
 					<input type="text" id="poDate" name="poDate"
 						class="form-control search-input inputcode"
 						value="${productionDTO.poDate}" readonly> 
-<!-- 						<input type="text" id="cusName" name="cusName" -->
-<!-- 						class="form-control search-input inputname" -->
-<%-- 						value="${workOrderDTO.cusName}" readonly> --%>
 				</div>
 				<div class="form-group-receive">
 					<p>라인코드</p>
 					<input type="text" id="lineCode" name="lineCode"
 						class="form-control search-input inputcode"
 						value="${productionDTO.lineCode}" readonly> 
-<!-- 						<input type="text" id="productName" name="productName" -->
-<!-- 						class="form-control search-input inputname" -->
-<%-- 						value="${workOrderDTO.productName}" readonly> --%>
 				</div>
 			<div class="form-group-receive">
 				<p>상품명</p>
@@ -86,11 +80,6 @@
 					class="form-control search-input"
 					value="${productionDTO.poCause}" readonly>
 			</div>
-<!-- 			<div class="form-group-receive"> -->
-<!-- 				<p>상태</p> -->
-<!-- 				<input type="text" id="woStatus" class="form-control search-input" -->
-<%-- 					value="${productionDTO.woStatus}" readonly> --%>
-<!-- 			</div> -->
 			<div class="form-group-receive">
 				<p>수주번호</p>
 				<input type="text" id="roCode" class="form-control search-input"
@@ -110,19 +99,6 @@
 					<input type="text" id="empName" class="form-control search-input"
 					value="${productionDTO.empName}" readonly>
 			</div>
-
-<!-- 			<div class="search-bar-popup"> -->
-<!-- 				<div class="form-group-receive"> -->
-<!-- 					<p>담당자</p> -->
-<!-- 					<input type="text" id="empId" name="empId" -->
-<!-- 						class="form-control search-input inputcode" -->
-<%-- 						value="${productionDTO.empId}" readonly> <input --%>
-<!-- 						type="text" id="empName" name="empName" -->
-<!-- 						class="form-control search-input inputcode" -->
-<%-- 						value="${productionDTO.empName}" readonly> --%>
-<!-- 				</div> -->
-<!-- 			</div> -->
-
 		</div>
 		<div class="details-buttons">
 			<input type="button" value="수정" class="btn btn-primary mybutton1"

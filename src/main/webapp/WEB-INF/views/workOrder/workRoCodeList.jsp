@@ -41,12 +41,9 @@
 				,'${workRoCodeList.roCount}','${workRoCodeList.shipSdate}')">
 	<td id="con">${workRoCodeList.roCode}</td>
 	<td id="con">${workRoCodeList.cusCode}</td>
-<%-- 	<td id="con">${workRoCodeList.cusName}</td> --%>
 	<td id="con">${workRoCodeList.productCode}</td>
-<%-- 	<td id="con">${workRoCodeList.productName}</td> --%>
 	<td id="con">${workRoCodeList.roCount}</td>
 	<td id="con">${workRoCodeList.shipSdate}</td>
-<%-- 	<td id="con">${workInstructList.woName}</td> --%>
 	</tr>
 
     <script type="text/javascript">

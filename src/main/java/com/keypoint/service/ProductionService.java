@@ -45,7 +45,6 @@ public class ProductionService {
 	public void productionInsertPro(ProductionDTO productionDTO) {
 		System.out.println("productionService productionInsertPro()");
 		
-//		workOrderDTO.setWoDate(new Timestamp(System.currentTimeMillis()));
 		productionDTO.setWoStatus("완료");
 		productionDAO.insertProduction(productionDTO);
 		
@@ -62,7 +61,6 @@ public class ProductionService {
 	
 	public void productionUpdatePro(ProductionDTO productionDTO) {
 		System.out.println("ProductionService productionUpdatePro()");
-//		workOrderDTO.setShipSdate(new Timestamp(System.currentTimeMillis()));
 		productionDAO.updateProduction(productionDTO);
 	}// workOrderUpdatePro() [작업지시수정Pro]
 	

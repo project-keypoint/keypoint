@@ -26,10 +26,6 @@
 <input type="text" id="woCode" name="woCode" class="form-control search-input" value="작업지시번호" >
 </div>
 <div class="search-bar-popup">
-<!-- <div class="form-group-receive"> -->
-<!-- <p>실적코드</p> -->
-<!-- <input type="text" id="poCode" name="poCode" class="form-control search-input inputcode" value="실적코드"> -->
-<!-- </div> -->
 <div class="form-group-receive">
 <p>실적일자</p>
 <input type="text" id="poDate" name="poDate" class="form-control search-input" value="실적일자">

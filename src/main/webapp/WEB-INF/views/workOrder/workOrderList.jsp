@@ -14,8 +14,6 @@
 	href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
 <!--     <link -->
-<!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
-<!--         rel="stylesheet"> -->
 <!-- Custom styles for this template-->
 <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/css/workOrder2.css" rel="stylesheet">
@@ -85,32 +83,12 @@
 						</div>
 						
 						
-<!-- 						<div style="display: flex; flex-direction: column; width: 145px; margin-top: -20px;"> -->
-<!-- 				<div class="search-button" style="margin-bottom: 5px;"> -->
-<!-- 				<input type="submit" value="검색하기" class="btn btn-primary mybutton1" style="width: 100%;"> -->
-<!-- 				</div> -->
-<!-- 				<div class="search-button" style="display: flex; justify-content: space-between;"> -->
-<%-- 				<input type="button" value="초기화" class="btn btn-secondary mybutton1" onclick="window.location.href = '${pageContext.request.contextPath}/workOrder/workOrderList'" style="width: 48.6%;"> --%>
-<!-- 				<input type="button" value="지우기" class="btn btn-secondary mybutton1" onclick="resetSearch()" style="width: 48.6%;"> -->
-<!-- 				</div> -->
-<!-- 				</div> -->
 
 				</div><!-- search-bar -->
 				
 				</form>
 					<br>
 						
-						
-<!-- 						<div class="search-select"> -->
-<!-- 							<p> -->
-<!-- 								라인 <select id="LineCode" name="LineCode" -->
-<!-- 									class="custom-select form-control lineCode"> -->
-<%-- 									<c:forEach var="LineDTO" items="${lineList}"> --%>
-<%-- 										<option value="${LineDTO.lineCode}">${LineDTO.lineCode}</option> --%>
-<%-- 									</c:forEach> --%>
-<!-- 								</select> -->
-<!-- 							</p> -->
-<!-- 						</div> -->
 			
 				<!-- search-bar -->
 			
@@ -146,9 +124,7 @@
 								<td>${workOrderDTO.roCode}</td>
 								<td><c:out value="${fn:substring(workOrderDTO.woDate, 0, 16)}" />
 								</td>
-								
-								<%--     <td><c:out value="${fn:substring(workOrderDTO.woDate, 0, 10)}" /></td> --%>
-								
+																
 								<!-- 지시상태가 완료면 색상변하게 -->
 								 <td>
     								<c:choose>
@@ -159,7 +135,6 @@
             						</c:choose>
     							   </td>
     							   
-<%-- 								<td>${workOrderDTO.woStatus}</td> --%>
 								<td>${workOrderDTO.productCode}</td>
 								<td>${workOrderDTO.productName}</td>
 								<td>${workOrderDTO.lineCode}</td>
