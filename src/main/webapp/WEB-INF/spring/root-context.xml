@@ -17,11 +17,12 @@
      => pom.xml 파일 넣기 => 자동으로 프로그램이 다운 받아짐
      디비연결 객체생성	 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://itwillbs-rds-class1-team3.cwyqfeylunq5.ap-northeast-2.rds.amazonaws.com:3306/keypoint?useSSL=false&amp;serverTimezone=Asia/Seoul"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="class10420"></property>
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://58.236.223.210:3306/keypoint?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul" />
+    <property name="username" value="root" />
+    <property name="password" value="1111" />
 	</bean>
+
 	
 	
 	
